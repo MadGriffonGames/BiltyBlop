@@ -1,23 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovingPlatform : MonoBehaviour {
-
+public class MovingPlatform : MonoBehaviour
+{
 	public GameObject platform;
-
 	public float moveSpeed;
 	public Transform currentPoint;
-
 	public Transform[] points;
-
 	public int pointSelection;
 
-	void Start () {
-		currentPoint = points [pointSelection];
-	
+	void Start ()
+    {
+        currentPoint = points[pointSelection];
 	}
 
-	void Update () {
+	void Update ()
+    {
 		platform.transform.position = Vector3.MoveTowards (platform.transform.position, currentPoint.position, Time.deltaTime * moveSpeed);
 
 		if (platform.transform.position == currentPoint.position) 

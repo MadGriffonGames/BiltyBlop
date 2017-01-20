@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Player : Character
 {
@@ -16,7 +17,15 @@ public class Player : Character
 		}
 	}
 
-	[SerializeField]
+    public override bool IsDead
+    {
+        get
+        {
+            return health <= 0;
+        }
+    }
+
+    [SerializeField]
 	private Transform[] groundPoints = null;
 
 	[SerializeField]
@@ -153,4 +162,9 @@ public class Player : Character
             ChangeDirection();
 		}
 	}
+
+    public override IEnumerator TakeDamage()
+    {
+        yield return null;
+    }
 }

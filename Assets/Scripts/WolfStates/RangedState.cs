@@ -13,14 +13,20 @@ public class RangedState : IEnemyState
 
     public void Execute()
     {
-        if (enemy.Target != null)
+
+        if (enemy.InMeleeRange)
         {
-            enemy.Move();
+            enemy.ChangeState(new MeleeState());
         }
         else
-        {
-            enemy.ChangeState(new IdleState());
-        }
+            if (enemy.Target != null)
+            {
+                enemy.Move();
+            }
+            else
+            {
+                enemy.ChangeState(new IdleState());
+            }
     }
 
     public void Exit()

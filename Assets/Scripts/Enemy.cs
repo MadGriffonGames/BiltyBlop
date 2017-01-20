@@ -1,13 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Character
 {
-
     private IEnemyState currentState;
 
     public GameObject Target { get; set; }
+
+    [SerializeField]
+    private float meleeRange;
+
+    public bool InMeleeRange
+    {
+        get
+        {
+            if (Target != null)//if enemy has a target
+            {
+                //return distance between enemy and target <= meleeRange (true or false)
+                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+            }
+            return false;
+        }
+    }
+
+    public override bool IsDead
+    {
+        get
+        {
+            return health <= 0;
+        }
+    }
 
     // Use this for initialization
     public override void Start ()
@@ -19,9 +43,16 @@ public class Enemy : Character
 	// Update is called once per frame
 	void Update ()
     {
-        currentState.Execute();
-        LookAtTarget();
-	}
+        if (!IsDead)
+        {
+            if (!TakingDamage)
+            {
+                currentState.Execute();
+            }
+            LookAtTarget();
+        }
+
+    }
 
     private void LookAtTarget()
     {
@@ -56,8 +87,20 @@ public class Enemy : Character
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
 
-   void OnTriggerEnter2D(Collider2D other)
+   public override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter (other);
+    }
+
+    public override IEnumerator TakeDamage()
+    {
+        health -= 1;
+
+        if (!IsDead)
+            MyAniamtor.SetTrigger("damage");
+        else
+            MyAniamtor.SetTrigger("death");
+        yield return null;
     }
 }

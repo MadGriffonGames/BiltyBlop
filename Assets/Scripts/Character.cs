@@ -4,8 +4,22 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
+    public abstract IEnumerator TakeDamage();
+
+    public bool TakingDamage { get; set; }
 
     public Animator MyAniamtor { get; private set; }
+
+    [SerializeField]
+    protected int health;
+
+    public abstract bool IsDead { get; }
+
+    [SerializeField]
+    private EdgeCollider2D SwordCollider;
+
+    [SerializeField]
+    private List<string> damageSources;
 
     [SerializeField]
     protected float movementSpeed = 3.0f;
@@ -27,9 +41,22 @@ public abstract class Character : MonoBehaviour
 		
 	}
 
+    public void MeleeAttack()
+    {
+        SwordCollider.enabled = !SwordCollider.enabled;
+    }
+
     public void ChangeDirection()
     {
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (damageSources.Contains(other.tag))
+        {
+            StartCoroutine(TakeDamage());
+        }
     }
 }

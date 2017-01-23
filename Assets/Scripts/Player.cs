@@ -43,6 +43,7 @@ public class Player : Character
 
     [SerializeField]
    private Vector2 startPosition;
+   private float mobileInput = 0;
 
 	// Use this for initialization
 	public override void Start () 
@@ -70,6 +71,10 @@ public class Player : Character
 		OnGround = IsGrounded();
 		HandleMovement(horizontal);
 		Flip(horizontal);
+		/* handling mobile input. unlock this code in case of building on device;
+		HandleMovement(mobileInput);
+		Flip(mobileInput);
+		*/
 		HandleLayers();
 	}
 
@@ -167,4 +172,17 @@ public class Player : Character
     {
         yield return null;
     }
+
+	public void ButtonJump()
+	{
+		MyAniamtor.SetTrigger("jump");
+	}
+	public void ButtonAttack()
+	{
+		 MyAniamtor.SetTrigger("attack");
+	}
+	public void ButtonMove(float input)
+	{
+		mobileInput = input;
+	}
 }

@@ -50,6 +50,7 @@ public class Player : Character
 
     [SerializeField]
    private Vector2 startPosition;
+   private float mobileInput = 0;
 
 	// Use this for initialization
 	public override void Start () 
@@ -77,8 +78,7 @@ public class Player : Character
 	// Update is called once per frame
 	void FixedUpdate() 
 	{
-
-        if (!TakingDamage && !IsDead)
+		if (!TakingDamage && !IsDead)
         {
             float horizontal = Input.GetAxis("Horizontal");
             //Debug.Log (horizontal); it's for print value on unity console 
@@ -87,7 +87,10 @@ public class Player : Character
             Flip(horizontal);
             HandleLayers();
         }
-        
+		/* handling mobile input. unlock this code in case of building on device;
+		HandleMovement(mobileInput);
+		Flip(mobileInput);
+		*/
 	}
 
 	private void HandleMovement(float horizontal)
@@ -212,4 +215,17 @@ public class Player : Character
             yield return null;
         }
     }
+
+	public void ButtonJump()
+	{
+		MyAniamtor.SetTrigger("jump");
+	}
+	public void ButtonAttack()
+	{
+		 MyAniamtor.SetTrigger("attack");
+	}
+	public void ButtonMove(float input)
+	{
+		mobileInput = input;
+	}
 }

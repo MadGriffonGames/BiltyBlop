@@ -137,8 +137,11 @@ public class Player : Character
 		}
         if (other.gameObject.tag == "Trap")
         {
-            MyRigidbody.velocity = Vector2.zero;
-            transform.position = startPosition;
+            TakeDamage();
+        }
+        if (other.gameObject.tag == "Enemy")
+        {
+            TakeDamage();
         }
         if (other.gameObject.tag == "Coin") 
 		{
@@ -209,6 +212,7 @@ public class Player : Character
             {
                 MyAniamtor.SetLayerWeight(1, 0);
                 MyAniamtor.SetTrigger("death");
+                MyRigidbody.velocity = Vector2.zero;
             }
             yield return null;
         }

@@ -16,7 +16,15 @@ public abstract class Character : MonoBehaviour
     public abstract bool IsDead { get; }
 
     [SerializeField]
-    private EdgeCollider2D SwordCollider;
+    private EdgeCollider2D attackCollider;
+
+    public EdgeCollider2D AttackCollider
+    {
+        get
+        {
+            return attackCollider;
+        }
+    }
 
     [SerializeField]
     private List<string> damageSources;
@@ -43,7 +51,7 @@ public abstract class Character : MonoBehaviour
 
     public void MeleeAttack()
     {
-        SwordCollider.enabled = !SwordCollider.enabled;
+        AttackCollider.enabled = true;
     }
 
     public void ChangeDirection()

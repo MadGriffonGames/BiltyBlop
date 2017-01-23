@@ -24,7 +24,7 @@ public class AttackBehaviour : StateMachineBehaviour {
     {
         Player.Instance.Attack = false;
         //when exiting from attack animation set SwordCollider disabled;
-        animator.GetComponent<Character>().MeleeAttack();
+        animator.GetComponent<Character>().AttackCollider.enabled = false;
         animator.ResetTrigger("attack");
     }
 

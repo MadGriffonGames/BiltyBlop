@@ -37,6 +37,13 @@ public class Player : Character
 	[SerializeField]
 	private float jumpForce = 10f;
 
+    private bool immortal = false;
+
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private float immortalTime;
+
 	public Rigidbody2D MyRigidbody { get; set;}
 	public bool Jump { get; set;}
 	public bool OnGround { get; set;}
@@ -48,6 +55,7 @@ public class Player : Character
 	// Use this for initialization
 	public override void Start () 
 	{
+        spriteRenderer = GetComponent<SpriteRenderer> ();
         startPosition = transform.position;
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D> ();
@@ -55,27 +63,34 @@ public class Player : Character
 
 	void Update()
 	{
-       if (transform.position.y <= -14f)
-      {
-        MyRigidbody.velocity = Vector2.zero;
-        transform.position = startPosition;
-      }
-        HandleInput();
+        if (!TakingDamage && !IsDead)
+        {
+            if (transform.position.y <= -14f)
+            {
+                MyRigidbody.velocity = Vector2.zero;
+                transform.position = startPosition;
+            }
+            HandleInput();
+        }
+
 	}
 		
 	// Update is called once per frame
 	void FixedUpdate() 
 	{
-		float horizontal = Input.GetAxis("Horizontal");
-		//Debug.Log (horizontal); it's for print value on unity console 
-		OnGround = IsGrounded();
-		HandleMovement(horizontal);
-		Flip(horizontal);
+		if (!TakingDamage && !IsDead)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            //Debug.Log (horizontal); it's for print value on unity console 
+            OnGround = IsGrounded();
+            HandleMovement(horizontal);
+            Flip(horizontal);
+            HandleLayers();
+        }
 		/* handling mobile input. unlock this code in case of building on device;
 		HandleMovement(mobileInput);
 		Flip(mobileInput);
 		*/
-		HandleLayers();
 	}
 
 	private void HandleMovement(float horizontal)
@@ -168,9 +183,37 @@ public class Player : Character
 		}
 	}
 
+    private IEnumerator IndicateImmortal()
+    {
+        while (immortal)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(.1f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
     public override IEnumerator TakeDamage()
     {
-        yield return null;
+        if (!immortal)
+        {
+            health -= 1;
+            if (!IsDead)
+            {
+                MyAniamtor.SetTrigger("damage");
+                immortal = true;
+                StartCoroutine(IndicateImmortal());
+                yield return new WaitForSeconds(immortalTime);
+                immortal = false;
+            }
+            else
+            {
+                MyAniamtor.SetLayerWeight(1, 0);
+                MyAniamtor.SetTrigger("death");
+            }
+            yield return null;
+        }
     }
 
 	public void ButtonJump()

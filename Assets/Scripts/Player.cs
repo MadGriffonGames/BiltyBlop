@@ -85,10 +85,8 @@ public class Player : Character
             OnGround = IsGrounded();
             HandleMovement(horizontal);
             Flip(horizontal);
-            /* handling mobile input. unlock this code in case of building on device;
-            HandleMovement(mobileInput);
-            Flip(mobileInput);
-            */
+            //HandleMovement(mobileInput);
+            //Flip(mobileInput);
             HandleLayers();
         }
 	}

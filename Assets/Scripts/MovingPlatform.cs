@@ -3,31 +3,43 @@ using System.Collections;
 
 public class MovingPlatform : MonoBehaviour
 {
-	public GameObject platform;
-	public float moveSpeed;
-	public Transform currentPoint;
-	public Transform[] points;
-	public int pointSelection;
+	private Vector3 posA;
+    private Vector3 nextPos;
+
+    private Vector3 posB;
+
+    [SerializeField]
+    private float speed;
+
+    [SerializeField]
+    private Transform platformTransform;
+
+    [SerializeField]
+    private Transform transformPosB;
 
 	void Start ()
     {
-        currentPoint = points[pointSelection];
+        posA = platformTransform.localPosition;
+        posB = transformPosB.localPosition;
+        nextPos = posB;
 	}
 
 	void Update ()
     {
-		platform.transform.position = Vector3.MoveTowards (platform.transform.position, currentPoint.position, Time.deltaTime * moveSpeed);
-
-		if (platform.transform.position == currentPoint.position) 
-		{
-			pointSelection++;
-
-			if (pointSelection == points.Length) 
-			{
-				pointSelection = 0;				
-			}
-			currentPoint = points [pointSelection];
-		}
-
+        Move();
 	}
+
+    private void Move()
+    {
+        platformTransform.localPosition = Vector3.MoveTowards(platformTransform.localPosition, nextPos, speed * Time.deltaTime);
+        if (Vector3.Distance())
+        {
+
+        }
+    }
+
+    private void ChangePoint()
+    {
+        nextPos = nextPos != posA ? posA : posB;//nextPos = posA or posB
+    }
 }

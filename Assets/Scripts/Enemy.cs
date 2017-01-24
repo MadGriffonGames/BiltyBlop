@@ -51,7 +51,6 @@ public class Enemy : Character
             }
             LookAtTarget();
         }
-
     }
 
     private void LookAtTarget()
@@ -100,7 +99,11 @@ public class Enemy : Character
         if (!IsDead)
             MyAniamtor.SetTrigger("damage");
         else
+        {
             MyAniamtor.SetTrigger("death");
+            yield return new WaitForSeconds(3f);
+            Destroy(gameObject);
+        }
         yield return null;
     }
 }

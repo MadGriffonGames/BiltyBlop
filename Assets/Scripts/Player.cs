@@ -47,10 +47,18 @@ public class Player : Character
 	public Rigidbody2D MyRigidbody { get; set;}
 	public bool Jump { get; set;}
 	public bool OnGround { get; set;}
+    public bool IsFalling
+    {
+        get
+        {
+            return MyRigidbody.velocity.y < 0;
+        }
+    }
 
     [SerializeField]
-   private Vector2 startPosition;
-   private float mobileInput = 0;
+    private Vector2 startPosition;
+    private float mobileInput = 0;
+    private int fallingLayerNumber = 10;
 
 	// Use this for initialization
 	public override void Start () 
@@ -93,10 +101,11 @@ public class Player : Character
 
 	private void HandleMovement(float horizontal)
 	{
-		if (MyRigidbody.velocity.y < 0)
-		{
-			MyAniamtor.SetBool ("fall", true);
-		}
+        if (MyRigidbody.velocity.y < -0.1 && MyAniamtor.GetLayerWeight(2) == 0)
+        {
+            MyAniamtor.SetBool("fall", true);
+            gameObject.layer = fallingLayerNumber;
+        }
 		if (!Attack) 
 		{
 			MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);//we can move if we are not attacking now
@@ -158,7 +167,7 @@ public class Player : Character
 			
 	}
 
-	private bool IsGrounded()
+    private bool IsGrounded()
 	{
 		if (MyRigidbody.velocity.y <= 0) 
 		{

@@ -42,4 +42,18 @@ public class MovingPlatform : MonoBehaviour
     {
         nextPos = nextPos != posA ? posA : posB;//nextPos = posA or posB
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.layer = 9;//9 - is layer called "Platform"
+            other.transform.SetParent(platformTransform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        other.transform.SetParent(null);
+    }
 }

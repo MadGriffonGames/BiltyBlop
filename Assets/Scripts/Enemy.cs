@@ -83,11 +83,8 @@ public class Enemy : Character
 
     public void Move()
     {
-        if (!Attack)
-        {
             MyAniamtor.SetFloat("speed", 1);
             transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
-        }
     }
 
    public override void OnTriggerEnter2D(Collider2D other)

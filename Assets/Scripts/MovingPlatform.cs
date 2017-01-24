@@ -32,9 +32,9 @@ public class MovingPlatform : MonoBehaviour
     private void Move()
     {
         platformTransform.localPosition = Vector3.MoveTowards(platformTransform.localPosition, nextPos, speed * Time.deltaTime);
-        if (Vector3.Distance())
+        if (Vector3.Distance(platformTransform.localPosition, nextPos) <= 0)
         {
-
+            ChangePoint();
         }
     }
 

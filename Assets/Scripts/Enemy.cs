@@ -88,8 +88,8 @@ public class Enemy : Character
 
    public override void OnTriggerEnter2D(Collider2D other)
     {
-        base.OnTriggerEnter2D(other);
-        currentState.OnTriggerEnter (other);
+        base.OnTriggerEnter2D (other);
+        currentState.OnTriggerEnter2D (other);
     }
 
     public override IEnumerator TakeDamage()

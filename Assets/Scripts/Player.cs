@@ -78,7 +78,7 @@ public class Player : Character
                 MyRigidbody.velocity = Vector2.zero;
                 transform.position = startPosition;
             }
-            HandleInput();
+			HandleInput();
         }
 
 	}
@@ -101,7 +101,7 @@ public class Player : Character
 
 	private void HandleMovement(float horizontal)
 	{
-        if (MyRigidbody.velocity.y < -0.1 && MyAniamtor.GetLayerWeight(2) == 0)
+        if (MyRigidbody.velocity.y < -0.1)
         {
             MyAniamtor.SetBool("fall", true);
             gameObject.layer = fallingLayerNumber;
@@ -144,17 +144,27 @@ public class Player : Character
 		{
 			transform.parent = other.transform;//make character chil object of platform
 		}
-        if (other.gameObject.tag == "Trap")
-        {
-            TakeDamage();
-        }
-        if (other.gameObject.tag == "Enemy")
-        {
-            TakeDamage();
-        }
-        if (other.gameObject.tag == "Coin") 
+        
+        
+	}
+
+	public virtual void OnTriggerEnter2D(Collider2D other)
+	{
+		if (true) 
 		{
-			Destroy (other.gameObject);
+			if (other.gameObject.tag == "Trap")
+			{
+				StartCoroutine(TakeDamage());
+			}
+			if (other.gameObject.tag == "Enemy")
+			{
+				StartCoroutine(TakeDamage());
+			}
+			if (other.gameObject.tag == "Coin") 
+			{
+				GameManager.Instance.CollectedCoins++;
+				Destroy(other.gameObject);
+			}
 		}
 	}
 

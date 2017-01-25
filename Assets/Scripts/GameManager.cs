@@ -4,8 +4,35 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-	public int collectedCoins;
+	private static GameManager instance;
 
+	public static GameManager Instance 
+	{
+		get 
+		{
+			if (instance == null) 
+			{
+				instance = FindObjectOfType<GameManager> ();
+			}
+			return instance;
+		}
+	}
+
+	private int collectedCoins;
+
+	public int CollectedCoins
+	{
+		get
+		{
+			return collectedCoins;
+		}
+		set
+		{
+			this.collectedCoins = value;
+		}
+	}
+
+	[SerializeField]
 	public Text coinTxt;
 
 	// Use this for initialization
@@ -17,6 +44,6 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		coinTxt.text = ("0" + collectedCoins);
+		coinTxt.text = ("" + collectedCoins);
 	}
 }

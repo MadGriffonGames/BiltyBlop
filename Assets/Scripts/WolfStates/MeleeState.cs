@@ -23,7 +23,8 @@ public class MeleeState : IEnemyState
         {
             enemy.ChangeState(new RangedState());
         }
-        else if(enemy.Target == null)
+        else 
+            if(enemy.Target == null)
             {
             enemy.ChangeState(new IdleState());
             }
@@ -38,6 +39,7 @@ public class MeleeState : IEnemyState
     {
         if (other.tag == "Edge")
         {
+            enemy.Target = null;
             enemy.ChangeDirection();
         }
     }

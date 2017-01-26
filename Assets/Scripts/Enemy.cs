@@ -10,6 +10,12 @@ public class Enemy : Character
     public GameObject Target { get; set; }
 
     [SerializeField]
+    public Transform rightEdge;
+
+    [SerializeField]
+    public Transform leftEdge;
+
+    [SerializeField]
     private float meleeRange;
 
     public bool InMeleeRange
@@ -82,8 +88,11 @@ public class Enemy : Character
 
     public void Move()
     {
+        if (!Attack)
+        {
             MyAniamtor.SetFloat("speed", 1);
             transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+        }
     }
 
    public override void OnTriggerEnter2D(Collider2D other)

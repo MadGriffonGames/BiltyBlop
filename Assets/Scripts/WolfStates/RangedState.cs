@@ -38,6 +38,7 @@ public class RangedState : IEnemyState
     {
         if (other.tag == "Edge")
         {
+            enemy.Target = null;
             enemy.ChangeDirection();
         }
     }

@@ -138,17 +138,7 @@ public class Player : Character
 			MyAniamtor.SetLayerWeight (1, 0);
 	}
 
-	void OnCollisionEnter2D(Collision2D other)//interaction with other colliders
-	{
-		if (other.transform.tag == "movingPlatform")//if character colliding with platform
-		{
-			transform.parent = other.transform;//make character chil object of platform
-		}
-        
-        
-	}
-
-	public virtual void OnTriggerEnter2D(Collider2D other)
+	public override void OnTriggerEnter2D(Collider2D other)
 	{
 		if (true) 
 		{
@@ -163,12 +153,19 @@ public class Player : Character
 			if (other.gameObject.tag == "Coin") 
 			{
 				GameManager.Instance.CollectedCoins++;
-				Destroy(other.gameObject);
 			}
 		}
 	}
 
-	void OnCollisionExit2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)//interaction with other colliders
+    {
+        if (other.transform.tag == "movingPlatform")//if character colliding with platform
+        {
+            transform.parent = other.transform;//make character chil object of platform
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
 	{
 		if (other.transform.tag == "movingPlatform")//if character stop colliding with platform
 		{

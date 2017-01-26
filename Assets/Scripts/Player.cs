@@ -140,21 +140,11 @@ public class Player : Character
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
-		if (true) 
-		{
-			if (other.gameObject.tag == "Trap")
-			{
-				StartCoroutine(TakeDamage());
-			}
-			if (other.gameObject.tag == "Enemy")
-			{
-				StartCoroutine(TakeDamage());
-			}
+            base.OnTriggerEnter2D(other);
 			if (other.gameObject.tag == "Coin") 
 			{
 				GameManager.Instance.CollectedCoins++;
 			}
-		}
 	}
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders

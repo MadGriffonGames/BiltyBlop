@@ -51,7 +51,7 @@ public class Enemy : Character
     {
         if (!IsDead)
         {
-            if (!TakingDamage)
+            if (!TakingDamage && !Attack)
             {
                 currentState.Execute();
             }

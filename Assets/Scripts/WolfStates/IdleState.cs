@@ -9,11 +9,12 @@ public class IdleState : IEnemyState
 
     private float idleTimer;
 
-    private float idleDuration = 2f;
+    private float idleDuration;
 
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
+        idleDuration =  enemy.idleDuration;
     }
 
     public void Execute()

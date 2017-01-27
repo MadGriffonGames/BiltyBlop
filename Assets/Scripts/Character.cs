@@ -13,6 +13,14 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected int health;
 
+    public int Health
+    {
+        get
+        {
+            return health;
+        }
+    }
+
     public abstract bool IsDead { get; }
 
     [SerializeField]

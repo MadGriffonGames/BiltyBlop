@@ -10,10 +10,13 @@ public class Enemy : Character
     public GameObject Target { get; set; }
 
     [SerializeField]
-    public Transform rightEdge;
+    public float patrolDuration;
 
     [SerializeField]
-    public Transform leftEdge;
+    public float idleDuration;
+
+    [SerializeField]
+    private Collider2D playerDamageCollider;
 
     [SerializeField]
     private float meleeRange;
@@ -110,6 +113,7 @@ public class Enemy : Character
         else
         {
             MyAniamtor.SetTrigger("death");
+            playerDamageCollider.enabled = false;
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }

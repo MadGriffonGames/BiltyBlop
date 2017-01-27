@@ -8,11 +8,12 @@ public class PatrolState : IEnemyState
 
     private float patrolTimer;
 
-    private float patrolDuration = 5f;
+    private float patrolDuration;
 
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
+        patrolDuration = enemy.patrolDuration;
     }
 
     public void Execute()

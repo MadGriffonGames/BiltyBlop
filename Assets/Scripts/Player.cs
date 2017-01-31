@@ -156,6 +156,11 @@ public class Player : Character
             gotKey = false;
             Destroy(other.gameObject);
         }
+        if (health < 3 && other.gameObject.tag == "Health")
+        {
+            health++;
+            Destroy(other.gameObject);
+        }
 	}
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders

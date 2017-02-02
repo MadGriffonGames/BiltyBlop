@@ -4,10 +4,10 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour {
 
 	public Transform target;
-	public float damping = 0.25f;
-	public float lookAheadFactor = 3;
-	public float lookAheadReturnSpeed = 0.5f;
-	public float lookAheadMoveTreshHold = 0.1f;
+	public float damping;
+	public float lookAheadFactor;
+	public float lookAheadReturnSpeed;
+	public float lookAheadMoveTreshHold;
 
 	float offsetZ;
 	Vector3 lastTargetPosition;

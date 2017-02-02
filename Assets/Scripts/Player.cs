@@ -92,10 +92,10 @@ public class Player : Character
         {
             float horizontal = Input.GetAxis("Horizontal");
             OnGround = IsGrounded();
-            //HandleMovement(horizontal);
-            //Flip(horizontal);
-            HandleMovement(mobileInput);
-            Flip(mobileInput);
+            HandleMovement(horizontal);
+            Flip(horizontal);
+            //HandleMovement(mobileInput);
+            //Flip(mobileInput);
             HandleLayers();
         }
 	}

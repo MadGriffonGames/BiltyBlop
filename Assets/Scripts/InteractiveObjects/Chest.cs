@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    private Coin rigidCoin;
+    [SerializeField]
+    private Coin coin;
 
     private bool isEmpty = false;
 
 	// Use this for initialization
 	void Start ()
     {
-        rigidCoin = GameObject.FindObjectOfType<Coin>();
+       
 	}
 	
 	// Update is called once per frame
@@ -26,7 +27,7 @@ public class Chest : MonoBehaviour
         {
             isEmpty = true;
             for (int i = 0; i < 10; i++)
-                Instantiate(rigidCoin, (this.gameObject.transform.position + new Vector3(0, 0, 0) ), Quaternion.identity);
+                Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
         }
     }
 }

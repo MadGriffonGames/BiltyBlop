@@ -75,4 +75,6 @@ public abstract class Character : MonoBehaviour
             StartCoroutine(TakeDamage());
         }
     }
+
+    
 }

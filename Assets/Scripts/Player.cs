@@ -51,7 +51,7 @@ public class Player : Character
     {
         get
         {
-            return MyRigidbody.velocity.y < 0;
+            return MyRigidbody.velocity.y < -0.1;
         }
     }
 
@@ -92,17 +92,17 @@ public class Player : Character
         {
             float horizontal = Input.GetAxis("Horizontal");
             OnGround = IsGrounded();
-            HandleMovement(horizontal);
-            Flip(horizontal);
-            //HandleMovement(mobileInput);
-            //Flip(mobileInput);
+            //HandleMovement(horizontal);
+            //Flip(horizontal);
+            HandleMovement(mobileInput);
+            Flip(mobileInput);
             HandleLayers();
         }
 	}
 
 	private void HandleMovement(float horizontal)
 	{
-        if (MyRigidbody.velocity.y < -0.1)
+        if (IsFalling)
         {
             MyAniamtor.SetBool("fall", true);
             gameObject.layer = fallingLayerNumber;

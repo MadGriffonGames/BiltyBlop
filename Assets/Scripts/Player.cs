@@ -60,6 +60,8 @@ public class Player : Character
     private float mobileInput = 0;
     private int fallingLayerNumber = 10;
 
+    private bool gotKey = false;
+
 	// Use this for initialization
 	public override void Start () 
 	{
@@ -89,7 +91,6 @@ public class Player : Character
         if (!TakingDamage && !IsDead)
         {
             float horizontal = Input.GetAxis("Horizontal");
-            //Debug.Log (horizontal); it's for print value on unity console 
             OnGround = IsGrounded();
             HandleMovement(horizontal);
             Flip(horizontal);
@@ -140,11 +141,26 @@ public class Player : Character
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
-            base.OnTriggerEnter2D(other);
-			if (other.gameObject.tag == "Coin") 
-			{
-				GameManager.Instance.CollectedCoins++;
-			}
+        base.OnTriggerEnter2D(other);
+		if (other.gameObject.tag == "Coin") 
+		{
+			GameManager.Instance.CollectedCoins++;
+		}
+        if (other.gameObject.tag == "Key")
+        {
+            gotKey = true;
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "Door" && gotKey)
+        {
+            gotKey = false;
+            Destroy(other.gameObject);
+        }
+        if (health < 3 && other.gameObject.tag == "Health")
+        {
+            health++;
+            Destroy(other.gameObject);
+        }
 	}
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders

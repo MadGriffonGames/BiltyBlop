@@ -48,9 +48,10 @@ public class Parallaxing : MonoBehaviour {
 
 			// set a target x position wich is the current position plus the parallax
 			float backgroundTargetPosX = backgrounds[i].position.x + parallax;
+			float backgroundTargetPosY = backgrounds [i].position.y + parallax;
 
 			// create a target position which is the backgrounds current position with it's target x position
-			Vector3 backgroundTargetPos = new Vector3 (backgroundTargetPosX, backgrounds[i].position.y , backgrounds[i].position.z);
+			Vector3 backgroundTargetPos = new Vector3 (backgroundTargetPosX, backgroundTargetPosY, backgrounds[i].position.z);
 
 			// fade between current pos and target position using lerp
 			backgrounds[i].position = Vector3.Lerp (backgrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);

@@ -25,17 +25,31 @@ public class Player : Character
         }
     }
 
+    public bool IsFalling
+    {
+        get
+        {
+            return MyRigidbody.velocity.y < -0.1;
+        }
+    }
+
+    private int fallingLayerNumber = 10;
+
     [SerializeField]
 	private Transform[] groundPoints = null;
 
 	[SerializeField]
 	private float groundRadius = 0.01f;
 
-	[SerializeField]
+    [SerializeField]
 	private LayerMask whatIsGround;
 
-	[SerializeField]
+    public bool OnGround { get; set; }
+
+    [SerializeField]
 	private float jumpForce = 10f;
+
+    public bool Jump { get; set; }
 
     private bool immortal = false;
 
@@ -45,29 +59,20 @@ public class Player : Character
     private float immortalTime;
 
 	public Rigidbody2D MyRigidbody { get; set;}
-	public bool Jump { get; set;}
-	public bool OnGround { get; set;}
-    public bool IsFalling
-    {
-        get
-        {
-            return MyRigidbody.velocity.y < -0.1;
-        }
-    }
 
-    [SerializeField]
-    private Vector2 startPosition;
     private float mobileInput = 0;
-    private int fallingLayerNumber = 10;
 
     private bool gotKey = false;
 
-	// Use this for initialization
-	public override void Start () 
+    [SerializeField]
+    private Vector2 startPosition;
+
+    // Use this for initialization
+    public override void Start () 
 	{
+        base.Start();
         spriteRenderer = GetComponent<SpriteRenderer> ();
         startPosition = transform.position;
-        base.Start();
         MyRigidbody = GetComponent<Rigidbody2D> ();
 	}
 
@@ -149,16 +154,10 @@ public class Player : Character
         if (other.gameObject.tag == "Key")
         {
             gotKey = true;
-            Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "Door" && gotKey)
         {
             gotKey = false;
-            Destroy(other.gameObject);
-        }
-        if (health < 3 && other.gameObject.tag == "Health")
-        {
-            health++;
             Destroy(other.gameObject);
         }
 	}

@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : InteractiveObject
 {
-    public Animator animator;
 
-    // Use this for initialization
-	void Start ()
+	public override void Start ()
     {
-        animator = GetComponent<Animator>();
+        base.Start();
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
 		
@@ -20,13 +17,13 @@ public class Coin : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && other.gameObject.tag != "SwordCollider")
         {
             animator.SetTrigger("collected");
         }   
     }
 
-    public void CoinDestroy()
+    public void DestroyObject()
     {
         Destroy(this.gameObject);
     }

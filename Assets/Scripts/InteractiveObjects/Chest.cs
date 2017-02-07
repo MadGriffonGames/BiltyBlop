@@ -7,12 +7,13 @@ public class Chest : InteractiveObject
     [SerializeField]
     private Coin coin;
 
-    private bool isEmpty = false;
+    private bool isEmpty;
 
     // Use this for initialization
     public override void Start()
     {
         base.Start();
+        isEmpty = false;
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class Chest : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && other.gameObject.tag != "SwordCollider")
+        if (!isEmpty && other.gameObject.tag == "Player" && other.gameObject.tag != "SwordCollider")
         {
             isEmpty = true;
             for (int i = 0; i < 10; i++)

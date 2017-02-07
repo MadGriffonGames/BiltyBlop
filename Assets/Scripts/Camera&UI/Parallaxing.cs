@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Parallaxing : MonoBehaviour {
+public class Parallaxing : MonoBehaviour
+{
 
 	[SerializeField]
 	private Transform[] backgrounds; // array (list) back- and foregrounds to parallax
@@ -38,19 +39,21 @@ public class Parallaxing : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		// for each background
 		for (int i = 0; i < backgrounds.Length; i++) 
 		{
 			// the parallax is the opposite of the camera movement because the previous frame multiplied by scale
-			float parallax = (previousCamPos.x - cam.position.x) * parallaxScales[i];
+			float Xparallax = (previousCamPos.x - cam.position.x) * parallaxScales[i];
+            float Yparallax = (previousCamPos.y - cam.position.y) * parallaxScales[i] * 2;
 
-			// set a target x position wich is the current position plus the parallax
-			float backgroundTargetPosX = backgrounds[i].position.x + parallax;
+            // set a target x position wich is the current position plus the parallax
+            float backgroundTargetPosX = backgrounds[i].position.x + Xparallax;
+            float backgroundTargetPosY = backgrounds[i].position.y + Yparallax;
 
-			// create a target position which is the backgrounds current position with it's target x position
-			Vector3 backgroundTargetPos = new Vector3 (backgroundTargetPosX, backgrounds[i].position.y , backgrounds[i].position.z);
+            // create a target position which is the backgrounds current position with it's target x position
+            Vector3 backgroundTargetPos = new Vector3 (backgroundTargetPosX, backgroundTargetPosY, backgrounds[i].position.z);
 
 			// fade between current pos and target position using lerp
 			backgrounds[i].position = Vector3.Lerp (backgrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);

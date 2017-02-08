@@ -62,7 +62,7 @@ public class Player : Character
 
     private float mobileInput = 0;
 
-    private bool gotKey = false;
+    public bool GotKey { get; set; }
 
     private Vector2 startPosition;
 
@@ -73,6 +73,7 @@ public class Player : Character
         spriteRenderer = GetComponent<SpriteRenderer> ();
         startPosition = transform.position;
         MyRigidbody = GetComponent<Rigidbody2D> ();
+        GotKey = false;
 	}
 
 	void Update()
@@ -115,7 +116,7 @@ public class Player : Character
 		{
 			MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);//we can move if we are not attacking now
 		}
-		if (Jump && MyRigidbody.velocity.y == 0)
+		if (Jump && Mathf.Abs(MyRigidbody.velocity.y) <= 0.1)
 		{
 			MyRigidbody.AddForce (new Vector2(0, jumpForce));
 		}
@@ -146,13 +147,9 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-        if (other.gameObject.tag == "Key")
+        if (other.gameObject.tag == "Door" && GotKey)
         {
-            gotKey = true;
-        }
-        if (other.gameObject.tag == "Door" && gotKey)
-        {
-            gotKey = false;
+            GotKey = false;
             Destroy(other.gameObject);
         }
     }

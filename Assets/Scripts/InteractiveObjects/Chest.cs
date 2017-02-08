@@ -24,7 +24,7 @@ public class Chest : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isEmpty && other.gameObject.tag == "Player" && other.gameObject.tag != "SwordCollider")
+        if (!isEmpty && other.gameObject.tag == "Player" && other.gameObject.tag != "Sword")
         {
             isEmpty = true;
             for (int i = 0; i < 10; i++)

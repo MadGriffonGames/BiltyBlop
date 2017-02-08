@@ -19,6 +19,11 @@ public abstract class Character : MonoBehaviour
         {
             return health;
         }
+
+        set
+        {
+            health = value;
+        }
     }
 
     public abstract bool IsDead { get; }

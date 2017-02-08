@@ -20,6 +20,7 @@ public class Coin : InteractiveObject
         if(other.gameObject.tag == "Player" && other.gameObject.tag != "SwordCollider")
         {
             animator.SetTrigger("collected");
+            GameManager.Instance.CollectedCoins++;
         }   
     }
 

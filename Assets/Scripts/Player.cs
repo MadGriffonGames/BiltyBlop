@@ -64,7 +64,6 @@ public class Player : Character
 
     private bool gotKey = false;
 
-    [SerializeField]
     private Vector2 startPosition;
 
     // Use this for initialization
@@ -97,10 +96,10 @@ public class Player : Character
         {
             float horizontal = Input.GetAxis("Horizontal");
             OnGround = IsGrounded();
-            //HandleMovement(horizontal);
-            //Flip(horizontal);
-            HandleMovement(mobileInput);
-            Flip(mobileInput);
+            HandleMovement(horizontal);
+            Flip(horizontal);
+            //HandleMovement(mobileInput);
+            //Flip(mobileInput);
             HandleLayers();
         }
 	}
@@ -147,10 +146,6 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-		if (other.gameObject.tag == "Coin") 
-		{
-			GameManager.Instance.CollectedCoins++;
-		}
         if (other.gameObject.tag == "Key")
         {
             gotKey = true;
@@ -159,10 +154,6 @@ public class Player : Character
         {
             gotKey = false;
             Destroy(other.gameObject);
-        }
-        if (other.gameObject.tag == "Health" && health < 3)
-        {
-            health++;
         }
     }
 

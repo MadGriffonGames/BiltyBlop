@@ -17,7 +17,7 @@ public class Coin : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player" && other.gameObject.tag != "SwordCollider")
+        if(other.gameObject.tag == "Player" && other.gameObject.tag != "Sword")
         {
             animator.SetTrigger("collected");
             GameManager.Instance.CollectedCoins++;

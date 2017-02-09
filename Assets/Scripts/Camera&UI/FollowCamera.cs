@@ -8,12 +8,14 @@ public class FollowCamera : MonoBehaviour {
     public float minDistance;
     public float followDistance;
     public GameObject target;
-    public Vector3 offset;
+    //public Vector3 offset;
     Vector3 targetPos;
-    // Use this for initialization
+    private Player player;
+
     void Start()
     {
         targetPos = transform.position;
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,6 @@ public class FollowCamera : MonoBehaviour {
 
             targetPos = transform.position + (targetDirection.normalized * interpVelocity * Time.deltaTime);
 
-            transform.position = Vector3.Lerp(transform.position, targetPos + offset, 0.2f);
+            transform.position = Vector3.Slerp(transform.position, targetPos, 0.2f);
     }
 }

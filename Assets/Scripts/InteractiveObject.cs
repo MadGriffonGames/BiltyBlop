@@ -7,7 +7,6 @@ public abstract class InteractiveObject : MonoBehaviour
 
     public Animator animator { get; private set; }
 
-    [SerializeField]
     public Player player;
 
     // Use this for initialization

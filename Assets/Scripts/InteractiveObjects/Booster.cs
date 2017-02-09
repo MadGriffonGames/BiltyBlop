@@ -5,11 +5,15 @@ using UnityEngine;
 public class Booster : InteractiveObject
 {
     [SerializeField]
-    float force = 1000;
+    float force;
 
     public override void Start()
     {
         base.Start();
+        if (force == 0)
+        {
+            force = 1000;
+        }
     }
 
     void Update()

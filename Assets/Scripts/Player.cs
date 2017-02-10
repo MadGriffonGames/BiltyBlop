@@ -53,7 +53,7 @@ public class Player : Character
 
     private bool immortal = false;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer[] spriteRenderer;
 
     [SerializeField]
     private float immortalTime;
@@ -70,7 +70,7 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
-        spriteRenderer = GetComponent<SpriteRenderer> ();
+		spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
         startPosition = transform.position;
         MyRigidbody = GetComponent<Rigidbody2D> ();
         GotKey = false;
@@ -201,10 +201,15 @@ public class Player : Character
     {
         while (immortal)
         {
-            spriteRenderer.enabled = false;
-            yield return new WaitForSeconds(.1f);
-            spriteRenderer.enabled = true;
-            yield return new WaitForSeconds(.1f);
+			foreach (SpriteRenderer sprite in spriteRenderer) {
+				sprite.enabled = false;
+			}
+			yield return new WaitForSeconds (.2f);
+			foreach (SpriteRenderer sprite in spriteRenderer) {
+				sprite.enabled = true;
+			}
+			yield return new WaitForSeconds (.2f);
+
         }
     }
 

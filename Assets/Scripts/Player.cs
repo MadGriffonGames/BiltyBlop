@@ -29,11 +29,13 @@ public class Player : Character
     {
         get
         {
-            return MyRigidbody.velocity.y < -0.1;
+                return MyRigidbody.velocity.y < -0.5;
         }
     }
 
     private int fallingLayerNumber = 10;
+
+    private int groundLayerNumber = 8;
 
     [SerializeField]
 	private Transform[] groundPoints = null;
@@ -65,6 +67,9 @@ public class Player : Character
     public bool GotKey { get; set; }
 
     private Vector2 startPosition;
+
+    [SerializeField]
+    private GameObject dust;
 
     // Use this for initialization
     public override void Start () 
@@ -107,7 +112,8 @@ public class Player : Character
 
 	private void HandleMovement(float horizontal)
 	{
-        if (IsFalling)
+        Debug.Log(OnGround);
+        if (IsFallingg())
         {
             MyAniamtor.SetBool("fall", true);
             gameObject.layer = fallingLayerNumber;
@@ -116,11 +122,19 @@ public class Player : Character
 		{
 			MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);//we can move if we are not attacking now
 		}
-		if (Jump && Mathf.Abs(MyRigidbody.velocity.y) <= 0.1)
-		{
-			MyRigidbody.AddForce (new Vector2(0, jumpForce));
-		}
-		MyAniamtor.SetFloat ("speed", Mathf.Abs (horizontal));
+        if (OnGround)
+        {
+            if (Jump && Mathf.Abs(MyRigidbody.velocity.y) <= 20)
+            {
+                MyRigidbody.AddForce(new Vector2(0, jumpForce));
+            }
+        }
+        else if (Jump && Mathf.Abs(MyRigidbody.velocity.y) <= 0.1)
+        {
+            MyRigidbody.AddForce(new Vector2(0, jumpForce));
+        }
+
+        MyAniamtor.SetFloat ("speed", Mathf.Abs (horizontal));
 	}
 
 	private void HandleInput()
@@ -159,6 +173,10 @@ public class Player : Character
         if (other.transform.tag == "movingPlatform")//if character colliding with platform
         {
             transform.parent = other.transform;//make character chil object of platform
+        }
+        if (other.gameObject.layer == groundLayerNumber && OnGround)
+        {
+            Instantiate(dust, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
         }
     }
 
@@ -229,6 +247,14 @@ public class Player : Character
             }
             yield return null;
         }
+    }
+
+    public bool IsFallingg()
+    {
+        if(!OnGround && MyRigidbody.velocity.y < -0.5)
+            return true;
+        return false;
+
     }
 
 	public void ButtonJump()

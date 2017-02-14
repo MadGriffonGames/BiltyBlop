@@ -204,10 +204,12 @@ public class Player : Character
 
     private IEnumerator IndicateImmortal()
     {
+        Debug.Log(immortal);
         while (immortal)
         {
 			foreach (SpriteRenderer sprite in spriteRenderer) {
 				sprite.enabled = false;
+                Debug.Log(sprite.enabled);
 			}
 			yield return new WaitForSeconds (.2f);
 			foreach (SpriteRenderer sprite in spriteRenderer) {

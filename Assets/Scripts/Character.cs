@@ -75,7 +75,7 @@ public abstract class Character : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (damageSources.Contains(other.tag))
+        if (damageSources.Contains(other.tag) && this.gameObject.tag == "Sword")
         {
             StartCoroutine(TakeDamage());
         }

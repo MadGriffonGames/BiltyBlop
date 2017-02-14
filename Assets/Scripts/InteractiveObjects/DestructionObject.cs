@@ -28,6 +28,7 @@ public class DestructionObject : InteractiveObject
             else
                 Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
             CameraEffect.Shake(0.2f, 0.2f);
+            MakeFX.Instance.MakeDust();
             Instantiate(chips, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
             Destroy(this.gameObject);
         }

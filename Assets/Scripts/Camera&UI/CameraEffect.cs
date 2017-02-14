@@ -30,7 +30,7 @@ public class CameraEffect : MonoBehaviour
             percentComplete = elapsed / initiateDuration;
             percentComplete = Mathf.Clamp01(percentComplete);
             Vector3 rnd = Random.insideUnitSphere * initiatePower * (1f - percentComplete);
-            position.localPosition = originalPosition + new Vector3(rnd.x, rnd.y, 0);
+            position.localPosition += new Vector3(rnd.x, rnd.y, 0);
         }
     }
 }

@@ -40,7 +40,7 @@ public abstract class Character : MonoBehaviour
     }
 
     [SerializeField]
-    private List<string> damageSources;
+    public List<string> damageSources;
 
     [SerializeField]
     protected float movementSpeed = 3.0f;
@@ -75,7 +75,7 @@ public abstract class Character : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (damageSources.Contains(other.tag) && this.gameObject.tag == "Sword")
+        if (damageSources.Contains(other.tag))
         {
             StartCoroutine(TakeDamage());
         }

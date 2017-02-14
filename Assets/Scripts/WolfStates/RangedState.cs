@@ -21,7 +21,7 @@ public class RangedState : IEnemyState
         else
             if (enemy.Target != null)
             {
-                enemy.Move();
+                //enemy.Move();
             }
             else
             {
@@ -29,17 +29,7 @@ public class RangedState : IEnemyState
             }
     }
 
-    public void Exit()
-    {
+    public void Exit() {}
 
-    }
-
-	public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Edge")
-        {
-            enemy.Target = null;
-            enemy.ChangeDirection();
-        }
-    }
+	public void OnTriggerEnter2D(Collider2D other) {}
 }

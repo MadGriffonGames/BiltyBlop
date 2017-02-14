@@ -13,13 +13,12 @@ public class PatrolState : IEnemyState
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
-        patrolDuration = enemy.patrolDuration;
     }
 
     public void Execute()
     {
         Patrol();
-        enemy.Move();
+        //enemy.Move();
         if (enemy.Target != null)
         {
             enemy.ChangeState(new RangedState());

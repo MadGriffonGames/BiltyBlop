@@ -19,35 +19,13 @@ public class IdleState : IEnemyState
 
     public void Execute()
     {
-        Idle();
         if (enemy.Target != null)
         {
-            enemy.ChangeState(new PatrolState());
+            enemy.ChangeState(new MeleeState());
         }
     }
 
-    public void Exit()
-    {
-   
-    }
+    public void Exit() {}
 
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Edge")
-        {
-            enemy.ChangeDirection();
-        }
-    }
-
-    private void Idle()
-    {
-        enemy.MyAniamtor.SetFloat ("speed", 0);
-
-        idleTimer += Time.deltaTime;
-
-        if (idleTimer >= idleDuration)
-        {
-            enemy.ChangeState(new PatrolState());
-        }
-    }
+    public void OnTriggerEnter2D(Collider2D other) {}
 }

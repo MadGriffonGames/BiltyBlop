@@ -19,30 +19,15 @@ public class MeleeState : IEnemyState
     public void Execute()
     {
         Attack();
-        if (!enemy.InMeleeRange)
+        if(enemy.Target == null)
         {
-            enemy.ChangeState(new RangedState());
-        }
-        else 
-            if(enemy.Target == null)
-            {
             enemy.ChangeState(new IdleState());
-            }
-    }
-
-    public void Exit()
-    {
-        
-    }
-
-	public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Edge")
-        {
-            enemy.Target = null;
-            enemy.ChangeDirection();
         }
     }
+
+    public void Exit() {}
+
+	public void OnTriggerEnter2D(Collider2D other) {}
 
     private void Attack()
     {

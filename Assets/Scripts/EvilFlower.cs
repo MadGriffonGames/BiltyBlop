@@ -15,7 +15,8 @@ public class EvilFlower : MonoBehaviour
 
 	public void Idle()
 	{
-		armature.animation.Play ("IDLE");
+        armature.animation.timeScale = 1f;
+        armature.animation.Play ("IDLE");
 	}
 
 	public void Attack()
@@ -24,6 +25,12 @@ public class EvilFlower : MonoBehaviour
 		armature.animation.Play ("ATTACK");
 
 	}
+
+    public void Preparation()
+    {
+        armature.animation.timeScale = 2f;
+        armature.animation.Play("PREPARATION");
+    }
 	
 	// Update is called once per frame
 	void Update () {

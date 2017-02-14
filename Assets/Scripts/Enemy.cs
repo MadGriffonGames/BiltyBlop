@@ -10,13 +10,7 @@ public class Enemy : Character
     public GameObject Target { get; set; }
 
     [SerializeField]
-    public float patrolDuration;
-
-    [SerializeField]
     public float idleDuration;
-
-    [SerializeField]
-    private Collider2D playerDamageCollider;
 
     [SerializeField]
     private float meleeRange;
@@ -58,20 +52,7 @@ public class Enemy : Character
             {
                 currentState.Execute();
             }
-            LookAtTarget();
         }
-    }
-
-    private void LookAtTarget()
-    {
-        if (Target != null)
-        {
-            float xDir = Target.transform.position.x - transform.position.x;//xDir shows target from left or right side 
-            if ((xDir < 0 && facingRight) || (xDir > 0 && !facingRight))
-            {
-                ChangeDirection();
-            }
-        } 
     }
 
     public void ChangeState(IEnemyState newState)
@@ -84,20 +65,6 @@ public class Enemy : Character
         currentState.Enter(this);
     }
 
-    public Vector2 GetDirection()
-    {
-        return facingRight ? Vector2.right : Vector2.left;
-    }
-
-    public void Move()
-    {
-        if (!Attack)
-        {
-            MyAniamtor.SetFloat("speed", 1);
-            transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
-        }
-    }
-
    public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D (other);
@@ -107,14 +74,12 @@ public class Enemy : Character
     public override IEnumerator TakeDamage()
     {
         health -= 1;
-
         if (!IsDead)
             MyAniamtor.SetTrigger("damage");
         else
         {
             MyAniamtor.SetTrigger("death");
-            playerDamageCollider.enabled = false;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
             Destroy(gameObject);
         }
         yield return null;

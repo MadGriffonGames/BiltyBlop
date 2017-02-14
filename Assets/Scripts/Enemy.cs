@@ -36,14 +36,15 @@ public class Enemy : Character
         }
     }
 
-    // Use this for initialization
+    [SerializeField]
+    private GameObject leafParticle;
+
     public override void Start ()
     {
         base.Start();
         ChangeState(new IdleState());
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
     {
         if (!IsDead)
@@ -79,7 +80,7 @@ public class Enemy : Character
         else
         {
             MyAniamtor.SetTrigger("death");
-            yield return new WaitForSeconds(1f);
+            Instantiate(leafParticle, transform.localPosition + new Vector3(-0.4f, 0, 0), Quaternion.identity);
             Destroy(gameObject);
         }
         yield return null;

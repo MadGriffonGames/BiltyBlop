@@ -17,10 +17,13 @@ public class MakeFX : MonoBehaviour
     }
 
     [SerializeField]
-    private static Transform position;
+    public Transform position;
 
     [SerializeField]
     private GameObject dust;
+
+    [SerializeField]
+    private GameObject leaf;
 
     void Start ()
     {
@@ -35,5 +38,10 @@ public class MakeFX : MonoBehaviour
     public void MakeDust()
     {
         Instantiate(dust, position.localPosition + new Vector3(0, -0.7f, 0), Quaternion.identity);
+    }
+
+    public void MakeLeaf()
+    {
+        Instantiate(leaf, position.localPosition + new Vector3(0, -0.3f, 0), Quaternion.identity);
     }
 }

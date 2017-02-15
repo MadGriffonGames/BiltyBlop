@@ -39,9 +39,4 @@ public class MakeFX : MonoBehaviour
     {
         Instantiate(dust, position.localPosition + new Vector3(0, -0.7f, 0), Quaternion.identity);
     }
-
-    public void MakeLeaf()
-    {
-        Instantiate(leaf, position.localPosition + new Vector3(0, -0.3f, 0), Quaternion.identity);
-    }
 }

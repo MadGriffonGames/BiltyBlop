@@ -150,6 +150,7 @@ public class Player : Character
         if (other.gameObject.tag == "Door" && GotKey)
         {
             GotKey = false;
+            KeyUI.Instance.KeyImage.enabled = false;
             Destroy(other.gameObject);
         }
     }
@@ -209,7 +210,6 @@ public class Player : Character
         {
 			foreach (SpriteRenderer sprite in spriteRenderer) {
 				sprite.enabled = false;
-                Debug.Log(sprite.enabled);
 			}
 			yield return new WaitForSeconds (.2f);
 			foreach (SpriteRenderer sprite in spriteRenderer) {

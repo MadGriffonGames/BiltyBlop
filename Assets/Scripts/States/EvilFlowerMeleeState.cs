@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeState : IEnemyState
+public class EvilFlowerMeleeState : IEvilFlowerState
 {
-    private Enemy enemy;
+    private EvilFlower enemy;
 
     private float attackTimer;
     private float attackCoolDown = 2;
     private bool canAttack = true;
 
-    public void Enter(Enemy enemy)
+    public void Enter(EvilFlower enemy)
     {
         this.enemy = enemy;
     }
@@ -21,7 +21,7 @@ public class MeleeState : IEnemyState
         Attack();
         if(enemy.Target == null)
         {
-            enemy.ChangeState(new IdleState());
+            enemy.ChangeState(new EvilFlowerIdleState());
         }
     }
 

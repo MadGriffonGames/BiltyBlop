@@ -21,14 +21,18 @@ public class Booster : InteractiveObject
 
     }
 
+    public void ResetBooster()
+    {
+        animator.SetBool("Boost", false);
+    }
+
     public void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            animator.SetTrigger("boost");
+            animator.SetBool("Boost", true);
             player.MyRigidbody.velocity = new Vector2(player.MyRigidbody.velocity.x, 0);
             player.MyRigidbody.AddForce(new Vector2(0, force));
-            animator.SetTrigger("boost");
         }
     }
 }

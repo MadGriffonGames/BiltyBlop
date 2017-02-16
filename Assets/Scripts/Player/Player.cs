@@ -29,7 +29,7 @@ public class Player : Character
     {
         get
         {
-                return MyRigidbody.velocity.y < 0;
+                return MyRigidbody.velocity.y < -0.1;
         }
     }
 
@@ -110,10 +110,13 @@ public class Player : Character
             MyAniamtor.SetBool("fall", true);
             gameObject.layer = LayerMask.NameToLayer("Falling");
         }
-		if (!Attack) 
+		if (OnGround) 
 		{
-			MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);//we can move if we are not attacking now
+            if(!Attack)
+                MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);//we can move if we are not attacking now
 		}
+        else
+            MyRigidbody.velocity = new Vector2(horizontal * movementSpeed, MyRigidbody.velocity.y);
         if (Jump &&  Mathf.Abs(MyRigidbody.velocity.y) < 0.1 )
         {
             MyRigidbody.AddForce(new Vector2(0, jumpForce));
@@ -164,6 +167,7 @@ public class Player : Character
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnGround)
         {
+            MyRigidbody.velocity = new Vector2(0, 0);
             MakeFX.Instance.MakeDust();
         }
     }

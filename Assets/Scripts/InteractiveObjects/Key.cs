@@ -21,6 +21,7 @@ public class Key : InteractiveObject
         {
             animator.SetTrigger("collected");
             player.GotKey = true;
+            KeyUI.Instance.KeyImage.enabled = true;
         }
     }
 

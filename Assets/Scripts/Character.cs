@@ -55,8 +55,7 @@ public abstract class Character : MonoBehaviour
         facingRight = true;
         MyAniamtor = GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
+
 	void Update ()
     {
 		

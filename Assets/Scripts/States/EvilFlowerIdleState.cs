@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : IEnemyState
+public class EvilFlowerIdleState : IEvilFlowerState
 {
-    private Enemy enemy;
+    private EvilFlower enemy;
 
     private float idleTimer;
 
     private float idleDuration;
 
-    public void Enter(Enemy enemy)
+    public void Enter(EvilFlower enemy)
     {
         this.enemy = enemy;
         idleDuration =  enemy.idleDuration;
@@ -21,7 +21,7 @@ public class IdleState : IEnemyState
     {
         if (enemy.Target != null)
         {
-            enemy.ChangeState(new MeleeState());
+            enemy.ChangeState(new EvilFlowerMeleeState());
         }
     }
 

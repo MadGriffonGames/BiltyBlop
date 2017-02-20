@@ -39,9 +39,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public List<string> damageSources;
 
-    [SerializeField]
-    protected float movementSpeed = 3.0f;
-
     protected bool facingRight;//check direction(true if we look right)
 
     public bool Attack { get; set; }
@@ -53,16 +50,7 @@ public class Enemy : MonoBehaviour
         MyAniamtor = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-
-    }
-
-    public void ChangeDirection()
-    {
-        facingRight = !facingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-    }
+    void Update() {}
 
     public virtual void OnTriggerEnter2D(Collider2D other)
     {

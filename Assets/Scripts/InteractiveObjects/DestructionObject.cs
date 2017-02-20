@@ -22,11 +22,14 @@ public class DestructionObject : InteractiveObject
     {
         if (other.gameObject.tag == "Sword")
         {
-            
-            if (UnityEngine.Random.Range(1, 100) < 80)//spawner of hearts or coins
-                Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
-            else
-                Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
+
+            if (UnityEngine.Random.Range(1, 100) < 40)//spawn or not hearts or coins
+            {
+                if (UnityEngine.Random.Range(1, 100) < 90)
+                    Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
+                else
+                    Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
+            }
             CameraEffect.Shake(0.2f, 0.2f);
             Instantiate(chips, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
             Destroy(this.gameObject);

@@ -165,9 +165,8 @@ public class Player : Character
         {
             transform.parent = other.transform;//make character chil object of platform
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnGround)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0)
         {
-            MyRigidbody.velocity = new Vector2(0, 0);
             MakeFX.Instance.MakeDust();
         }
     }

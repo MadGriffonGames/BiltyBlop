@@ -18,6 +18,7 @@ public class StoneHolem : MovingMeleeEnemy
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), FindObjectOfType<Player> ().GetComponent<Collider2D> (), true);
     }
 
     public override void Start()

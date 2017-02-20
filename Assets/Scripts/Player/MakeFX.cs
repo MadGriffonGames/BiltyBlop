@@ -16,14 +16,10 @@ public class MakeFX : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    public Transform position;
+    private Transform position;
 
     [SerializeField]
     private GameObject dust;
-
-    [SerializeField]
-    private GameObject leaf;
 
     void Start ()
     {

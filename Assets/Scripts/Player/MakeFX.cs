@@ -22,8 +22,8 @@ public class MakeFX : MonoBehaviour
     [SerializeField]
     private GameObject dust;
 
-    [SerializeField]
-    private GameObject leaf;
+	[SerializeField]
+	private GameObject death;
 
     void Start ()
     {
@@ -39,4 +39,8 @@ public class MakeFX : MonoBehaviour
     {
         Instantiate(dust, position.localPosition + new Vector3(0, -0.7f, 0), Quaternion.identity);
     }
+	public void MakeDeath()
+	{
+		Instantiate(death, position.localPosition + new Vector3(-0.25f, 0, 0), Quaternion.identity);
+	}
 }

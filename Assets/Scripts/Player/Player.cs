@@ -16,7 +16,7 @@ public class Player : Character
 			return instance;
 		}
 	}
-
+    
     public override bool IsDead
     {
         get

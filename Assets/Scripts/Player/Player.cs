@@ -95,10 +95,10 @@ public class Player : Character
         {
             float horizontal = Input.GetAxis("Horizontal");
             OnGround = IsGrounded();
-            HandleMovement(horizontal);
-            Flip(horizontal);
-            //HandleMovement(mobileInput);
-            //Flip(mobileInput);
+            //HandleMovement(horizontal);
+            //Flip(horizontal);
+            HandleMovement(mobileInput);
+            Flip(mobileInput);
             HandleLayers();
         }
 	}
@@ -113,8 +113,10 @@ public class Player : Character
 		if (OnGround) 
 		{
             if(!Attack)
-                MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);//we can move if we are not attacking now
-		}
+                MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);
+            else
+                MyRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f , MyRigidbody.velocity.y);
+        }
         else
             MyRigidbody.velocity = new Vector2(horizontal * movementSpeed, MyRigidbody.velocity.y);
         if (Jump &&  Mathf.Abs(MyRigidbody.velocity.y) < 0.1 )
@@ -165,7 +167,7 @@ public class Player : Character
         {
             transform.parent = other.transform;//make character chil object of platform
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0 && OnGround)
         {
             MakeFX.Instance.MakeDust();
         }

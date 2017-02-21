@@ -27,6 +27,6 @@ public class RuneStone : InteractiveObject
 
     public void ChangeScene()
     {
-        SceneManager.LoadScene("GameOverScene");
+        SceneManager.LoadScene("Level1");
     }
 }

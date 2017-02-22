@@ -15,7 +15,7 @@ public class Checkpoint : InteractiveObject
     {
         if (other.gameObject.tag == "Player")
         {
-            player.StartPosition = this.gameObject.transform.localPosition;
+            player.CheckpointPosition = this.gameObject.transform.localPosition;
         }
     }
 }

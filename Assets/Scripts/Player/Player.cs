@@ -65,10 +65,13 @@ public class Player : Character
 
     public Vector2 StartPosition { get; set; }
 
+    public Vector2 CheckpointPosition { get; set; }
+
     [SerializeField]
     public GameObject deathUI;
 
-    // Use this for initialization
+    public int startCoinCount;
+
     public override void Start () 
 	{
         base.Start();
@@ -76,6 +79,8 @@ public class Player : Character
         StartPosition = transform.position;
         MyRigidbody = GetComponent<Rigidbody2D> ();
         GotKey = false;
+        CheckpointPosition = StartPosition;
+        startCoinCount = GameManager.CollectedCoins;
 	}
 
 	void Update()

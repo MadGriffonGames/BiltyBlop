@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-	private static int collectedCoins = 0;
+    public static int collectedCoins = 50;
 
 	public static int CollectedCoins
 	{

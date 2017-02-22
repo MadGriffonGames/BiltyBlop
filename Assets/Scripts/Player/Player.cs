@@ -263,4 +263,9 @@ public class Player : Character
 	{
 		mobileInput = input;
 	}
+		
+	public void InstantiateDeathParticles()
+	{
+		MakeFX.Instance.MakeDeath();
+	}
 }

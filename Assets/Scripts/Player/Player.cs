@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
@@ -62,14 +63,17 @@ public class Player : Character
 
     public bool GotKey { get; set; }
 
-    private Vector2 startPosition;
+    public Vector2 StartPosition { get; set; }
+
+    [SerializeField]
+    public GameObject deathUI;
 
     // Use this for initialization
     public override void Start () 
 	{
         base.Start();
 		spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
-        startPosition = transform.position;
+        StartPosition = transform.position;
         MyRigidbody = GetComponent<Rigidbody2D> ();
         GotKey = false;
 	}
@@ -81,7 +85,7 @@ public class Player : Character
             if (transform.position.y <= -14f)
             {
                 MyRigidbody.velocity = Vector2.zero;
-                transform.position = startPosition;
+                transform.position = StartPosition;
             }
 			HandleInput();
         }
@@ -184,8 +188,6 @@ public class Player : Character
 
     private bool IsGrounded()
 	{
-		//if (MyAniamtor.GetLayerWeight(2) == 0) 
-		{
 			foreach (Transform ponint in groundPoints) 
 			{
 				Collider2D[] colliders = Physics2D.OverlapCircleAll (ponint.position, groundRadius, whatIsGround);//making circle collider for each groundPoint(area to check ground) 
@@ -195,7 +197,6 @@ public class Player : Character
 						return true;//true if we colliding with smthing
 					}
 			}
-		}
 		return false;
 	}
 
@@ -212,11 +213,13 @@ public class Player : Character
     {
         while (immortal)
         {
-			foreach (SpriteRenderer sprite in spriteRenderer) {
+			foreach (SpriteRenderer sprite in spriteRenderer)
+            {
 				sprite.enabled = false;
 			}
 			yield return new WaitForSeconds (.2f);
-			foreach (SpriteRenderer sprite in spriteRenderer) {
+			foreach (SpriteRenderer sprite in spriteRenderer)
+            {
 				sprite.enabled = true;
 			}
 			yield return new WaitForSeconds (.2f);
@@ -242,6 +245,7 @@ public class Player : Character
                 MyAniamtor.SetLayerWeight(1, 0);
                 MyAniamtor.SetTrigger("death");
                 MyRigidbody.velocity = Vector2.zero;
+                deathUI.SetActive(true);
             }
             yield return null;
         }

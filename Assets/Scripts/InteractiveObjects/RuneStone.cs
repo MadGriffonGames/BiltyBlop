@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RuneStone : InteractiveObject
 {
+    public string nextLvl;
 
     public override void Start()
     {
@@ -19,7 +20,7 @@ public class RuneStone : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && other.gameObject.tag != "SwordCollider")
+        if (other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Sword"))
         {
             animator.SetTrigger("shine");
         }
@@ -27,6 +28,7 @@ public class RuneStone : InteractiveObject
 
     public void ChangeScene()
     {
-        SceneManager.LoadScene("Level1");
+        GameManager.levelName = nextLvl;
+        SceneManager.LoadScene("Loading");
     }
 }

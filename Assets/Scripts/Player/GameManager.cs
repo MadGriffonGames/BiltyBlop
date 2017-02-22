@@ -2,25 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
+	private static int collectedCoins = 0;
 
-	private static GameManager instance;
-
-	public static GameManager Instance 
-	{
-		get 
-		{
-			if (instance == null) 
-			{
-				instance = FindObjectOfType<GameManager> ();
-			}
-			return instance;
-		}
-	}
-
-	private int collectedCoins;
-
-	public int CollectedCoins
+	public static int CollectedCoins
 	{
 		get
 		{
@@ -28,20 +14,15 @@ public class GameManager : MonoBehaviour {
 		}
 		set
 		{
-			this.collectedCoins = value;
+			collectedCoins = value;
 		}
 	}
 
 	[SerializeField]
 	public Text coinTxt;
 
-	// Use this for initialization
-	void Start () 
-	{
-		collectedCoins = 0;
-	}
+    public static string levelName;
 	
-	// Update is called once per frame
 	void Update ()
 	{
 		coinTxt.text = ("" + collectedCoins);

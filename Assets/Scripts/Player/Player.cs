@@ -131,6 +131,9 @@ public class Player : Character
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
             MyAniamtor.SetTrigger("jump");
+			if (Mathf.Abs (MyRigidbody.velocity.y) <= 0.01f) {
+				SoundManager.PlaySound ("player_jump");
+			}
 		}
 		
 		if (Input.GetKeyDown (KeyCode.LeftControl)) 
@@ -141,10 +144,13 @@ public class Player : Character
 
 	private void HandleLayers()
 	{
-		if (!OnGround)
+		if (!OnGround) {
 			MyAniamtor.SetLayerWeight (1, 1);
-		else
+			MyAniamtor.SetLayerWeight (2, 0);
+		} else {
 			MyAniamtor.SetLayerWeight (1, 0);
+			MyAniamtor.SetLayerWeight (2, 1);
+		}
 	}
 
 	public override void OnTriggerEnter2D(Collider2D other)

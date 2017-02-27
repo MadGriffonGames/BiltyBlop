@@ -21,6 +21,7 @@ public class Coin : InteractiveObject
         {
             animator.SetTrigger("collected");
             GameManager.Instance.CollectedCoins++;
+			SoundManager.PlaySound ("coin_collect");
         }   
     }
 

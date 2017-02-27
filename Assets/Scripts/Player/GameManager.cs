@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		SoundManager.PlayMusic ("muzlo", true);
 		collectedCoins = 0;
 	}
 	

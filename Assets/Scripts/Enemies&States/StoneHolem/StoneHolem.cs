@@ -54,9 +54,11 @@ public class StoneHolem : MovingMeleeEnemy
         health -= 1;
         CameraEffect.Shake(0.5f, 0.4f);
         MyAniamtor.SetTrigger("damage");
+		SoundManager.PlaySound ("holem_takingdamage");
         Instantiate(stoneParticle, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2f, -1f), Quaternion.identity);
         if (IsDead)
         {
+			SoundManager.PlaySound ("holem_death");
             Destroy(gameObject);
         }
         yield return null;

@@ -29,7 +29,6 @@ public class StoneHolem : MovingMeleeEnemy
 
     void Update()
     {
-        Debug.Log(currentState);
         if (!IsDead)
         {
             if (!TakingDamage && !Attack)
@@ -58,7 +57,7 @@ public class StoneHolem : MovingMeleeEnemy
         Instantiate(stoneParticle, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2f, -1f), Quaternion.identity);
         if (IsDead)
         {
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
         yield return null;
     }

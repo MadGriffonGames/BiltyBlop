@@ -33,6 +33,7 @@ public class RuneStone : InteractiveObject
     public void ChangeScene()
     {
         GameManager.levelName = nextLvl;
+        LevelSelect.use.SaveScene(GameManager.CollectedCoins, "0");
         SceneManager.LoadScene("Loading");
     }
 }

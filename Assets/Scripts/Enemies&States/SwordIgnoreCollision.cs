@@ -6,7 +6,6 @@ public class SwordIgnoreCollision : MonoBehaviour
 {
     Player player;
 
-    // Use this for initialization
     private void Start()
     {
         player = FindObjectOfType<Player>();

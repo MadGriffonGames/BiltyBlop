@@ -32,6 +32,7 @@ public class DeathUI : MonoBehaviour
             player.MyAniamtor.Play("PlayerIdle", 0);
             player.Health = 3;
             player.transform.position = player.CheckpointPosition;
+            player.MyRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
             this.gameObject.SetActive(false);
         }     

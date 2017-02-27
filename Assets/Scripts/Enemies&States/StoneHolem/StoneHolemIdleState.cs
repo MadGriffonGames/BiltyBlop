@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StoneHolemIdleState : IStoneHolemState
 {
-
     private StoneHolem enemy;
 
     private float idleTimer;

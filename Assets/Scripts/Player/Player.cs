@@ -238,7 +238,7 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-		if (!immortal)
+	    if (!immortal)
 		{
 			health -= 1;
 			if (!IsDead)

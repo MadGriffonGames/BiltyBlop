@@ -15,7 +15,12 @@ public class Coin : InteractiveObject
         if(other.gameObject.tag == "Player" && other.gameObject.tag != "Sword")
         {
             animator.SetTrigger("collected");
+<<<<<<< HEAD
             GameManager.CollectedCoins++;
+=======
+            GameManager.Instance.CollectedCoins++;
+			SoundManager.PlaySound ("coin_collect");
+>>>>>>> DevG
         }   
     }
 

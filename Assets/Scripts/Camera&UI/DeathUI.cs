@@ -27,11 +27,13 @@ public class DeathUI : MonoBehaviour
         if (GameManager.CollectedCoins >= 50)
         {
             GameManager.CollectedCoins -= 50;
-            player.MyAniamtor.ResetTrigger("death");
-            player.MyAniamtor.SetFloat("speed", 0);
+			player.MyAniamtor.ResetTrigger ("death");      
             player.MyAniamtor.Play("PlayerIdle", 0);
             player.Health = 3;
+			player.MyAniamtor.SetTrigger ("revive");
             player.transform.position = player.CheckpointPosition;
+			player.MyAniamtor.SetFloat("speed", 0);
+			player.ButtonMove (0);
             player.MyRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
             this.gameObject.SetActive(false);

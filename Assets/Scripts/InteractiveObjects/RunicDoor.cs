@@ -22,9 +22,11 @@ public class RunicDoor : InteractiveObject {
 	{
 		if (other.gameObject.tag == "Player" && player.GotKey)
 		{
+			player.GotKey = false;
+			KeyUI.Instance.KeyImage.enabled = false;
 			CameraEffect.Shake(0.25f, 0.25f);
 			animator.SetTrigger ("open");
-			player.GotKey = false;
+
 		}
 	}
 

@@ -20,17 +20,12 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField]
 	public Text coinTxt;
-
-<<<<<<< HEAD
     public static string levelName;
-=======
-	// Use this for initialization
+
 	void Start () 
 	{
 		SoundManager.PlayMusic ("muzlo", true);
-		collectedCoins = 0;
 	}
->>>>>>> DevG
 	
 	void Update ()
 	{

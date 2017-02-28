@@ -6,29 +6,27 @@ using System.IO;
 
 public class LevelSelect : MonoBehaviour
 {
-
+    private string iconPath = "SceneIcons";
     [SerializeField]
-    private string iconPath = "SceneIcons"; // папка в Resources, где лежат уникальные иконки сцен, их имена должны быть как и у сцен (необязательно)
+    private string fileName = "Levels.data";
     [SerializeField]
-    private string fileName = "Levels.data"; // файл для сохранения
+    private string scenePrefix;
     [SerializeField]
-    private string scenePrefix; // приставка имени сцены, например, может быть так: Scene_1, Scene_2, Scene_3 и т.п.
+    private GameObject levelMenu;
     [SerializeField]
-    private GameObject levelMenu; // родительский объект менюшки
+    private RectTransform levelGroup;
     [SerializeField]
-    private RectTransform levelGroup; // группа иконок
+    private int groupCount = 5;
     [SerializeField]
-    private int groupCount = 5; // сколько страниц, формула: например, группа иконок содержит 10 объектов, то умножаем на количество страниц = число сцен
+    private Button backButton;
     [SerializeField]
-    private Button backButton; // предощущая страница
+    private Button nextButton;
     [SerializeField]
-    private Button nextButton; // следующая страница
+    private Sprite lockIcon;
     [SerializeField]
-    private Sprite lockIcon; // иконка, если сцена закрыта
+    private Sprite unlockIcon;
     [SerializeField]
-    private Sprite unlockIcon; // иконка, если сцена открыта
-    [SerializeField]
-    private bool dontDestroyOnLoad; // если 'true' - менюшка будет переходить из сцены в сцену
+    private bool dontDestroyOnLoad;
 
     private static bool _active;
     private static LevelSelect _internal;
@@ -167,6 +165,7 @@ public class LevelSelect : MonoBehaviour
         comp = levelGroup.GetComponentsInChildren<LevelSelectButton>();
         data = new LevelData[comp.Length * groupCount];
         Load();
+
     }
 
     string GetPath()

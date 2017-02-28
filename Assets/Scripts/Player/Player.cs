@@ -244,33 +244,7 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-<<<<<<< HEAD
-        if (!immortal)
-        {
-            health -= 1;
-            if (!IsDead)
-            {
-                if(IsFalling || !OnGround)
-                    MyAniamtor.SetLayerWeight(1, 0);
-                MyAniamtor.SetLayerWeight(2, 1);
-                MyAniamtor.SetTrigger("damage");
-                immortal = true;
-                StartCoroutine(IndicateImmortal());
-                yield return new WaitForSeconds(immortalTime);
-                immortal = false;
-            }
-            else
-            {
-                MyAniamtor.SetLayerWeight(1, 0);
-                MyAniamtor.SetLayerWeight(2, 1);
-                MyAniamtor.SetTrigger("death");
-                MyRigidbody.velocity = Vector2.zero;
-                deathUI.SetActive(true);
-            }
-            yield return null;
-        }
-=======
-		if (!immortal)
+	    if (!immortal)
 		{
 			health -= 1;
 			if (!IsDead)
@@ -297,7 +271,6 @@ public class Player : Character
 			}
 			yield return null;
 		}
->>>>>>> origin/DevG
     }
 
 	public void ButtonJump()

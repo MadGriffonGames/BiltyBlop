@@ -171,12 +171,6 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-//        if (other.gameObject.tag == "Door" && GotKey)
-//        {
-//            GotKey = false;
-//            KeyUI.Instance.KeyImage.enabled = false;
-//            Destroy(other.gameObject);
-//        }
     }
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders

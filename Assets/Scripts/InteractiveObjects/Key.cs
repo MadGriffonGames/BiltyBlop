@@ -19,6 +19,7 @@ public class Key : InteractiveObject
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
+			SoundManager.PlaySound ("key_collect");
             animator.SetTrigger("collected");
             player.GotKey = true;
             KeyUI.Instance.KeyImage.enabled = true;

@@ -18,6 +18,7 @@ public class HP : InteractiveObject {
     {
         if (other.gameObject.tag == "Player" && player.Health < 3 && other.gameObject.tag != "Sword")
         {
+			SoundManager.PlaySound ("heart_collect");
             animator.SetTrigger("collected");
             player.Health ++;
         }

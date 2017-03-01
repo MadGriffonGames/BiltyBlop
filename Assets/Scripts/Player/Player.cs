@@ -249,6 +249,7 @@ public class Player : Character
 				}
 				MyAniamtor.SetLayerWeight(2, 1);
 				MyAniamtor.SetTrigger("damage");
+				SoundManager.PlaySound ("player_takehit1");
 				immortal = true;
 				StartCoroutine(IndicateImmortal());
 				yield return new WaitForSeconds(immortalTime);
@@ -258,6 +259,7 @@ public class Player : Character
 			{
 				MyAniamtor.SetLayerWeight(1, 0);
 				MyAniamtor.SetLayerWeight(2, 1);
+				SoundManager.PlaySound ("player_death");
 				MyAniamtor.SetTrigger("death");
 				MyRigidbody.velocity = Vector2.zero;
 				deathUI.gameObject.SetActive(true); 
@@ -287,7 +289,7 @@ public class Player : Character
 
 	public void InstantiateGrave()
 	{
-		Instantiate (grave, new Vector3(transform.position.x, transform.position.y + 0.21f, transform.position.z), Quaternion.identity);
+		Instantiate (grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z), Quaternion.identity);
 	}
 }
 

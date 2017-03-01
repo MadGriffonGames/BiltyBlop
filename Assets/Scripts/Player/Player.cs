@@ -70,10 +70,10 @@ public class Player : Character
 
     public Vector2 CheckpointPosition { get; set; }
 
-    [SerializeField]
-    public GameObject deathUI;
-
     public int startCoinCount;
+
+    [SerializeField]
+    GameObject deathUI;
 
     public override void Start () 
 	{
@@ -131,7 +131,7 @@ public class Player : Character
         }
         else
             MyRigidbody.velocity = new Vector2(horizontal * movementSpeed, MyRigidbody.velocity.y);
-        if (Jump &&  Mathf.Abs(MyRigidbody.velocity.y) < 0.1 )
+        if (OnGround && Jump &&  Mathf.Abs(MyRigidbody.velocity.y) < 0.1 )
         {
             MyRigidbody.AddForce(new Vector2(0, jumpForce));
             MyRigidbody.velocity = new Vector2(0,0);
@@ -232,7 +232,6 @@ public class Player : Character
 				sprite.enabled = true;
 			}
 			yield return new WaitForSeconds (.2f);
-
         }
     }
 
@@ -261,7 +260,7 @@ public class Player : Character
 				MyAniamtor.SetLayerWeight(2, 1);
 				MyAniamtor.SetTrigger("death");
 				MyRigidbody.velocity = Vector2.zero;
-				deathUI.SetActive(true);
+				deathUI.gameObject.SetActive(true); 
 			}
 			yield return null;
 		}

@@ -13,7 +13,8 @@ public class JumpDownBehaviour : StateMachineBehaviour {
 	{
 		if (Player.Instance.OnGround) 
 		{
-			animator.SetBool ("fall", false);
+            Player.Instance.Jump = false;
+            animator.SetBool ("fall", false);
 			animator.ResetTrigger ("jump");
 		}
 	}

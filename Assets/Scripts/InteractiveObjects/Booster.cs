@@ -10,15 +10,6 @@ public class Booster : InteractiveObject
     public override void Start()
     {
         base.Start();
-        if (force == 0)
-        {
-            force = 1000;
-        }
-    }
-
-    void Update()
-    {
-
     }
 
     public void ResetBooster()
@@ -28,11 +19,11 @@ public class Booster : InteractiveObject
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.transform.CompareTag("Player"))
         {
             animator.SetBool("Boost", true);
-            player.MyRigidbody.velocity = new Vector2(player.MyRigidbody.velocity.x, 0);
-            player.MyRigidbody.AddForce(new Vector2(0, force));
+            Player.Instance.MyRigidbody.velocity = new Vector2(player.MyRigidbody.velocity.x, 0);
+            Player.Instance.MyRigidbody.AddForce(new Vector2(0, force));
         }
     }
 }

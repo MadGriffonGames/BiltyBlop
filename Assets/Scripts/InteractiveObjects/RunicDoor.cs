@@ -25,6 +25,7 @@ public class RunicDoor : InteractiveObject {
 			CameraEffect.Shake(0.25f, 0.25f);
 			animator.SetTrigger ("open");
 			player.GotKey = false;
+            KeyUI.Instance.KeyImage.enabled = false;
 		}
 	}
 

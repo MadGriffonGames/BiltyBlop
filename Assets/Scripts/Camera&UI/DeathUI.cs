@@ -4,25 +4,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class DeathUI : MonoBehaviour
 {
     [SerializeField]
     GameObject controls;
 
-    Player player;
-
-    void Start ()
+    private void Start ()
     {
         controls.SetActive(false);
-        player = FindObjectOfType<Player> ();
-
 	}
 
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameManager.collectedCoins = player.startCoinCount;
+        GameManager.collectedCoins = Player.Instance.startCoinCount;
     }
 
     public void Continue()
@@ -30,14 +25,14 @@ public class DeathUI : MonoBehaviour
         if (GameManager.CollectedCoins >= 50)
         {
             GameManager.CollectedCoins -= 50;
-			player.MyAniamtor.ResetTrigger ("death");      
-            player.MyAniamtor.Play("PlayerIdle", 0);
-            player.Health = 3;
-			player.MyAniamtor.SetTrigger ("revive");
-            player.transform.position = player.CheckpointPosition;
-			player.MyAniamtor.SetFloat("speed", 0);
-			player.ButtonMove (0);
-            player.MyRigidbody.velocity = new Vector2(0, 0);
+			Player.Instance.MyAniamtor.ResetTrigger ("death");      
+            Player.Instance.MyAniamtor.Play("PlayerIdle", 0);
+            Player.Instance.Health = 3;
+			Player.Instance.MyAniamtor.SetTrigger ("revive");
+            Player.Instance.transform.position = Player.Instance.CheckpointPosition;
+			Player.Instance.MyAniamtor.SetFloat("speed", 0);
+			Player.Instance.ButtonMove (0);
+            Player.Instance.MyRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
             this.gameObject.SetActive(false);
         }     

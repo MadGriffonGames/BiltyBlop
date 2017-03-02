@@ -7,20 +7,17 @@ public class RuneStone : InteractiveObject
 {
     public string nextLvl;
 
-	private Transform position;
-
 	[SerializeField]
 	private GameObject lightParticle;
 
     public override void Start()
     {
         base.Start();
-		position = GetComponent<Transform>();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Sword"))
+        if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             animator.SetTrigger("shine");
         }

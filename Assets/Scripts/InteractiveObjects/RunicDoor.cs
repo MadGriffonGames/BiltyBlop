@@ -22,21 +22,19 @@ public class RunicDoor : InteractiveObject {
 	{
 		if (other.gameObject.tag == "Player" && player.GotKey)
 		{
-			player.GotKey = false;
-			KeyUI.Instance.KeyImage.enabled = false;
+			CameraEffect.Shake(0.25f, 0.25f);
 			animator.SetTrigger ("open");
-			SoundManager.MusicVolume (2f);
-			SoundManager.PlaySound ("key_enter");
-
+			player.GotKey = false;
+            KeyUI.Instance.KeyImage.enabled = false;
 		}
 	}
 
 	public void DestroyObject()
 	{
+		
 		Destroy(this.gameObject);
-		CameraEffect.Shake(0.4f, 0.4f);
-		Instantiate(stoneParticle, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
 		SoundManager.PlaySound ("door_explode");
+		Instantiate(stoneParticle, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
 	}
 
 }

@@ -77,6 +77,7 @@ public class StoneHolem : MovingMeleeEnemy
     public void HolemMeleeAttack()
     {
         MeleeAttack();
+		SoundManager.PlaySound ("holem_smash");
         CameraEffect.Shake(0.7f, 0.4f);
         if (transform.localScale.x > 0)
             Instantiate(attackParticle, gameObject.transform.position + new Vector3(-3, 0, -2), Quaternion.identity);

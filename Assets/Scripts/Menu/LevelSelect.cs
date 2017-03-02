@@ -16,7 +16,7 @@ public class LevelSelect : MonoBehaviour
     [SerializeField]
     private RectTransform levelGroup;
     [SerializeField]
-    private int groupCount = 5;
+    private int groupCount;//count of "pages" with levels
     [SerializeField]
     private Button backButton;
     [SerializeField]
@@ -31,9 +31,23 @@ public class LevelSelect : MonoBehaviour
     private static bool _active;
     private static LevelSelect _internal;
     private int groupIndex;
-    private LevelSelectButton[] comp;
+    private LevelSelectButton[] buttonsArray;
     private LevelData[] data;
     private Sprite[] sceneIcon;
+
+    void Awake()
+    {
+        _internal = this;
+        if (dontDestroyOnLoad) DontDestroyOnLoad(transform.gameObject);
+        sceneIcon = Resources.LoadAll<Sprite>(iconPath);
+        groupIndex = 1;
+        backButton.onClick.AddListener(() => { Back(); });
+        nextButton.onClick.AddListener(() => { Next(); });
+        buttonsArray = levelGroup.GetComponentsInChildren<LevelSelectButton>();
+        data = new LevelData[buttonsArray.Length * groupCount];
+        Load();
+
+    }
 
     struct LevelData // параметры для сохранения
     {
@@ -125,16 +139,14 @@ public class LevelSelect : MonoBehaviour
     public void LoadScene(int id)
     {
         string level = scenePrefix + id;
-
         if (!Application.CanStreamedLevelBeLoaded(level))
         {
             Debug.Log("[LevelSelect] сцены не существует или она не добавлена в Build Setting: " + level);
             return;
         }
-
         Hide();
-
-        SceneManager.LoadScene(level);
+        GameManager.levelName = level;
+        SceneManager.LoadScene("Loading");
     }
 
     public static bool isActive
@@ -152,20 +164,6 @@ public class LevelSelect : MonoBehaviour
         int value;
         if (int.TryParse(text, out value)) return value;
         return 0;
-    }
-
-    void Awake()
-    {
-        _internal = this;
-        if (dontDestroyOnLoad) DontDestroyOnLoad(transform.gameObject);
-        sceneIcon = Resources.LoadAll<Sprite>(iconPath);
-        groupIndex = 1;
-        backButton.onClick.AddListener(() => { Back(); });
-        nextButton.onClick.AddListener(() => { Next(); });
-        comp = levelGroup.GetComponentsInChildren<LevelSelectButton>();
-        data = new LevelData[comp.Length * groupCount];
-        Load();
-
     }
 
     string GetPath()
@@ -229,8 +227,8 @@ public class LevelSelect : MonoBehaviour
 
     void ButtonUpdate()
     {
-        int j = (comp.Length * groupIndex) - comp.Length;
-        foreach (LevelSelectButton element in comp)
+        int j = (buttonsArray.Length * groupIndex) - buttonsArray.Length;
+        foreach (LevelSelectButton element in buttonsArray)
         {
             if (data[j].isActive || data[j].canUse)
             {

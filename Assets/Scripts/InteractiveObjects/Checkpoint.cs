@@ -13,9 +13,9 @@ public class Checkpoint : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.transform.CompareTag("Player"))
         {
-            player.CheckpointPosition = this.gameObject.transform.localPosition;
+            Player.Instance.CheckpointPosition = this.gameObject.transform.localPosition;
         }
     }
 }

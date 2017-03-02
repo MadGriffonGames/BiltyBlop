@@ -31,7 +31,7 @@ public class LevelSelect : MonoBehaviour
     private static bool _active;
     private static LevelSelect _internal;
     private int groupIndex;
-    private LevelSelectButton[] buttonsArray;
+   // private LevelSelectButton[] buttonsArray;
     private LevelData[] data;
     private Sprite[] sceneIcon;
 
@@ -43,8 +43,8 @@ public class LevelSelect : MonoBehaviour
         groupIndex = 1;
         backButton.onClick.AddListener(() => { Back(); });
         nextButton.onClick.AddListener(() => { Next(); });
-        buttonsArray = levelGroup.GetComponentsInChildren<LevelSelectButton>();
-        data = new LevelData[buttonsArray.Length * groupCount];
+        //buttonsArray = levelGroup.GetComponentsInChildren<LevelSelectButton>();
+       // data = new LevelData[buttonsArray.Length * groupCount];
         Load();
 
     }
@@ -84,7 +84,6 @@ public class LevelSelect : MonoBehaviour
         if ((j + 1) <= data.Length - 1) // после сохранения, открываем следующую сцену, если таковая есть
         {
             data[(j + 1)].canUse = true;
-            ButtonUpdate();
         }
     }
 
@@ -109,7 +108,6 @@ public class LevelSelect : MonoBehaviour
             if (data.Length > 0)
             {
                 data[0].canUse = true;
-                ButtonUpdate();
             }
             return;
         }
@@ -130,7 +128,6 @@ public class LevelSelect : MonoBehaviour
 
         reader.Close();
 
-        ButtonUpdate();
     }
 
     public void LoadScene(int id)
@@ -186,7 +183,6 @@ public class LevelSelect : MonoBehaviour
         {
             nextButton.interactable = true;
             groupIndex--;
-            ButtonUpdate();
         }
 
         if (groupIndex == 1) backButton.interactable = false;
@@ -198,7 +194,6 @@ public class LevelSelect : MonoBehaviour
         {
             backButton.interactable = true;
             groupIndex++;
-            ButtonUpdate();
         }
 
         if (groupIndex == groupCount) nextButton.interactable = false;
@@ -222,25 +217,4 @@ public class LevelSelect : MonoBehaviour
         return unlockIcon;
     }
 
-    void ButtonUpdate()
-    {
-        int j = (buttonsArray.Length * groupIndex) - buttonsArray.Length;
-        foreach (LevelSelectButton element in buttonsArray)
-        {
-            if (data[j].isActive || data[j].canUse)
-            {
-                element.button.interactable = true;
-                element.button.image.sprite = GetSprite(false, scenePrefix + (j + 1));
-            }
-            else
-            {
-                element.button.interactable = false;
-                element.button.image.sprite = GetSprite(true, scenePrefix + (j + 1));
-            }
-
-            j++;
-            element.id = j;
-            element.buttonText.text = j.ToString();
-        }
-    }
 }

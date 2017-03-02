@@ -10,18 +10,13 @@ public class Key : InteractiveObject
         base.Start();
     }
 
-    void Update()
-    {
-
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
 			SoundManager.PlaySound ("key_collect");
             animator.SetTrigger("collected");
-            player.GotKey = true;
+            Player.Instance.GotKey = true;
             KeyUI.Instance.KeyImage.enabled = true;
         }
     }

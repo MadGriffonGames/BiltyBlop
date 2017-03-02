@@ -20,10 +20,9 @@ public class DestructionObject : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Sword")
+        if (other.transform.CompareTag("Sword"))
         {
-
-            if (UnityEngine.Random.Range(1, 100) < 40)//spawn or not hearts or coins
+            if (UnityEngine.Random.Range(1, 100) < 45)//spawn or not
             {
                 if (UnityEngine.Random.Range(1, 100) < 90)
                     Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);

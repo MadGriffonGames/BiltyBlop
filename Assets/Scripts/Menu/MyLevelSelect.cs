@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-public class LevelSelect : MonoBehaviour
+public class MyLevelSelect : MonoBehaviour
 {
     private string iconPath = "SceneIcons";
     [SerializeField]
@@ -29,7 +29,7 @@ public class LevelSelect : MonoBehaviour
     private bool dontDestroyOnLoad;
 
     private static bool _active;
-    private static LevelSelect _internal;
+    private static MyLevelSelect _internal;
     private int groupIndex;
     private LevelSelectButton[] buttonsArray;
     private LevelData[] data;
@@ -40,7 +40,6 @@ public class LevelSelect : MonoBehaviour
         _internal = this;
         if (dontDestroyOnLoad) DontDestroyOnLoad(transform.gameObject);
         sceneIcon = Resources.LoadAll<Sprite>(iconPath);
-        groupIndex = 1;
         backButton.onClick.AddListener(() => { Back(); });
         nextButton.onClick.AddListener(() => { Next(); });
         buttonsArray = levelGroup.GetComponentsInChildren<LevelSelectButton>();
@@ -55,20 +54,23 @@ public class LevelSelect : MonoBehaviour
 
         // пользовательские (можно изменять)
         public int coins;
+        public string time;
     }
 
-    public void SaveScene(int coins)
+    public void SaveScene(int coins, string time)
     {
         int j = 0;
-        foreach (LevelData element in data)//counting unlock lvls
+        foreach (LevelData element in data)
         {
             if (!element.isActive) break; else j++;
+            Debug.Log(element.isActive);
         }
+
         if (j <= data.Length - 1)
         {
-            Debug.Log(j);
             data[j].isActive = true;
             data[j].coins = coins;
+            data[j].time = time;
         }
         else return;
         StreamWriter writer = new StreamWriter(GetPath());
@@ -76,12 +78,12 @@ public class LevelSelect : MonoBehaviour
         {
             if (element.isActive)
             {
-                writer.WriteLine(element.coins + "|");
+                writer.WriteLine(element.coins + "|" + element.time);
             }
         }
         writer.Close();
         Debug.Log("[LevelSelect] сохранение в файл: " + GetPath());
-        if ((j + 1) <= data.Length - 1) // после сохранения, открываем следующую сцену, если таковая есть
+        if ((j + 1) <= data.Length - 1 && !data[(j + 1)].isActive) // после сохранения, открываем следующую сцену, если таковая есть
         {
             data[(j + 1)].canUse = true;
             ButtonUpdate();
@@ -93,11 +95,12 @@ public class LevelSelect : MonoBehaviour
         string[] t = text.Split(new char[] { '|' });
 
         // загрузка в таком же порядке, что и запись
-        int coins = Parse(t[0]);
+        int score = Parse(t[0]);
         string time = t[1];
 
         data[index].isActive = true;
-        data[index].coins = coins;
+        data[index].coins = score;
+        data[index].time = time;
     }
 
     void Load()
@@ -151,7 +154,7 @@ public class LevelSelect : MonoBehaviour
         get { return _active; }
     }
 
-    public static LevelSelect use
+    public static MyLevelSelect use
     {
         get { return _internal; }
     }

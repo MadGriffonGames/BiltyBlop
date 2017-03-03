@@ -20,11 +20,11 @@ public class RunicDoor : InteractiveObject {
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "Player" && player.GotKey)
+		if (other.transform.CompareTag("Player") && Player.Instance.GotKey)
 		{
 			CameraEffect.Shake(0.25f, 0.25f);
 			animator.SetTrigger ("open");
-			player.GotKey = false;
+			Player.Instance.GotKey = false;
             KeyUI.Instance.KeyImage.enabled = false;
 		}
 	}

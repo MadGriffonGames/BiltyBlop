@@ -31,7 +31,7 @@ public class LevelSelect : MonoBehaviour
     private static bool _active;
     private static LevelSelect _internal;
     private int groupIndex;
-    private LevelSelectButton[] buttonsArray;
+   // private LevelSelectButton[] buttonsArray;
     private LevelData[] data;
     private Sprite[] sceneIcon;
 
@@ -43,8 +43,8 @@ public class LevelSelect : MonoBehaviour
         groupIndex = 1;
         backButton.onClick.AddListener(() => { Back(); });
         nextButton.onClick.AddListener(() => { Next(); });
-        buttonsArray = levelGroup.GetComponentsInChildren<LevelSelectButton>();
-        data = new LevelData[buttonsArray.Length * groupCount];
+        //buttonsArray = levelGroup.GetComponentsInChildren<LevelSelectButton>();
+       // data = new LevelData[buttonsArray.Length * groupCount];
         Load();
 
     }
@@ -55,22 +55,20 @@ public class LevelSelect : MonoBehaviour
 
         // пользовательские (можно изменять)
         public int coins;
-        public string time;
     }
 
-    public void SaveScene(int coins, string time)
+    public void SaveScene(int coins)
     {
         int j = 0;
-        foreach (LevelData element in data)
+        foreach (LevelData element in data)//counting unlock lvls
         {
             if (!element.isActive) break; else j++;
         }
-
         if (j <= data.Length - 1)
         {
+            Debug.Log(j);
             data[j].isActive = true;
             data[j].coins = coins;
-            data[j].time = time;
         }
         else return;
         StreamWriter writer = new StreamWriter(GetPath());
@@ -78,7 +76,7 @@ public class LevelSelect : MonoBehaviour
         {
             if (element.isActive)
             {
-                writer.WriteLine(element.coins + "|" + element.time);
+                writer.WriteLine(element.coins + "|");
             }
         }
         writer.Close();
@@ -86,7 +84,6 @@ public class LevelSelect : MonoBehaviour
         if ((j + 1) <= data.Length - 1) // после сохранения, открываем следующую сцену, если таковая есть
         {
             data[(j + 1)].canUse = true;
-            ButtonUpdate();
         }
     }
 
@@ -95,12 +92,11 @@ public class LevelSelect : MonoBehaviour
         string[] t = text.Split(new char[] { '|' });
 
         // загрузка в таком же порядке, что и запись
-        int score = Parse(t[0]);
+        int coins = Parse(t[0]);
         string time = t[1];
 
         data[index].isActive = true;
-        data[index].coins = score;
-        data[index].time = time;
+        data[index].coins = coins;
     }
 
     void Load()
@@ -112,7 +108,6 @@ public class LevelSelect : MonoBehaviour
             if (data.Length > 0)
             {
                 data[0].canUse = true;
-                ButtonUpdate();
             }
             return;
         }
@@ -133,7 +128,6 @@ public class LevelSelect : MonoBehaviour
 
         reader.Close();
 
-        ButtonUpdate();
     }
 
     public void LoadScene(int id)
@@ -189,7 +183,6 @@ public class LevelSelect : MonoBehaviour
         {
             nextButton.interactable = true;
             groupIndex--;
-            ButtonUpdate();
         }
 
         if (groupIndex == 1) backButton.interactable = false;
@@ -201,7 +194,6 @@ public class LevelSelect : MonoBehaviour
         {
             backButton.interactable = true;
             groupIndex++;
-            ButtonUpdate();
         }
 
         if (groupIndex == groupCount) nextButton.interactable = false;
@@ -225,25 +217,4 @@ public class LevelSelect : MonoBehaviour
         return unlockIcon;
     }
 
-    void ButtonUpdate()
-    {
-        int j = (buttonsArray.Length * groupIndex) - buttonsArray.Length;
-        foreach (LevelSelectButton element in buttonsArray)
-        {
-            if (data[j].isActive || data[j].canUse)
-            {
-                element.button.interactable = true;
-                element.button.image.sprite = GetSprite(false, scenePrefix + (j + 1));
-            }
-            else
-            {
-                element.button.interactable = false;
-                element.button.image.sprite = GetSprite(true, scenePrefix + (j + 1));
-            }
-
-            j++;
-            element.id = j;
-            element.buttonText.text = j.ToString();
-        }
-    }
 }

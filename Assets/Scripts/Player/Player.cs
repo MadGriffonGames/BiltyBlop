@@ -237,9 +237,10 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-	    if (!immortal)
+        if (!immortal)
 		{
-			health -= 1;
+            CameraEffect.Shake(0.5f, 0.4f);
+            health -= 1;
 			if (!IsDead)
 			{
 				if (IsFalling || !OnGround) 

@@ -16,15 +16,9 @@ public class Chest : InteractiveObject
         isEmpty = false;
     }
 
-    // Update is called once per frame
-    void Update ()
-    {
-		
-	}
-
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isEmpty && other.gameObject.tag == "Player" && other.gameObject.tag != "Sword")
+        if (!isEmpty && other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             isEmpty = true;
             for (int i = 0; i < 10; i++)

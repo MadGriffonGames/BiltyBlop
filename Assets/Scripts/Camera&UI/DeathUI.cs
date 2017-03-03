@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 public class DeathUI : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class DeathUI : MonoBehaviour
     private void Start ()
     {
         controls.SetActive(false);
+        Advertisement.Show();
 	}
 
     public void Restart()

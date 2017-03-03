@@ -6,7 +6,6 @@ using UnityEngine;
 public class RuneStone : InteractiveObject
 {
     public string nextLvl;
-
 	[SerializeField]
 	private GameObject lightParticle;
 
@@ -22,6 +21,7 @@ public class RuneStone : InteractiveObject
             animator.SetTrigger("shine");
         }
     }
+
 	public void MakeFX()
 	{
 		Instantiate(lightParticle, this.gameObject.transform.position + new Vector3(0, -0.5f, 1), Quaternion.Euler(new Vector3 (-90, 0 , 0)));
@@ -30,7 +30,8 @@ public class RuneStone : InteractiveObject
     public void ChangeScene()
     {
         GameManager.levelName = nextLvl;
-        LevelSelect.use.SaveScene(GameManager.CollectedCoins, "0");
+        PlayerPrefs.SetInt("Coins", GameManager.collectedCoins);
+        PlayerPrefs.SetInt(nextLvl, 1);
         SceneManager.LoadScene("Loading");
     }
 }

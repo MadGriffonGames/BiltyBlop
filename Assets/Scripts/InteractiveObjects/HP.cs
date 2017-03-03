@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HP : InteractiveObject {
+public class HP : InteractiveObject
+{
 
     public override void Start()
     {
         base.Start();
     }
 
-    void Update()
-    {
-
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player" && player.Health < 3 && other.gameObject.tag != "Sword")
+        if (other.transform.CompareTag("Player") && Player.Instance.Health < 3 && !other.transform.CompareTag("Sword"))
         {
 			SoundManager.PlaySound ("heart_collect");
             animator.SetTrigger("collected");
-            player.Health ++;
+            Player.Instance.Health ++;
         }
     }
 

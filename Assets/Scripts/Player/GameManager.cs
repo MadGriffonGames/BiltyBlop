@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static int collectedCoins = 50;
+    public static int collectedCoins;
 
 	public static int CollectedCoins
 	{
@@ -24,7 +24,13 @@ public class GameManager : MonoBehaviour
 
 	void Start () 
 	{
-		SoundManager.PlayMusic ("muzlo", true);
+        if (!PlayerPrefs.HasKey("Coins"))
+        {
+            collectedCoins = 0;
+        }
+        else
+            collectedCoins = PlayerPrefs.GetInt("Coins");
+        SoundManager.PlayMusic ("muzlo", true);
 	}
 	
 	void Update ()

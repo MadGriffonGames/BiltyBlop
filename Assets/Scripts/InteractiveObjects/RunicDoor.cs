@@ -7,29 +7,34 @@ public class RunicDoor : InteractiveObject {
 	[SerializeField]
 	GameObject stoneParticle;
 
+	// Use this for initialization
 	public override void Start ()
 	{
 		base.Start();
 	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.transform.CompareTag("Player") && Player.Instance.GotKey)
+		if (other.gameObject.tag == "Player" && player.GotKey)
 		{
-			Player.Instance.GotKey = false;
-			KeyUI.Instance.KeyImage.enabled = false;
+			CameraEffect.Shake(0.25f, 0.25f);
 			animator.SetTrigger ("open");
-			SoundManager.MusicVolume (2f);
-			SoundManager.PlaySound ("key_enter");
+			player.GotKey = false;
+            KeyUI.Instance.KeyImage.enabled = false;
 		}
 	}
 
 	public void DestroyObject()
 	{
+		
 		Destroy(this.gameObject);
-		CameraEffect.Shake(0.4f, 0.4f);
-		Instantiate(stoneParticle, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
 		SoundManager.PlaySound ("door_explode");
+		Instantiate(stoneParticle, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
 	}
 
 }

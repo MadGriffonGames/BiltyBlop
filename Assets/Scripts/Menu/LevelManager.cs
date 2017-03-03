@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     [System.Serializable]
     public class Level
     {
-        public string levelText;
+        protected string levelText;
         public int unlocked;
         public bool isInteractable;
     }
@@ -27,11 +27,13 @@ public class LevelManager : MonoBehaviour
 
     void SetButtons()
     {
+        int lvlNum = 1;
         foreach (var level in levelList)
         {
+            Debug.Log(lvlNum);
             GameObject newButton = Instantiate(levelButton) as GameObject;
             LevelButton button = newButton.GetComponent<LevelButton>();
-            button.levelText.text = level.levelText;
+            button.levelText.text = lvlNum++.ToString();
             if (PlayerPrefs.GetInt("Level" + button.levelText.text) == 1)
             {
                 level.unlocked = 1;
@@ -40,7 +42,6 @@ public class LevelManager : MonoBehaviour
             button.unlocked = level.unlocked;
             button.GetComponent<Button>().interactable = level.isInteractable;
             button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
-
             newButton.transform.SetParent(spacer);
         }
         SaveAll();

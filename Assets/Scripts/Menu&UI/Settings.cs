@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class PauseUI : MonoBehaviour
+public class Settings : MonoBehaviour
 {
-    public void ToLevelMenu()
+
+    public void Back()
     {
-        SceneManager.LoadScene("LevelSelectMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 }

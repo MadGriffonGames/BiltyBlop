@@ -17,8 +17,6 @@ public class EFGreenRangeState : IEFGreenState {
         {
             if (enemy.InShootingRange)
                 enemy.MyAniamtor.SetTrigger("attack");
-            else
-            { }
         }
         else
         {

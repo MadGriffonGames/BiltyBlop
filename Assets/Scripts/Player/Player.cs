@@ -36,44 +36,30 @@ public class Player : Character
 
 	[SerializeField]
 	private GameObject grave;
-
     [SerializeField]
 	private Transform[] groundPoints = null;
-
 	[SerializeField]
 	private float groundRadius;
-
     [SerializeField]
 	private LayerMask whatIsGround;
-    
-    public bool OnGround { get; set; }
-
+    public Rigidbody2D MyRigidbody { get; set; }
     [SerializeField]
-	private float jumpForce = 10f;
-
-    public bool Jump { get; set; }
-
-    private bool immortal = false;
-
-    private SpriteRenderer[] spriteRenderer;
-
+    private float jumpForce;
     [SerializeField]
-    private float immortalTime;
-
-	public Rigidbody2D MyRigidbody { get; set;}
-
-    private float mobileInput = 0;
-
-    public bool GotKey { get; set; }
-
-    public Vector2 StartPosition { get; set; }
-
-    public Vector2 CheckpointPosition { get; set; }
-
-    public int startCoinCount;
-
+    public float immortalTime;
     [SerializeField]
     GameObject deathUI;
+    public bool OnGround { get; set; }
+    public bool Jump { get; set; }
+    public bool immortal = false;
+    private SpriteRenderer[] spriteRenderer;
+    private float mobileInput = 0;
+    public bool GotKey { get; set; }
+    public Vector2 StartPosition { get; set; }
+    public Vector2 CheckpointPosition { get; set; }
+    public int startCoinCount;
+    public int monstersKilled;
+    public int collectables;
 
     public override void Start () 
 	{
@@ -84,7 +70,9 @@ public class Player : Character
         GotKey = false;
         CheckpointPosition = StartPosition;
         startCoinCount = GameManager.CollectedCoins;
-	}
+        monstersKilled = 0;
+        collectables = 0;
+    }
 
 	void Update()
 	{
@@ -99,8 +87,7 @@ public class Player : Character
         }
 
 	}
-		
-	// Update is called once per frame
+
 	void FixedUpdate() 
 	{
         if (!TakingDamage && !IsDead)
@@ -146,7 +133,8 @@ public class Player : Character
 		{
             MyAniamtor.SetTrigger("jump");
 			Jump = true;
-			if (Mathf.Abs (MyRigidbody.velocity.y) <= 0.01f) {
+			if (Mathf.Abs (MyRigidbody.velocity.y) <= 0.01f)
+            {
 				SoundManager.PlaySound ("player_jump");
 			}
 		}
@@ -218,7 +206,7 @@ public class Player : Character
 		}
 	}
 
-    private IEnumerator IndicateImmortal()
+    public IEnumerator IndicateImmortal()
     {
         while (immortal)
         {

@@ -36,6 +36,4 @@ public class MeleeEnemy : Enemy
     {
         AttackCollider.enabled = true;
     }
-
-    public override IEnumerator TakeDamage() { yield return null; }
 }

@@ -58,7 +58,8 @@ public class StoneHolem : MovingMeleeEnemy
         Instantiate(stoneParticle, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2f, -1f), Quaternion.identity);
         if (IsDead)
         {
-			SoundManager.PlaySound ("holem_death");
+            Player.Instance.monstersKilled++;
+            SoundManager.PlaySound ("holem_death");
             Destroy(transform.parent.gameObject);
         }
         yield return null;

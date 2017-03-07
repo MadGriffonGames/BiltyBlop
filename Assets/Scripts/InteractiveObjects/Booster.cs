@@ -27,15 +27,4 @@ public class Booster : InteractiveObject
             Player.Instance.MyRigidbody.AddForce(new Vector2(0, force));
         }
     }
-
-    public void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.transform.CompareTag("Player"))
-        {
-            SoundManager.PlaySound("mushroom_boing");
-            animator.SetBool("Boost", true);
-            Player.Instance.MyRigidbody.velocity = new Vector2(Player.Instance.MyRigidbody.velocity.x, 0);
-            Player.Instance.MyRigidbody.AddForce(new Vector2(0, force));
-        }
-    }
 }

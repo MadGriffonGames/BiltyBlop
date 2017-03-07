@@ -14,8 +14,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual IEnumerator TakeDamage() { yield return null; }
-
     public bool TakingDamage { get; set; }
 
     public Animator MyAniamtor { get; private set; }
@@ -50,7 +48,10 @@ public class Enemy : MonoBehaviour
         MyAniamtor = GetComponent<Animator>();
     }
 
-    void Update() {}
+    public virtual IEnumerator TakeDamage()
+    {
+        yield return null;
+    }
 
     public virtual void OnTriggerEnter2D(Collider2D other)
     {

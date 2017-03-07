@@ -9,12 +9,27 @@ public class DeathUI : MonoBehaviour
 {
     [SerializeField]
     GameObject controls;
+    [SerializeField]
+    GameObject fade;
 
     private void Start ()
     {
         controls.SetActive(false);
+        fade.SetActive(true);
         Advertisement.Show();
 	}
+
+    private void Update()
+    {
+        if (!fade.activeInHierarchy)
+        {
+            fade.SetActive(true);
+        }
+        if (controls.activeInHierarchy)
+        {
+            controls.SetActive(false);
+        }
+    }
 
     public void Restart()
     {
@@ -36,6 +51,7 @@ public class DeathUI : MonoBehaviour
 			Player.Instance.ButtonMove (0);
             Player.Instance.MyRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
+            fade.SetActive(false);
             this.gameObject.SetActive(false);
         }     
     }

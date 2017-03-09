@@ -19,7 +19,6 @@ public class FollowCamera : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(transform.position.x);
         Vector3 posNoZ = transform.position;
         posNoZ.z = target.transform.position.z;
         Vector3 targetDirection = (target.transform.position - posNoZ); 

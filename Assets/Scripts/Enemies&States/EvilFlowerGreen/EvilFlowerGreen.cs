@@ -10,10 +10,13 @@ public class EvilFlowerGreen : RangeEnemy
     private IEFGreenState currentState;
 
     [SerializeField]
-    private GameObject seed;
+    GameObject seed;
 
     [SerializeField]
-    private GameObject leafParticle;
+    GameObject leafParticle;
+
+    [SerializeField]
+    GameObject[] healthbar;
 
     void Awake()
     {
@@ -34,6 +37,7 @@ public class EvilFlowerGreen : RangeEnemy
             {
                 currentState.Execute();
             }
+            
         }
     }
 

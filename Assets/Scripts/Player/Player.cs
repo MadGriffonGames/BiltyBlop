@@ -280,5 +280,10 @@ public class Player : Character
 	{
 		Instantiate (grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z), Quaternion.identity);
 	}
+
+    public void Heal()
+    {
+        MakeFX.Instance.MakeHeal();
+    }
 }
 

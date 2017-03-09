@@ -14,7 +14,17 @@ public class Collectables : InteractiveObject
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             Player.Instance.collectables++;
-            Destroy(this.gameObject);
+            animator.SetTrigger("collected");
         }
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(this.gameObject);   
+    }
+
+    public void PlaySound()
+    {
+        SoundManager.PlaySound("key_collect");
     }
 }

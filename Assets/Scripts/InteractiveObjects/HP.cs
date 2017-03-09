@@ -16,7 +16,8 @@ public class HP : InteractiveObject
         {
 			SoundManager.PlaySound ("heart_collect");
             animator.SetTrigger("collected");
-            Player.Instance.Health ++;
+            Player.Instance.Health++;
+            MakeFX.Instance.MakeHeal();
         }
     }
 

@@ -17,30 +17,27 @@ public class MakeFX : MonoBehaviour
     }
 
     [SerializeField]
-    public Transform position;
-
-    [SerializeField]
-    private GameObject dust;
+    GameObject dust;
 
 	[SerializeField]
-	private GameObject death;
+    GameObject death;
 
-    void Start ()
-    {
-        position = GetComponent<Transform>();
-    }
-	
-	void Update ()
-    {
-		
-	}
+    [SerializeField]
+    GameObject heal;
 
     public void MakeDust()
     {
-        Instantiate(dust, position.localPosition + new Vector3(0, -0.7f, 0), Quaternion.identity);
+        Instantiate(dust, transform.localPosition + new Vector3(0, -0.7f, 0), Quaternion.identity);
     }
+
 	public void MakeDeath()
 	{
-		Instantiate(death, position.localPosition + new Vector3(-0.25f, 0, 0), Quaternion.identity);
+		Instantiate(death, transform.localPosition + new Vector3(-0.25f, 0, 0), Quaternion.identity);
 	}
+
+    public void MakeHeal()
+    {
+        GameObject tmp = Instantiate(heal, transform.localPosition + new Vector3(0, -0.2f, 0), Quaternion.identity);
+        tmp.transform.SetParent(Player.Instance.transform);
+    }
 }

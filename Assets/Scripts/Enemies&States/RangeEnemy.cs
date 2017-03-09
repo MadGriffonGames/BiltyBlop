@@ -8,6 +8,11 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private float shootingRange;
 
+    public override void Start()
+    {
+        base.Start();
+    }
+
     public bool InShootingRange
     {
         get

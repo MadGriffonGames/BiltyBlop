@@ -15,9 +15,6 @@ public class EvilFlowerGreen : RangeEnemy
     [SerializeField]
     GameObject leafParticle;
 
-    [SerializeField]
-    GameObject[] healthbar;
-
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -37,7 +34,6 @@ public class EvilFlowerGreen : RangeEnemy
             {
                 currentState.Execute();
             }
-            
         }
     }
 

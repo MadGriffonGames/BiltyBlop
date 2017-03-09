@@ -22,17 +22,39 @@ public class DestructionObject : InteractiveObject
     {
         if (other.transform.CompareTag("Sword"))
         {
-            if (UnityEngine.Random.Range(1, 100) < 45)//spawn or not
-            {
-                if (UnityEngine.Random.Range(1, 100) < 90)
-                    Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
-                else
-                    Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
-            }
+            SpawnObject();
             CameraEffect.Shake(0.2f, 0.2f);
             Instantiate(chips, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
 			SoundManager.PlaySound ("wooden_box");
             Destroy(this.gameObject);
+        }
+    }
+
+    public void SpawnObject()
+    {
+        if (UnityEngine.Random.Range(1, 100) <= 50)//spawn or not
+        {
+            switch (Player.Instance.Health)
+            {
+                case 1:
+                    if (UnityEngine.Random.Range(1, 100) <= 75)
+                        Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
+                    else
+                        Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
+                    break;
+                case 2:
+                    if (UnityEngine.Random.Range(1, 100) <= 85)
+                        Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
+                    else
+                        Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
+                    break;
+                case 3:
+                    if (UnityEngine.Random.Range(1, 100) <= 95)
+                        Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
+                    else
+                        Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
+                    break;
+            }
         }
     }
 }

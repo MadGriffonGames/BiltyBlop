@@ -50,6 +50,7 @@ public class Hedgehog : MovingMeleeEnemy
     {
         health -= 1;
         CameraEffect.Shake(0.5f, 0.4f);
+        SetHealthbar();
         if (IsDead)
         {
             Player.Instance.monstersKilled++;

@@ -11,6 +11,9 @@ public class DeathUI : MonoBehaviour
     GameObject controls;
     [SerializeField]
     GameObject fade;
+    public bool timerOn;
+    float timer;
+    float delay = 3f;
 
     private void Start ()
     {
@@ -28,6 +31,14 @@ public class DeathUI : MonoBehaviour
         if (controls.activeInHierarchy)
         {
             controls.SetActive(false);
+        }
+        if (timerOn)
+        {
+            timer += Time.deltaTime;
+            if (timer >= delay)
+            {
+                timerOn = false;
+            }
         }
     }
 
@@ -50,6 +61,8 @@ public class DeathUI : MonoBehaviour
 			Player.Instance.MyAniamtor.SetFloat("speed", 0);
 			Player.Instance.ButtonMove (0);
             Player.Instance.MyRigidbody.velocity = new Vector2(0, 0);
+            timerOn = true;
+            Player.Instance.immortal = true;
             controls.SetActive(true);
             fade.SetActive(false);
             this.gameObject.SetActive(false);

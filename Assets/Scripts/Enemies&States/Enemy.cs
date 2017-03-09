@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
 {
     public GameObject Target { get; set; }
 
+    [SerializeField]
+    protected GameObject[] healthbar;
+
     public bool IsDead
     {
         get
@@ -13,6 +16,7 @@ public class Enemy : MonoBehaviour
             return health <= 0;
         }
     }
+
 
     public bool TakingDamage { get; set; }
 
@@ -46,10 +50,12 @@ public class Enemy : MonoBehaviour
     {
         facingRight = false;
         MyAniamtor = GetComponent<Animator>();
+        healthbar[Health - 1].SetActive(true);
     }
 
     public virtual IEnumerator TakeDamage()
     {
+
         yield return null;
     }
 
@@ -58,6 +64,21 @@ public class Enemy : MonoBehaviour
         if (damageSources.Contains(other.tag))
         {
             StartCoroutine(TakeDamage());
+        }
+    }
+
+    public void SetHealthbar()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (i + 1 == health)
+            {
+                healthbar[i].SetActive(true);
+            }
+            else
+            {
+                healthbar[i].SetActive(false);
+            }
         }
     }
 }

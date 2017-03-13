@@ -76,7 +76,7 @@ public class SoundManager : MonoBehaviour {
 
 	public static void PlayMusic(string name, bool loop)
 	{
-		//_instance.PlayMusicInternal(name, loop);
+		_instance.PlayMusicInternal(name, loop);
 	}
 
 	void LateUpdate()

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         }
         else
             collectedCoins = PlayerPrefs.GetInt("Coins");
+        collectedCoins = 500;
         SoundManager.PlayMusic ("muzlo", true);
 	}
 	

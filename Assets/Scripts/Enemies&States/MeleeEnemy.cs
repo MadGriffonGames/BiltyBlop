@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
+    public override void Start()
+    {
+        base.Start();
+    }
 
     [SerializeField]
     private EdgeCollider2D attackCollider;
@@ -36,6 +40,4 @@ public class MeleeEnemy : Enemy
     {
         AttackCollider.enabled = true;
     }
-
-    public override IEnumerator TakeDamage() { yield return null; }
 }

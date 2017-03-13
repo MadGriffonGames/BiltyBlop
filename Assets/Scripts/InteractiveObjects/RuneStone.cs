@@ -8,10 +8,28 @@ public class RuneStone : InteractiveObject
     public string nextLvl;
 	[SerializeField]
 	private GameObject lightParticle;
+    [SerializeField]
+    GameObject LevelEndUI;
+    float delay = 2f;
+    float timer;
+    bool timerIsOn = false;
 
     public override void Start()
     {
         base.Start();
+    }
+
+    private void Update()
+    {
+        if (timerIsOn)
+        {
+            timer += Time.deltaTime;
+        }
+        if (timer >= delay)
+        {
+            Zoom.stopZoom();
+            LevelEndUI.SetActive(true);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -19,6 +37,10 @@ public class RuneStone : InteractiveObject
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             animator.SetTrigger("shine");
+            Zoom.makeZoom(1, 3, 5);
+            SaveGame();
+            timer = 0;
+            timerIsOn = true;
         }
     }
 
@@ -27,11 +49,21 @@ public class RuneStone : InteractiveObject
 		Instantiate(lightParticle, this.gameObject.transform.position + new Vector3(0, -0.5f, 1), Quaternion.Euler(new Vector3 (-90, 0 , 0)));
 	}
 
-    public void ChangeScene()
+    public void SaveGame()
     {
         GameManager.levelName = nextLvl;
         PlayerPrefs.SetInt("Coins", GameManager.collectedCoins);
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
+        {
+            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.collectables)
+            {
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.collectables);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.collectables);
+        }
         PlayerPrefs.SetInt(nextLvl, 1);
-        SceneManager.LoadScene("Loading");
     }
 }

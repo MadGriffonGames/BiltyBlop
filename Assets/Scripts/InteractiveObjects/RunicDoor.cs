@@ -7,15 +7,9 @@ public class RunicDoor : InteractiveObject {
 	[SerializeField]
 	GameObject stoneParticle;
 
-	// Use this for initialization
 	public override void Start ()
 	{
 		base.Start();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	public void OnTriggerEnter2D(Collider2D other)

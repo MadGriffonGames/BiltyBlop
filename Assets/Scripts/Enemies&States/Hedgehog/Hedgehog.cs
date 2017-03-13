@@ -50,11 +50,14 @@ public class Hedgehog : MovingMeleeEnemy
     {
         health -= 1;
         CameraEffect.Shake(0.5f, 0.4f);
-		SoundManager.PlaySound ("hedgehog_death");
-        Instantiate(spikeParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
+        SetHealthbar();
         if (IsDead)
         {
+            Player.Instance.monstersKilled++;
+            SoundManager.PlaySound("hedgehog_death");
+            Instantiate(spikeParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
             Destroy(transform.parent.gameObject);
+
         }
         yield return null;
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+//using UnityEngine.Advertisements;
 
 public class DeathUI : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class DeathUI : MonoBehaviour
     {
         controls.SetActive(false);
         fade.SetActive(true);
-        Advertisement.Show();
+        //Advertisement.Show();
 	}
 
     private void Update()

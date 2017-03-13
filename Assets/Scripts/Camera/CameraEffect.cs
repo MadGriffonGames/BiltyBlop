@@ -7,15 +7,11 @@ public class CameraEffect : MonoBehaviour
     private static Transform position;
     private static float elapsedShake, initiateDuration, initiatePower, percentComplete;
     private static Vector3 originalPosition;
-    private static Camera mainCamera;
-    
-    
 
     void Start()
     {
         percentComplete = 1;
         position = GetComponent<Transform>();
-        mainCamera = FindObjectOfType<Camera>();
     }
 
     public static void Shake(float duration, float power)

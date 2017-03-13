@@ -24,7 +24,6 @@ public class Parallaxing : MonoBehaviour
 
 	}
 
-	// Use this for initialization
 	void Start () 
 	{
 		// The previous frame had the current frame's camera position
@@ -38,8 +37,8 @@ public class Parallaxing : MonoBehaviour
 		}
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
 
 		// for each background
 		for (int i = 0; i < backgrounds.Length; i++) 

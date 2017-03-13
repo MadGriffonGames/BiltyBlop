@@ -60,7 +60,6 @@ public class EvilFlowerGreen : RangeEnemy
         if (IsDead)
         {
             Player.Instance.monstersKilled++;
-            MyAniamtor.SetTrigger("death");
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
 			SoundManager.PlaySound ("flower_death");
 			Destroy(gameObject);

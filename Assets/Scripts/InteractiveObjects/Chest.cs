@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Chest : InteractiveObject
 {
-    [SerializeField]
-    private Coin coin;
 
     private bool isEmpty;
 
-	private Animator animator;
+	[SerializeField]
+	private GameObject[] coins;
 
     // Use this for initialization
     public override void Start()
@@ -21,12 +20,20 @@ public class Chest : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isEmpty && other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
+		
+
+        if (!isEmpty && other.transform.CompareTag("Sword"))
         {
-			animator = GetComponent<Animator> ();
 			animator.SetTrigger ("open");
-            isEmpty = true;
+			foreach (GameObject coin in coins)
+			{
+				coin.SetActive(true);				
+				Rigidbody2D rb = coin.GetComponent<Rigidbody2D> ();
+				rb.AddForce (new Vector2 (UnityEngine.Random.Range(-15,15), UnityEngine.Random.Range(30,50)));
+			}
 
         }
+
+		isEmpty = true;
     }
 }

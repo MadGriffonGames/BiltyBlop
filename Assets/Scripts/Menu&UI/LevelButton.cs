@@ -25,4 +25,12 @@ public class LevelButton : MonoBehaviour
             stars[i].SetActive(true);
         }
     }
+
+    public void HideStars()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            stars[i].SetActive(false);
+        }
+    }
 }

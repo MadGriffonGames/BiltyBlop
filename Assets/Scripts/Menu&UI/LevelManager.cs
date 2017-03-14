@@ -82,6 +82,11 @@ public class LevelManager : MonoBehaviour
                 button.unlocked = level.unlocked;
                 button.GetComponent<Button>().interactable = level.isInteractable;
                 button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
+                if (PlayerPrefs.HasKey("Level" + button.levelText.text + "_collects"))
+                {
+                    button.ShowStars(PlayerPrefs.GetInt("Level" + button.levelText.text + "_collects"));
+                }
+                else button.HideStars();
             }
             ButtonsUpdate();
         }
@@ -97,7 +102,6 @@ public class LevelManager : MonoBehaviour
             foreach (var level in levelList)
             {
                 LevelButton button = levelButtonsArray[i--];//cuz lvls goes in revert order
-                Debug.Log(levelList.Count);
                 button.levelText.text = (lvlNum++ + levelList.Count * groupIndex).ToString();
                 //2nd statement needs bad, but i dont know why, without it, doesn't works
                 if (PlayerPrefs.GetInt("Level" + button.levelText.text) == 1 || button.levelText.text == "1")
@@ -113,6 +117,11 @@ public class LevelManager : MonoBehaviour
                 button.unlocked = level.unlocked;
                 button.GetComponent<Button>().interactable = level.isInteractable;
                 button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
+                if (PlayerPrefs.HasKey("Level" + button.levelText.text + "_collects"))
+                {
+                    button.ShowStars(PlayerPrefs.GetInt("Level" + button.levelText.text + "_collects"));
+                }
+                else button.HideStars();
             }
             ButtonsUpdate();
         }

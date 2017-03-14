@@ -17,7 +17,7 @@ public class Star : InteractiveObject
 		if(other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
 		{
 			animator.SetTrigger("collected");
-			//GameManager.CollectedStars++;
+            Player.Instance.collectables++;
 		}   
 	}
 
@@ -26,9 +26,15 @@ public class Star : InteractiveObject
 		Instantiate(crystalParticle, this.gameObject.transform.position + new Vector3(0, 0.2f, 1), Quaternion.Euler(new Vector3 (0, 0 , 0)));
 	}
 
+    public void ShowStar()
+    {
+        CollectsUI.Instance.ShowStars(Player.Instance.collectables);
+    }
+
 	public void DestroyObject()
 	{
 		SoundManager.PlaySound ("star_collect");
+        ShowStar();
 		Destroy(this.gameObject);
 	}
 }

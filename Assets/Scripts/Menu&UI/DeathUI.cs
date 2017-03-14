@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+//using UnityEngine.Advertisements;
 
 public class DeathUI : MonoBehaviour
 {
@@ -11,7 +11,9 @@ public class DeathUI : MonoBehaviour
     GameObject controls;
     [SerializeField]
     GameObject fade;
-    public bool timerOn;
+    [SerializeField]
+    GameObject mainCamera;
+    bool timerOn;
     float timer;
     float delay = 3f;
 
@@ -19,7 +21,7 @@ public class DeathUI : MonoBehaviour
     {
         controls.SetActive(false);
         fade.SetActive(true);
-        Advertisement.Show();
+        //Advertisement.Show();
 	}
 
     private void Update()
@@ -38,6 +40,7 @@ public class DeathUI : MonoBehaviour
             if (timer >= delay)
             {
                 timerOn = false;
+                Player.Instance.immortal = false;
             }
         }
     }
@@ -54,7 +57,6 @@ public class DeathUI : MonoBehaviour
         {
             GameManager.CollectedCoins -= 50;
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
-            Player.Instance.MyAniamtor.Play("PlayerIdle", 0);
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");
             Player.Instance.transform.position = Player.Instance.CheckpointPosition;
@@ -63,6 +65,9 @@ public class DeathUI : MonoBehaviour
             Player.Instance.MyRigidbody.velocity = new Vector2(0, 0);
             timerOn = true;
             Player.Instance.immortal = true;
+            mainCamera.transform.position = new Vector3(Player.Instance.transform.position.x,
+                                                        Player.Instance.transform.position.y,
+                                                        mainCamera.transform.position.z);
             controls.SetActive(true);
             fade.SetActive(false);
             this.gameObject.SetActive(false);

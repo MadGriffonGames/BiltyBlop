@@ -85,8 +85,7 @@ public class Player : Character
             }
 			HandleInput();
         }
-
-	}
+    }
 
 	void FixedUpdate() 
 	{
@@ -100,7 +99,7 @@ public class Player : Character
             Flip(mobileInput);
             HandleLayers();
         }
-	}
+    }
 
 	private void HandleMovement(float horizontal)
 	{

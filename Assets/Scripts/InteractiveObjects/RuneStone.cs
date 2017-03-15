@@ -28,7 +28,11 @@ public class RuneStone : InteractiveObject
         if (timer >= delay)
         {
             Zoom.stopZoom();
-            LevelEndUI.SetActive(true);
+            if (LevelEndUI != null)
+            {
+                LevelEndUI.SetActive(true);
+            }
+            else Debug.Log("Перетащи LevelEndUI в RuneStone, мудак!");
         }
     }
 

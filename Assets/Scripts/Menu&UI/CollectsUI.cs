@@ -6,7 +6,6 @@ using UnityEngine;
 public class CollectsUI : MonoBehaviour
 {
     private static CollectsUI instance;
-
     public static CollectsUI Instance
     {
         get

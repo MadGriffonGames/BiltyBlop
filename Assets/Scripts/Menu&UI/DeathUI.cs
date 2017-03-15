@@ -13,9 +13,6 @@ public class DeathUI : MonoBehaviour
     GameObject fade;
     [SerializeField]
     GameObject mainCamera;
-    bool timerOn;
-    float timer;
-    float delay = 3f;
 
     private void Start ()
     {
@@ -34,15 +31,6 @@ public class DeathUI : MonoBehaviour
         {
             controls.SetActive(false);
         }
-        if (timerOn)
-        {
-            timer += Time.deltaTime;
-            if (timer >= delay)
-            {
-                timerOn = false;
-                Player.Instance.immortal = false;
-            }
-        }
     }
 
     public void Restart()
@@ -59,12 +47,12 @@ public class DeathUI : MonoBehaviour
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");
-            Player.Instance.transform.position = Player.Instance.CheckpointPosition;
-			Player.Instance.MyAniamtor.SetFloat("speed", 0);
+            Player.Instance.transform.position = new Vector3(Player.Instance.CheckpointPosition.x,
+                                                        Player.Instance.CheckpointPosition.y,
+                                                        Player.Instance.transform.position.z);
+            Player.Instance.MyAniamtor.SetFloat("speed", 0);
 			Player.Instance.ButtonMove (0);
             Player.Instance.MyRigidbody.velocity = new Vector2(0, 0);
-            timerOn = true;
-            Player.Instance.immortal = true;
             mainCamera.transform.position = new Vector3(Player.Instance.transform.position.x,
                                                         Player.Instance.transform.position.y,
                                                         mainCamera.transform.position.z);

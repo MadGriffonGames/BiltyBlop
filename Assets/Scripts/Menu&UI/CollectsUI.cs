@@ -20,15 +20,8 @@ public class CollectsUI : MonoBehaviour
     [SerializeField]
     GameObject[] stars;
 
-    private void Start()
-    {
-        
-    }
-
     public void ShowStars(int value)
     {
-        Debug.Log("I am here");
-        Debug.Log(value);
         stars[value-1].SetActive(true);
     }
 }

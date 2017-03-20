@@ -5,7 +5,6 @@ public class MovingPlatform : MonoBehaviour
 {
 	private Vector3 posA;
     private Vector3 nextPos;
-
     private Vector3 posB;
 
     [SerializeField]

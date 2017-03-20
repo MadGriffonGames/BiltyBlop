@@ -10,7 +10,7 @@ public class Hedgehog : MovingMeleeEnemy
     private IHedgehogState currentState;
 
     [SerializeField]
-    private GameObject spikeParticle;
+    GameObject spikeParticle;
 
     void Awake()
     {

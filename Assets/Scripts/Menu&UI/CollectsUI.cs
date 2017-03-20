@@ -19,7 +19,7 @@ public class CollectsUI : MonoBehaviour
     [SerializeField]
     GameObject[] stars;
 
-    public void ShowStars(int value)
+    public void ShowStar(int value)
     {
         stars[value-1].SetActive(true);
     }

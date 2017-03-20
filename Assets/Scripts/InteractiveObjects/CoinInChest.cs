@@ -17,7 +17,6 @@ public class CoinInChest : InteractiveObject
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             MyRigidbody.bodyType = RigidbodyType2D.Static;
-            MyRigidbody.velocity = new Vector3(0,0,0);
             animator.SetTrigger("collected");
             GameManager.CollectedCoins++;
             SoundManager.PlaySound("coin_collect");

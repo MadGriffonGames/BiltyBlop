@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    public float interpVelocity;
-    public float minDistance;
-    public float followDistance;
-    public GameObject target;
+    float interpVelocity;
+    float minDistance;
+    float followDistance;
+    GameObject target;
     Vector3 targetPos;
     [SerializeField]
     float xMin, xMax;
 
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("CameraTarget");
         targetPos = transform.position;
     }
 

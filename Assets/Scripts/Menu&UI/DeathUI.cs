@@ -11,13 +11,13 @@ public class DeathUI : MonoBehaviour
     GameObject controls;
     [SerializeField]
     GameObject fade;
-    [SerializeField]
     GameObject mainCamera;
 
-    private void Start ()
+    public void Start ()
     {
         controls.SetActive(false);
         fade.SetActive(true);
+        mainCamera = GameObject.FindWithTag("MainCamera");
         //Advertisement.Show();
 	}
 

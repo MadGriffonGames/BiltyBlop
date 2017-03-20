@@ -53,6 +53,7 @@ public class Player : Character
     public bool Jump { get; set; }
     public bool immortal = false;
     private SpriteRenderer[] spriteRenderer;
+    private HingeJoint2D hingeJoint;
     private float mobileInput = 0;
     public bool GotKey { get; set; }
     public Vector2 StartPosition { get; set; }
@@ -72,6 +73,8 @@ public class Player : Character
         startCoinCount = GameManager.CollectedCoins;
         monstersKilled = 0;
         collectables = 0;
+        hingeJoint = GetComponent<HingeJoint2D>();
+        hingeJoint.enabled = false;
     }
 
 	void Update()
@@ -131,12 +134,18 @@ public class Player : Character
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
             MyAniamtor.SetTrigger("jump");
+            if (hingeJoint.enabled)
+            {
+                this.TakeOfJoint();
+                MyRigidbody.AddForce(new Vector2(0, jumpForce));
+                MyRigidbody.velocity = new Vector2(0, 0);
+            }
 			Jump = true;
 			if (Mathf.Abs (MyRigidbody.velocity.y) <= 0.01f)
             {
 				SoundManager.PlaySound ("player_jump");
 			}
-		}
+        }
 		
 		if (Input.GetKeyDown (KeyCode.LeftControl)) 
 		{
@@ -144,21 +153,52 @@ public class Player : Character
         }
 	}
 
-	private void HandleLayers()
-	{
-		if (!OnGround) {
-			MyAniamtor.SetLayerWeight (1, 1);
-			MyAniamtor.SetLayerWeight (2, 0);
-		} else {
-			MyAniamtor.SetLayerWeight (1, 0);
-			MyAniamtor.SetLayerWeight (2, 1);
-		}
-	}
+    private void TakeOfJoint()
+    {
+        hingeJoint.enabled = false;
+        hingeJoint.connectedBody = null;
+        MyRigidbody.mass = 1;
+        MyRigidbody.gravityScale = 3;
+    }
+
+    private void JoinToHinge(Collision2D other)
+    {
+        hingeJoint.enabled = true;
+        hingeJoint.connectedBody = other.rigidbody;
+        MyRigidbody.mass = 10;
+        MyRigidbody.velocity = new Vector2(0, 0);
+    }
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
+        if (other.tag == "Chain")
+        {
+            hingeJoint.enabled = true;
+            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
+            hingeJoint.connectedBody = rb;
+            MyRigidbody.gravityScale = 3;
+            MyRigidbody.velocity = new Vector2(0, 0);
+        }
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Chain")
+        {
+           // MyRigidbody.velocity = new Vector2(0, 0);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Chain")
+        {
+            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
+            rb.angularVelocity = 0;
+        }
+    }
+
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders
     {
@@ -166,6 +206,11 @@ public class Player : Character
         if (other.transform.tag == "movingPlatform")//if character colliding with platform
         {
             transform.parent = other.transform;//make character chil object of platform
+        }
+
+        if (other.transform.tag == "Chain")
+        {
+            //JoinToHinge(other);            
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0 && OnGround)
         {
@@ -179,8 +224,22 @@ public class Player : Character
 		{
 			transform.parent = null;//make charter object non child
 		}
-			
-	}
+
+    }
+
+    private void HandleLayers()
+    {
+        if (!OnGround)
+        {
+            MyAniamtor.SetLayerWeight(1, 1);
+            MyAniamtor.SetLayerWeight(2, 0);
+        }
+        else
+        {
+            MyAniamtor.SetLayerWeight(1, 0);
+            MyAniamtor.SetLayerWeight(2, 1);
+        }
+    }
 
     private bool IsGrounded()
 	{
@@ -258,9 +317,18 @@ public class Player : Character
 
 	public void ButtonJump()
 	{
-		Jump = true;
+        if (hingeJoint.enabled)
+        {
+            this.TakeOfJoint();
+        }
+        Jump = true;
 		MyAniamtor.SetTrigger("jump");
-	}
+        if (Mathf.Abs(MyRigidbody.velocity.y) <= 0.01f)
+        {
+            SoundManager.PlaySound("player_jump");
+        }
+        
+    }
 	public void ButtonAttack()
 	{
 		 MyAniamtor.SetTrigger("attack");

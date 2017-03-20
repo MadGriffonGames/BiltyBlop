@@ -31,9 +31,13 @@ public class Star : InteractiveObject
         CollectsUI.Instance.ShowStars(Player.Instance.collectables);
     }
 
+    public void PlaySound()
+    {
+        SoundManager.PlaySound("star_collect");
+    }
+
 	public void DestroyObject()
 	{
-		SoundManager.PlaySound ("star_collect");
         ShowStar();
 		Destroy(this.gameObject);
 	}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingMeleeEnemy : Enemy
 {
     [SerializeField]
-    protected float movementSpeed = 3.0f;
+    public float movementSpeed = 3.0f;
 
     [SerializeField]
     private EdgeCollider2D attackCollider;

@@ -83,7 +83,7 @@ public class EvilFlowerGreen : RangeEnemy
 
     public void AnimIdle()
     {
-        armature.animation.timeScale = 1f;
+        armature.animation.timeScale = 1.2f;
         armature.animation.Play("IDLE");
     }
 

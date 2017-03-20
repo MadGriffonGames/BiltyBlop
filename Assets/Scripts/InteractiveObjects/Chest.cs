@@ -15,13 +15,10 @@ public class Chest : InteractiveObject
     {
         base.Start();
         isEmpty = false;
-
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-		
-
         if (!isEmpty && other.transform.CompareTag("Sword"))
         {
 			animator.SetTrigger ("open");
@@ -29,11 +26,9 @@ public class Chest : InteractiveObject
 			{
 				coin.SetActive(true);				
 				Rigidbody2D rb = coin.GetComponent<Rigidbody2D> ();
-				rb.AddForce (new Vector2 (UnityEngine.Random.Range(-15,15), UnityEngine.Random.Range(30,50)));
+				rb.velocity =  new Vector2 (UnityEngine.Random.Range(-2f,2f), UnityEngine.Random.Range(7f,9f));
 			}
-
+            isEmpty = true;
         }
-
-		isEmpty = true;
     }
 }

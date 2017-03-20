@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Checkpoint : InteractiveObject
 {
+    [SerializeField]
+    GameObject lightPillar;
 
-    // Use this for initialization
+    bool activated = false;
+
     public override void Start()
     {
         base.Start();
@@ -15,7 +18,11 @@ public class Checkpoint : InteractiveObject
     {
         if (other.transform.CompareTag("Player"))
         {
-            Player.Instance.CheckpointPosition = this.gameObject.transform.localPosition;
+            if (!activated)
+            {
+                lightPillar.SetActive(true);
+                Player.Instance.CheckpointPosition = this.gameObject.transform.position;
+            }
         }
     }
 }

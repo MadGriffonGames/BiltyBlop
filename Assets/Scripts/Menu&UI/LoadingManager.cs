@@ -28,7 +28,6 @@ public class LoadingManager : MonoBehaviour
             loadingCompleteTxt.SetActive(true);
         }
         if (Input.anyKey)
-            async.allowSceneActivation = true;  
-
+            async.allowSceneActivation = true;
     }
 }

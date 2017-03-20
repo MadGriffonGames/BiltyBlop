@@ -32,7 +32,7 @@ public class DestructionObject : InteractiveObject
 
     public void SpawnObject()
     {
-        if (UnityEngine.Random.Range(1, 100) <= 50)//spawn or not
+        if (UnityEngine.Random.Range(1, 100) <= 65)//spawn or not
         {
             switch (Player.Instance.Health)
             {

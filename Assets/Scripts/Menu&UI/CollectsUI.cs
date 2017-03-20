@@ -6,7 +6,6 @@ using UnityEngine;
 public class CollectsUI : MonoBehaviour
 {
     private static CollectsUI instance;
-
     public static CollectsUI Instance
     {
         get
@@ -20,15 +19,8 @@ public class CollectsUI : MonoBehaviour
     [SerializeField]
     GameObject[] stars;
 
-    private void Start()
+    public void ShowStar(int value)
     {
-        
-    }
-
-    public void ShowStars(int value)
-    {
-        Debug.Log("I am here");
-        Debug.Log(value);
         stars[value-1].SetActive(true);
     }
 }

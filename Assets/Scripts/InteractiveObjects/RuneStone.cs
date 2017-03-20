@@ -8,8 +8,6 @@ public class RuneStone : InteractiveObject
     public string nextLvl;
 	[SerializeField]
 	private GameObject lightParticle;
-    [SerializeField]
-    GameObject LevelEndUI;
     float delay = 2f;
     float timer;
     bool timerIsOn = false;
@@ -28,7 +26,7 @@ public class RuneStone : InteractiveObject
         if (timer >= delay)
         {
             Zoom.stopZoom();
-            LevelEndUI.SetActive(true);
+            UI.Instance.LevelEndUI.SetActive(true);
         }
     }
 

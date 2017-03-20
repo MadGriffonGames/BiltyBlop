@@ -47,8 +47,6 @@ public class Player : Character
     private float jumpForce;
     [SerializeField]
     public float immortalTime;
-    [SerializeField]
-    GameObject deathUI;
     public bool OnGround { get; set; }
     public bool Jump { get; set; }
     public bool immortal = false;
@@ -309,7 +307,7 @@ public class Player : Character
 				SoundManager.PlaySound ("player_death");
 				MyAniamtor.SetTrigger("death");
 				MyRigidbody.velocity = Vector2.zero;
-				deathUI.gameObject.SetActive(true); 
+				UI.Instance.DeathUI.SetActive(true);
 			}
 			yield return null;
 		}

@@ -6,7 +6,6 @@ public class CameraEffect : MonoBehaviour
 {
     private static Transform position;
     private static float elapsedShake, initiateDuration, initiatePower, percentComplete;
-    private static Vector3 originalPosition;
 
     void Start()
     {
@@ -16,7 +15,6 @@ public class CameraEffect : MonoBehaviour
 
     public static void Shake(float duration, float power)
     {
-        if (percentComplete == 1) originalPosition = position.localPosition;
         elapsedShake = 0;
         initiateDuration = duration;
         initiatePower = power;

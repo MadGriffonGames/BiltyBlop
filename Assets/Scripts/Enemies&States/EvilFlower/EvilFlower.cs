@@ -52,7 +52,7 @@ public class EvilFlower : MeleeEnemy
 
     public override IEnumerator TakeDamage()
     {
-        health -= 1;
+        health -= Player.Instance.damage;
         CameraEffect.Shake(0.5f, 0.4f);
 
         if(IsDead)

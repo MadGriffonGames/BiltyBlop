@@ -17,8 +17,11 @@ public class Star : InteractiveObject
 		if(other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
 		{
 			animator.SetTrigger("collected");
+            Debug.Log(Player.Instance.collectables);
             Player.Instance.collectables++;
-		}   
+            Debug.Log(Player.Instance.collectables);
+
+        }   
 	}
 
 	public void MakeFX()

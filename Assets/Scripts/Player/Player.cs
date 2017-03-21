@@ -132,12 +132,6 @@ public class Player : Character
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
             MyAniamtor.SetTrigger("jump");
-            if (hingeJoint.enabled)
-            {
-                this.TakeOfJoint();
-                MyRigidbody.AddForce(new Vector2(0, jumpForce));
-                MyRigidbody.velocity = new Vector2(0, 0);
-            }
 			Jump = true;
 			if (Mathf.Abs (MyRigidbody.velocity.y) <= 0.01f)
             {
@@ -151,50 +145,9 @@ public class Player : Character
         }
 	}
 
-    private void TakeOfJoint()
-    {
-        hingeJoint.enabled = false;
-        hingeJoint.connectedBody = null;
-        MyRigidbody.mass = 1;
-        MyRigidbody.gravityScale = 3;
-    }
-
-    private void JoinToHinge(Collision2D other)
-    {
-        hingeJoint.enabled = true;
-        hingeJoint.connectedBody = other.rigidbody;
-        MyRigidbody.mass = 10;
-        MyRigidbody.velocity = new Vector2(0, 0);
-    }
-
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-        if (other.tag == "Chain")
-        {
-            hingeJoint.enabled = true;
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
-            hingeJoint.connectedBody = rb;
-            MyRigidbody.gravityScale = 3;
-            MyRigidbody.velocity = new Vector2(0, 0);
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "Chain")
-        {
-           // MyRigidbody.velocity = new Vector2(0, 0);
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "Chain")
-        {
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
-            rb.angularVelocity = 0;
-        }
     }
 
 
@@ -206,10 +159,6 @@ public class Player : Character
             transform.parent = other.transform;//make character chil object of platform
         }
 
-        if (other.transform.tag == "Chain")
-        {
-            //JoinToHinge(other);            
-        }
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0 && OnGround)
         {
             MakeFX.Instance.MakeDust();
@@ -315,10 +264,6 @@ public class Player : Character
 
 	public void ButtonJump()
 	{
-        if (hingeJoint.enabled)
-        {
-            this.TakeOfJoint();
-        }
         Jump = true;
 		MyAniamtor.SetTrigger("jump");
         if (Mathf.Abs(MyRigidbody.velocity.y) <= 0.01f)
@@ -343,7 +288,7 @@ public class Player : Character
 
 	public void InstantiateGrave()
 	{
-		Instantiate (grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z), Quaternion.identity);
+		Instantiate (grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
 	}
 
     public void Heal()

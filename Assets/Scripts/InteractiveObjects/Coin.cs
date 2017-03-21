@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Coin : InteractiveObject
 {
-
 	public override void Start ()
     {
         base.Start();

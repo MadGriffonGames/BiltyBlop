@@ -55,7 +55,6 @@ public class Enemy : MonoBehaviour
 
     public virtual IEnumerator TakeDamage()
     {
-
         yield return null;
     }
 

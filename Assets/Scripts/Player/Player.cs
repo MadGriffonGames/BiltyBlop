@@ -17,48 +17,63 @@ public class Player : Character
 			return instance;
 		}
 	}
-    
-    public override bool IsDead
-    {
-        get
-        {
-            return health <= 0;
-        }
-    }
 
-    public bool IsFalling
-    {
-        get
-        {
-                return MyRigidbody.velocity.y < -0.1;
-        }
-    }
 
-	[SerializeField]
-	private GameObject grave;
     [SerializeField]
-	private Transform[] groundPoints = null;
-	[SerializeField]
-	private float groundRadius;
-    [SerializeField]
-	private LayerMask whatIsGround;
+    private GameObject grave;
     public Rigidbody2D MyRigidbody { get; set; }
-    [SerializeField]
-    private float jumpForce;
-    [SerializeField]
-    public float immortalTime;
-    public bool OnGround { get; set; }
-    public bool Jump { get; set; }
-    public bool immortal = false;
     private SpriteRenderer[] spriteRenderer;
-    private HingeJoint2D hingeJoint;
-    private float mobileInput = 0;
-    public bool GotKey { get; set; }
+
+    /*
+     * Game Managment vars
+     */
     public Vector2 StartPosition { get; set; }
     public Vector2 CheckpointPosition { get; set; }
     public int startCoinCount;
     public int monstersKilled;
     public int collectables;
+
+    /*
+     * Action vars
+     */
+    [SerializeField]
+    private float jumpForce;
+    public bool Jump { get; set; }
+    private float mobileInput = 0;
+    public bool GotKey { get; set; }
+    public bool immortal = false;
+    public float immortalTime;
+    public int damage = 1;
+    public override bool IsDead
+    {
+        get { return health <= 0; }
+    }
+
+    /*
+     * Ground Check vars
+     */
+    public bool IsFalling
+    {
+        get { return MyRigidbody.velocity.y < -0.1; }
+    }
+    [SerializeField]
+    private Transform[] groundPoints = null;
+    [SerializeField]
+    private float groundRadius;
+    [SerializeField]
+    private LayerMask whatIsGround;
+    [SerializeField]
+    public bool OnGround { get; set; }
+
+    /*
+     * Bonus triggers
+     */
+    public bool jumpBonus = false;
+    public bool damageBonus = false;
+    public bool immortalBonus = false;
+    public float timeScaler = 1;
+    public float timeScalerJump = 1;
+    public float timeScalerMove = 1;
 
     public override void Start () 
 	{
@@ -71,8 +86,6 @@ public class Player : Character
         startCoinCount = GameManager.CollectedCoins;
         monstersKilled = 0;
         collectables = 0;
-        hingeJoint = GetComponent<HingeJoint2D>();
-        hingeJoint.enabled = false;
     }
 
 	void Update()
@@ -85,10 +98,10 @@ public class Player : Character
                 transform.position = StartPosition;
             }
 			HandleInput();
-        }
+        }     
     }
 
-	void FixedUpdate() 
+    void FixedUpdate() 
 	{
         if (!TakingDamage && !IsDead)
         {
@@ -112,15 +125,15 @@ public class Player : Character
 		if (OnGround) 
 		{
             if(!Attack)
-                MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, MyRigidbody.velocity.y);
+                MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, MyRigidbody.velocity.y);
             else
-                MyRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f , MyRigidbody.velocity.y);
+                MyRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f * timeScalerMove, MyRigidbody.velocity.y);
         }
         else
-            MyRigidbody.velocity = new Vector2(horizontal * movementSpeed, MyRigidbody.velocity.y);
+            MyRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, MyRigidbody.velocity.y);
         if (OnGround && Jump &&  Mathf.Abs(MyRigidbody.velocity.y) < 0.1 )
         {
-            MyRigidbody.AddForce(new Vector2(0, jumpForce));
+            MyRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
             MyRigidbody.velocity = new Vector2(0,0);
         }
 
@@ -137,7 +150,7 @@ public class Player : Character
             {
 				SoundManager.PlaySound ("player_jump");
 			}
-        }
+		}
 		
 		if (Input.GetKeyDown (KeyCode.LeftControl)) 
 		{
@@ -145,11 +158,21 @@ public class Player : Character
         }
 	}
 
+	private void HandleLayers()
+	{
+		if (!OnGround) {
+			MyAniamtor.SetLayerWeight (1, 1);
+			MyAniamtor.SetLayerWeight (2, 0);
+		} else {
+			MyAniamtor.SetLayerWeight (1, 0);
+			MyAniamtor.SetLayerWeight (2, 1);
+		}
+	}
+
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
     }
-
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders
     {
@@ -158,7 +181,6 @@ public class Player : Character
         {
             transform.parent = other.transform;//make character chil object of platform
         }
-
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0 && OnGround)
         {
             MakeFX.Instance.MakeDust();
@@ -171,22 +193,8 @@ public class Player : Character
 		{
 			transform.parent = null;//make charter object non child
 		}
-
-    }
-
-    private void HandleLayers()
-    {
-        if (!OnGround)
-        {
-            MyAniamtor.SetLayerWeight(1, 1);
-            MyAniamtor.SetLayerWeight(2, 0);
-        }
-        else
-        {
-            MyAniamtor.SetLayerWeight(1, 0);
-            MyAniamtor.SetLayerWeight(2, 1);
-        }
-    }
+			
+	}
 
     private bool IsGrounded()
 	{
@@ -253,7 +261,7 @@ public class Player : Character
 			{
 				MyAniamtor.SetLayerWeight(1, 0);
 				MyAniamtor.SetLayerWeight(2, 1);
-				SoundManager.PlayMusic ("player_death", true);
+				SoundManager.PlaySound ("player_death");
 				MyAniamtor.SetTrigger("death");
 				MyRigidbody.velocity = Vector2.zero;
 				UI.Instance.DeathUI.SetActive(true);
@@ -262,34 +270,123 @@ public class Player : Character
 		}
     }
 
-	public void ButtonJump()
+    /*
+    * Mobile input hendlers
+    */
+
+    public void ButtonJump()
 	{
-        Jump = true;
+		Jump = true;
 		MyAniamtor.SetTrigger("jump");
-        if (Mathf.Abs(MyRigidbody.velocity.y) <= 0.01f)
-        {
-            SoundManager.PlaySound("player_jump");
-        }
-        
-    }
+	}
+
 	public void ButtonAttack()
 	{
 		 MyAniamtor.SetTrigger("attack");
 	}
+
 	public void ButtonMove(float input)
 	{
 		mobileInput = input;
 	}
-		
-	public void InstantiateDeathParticles()
-	{
-		MakeFX.Instance.MakeDeath();
-	}
 
-	public void InstantiateGrave()
-	{
-		Instantiate (grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
-	}
+    /*
+     * Bonus functions
+     */
+
+    public void ExecBonusImmortal(float duration)
+    {
+        StartCoroutine(ImmortalBonus(duration));
+    }
+
+    public IEnumerator ImmortalBonus(float duration)
+    {
+        immortal = true;
+        yield return new WaitForSeconds(duration);
+        immortal = false;
+    }
+
+    public void ExecBonusDamage(float duration)
+    {
+        StartCoroutine(DamageBonus(duration));
+    }
+
+    public IEnumerator DamageBonus(float duration)
+    {
+        damage = 2;
+        yield return new WaitForSeconds(duration);
+        damage = 1;
+    }
+
+    public void ExecBonusJump(float duration, float force)
+    {
+        StartCoroutine(JumpBonus(duration, force));
+    }
+
+    public IEnumerator JumpBonus(float duration, float force)
+    {
+        float tmp = jumpForce;
+        jumpForce += force;
+        yield return new WaitForSeconds(duration);
+        jumpForce = tmp;
+    }
+
+    public void ExecBonusSpeed(float duration)
+    {
+        StartCoroutine(SpeedBonus(duration));
+    }
+
+    public IEnumerator SpeedBonus(float duration)
+    {
+        
+        movementSpeed *= 2;
+        MyAniamtor.speed *= 2;
+        MyRigidbody.gravityScale *= 1.4f;
+        yield return new WaitForSeconds(duration);
+        MyRigidbody.gravityScale /= 1.4f;
+        movementSpeed /= 2;
+        MyAniamtor.speed /= 2;
+    }
+
+    public void ExecBonusTime(float duration)
+    {
+        StartCoroutine(TimeBonus(duration));
+    }
+
+    public IEnumerator TimeBonus(float duration)
+    {
+        timeScaler = 2f;
+        timeScalerJump = 3f;
+        timeScalerMove = 1.5f;
+        
+        float tmpASpeed = MyAniamtor.speed;
+        MyAniamtor.speed *= timeScaler;
+        Time.timeScale = 0.5f;
+        Time.fixedDeltaTime /= 2;
+        MyRigidbody.gravityScale *= 2f;
+        yield return new WaitForSeconds(duration);
+        timeScaler = 1;
+        timeScalerJump = 1;
+        timeScalerMove = 1;
+        MyAniamtor.speed = tmpASpeed;
+        Time.timeScale = 1;
+        Time.fixedDeltaTime *= 2;
+        MyRigidbody.gravityScale = 3;
+    }
+
+    /*
+     * Other
+     */
+
+    public void InstantiateDeathParticles()
+    {
+        MakeFX.Instance.MakeDeath();
+    }
+
+    public void InstantiateGrave()
+    {
+        Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z), Quaternion.identity);
+    }
 
     public void Heal()
     {

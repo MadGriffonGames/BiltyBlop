@@ -253,7 +253,7 @@ public class Player : Character
 			{
 				MyAniamtor.SetLayerWeight(1, 0);
 				MyAniamtor.SetLayerWeight(2, 1);
-				SoundManager.PlaySound ("player_death");
+				SoundManager.PlayMusic ("player_death", true);
 				MyAniamtor.SetTrigger("death");
 				MyRigidbody.velocity = Vector2.zero;
 				UI.Instance.DeathUI.SetActive(true);

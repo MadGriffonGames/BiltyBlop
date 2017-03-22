@@ -18,6 +18,7 @@ public class DamageBonus : Bonus
         {
             //animator.SetTrigger("collected");
             Player.Instance.ExecBonusDamage(duration);
+            animator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }
     }

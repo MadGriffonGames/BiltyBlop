@@ -302,6 +302,7 @@ public class Player : Character
     public void ExecBonusImmortal(float duration)
     {
         StartCoroutine(ImmortalBonus(duration));
+        MakeFX.Instance.MakeImmortalBonus(duration);
     }
 
     public IEnumerator ImmortalBonus(float duration)
@@ -314,6 +315,7 @@ public class Player : Character
     public void ExecBonusDamage(float duration)
     {
         StartCoroutine(DamageBonus(duration));
+        MakeFX.Instance.MakeDamageBonus(duration);
     }
 
     public IEnumerator DamageBonus(float duration)
@@ -326,6 +328,7 @@ public class Player : Character
     public void ExecBonusJump(float duration, float force)
     {
         StartCoroutine(JumpBonus(duration, force));
+        MakeFX.Instance.MakeJumpBonus(duration);
     }
 
     public IEnumerator JumpBonus(float duration, float force)
@@ -339,6 +342,7 @@ public class Player : Character
     public void ExecBonusSpeed(float duration)
     {
         StartCoroutine(SpeedBonus(duration));
+        MakeFX.Instance.MakeSpeedBonus(duration);
     }
 
     public IEnumerator SpeedBonus(float duration)
@@ -356,6 +360,7 @@ public class Player : Character
     public void ExecBonusTime(float duration)
     {
         StartCoroutine(TimeBonus(duration));
+        MakeFX.Instance.MakeTimeBonus(duration);
     }
 
     public IEnumerator TimeBonus(float duration)

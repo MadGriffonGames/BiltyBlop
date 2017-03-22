@@ -18,8 +18,8 @@ public class TimeBonus : Bonus
         {
             //animator.SetTrigger("collected");
             Player.Instance.ExecBonusTime(duration);
+            animator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
-            Destroy();
         }
     }
 

@@ -18,6 +18,7 @@ public class SpeedBonus : Bonus
         {
             //animator.SetTrigger("collected");
             Player.Instance.ExecBonusSpeed(duration);
+            animator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }
     }

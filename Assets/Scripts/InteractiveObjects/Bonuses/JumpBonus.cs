@@ -20,6 +20,7 @@ public class JumpBonus : Bonus
         {
             //animator.SetTrigger("collected");
             Player.Instance.ExecBonusJump(duration, force);
+            animator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }
     }

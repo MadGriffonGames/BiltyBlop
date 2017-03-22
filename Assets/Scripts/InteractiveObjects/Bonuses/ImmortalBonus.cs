@@ -18,6 +18,7 @@ public class ImmortalBonus : Bonus
         {
             //animator.SetTrigger("collected");
             Player.Instance.ExecBonusImmortal(duration);
+            animator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }
     }

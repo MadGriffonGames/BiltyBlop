@@ -19,6 +19,11 @@ public class MovingMeleeEnemy : Enemy
     [SerializeField]
     public float idleDuration;
 
+    public override void Start()
+    {
+        base.Start();
+    }
+
     public bool InMeleeRange
     {
         get

@@ -21,6 +21,7 @@ public class Hedgehog : MovingMeleeEnemy
     public override void Start()
     {
         base.Start();
+        enabled = true;
         ChangeState(new HedgehogIdleState());
     }
 

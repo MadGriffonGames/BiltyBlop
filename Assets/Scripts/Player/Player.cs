@@ -172,6 +172,11 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
+        if (other.CompareTag("DeathTrigger"))
+        {
+            health -= health - 1;
+            StartCoroutine(TakeDamage());
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders
@@ -181,7 +186,7 @@ public class Player : Character
         {
             transform.parent = other.transform;//make character chil object of platform
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0 && OnGround)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0)
         {
             MakeFX.Instance.MakeDust();
         }
@@ -355,12 +360,10 @@ public class Player : Character
 
     public IEnumerator TimeBonus(float duration)
     {
-        timeScaler = 2f;
-        timeScalerJump = 3f;
-        timeScalerMove = 1.5f;
-
+        timeScaler = 1.6f;
+        timeScalerJump = 2.8f;
+        timeScalerMove = 1.3f;
         SoundManager.SetPitch(0.5f);
-        float tmpASpeed = MyAniamtor.speed;
         MyAniamtor.speed *= timeScaler;
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime /= 2;
@@ -370,7 +373,7 @@ public class Player : Character
         timeScaler = 1;
         timeScalerJump = 1;
         timeScalerMove = 1;
-        MyAniamtor.speed = tmpASpeed;
+        MyAniamtor.speed /= timeScaler;
         Time.timeScale = 1;
         Time.fixedDeltaTime *= 2;
         MyRigidbody.gravityScale = 3;

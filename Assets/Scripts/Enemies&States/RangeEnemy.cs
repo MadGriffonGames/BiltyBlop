@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RangeEnemy : Enemy
 {
-
     [SerializeField]
     private float shootingRange;
 

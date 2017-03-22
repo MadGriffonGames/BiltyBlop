@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
     public virtual void Start()
     {
         facingRight = false;
+        enabled = false;
         MyAniamtor = GetComponent<Animator>();
         healthbar[Health - 1].SetActive(true);
     }
@@ -79,5 +80,10 @@ public class Enemy : MonoBehaviour
                 healthbar[i].SetActive(false);
             }
         }
+    }
+
+    private void OnBecameVisible()
+    {
+        enabled = true;
     }
 }

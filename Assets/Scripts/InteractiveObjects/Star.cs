@@ -17,8 +17,11 @@ public class Star : InteractiveObject
 		if(other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
 		{
 			animator.SetTrigger("collected");
+            Debug.Log(Player.Instance.collectables);
             Player.Instance.collectables++;
-		}   
+            Debug.Log(Player.Instance.collectables);
+
+        }   
 	}
 
 	public void MakeFX()
@@ -31,9 +34,13 @@ public class Star : InteractiveObject
         CollectsUI.Instance.ShowStar(Player.Instance.collectables);
     }
 
+    public void PlaySound()
+    {
+        SoundManager.PlaySound("star_collect");
+    }
+
 	public void DestroyObject()
 	{
-		SoundManager.PlaySound ("star_collect");
         ShowStar();
 		Destroy(this.gameObject);
 	}

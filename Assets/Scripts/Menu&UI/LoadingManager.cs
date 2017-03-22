@@ -13,15 +13,20 @@ public class LoadingManager : MonoBehaviour
     {
         async = SceneManager.LoadSceneAsync(GameManager.levelName);
         loadingTxt.SetActive(true);
-        loadingCompleteTxt.SetActive(false);
+        loadingCompleteTxt.SetActive(false); 
         yield return true;
         async.allowSceneActivation = false;
-        loadingTxt.SetActive(false);
-        loadingCompleteTxt.SetActive(true);
+        
+
     }
 
     void Update()
     {
+        if (async.progress == 0.9f)
+        {
+            loadingTxt.SetActive(false);
+            loadingCompleteTxt.SetActive(true);
+        }
         if (Input.anyKey)
             async.allowSceneActivation = true;
     }

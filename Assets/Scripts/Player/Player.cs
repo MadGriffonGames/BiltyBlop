@@ -261,7 +261,7 @@ public class Player : Character
 			{
 				MyAniamtor.SetLayerWeight(1, 0);
 				MyAniamtor.SetLayerWeight(2, 1);
-				SoundManager.PlaySound ("player_death");
+				SoundManager.PlayMusic ("player_death",true);
 				MyAniamtor.SetTrigger("death");
 				MyRigidbody.velocity = Vector2.zero;
 				UI.Instance.DeathUI.SetActive(true);
@@ -358,13 +358,15 @@ public class Player : Character
         timeScaler = 2f;
         timeScalerJump = 3f;
         timeScalerMove = 1.5f;
-        
+
+        SoundManager.SetPitch(0.5f);
         float tmpASpeed = MyAniamtor.speed;
         MyAniamtor.speed *= timeScaler;
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime /= 2;
         MyRigidbody.gravityScale *= 2f;
         yield return new WaitForSeconds(duration);
+        SoundManager.SetPitch(1f);
         timeScaler = 1;
         timeScalerJump = 1;
         timeScalerMove = 1;
@@ -385,7 +387,17 @@ public class Player : Character
 
     public void InstantiateGrave()
     {
-        Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z), Quaternion.identity);
+        Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
+        instance.MyRigidbody.bodyType = RigidbodyType2D.Static;
+        BoxCollider2D boxCollider = instance.GetComponent<BoxCollider2D>();
+        boxCollider.enabled = false;
+    }
+
+    public void PlayerRevive()
+    {
+        instance.MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
+        BoxCollider2D boxCollider = instance.GetComponent<BoxCollider2D>();
+        boxCollider.enabled = true;
     }
 
     public void Heal()

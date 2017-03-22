@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour {
 	public string musicFolder = "Music";
 
 	public float fadeSpeed = 3; // скорость плавного перехода между треками музыки
+    public float pitch = 1;
 
 	public AudioMixerGroup musicGroup;
 	public AudioMixerGroup soundGroup;
@@ -17,6 +18,7 @@ public class SoundManager : MonoBehaviour {
 	private static AudioSource last, current;
 	private static float musicVolume, soundVolume;
 	private static bool muteMusic, muteSound;
+    private static float currentPitch = 1;
 
 	void Awake()
 	{
@@ -24,6 +26,16 @@ public class SoundManager : MonoBehaviour {
 		soundVolume = 1;
 		_instance = this;
 	}
+
+    public static void SetPitch(float pitch)
+    {
+        currentPitch = pitch;
+        AudioSource[] sounds = _instance.GetComponentsInChildren<AudioSource>();
+        foreach (AudioSource sound in sounds)
+        {
+            sound.pitch = pitch;
+        }
+    }
 
 	public static void SoundVolume(float volume)
 	{
@@ -123,6 +135,7 @@ public class SoundManager : MonoBehaviour {
 		au.outputAudioMixerGroup = musicGroup;
 		au.playOnAwake = false;
 		au.loop = loop;
+        au.pitch = currentPitch;
 		au.mute = muteMusic;
 		au.volume = (last == null) ? musicVolume : 0;
 		au.clip = clip;
@@ -153,6 +166,7 @@ public class SoundManager : MonoBehaviour {
 		au.outputAudioMixerGroup = soundGroup;
 		au.playOnAwake = false;
 		au.loop = false;
+        au.pitch = currentPitch;
 		au.mute = muteSound;
 		au.volume = soundVolume;
 		au.clip = clip;

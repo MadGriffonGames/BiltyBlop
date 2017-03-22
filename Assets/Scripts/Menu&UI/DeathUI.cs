@@ -47,6 +47,7 @@ public class DeathUI : MonoBehaviour
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");
+            SoundManager.PlayMusic("kid_music", true);
             Player.Instance.transform.position = new Vector3(Player.Instance.CheckpointPosition.x,
                                                         Player.Instance.CheckpointPosition.y,
                                                         Player.Instance.transform.position.z);

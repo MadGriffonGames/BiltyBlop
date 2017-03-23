@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunicGrave : MonoBehaviour {
+public class RunicGrave : MonoBehaviour
+{
 
     // Use this for initialization
     [SerializeField]
@@ -25,5 +26,11 @@ public class RunicGrave : MonoBehaviour {
         }
     }
 
-
+    private void OnBecameInvisible()
+    {
+        if (transform.position.y < -70)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

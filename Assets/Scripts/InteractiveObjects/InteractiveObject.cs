@@ -9,5 +9,11 @@ public abstract class InteractiveObject : MonoBehaviour
     public virtual void Start ()
     {
         animator = GetComponent<Animator>();
+        enabled = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        enabled = true;
     }
 }

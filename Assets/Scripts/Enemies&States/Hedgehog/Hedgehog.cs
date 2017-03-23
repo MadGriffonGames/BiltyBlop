@@ -21,6 +21,7 @@ public class Hedgehog : MovingMeleeEnemy
     public override void Start()
     {
         base.Start();
+        enabled = true;
         ChangeState(new HedgehogIdleState());
     }
 
@@ -66,10 +67,6 @@ public class Hedgehog : MovingMeleeEnemy
     {
         base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter2D(other);
-        if (other.gameObject.tag == "Edge")
-        {
-            ChangeDirection();
-        }
     }
 
     public void AnimIdle()

@@ -356,7 +356,7 @@ public class Player : Character
         MyRigidbody.gravityScale *= 1.4f;
         yield return new WaitForSeconds(duration);
         MyRigidbody.gravityScale = 3;
-        movementSpeed = 700;
+        movementSpeed = 7;
         MyAniamtor.speed = 1;
     }
 

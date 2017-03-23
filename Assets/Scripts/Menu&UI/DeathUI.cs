@@ -43,6 +43,7 @@ public class DeathUI : MonoBehaviour
     {
         if (GameManager.CollectedCoins >= 50)
         {
+
             GameManager.CollectedCoins -= 50;
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
@@ -61,5 +62,10 @@ public class DeathUI : MonoBehaviour
             fade.SetActive(false);
             this.gameObject.SetActive(false);
         }     
+    }
+
+    private void OnEnable()
+    {
+        Player.Instance.ResetBonusValues();
     }
 }

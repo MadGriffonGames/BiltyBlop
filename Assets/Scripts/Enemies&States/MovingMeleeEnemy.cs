@@ -85,10 +85,6 @@ public class MovingMeleeEnemy : Enemy
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
-        if (other.gameObject.tag == "Edge")
-        {
-            ChangeDirection();
-        }
     }
 
     public override IEnumerator TakeDamage() { yield return null; }

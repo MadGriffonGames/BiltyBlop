@@ -16,7 +16,7 @@ public class FallingSpikes : MonoBehaviour
     {
         if (shake)
         {
-            Vector3 rnd = Random.insideUnitCircle * 0.03f;
+            Vector3 rnd = Random.insideUnitCircle * 0.05f;
             transform.localPosition += new Vector3(rnd.x, rnd.y, 0);
         }
     }

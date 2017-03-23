@@ -68,12 +68,10 @@ public class Player : Character
     /*
      * Bonus triggers
      */
-    public bool jumpBonus = false;
-    public bool damageBonus = false;
-    public bool immortalBonus = false;
     public float timeScaler = 1;
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
+
 
     public override void Start () 
 	{
@@ -98,17 +96,17 @@ public class Player : Character
                 transform.position = StartPosition;
             }
 			HandleInput();
-        }     
+        }
     }
 
     void FixedUpdate() 
 	{
         if (!TakingDamage && !IsDead)
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            OnGround = IsGrounded();
+            //float horizontal = Input.GetAxis("Horizontal");
             //HandleMovement(horizontal);
             //Flip(horizontal);
+            OnGround = IsGrounded();
             HandleMovement(mobileInput);
             Flip(mobileInput);
             HandleLayers();
@@ -174,7 +172,13 @@ public class Player : Character
         base.OnTriggerEnter2D(other);
         if (other.CompareTag("DeathTrigger"))
         {
-            health -= health - 1;
+            health -= health;
+            if (immortal)
+            {
+                ParticleSystem tmp = GetComponentInChildren<ParticleSystem>();
+                tmp.gameObject.SetActive(false);
+            }
+            immortal = false;
             StartCoroutine(TakeDamage());
         }
     }
@@ -244,35 +248,35 @@ public class Player : Character
     public override IEnumerator TakeDamage()
     {
         if (!immortal)
-		{
+        {
             CameraEffect.Shake(0.5f, 0.4f);
             health -= 1;
-			if (!IsDead)
-			{
-				if (IsFalling || !OnGround) 
-				{
-					MyAniamtor.SetLayerWeight (1, 0);
-					Jump = false;
-				}
-				MyAniamtor.SetLayerWeight(2, 1);
-				MyAniamtor.SetTrigger("damage");
-				SoundManager.PlaySound ("player_takehit1");
-				immortal = true;
-				StartCoroutine(IndicateImmortal());
-				yield return new WaitForSeconds(immortalTime);
-				immortal = false;
-			}
-			else
-			{
-				MyAniamtor.SetLayerWeight(1, 0);
-				MyAniamtor.SetLayerWeight(2, 1);
-				SoundManager.PlayMusic ("player_death",true);
-				MyAniamtor.SetTrigger("death");
-				MyRigidbody.velocity = Vector2.zero;
-				UI.Instance.DeathUI.SetActive(true);
-			}
-			yield return null;
-		}
+            if (!IsDead)
+            {
+                if (IsFalling || !OnGround)
+                {
+                    MyAniamtor.SetLayerWeight(1, 0);
+                    Jump = false;
+                }
+                MyAniamtor.SetLayerWeight(2, 1);
+                MyAniamtor.SetTrigger("damage");
+                SoundManager.PlaySound("player_takehit1");
+                immortal = true;
+                StartCoroutine(IndicateImmortal());
+                yield return new WaitForSeconds(immortalTime);
+                immortal = false;
+            }
+            else
+            {
+                MyAniamtor.SetLayerWeight(1, 0);
+                MyAniamtor.SetLayerWeight(2, 1);
+                SoundManager.PlayMusic("player_death", true);
+                MyAniamtor.SetTrigger("death");
+                MyRigidbody.velocity = Vector2.zero;
+                UI.Instance.DeathUI.SetActive(true);
+            }
+            yield return null;
+        }
     }
 
     /*
@@ -333,10 +337,9 @@ public class Player : Character
 
     public IEnumerator JumpBonus(float duration, float force)
     {
-        float tmp = jumpForce;
         jumpForce += force;
         yield return new WaitForSeconds(duration);
-        jumpForce = tmp;
+        jumpForce = 700;
     }
 
     public void ExecBonusSpeed(float duration)
@@ -352,9 +355,9 @@ public class Player : Character
         MyAniamtor.speed *= 2;
         MyRigidbody.gravityScale *= 1.4f;
         yield return new WaitForSeconds(duration);
-        MyRigidbody.gravityScale /= 1.4f;
-        movementSpeed /= 2;
-        MyAniamtor.speed /= 2;
+        MyRigidbody.gravityScale = 3;
+        movementSpeed = 700;
+        MyAniamtor.speed = 1;
     }
 
     public void ExecBonusTime(float duration)
@@ -369,7 +372,7 @@ public class Player : Character
         timeScalerJump = 2.8f;
         timeScalerMove = 1.3f;
         SoundManager.SetPitch(0.5f);
-        MyAniamtor.speed *= timeScaler;
+        MyAniamtor.speed *= 1.6f;
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime /= 2;
         MyRigidbody.gravityScale *= 2f;
@@ -378,10 +381,26 @@ public class Player : Character
         timeScaler = 1;
         timeScalerJump = 1;
         timeScalerMove = 1;
-        MyAniamtor.speed /= timeScaler;
+        MyAniamtor.speed = 1;
         Time.timeScale = 1;
-        Time.fixedDeltaTime *= 2;
+        Time.fixedDeltaTime = 0.02f;
         MyRigidbody.gravityScale = 3;
+    }
+
+    public void ResetBonusValues()
+    {        
+        SoundManager.SetPitch(1f);
+        timeScaler = 1;
+        timeScalerJump = 1;
+        timeScalerMove = 1;
+        Time.timeScale = 1;
+        MyRigidbody.gravityScale = 3;
+        immortal = false;
+        damage = 1;
+        movementSpeed = 7;
+        jumpForce = 700;
+        MyAniamtor.speed = 1;
+        Time.fixedDeltaTime = 0.02000000f;
     }
 
     /*

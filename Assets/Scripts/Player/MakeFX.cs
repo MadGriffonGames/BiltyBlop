@@ -71,7 +71,7 @@ public class MakeFX : MonoBehaviour
         GameObject tmp = Instantiate(timeBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90, 0, 0));
         ParticleSystem ps = tmp.GetComponent<ParticleSystem>();
         var ma = ps.main;
-        ma.duration = time;
+        //ma.duration = time;
         tmp.transform.SetParent(Player.Instance.transform);
     }
 

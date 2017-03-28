@@ -41,17 +41,18 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public List<string> damageSources;
 
-    protected bool facingRight;//check direction(true if we look right)
+    public bool facingRight;//check direction(true if we look right)
 
     public bool Attack { get; set; }
 
     // Use this for initialization
     public virtual void Start()
     {
-        facingRight = false;
-        enabled = false;
         MyAniamtor = GetComponent<Animator>();
         healthbar[Health - 1].SetActive(true);
+        facingRight = false;
+        enabled = false;
+        MyAniamtor.enabled = false;
     }
 
     public virtual IEnumerator TakeDamage()
@@ -85,5 +86,6 @@ public class Enemy : MonoBehaviour
     private void OnBecameVisible()
     {
         enabled = true;
+        MyAniamtor.enabled = true;
     }
 }

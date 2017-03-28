@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SpeedBonus : Bonus
 {
-    [SerializeField]
-    float duration;
-
     public override void Start()
     {
         base.Start();
@@ -16,7 +13,6 @@ public class SpeedBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            //animator.SetTrigger("collected");
             Player.Instance.ExecBonusSpeed(duration);
             animator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
@@ -25,6 +21,20 @@ public class SpeedBonus : Bonus
 
     public void Destroy()
     {
-        Destroy(this.gameObject);
+        if (reset)
+        {
+            animator.enabled = false;
+            spriteRenderer.enabled = false;
+            StartCoroutine(Reset());
+        }
+        else Destroy(this.gameObject);
+    }
+
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(10);
+        animator.Play("BonusIdle");
+        animator.enabled = true;
+        spriteRenderer.enabled = true;
     }
 }

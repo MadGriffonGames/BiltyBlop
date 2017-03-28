@@ -9,15 +9,14 @@ public class Bat : MovingMeleeEnemy
     IBatState currentState;
     public Vector3 nextPos;
     [SerializeField]
+    public UnityEngine.Transform batTransform;
+    [SerializeField]
     GameObject batParticles;
     [SerializeField]
     public UnityEngine.Transform[] pathPoints;
-    [SerializeField]
-    public UnityEngine.Transform batTransform;
     public Vector3[] pathCordinates;
-
     public int nextPosNum = 0;
-
+    
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -76,7 +75,7 @@ public class Bat : MovingMeleeEnemy
 
     public void AnimFly()
     {
-        armature.animation.timeScale = 1.1f;
+        armature.animation.timeScale = 2f;
         armature.animation.Play("FLY");
     }
 }

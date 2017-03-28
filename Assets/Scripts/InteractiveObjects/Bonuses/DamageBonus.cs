@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DamageBonus : Bonus
 {
-    [SerializeField]
-    float duration;
-
     public override void Start()
     {
         base.Start();
@@ -16,15 +13,28 @@ public class DamageBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            //animator.SetTrigger("collected");
             Player.Instance.ExecBonusDamage(duration);
-            animator.SetTrigger("collected");
+            animator.SetBool("collected", true);
             SoundManager.PlaySound("key_collect");
         }
     }
 
     public void Destroy()
     {
-        Destroy(this.gameObject);
+        if (reset)
+        {
+            animator.enabled = false;
+            spriteRenderer.enabled = false;
+            StartCoroutine(Reset());
+        }
+        else Destroy(this.gameObject);
+    }
+
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(10);
+        animator.Play("BonusIdle");
+        animator.enabled = true;
+        spriteRenderer.enabled = true;
     }
 }

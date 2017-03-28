@@ -31,6 +31,7 @@ public class DisappearingPlatform : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         shake = false;
         MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
+        MyRigidbody.freezeRotation = true;
         MyRigidbody.gravityScale = 4;
         yield return null;
     }
@@ -40,6 +41,7 @@ public class DisappearingPlatform : MonoBehaviour
         yield return new WaitForSeconds(2);
         MyRigidbody.bodyType = RigidbodyType2D.Static;
         transform.position = startPos;
+        platfrom.transform.localPosition = new Vector2(0, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -50,8 +52,11 @@ public class DisappearingPlatform : MonoBehaviour
         }
     }
 
-    public void OnBecameInvisible()
+    void OnBecameInvisible()
     {
-        StartCoroutine(Reset());
+        if (MyRigidbody.bodyType == RigidbodyType2D.Dynamic)
+        {
+            StartCoroutine(Reset());
+        }
     }
 }

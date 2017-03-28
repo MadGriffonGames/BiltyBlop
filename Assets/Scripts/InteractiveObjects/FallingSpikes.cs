@@ -32,7 +32,7 @@ public class FallingSpikes : MonoBehaviour
     IEnumerator Fall()
     {
         shake = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         shake = false;
         MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
         MyRigidbody.gravityScale = 4;

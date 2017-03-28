@@ -24,7 +24,8 @@ public class MovingSpikesMedium : InteractiveObject {
         if (other.transform.CompareTag("Player"))
         {
             animator.SetTrigger("exit");
-            animator.ResetTrigger("enter");        }
+            animator.ResetTrigger("enter");
+        }
     }
 
 }

@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class JumpBonus : Bonus
 {
-    [SerializeField]
-    float force;
-    [SerializeField]
-    float duration;
-
     public override void Start()
     {
         base.Start();
@@ -18,8 +13,7 @@ public class JumpBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            //animator.SetTrigger("collected");
-            Player.Instance.ExecBonusJump(duration, force);
+            Player.Instance.ExecBonusJump(duration);
             animator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }
@@ -27,6 +21,20 @@ public class JumpBonus : Bonus
 
     public void Destroy()
     {
-        Destroy(this.gameObject);
+        if (reset)
+        {
+            animator.enabled = false;
+            spriteRenderer.enabled = false;
+            StartCoroutine(Reset());
+        }
+        else Destroy(this.gameObject);
+    }
+
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(10);
+        animator.Play("BonusIdle");
+        animator.enabled = true;
+        spriteRenderer.enabled = true;
     }
 }

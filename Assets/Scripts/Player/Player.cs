@@ -66,12 +66,16 @@ public class Player : Character
     public bool OnGround { get; set; }
 
     /*
-     * Bonus triggers
+     * Bonus vars
      */
+    int speedBonusNum = 0;
+    int immortalBonusNum = 0;
+    int damageBonusNum = 0;
+    int jumpBonusNum = 0;
+    int timeBonusNum = 0;
     public float timeScaler = 1;
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
-
 
     public override void Start () 
 	{
@@ -311,9 +315,14 @@ public class Player : Character
 
     public IEnumerator ImmortalBonus(float duration)
     {
+        immortalBonusNum++;
         immortal = true;
         yield return new WaitForSeconds(duration);
-        immortal = false;
+        immortalBonusNum--;
+        if (immortalBonusNum == 0)
+        {
+            immortal = false;
+        }
     }
 
     public void ExecBonusDamage(float duration)
@@ -324,22 +333,32 @@ public class Player : Character
 
     public IEnumerator DamageBonus(float duration)
     {
+        damageBonusNum++;
         damage = 2;
         yield return new WaitForSeconds(duration);
-        damage = 1;
+        damageBonusNum--;
+        if (damageBonusNum == 0)
+        {
+            damage = 1;
+        }
     }
 
-    public void ExecBonusJump(float duration, float force)
+    public void ExecBonusJump(float duration)
     {
-        StartCoroutine(JumpBonus(duration, force));
+        StartCoroutine(JumpBonus(duration));
         MakeFX.Instance.MakeJumpBonus(duration);
     }
 
-    public IEnumerator JumpBonus(float duration, float force)
+    public IEnumerator JumpBonus(float duration)
     {
-        jumpForce += force;
+        jumpBonusNum++;
+        jumpForce = 1400;
         yield return new WaitForSeconds(duration);
-        jumpForce = 700;
+        jumpBonusNum--;
+        if (jumpBonusNum == 0)
+        {
+            jumpForce = 700;
+        }
     }
 
     public void ExecBonusSpeed(float duration)
@@ -350,14 +369,18 @@ public class Player : Character
 
     public IEnumerator SpeedBonus(float duration)
     {
-        
-        movementSpeed *= 2;
-        MyAniamtor.speed *= 2;
-        MyRigidbody.gravityScale *= 1.4f;
+        speedBonusNum++;
+        movementSpeed = 14;
+        MyAniamtor.speed = 2;
+        MyRigidbody.gravityScale = 4.2f;
         yield return new WaitForSeconds(duration);
-        MyRigidbody.gravityScale = 3;
-        movementSpeed = 7;
-        MyAniamtor.speed = 1;
+        speedBonusNum--;
+        if (speedBonusNum == 0)
+        {
+            MyRigidbody.gravityScale = 3;
+            movementSpeed = 7;
+            MyAniamtor.speed = 1;
+        }
     }
 
     public void ExecBonusTime(float duration)
@@ -368,23 +391,28 @@ public class Player : Character
 
     public IEnumerator TimeBonus(float duration)
     {
+        timeBonusNum++;
         timeScaler = 1.6f;
-        timeScalerJump = 2.8f;
+        timeScalerJump = 3f;
         timeScalerMove = 1.3f;
         SoundManager.SetPitch(0.5f);
-        MyAniamtor.speed *= 1.6f;
+        MyAniamtor.speed = 1.6f;
         Time.timeScale = 0.5f;
-        Time.fixedDeltaTime /= 2;
-        MyRigidbody.gravityScale *= 2f;
+        Time.fixedDeltaTime = 0.01f;
+        MyRigidbody.gravityScale = 6;
         yield return new WaitForSeconds(duration);
-        SoundManager.SetPitch(1f);
-        timeScaler = 1;
-        timeScalerJump = 1;
-        timeScalerMove = 1;
-        MyAniamtor.speed = 1;
-        Time.timeScale = 1;
-        Time.fixedDeltaTime = 0.02f;
-        MyRigidbody.gravityScale = 3;
+        timeBonusNum--;
+        if (timeBonusNum == 0)
+        {
+            SoundManager.SetPitch(1f);
+            timeScaler = 1;
+            timeScalerJump = 1;
+            timeScalerMove = 1;
+            MyAniamtor.speed = 1;
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = 0.02f;
+            MyRigidbody.gravityScale = 3;
+        }
     }
 
     public void ResetBonusValues()

@@ -19,7 +19,7 @@ public class BatPatrolState : IBatState
 
     public void Exit() { }
 
-    public void OnTriggerEnter2D(Collider2D other){ }
+    public void OnTriggerEnter2D(Collider2D other) { }
 
     public void Move()
     {
@@ -27,6 +27,7 @@ public class BatPatrolState : IBatState
         if (Vector3.Distance(enemy.batTransform.localPosition, enemy.nextPos) <= 0)
         {
             ChangePoint();
+            ChangeDirection();
         }
     }
 
@@ -41,6 +42,18 @@ public class BatPatrolState : IBatState
         {
             enemy.nextPosNum = 0;
             enemy.nextPos = enemy.pathCordinates[enemy.nextPosNum];
+        }
+    }
+
+    void ChangeDirection()
+    {
+        if (!enemy.facingRight && enemy.transform.localPosition.x < enemy.nextPos.x)
+        {
+            enemy.ChangeDirection();
+        }
+        if (enemy.facingRight && enemy.transform.localPosition.x > enemy.nextPos.x)
+        {
+            enemy.ChangeDirection();
         }
     }
 }

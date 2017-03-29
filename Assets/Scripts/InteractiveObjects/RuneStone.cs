@@ -15,6 +15,7 @@ public class RuneStone : InteractiveObject
     public override void Start()
     {
         base.Start();
+        enabled = true;
     }
 
     private void Update()

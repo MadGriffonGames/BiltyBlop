@@ -240,7 +240,7 @@ public class Player : Character
             {
 				sprite.enabled = false;
 			}
-			yield return new WaitForSeconds (.2f);
+			yield return new WaitForSeconds (.1f);
 			foreach (SpriteRenderer sprite in spriteRenderer)
             {
 				sprite.enabled = true;
@@ -352,7 +352,7 @@ public class Player : Character
     public IEnumerator JumpBonus(float duration)
     {
         jumpBonusNum++;
-        jumpForce = 1400;
+        jumpForce = 1200;
         yield return new WaitForSeconds(duration);
         jumpBonusNum--;
         if (jumpBonusNum == 0)
@@ -372,7 +372,7 @@ public class Player : Character
         speedBonusNum++;
         movementSpeed = 14;
         MyAniamtor.speed = 2;
-        MyRigidbody.gravityScale = 4.2f;
+        timeScalerMove = 0.7f;
         yield return new WaitForSeconds(duration);
         speedBonusNum--;
         if (speedBonusNum == 0)
@@ -380,6 +380,7 @@ public class Player : Character
             MyRigidbody.gravityScale = 3;
             movementSpeed = 7;
             MyAniamtor.speed = 1;
+            timeScalerMove = 1;
         }
     }
 

@@ -15,7 +15,7 @@ public class HP : InteractiveObject
         if (other.transform.CompareTag("Player") && Player.Instance.Health < 3 && !other.transform.CompareTag("Sword"))
         {
 			SoundManager.PlaySound ("heart_collect");
-            animator.SetTrigger("collected");
+            MyAnimator.SetTrigger("collected");
             Player.Instance.Health++;
             MakeFX.Instance.MakeHeal();
         }

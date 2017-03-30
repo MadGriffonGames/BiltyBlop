@@ -14,7 +14,7 @@ public class Collectables : InteractiveObject
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             Player.Instance.collectables++;
-            animator.SetTrigger("collected");
+            MyAnimator.SetTrigger("collected");
         }
     }
 

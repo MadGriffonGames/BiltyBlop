@@ -5,13 +5,9 @@ using DragonBones;
 
 public class EvilFlowerGreen : RangeEnemy
 {
-    UnityArmatureComponent armature;
-
     private IEFGreenState currentState;
-
     [SerializeField]
     GameObject seed;
-
     [SerializeField]
     GameObject leafParticle;
 

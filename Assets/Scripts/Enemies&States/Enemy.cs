@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DragonBones;
 
 public class Enemy : MonoBehaviour
 {
+    protected UnityArmatureComponent armature;
+
     public GameObject Target { get; set; }
 
     [SerializeField]
@@ -53,6 +56,7 @@ public class Enemy : MonoBehaviour
         facingRight = false;
         enabled = false;
         MyAniamtor.enabled = false;
+        armature.enabled = false;
     }
 
     public virtual IEnumerator TakeDamage()
@@ -87,5 +91,6 @@ public class Enemy : MonoBehaviour
     {
         enabled = true;
         MyAniamtor.enabled = true;
+        armature.enabled = true;
     }
 }

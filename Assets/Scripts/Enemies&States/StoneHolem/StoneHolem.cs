@@ -5,8 +5,6 @@ using DragonBones;
 
 public class StoneHolem : MovingMeleeEnemy
 {
-    UnityArmatureComponent armature;
-
     private IStoneHolemState currentState;
 
     [SerializeField]

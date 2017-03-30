@@ -5,8 +5,6 @@ using DragonBones;
 
 public class Hedgehog : MovingMeleeEnemy
 {
-    UnityArmatureComponent armature;
-
     private IHedgehogState currentState;
 
     [SerializeField]

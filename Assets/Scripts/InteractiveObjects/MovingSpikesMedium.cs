@@ -15,7 +15,7 @@ public class MovingSpikesMedium : InteractiveObject {
     {
         if (other.transform.CompareTag("Player"))
         {
-            animator.SetTrigger("enter");
+            MyAnimator.SetTrigger("enter");
         }
     }
 
@@ -23,8 +23,8 @@ public class MovingSpikesMedium : InteractiveObject {
     {
         if (other.transform.CompareTag("Player"))
         {
-            animator.SetTrigger("exit");
-            animator.ResetTrigger("enter");
+            MyAnimator.SetTrigger("exit");
+            MyAnimator.ResetTrigger("enter");
         }
     }
 

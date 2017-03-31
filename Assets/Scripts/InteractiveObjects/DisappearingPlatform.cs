@@ -33,6 +33,7 @@ public class DisappearingPlatform : MonoBehaviour
         MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
         MyRigidbody.freezeRotation = true;
         MyRigidbody.gravityScale = 4;
+        StartCoroutine(Reset());
         yield return null;
     }
 
@@ -65,14 +66,6 @@ public class DisappearingPlatform : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, false);
-        }
-    }
-
-    void OnBecameInvisible()
-    {
-        if (MyRigidbody.bodyType == RigidbodyType2D.Dynamic)
-        {
-            StartCoroutine(Reset());
         }
     }
 }

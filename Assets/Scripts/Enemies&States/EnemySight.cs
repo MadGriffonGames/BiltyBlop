@@ -13,11 +13,15 @@ public class EnemySight : MonoBehaviour {
         {
             enemy.Target = other.gameObject;
         }
+        if (other.tag == "grave")
+        {
+            enemy.Target = null;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player");
         {
             enemy.Target = null;
         }

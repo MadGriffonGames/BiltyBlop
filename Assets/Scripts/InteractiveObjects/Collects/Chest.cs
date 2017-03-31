@@ -21,7 +21,7 @@ public class Chest : InteractiveObject
     {
         if (!isEmpty && other.transform.CompareTag("Sword"))
         {
-			animator.SetTrigger ("open");
+			MyAnimator.SetTrigger ("open");
 			foreach (GameObject coin in coins)
 			{
 				coin.SetActive(true);				

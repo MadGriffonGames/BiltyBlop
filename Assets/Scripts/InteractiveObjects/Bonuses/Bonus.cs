@@ -8,12 +8,18 @@ public class Bonus : MonoBehaviour
     public bool reset;
     [SerializeField]
     public float duration;
-    public Animator animator { get; private set; }
+    public Animator MyAnimator { get; private set; }
     public SpriteRenderer spriteRenderer;
 
     public virtual void Start()
     {
-        animator = GetComponent<Animator>();
+        MyAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        MyAnimator.enabled = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        MyAnimator.enabled = true;
     }
 }

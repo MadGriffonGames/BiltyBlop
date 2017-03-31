@@ -11,6 +11,10 @@ public class DestroyParticles : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (Player.Instance.IsDead)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }

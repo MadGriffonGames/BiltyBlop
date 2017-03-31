@@ -33,6 +33,7 @@ public class DisappearingPlatform : MonoBehaviour
         MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
         MyRigidbody.freezeRotation = true;
         MyRigidbody.gravityScale = 4;
+        StartCoroutine(Reset());
         yield return null;
     }
 
@@ -41,7 +42,7 @@ public class DisappearingPlatform : MonoBehaviour
         yield return new WaitForSeconds(2);
         MyRigidbody.bodyType = RigidbodyType2D.Static;
         transform.position = startPos;
-        platfrom.transform.localPosition = new Vector2(0, 0);
+        platfrom.transform.localPosition = new Vector3(0, 0, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -52,11 +53,19 @@ public class DisappearingPlatform : MonoBehaviour
         }
     }
 
-    void OnBecameInvisible()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (MyRigidbody.bodyType == RigidbodyType2D.Dynamic)
+        if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Reset());
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, false);
         }
     }
 }

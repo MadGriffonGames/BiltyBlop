@@ -3,15 +3,13 @@ using System.Collections;
 
 public class Parallaxing : MonoBehaviour
 {
-
+    [SerializeField]
+    float Yscaler = 0;
 	[SerializeField]
 	private Transform[] backgrounds; // array (list) back- and foregrounds to parallax
-
 	public float[] parallaxScales;   // the proportion of the cameras movement to move the backrounds by
-
 	[SerializeField]
 	private float smoothing = 1f; 	// parallaxing amount = how smooth paralax is going to be. must be > 0
-
 	private Transform cam;			// reference to main cameras transform
 	private Vector3 previousCamPos; // position of the camera in the previous frame
 
@@ -28,13 +26,16 @@ public class Parallaxing : MonoBehaviour
 	{
 		// The previous frame had the current frame's camera position
 		previousCamPos = cam.position;
-
 		// assigning coresponding parallaxScales
 		parallaxScales = new float[backgrounds.Length];
 		for (int i = 0; i < backgrounds.Length; i++) 
 		{
 			parallaxScales [i] = backgrounds [i].position.z * -1;
 		}
+        if (Yscaler == 0)
+        {
+            Yscaler = 2;
+        }
 	}
 	
 	void FixedUpdate ()
@@ -45,7 +46,7 @@ public class Parallaxing : MonoBehaviour
 		{
 			// the parallax is the opposite of the camera movement because the previous frame multiplied by scale
 			float Xparallax = (previousCamPos.x - cam.position.x) * parallaxScales[i];
-            float Yparallax = (previousCamPos.y - cam.position.y) * parallaxScales[i] * 2;
+            float Yparallax = (previousCamPos.y - cam.position.y) * parallaxScales[i] * Yscaler;
 
             // set a target x position wich is the current position plus the parallax
             float backgroundTargetPosX = backgrounds[i].position.x + Xparallax;

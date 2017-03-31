@@ -14,7 +14,7 @@ public class Booster : InteractiveObject
 
     public void ResetBooster()
     {
-        animator.SetBool("Boost", false);
+        MyAnimator.SetBool("Boost", false);
     }
 
     public void OnCollisionEnter2D(Collision2D other)
@@ -22,7 +22,7 @@ public class Booster : InteractiveObject
         if (other.transform.CompareTag("Player"))
         {
 			SoundManager.PlaySound ("mushroom_boing");
-            animator.SetBool("Boost", true);
+            MyAnimator.SetBool("Boost", true);
             Player.Instance.MyRigidbody.velocity = new Vector2(Player.Instance.MyRigidbody.velocity.x, 0);
             Player.Instance.MyRigidbody.AddForce(new Vector2(0, force * Player.Instance.timeScalerJump));
         }

@@ -14,7 +14,7 @@ public class JumpBonus : Bonus
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             Player.Instance.ExecBonusJump(duration);
-            animator.SetTrigger("collected");
+            MyAnimator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }
     }
@@ -23,7 +23,7 @@ public class JumpBonus : Bonus
     {
         if (reset)
         {
-            animator.enabled = false;
+            MyAnimator.enabled = false;
             spriteRenderer.enabled = false;
             StartCoroutine(Reset());
         }
@@ -33,8 +33,8 @@ public class JumpBonus : Bonus
     IEnumerator Reset()
     {
         yield return new WaitForSeconds(10);
-        animator.Play("BonusIdle");
-        animator.enabled = true;
+        MyAnimator.Play("BonusIdle");
+        MyAnimator.enabled = true;
         spriteRenderer.enabled = true;
     }
 }

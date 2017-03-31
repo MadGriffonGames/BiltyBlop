@@ -14,7 +14,7 @@ public class DamageBonus : Bonus
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             Player.Instance.ExecBonusDamage(duration);
-            animator.SetBool("collected", true);
+            MyAnimator.SetBool("collected", true);
             SoundManager.PlaySound("key_collect");
         }
     }
@@ -23,7 +23,7 @@ public class DamageBonus : Bonus
     {
         if (reset)
         {
-            animator.enabled = false;
+            MyAnimator.enabled = false;
             spriteRenderer.enabled = false;
             StartCoroutine(Reset());
         }
@@ -33,8 +33,8 @@ public class DamageBonus : Bonus
     IEnumerator Reset()
     {
         yield return new WaitForSeconds(10);
-        animator.Play("BonusIdle");
-        animator.enabled = true;
+        MyAnimator.Play("BonusIdle");
+        MyAnimator.enabled = true;
         spriteRenderer.enabled = true;
     }
 }

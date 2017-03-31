@@ -14,7 +14,7 @@ public class ImmortalBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            animator.SetTrigger("collected");
+            MyAnimator.SetTrigger("collected");
             Player.Instance.ExecBonusImmortal(duration);
             SoundManager.PlaySound("key_collect");
         }
@@ -24,7 +24,7 @@ public class ImmortalBonus : Bonus
     {
         if (reset)
         {
-            animator.enabled = false;
+            MyAnimator.enabled = false;
             spriteRenderer.enabled = false;
             StartCoroutine(Reset());
         }
@@ -34,8 +34,8 @@ public class ImmortalBonus : Bonus
     IEnumerator Reset()
     {
         yield return new WaitForSeconds(10);
-        animator.Play("BonusIdle");
-        animator.enabled = true;
+        MyAnimator.Play("BonusIdle");
+        MyAnimator.enabled = true;
         spriteRenderer.enabled = true;
     }
 }

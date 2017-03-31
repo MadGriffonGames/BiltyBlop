@@ -15,6 +15,7 @@ public class RuneStone : InteractiveObject
     public override void Start()
     {
         base.Start();
+        enabled = true;
     }
 
     private void Update()
@@ -34,7 +35,7 @@ public class RuneStone : InteractiveObject
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            animator.SetTrigger("shine");
+            MyAnimator.SetTrigger("shine");
             Zoom.makeZoom(1, 3, 5);
             SaveGame();
             timer = 0;

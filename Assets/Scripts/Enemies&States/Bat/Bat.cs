@@ -5,7 +5,6 @@ using DragonBones;
 
 public class Bat : MovingMeleeEnemy
 {
-    UnityArmatureComponent armature;
     IBatState currentState;
     public Vector3 nextPos;
     [SerializeField]

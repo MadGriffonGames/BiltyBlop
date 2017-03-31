@@ -13,7 +13,7 @@ public class Coin : InteractiveObject
     {
         if(other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            animator.SetTrigger("collected");
+            MyAnimator.SetTrigger("collected");
             GameManager.CollectedCoins++;
 			SoundManager.PlaySound ("coin_collect");
         }   

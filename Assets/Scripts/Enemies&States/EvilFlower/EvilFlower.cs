@@ -5,10 +5,7 @@ using DragonBones;
 
 public class EvilFlower : MeleeEnemy
 {
-	UnityArmatureComponent armature;
-
     private IEvilFlowerState currentState;
-
     [SerializeField]
     private GameObject leafParticle;
 

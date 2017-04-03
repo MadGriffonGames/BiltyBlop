@@ -11,20 +11,13 @@ public class Health : MonoBehaviour
     [SerializeField]
     private Image healthUI;
 
-    private Player player;
-
-    void Start ()
-    {
-        player = FindObjectOfType<Player>();
-	}
-	
 	void Update ()
     {
-        if (player.Health < 0)
+        if (Player.Instance.Health < 0)
         {
             healthUI.sprite = healthSprites[0];
         }
         else
-            healthUI.sprite = healthSprites[player.Health];
+            healthUI.sprite = healthSprites[Player.Instance.Health];
 	}
 }

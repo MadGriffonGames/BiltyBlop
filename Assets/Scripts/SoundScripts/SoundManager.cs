@@ -91,7 +91,7 @@ public class SoundManager : MonoBehaviour {
 		_instance.PlayMusicInternal(name, loop);
 	}
 
-	void LateUpdate()
+	void Update()
 	{
 		Fader();
 	}

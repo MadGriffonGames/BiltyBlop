@@ -47,14 +47,8 @@ public class EvilFlower : MeleeEnemy
         currentState.OnTriggerEnter2D(other);
     }
 
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("stay");
-    }
-
     public void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("exit");
         ChangeState(new EvilFlowerIdleState());
     }
 

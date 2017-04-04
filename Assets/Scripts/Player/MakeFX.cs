@@ -61,45 +61,55 @@ public class MakeFX : MonoBehaviour
     {
         GameObject tmp = Instantiate(damageBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90,0,0));
         ParticleSystem ps = tmp.GetComponent<ParticleSystem>();
+        ps.Stop();
         var ma = ps.main;
         ma.duration = time;
         tmp.transform.SetParent(Player.Instance.transform);
+        ps.Play();
     }
 
     public void MakeTimeBonus(float time)
     {
         GameObject tmp = Instantiate(timeBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90, 0, 0));
         ParticleSystem ps = tmp.GetComponent<ParticleSystem>();
+        ps.Stop();
         var ma = ps.main;
         ma.duration = time;
         tmp.transform.SetParent(Player.Instance.transform);
+        ps.Play();
     }
 
     public void MakeImmortalBonus(float time)
     {
         GameObject tmp = Instantiate(immortalBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90, 0, 0));
         ParticleSystem ps = tmp.GetComponent<ParticleSystem>();
+        ps.Stop();
         var ma = ps.main;
         ma.duration = time;
         tmp.transform.SetParent(Player.Instance.transform);
+        ps.Play();
     }
 
     public void MakeSpeedBonus(float time)
     {
         GameObject tmp = Instantiate(speedBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90, 0, 0));
         ParticleSystem ps = tmp.GetComponent<ParticleSystem>();
+        ps.Stop();
         var ma = ps.main;
         ma.duration = time;
         tmp.transform.SetParent(Player.Instance.transform);
+        ps.Play();
     }
 
     public void MakeJumpBonus(float time)
     {
         GameObject tmp = Instantiate(jumpBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90, 0, 0));
         ParticleSystem ps = tmp.GetComponent<ParticleSystem>();
+        ps.Stop();
         var ma = ps.main;
         ma.duration = time;
         tmp.transform.SetParent(Player.Instance.transform);
+        ps.Play();
     }
 
 

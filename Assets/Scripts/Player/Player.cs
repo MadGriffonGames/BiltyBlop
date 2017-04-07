@@ -166,6 +166,7 @@ public class Player : Character
     {
         yield return new WaitForSeconds(0.2f);
         onRope = false;
+        MyAniamtor.SetBool("onRope", false);
     }
 
 	private void HandleInput()
@@ -203,6 +204,7 @@ public class Player : Character
         if (other.CompareTag("Rope") && !onRope)
         {
             onRope = true;
+            MyAniamtor.SetBool("onRope",true);
             Jump = false;
             target.transform.position = other.gameObject.transform.position;
             this.gameObject.transform.SetParent(other.gameObject.transform);

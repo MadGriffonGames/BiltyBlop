@@ -4,10 +4,12 @@ using System.Collections;
 public class Parallaxing : MonoBehaviour
 {
     [SerializeField]
-    float Yscaler = 0;
+    float yScaler = 2;
 	[SerializeField]
 	private Transform[] backgrounds; // array (list) back- and foregrounds to parallax
-	public float[] parallaxScales;   // the proportion of the cameras movement to move the backrounds by
+    [SerializeField]
+    public float[] parallaxScalesY;
+    public float[] parallaxScalesX;   // the proportion of the cameras movement to move the backrounds by
 	[SerializeField]
 	private float smoothing = 1f; 	// parallaxing amount = how smooth paralax is going to be. must be > 0
 	private Transform cam;			// reference to main cameras transform
@@ -27,14 +29,18 @@ public class Parallaxing : MonoBehaviour
 		// The previous frame had the current frame's camera position
 		previousCamPos = cam.position;
 		// assigning coresponding parallaxScales
-		parallaxScales = new float[backgrounds.Length];
+		parallaxScalesX = new float[backgrounds.Length];
 		for (int i = 0; i < backgrounds.Length; i++) 
 		{
-			parallaxScales [i] = backgrounds [i].position.z * -1;
+			parallaxScalesX [i] = backgrounds [i].position.z * -1;
 		}
-        if (Yscaler == 0)
+        if (parallaxScalesY.Length == 0)
         {
-            Yscaler = 2;
+            parallaxScalesY = new float[backgrounds.Length];
+            for (int i = 0; i < backgrounds.Length; i++)
+            {
+                parallaxScalesY[i] = 2;
+            }
         }
 	}
 	
@@ -45,10 +51,10 @@ public class Parallaxing : MonoBehaviour
 		for (int i = 0; i < backgrounds.Length; i++) 
 		{
 			// the parallax is the opposite of the camera movement because the previous frame multiplied by scale
-			float Xparallax = (previousCamPos.x - cam.position.x) * parallaxScales[i];
-            float Yparallax = (previousCamPos.y - cam.position.y) * parallaxScales[i] * Yscaler;
+			float Xparallax = (previousCamPos.x - cam.position.x) * parallaxScalesX[i];
+            float Yparallax = (previousCamPos.y - cam.position.y) * parallaxScalesX[i] * parallaxScalesY[i];
 
-            // set a target x position wich is the current position plus the parallax
+            // set a target x, y position wich is the current position plus the parallax
             float backgroundTargetPosX = backgrounds[i].position.x + Xparallax;
             float backgroundTargetPosY = backgrounds[i].position.y + Yparallax;
 

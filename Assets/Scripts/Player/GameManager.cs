@@ -36,6 +36,6 @@ public class GameManager : MonoBehaviour
 	
 	void Update ()
 	{
-		coinTxt.text = ("x " + collectedCoins);
+		//coinTxt.text = ("x " + collectedCoins);
 	}
 }

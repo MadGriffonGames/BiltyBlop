@@ -2,9 +2,20 @@
 using UnityEngine.Audio;
 using System.Collections;
 
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
+    private static SoundManager instance;
+    public static SoundManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = GameObject.FindObjectOfType<SoundManager>();
+            return instance;
+        }
+    }
 
-	public string mainFolder = "GameSound";
+    public string mainFolder = "GameSound";
 	public string soundFolder = "Sounds";
 	public string musicFolder = "Music";
 
@@ -14,23 +25,26 @@ public class SoundManager : MonoBehaviour {
 	public AudioMixerGroup musicGroup;
 	public AudioMixerGroup soundGroup;
 
-	private static SoundManager _instance;
 	private static AudioSource last, current;
-	private static float musicVolume, soundVolume;
+	public static float musicVolume, soundVolume;
 	private static bool muteMusic, muteSound;
     private static float currentPitch = 1;
 
 	void Awake()
 	{
-		musicVolume = 1;
-		soundVolume = 1;
-		_instance = this;
+		musicVolume = PlayerPrefs.GetInt("MusicIsOn");
+		soundVolume = PlayerPrefs.GetInt("SoundsIsOn");
 	}
+
+    void Update()
+    {
+        Fader();
+    }
 
     public static void SetPitch(float pitch)
     {
         currentPitch = pitch;
-        AudioSource[] sounds = _instance.GetComponentsInChildren<AudioSource>();
+        AudioSource[] sounds = Instance.GetComponentsInChildren<AudioSource>();
         foreach (AudioSource sound in sounds)
         {
             sound.pitch = pitch;
@@ -63,7 +77,7 @@ public class SoundManager : MonoBehaviour {
 	{
 		if(string.IsNullOrEmpty(soundName))
 		{
-			Debug.Log(_instance + " :: Имя файла не указанно.");
+			Debug.Log(Instance + " :: Имя файла не указанно.");
 			return;
 		}
 
@@ -72,14 +86,14 @@ public class SoundManager : MonoBehaviour {
 
 	public static void PlaySound(string name)
 	{
-		_instance.PlaySoundInternal(name);
+		Instance.PlaySoundInternal(name);
 	}
 
 	void PlayMusicInternal(string musicName, bool loop)
 	{
 		if(string.IsNullOrEmpty(musicName))
 		{
-			Debug.Log(_instance + " :: Имя файла не указанно.");
+			Debug.Log(Instance + " :: Имя файла не указанно.");
 			return;
 		}
 
@@ -88,12 +102,7 @@ public class SoundManager : MonoBehaviour {
 
 	public static void PlayMusic(string name, bool loop)
 	{
-		_instance.PlayMusicInternal(name, loop);
-	}
-
-	void Update()
-	{
-		Fader();
+		Instance.PlayMusicInternal(name, loop);
 	}
 
 	void Fader()
@@ -123,7 +132,7 @@ public class SoundManager : MonoBehaviour {
 
 		if(clip == null)
 		{
-			Debug.Log(_instance + " :: Файл не найден: " + musicName);
+			Debug.Log(Instance + " :: Файл не найден: " + musicName);
 			yield return false;
 		}
 
@@ -156,7 +165,7 @@ public class SoundManager : MonoBehaviour {
 
 		if(clip == null)
 		{
-			Debug.Log(_instance + " :: Файл не найден: " + soundName);
+			Debug.Log(Instance + " :: Файл не найден: " + soundName);
 			yield return false;
 		}
 

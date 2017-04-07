@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-
 	private static Player instance;
 	public static Player Instance
 	{

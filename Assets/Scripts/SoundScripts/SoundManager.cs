@@ -32,9 +32,22 @@ public class SoundManager : MonoBehaviour
 
 	void Awake()
 	{
-		musicVolume = PlayerPrefs.GetInt("MusicIsOn");
-		soundVolume = PlayerPrefs.GetInt("SoundsIsOn");
-	}
+        if (!PlayerPrefs.HasKey("MusicIsOn"))
+            PlayerPrefs.SetInt("MusicIsOn", 1);
+        if (!PlayerPrefs.HasKey("SoundsIsOn"))
+            PlayerPrefs.SetInt("SoundsIsOn", 1);
+
+        if (PlayerPrefs.GetInt("MusicIsOn") == 0)
+            MuteMusic(true);
+        else MuteMusic(false);
+
+        if (PlayerPrefs.GetInt("SoundsIsOn") == 0)
+            MuteSound(true);
+        else MuteSound(false);
+
+        musicVolume = 1;
+        soundVolume = 1;
+    }
 
     void Update()
     {
@@ -177,6 +190,7 @@ public class SoundManager : MonoBehaviour
 		au.loop = false;
         au.pitch = currentPitch;
 		au.mute = muteSound;
+        //Debug.Log(au.mute);
 		au.volume = soundVolume;
 		au.clip = clip;
 		au.Play();

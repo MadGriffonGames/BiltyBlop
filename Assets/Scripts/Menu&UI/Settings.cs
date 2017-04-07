@@ -17,14 +17,6 @@ public class Settings : MonoBehaviour
     {
         musicButton.gameObject.SetActive(false);
         fxButton.gameObject.SetActive(false);
-        if (!PlayerPrefs.HasKey("SoundsIsOn"))
-        {
-            PlayerPrefs.SetInt("SoundsIsOn", 1);
-        }
-        if (!PlayerPrefs.HasKey("MusicIsOn"))
-        {
-            PlayerPrefs.SetInt("MusicIsOn", 1);
-        }
     }
 
     public void ShowButtons()

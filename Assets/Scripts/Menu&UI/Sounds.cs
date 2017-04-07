@@ -38,5 +38,6 @@ public class Sounds : MonoBehaviour
             SoundManager.MuteSound(false);
             currentImg.sprite = on;
         }
+
     }
 }

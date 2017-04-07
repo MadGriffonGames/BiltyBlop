@@ -18,7 +18,7 @@ public class LevelEndUI : MonoBehaviour
     void Start ()
     {
         Time.timeScale = 0;
-        coinsCollected = GameManager.collectedCoins - Player.Instance.startCoinCount;
+        coinsCollected = GameManager.lvlCollectedCoins;
         coinsText.text = ("Coins collected x" + coinsCollected);
         monstersText.text = ("Monsters killed x" + Player.Instance.monstersKilled);
         ShowStars(Player.Instance.collectables);

@@ -21,21 +21,22 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	public Text coinTxt;
     public static string levelName;
+    public static int lvlCollectedCoins;
 
-	void Start () 
+    void Start () 
 	{
         if (!PlayerPrefs.HasKey("Coins"))
         {
-            collectedCoins = 0;
+            collectedCoins = 500;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
         }
         else
             collectedCoins = PlayerPrefs.GetInt("Coins");
-        collectedCoins = 500;
+        lvlCollectedCoins = 0;
         SoundManager.PlayMusic ("kid_music", true);
 	}
 	
 	void Update ()
 	{
-		//coinTxt.text = ("x " + collectedCoins);
+		coinTxt.text = ("x " + collectedCoins);
 	}
 }

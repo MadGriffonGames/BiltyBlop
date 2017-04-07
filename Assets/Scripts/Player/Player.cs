@@ -29,6 +29,7 @@ public class Player : Character
     public Vector2 StartPosition { get; set; }
     public Vector2 CheckpointPosition { get; set; }
     public int startCoinCount;
+    public int lvlCoins;
     public int monstersKilled;
     public int collectables;
 
@@ -90,6 +91,7 @@ public class Player : Character
         startCoinCount = GameManager.CollectedCoins;
         monstersKilled = 0;
         collectables = 0;
+        lvlCoins = 0;
     }
 
 	void Update()

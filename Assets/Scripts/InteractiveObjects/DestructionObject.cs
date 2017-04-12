@@ -24,7 +24,7 @@ public class DestructionObject : InteractiveObject
         {
             SpawnObject();
             CameraEffect.Shake(0.2f, 0.2f);
-            Instantiate(chips, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
+            Instantiate(chips, this.gameObject.transform.position + new Vector3(0, 0.5f , -3), Quaternion.identity);
 			SoundManager.PlaySound ("wooden_box");
             Destroy(this.gameObject);
         }

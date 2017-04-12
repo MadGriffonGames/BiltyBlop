@@ -233,6 +233,7 @@ public class Player : Character
         if (other.transform.tag == "movingPlatform")//if character colliding with platform
         {
             transform.parent = other.transform;//make character chil object of platform
+            target.transform.SetParent(other.gameObject.transform);
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0)
         {
@@ -245,6 +246,7 @@ public class Player : Character
 		if (other.transform.tag == "movingPlatform")//if character stop colliding with platform
 		{
 			transform.parent = null;//make charter object non child
+            target.transform.SetParent(this.gameObject.transform);
 		}
 			
 	}

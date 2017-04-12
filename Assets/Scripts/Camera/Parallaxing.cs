@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Parallaxing : MonoBehaviour
 {
-    [SerializeField]
-    float yScaler = 2;
 	[SerializeField]
 	private Transform[] backgrounds; // array (list) back- and foregrounds to parallax
     [SerializeField]

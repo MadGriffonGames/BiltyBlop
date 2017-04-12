@@ -10,6 +10,8 @@ public class EvilFlowerGreen : RangeEnemy
     GameObject seed;
     [SerializeField]
     GameObject leafParticle;
+    [SerializeField]
+    GameObject acidFx;
 
     void Awake()
     {
@@ -67,12 +69,12 @@ public class EvilFlowerGreen : RangeEnemy
     {
         if (this.gameObject.transform.localScale.x > 0)
         {
-            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.55f, 0), Quaternion.identity);
+            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.8f, -5), Quaternion.identity);
             tmp.GetComponent<Seed>().Initialize(Vector2.left);
         }
         else
         {
-            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.55f, 0), Quaternion.Euler(0, 0, 180));
+            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.8f, -5), Quaternion.Euler(0, 0, 180));
             tmp.GetComponent<Seed>().Initialize(Vector2.right);
         }
     }
@@ -81,6 +83,7 @@ public class EvilFlowerGreen : RangeEnemy
     {
         armature.animation.timeScale = 1.2f;
         armature.animation.Play("IDLE");
+
     }
 
     public void AnimAttack()
@@ -88,6 +91,7 @@ public class EvilFlowerGreen : RangeEnemy
         armature.animation.timeScale = 1.5f;
         ThrowSeed();
         armature.animation.Play("ATTACK");
+        acidFx.SetActive(true);
     }
 
     public void AnimPreparation()

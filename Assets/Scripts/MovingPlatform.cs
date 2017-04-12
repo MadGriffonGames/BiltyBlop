@@ -6,6 +6,7 @@ public class MovingPlatform : MonoBehaviour
 	private Vector3 posA;
     private Vector3 nextPos;
     private Vector3 posB;
+    Rigidbody2D MyRigidbody;
 
     [SerializeField]
     private float speed;
@@ -21,6 +22,7 @@ public class MovingPlatform : MonoBehaviour
         posA = platformTransform.localPosition;
         posB = transformPosB.localPosition;
         nextPos = posB;
+        MyRigidbody = GetComponent<Rigidbody2D>();
 	}
 
 	void Update ()
@@ -30,7 +32,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void Move()
     {
-        platformTransform.localPosition = Vector3.MoveTowards(platformTransform.localPosition, nextPos, speed * Time.deltaTime);
+        MyRigidbody.velocity = new Vector2(2,0);
         if (Vector3.Distance(platformTransform.localPosition, nextPos) <= 0)
         {
             ChangePoint();

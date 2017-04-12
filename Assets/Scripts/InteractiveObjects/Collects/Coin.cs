@@ -15,7 +15,8 @@ public class Coin : InteractiveObject
         {
             MyAnimator.SetTrigger("collected");
             GameManager.CollectedCoins++;
-			SoundManager.PlaySound ("coin_collect");
+            GameManager.lvlCollectedCoins++;
+            SoundManager.PlaySound ("coin_collect");
         }   
     }
 

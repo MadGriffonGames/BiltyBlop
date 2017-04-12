@@ -6,6 +6,8 @@ public class DisappearingPlatform : MonoBehaviour
 {
     [SerializeField]
     GameObject platfrom;
+    [SerializeField]
+    float shakingTime;
     Rigidbody2D MyRigidbody;
     bool shake = false;
     Vector3 startPos;
@@ -25,10 +27,10 @@ public class DisappearingPlatform : MonoBehaviour
         }
     }
 
-    IEnumerator Fall()
+    IEnumerator Fall(float time)
     {
         shake = true;
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(time);
         shake = false;
         MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
         MyRigidbody.freezeRotation = true;
@@ -49,7 +51,7 @@ public class DisappearingPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Fall());
+            StartCoroutine(Fall(shakingTime));
         }
     }
 

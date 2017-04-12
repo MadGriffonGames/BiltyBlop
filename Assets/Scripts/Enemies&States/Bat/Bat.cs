@@ -24,7 +24,7 @@ public class Bat : MovingMeleeEnemy
 
     public override void Start()
     {
-        //base.Start();
+        base.Start();
         ChangeState(new BatPatrolState());
         pathCordinates = new Vector3[pathPoints.Length];
         int i = 0;

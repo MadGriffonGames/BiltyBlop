@@ -22,6 +22,8 @@ public class Player : Character
     private SpriteRenderer[] spriteRenderer;
     [SerializeField]
     GameObject target;
+    [SerializeField]
+    GameObject shadow;
 
     /*
      * Game Managment vars
@@ -109,6 +111,15 @@ public class Player : Character
         {
             transform.rotation = joint.connectedBody.transform.rotation;
         }
+        if (OnGround && !shadow.activeInHierarchy)
+        {
+            shadow.SetActive(true);
+        }
+        if (!OnGround && shadow.activeInHierarchy)
+        {
+            shadow.SetActive(false);
+        }
+
     }
 
     void FixedUpdate() 

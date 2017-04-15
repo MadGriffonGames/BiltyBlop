@@ -36,10 +36,7 @@ public class FallingSpikes : MonoBehaviour
         shake = false;
         MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
         MyRigidbody.gravityScale = 4;
-    }
-
-    public void OnBecameInvisible()
-    {
+        yield return new WaitForSeconds(4f);
         Destroy(gameObject);
     }
 }

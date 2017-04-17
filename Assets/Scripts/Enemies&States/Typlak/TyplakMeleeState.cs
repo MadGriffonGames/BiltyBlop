@@ -8,7 +8,7 @@ public class TyplakMeleeState : ITyplakState
     private Typlak enemy;
 
     private float attackTimer;
-    private float attackCoolDown = 2f;
+    private float attackCoolDown = 1.5f;
     private bool canAttack = true;
 
     public void Enter(Typlak enemy)

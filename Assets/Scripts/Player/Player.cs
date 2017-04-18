@@ -24,6 +24,8 @@ public class Player : Character
     GameObject target;
     [SerializeField]
     GameObject shadow;
+    [SerializeField]
+    GameObject damageUI;
 
     /*
      * Game Managment vars
@@ -307,6 +309,9 @@ public class Player : Character
         if (!immortal)
         {
             CameraEffect.Shake(0.5f, 0.4f);
+            damageUI.SetActive(true);
+            yield return new WaitForSeconds(0.4f);
+            damageUI.SetActive(false);
             health -= 1;
             if (!IsDead)
             {

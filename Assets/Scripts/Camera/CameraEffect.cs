@@ -19,7 +19,14 @@ public class CameraEffect : MonoBehaviour
         initiateDuration = duration;
         initiatePower = power;
     }
-
+    public void StartBlur()
+    {
+        GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = true;
+    }
+    public void StopBlur()
+    {
+        GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
+    }
     void Update()
     {
         if (elapsedShake < initiateDuration)

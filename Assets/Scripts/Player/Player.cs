@@ -426,6 +426,9 @@ public class Player : Character
         movementSpeed = 14;
         MyAniamtor.speed = 2;
         timeScalerMove = 0.7f;
+        Camera cam = Camera.main;
+        CameraEffect cef = cam.GetComponent<CameraEffect>();
+        cef.StartBlur();
         yield return new WaitForSeconds(duration);
         speedBonusNum--;
         if (speedBonusNum == 0)
@@ -434,6 +437,7 @@ public class Player : Character
             movementSpeed = 7;
             MyAniamtor.speed = 1;
             timeScalerMove = 1;
+            cef.StopBlur();
         }
     }
 

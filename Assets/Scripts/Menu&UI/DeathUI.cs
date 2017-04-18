@@ -11,6 +11,9 @@ public class DeathUI : MonoBehaviour
     GameObject controls;
     [SerializeField]
     GameObject fade;
+    [SerializeField]
+    GameObject gameOverBar;
+
     GameObject mainCamera;
 
     public void Start ()
@@ -23,6 +26,10 @@ public class DeathUI : MonoBehaviour
 
     private void Update()
     {
+        if (this.isActiveAndEnabled)
+        {
+            gameOverBar.GetComponent<Animator>().SetBool("animate", true);
+        }
         if (!fade.activeInHierarchy)
         {
             fade.SetActive(true);
@@ -35,6 +42,7 @@ public class DeathUI : MonoBehaviour
 
     public void Restart()
     {
+        gameOverBar.GetComponent<Animator>().SetBool("animate", false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.collectedCoins = Player.Instance.startCoinCount;
     }
@@ -43,6 +51,7 @@ public class DeathUI : MonoBehaviour
     {
         if (GameManager.CollectedCoins >= 50)
         {
+            gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      

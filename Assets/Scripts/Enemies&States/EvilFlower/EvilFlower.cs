@@ -55,9 +55,8 @@ public class EvilFlower : MeleeEnemy
     public override IEnumerator TakeDamage()
     {
         health -= Player.Instance.damage;
-        CameraEffect.Shake(0.5f, 0.4f);
-
-        if(IsDead)
+        CameraEffect.Shake(0.2f, 0.3f);
+        if (IsDead)
         {
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);

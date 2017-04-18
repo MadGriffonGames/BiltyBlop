@@ -60,7 +60,7 @@ public class Bat : MovingMeleeEnemy
     public override IEnumerator TakeDamage()
     {
         health -= Player.Instance.damage;
-        CameraEffect.Shake(0.5f, 0.4f);
+        CameraEffect.Shake(0.2f, 0.3f);
         if (IsDead)
         {
             Player.Instance.monstersKilled++;

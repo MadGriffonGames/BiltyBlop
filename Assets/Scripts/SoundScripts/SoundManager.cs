@@ -190,7 +190,6 @@ public class SoundManager : MonoBehaviour
 		au.loop = false;
         au.pitch = currentPitch;
 		au.mute = muteSound;
-        //Debug.Log(au.mute);
 		au.volume = soundVolume;
 		au.clip = clip;
 		au.Play();

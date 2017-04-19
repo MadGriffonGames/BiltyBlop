@@ -13,15 +13,19 @@ public class LevelEndUI : MonoBehaviour
     Text coinsText;
     [SerializeField]
     GameObject[] starsFull;
-
+    [SerializeField]
+    GameObject fade;
+    [SerializeField]
+    GameObject controlsUI;
+    
 
     void Start ()
     {
-        Time.timeScale = 0;
+        fade.SetActive(true);
+        controlsUI.SetActive(false);
         coinsCollected = GameManager.lvlCollectedCoins;
-        coinsText.text = ("Coins collected x" + coinsCollected);
-        monstersText.text = ("Monsters killed x" + Player.Instance.monstersKilled);
-        ShowStars(Player.Instance.collectables);
+        coinsText.text = (" x" + coinsCollected);
+        StartCoroutine( ShowStars(Player.Instance.collectables));
     }
 
     public void Menu()
@@ -36,11 +40,12 @@ public class LevelEndUI : MonoBehaviour
         SceneManager.LoadScene("Loading");
     }
 
-    public void ShowStars(int value)
+    public IEnumerator ShowStars(int value)
     {
         for (int i = 0; i < value; i++)
         {
             starsFull[i].SetActive(true);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

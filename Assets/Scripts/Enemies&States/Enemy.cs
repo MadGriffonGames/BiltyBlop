@@ -52,11 +52,13 @@ public class Enemy : MonoBehaviour
     public virtual void Start()
     {
         MyAniamtor = GetComponent<Animator>();
+        armature = GetComponent<UnityArmatureComponent>();
         healthbar[Health - 1].SetActive(true);
         facingRight = false;
         enabled = false;
         MyAniamtor.enabled = false;
         armature.enabled = false;
+        armature.armature.cacheFrameRate = 55;
     }
 
     public virtual IEnumerator TakeDamage()

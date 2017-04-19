@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -37,6 +38,6 @@ public class GameManager : MonoBehaviour
 	
 	void Update ()
 	{
-		coinTxt.text = ("x " + collectedCoins);
+            coinTxt.text = ("x " + collectedCoins);
 	}
 }

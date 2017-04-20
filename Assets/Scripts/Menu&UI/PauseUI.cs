@@ -12,21 +12,21 @@ public class PauseUI : MonoBehaviour
     GameObject controls;
     [SerializeField]
     GameObject fade;
+    [SerializeField]
+    GameObject pauseButton;
+    [SerializeField]
+    GameObject continueButton;
 
     public void Pause()
     {
         Time.timeScale = 0;
-        pauseMenu.gameObject.SetActive(true);
-        fade.SetActive(true);
-        controls.SetActive(false);
+        buttonsSetActive(true);
     }
 
     public void Continue()
     {
         Time.timeScale = 1;
-        pauseMenu.gameObject.SetActive(false);
-        fade.SetActive(false);
-        controls.SetActive(true);
+        buttonsSetActive(false);
     }
 
     public void Restart()
@@ -41,4 +41,14 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
+
+    void buttonsSetActive(bool pause) // переключатель кнопок
+    {
+        pauseMenu.gameObject.SetActive(pause);
+        fade.SetActive(pause);
+        controls.SetActive(!pause);
+        pauseButton.SetActive(!pause);
+        continueButton.SetActive(pause);
+    }
+
 }

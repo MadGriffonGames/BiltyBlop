@@ -8,7 +8,7 @@ public class RuneStone : InteractiveObject
     public string nextLvl;
 	[SerializeField]
 	private GameObject lightParticle;
-    float delay = 2f;
+    float delay = 2.5f;
     float timer;
     bool timerIsOn = false;
 

@@ -8,6 +8,8 @@ public class DoorOpen : MonoBehaviour {
        private GameObject door;
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private GameObject gear;
 
     [SerializeField]
     private Transform transformPosB;
@@ -42,15 +44,21 @@ public class DoorOpen : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (isMoved)
-        {
+        { 
+            Quaternion rot = gear.transform.localRotation;
+            float new_z = rot.z;
             step = speed * Time.deltaTime;
             if (direction)
             {
+                new_z += speed/200;
+                gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);//Quaternion.Euler(0, 0, (speed+prev.z));
                 door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step);
                 if (Vector3.Distance(door.transform.localPosition, posB) == 0) isMoved = false;
             }
             else
             {
+                new_z -= speed/200;
+                gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);
                 door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, startPos, step);
                 if (Vector3.Distance(door.transform.localPosition, startPos) == 0) isMoved = false;
             }

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour {
 
-	[SerializeField]
-       private GameObject door;
+    [SerializeField]
+    private GameObject door;
     [SerializeField]
     private float speed;
     [SerializeField]
     private GameObject gear;
 
+    [SerializeField]
+    private Sprite leverLeft;
+
+    [SerializeField]
+    private Sprite leverRight;
     [SerializeField]
     private Transform transformPosB;
 
@@ -34,6 +39,8 @@ public class DoorOpen : MonoBehaviour {
         {
             isMoved = true;
             direction = !direction;
+            if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;
+            else gameObject.GetComponent<SpriteRenderer>().sprite = leverLeft;
         }
         
       }

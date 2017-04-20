@@ -126,12 +126,12 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
-            //float horizontal = Input.GetAxis("Horizontal");
-            //HandleMovement(horizontal);
-            //Flip(horizontal);
+            float horizontal = Input.GetAxis("Horizontal");
+            HandleMovement(horizontal);
+            Flip(horizontal);
             OnGround = IsGrounded();
-            HandleMovement(mobileInput);
-            Flip(mobileInput);
+            //HandleMovement(mobileInput);
+            //Flip(mobileInput);
             HandleLayers();
         }
     }

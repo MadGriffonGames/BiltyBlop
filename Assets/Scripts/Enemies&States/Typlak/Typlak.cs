@@ -50,8 +50,6 @@ public class Typlak : MovingMeleeEnemy
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
         SetHealthbar();
-        MyAniamtor.SetTrigger("damage");
-        
         if (IsDead)
         {
             Player.Instance.monstersKilled++;

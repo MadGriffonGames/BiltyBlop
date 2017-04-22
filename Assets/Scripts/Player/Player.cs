@@ -304,6 +304,7 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
+        CameraEffect cef = Camera.main.GetComponent<CameraEffect>();
         if (!immortal)
         {
             CameraEffect.Shake(0.5f, 0.4f);
@@ -317,6 +318,7 @@ public class Player : Character
                 }
                 MyAniamtor.SetLayerWeight(2, 1);
                 MyAniamtor.SetTrigger("damage");
+                cef.ShowBlood(0.5f);
                 SoundManager.PlaySound("player_takehit1");
                 immortal = true;
                 StartCoroutine(IndicateImmortal());

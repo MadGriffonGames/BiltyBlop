@@ -5,7 +5,11 @@ using UnityEngine;
 public class CameraEffect : MonoBehaviour
 {
     private static Transform position;
-    private static float elapsedShake, initiateDuration, initiatePower, percentComplete;
+    private static float shakeElapsed, shakeDuration, initiatePower, percentComplete;
+    private float bloodElapsed, bloodDuration;
+    [SerializeField]
+    GameObject blood;
+    Color origColor;
 
     void Start()
     {
@@ -15,8 +19,8 @@ public class CameraEffect : MonoBehaviour
 
     public static void Shake(float duration, float power)
     {
-        elapsedShake = 0;
-        initiateDuration = duration;
+        shakeElapsed = 0;
+        shakeDuration = duration;
         initiatePower = power;
     }
     public void StartBlur()
@@ -27,15 +31,28 @@ public class CameraEffect : MonoBehaviour
     {
         GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
     }
+    public void ShowBlood(float duration)
+    {
+        blood.gameObject.SetActive(true);
+        bloodElapsed = 0f;
+        bloodDuration = duration;
+    }
     void Update()
     {
-        if (elapsedShake < initiateDuration)
+  
+        if (shakeElapsed < shakeDuration)
         {
-            elapsedShake += Time.deltaTime;
-            percentComplete = elapsedShake / initiateDuration;
+            shakeElapsed += Time.deltaTime;
+            percentComplete = shakeElapsed / shakeDuration;
             percentComplete = Mathf.Clamp01(percentComplete);
             Vector3 rnd = Random.insideUnitSphere * initiatePower * (1f - percentComplete);
             position.localPosition += new Vector3(rnd.x, rnd.y, 0);
         }
+        if (bloodElapsed < bloodDuration)
+        {
+            bloodElapsed += Time.deltaTime;
+            if(bloodDuration-bloodElapsed<0.05f) blood.gameObject.SetActive(false);
+        }
+        
     }
 }

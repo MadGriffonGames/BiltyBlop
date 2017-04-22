@@ -21,7 +21,7 @@ public class CoinInChest : InteractiveObject
             GameManager.CollectedCoins++;
             SoundManager.PlaySound("coin_collect");
         }
-        if (!other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Coin"))
         {
             Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), other.collider, true);
         }

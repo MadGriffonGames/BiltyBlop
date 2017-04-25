@@ -40,6 +40,8 @@ public class Player : Character
      */
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    public GameObject secretHalo;
     public bool Jump { get; set; }
     private float mobileInput = 0;
     public bool GotKey { get; set; }

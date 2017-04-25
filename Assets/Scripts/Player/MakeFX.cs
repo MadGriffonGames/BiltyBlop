@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MakeFX : MonoBehaviour
 {
+
     private static MakeFX instance;
 
     public static MakeFX Instance
@@ -40,6 +41,8 @@ public class MakeFX : MonoBehaviour
     [SerializeField]
     GameObject jumpBonus;
 
+    [SerializeField]
+    GameObject SwordEdge;
 
     public void MakeDust()
     {
@@ -110,6 +113,16 @@ public class MakeFX : MonoBehaviour
         ma.duration = time;
         tmp.transform.SetParent(Player.Instance.transform);
         ps.Play();
+    }
+
+    public void startSwordFX()
+    {
+        SwordEdge.GetComponent<TrailRenderer>().enabled = true;
+    }
+    public void stopSwordFX()
+    {
+
+        SwordEdge.GetComponent<TrailRenderer>().enabled = false;
     }
 
 

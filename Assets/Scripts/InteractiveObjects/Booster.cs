@@ -27,4 +27,20 @@ public class Booster : InteractiveObject
             Player.Instance.MyRigidbody.AddForce(new Vector2(0, force * Player.Instance.timeScalerJump));
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, false);
+        }
+    }
 }

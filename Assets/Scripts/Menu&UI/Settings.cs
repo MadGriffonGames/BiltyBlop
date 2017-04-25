@@ -10,13 +10,18 @@ public class Settings : MonoBehaviour
     GameObject musicButton;
     [SerializeField]
     GameObject fxButton;
+    [SerializeField]
+    GameObject settingsBar;
+    Animator MyAnimator;
     
     bool hide = true;
 
     private void Start()
     {
+        MyAnimator = GetComponent<Animator>();
         musicButton.gameObject.SetActive(false);
         fxButton.gameObject.SetActive(false);
+        settingsBar.gameObject.SetActive(false);
     }
 
     public void ShowButtons()
@@ -26,11 +31,13 @@ public class Settings : MonoBehaviour
         {
             musicButton.gameObject.SetActive(true);
             fxButton.gameObject.SetActive(true);
+            settingsBar.gameObject.SetActive(true);
         }
         else
         {
             musicButton.gameObject.SetActive(false);
             fxButton.gameObject.SetActive(false);
+            settingsBar.gameObject.SetActive(false);
         }
     }
 }

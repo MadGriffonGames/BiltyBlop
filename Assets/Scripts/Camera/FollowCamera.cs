@@ -50,18 +50,23 @@ public class FollowCamera : MonoBehaviour
 
         lastX = currentX;
         lastY = currentY;
+
         offsetY.z = 0;
-        offsetY = Vector3.Slerp(offsetY, new Vector3(offsetY.x, offset.y, offsetY.z), 0.1f);
+        offsetY = Vector2.Lerp(offsetY, new Vector2(offsetY.x, offset.y), 0.1f);
+        //offsetY = Vector3.Slerp(offsetY, new Vector3(offsetY.x, offset.y, offsetY.z), 0.1f);
     }
+
 
     void FixedUpdate()
     {
-        this.CalculateOffsets();
+        CalculateOffsets();
 
         // Camera position with Target's position.z
         Vector3 posNoZ = transform.position; 
         posNoZ.z = target.transform.position.z;
+
         Vector3 targetDirection = (target.transform.position - posNoZ);
+        
         // Adding Offsets
         targetDirection += offsetY;
         targetDirection.x += offset.x;
@@ -75,6 +80,7 @@ public class FollowCamera : MonoBehaviour
         else interpVelocityX = 0;
 
         targetPos = transform.position + (targetDirection.normalized * interpVelocityX * Time.deltaTime * Player.Instance.timeScaler);
-        transform.position = Vector3.Slerp(transform.position, targetPos, 0.1f);
+        transform.position = Vector2.Lerp(transform.position, targetPos, 0.1f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -20); // костыльный сет Z на позицмию камеры.
     }
 }

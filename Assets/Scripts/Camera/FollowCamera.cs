@@ -50,7 +50,6 @@ public class FollowCamera : MonoBehaviour
 
         lastX = currentX;
         lastY = currentY;
-
         offsetY.z = 0;
         offsetY = Vector3.Slerp(offsetY, new Vector3(offsetY.x, offset.y, offsetY.z), 0.1f);
     }
@@ -63,7 +62,6 @@ public class FollowCamera : MonoBehaviour
         Vector3 posNoZ = transform.position; 
         posNoZ.z = target.transform.position.z;
         Vector3 targetDirection = (target.transform.position - posNoZ);
-
         // Adding Offsets
         targetDirection += offsetY;
         targetDirection.x += offset.x;

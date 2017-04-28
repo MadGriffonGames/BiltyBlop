@@ -17,44 +17,24 @@ public class LevelMakerEditor : Editor {
         DrawDefaultInspector();
         // SEPARATOR
         GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
-		GUILayout.Label("GROUND TILES");
+		GUILayout.Label("TILES");
         // Customizing the inspector a little bit
         GUILayout.BeginHorizontal();
         for (int i = 0; i < grid.tiles.Length; i++)
         {
             GameObject tilePrefab = grid.tiles[i];
-            // We want two buttons per line
-            if(i % 2 == 0 && i != 0)
+            //     4 buttons per line
+            if(i % 4 == 0 && i != 0)
             {
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
             }
-            if (GUILayout.Button(tilePrefab.name))
-            {
-                grid.SelectTile(i);
-				grid.DisableLoop();
-            }
-        }
-        GUILayout.EndHorizontal();
+            if (GUILayout.Button(tilePrefab.GetComponent<MeshRenderer>().sharedMaterial.mainTexture, GUILayout.MaxWidth(50f), GUILayout.MaxHeight(50f))) // selecting prefab(working ONLY with meshes)
 
-        GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
-        GUILayout.Label("INTERACTIVES");
-        // Customizing the inspector a little bit
-        GUILayout.BeginHorizontal();
-        for (int i = 0; i < grid.interactives.Length; i++)
-        {
-            GameObject tilePrefab = grid.interactives[i];
-            // We want two buttons per line
-            if (i % 3 == 0 && i != 0)
-            {
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();
-            }
-            if (GUILayout.Button(tilePrefab.name))
             {
                 grid.SelectTile(i);
                 grid.DisableLoop();
-            }
+            } 
         }
         GUILayout.EndHorizontal();
 
@@ -74,6 +54,7 @@ public class LevelMakerEditor : Editor {
 			}
 		}
 		GUILayout.EndHorizontal();
+
 		// SEPARATOR
 		GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
 		GUILayout.Label("RANDOM LOOPS");
@@ -90,6 +71,8 @@ public class LevelMakerEditor : Editor {
 			}
 		}
 		GUILayout.EndHorizontal();
+
+
 		// SEPARATOR
 		GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
 		GUILayout.Label("WARNING AREA!!!");

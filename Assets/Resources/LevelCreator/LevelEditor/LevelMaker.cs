@@ -20,8 +20,6 @@ public class LevelMaker : MonoBehaviour {
 	public bool gridVisible = true;
 
     public GameObject[] tiles;
-    public GameObject[] environment;
-    public GameObject[] interactives;
     public Loop[] loops;
 	public Loop[] randomLoops;
 
@@ -213,6 +211,7 @@ public class LevelMaker : MonoBehaviour {
         // In case of array overflow default to 0
         if(index >= tiles.Length)
             selectedTile = 0;
+        Debug.Log(selectedTile + "  " + tiles.Length);
     }
 
 	public void SelectLoop(int index)

@@ -18,10 +18,12 @@ public class LevelMaker : MonoBehaviour {
 
     public Color gridColor = Color.green;
 	public bool gridVisible = true;
+    public float rotation;
 
     public GameObject[] tiles;
     public Loop[] loops;
 	public Loop[] randomLoops;
+
 
     List<GameObject> levelTiles = new List<GameObject>();
 
@@ -98,6 +100,8 @@ public class LevelMaker : MonoBehaviour {
 		else{
 			GameObject newTile = Instantiate<GameObject>(tiles[selectedTile]) as GameObject;
 			newTile.transform.position = position;
+            newTile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotation));
+            Debug.Log(rotation);
 			newTile.transform.SetParent(transform);
 			levelTiles.Add(newTile);
 		}
@@ -212,6 +216,11 @@ public class LevelMaker : MonoBehaviour {
         if(index >= tiles.Length)
             selectedTile = 0;
         Debug.Log(selectedTile + "  " + tiles.Length);
+    }
+
+    public void SetRotation(float rotationToSet)
+    {
+        rotation = rotationToSet;
     }
 
 	public void SelectLoop(int index)

@@ -6,6 +6,8 @@ public class Checkpoint : InteractiveObject
 {
     [SerializeField]
     GameObject lightPillar;
+    [SerializeField]
+    GameObject light;
 
     bool activated = false;
 
@@ -21,6 +23,7 @@ public class Checkpoint : InteractiveObject
             if (!activated)
             {
                 lightPillar.SetActive(true);
+                light.SetActive(true);
                 Player.Instance.CheckpointPosition = this.gameObject.transform.position;
             }
         }

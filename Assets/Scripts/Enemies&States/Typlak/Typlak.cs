@@ -72,14 +72,14 @@ public class Typlak : MovingMeleeEnemy
 
     public void AnimPreattack()
     {
-        armature.animation.timeScale = 1f;
+        armature.animation.timeScale = 1.5f;
         armature.animation.Play("preattack");
 
     }
 
     public void AnimAttack()
     {
-        armature.animation.timeScale = 1f;
+        armature.animation.timeScale = 1.5f;
         AttackCollider.enabled = true;
         armature.animation.Play("Attack");
 

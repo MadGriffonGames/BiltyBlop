@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
             button.unlocked = level.unlocked;
             button.GetComponent<Button>().interactable = level.isInteractable;
             button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
-            newButton.transform.SetParent(spacer);
+            newButton.transform.SetParent(spacer, true);
         }
         SaveAll();
     }
@@ -159,4 +159,8 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void Back()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

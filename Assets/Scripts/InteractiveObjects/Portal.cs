@@ -6,12 +6,11 @@ public class Portal : MonoBehaviour
 {
     [SerializeField]
     GameObject nextPortal;
-    public BoxCollider2D bc;
+    GameObject mainCamera;
 
     private void Start()
     {
-        bc = GetComponent<BoxCollider2D>();
-        Debug.Log(bc.size.y);
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -31,7 +30,8 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Player.Instance.transform.position = nextPortal.transform.position + new Vector3(1 * Player.Instance.transform.localScale.x, -2f, 0);
+            mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, nextPortal.transform.position + new Vector3(0, 0, -20), 1f); 
+            Player.Instance.transform.position = nextPortal.transform.position + new Vector3(1 * Player.Instance.transform.localScale.x, -1.8f, 0);
         }
     }
 }

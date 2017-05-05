@@ -215,7 +215,6 @@ public class LevelMaker : MonoBehaviour {
         // In case of array overflow default to 0
         if(index >= tiles.Length)
             selectedTile = 0;
-        Debug.Log(selectedTile + "  " + tiles.Length);
     }
 
     public void SetRotation(float rotationToSet)

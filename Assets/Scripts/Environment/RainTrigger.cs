@@ -6,6 +6,9 @@ public class RainTrigger : MonoBehaviour
 {
     GameObject rainParticle;
 
+    [SerializeField]
+    private bool isExit;
+
     private void Start()
     {
         rainParticle = GameObject.FindGameObjectWithTag("Rain");
@@ -13,13 +16,36 @@ public class RainTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !rainParticle.activeInHierarchy)
+        
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
-            rainParticle.SetActive(true);
-        }
-        else if (other.gameObject.CompareTag("Player") && rainParticle.activeInHierarchy)
-        {
-            rainParticle.SetActive(false);
+            float leaved_x = other.transform.position.x;
+            float extent_x = GetComponent<Collider2D>().bounds.extents.x;
+            if (isExit)
+            {
+               if(leaved_x>=extent_x+GetComponent<Collider2D>().bounds.center.x)
+                {
+                    if (!rainParticle.activeInHierarchy)
+                        rainParticle.SetActive(true);
+                }
+               else
+                    if (rainParticle.activeInHierarchy)
+                    rainParticle.SetActive(false);
+            }
+            else
+            {
+                if (leaved_x >= extent_x + GetComponent<Collider2D>().bounds.center.x)
+                {
+                    if (rainParticle.activeInHierarchy)
+                        rainParticle.SetActive(false);
+                }
+                else
+                    if (!rainParticle.activeInHierarchy)
+                    rainParticle.SetActive(true);
+            }
         }
     }
 }

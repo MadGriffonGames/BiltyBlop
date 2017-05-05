@@ -15,6 +15,23 @@ public class LevelMakerEditor : Editor {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
+
+
+        GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
+        GUILayout.Label("ROTATION");
+        GUILayout.BeginHorizontal();
+        for (int i = 0; i<4; i++)
+        {
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.EndHorizontal();
+            int rotation = i * 90;
+            if (GUILayout.Button(rotation.ToString(), GUILayout.MaxWidth(50f), GUILayout.MaxHeight(50f)))
+                grid.SetRotation(rotation);
+            
+        }
+        GUILayout.EndHorizontal();
+
         // SEPARATOR
         GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
 		GUILayout.Label("TILES");
@@ -30,7 +47,6 @@ public class LevelMakerEditor : Editor {
                 GUILayout.BeginHorizontal();
             }
             if (GUILayout.Button(tilePrefab.GetComponent<MeshRenderer>().sharedMaterial.mainTexture, GUILayout.MaxWidth(50f), GUILayout.MaxHeight(50f))) // selecting prefab(working ONLY with meshes)
-
             {
                 grid.SelectTile(i);
                 grid.DisableLoop();

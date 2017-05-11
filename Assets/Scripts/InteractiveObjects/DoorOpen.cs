@@ -26,9 +26,8 @@ public class DoorOpen : MonoBehaviour {
     bool isMoved = false;
     bool direction = false; // true is forward, false is backward
 
-    // Use this for initialization
-    void Start () {
-
+    void Start ()
+    {
         startPos = door.transform.localPosition;
         posB = transformPosB.localPosition;
         
@@ -38,18 +37,15 @@ public class DoorOpen : MonoBehaviour {
         if(other.gameObject.CompareTag("Sword"))
         {
             isMoved = true;
-            direction = !direction;
+            direction = true;
             if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;
             else gameObject.GetComponent<SpriteRenderer>().sprite = leverLeft;
         }
         
       }
 
-   
-
-
-    // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
         if (isMoved)
         { 
             Quaternion rot = gear.transform.localRotation;
@@ -59,15 +55,8 @@ public class DoorOpen : MonoBehaviour {
             {
                 new_z += speed/200;
                 gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);//Quaternion.Euler(0, 0, (speed+prev.z));
-                door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step);
+                door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step*2);
                 if (Vector3.Distance(door.transform.localPosition, posB) == 0) isMoved = false;
-            }
-            else
-            {
-                new_z -= speed/200;
-                gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);
-                door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, startPos, step);
-                if (Vector3.Distance(door.transform.localPosition, startPos) == 0) isMoved = false;
             }
         }
     }

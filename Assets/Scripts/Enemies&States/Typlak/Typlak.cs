@@ -9,6 +9,8 @@ public class Typlak : MovingMeleeEnemy
     [SerializeField]
     private GameObject typlakParticle;
     public bool attack;
+    bool damaged = false;
+
 
     void Awake()
     {
@@ -47,16 +49,22 @@ public class Typlak : MovingMeleeEnemy
 
     public override IEnumerator TakeDamage()
     {
-        health -= Player.Instance.damage;
-        CameraEffect.Shake(0.2f, 0.3f);
-        SetHealthbar();
-        if (IsDead)
+        if (!damaged)
         {
-            Player.Instance.monstersKilled++;
-            Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
-            Destroy(gameObject);
+            damaged = true;
+            health -= Player.Instance.damage;
+            CameraEffect.Shake(0.2f, 0.3f);
+            SetHealthbar();
+            if (IsDead)
+            {
+                Player.Instance.monstersKilled++;
+                Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                Destroy(gameObject);
+            }
+            yield return null;
         }
-        yield return null;
+        yield return new WaitForSeconds(0.05f);
+        damaged = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

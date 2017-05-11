@@ -78,7 +78,10 @@ public class FollowCamera : MonoBehaviour
             interpVelocityX = targetDirection.magnitude * Mathf.Abs(Player.Instance.MyRigidbody.velocity.magnitude) * 5f;
         }
         else interpVelocityX = 0;
-
+        if (Player.Instance.gameObject.layer == 9)
+        {
+            interpVelocityX = 25;
+        }
         targetPos = transform.position + (targetDirection.normalized * interpVelocityX * Time.deltaTime * Player.Instance.timeScaler);
         transform.position = Vector2.Lerp(transform.position, targetPos, 0.1f);
         transform.position = new Vector3(transform.position.x, transform.position.y, -20); // костыльный сет Z на позицмию камеры.

@@ -12,7 +12,7 @@ class SwordSlash : MonoBehaviour
         i = 0;
         lineR = this.gameObject.AddComponent<LineRenderer>();
         lineR.material = new Material(Shader.Find("Mobile/Particles/Additive"));
-        lineR.startColor = new Color(255, 255, 255);
+        lineR.startColor = new Color(255, 255, 255, 120);
         lineR.receiveShadows = false;
         lineR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         Keyframe a = new Keyframe(0f, 0f, 0f, 0f);

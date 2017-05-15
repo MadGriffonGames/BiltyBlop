@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOpen : MonoBehaviour {
+public class DoorOpen : MonoBehaviour
+{
 
     [SerializeField]
     private GameObject door;
@@ -24,39 +25,63 @@ public class DoorOpen : MonoBehaviour {
 
     float step;
     bool isMoved = false;
+    bool isUsedByPlayer = false;
+    bool isBlocked = false; // true: block lever after single use
     bool direction = false; // true is forward, false is backward
 
-    void Start ()
+    void Start()
     {
         startPos = door.transform.localPosition;
         posB = transformPosB.localPosition;
-        
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Sword"))
+        if (other.gameObject.CompareTag("Sword"))
         {
             isMoved = true;
-            direction = true;
+            direction = !direction;
+            isUsedByPlayer = true;
             if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;
             else gameObject.GetComponent<SpriteRenderer>().sprite = leverLeft;
         }
-        
-      }
 
-    void Update ()
+    }
+    public void Activate()
     {
-        if (isMoved)
-        { 
-            Quaternion rot = gear.transform.localRotation;
-            float new_z = rot.z;
-            step = speed * Time.deltaTime;
-            if (direction)
+        isMoved = true;
+        direction = !direction;
+    }
+    void Update()
+    {
+        if (!isBlocked)
+        {
+            if (isMoved)
             {
-                new_z += speed/200;
-                gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);//Quaternion.Euler(0, 0, (speed+prev.z));
-                door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step*2);
-                if (Vector3.Distance(door.transform.localPosition, posB) == 0) isMoved = false;
+                Quaternion rot = gear.transform.localRotation;
+                float new_z = rot.z;
+                step = speed * Time.deltaTime;
+                if (direction)
+                {
+                    new_z += speed / 200;
+                    gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);
+                    door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step * 2);
+                    if (Vector3.Distance(door.transform.localPosition, posB) == 0)  {
+                        isMoved = false;
+                        isBlocked = isUsedByPlayer;
+                    }
+                }
+                else
+                {
+                    new_z += speed / 200;
+                    gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);
+                    door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step * 2);
+                    if (Vector3.Distance(door.transform.localPosition, posB) == 0)
+                    {
+                        isMoved = false;
+                        isBlocked = isUsedByPlayer;
+                    }
+                }
             }
         }
     }

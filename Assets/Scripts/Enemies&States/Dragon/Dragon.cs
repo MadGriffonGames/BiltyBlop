@@ -6,6 +6,7 @@ using DragonBones;
 public class Dragon : Boss
 {
     private IDragonState currentState;
+    Rigidbody2D MyRigidbody;
 
     [SerializeField]
     public UnityEngine.Transform behindPosRight;
@@ -14,28 +15,40 @@ public class Dragon : Boss
     [SerializeField]
     public GameObject flameFlow;
     [SerializeField]
-    public GameObject fallPoint;
-    [SerializeField]
     public GameObject flameOffRight;
     [SerializeField]
     public GameObject flameOffLeft;
+    [SerializeField]
+    public GameObject fallPoint;
+    [SerializeField]
+    public GameObject risePoint;
+    [SerializeField]
+    public GameObject groundPoint;
+    [SerializeField]
+    public GameObject fireball;
+    [SerializeField]
+    public Collider2D takeDamageCollider;
+
     float angle;
+    bool roar = true;
 
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
+        gameObject.SetActive(false);
     }
 
     public override void Start()
     {
         base.Start();
-        ChangeState(new EnterState());
+        MyRigidbody = GetComponent<Rigidbody2D>();
+        StartCoroutine(Roar());
     }
 
     void Update()
     {
-        if (!IsDead)
+        if (!roar)
         {
             currentState.Execute();
         }
@@ -58,13 +71,9 @@ public class Dragon : Boss
 
     public override IEnumerator TakeDamage()
     {
-            health -= Player.Instance.damage;
-            CameraEffect.Shake(0.2f, 0.3f);
-            //SetHealthbar();
-            if (IsDead)
-            {
-                Destroy(gameObject);
-            }
+        health -= Player.Instance.damage;
+        CameraEffect.Shake(0.2f, 0.3f);
+        //SetHealthbar();
         yield return new WaitForSeconds(0.05f);
     }
 
@@ -73,12 +82,30 @@ public class Dragon : Boss
         armature.animation.Play(name);
     }
 
-    public void Move()
+    public void Move(float x, float y)
     {
-        angle += Time.deltaTime*5;
-        angle %= 360;
-        float offsetY = Mathf.Sin(angle) * 0.01f;
-        transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x + 0.045f * transform.localScale.x * speed, transform.position.y + offsetY, transform.position.z), speed);
+        MyRigidbody.velocity = new Vector2(x*transform.localScale.x/1.9f, y);
     }
 
+    IEnumerator Roar()
+    {
+        //DRAGON SOUND HERE
+        yield return new WaitForSeconds(1);
+        roar = false;
+        ChangeState(new EnterState());
+    }
+
+    public void ThrowFireball()
+    {
+        if (this.gameObject.transform.localScale.x > 0)
+        {
+            GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(-1.8f, 0.9f, -5), Quaternion.identity);
+            tmp.GetComponent<FireBall>().Initialize(Vector2.right);
+        }
+        else
+        {
+            GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(-1.8f, 0.9f, -5), Quaternion.Euler(0, 0, 180));
+            tmp.GetComponent<FireBall>().Initialize(Vector2.left);
+        }
+    }
 }

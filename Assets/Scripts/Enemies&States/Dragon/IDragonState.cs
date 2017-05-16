@@ -7,4 +7,5 @@ public interface IDragonState
     void Execute();
     void Enter(Dragon enemy);
     void Exit();
+
 }

@@ -24,6 +24,7 @@ public class Player : Character
     GameObject target;
     [SerializeField]
     GameObject shadow;
+    public bool bossFight = false;
 
     /*
      * Game Managment vars

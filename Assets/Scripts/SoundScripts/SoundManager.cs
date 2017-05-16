@@ -234,15 +234,17 @@ public class SoundManager : MonoBehaviour
         //Debug.Log(clip.name);
         stepsAudio.clip = clip;
         stepsAudio.Pause();
-
         steps = stepsAudio;
     }
     
     public static void MakeSteps(bool isStepping)
     {
-        if (steps.isPlaying && !isStepping)
-            steps.Pause();
-        else if (!steps.isPlaying && isStepping)
-            steps.Play();
+		if (steps != null) 
+		{
+			if (steps.isPlaying && !isStepping)
+				steps.Pause ();
+			else if (!steps.isPlaying && isStepping)
+				steps.Play ();
+		}
     }
 }

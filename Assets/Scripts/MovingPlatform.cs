@@ -25,7 +25,7 @@ public class MovingPlatform : MonoBehaviour
         MyRigidbody = GetComponent<Rigidbody2D>();
 	}
 
-	void Update ()
+	void FixedUpdate ()
     {
         Move();
 	}

@@ -25,7 +25,6 @@ public class DoorOpen : MonoBehaviour
 
     float step;
     bool isMoved = false;
-    bool isUsedByPlayer = false;
     bool isBlocked = false; // true: block lever after single use
     bool direction = false; // true is forward, false is backward
 
@@ -39,11 +38,15 @@ public class DoorOpen : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Sword"))
         {
-            isMoved = true;
-            direction = !direction;
-            isUsedByPlayer = true;
-            if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;
-            else gameObject.GetComponent<SpriteRenderer>().sprite = leverLeft;
+            
+            if (!isBlocked)
+            {
+                isMoved = true;
+                direction = !direction;
+                isBlocked = true;
+                if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;
+                else gameObject.GetComponent<SpriteRenderer>().sprite = leverLeft;
+            }
         }
 
     }
@@ -54,8 +57,7 @@ public class DoorOpen : MonoBehaviour
     }
     void Update()
     {
-        if (!isBlocked)
-        {
+        
             if (isMoved)
             {
                 Quaternion rot = gear.transform.localRotation;
@@ -66,9 +68,9 @@ public class DoorOpen : MonoBehaviour
                     new_z += speed / 200;
                     gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);
                     door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step * 2);
-                    if (Vector3.Distance(door.transform.localPosition, posB) == 0)  {
+                    if (Vector3.Distance(door.transform.localPosition, posB) == 0)
+                    {
                         isMoved = false;
-                        isBlocked = isUsedByPlayer;
                     }
                 }
                 else
@@ -79,10 +81,9 @@ public class DoorOpen : MonoBehaviour
                     if (Vector3.Distance(door.transform.localPosition, posB) == 0)
                     {
                         isMoved = false;
-                        isBlocked = isUsedByPlayer;
                     }
                 }
             }
-        }
+        
     }
 }

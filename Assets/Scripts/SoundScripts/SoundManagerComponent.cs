@@ -33,4 +33,5 @@ public class SoundManagerComponent : MonoBehaviour {
 	{
 		SoundManager.MuteSound(!value);
 	}
+
 }

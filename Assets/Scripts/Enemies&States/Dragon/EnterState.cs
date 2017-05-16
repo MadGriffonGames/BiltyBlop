@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnterState : IDragonState
+public class EnterState : MonoBehaviour, IDragonState
 {
     private Dragon enemy;
 
@@ -11,11 +11,11 @@ public class EnterState : IDragonState
 
     public void Enter(Dragon enemy)
     {
-        this.enemy = enemy;
-        //Звук для появления дракона
+        this.enemy = enemy; 
         enemy.PlayAnimation("FLY");
         enemy.armature.animation.timeScale = 2;
         enemy.speed = 1;
+        enemy.takeDamageCollider.enabled = false;
     }
 
     public void Execute()
@@ -27,23 +27,24 @@ public class EnterState : IDragonState
 
     public void FirstEnter()
     {
-        if (!reachRight)
+        if (!reachLeft)
         {
-            enemy.Move();
+            enemy.Move(15,0);
         }
-        if (enemy.transform.position.x >= enemy.behindPosRight.position.x)
+        if (enemy.transform.position.x >= enemy.behindPosRight.position.x && reachLeft)
         {
             reachRight = true;
             enemy.ChangeDirection();
             enemy.transform.rotation = Quaternion.Euler(0, 0, 11);
         }
-        if (reachRight && !reachLeft)
+        if (!reachRight && reachLeft)
         {
-            enemy.Move();
+            enemy.Move(15, 0);
         }
         if (enemy.transform.position.x <= enemy.behindPosLeft.position.x && !reachLeft)
         {
             reachLeft = true;
+            reachRight = false;
             enemy.ChangeDirection();
             enemy.transform.rotation = Quaternion.Euler(0, 0, -11);
         }

@@ -50,7 +50,6 @@ public class Boss : MonoBehaviour
         MyAniamtor = GetComponent<Animator>();
         armature = GetComponent<UnityArmatureComponent>();
         //healthbar[Health - 1].SetActive(true);
-        armature.armature.cacheFrameRate = 55;
     }
 
     public virtual IEnumerator TakeDamage()

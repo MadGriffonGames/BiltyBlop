@@ -23,20 +23,24 @@ public class CameraEffect : MonoBehaviour
         shakeDuration = duration;
         initiatePower = power;
     }
+
     public void StartBlur()
     {
         GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = true;
     }
+
     public void StopBlur()
     {
         GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
     }
+
     public void ShowBlood(float duration)
     {
         blood.gameObject.SetActive(true);
         bloodElapsed = 0f;
         bloodDuration = duration;
     }
+
     void Update()
     {
   
@@ -51,8 +55,14 @@ public class CameraEffect : MonoBehaviour
         if (bloodElapsed < bloodDuration)
         {
             bloodElapsed += Time.deltaTime;
-            if(bloodDuration-bloodElapsed<0.05f) blood.gameObject.SetActive(false);
+            if (bloodDuration - bloodElapsed < 0.05f)
+            {
+                blood.gameObject.SetActive(false);
+            }
         }
-        
+        if (percentComplete == 1 && Player.Instance.bossFight)
+        {
+            position.localPosition = new Vector3(0, 0, 0); 
+        }
     }
 }

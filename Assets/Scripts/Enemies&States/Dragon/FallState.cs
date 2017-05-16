@@ -2,28 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallState : IDragonState
+public class FallState : MonoBehaviour ,IDragonState
 {
     private Dragon enemy;
 
-    bool reach = false;
+    bool reachFallPoint = false;
+    bool fall = false;
+    bool grounded = false;
 
     public void Enter(Dragon enemy)
     {
         this.enemy = enemy;
-        //Звук для появления дракона
         enemy.PlayAnimation("FLY");
-        enemy.armature.animation.timeScale = 1;
-        enemy.speed = 0.75f;
-        enemy.flameFlow.SetActive(true);
+        enemy.armature.animation.timeScale = 2;
+        enemy.speed = 1;
     }
 
     public void Execute()
     {
-        enemy.Move();
-        if (enemy.transform.position.x >= enemy.behindPosRight.position.x)
+        if (!reachFallPoint)
         {
-            
+            enemy.Move(10, 0);
+        }
+        if (enemy.transform.position.x <= enemy.fallPoint.transform.position.x)
+        {
+            reachFallPoint = true;
+            if (!fall)
+            {
+                enemy.transform.rotation = Quaternion.Euler(0, 0, 0);
+                enemy.armature.animation.FadeIn("FALL", -1, 1);
+            }
+            fall = true;
+            enemy.Move(5, -7);
+        }
+        if (enemy.transform.position.y <= enemy.groundPoint.transform.position.y)
+        {
+            if (!grounded)
+            {
+                enemy.Move(0, 0);
+            }
+            grounded = true;
+        }
+        if (grounded)
+        {
+            enemy.ChangeState(new GroundState());
         }
     }
 

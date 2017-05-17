@@ -8,11 +8,26 @@ class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject Enemies;
+    [SerializeField]
+    private GameObject SpawnedEnemies;
 
-    private Enemy[] arr;
 
-    private void Start()
+    public bool isEmpty()
     {
-        arr = Enemies.GetComponentsInChildren<Enemy>();
+        Enemy enemy = Enemies.GetComponentInChildren<Enemy>(true);
+        return (enemy==null);
+    }
+    public void SpawnEnemy()
+    {
+        Enemy enemy = Enemies.GetComponentInChildren<Enemy>(true);
+        enemy.gameObject.transform.parent.gameObject.SetActive(true);
+        Enemy[] arEnem = SpawnedEnemies.GetComponentsInChildren<Enemy>();
+        foreach(Enemy e in arEnem)
+        {
+            Physics2D.IgnoreCollision(enemy.GetComponent<Collider2D>(), e.GetComponent<Collider2D>());
+        }
+        enemy.gameObject.transform.parent.SetParent(SpawnedEnemies.transform);
+        enemy.enabled = true;
+       
     }
 }

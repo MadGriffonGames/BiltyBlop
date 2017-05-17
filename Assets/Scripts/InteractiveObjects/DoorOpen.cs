@@ -52,8 +52,8 @@ public class DoorOpen : MonoBehaviour
     }
     public void Activate()
     {
-        isMoved = true;
         direction = !direction;
+        isMoved = true;
     }
     void Update()
     {
@@ -77,8 +77,8 @@ public class DoorOpen : MonoBehaviour
                 {
                     new_z += speed / 200;
                     gear.transform.localRotation = new Quaternion(rot.x, rot.y, new_z, rot.w);
-                    door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, posB, step * 2);
-                    if (Vector3.Distance(door.transform.localPosition, posB) == 0)
+                    door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, startPos, step * 2);
+                    if (Vector3.Distance(door.transform.localPosition, startPos) == 0)
                     {
                         isMoved = false;
                     }

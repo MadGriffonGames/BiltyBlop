@@ -28,14 +28,38 @@ public class Dragon : Boss
     public GameObject fireball;
     [SerializeField]
     public Collider2D takeDamageCollider;
+    [SerializeField]
+    public GameObject enemyDamageCollider;
+    [SerializeField]
+    public GameObject levelEnd;
+    [SerializeField]
+    public GameObject rain;
+    [SerializeField]
+    public GameObject backgroundControl;
+    [SerializeField]
+    public GameObject column1;
+    [SerializeField]
+    public GameObject column2;
+    [SerializeField]
+    public GameObject bossUI;
+    [SerializeField]
+    public RectTransform healthbar;
+    [SerializeField]
+    public GameObject stun;
 
     float angle;
     bool roar = true;
+    int maxHealth;
+    float firstHBScaleX;
+    float firstHBPosX;
 
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
+        maxHealth = Health;
+        firstHBScaleX = healthbar.localScale.x;
+        firstHBPosX = healthbar.position.x;
         gameObject.SetActive(false);
     }
 
@@ -43,6 +67,9 @@ public class Dragon : Boss
     {
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
+        bossUI.SetActive(true);
+        column1.SetActive(true);
+        column2.SetActive(true);
         StartCoroutine(Roar());
     }
 
@@ -73,7 +100,7 @@ public class Dragon : Boss
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
-        //SetHealthbar();
+        SetHealthbar();
         yield return new WaitForSeconds(0.05f);
     }
 
@@ -107,5 +134,20 @@ public class Dragon : Boss
             GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(-1.8f, 0.9f, -5), Quaternion.Euler(0, 0, 180));
             tmp.GetComponent<FireBall>().Initialize(Vector2.left);
         }
+    }
+
+    public void SetHealthbar()
+    {
+        if (Health != 0)
+        {
+            healthbar.localScale = new Vector3(healthbar.localScale.x - firstHBScaleX * 1 / maxHealth,
+                                               healthbar.localScale.y,
+                                               healthbar.localScale.z);
+        }
+        else
+        {
+            bossUI.SetActive(false);
+        }
+        
     }
 }

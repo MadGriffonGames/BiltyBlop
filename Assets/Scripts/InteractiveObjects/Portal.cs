@@ -33,8 +33,9 @@ public class Portal : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            SoundManager.PlaySound("portal");
             mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, nextPortal.transform.position + new Vector3(0, 0, -20), 1f); 
-            Player.Instance.transform.position = nextPortal.transform.position + new Vector3(1 * Player.Instance.transform.localScale.x, -1.8f, 0);
+            Player.Instance.transform.position = nextPortal.transform.position + new Vector3(1 * Player.Instance.transform.localScale.x, -1.8f, -4);
         }
     }
 

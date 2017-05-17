@@ -11,7 +11,9 @@ public class EnterState : MonoBehaviour, IDragonState
 
     public void Enter(Dragon enemy)
     {
-        this.enemy = enemy; 
+        this.enemy = enemy;
+        enemy.rain.SetActive(true);
+        enemy.backgroundControl.SetActive(false); 
         enemy.PlayAnimation("FLY");
         enemy.armature.animation.timeScale = 2;
         enemy.speed = 1;

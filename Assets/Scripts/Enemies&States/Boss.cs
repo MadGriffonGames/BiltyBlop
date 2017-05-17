@@ -7,8 +7,7 @@ public class Boss : MonoBehaviour
 {
     public UnityArmatureComponent armature;
 
-    //[SerializeField]
-    //protected GameObject[] healthbar;
+    
 
     public bool IsDead
     {
@@ -49,7 +48,6 @@ public class Boss : MonoBehaviour
     {
         MyAniamtor = GetComponent<Animator>();
         armature = GetComponent<UnityArmatureComponent>();
-        //healthbar[Health - 1].SetActive(true);
     }
 
     public virtual IEnumerator TakeDamage()
@@ -64,19 +62,4 @@ public class Boss : MonoBehaviour
             StartCoroutine(TakeDamage());
         }
     }
-
-    //public void SetHealthbar()
-    //{
-    //    for (int i = 0; i < 5; i++)
-    //    {
-    //        if (i + 1 == health)
-    //        {
-    //            healthbar[i].SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            healthbar[i].SetActive(false);
-    //        }
-    //    }
-    //}
 }

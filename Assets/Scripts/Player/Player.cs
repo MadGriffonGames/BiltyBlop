@@ -21,7 +21,7 @@ public class Player : Character
     public Rigidbody2D MyRigidbody { get; set; }
     private SpriteRenderer[] spriteRenderer;
     [SerializeField]
-    GameObject target;
+    public GameObject target;
     [SerializeField]
     GameObject shadow;
     public bool bossFight = false;

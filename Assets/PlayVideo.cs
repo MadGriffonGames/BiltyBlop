@@ -7,10 +7,7 @@ using UnityEngine;
 
 public class PlayVideo : MonoBehaviour {
 
-
 	[SerializeField]
-	GameObject skipButton;
-
 	public MovieTexture movie;
 	private AudioSource audio;
 

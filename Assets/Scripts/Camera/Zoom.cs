@@ -38,6 +38,10 @@ public class Zoom : MonoBehaviour
             targetOrtho -=  zoomSpeed;
             targetOrtho = Mathf.Clamp(targetOrtho, minOrtho, maxOrtho);
             Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
+			Camera.main.transform.position = Vector3.Slerp (Camera.main.transform.position, Player.Instance.target.transform.position - new Vector3(0,0,15), 0.2f);
+			Camera.main.gameObject.GetComponent<FollowCamera> ().enabled = false;
         }
+
+
     }
 }

@@ -36,6 +36,7 @@ public class WeaknessState : IDragonState
         else
         {
             enemy.takeDamageCollider.enabled = false;
+            enemy.stun.SetActive(false);
             Player.Instance.collectables = 3;
             if (!dead)
             {

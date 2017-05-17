@@ -322,7 +322,11 @@ public class Player : Character
                 MyAniamtor.SetLayerWeight(2, 1);
                 MyAniamtor.SetTrigger("damage");
                 cef.ShowBlood(0.5f);
-                SoundManager.PlaySound("player_takehit1");
+                System.Random soundFlag = new System.Random();
+                if (soundFlag.Next(0, 2) == 0)
+                    SoundManager.PlaySound("player_damage1");
+                else
+                    SoundManager.PlaySound("player_damage2");
                 immortal = true;
                 StartCoroutine(IndicateImmortal());
                 yield return new WaitForSeconds(immortalTime);
@@ -332,7 +336,7 @@ public class Player : Character
             {
                 MyAniamtor.SetLayerWeight(1, 0);
                 MyAniamtor.SetLayerWeight(2, 1);
-                SoundManager.PlayMusic("player_death", true);
+                SoundManager.PlayMusic("kid death", false);
                 MyAniamtor.SetTrigger("death");
                 MyRigidbody.velocity = Vector2.zero;
                 UI.Instance.DeathUI.SetActive(true);

@@ -16,6 +16,7 @@ public class AlwaysMovingSpikes : MonoBehaviour
 	
     private IEnumerator OnBecameVisible()
     {
+        SoundManager.PlaySound("trap");
         yield return new WaitForSeconds(delay);
         MyAnimator.enabled = true;
     }

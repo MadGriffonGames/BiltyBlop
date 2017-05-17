@@ -36,6 +36,7 @@ public class DoorOpen : MonoBehaviour {
     {
         if(other.gameObject.CompareTag("Sword"))
         {
+            SoundManager.PlaySound("tumbler");
             isMoved = true;
             direction = true;
             if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;

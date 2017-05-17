@@ -46,7 +46,7 @@ public class SoundManager : MonoBehaviour
             MuteSound(true);
         else MuteSound(false);
 
-        musicVolume = 1;
+        musicVolume = 0.7f;
         soundVolume = 1;
 
         StartCoroutine(InitiateSteps("player_step")); // стринговое константа требует замены на переменную

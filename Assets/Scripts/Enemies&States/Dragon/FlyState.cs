@@ -14,6 +14,7 @@ public class FlyState : IDragonState
 
     public void Enter(Dragon enemy)
     {
+        SoundManager.PlaySound("breathing_fire1");
         this.enemy = enemy;
         enemy.PlayAnimation("FLY_ATTACK");
         enemy.armature.animation.timeScale = 2;
@@ -33,6 +34,7 @@ public class FlyState : IDragonState
         }
         if (enemy.transform.position.x <= enemy.behindPosLeft.position.x && !reachLeft)
         {
+            SoundManager.PlaySound("breathing_fire1");
             reachLeft = true;
             reachRight = false;
             enemy.ChangeDirection();

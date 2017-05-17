@@ -31,6 +31,7 @@ public class FallingSpikes : MonoBehaviour
 
     IEnumerator Fall()
     {
+        SoundManager.PlaySound("falling spikes");
         shake = true;
         yield return new WaitForSeconds(0.2f);
         shake = false;

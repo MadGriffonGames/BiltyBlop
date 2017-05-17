@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         else
             collectedCoins = PlayerPrefs.GetInt("Coins");
         lvlCollectedCoins = 0;
-        //SoundManager.PlayMusic ("kid_music", true);
+        SoundManager.PlayMusic ("kid_music", true);
 	}
 	
 	void Update ()

@@ -13,30 +13,30 @@ public class DeathUI : MonoBehaviour
     GameObject fade;
     [SerializeField]
     GameObject gameOverBar;
-	[SerializeField]
-	GameObject continueButton;
-	[SerializeField]
-	GameObject restartButton;
+    [SerializeField]
+    GameObject restartButton;
+    [SerializeField]
+    GameObject continueButton;
 
     GameObject mainCamera;
 
     public void Start ()
     {
         controls.SetActive(false);
+        restartButton.SetActive(false);
+        continueButton.SetActive(false);
         fade.SetActive(true);
         mainCamera = GameObject.FindWithTag("MainCamera");
-		continueButton.SetActive (false);
-		restartButton.SetActive (false);
+        StartCoroutine(ButtonDelay());
+        SoundManager.PlayMusic("kid death", false);
         //Advertisement.Show();
-	}
+    }
 
     private void Update()
     {
         if (this.isActiveAndEnabled)
         {
             gameOverBar.GetComponent<Animator>().SetBool("animate", true);
-			this.StartCoroutine (EnableButtons());
-
         }
         if (!fade.activeInHierarchy)
         {
@@ -62,10 +62,11 @@ public class DeathUI : MonoBehaviour
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;
+            Player.Instance.gameObject.layer = 0;
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");
-            SoundManager.PlayMusic("kid death", false);
+            SoundManager.PlayMusic("kid_music", false);
             Player.Instance.transform.position = new Vector3(Player.Instance.CheckpointPosition.x,
                                                         Player.Instance.CheckpointPosition.y,
                                                         Player.Instance.transform.position.z);
@@ -81,15 +82,15 @@ public class DeathUI : MonoBehaviour
         }     
     }
 
+    IEnumerator ButtonDelay()
+    {
+        yield return new WaitForSeconds(1);
+        restartButton.SetActive(true);
+        continueButton.SetActive(true);
+    }
+
     private void OnEnable()
     {
         Player.Instance.ResetBonusValues();
     }
-
-	private IEnumerator EnableButtons()
-	{
-		yield return new WaitForSeconds (2);
-		continueButton.SetActive (true);
-		restartButton.SetActive (true);
-	}
 }

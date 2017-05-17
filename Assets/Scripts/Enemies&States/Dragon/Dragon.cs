@@ -98,6 +98,7 @@ public class Dragon : Boss
 
     public override IEnumerator TakeDamage()
     {
+        SoundManager.PlaySound("dragon_damage");
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
         SetHealthbar();
@@ -117,6 +118,7 @@ public class Dragon : Boss
     IEnumerator Roar()
     {
         //DRAGON SOUND HERE
+        SoundManager.PlaySound("dragon_roar_long");
         yield return new WaitForSeconds(1);
         roar = false;
         ChangeState(new EnterState());
@@ -126,11 +128,13 @@ public class Dragon : Boss
     {
         if (this.gameObject.transform.localScale.x > 0)
         {
+            SoundManager.PlaySound("fireball_sfx");
             GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(-1.8f, 0.9f, -5), Quaternion.identity);
             tmp.GetComponent<FireBall>().Initialize(Vector2.right);
         }
         else
         {
+            SoundManager.PlaySound("fireball_sfx");
             GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(-1.8f, 0.9f, -5), Quaternion.Euler(0, 0, 180));
             tmp.GetComponent<FireBall>().Initialize(Vector2.left);
         }

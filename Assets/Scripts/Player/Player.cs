@@ -342,7 +342,6 @@ public class Player : Character
             {
                 MyAniamtor.SetLayerWeight(1, 0);
                 MyAniamtor.SetLayerWeight(2, 1);
-                SoundManager.PlayMusic("kid death", false);
                 MyAniamtor.SetTrigger("death");
                 MyRigidbody.velocity = Vector2.zero;
                 UI.Instance.DeathUI.SetActive(true);
@@ -361,11 +360,14 @@ public class Player : Character
 		MyAniamtor.SetTrigger("jump");
 	}
 
-    public void PlayRandomSound(string[] sounds)
+    public void PlayRandomSound(string sound1, string sound2)
     {
         System.Random soundCount = new System.Random();
-        int choice = soundCount.Next(0, sounds.Length);
-        SoundManager.PlaySound(sounds[choice]);
+        if (soundCount.Next(0, 2) == 0)
+            SoundManager.PlaySound(sound1);
+        //int choice = soundCount.Next(0, sounds.Length);
+        else
+            SoundManager.PlaySound(sound2);
     }
 
     public void ButtonAttack()

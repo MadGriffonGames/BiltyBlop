@@ -28,8 +28,9 @@ public class DeathUI : MonoBehaviour
         fade.SetActive(true);
         mainCamera = GameObject.FindWithTag("MainCamera");
         StartCoroutine(ButtonDelay());
+        SoundManager.PlayMusic("kid death", false);
         //Advertisement.Show();
-	}
+    }
 
     private void Update()
     {
@@ -61,10 +62,11 @@ public class DeathUI : MonoBehaviour
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;
+            Player.Instance.gameObject.layer = 0;
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");
-            SoundManager.PlayMusic("kid death", false);
+            SoundManager.PlayMusic("kid_music", false);
             Player.Instance.transform.position = new Vector3(Player.Instance.CheckpointPosition.x,
                                                         Player.Instance.CheckpointPosition.y,
                                                         Player.Instance.transform.position.z);

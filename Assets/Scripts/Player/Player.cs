@@ -24,6 +24,7 @@ public class Player : Character
     GameObject target;
     [SerializeField]
     GameObject shadow;
+    public bool bossFight = false;
 
     /*
      * Game Managment vars
@@ -40,6 +41,8 @@ public class Player : Character
      */
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    public GameObject secretHalo;
     public bool Jump { get; set; }
     private float mobileInput = 0;
     public bool GotKey { get; set; }
@@ -126,12 +129,12 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            HandleMovement(horizontal);
-            Flip(horizontal);
+            //float horizontal = Input.GetAxis("Horizontal");
+            //HandleMovement(horizontal);
+            //Flip(horizontal);
             OnGround = IsGrounded();
-            //HandleMovement(mobileInput);
-            //Flip(mobileInput);
+            HandleMovement(mobileInput);
+            Flip(mobileInput);
             HandleLayers();
         }
     }

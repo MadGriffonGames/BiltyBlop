@@ -25,14 +25,14 @@ public class MovingPlatform : MonoBehaviour
         MyRigidbody = GetComponent<Rigidbody2D>();
 	}
 
-	void Update ()
+	void FixedUpdate ()
     {
         Move();
 	}
 
     private void Move()
     {
-        MyRigidbody.velocity = new Vector2(2,0);
+        platformTransform.localPosition = Vector3.MoveTowards(platformTransform.localPosition, nextPos, speed*Time.deltaTime);
         if (Vector3.Distance(platformTransform.localPosition, nextPos) <= 0)
         {
             ChangePoint();

@@ -42,7 +42,8 @@ public class MakeFX : MonoBehaviour
     GameObject jumpBonus;
 
     [SerializeField]
-    GameObject SwordEdge;
+    SwordEdge swordEdge;
+
 
     public void MakeDust()
     {
@@ -115,15 +116,10 @@ public class MakeFX : MonoBehaviour
         ps.Play();
     }
 
-    public void startSwordFX()
+    public void makeSwordFX()
     {
-        SwordEdge.GetComponent<TrailRenderer>().enabled = true;
-    }
-    public void stopSwordFX()
-    {
+        //swordEdge.StartDraw(0.06f, 1f);
 
-        SwordEdge.GetComponent<TrailRenderer>().enabled = false;
     }
-
 
 }

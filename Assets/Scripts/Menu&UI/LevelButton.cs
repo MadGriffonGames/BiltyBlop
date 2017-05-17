@@ -9,6 +9,9 @@ public class LevelButton : MonoBehaviour
     public int unlocked;
     [SerializeField]
     public GameObject[] stars;
+    [SerializeField]
+    GameObject Lock;
+    RectTransform MyRectTransfrom;
 
     private void Start()
     {
@@ -16,6 +19,12 @@ public class LevelButton : MonoBehaviour
         {
             ShowStars(PlayerPrefs.GetInt("Level" + levelText.text + "_collects"));
         }
+        if (unlocked == 0)
+        {
+            Lock.SetActive(true);
+        }
+        else
+            Lock.SetActive(false);
     }
 
     public void ShowStars(int value)
@@ -32,5 +41,10 @@ public class LevelButton : MonoBehaviour
         {
             stars[i].SetActive(false);
         }
+    }
+
+    private void OnRectTransformDimensionsChange()
+    {
+        
     }
 }

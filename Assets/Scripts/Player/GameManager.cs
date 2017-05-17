@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Coins"))
         {
             collectedCoins = 500;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
+            PlayerPrefs.SetInt("Coins", collectedCoins);
         }
         else
             collectedCoins = PlayerPrefs.GetInt("Coins");
@@ -38,6 +39,6 @@ public class GameManager : MonoBehaviour
 	
 	void Update ()
 	{
-            coinTxt.text = ("x " + collectedCoins);
-	}
+        coinTxt.text = ("x " + collectedCoins);
+    }
 }

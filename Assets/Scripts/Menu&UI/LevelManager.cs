@@ -26,10 +26,13 @@ public class LevelManager : MonoBehaviour
     public GameObject levelButton;
     public Transform spacer;
     public LevelButton[] levelButtonsArray;
+    Vector2 screenSize;
 
 	void Start ()
     {
         groupIndex = 0;
+        screenSize.x = 1920;
+        screenSize.y = 1080;
         SetButtons();
         levelButtonsArray = new LevelButton[levelList.Count];
         levelButtonsArray = FindObjectsOfType<LevelButton>();
@@ -52,7 +55,8 @@ public class LevelManager : MonoBehaviour
             button.unlocked = level.unlocked;
             button.GetComponent<Button>().interactable = level.isInteractable;
             button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
-            newButton.transform.SetParent(spacer);
+            button.GetComponent<Button>().gameObject.transform.localScale = new Vector3(Screen.width / screenSize.x, Screen.height / screenSize.y, 1);
+            newButton.transform.SetParent(spacer, true);
         }
         SaveAll();
     }
@@ -159,4 +163,8 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void Back()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

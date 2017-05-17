@@ -26,6 +26,7 @@ public class Checkpoint : InteractiveObject
                 light.SetActive(true);
                 SoundManager.PlaySound("checkpoint");
                 Player.Instance.CheckpointPosition = this.gameObject.transform.position;
+                activated = true;
             }
         }
     }

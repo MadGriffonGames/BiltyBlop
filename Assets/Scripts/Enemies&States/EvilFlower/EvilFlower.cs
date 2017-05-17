@@ -76,12 +76,14 @@ public class EvilFlower : MeleeEnemy
 	{
 		armature.animation.timeScale = 1.5f;
 		armature.animation.Play ("ATTACK");
+        SoundManager.PlaySound("bite");
 
-	}
+    }
 
     public void AnimPreparation()
     {
         armature.animation.timeScale = 2f;
+        
         armature.animation.Play("PREPARATION");
     }
 }

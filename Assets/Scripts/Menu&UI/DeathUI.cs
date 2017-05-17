@@ -13,14 +13,21 @@ public class DeathUI : MonoBehaviour
     GameObject fade;
     [SerializeField]
     GameObject gameOverBar;
+    [SerializeField]
+    GameObject restartButton;
+    [SerializeField]
+    GameObject continueButton;
 
     GameObject mainCamera;
 
     public void Start ()
     {
         controls.SetActive(false);
+        restartButton.SetActive(false);
+        continueButton.SetActive(false);
         fade.SetActive(true);
         mainCamera = GameObject.FindWithTag("MainCamera");
+        StartCoroutine(ButtonDelay());
         //Advertisement.Show();
 	}
 
@@ -71,6 +78,13 @@ public class DeathUI : MonoBehaviour
             fade.SetActive(false);
             this.gameObject.SetActive(false);
         }     
+    }
+
+    IEnumerator ButtonDelay()
+    {
+        yield return new WaitForSeconds(1);
+        restartButton.SetActive(true);
+        continueButton.SetActive(true);
     }
 
     private void OnEnable()

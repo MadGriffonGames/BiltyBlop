@@ -13,6 +13,7 @@ public class LightPillar : InteractiveObject
 
     public void FireOn()
     {
+        
         fire1.gameObject.SetActive(true);
         fire2.gameObject.SetActive(true);
     }

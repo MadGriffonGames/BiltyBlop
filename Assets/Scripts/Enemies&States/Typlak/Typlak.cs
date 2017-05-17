@@ -57,6 +57,7 @@ public class Typlak : MovingMeleeEnemy
             SetHealthbar();
             if (IsDead)
             {
+                SoundManager.PlaySound("enemyher loud");
                 Player.Instance.monstersKilled++;
                 Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 Destroy(gameObject);
@@ -76,6 +77,11 @@ public class Typlak : MovingMeleeEnemy
     {
         armature.animation.timeScale = 1f;
         armature.animation.Play("idle");
+    }
+
+    public void PlaySound(string sound)
+    {
+        SoundManager.PlaySound(sound);
     }
 
     public void AnimPreattack()

@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
     Button nextButton;
     [SerializeField]
     Button backButton;
+	[SerializeField]
+	GameObject actsSpacer;
     public int groupCount;
     private int groupIndex;
     public List<Level> levelList;
@@ -165,6 +167,14 @@ public class LevelManager : MonoBehaviour
 
     public void Back()
     {
-        SceneManager.LoadScene("MainMenu");
+		if (spacer.gameObject.activeInHierarchy) 
+		{
+			spacer.gameObject.SetActive (false);
+			actsSpacer.SetActive (true);
+		} else 
+		{
+			SceneManager.LoadScene ("MainMenu");
+		}
+			
     }
 }

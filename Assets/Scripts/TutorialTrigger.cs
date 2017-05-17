@@ -27,6 +27,7 @@ public class TutorialTrigger : MonoBehaviour
         {
             active = false;
             Time.timeScale = 0;
+            SoundManager.MakeSteps(false);
             if (arrow != null)
             {
                 arrow.SetActive(true);

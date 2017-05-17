@@ -133,6 +133,12 @@ public class Player : Character
             //HandleMovement(horizontal);
             //Flip(horizontal);
             OnGround = IsGrounded();
+            if (!OnGround || (Mathf.Abs(MyRigidbody.velocity.x) <= 1))
+                SoundManager.MakeSteps(false);
+            else if (((MyRigidbody.velocity.x >= 1) || (MyRigidbody.velocity.x <= -1)) && (OnGround))
+                SoundManager.MakeSteps(true);
+                
+
             HandleMovement(mobileInput);
             Flip(mobileInput);
             HandleLayers();

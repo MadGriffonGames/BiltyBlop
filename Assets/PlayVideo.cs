@@ -7,8 +7,10 @@ using UnityEngine;
 
 public class PlayVideo : MonoBehaviour {
 
+	[SerializeField]
 	public MovieTexture movie;
 	private AudioSource audio;
+
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +25,16 @@ public class PlayVideo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!movie.isPlaying) 
+		{
+			this.gameObject.SetActive (false);
+		}
 		
+	}
+
+	public void StopPlaying()
+	{
+		movie.Stop ();
+		Destroy (this.gameObject);
 	}
 }

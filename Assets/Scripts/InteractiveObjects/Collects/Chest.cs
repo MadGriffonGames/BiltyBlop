@@ -22,6 +22,7 @@ public class Chest : InteractiveObject
         if (!isEmpty && other.transform.CompareTag("Sword"))
         {
 			MyAnimator.SetTrigger ("open");
+            SoundManager.PlaySound("chest open");
 			foreach (GameObject coin in coins)
 			{
 				coin.SetActive(true);				

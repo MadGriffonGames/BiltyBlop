@@ -23,9 +23,11 @@ public class WeaknessState : IDragonState
             if (enemy.armature.animation.lastAnimationName == "WEAKNESS_START" && enemy.armature.animation.isCompleted)
             {
                 enemy.armature.animation.FadeIn("WEAKNESS_IDLE", -1, 1);
+                enemy.stun.SetActive(true);
             }
             if (enemy.armature.animation.lastAnimationName == "WEAKNESS_IDLE" && enemy.armature.animation.isCompleted)
             {
+                enemy.stun.SetActive(false);
                 enemy.armature.animation.FadeIn("WEAKNESS_END", -1, 1);
                 enemy.takeDamageCollider.enabled = false;
                 enemy.ChangeState(new RiseState());
@@ -33,6 +35,8 @@ public class WeaknessState : IDragonState
         }
         else
         {
+            enemy.takeDamageCollider.enabled = false;
+            Player.Instance.collectables = 3;
             if (!dead)
             {
                 enemy.armature.animation.timeScale = 0.9f;
@@ -43,6 +47,7 @@ public class WeaknessState : IDragonState
             if (enemy.armature.animation.lastAnimationName == "DEATH" && enemy.armature.animation.isCompleted)
             {
                 enemy.armature.animation.FadeIn("DEATH_IDLE", -1, -1);
+                enemy.levelEnd.SetActive(true);
             }
         }
     }

@@ -19,7 +19,7 @@ public class SoundManager : MonoBehaviour
 	public string soundFolder = "Sounds";
 	public string musicFolder = "Music";
 
-	public float fadeSpeed = 3; // скорость плавного перехода между треками музыки
+	public float fadeSpeed = 50; // скорость плавного перехода между треками музыки
     public float pitch = 1;
 
 	public AudioMixerGroup musicGroup;

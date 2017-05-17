@@ -361,7 +361,14 @@ public class Player : Character
 		MyAniamtor.SetTrigger("jump");
 	}
 
-	public void ButtonAttack()
+    public void PlayRandomSound(string[] sounds)
+    {
+        System.Random soundCount = new System.Random();
+        int choice = soundCount.Next(0, sounds.Length);
+        SoundManager.PlaySound(sounds[choice]);
+    }
+
+    public void ButtonAttack()
 	{
 		 MyAniamtor.SetTrigger("attack");
 	}

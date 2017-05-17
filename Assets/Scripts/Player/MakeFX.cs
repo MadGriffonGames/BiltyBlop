@@ -116,6 +116,8 @@ public class MakeFX : MonoBehaviour
         ps.Play();
     }
 
+    
+
     public void makeSwordFX()
     {
         //swordEdge.StartDraw(0.06f, 1f);

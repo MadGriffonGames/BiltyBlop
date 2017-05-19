@@ -33,6 +33,10 @@ public class LevelManager : MonoBehaviour
 	void Start ()
     {
         groupIndex = 0;
+		for (int i = 1; i < 10; i++) 
+		{
+			PlayerPrefs.SetInt ("Level" + i, 1);
+		}
         screenSize.x = 1920;
         screenSize.y = 1080;
         SetButtons();

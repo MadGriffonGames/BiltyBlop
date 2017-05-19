@@ -131,7 +131,7 @@ public class Player : Character
         {
             //float horizontal = Input.GetAxis("Horizontal");
             //HandleMovement(horizontal);
-            //Flip(horizontal);
+            //sFlip(horizontal);
             OnGround = IsGrounded();
             if (!OnGround || (Mathf.Abs(MyRigidbody.velocity.x) <= 1))
                 SoundManager.MakeSteps(false);

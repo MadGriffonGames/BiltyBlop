@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-
+    [SerializeField]
+    public GameObject actCanvas;
     
     public string sceneName { get; set; }
 
@@ -14,9 +15,9 @@ public class MainMenu : MonoBehaviour
         SoundManager.PlayMusic("main menu", true);
     }
 
-    public void ChangeScene(string sceneName)
+    public void ToActSelect(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        actCanvas.SetActive(true);
     }
 
     

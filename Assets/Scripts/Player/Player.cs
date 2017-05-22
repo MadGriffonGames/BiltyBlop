@@ -53,8 +53,6 @@ public class Player : Character
     {
         get { return health <= 0; }
     }
-    HingeJoint2D joint;
-    public bool onRope = false;
 
     /*
      * Ground Check vars
@@ -90,7 +88,6 @@ public class Player : Character
 		spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
         StartPosition = transform.position;
         MyRigidbody = GetComponent<Rigidbody2D> ();
-        joint = GetComponent<HingeJoint2D>();
         GotKey = false;
         CheckpointPosition = StartPosition;
         startCoinCount = GameManager.CollectedCoins;
@@ -109,10 +106,6 @@ public class Player : Character
                 transform.position = StartPosition;
             }
 			HandleInput();
-        }
-        if (joint.enabled && onRope)
-        {
-            transform.rotation = joint.connectedBody.transform.rotation;
         }
         if (OnGround && !shadow.activeInHierarchy)
         {
@@ -167,28 +160,8 @@ public class Player : Character
             MyRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
             MyRigidbody.velocity = new Vector2(0,0);
         }
-        if (onRope && joint.enabled)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y, -4);
-                target.transform.localPosition = new Vector3(0, 3.41f, 0);
-                joint.enabled = false;
-                StartCoroutine(RopeReset());
-                MyRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
-                this.gameObject.transform.SetParent(null);
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
-        }
         MyAniamtor.SetFloat ("speed", Mathf.Abs (horizontal));
 	}
-
-    IEnumerator RopeReset()
-    {
-        yield return new WaitForSeconds(0.2f);
-        onRope = false;
-        MyAniamtor.SetBool("onRope", false);
-    }
 
 	private void HandleInput()
 	{
@@ -222,18 +195,6 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-        if (other.CompareTag("Rope") && !onRope)
-        {
-            onRope = true;
-            MyAniamtor.SetBool("onRope",true);
-            Jump = false;
-            target.transform.position = other.gameObject.transform.position;
-            this.gameObject.transform.SetParent(other.gameObject.transform);
-            joint.enabled = true;
-            joint.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
-            joint.anchor = new Vector2(0, 0);
-            transform.localPosition = new Vector3(0, 0, this.gameObject.transform.position.z);
-        }
         if (other.CompareTag("DeathTrigger"))
         {
             health -= health;

@@ -6,24 +6,16 @@ using UnityEngine;
 public class LoadingManager : MonoBehaviour
 {
     [SerializeField]
-    public GameObject loadingCompleteTxt, loadingTxt;
+    public GameObject loadingUI;
     private AsyncOperation async;
 
     IEnumerator Start()
     {
         async = SceneManager.LoadSceneAsync(GameManager.levelName);
-        loadingTxt.SetActive(true);
-        loadingCompleteTxt.SetActive(false); 
+        
         yield return true;
-        async.allowSceneActivation = false;
-    }
+        async.allowSceneActivation = true;
+        
 
-    void Update()
-    {
-        if (async.progress == 0.9f)
-        {
-            loadingTxt.SetActive(false);
-            loadingCompleteTxt.SetActive(true);
-        }
     }
 }

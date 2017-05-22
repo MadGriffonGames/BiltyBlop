@@ -62,7 +62,7 @@ public class FollowCamera : MonoBehaviour
         CalculateOffsets();
 
         // Camera position with Target's position.z
-        Vector3 posNoZ = transform.position; 
+        Vector3 posNoZ = transform.position;
         posNoZ.z = target.transform.position.z;
 
         Vector3 targetDirection = (target.transform.position - posNoZ);

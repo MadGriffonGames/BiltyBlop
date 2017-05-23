@@ -122,19 +122,23 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
-            //float horizontal = Input.GetAxis("Horizontal");
-            //HandleMovement(horizontal);
-            //Flip(horizontal);
+#if UNITY_EDITOR
+            float horizontal = Input.GetAxis("Horizontal");
+            HandleMovement(horizontal);
+            Flip(horizontal);
+#elif UNITY_ANDROID
+            HandleMovement(mobileInput);
+            Flip(mobileInput);
+#elif UNITY_IOS
+            HandleMovement(mobileInput);
+            Flip(mobileInput);
+#endif
+            HandleLayers();
             OnGround = IsGrounded();
             if (!OnGround || (Mathf.Abs(MyRigidbody.velocity.x) <= 1))
                 SoundManager.MakeSteps(false);
             else if (((MyRigidbody.velocity.x >= 1) || (MyRigidbody.velocity.x <= -1)) && (OnGround))
                 SoundManager.MakeSteps(true);
-                
-
-            HandleMovement(mobileInput);
-            Flip(mobileInput);
-            HandleLayers();
         }
     }
 

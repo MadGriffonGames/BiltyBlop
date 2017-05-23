@@ -11,6 +11,8 @@ public class TutorialTrigger : MonoBehaviour
     int fontSize;
     [SerializeField]
     GameObject arrow;
+    [SerializeField]
+    bool reset;
 
     bool active = true;
     bool hide = false;
@@ -52,7 +54,10 @@ public class TutorialTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            active = false;
+            if (!reset)
+            {
+                active = false;
+            }
             if (arrow != null)
             {
                 arrow.SetActive(false);

@@ -21,6 +21,10 @@ public class CollectsUI : MonoBehaviour
 
     public void ShowStar(int value)
     {
+        if (value > 3)
+        {
+            value = 3;
+        }
         stars[value-1].SetActive(true);
     }
 }

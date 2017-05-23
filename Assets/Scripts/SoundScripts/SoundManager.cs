@@ -18,8 +18,10 @@ public class SoundManager : MonoBehaviour
     public string mainFolder = "GameSound";
 	public string soundFolder = "Sounds";
 	public string musicFolder = "Music";
+    bool timerOn;
+    static float timer;
 
-	public float fadeSpeed = 50; // скорость плавного перехода между треками музыки
+    public float fadeSpeed = 50; // скорость плавного перехода между треками музыки
     public float pitch = 1;
 
 	public AudioMixerGroup musicGroup;
@@ -56,6 +58,15 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         Fader();
+        if (timerOn)
+        {
+            timer += Time.deltaTime;
+        }
+        if (timer > 1)
+        {
+            timer = 0;
+            timerOn = false;
+        }
     }
 
     public static void SetPitch(float pitch)
@@ -94,19 +105,35 @@ public class SoundManager : MonoBehaviour
 	{
 		if(string.IsNullOrEmpty(soundName))
 		{
-			Debug.Log(Instance + " :: Имя файла не указанно.");
+			Debug.Log(Instance + " :: Имя файла не указано.");
 			return;
 		}
 
 		StartCoroutine(GetSound(soundName));
 	}
 
-	public static void PlaySound(string name)
+    void PlaySoundInternalPitched(string soundName, float pitch)
+    {
+        if (string.IsNullOrEmpty(soundName))
+        {
+            Debug.Log(Instance + " :: Имя файла не указано.");
+            return;
+        }
+
+        StartCoroutine(GetSoundPitched(soundName, pitch));
+    }
+
+    public static void PlaySound(string name)
 	{
 		Instance.PlaySoundInternal(name);
 	}
 
-	void PlayMusicInternal(string musicName, bool loop)
+    public static void PlayPitchedSound(string name)
+    {
+        Instance.PlaySoundInternalPitched(name, timer);
+    }
+
+    void PlayMusicInternal(string musicName, bool loop)
 	{
 		if(string.IsNullOrEmpty(musicName))
 		{
@@ -197,10 +224,46 @@ public class SoundManager : MonoBehaviour
 		au.volume = soundVolume;
 		au.clip = clip;
 		au.Play();
+        //Debug.Log(au.volume + " " + soundVolume);
 		Destroy(obj, clip.length);
 	}
 
-	ResourceRequest LoadAsync(string name)
+    IEnumerator GetSoundPitched(string soundName, float pitch)
+    {
+        ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
+
+        while (!request.isDone)
+        {
+            yield return null;
+        }
+
+        AudioClip clip = (AudioClip)request.asset;
+
+        if (clip == null)
+        {
+            Debug.Log(Instance + " :: Файл не найден: " + soundName);
+            yield return false;
+        }
+
+        GameObject obj = new GameObject("Sound: " + soundName);
+        AudioSource au = obj.AddComponent<AudioSource>();
+        obj.transform.parent = transform;
+        au.outputAudioMixerGroup = soundGroup;
+        au.playOnAwake = false;
+        au.loop = false;
+        Debug.Log(pitch);
+        au.pitch = currentPitch + pitch/4;
+        Debug.Log(au.pitch);
+        au.mute = muteSound;
+        au.volume = soundVolume;
+        au.clip = clip;
+        au.Play();
+        timerOn = true;
+        //Debug.Log(au.volume + " " + soundVolume);
+        Destroy(obj, clip.length);
+    }
+
+    ResourceRequest LoadAsync(string name)
 	{
 		string path = mainFolder + "/" + name;
 		return Resources.LoadAsync<AudioClip>(path);

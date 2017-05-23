@@ -21,7 +21,7 @@ public class Booster : InteractiveObject
     {
         if (other.transform.CompareTag("Player"))
         {
-			SoundManager.PlaySound ("mushroom_boing");
+			SoundManager.PlaySound ("mushroom jump 2");
             MyAnimator.SetBool("Boost", true);
             Player.Instance.MyRigidbody.velocity = new Vector2(Player.Instance.MyRigidbody.velocity.x, 0);
             Player.Instance.MyRigidbody.AddForce(new Vector2(0, force * Player.Instance.timeScalerJump));

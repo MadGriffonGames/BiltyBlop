@@ -8,6 +8,8 @@ public class Coin : InteractiveObject
     SpriteRenderer mainCoin;
     SpriteRenderer MySR;
     bool collected = false;
+    float timer = 0;
+
 
     public override void Start ()
     {
@@ -27,6 +29,7 @@ public class Coin : InteractiveObject
         {
             MySR.sprite = mainCoin.sprite;
         }
+        
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -38,7 +41,8 @@ public class Coin : InteractiveObject
             MyAnimator.SetTrigger("collected");
             GameManager.CollectedCoins++;
             GameManager.lvlCollectedCoins++;
-            SoundManager.PlaySound ("coin_collect");
+            //timerOn = true;
+            SoundManager.PlayPitchedSound("coin_collect2");
         }   
     }
 

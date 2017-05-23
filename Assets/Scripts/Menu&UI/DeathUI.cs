@@ -22,6 +22,7 @@ public class DeathUI : MonoBehaviour
 
     public void Start ()
     {
+        SoundManager.PlaySound("kid death");
         controls.SetActive(false);
         restartButton.SetActive(false);
         continueButton.SetActive(false);
@@ -64,7 +65,6 @@ public class DeathUI : MonoBehaviour
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");
-            SoundManager.PlayMusic("kid death", false);
             Player.Instance.transform.position = new Vector3(Player.Instance.CheckpointPosition.x,
                                                         Player.Instance.CheckpointPosition.y,
                                                         Player.Instance.transform.position.z);

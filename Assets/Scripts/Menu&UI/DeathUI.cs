@@ -62,6 +62,7 @@ public class DeathUI : MonoBehaviour
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;
+            Player.Instance.gameObject.layer = 0;
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");

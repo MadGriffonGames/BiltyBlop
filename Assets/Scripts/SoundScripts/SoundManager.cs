@@ -251,15 +251,12 @@ public class SoundManager : MonoBehaviour
         au.outputAudioMixerGroup = soundGroup;
         au.playOnAwake = false;
         au.loop = false;
-        Debug.Log(pitch);
         au.pitch = currentPitch + pitch/4;
-        Debug.Log(au.pitch);
         au.mute = muteSound;
         au.volume = soundVolume;
         au.clip = clip;
         au.Play();
         timerOn = true;
-        //Debug.Log(au.volume + " " + soundVolume);
         Destroy(obj, clip.length);
     }
 

@@ -10,13 +10,14 @@ public class Torch : MonoBehaviour
     GameObject light;
     [SerializeField]
     GameObject flame;
+    [SerializeField]
+    GameObject torchParticle;
 
-    Rigidbody2D MyRigidbody;
+    BoxCollider2D MyBoxCollider;
 
 	void Start ()
     {
         MyAnimator = GetComponentsInChildren<Animator>();
-        MyRigidbody = GetComponent<Rigidbody2D>();
         MyAnimator[0].enabled = false;
         MyAnimator[1].enabled = false;
     }
@@ -39,8 +40,7 @@ public class Torch : MonoBehaviour
         {
             light.SetActive(false);
             flame.SetActive(false);
-            MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
-            GetComponent<CircleCollider2D>().isTrigger = false;
+            Instantiate(torchParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.Euler(-90,0,0));
         }
     }
 }

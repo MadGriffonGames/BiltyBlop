@@ -8,6 +8,8 @@ public class Checkpoint : InteractiveObject
     GameObject lightPillar;
     [SerializeField]
     GameObject light;
+    [SerializeField]
+    GameObject checkpointText;
 
     bool activated = false;
 
@@ -24,6 +26,7 @@ public class Checkpoint : InteractiveObject
             {
                 lightPillar.SetActive(true);
                 light.SetActive(true);
+                checkpointText.SetActive(true);
                 SoundManager.PlaySound("checkpoint");
                 Player.Instance.CheckpointPosition = this.gameObject.transform.position;
                 activated = true;

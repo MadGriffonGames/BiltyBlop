@@ -37,9 +37,7 @@ public class DoorOpen : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Sword"))
-        {
-<<<<<<< HEAD
-            
+        {            
             if (!isBlocked)
             {
                 isMoved = true;
@@ -48,15 +46,13 @@ public class DoorOpen : MonoBehaviour
                 if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;
                 else gameObject.GetComponent<SpriteRenderer>().sprite = leverLeft;
             }
-=======
+
             SoundManager.PlaySound("tumbler");
             isMoved = true;
             direction = true;
             if (direction) gameObject.GetComponent<SpriteRenderer>().sprite = leverRight;
             else gameObject.GetComponent<SpriteRenderer>().sprite = leverLeft;
->>>>>>> origin/DevA
         }
-
     }
     public void Activate()
     {

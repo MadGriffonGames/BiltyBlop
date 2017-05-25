@@ -43,7 +43,7 @@ public class Torch : MonoBehaviour
         {
             light.SetActive(false);
             flame.SetActive(false);
-            Instantiate(torchParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.Euler(-90,0,0));
+            Instantiate(torchParticle, light.transform.position + new Vector3(0, -0.2f, -1f), Quaternion.Euler(-90,0,0));
             isShining = false;
         }
     }

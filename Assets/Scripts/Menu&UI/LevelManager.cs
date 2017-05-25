@@ -43,7 +43,6 @@ public class LevelManager : MonoBehaviour
         SetButtons();
         levelButtonsArray = new LevelButton[levelList.Count];
         levelButtonsArray = FindObjectsOfType<LevelButton>();
-        ButtonsUpdate();
     }
 
     void SetButtons()
@@ -66,86 +65,6 @@ public class LevelManager : MonoBehaviour
             newButton.transform.SetParent(spacer, true);
         }
         SaveAll();
-    }
-
-
-    public void NextButton()
-    {
-        if (groupIndex < groupCount)
-        {
-            groupIndex++;
-            int lvlNum = 1;
-            int i = levelButtonsArray.Length-1;//cuz lvls goes in revert order
-            foreach (var level in levelList)
-            {
-                LevelButton button = levelButtonsArray[i--];//cuz lvls goes in revert order
-                button.levelText.text = (lvlNum++ + levelList.Count * groupIndex).ToString();
-                if (PlayerPrefs.GetInt("Level" + button.levelText.text) == 1)
-                {
-                    level.unlocked = 1;
-                    level.isInteractable = true;
-                }
-                else
-                {
-                    level.unlocked = 0;
-                    level.isInteractable = false;
-                }
-                button.unlocked = level.unlocked;
-                button.GetComponent<Button>().interactable = level.isInteractable;
-                button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
-                if (PlayerPrefs.HasKey("Level" + button.levelText.text + "_collects"))
-                {
-                    button.ShowStars(PlayerPrefs.GetInt("Level" + button.levelText.text + "_collects"));
-                }
-                else button.HideStars();
-            }
-            ButtonsUpdate();
-        }
-    }
-
-    public void BackButton()
-    {
-        if (groupIndex != 0)
-        {
-            groupIndex--;
-            int lvlNum = 1;
-            int i = levelButtonsArray.Length - 1;//cuz lvls goes in revert order
-            foreach (var level in levelList)
-            {
-                LevelButton button = levelButtonsArray[i--];//cuz lvls goes in revert order
-                button.levelText.text = (lvlNum++ + levelList.Count * groupIndex).ToString();
-                //2nd statement needs bad, but i dont know why, without it, doesn't works
-                if (PlayerPrefs.GetInt("Level" + button.levelText.text) == 1 || button.levelText.text == "1")
-                {
-                    level.unlocked = 1;
-                    level.isInteractable = true;
-                }
-                else
-                {
-                    level.unlocked = 0;
-                    level.isInteractable = false;
-                }
-                button.unlocked = level.unlocked;
-                button.GetComponent<Button>().interactable = level.isInteractable;
-                button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
-                if (PlayerPrefs.HasKey("Level" + button.levelText.text + "_collects"))
-                {
-                    button.ShowStars(PlayerPrefs.GetInt("Level" + button.levelText.text + "_collects"));
-                }
-                else button.HideStars();
-            }
-            ButtonsUpdate();
-        }
-    }
-
-    void ButtonsUpdate()
-    {
-        if (groupIndex == 0)
-            backButton.interactable = false;
-        else backButton.interactable = true;
-        if (groupIndex == groupCount)
-            nextButton.interactable = false;
-        else nextButton.interactable = true;
     }
 
     void LoadLevel(string levelName)

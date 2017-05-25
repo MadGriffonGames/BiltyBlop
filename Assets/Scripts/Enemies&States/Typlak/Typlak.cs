@@ -15,7 +15,8 @@ public class Typlak : MovingMeleeEnemy
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         attack = false;
     }
 

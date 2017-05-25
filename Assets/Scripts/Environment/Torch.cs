@@ -13,6 +13,8 @@ public class Torch : MonoBehaviour
     [SerializeField]
     GameObject torchParticle;
 
+    bool isShining;
+
     BoxCollider2D MyBoxCollider;
 
 	void Start ()
@@ -20,6 +22,7 @@ public class Torch : MonoBehaviour
         MyAnimator = GetComponentsInChildren<Animator>();
         MyAnimator[0].enabled = false;
         MyAnimator[1].enabled = false;
+        isShining = true;
     }
 
     private void OnBecameVisible()
@@ -36,11 +39,12 @@ public class Torch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Sword"))
+        if (collision.CompareTag("Sword") && isShining)
         {
             light.SetActive(false);
             flame.SetActive(false);
-            Instantiate(torchParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.Euler(-90,0,0));
+            Instantiate(torchParticle, light.transform.position + new Vector3(0, -0.2f, -1f), Quaternion.Euler(-90,0,0));
+            isShining = false;
         }
     }
 }

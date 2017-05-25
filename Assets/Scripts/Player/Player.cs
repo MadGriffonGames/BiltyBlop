@@ -45,6 +45,7 @@ public class Player : Character
     public GameObject secretHalo;
     public bool Jump { get; set; }
     private float mobileInput = 0;
+    private float playerAxis = 0;
     public bool GotKey { get; set; }
     public bool immortal = false;
     public float immortalTime;
@@ -122,6 +123,10 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
+            if (Mathf.Abs(mobileInput + playerAxis / 10) <= 1 && playerAxis != 0)
+                mobileInput += playerAxis / 10;
+            else mobileInput = playerAxis;
+
 #if UNITY_EDITOR
             float horizontal = Input.GetAxis("Horizontal");
             HandleMovement(horizontal);
@@ -342,7 +347,8 @@ public class Player : Character
 
 	public void ButtonMove(float input)
 	{
-		mobileInput = input;
+        playerAxis = input;
+		
 	}
 
     /*

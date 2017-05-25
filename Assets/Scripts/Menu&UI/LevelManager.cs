@@ -20,16 +20,26 @@ public class LevelManager : MonoBehaviour
     Button nextButton;
     [SerializeField]
     Button backButton;
+	[SerializeField]
+	GameObject actsSpacer;
+    [SerializeField]
+    public GameObject mainMenuCanvas;
+    [SerializeField]
+    public GameObject lvlSelectCanvas;
+
     public int groupCount;
     private int groupIndex;
     public List<Level> levelList;
     public GameObject levelButton;
     public Transform spacer;
     public LevelButton[] levelButtonsArray;
+    Vector2 screenSize;
 
 	void Start ()
     {
         groupIndex = 0;
+        screenSize.x = 1920;
+        screenSize.y = 1080;
         SetButtons();
         levelButtonsArray = new LevelButton[levelList.Count];
         levelButtonsArray = FindObjectsOfType<LevelButton>();
@@ -52,6 +62,7 @@ public class LevelManager : MonoBehaviour
             button.unlocked = level.unlocked;
             button.GetComponent<Button>().interactable = level.isInteractable;
             button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
+            button.GetComponent<Button>().gameObject.transform.localScale = new Vector3(Screen.width / screenSize.x, Screen.height / screenSize.y, 1);
             newButton.transform.SetParent(spacer, true);
         }
         SaveAll();
@@ -161,6 +172,15 @@ public class LevelManager : MonoBehaviour
 
     public void Back()
     {
-        SceneManager.LoadScene("MainMenu");
+        if (spacer.gameObject.activeInHierarchy) 
+		{
+            spacer.gameObject.SetActive (false);
+			actsSpacer.SetActive (true);
+		}
+        else 
+		{
+            lvlSelectCanvas.SetActive(false);
+            mainMenuCanvas.SetActive(true);
+		}
     }
 }

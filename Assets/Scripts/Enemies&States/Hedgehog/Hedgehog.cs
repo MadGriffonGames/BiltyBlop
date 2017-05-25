@@ -9,6 +9,8 @@ public class Hedgehog : MovingMeleeEnemy
 
     [SerializeField]
     GameObject spikeParticle;
+    [SerializeField]
+    GameObject healthBar;
 
     void Awake()
     {
@@ -92,4 +94,11 @@ public class Hedgehog : MovingMeleeEnemy
         armature.animation.timeScale = 3f;
         armature.animation.Play("Attack");
     }
+
+    public void EnableHealthbar (int enable)
+    {
+        if (enable == 1) healthBar.SetActive(true);
+        else healthBar.SetActive(false);
+    } 
+
 }

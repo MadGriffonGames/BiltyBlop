@@ -5,10 +5,20 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject actCanvas;
+    
     public string sceneName { get; set; }
 
-    public void ChangeScene(string sceneName)
+    public void Start()
     {
-        SceneManager.LoadScene(sceneName);
+        SoundManager.PlayMusic("main menu", true);
     }
+
+    public void ToActSelect(string sceneName)
+    {
+        actCanvas.SetActive(true);
+    }
+
+    
 }

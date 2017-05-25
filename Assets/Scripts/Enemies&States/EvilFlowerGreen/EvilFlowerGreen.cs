@@ -88,6 +88,7 @@ public class EvilFlowerGreen : RangeEnemy
 
     public void AnimAttack()
     {
+        SoundManager.PlaySound("spit");
         armature.animation.timeScale = 1.5f;
         ThrowSeed();
         armature.animation.Play("ATTACK");

@@ -27,7 +27,7 @@ public class RunicDoor : InteractiveObject {
 	{
 		
 		Destroy(this.gameObject);
-		SoundManager.PlaySound ("door_explode");
+		SoundManager.PlaySound ("door crash");
 		Instantiate(stoneParticle, this.gameObject.transform.position + new Vector3(0, 0.5f , 0), Quaternion.identity);
 	}
 

@@ -15,6 +15,7 @@ public class MovingSpikesMedium : InteractiveObject {
     {
         if (other.transform.CompareTag("Player"))
         {
+            SoundManager.PlaySound("trap1");
             MyAnimator.SetTrigger("enter");
         }
     }

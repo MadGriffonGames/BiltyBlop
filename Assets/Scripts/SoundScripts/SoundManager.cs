@@ -19,18 +19,19 @@ public class SoundManager : MonoBehaviour
 	public string soundFolder = "Sounds";
 	public string musicFolder = "Music";
 
-	public float fadeSpeed = 3; // скорость плавного перехода между треками музыки
+	public float fadeSpeed = 50; // скорость плавного перехода между треками музыки
     public float pitch = 1;
 
 	public AudioMixerGroup musicGroup;
 	public AudioMixerGroup soundGroup;
 
-	private static AudioSource last, current;
+	private static AudioSource last, current, steps;
 	public static float musicVolume, soundVolume;
 	private static bool muteMusic, muteSound;
     private static float currentPitch = 1;
 
-	void Awake()
+
+    void Awake()
 	{
         if (!PlayerPrefs.HasKey("MusicIsOn"))
             PlayerPrefs.SetInt("MusicIsOn", 1);
@@ -45,8 +46,11 @@ public class SoundManager : MonoBehaviour
             MuteSound(true);
         else MuteSound(false);
 
-        musicVolume = 1;
+        musicVolume = 0.7f;
         soundVolume = 1;
+
+        StartCoroutine(InitiateSteps("player_step")); // стринговое константа требует замены на переменную
+
     }
 
     void Update()
@@ -201,4 +205,46 @@ public class SoundManager : MonoBehaviour
 		string path = mainFolder + "/" + name;
 		return Resources.LoadAsync<AudioClip>(path);
 	}
+
+    IEnumerator InitiateSteps(string musicName)
+    {
+        ResourceRequest request = LoadAsync(soundFolder + "/" + musicName);
+
+        while (!request.isDone)
+        {
+            yield return null;
+        }
+
+        AudioClip clip = (AudioClip)request.asset;
+
+        if (clip == null)
+        {
+            Debug.Log(Instance + " :: Файл не найден: " + musicName);
+            yield return false;
+        }
+
+        GameObject stepsObj = new GameObject("Steps");
+        AudioSource stepsAudio = stepsObj.AddComponent<AudioSource>();
+        stepsObj.transform.parent = transform;
+        stepsAudio.playOnAwake = false;
+        stepsAudio.loop = true;
+        stepsAudio.pitch = currentPitch;
+        stepsAudio.mute = muteSound;
+        stepsAudio.volume = (last == null) ? musicVolume : 0;
+        //Debug.Log(clip.name);
+        stepsAudio.clip = clip;
+        stepsAudio.Pause();
+        steps = stepsAudio;
+    }
+    
+    public static void MakeSteps(bool isStepping)
+    {
+		if (steps != null) 
+		{
+			if (steps.isPlaying && !isStepping)
+				steps.Pause ();
+			else if (!steps.isPlaying && isStepping)
+				steps.Play ();
+		}
+    }
 }

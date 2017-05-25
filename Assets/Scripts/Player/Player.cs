@@ -21,9 +21,10 @@ public class Player : Character
     public Rigidbody2D MyRigidbody { get; set; }
     private SpriteRenderer[] spriteRenderer;
     [SerializeField]
-    GameObject target;
+    public GameObject target;
     [SerializeField]
     GameObject shadow;
+    public bool bossFight = false;
 
     /*
      * Game Managment vars
@@ -52,8 +53,6 @@ public class Player : Character
     {
         get { return health <= 0; }
     }
-    HingeJoint2D joint;
-    public bool onRope = false;
 
     /*
      * Ground Check vars
@@ -89,7 +88,6 @@ public class Player : Character
 		spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
         StartPosition = transform.position;
         MyRigidbody = GetComponent<Rigidbody2D> ();
-        joint = GetComponent<HingeJoint2D>();
         GotKey = false;
         CheckpointPosition = StartPosition;
         startCoinCount = GameManager.CollectedCoins;
@@ -102,16 +100,12 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
-            if (transform.position.y <= -200f)
+            if (transform.position.y <= -14f)
             {
                 MyRigidbody.velocity = Vector2.zero;
                 transform.position = StartPosition;
             }
 			HandleInput();
-        }
-        if (joint.enabled && onRope)
-        {
-            transform.rotation = joint.connectedBody.transform.rotation;
         }
         if (OnGround && !shadow.activeInHierarchy)
         {
@@ -128,13 +122,23 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
+#if UNITY_EDITOR
             float horizontal = Input.GetAxis("Horizontal");
-           HandleMovement(horizontal);
+            HandleMovement(horizontal);
             Flip(horizontal);
-            OnGround = IsGrounded();
-          //  HandleMovement(mobileInput);
-           // Flip(mobileInput);
+#elif UNITY_ANDROID
+            HandleMovement(mobileInput);
+            Flip(mobileInput);
+#elif UNITY_IOS
+            HandleMovement(mobileInput);
+            Flip(mobileInput);
+#endif
             HandleLayers();
+            OnGround = IsGrounded();
+            if (!OnGround || (Mathf.Abs(MyRigidbody.velocity.x) <= 1))
+                SoundManager.MakeSteps(false);
+            else if (((MyRigidbody.velocity.x >= 1) || (MyRigidbody.velocity.x <= -1)) && (OnGround))
+                SoundManager.MakeSteps(true);
         }
     }
 
@@ -160,28 +164,8 @@ public class Player : Character
             MyRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
             MyRigidbody.velocity = new Vector2(0,0);
         }
-        if (onRope && joint.enabled)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y, -4);
-                target.transform.localPosition = new Vector3(0, 3.41f, 0);
-                joint.enabled = false;
-                StartCoroutine(RopeReset());
-                MyRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
-                this.gameObject.transform.SetParent(null);
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
-        }
         MyAniamtor.SetFloat ("speed", Mathf.Abs (horizontal));
 	}
-
-    IEnumerator RopeReset()
-    {
-        yield return new WaitForSeconds(0.2f);
-        onRope = false;
-        MyAniamtor.SetBool("onRope", false);
-    }
 
 	private void HandleInput()
 	{
@@ -215,18 +199,6 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-        if (other.CompareTag("Rope") && !onRope)
-        {
-            onRope = true;
-            MyAniamtor.SetBool("onRope",true);
-            Jump = false;
-            target.transform.position = other.gameObject.transform.position;
-            this.gameObject.transform.SetParent(other.gameObject.transform);
-            joint.enabled = true;
-            joint.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
-            joint.anchor = new Vector2(0, 0);
-            transform.localPosition = new Vector3(0, 0, this.gameObject.transform.position.z);
-        }
         if (other.CompareTag("DeathTrigger"))
         {
             health -= health;
@@ -321,7 +293,11 @@ public class Player : Character
                 MyAniamtor.SetLayerWeight(2, 1);
                 MyAniamtor.SetTrigger("damage");
                 cef.ShowBlood(0.5f);
-                SoundManager.PlaySound("player_takehit1");
+                System.Random soundFlag = new System.Random();
+                if (soundFlag.Next(0, 2) == 0)
+                    SoundManager.PlaySound("player_damage1");
+                else
+                    SoundManager.PlaySound("player_damage2");
                 immortal = true;
                 StartCoroutine(IndicateImmortal());
                 yield return new WaitForSeconds(immortalTime);
@@ -331,7 +307,6 @@ public class Player : Character
             {
                 MyAniamtor.SetLayerWeight(1, 0);
                 MyAniamtor.SetLayerWeight(2, 1);
-                SoundManager.PlayMusic("player_death", true);
                 MyAniamtor.SetTrigger("death");
                 MyRigidbody.velocity = Vector2.zero;
                 UI.Instance.DeathUI.SetActive(true);
@@ -350,7 +325,17 @@ public class Player : Character
 		MyAniamtor.SetTrigger("jump");
 	}
 
-	public void ButtonAttack()
+    public void PlayRandomSound(string sound1, string sound2)
+    {
+        System.Random soundCount = new System.Random();
+        if (soundCount.Next(0, 2) == 0)
+            SoundManager.PlaySound(sound1);
+        //int choice = soundCount.Next(0, sounds.Length);
+        else
+            SoundManager.PlaySound(sound2);
+    }
+
+    public void ButtonAttack()
 	{
 		 MyAniamtor.SetTrigger("attack");
 	}

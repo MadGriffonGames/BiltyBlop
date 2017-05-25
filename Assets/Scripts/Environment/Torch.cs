@@ -7,7 +7,7 @@ public class Torch : MonoBehaviour
     [SerializeField]
     public Animator[] MyAnimator;
     [SerializeField]
-    GameObject light;
+    GameObject torchLight;
     [SerializeField]
     GameObject flame;
     [SerializeField]
@@ -41,9 +41,9 @@ public class Torch : MonoBehaviour
     {
         if (collision.CompareTag("Sword") && isShining)
         {
-            light.SetActive(false);
+            torchLight.SetActive(false);
             flame.SetActive(false);
-            Instantiate(torchParticle, light.transform.position + new Vector3(0, -0.2f, -1f), Quaternion.Euler(-90,0,0));
+            Instantiate(torchParticle, torchLight.transform.position + new Vector3(0, -0.2f, -1f), Quaternion.Euler(-90,0,0));
             isShining = false;
         }
     }

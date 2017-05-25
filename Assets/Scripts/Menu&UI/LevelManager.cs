@@ -138,6 +138,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void PlayUISound(string sound)
+    {
+        SoundManager.PlaySound(sound);
+    }
+
     void ButtonsUpdate()
     {
         if (groupIndex == 0)

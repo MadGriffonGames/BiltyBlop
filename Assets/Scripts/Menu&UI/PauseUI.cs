@@ -42,6 +42,11 @@ public class PauseUI : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void PlayUISound(string sound)
+    {
+        SoundManager.PlaySound(sound);
+    }
+
     void buttonsSetActive(bool pause) // переключатель кнопок
     {
         pauseMenu.gameObject.SetActive(pause);

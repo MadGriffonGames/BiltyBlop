@@ -101,7 +101,7 @@ public class SoundManager : MonoBehaviour
 		if(current) current.mute = value;
 	}
 
-	void PlaySoundInternal(string soundName)
+	 public void PlaySoundInternal(string soundName)
 	{
 		if(string.IsNullOrEmpty(soundName))
 		{
@@ -196,7 +196,7 @@ public class SoundManager : MonoBehaviour
 		current = au;
 	}
 
-	IEnumerator GetSound(string soundName)
+	public IEnumerator GetSound(string soundName)
 	{
 		ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
 
@@ -251,7 +251,7 @@ public class SoundManager : MonoBehaviour
         au.outputAudioMixerGroup = soundGroup;
         au.playOnAwake = false;
         au.loop = false;
-        au.pitch = currentPitch + pitch/4;
+        au.pitch = currentPitch + pitch/3;
         au.mute = muteSound;
         au.volume = soundVolume;
         au.clip = clip;

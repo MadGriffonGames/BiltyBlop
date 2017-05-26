@@ -9,11 +9,14 @@ public class Hedgehog : MovingMeleeEnemy
 
     [SerializeField]
     GameObject spikeParticle;
+    [SerializeField]
+    GameObject healthBar;
 
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     public override void Start()
@@ -92,4 +95,11 @@ public class Hedgehog : MovingMeleeEnemy
         armature.animation.timeScale = 3f;
         armature.animation.Play("Attack");
     }
+
+    public void EnableHealthbar (int enable)
+    {
+        if (enable == 1) healthBar.SetActive(true);
+        else healthBar.SetActive(false);
+    } 
+
 }

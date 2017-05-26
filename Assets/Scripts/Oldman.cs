@@ -15,7 +15,6 @@ public class Oldman : MonoBehaviour
             Time.timeScale = 0;
             TutorialUI.Instance.oldmanFace.gameObject.SetActive(true);
             TutorialUI.Instance.textBar.gameObject.SetActive(true);
-            TutorialUI.Instance.nextButton.gameObject.SetActive(true);
             TutorialUI.Instance.txt.text = text [i];
         }
     }

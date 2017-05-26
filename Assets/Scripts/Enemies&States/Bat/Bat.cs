@@ -64,7 +64,7 @@ public class Bat : MovingMeleeEnemy
         if (IsDead)
         {
             Player.Instance.monstersKilled++;
-            SoundManager.PlaySound("hedgehog_death");
+            SoundManager.PlaySound("bat_death");
             Instantiate(batParticles, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
             Destroy(transform.parent.gameObject);
 

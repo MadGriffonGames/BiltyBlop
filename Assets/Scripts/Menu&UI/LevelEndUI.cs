@@ -21,7 +21,7 @@ public class LevelEndUI : MonoBehaviour
 
     void Start ()
     {
-        SoundManager.PlayMusic("victory sound", false);
+        SoundManager.PlaySound("victory sound");
         fade.SetActive(true);
         controlsUI.SetActive(false);
         coinsCollected = GameManager.lvlCollectedCoins;

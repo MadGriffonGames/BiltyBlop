@@ -22,21 +22,6 @@ public class TutorialUI : MonoBehaviour
     public Image oldmanFace;
     [SerializeField]
     public Image textBar;
-    [SerializeField]
-    public GameObject okButton;
-    [SerializeField]
-    public GameObject nextButton;
 
-    public void OKButton()
-    {
-        Time.timeScale = 1;
-        GameObject arrow = GameObject.FindGameObjectWithTag("Arrow");
-        if (arrow != null)
-        {
-            Destroy(arrow.gameObject);
-        }
-        oldmanFace.gameObject.SetActive(false);
-        textBar.gameObject.SetActive(false);
-        okButton.gameObject.SetActive(false);
-    }
+
 }

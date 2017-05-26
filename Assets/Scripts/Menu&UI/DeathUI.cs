@@ -66,15 +66,18 @@ public class DeathUI : MonoBehaviour
 			Player.Instance.MyAniamtor.ResetTrigger ("death");      
             Player.Instance.Health = 3;
 			Player.Instance.MyAniamtor.SetTrigger ("revive");
-            Player.Instance.transform.position = new Vector3(Player.Instance.CheckpointPosition.x,
-                                                        Player.Instance.CheckpointPosition.y,
+            FindObjectOfType<Light>().intensity = Player.Instance.lightIntencityCP;
+            Player.Instance.transform.position = new Vector3(Player.Instance.checkpointPosition.x,
+                                                        Player.Instance.checkpointPosition.y,
                                                         Player.Instance.transform.position.z);
-            Player.Instance.MyAniamtor.SetFloat("speed", 0);
-			Player.Instance.ButtonMove (0);
-            Player.Instance.MyRigidbody.velocity = new Vector2(0, 0);
+
             mainCamera.transform.position = new Vector3(Player.Instance.transform.position.x,
                                                         Player.Instance.transform.position.y,
                                                         mainCamera.transform.position.z);
+
+            Player.Instance.MyAniamtor.SetFloat("speed", 0);
+			Player.Instance.ButtonMove (0);
+            Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
             fade.SetActive(false);
             this.gameObject.SetActive(false);

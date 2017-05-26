@@ -18,7 +18,7 @@ public class Player : Character
 
     [SerializeField]
     private GameObject grave;
-    public Rigidbody2D MyRigidbody { get; set; }
+    public Rigidbody2D myRigidbody;
     private SpriteRenderer[] spriteRenderer;
     [SerializeField]
     public GameObject target;
@@ -29,8 +29,9 @@ public class Player : Character
     /*
      * Game Managment vars
      */
-    public Vector2 StartPosition { get; set; }
-    public Vector2 CheckpointPosition { get; set; }
+    public Vector2 startPosition;
+    public Vector2 checkpointPosition;
+    public float lightIntencityCP;
     public int startCoinCount;
     public int lvlCoins;
     public int monstersKilled;
@@ -60,7 +61,7 @@ public class Player : Character
      */
     public bool IsFalling
     {
-        get { return MyRigidbody.velocity.y < -0.1; }
+        get { return myRigidbody.velocity.y < -0.1; }
     }
     [SerializeField]
     private Transform[] groundPoints = null;
@@ -87,10 +88,11 @@ public class Player : Character
 	{
         base.Start();
 		spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
-        StartPosition = transform.position;
-        MyRigidbody = GetComponent<Rigidbody2D> ();
+        myRigidbody = GetComponent<Rigidbody2D>();
+        startPosition = transform.position;
         GotKey = false;
-        CheckpointPosition = StartPosition;
+        checkpointPosition = startPosition;
+        lightIntencityCP = FindObjectOfType<Light>().intensity;
         startCoinCount = GameManager.CollectedCoins;
         monstersKilled = 0;
         collectables = 0;
@@ -103,8 +105,8 @@ public class Player : Character
         {
             if (transform.position.y <= -14f)
             {
-                MyRigidbody.velocity = Vector2.zero;
-                transform.position = StartPosition;
+                myRigidbody.velocity = Vector2.zero;
+                transform.position = startPosition;
             }
 			HandleInput();
         }
@@ -140,9 +142,9 @@ public class Player : Character
 #endif
             HandleLayers();
             OnGround = IsGrounded();
-            if (!OnGround || (Mathf.Abs(MyRigidbody.velocity.x) <= 1))
+            if (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1))
                 SoundManager.MakeSteps(false);
-            else if (((MyRigidbody.velocity.x >= 1) || (MyRigidbody.velocity.x <= -1)) && (OnGround))
+            else if (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround))
                 SoundManager.MakeSteps(true);
         }
     }
@@ -157,17 +159,17 @@ public class Player : Character
 		if (OnGround) 
 		{
             if(!Attack)
-                MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, MyRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, myRigidbody.velocity.y);
             else
-                MyRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f * timeScalerMove, MyRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f * timeScalerMove, myRigidbody.velocity.y);
         }
         else
-            MyRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, MyRigidbody.velocity.y);
-        if (OnGround && Jump &&  Mathf.Abs(MyRigidbody.velocity.y) < 0.1 )
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
+        if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
         {
             
-            MyRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
-            MyRigidbody.velocity = new Vector2(0,0);
+            myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
+            myRigidbody.velocity = new Vector2(0,0);
         }
         MyAniamtor.SetFloat ("speed", Mathf.Abs (horizontal));
 	}
@@ -178,7 +180,7 @@ public class Player : Character
 		{
             MyAniamtor.SetTrigger("jump");
 			Jump = true;
-			if (Mathf.Abs (MyRigidbody.velocity.y) <= 0.01f)
+			if (Mathf.Abs (myRigidbody.velocity.y) <= 0.01f)
             {
 				SoundManager.PlaySound ("player_jump");
 			}
@@ -225,7 +227,7 @@ public class Player : Character
             transform.parent = other.transform;//make character chil object of platform
             target.transform.SetParent(other.gameObject.transform);
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && MyRigidbody.velocity.y != 0)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && myRigidbody.velocity.y != 0)
         {
             MakeFX.Instance.MakeDust();
         }
@@ -313,7 +315,7 @@ public class Player : Character
                 MyAniamtor.SetLayerWeight(1, 0);
                 MyAniamtor.SetLayerWeight(2, 1);
                 MyAniamtor.SetTrigger("death");
-                MyRigidbody.velocity = Vector2.zero;
+                myRigidbody.velocity = Vector2.zero;
                 UI.Instance.DeathUI.SetActive(true);
             }
             yield return null;
@@ -428,7 +430,7 @@ public class Player : Character
         speedBonusNum--;
         if (speedBonusNum == 0)
         {
-            MyRigidbody.gravityScale = 3;
+            myRigidbody.gravityScale = 3;
             movementSpeed = 7;
             MyAniamtor.speed = 1;
             timeScalerMove = 1;
@@ -452,7 +454,7 @@ public class Player : Character
         MyAniamtor.speed = 1.6f;
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime = 0.01f;
-        MyRigidbody.gravityScale = 6;
+        myRigidbody.gravityScale = 6;
         yield return new WaitForSeconds(duration);
         timeBonusNum--;
         if (timeBonusNum == 0)
@@ -464,7 +466,7 @@ public class Player : Character
             MyAniamtor.speed = 1;
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
-            MyRigidbody.gravityScale = 3;
+            myRigidbody.gravityScale = 3;
         }
     }
 
@@ -475,7 +477,7 @@ public class Player : Character
         timeScalerJump = 1;
         timeScalerMove = 1;
         Time.timeScale = 1;
-        MyRigidbody.gravityScale = 3;
+        myRigidbody.gravityScale = 3;
         immortal = false;
         damage = 1;
         movementSpeed = 7;
@@ -496,14 +498,14 @@ public class Player : Character
     public void InstantiateGrave()
     {
         Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
-        instance.MyRigidbody.bodyType = RigidbodyType2D.Static;
+        instance.myRigidbody.bodyType = RigidbodyType2D.Static;
         BoxCollider2D boxCollider = instance.GetComponent<BoxCollider2D>();
         boxCollider.enabled = false;
     }
 
     public void PlayerRevive()
     {
-        instance.MyRigidbody.bodyType = RigidbodyType2D.Dynamic;
+        instance.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
         BoxCollider2D boxCollider = instance.GetComponent<BoxCollider2D>();
         boxCollider.enabled = true;
     }

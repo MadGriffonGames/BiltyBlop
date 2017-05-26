@@ -71,6 +71,6 @@ public class RuneStone : InteractiveObject
 	IEnumerator WaitForGround()
 	{
 		yield return new WaitForSeconds (0.2f);
-		Player.Instance.MyRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;		
+		Player.Instance.myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;		
 	}
 }

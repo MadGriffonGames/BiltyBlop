@@ -8,7 +8,7 @@ public class Rope : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Player.Instance.MyRigidbody.velocity = new Vector3(0, 0, 0);
+            Player.Instance.myRigidbody.velocity = new Vector3(0, 0, 0);
         }
     }
 }

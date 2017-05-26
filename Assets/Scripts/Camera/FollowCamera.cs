@@ -33,7 +33,7 @@ public class FollowCamera : MonoBehaviour
         else if (currentX - lastX >= 0.11f)
             offset.x = 4f;
 
-        if (Mathf.Abs(Player.Instance.MyRigidbody.velocity.y) >= 14)
+        if (Mathf.Abs(Player.Instance.myRigidbody.velocity.y) >= 14)
         {
             if (currentY - lastY < -0.01f)
                 offset.y = -5f;
@@ -75,7 +75,7 @@ public class FollowCamera : MonoBehaviour
 
         if (target.transform.position.x <= xMax && target.transform.position.x >= xMin)
         {
-            interpVelocityX = targetDirection.magnitude * Mathf.Abs(Player.Instance.MyRigidbody.velocity.magnitude) * 5f;
+            interpVelocityX = targetDirection.magnitude * Mathf.Abs(Player.Instance.myRigidbody.velocity.magnitude) * 5f;
         }
         else interpVelocityX = 0;
         if (Player.Instance.gameObject.layer == 9)

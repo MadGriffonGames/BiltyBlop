@@ -7,7 +7,7 @@ public class Checkpoint : InteractiveObject
     [SerializeField]
     GameObject lightPillar;
     [SerializeField]
-    GameObject light;
+    GameObject fire;
     [SerializeField]
     GameObject checkpointText;
 
@@ -25,10 +25,11 @@ public class Checkpoint : InteractiveObject
             if (!activated)
             {
                 lightPillar.SetActive(true);
-                light.SetActive(true);
+                fire.SetActive(true);
                 checkpointText.SetActive(true);
                 SoundManager.PlaySound("checkpoint");
-                Player.Instance.CheckpointPosition = this.gameObject.transform.position;
+                Player.Instance.checkpointPosition = this.gameObject.transform.position;
+                Player.Instance.lightIntencityCP = FindObjectOfType<Light>().intensity;
                 activated = true;
             }
         }

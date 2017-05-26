@@ -59,7 +59,7 @@ public class EvilFlowerGreen : RangeEnemy
         {
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
-			SoundManager.PlaySound ("flower_death");
+			SoundManager.PlaySound ("green flower");
 			Destroy(gameObject);
         }
         yield return null;

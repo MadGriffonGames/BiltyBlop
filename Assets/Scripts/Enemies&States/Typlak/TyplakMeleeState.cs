@@ -9,44 +9,56 @@ public class TyplakMeleeState : ITyplakState
 
     private float attackTimer;
     private float attackCoolDown = 1.5f;
-    private bool canAttack = true;
+    private bool canExit = true;
+    bool preattack = false;
 
     public void Enter(Typlak enemy)
     {
         this.enemy = enemy;
+        enemy.armature.animation.timeScale = 1f;
+        
     }
 
     public void Execute()
     {
         Attack();
-        if (!enemy.InMeleeRange && canAttack)
+        if (!enemy.InMeleeRange && canExit)
         {
             enemy.ChangeState(new TyplakRangeState());
         }
-        else if (enemy.Target == null && canAttack)
+        else if (enemy.Target == null && canExit)
         {
             enemy.ChangeState(new TyplakPatrolState());
         }
     }
 
-    public void Exit() { }
+    public void Exit()
+    {
+        enemy.walk = false;
+        enemy.AttackCollider.enabled = false;
+    }
 
     public void OnCollisionEnter2D(Collision2D other)
     {    }
 
     private void Attack()
     {
-        enemy.MyAniamtor.SetFloat("speed", 0);
-        attackTimer += Time.deltaTime;
-        if (attackTimer >= attackCoolDown)
+        if (!preattack)
         {
-            canAttack = true;
-            attackTimer = 0;
+            canExit = false;
+            enemy.armature.animation.FadeIn("preattack", -1, 1);
+            preattack = true;
         }
-        if (canAttack && enemy.Target != null)
+        if (enemy.armature.animation.lastAnimationName == "preattack" && enemy.armature.animation.isCompleted)
         {
-            canAttack = false;
-            enemy.MyAniamtor.SetTrigger("attack");
+            enemy.armature.animation.FadeIn("Attack", -1, 1);
+            enemy.AttackCollider.enabled = true;
+        }
+        if (enemy.armature.animation.lastAnimationName == "Attack" && enemy.armature.animation.isCompleted)
+        {
+            enemy.AttackCollider.enabled = false;
+            preattack = false;
+            canExit = true;
         }
     }
 }

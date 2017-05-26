@@ -5,20 +5,19 @@ using UnityEngine;
 public class TyplakPatrolState : ITyplakState
 {
     private Typlak enemy;
-
     private float patrolTimer;
-
     private float patrolDuration;
 
     public void Enter(Typlak enemy)
     {
         this.enemy = enemy;
         patrolDuration = enemy.patrolDuration;
+        enemy.armature.animation.timeScale = 1.2f;
     }
 
     public void Execute()
     {
-        enemy.Move();
+        enemy.LocalMove();
         if (enemy.Target != null)
         {
             enemy.ChangeState(new TyplakRangeState());

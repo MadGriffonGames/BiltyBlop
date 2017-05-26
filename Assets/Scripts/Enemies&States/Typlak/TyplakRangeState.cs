@@ -10,6 +10,7 @@ public class TyplakRangeState : ITyplakState
     public void Enter(Typlak enemy)
     {
         this.enemy = enemy;
+        enemy.armature.animation.timeScale = 1.2f;
     }
 
     public void Execute()
@@ -21,7 +22,7 @@ public class TyplakRangeState : ITyplakState
         }
         else if (enemy.Target != null)
         {
-            enemy.Move();
+            enemy.LocalMove();
         }
         else
         {

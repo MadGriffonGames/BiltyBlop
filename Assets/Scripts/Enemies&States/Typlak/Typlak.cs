@@ -10,7 +10,7 @@ public class Typlak : MovingMeleeEnemy
     private GameObject typlakParticle;
     public bool attack;
     bool damaged = false;
-
+    public bool walk = false;
 
     void Awake()
     {
@@ -72,6 +72,16 @@ public class Typlak : MovingMeleeEnemy
     private void OnCollisionEnter2D(Collision2D other)
     {
         currentState.OnCollisionEnter2D(other);
+    }
+
+    public void LocalMove()
+    {
+        if (!walk)
+            {
+                walk = true;
+                armature.animation.FadeIn("walk", -1, -1);
+            }
+         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
 
     public void AnimIdle()

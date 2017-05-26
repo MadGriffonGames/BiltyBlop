@@ -22,7 +22,8 @@ public class DeathUI : MonoBehaviour
 
     public void Start ()
     {
-        SoundManager.PlaySound("kid death");
+        SoundManager.PlayMusic("kid death", false);
+        Debug.Log("kek");
         controls.SetActive(false);
         restartButton.SetActive(false);
         continueButton.SetActive(false);

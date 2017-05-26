@@ -34,10 +34,16 @@ public class GameManager : MonoBehaviour
         else
             collectedCoins = PlayerPrefs.GetInt("Coins");
         lvlCollectedCoins = 0;
-        SoundManager.PlayMusic ("kid_music", true);
+        if(SceneManager.GetActiveScene().name != "MainMenu")
+            SoundManager.PlayMusic ("kid_music", true);
 	}
-	
-	void Update ()
+
+    public void PlayUISound(string sound)
+    {
+        SoundManager.PlaySound(sound);
+    }
+
+    void Update ()
 	{
         coinTxt.text = ("x " + collectedCoins);
     }

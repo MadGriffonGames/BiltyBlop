@@ -20,5 +20,10 @@ public class MainMenu : MonoBehaviour
         actCanvas.SetActive(true);
     }
 
+    public void PlayUISound(string sound)
+    {
+        SoundManager.PlaySound(sound);
+    }
+
     
 }

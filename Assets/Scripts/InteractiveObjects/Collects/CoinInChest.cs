@@ -21,7 +21,7 @@ public class CoinInChest : InteractiveObject
             MyRigidbody.bodyType = RigidbodyType2D.Static;
             MyAnimator.SetTrigger("collected");
             GameManager.CollectedCoins++;
-            SoundManager.PlaySound("coin_collect");
+            SoundManager.PlaySound("coin_collect2");
         }
         if (other.gameObject.CompareTag("Coin"))
         {

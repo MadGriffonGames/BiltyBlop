@@ -103,7 +103,7 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
-            if (transform.position.y <= -14f)
+            if (transform.position.y <= -140f)
             {
                 myRigidbody.velocity = Vector2.zero;
                 transform.position = startPosition;

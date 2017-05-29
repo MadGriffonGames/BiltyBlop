@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DragonBones;
 using System;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +26,7 @@ public class Player : Character
     [SerializeField]
     GameObject shadow;
     public bool bossFight = false;
+    IPlayerState currentState;
 
     /*
      * Game Managment vars
@@ -64,7 +66,7 @@ public class Player : Character
         get { return myRigidbody.velocity.y < -0.1; }
     }
     [SerializeField]
-    private Transform[] groundPoints = null;
+    private UnityEngine.Transform[] groundPoints = null;
     [SerializeField]
     private float groundRadius;
     [SerializeField]
@@ -87,6 +89,7 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
+        currentState = new PlayerIdleState();
 		spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
         myRigidbody = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
@@ -125,23 +128,29 @@ public class Player : Character
 	{
         if (!TakingDamage && !IsDead)
         {
+            currentState.Execute();
+
             if (Mathf.Abs(mobileInput + playerAxis / 10) <= 1 && playerAxis != 0)
                 mobileInput += playerAxis / 10;
             else mobileInput = playerAxis;
-
+            
 #if UNITY_EDITOR
             float horizontal = Input.GetAxis("Horizontal");
             HandleMovement(horizontal);
             Flip(horizontal);
+
 #elif UNITY_ANDROID
             HandleMovement(mobileInput);
             Flip(mobileInput);
+
 #elif UNITY_IOS
             HandleMovement(mobileInput);
             Flip(mobileInput);
 #endif
+
             HandleLayers();
             OnGround = IsGrounded();
+
             if (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1))
                 SoundManager.MakeSteps(false);
             else if (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround))
@@ -149,11 +158,21 @@ public class Player : Character
         }
     }
 
-	private void HandleMovement(float horizontal)
+    public void ChangeState(IPlayerState newState)
+    {
+        if (currentState != null)
+        {
+            currentState.Exit();
+        }
+        currentState = newState;
+        currentState.Enter(this);
+    }
+
+    private void HandleMovement(float horizontal)
 	{
         if (IsFalling)
         {
-            MyAniamtor.SetBool("fall", true);
+            //MyAniamtor.SetBool("fall", true);
             gameObject.layer = LayerMask.NameToLayer("Falling");
         }
 		if (OnGround) 
@@ -167,18 +186,18 @@ public class Player : Character
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
         if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
         {
-            
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
             myRigidbody.velocity = new Vector2(0,0);
         }
-        MyAniamtor.SetFloat ("speed", Mathf.Abs (horizontal));
+        //MyAniamtor.SetFloat ("speed", Mathf.Abs (horizontal));
 	}
 
 	private void HandleInput()
 	{
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
-            MyAniamtor.SetTrigger("jump");
+            //MyAniamtor.SetTrigger("jump");
+
 			Jump = true;
 			if (Mathf.Abs (myRigidbody.velocity.y) <= 0.01f)
             {
@@ -188,18 +207,19 @@ public class Player : Character
 		
 		if (Input.GetKeyDown (KeyCode.LeftControl)) 
 		{
-            MyAniamtor.SetTrigger("attack");
+            //MyAniamtor.SetTrigger("attack");
+            Attack = true;
         }
 	}
 
 	private void HandleLayers()
 	{
 		if (!OnGround) {
-			MyAniamtor.SetLayerWeight (1, 1);
-			MyAniamtor.SetLayerWeight (2, 0);
+			//MyAniamtor.SetLayerWeight (1, 1);
+			//MyAniamtor.SetLayerWeight (2, 0);
 		} else {
-			MyAniamtor.SetLayerWeight (1, 0);
-			MyAniamtor.SetLayerWeight (2, 1);
+			//MyAniamtor.SetLayerWeight (1, 0);
+			//MyAniamtor.SetLayerWeight (2, 1);
 		}
 	}
 
@@ -245,7 +265,7 @@ public class Player : Character
 
     private bool IsGrounded()
 	{
-			foreach (Transform ponint in groundPoints) 
+			foreach (UnityEngine.Transform ponint in groundPoints) 
 			{
 				Collider2D[] colliders = Physics2D.OverlapCircleAll (ponint.position, groundRadius, whatIsGround);//making circle collider for each groundPoint(area to check ground) 
 				for (int i = 0; i < colliders.Length; i++) 
@@ -294,11 +314,11 @@ public class Player : Character
             {
                 if (IsFalling || !OnGround)
                 {
-                    MyAniamtor.SetLayerWeight(1, 0);
+                    //MyAniamtor.SetLayerWeight(1, 0);
                     Jump = false;
                 }
-                MyAniamtor.SetLayerWeight(2, 1);
-                MyAniamtor.SetTrigger("damage");
+                //MyAniamtor.SetLayerWeight(2, 1);
+                //MyAniamtor.SetTrigger("damage");
                 cef.ShowBlood(0.5f);
                 System.Random soundFlag = new System.Random();
                 if (soundFlag.Next(0, 2) == 0)
@@ -312,9 +332,9 @@ public class Player : Character
             }
             else
             {
-                MyAniamtor.SetLayerWeight(1, 0);
-                MyAniamtor.SetLayerWeight(2, 1);
-                MyAniamtor.SetTrigger("death");
+                //MyAniamtor.SetLayerWeight(1, 0);
+                //MyAniamtor.SetLayerWeight(2, 1);
+                //MyAniamtor.SetTrigger("death");
                 myRigidbody.velocity = Vector2.zero;
                 UI.Instance.DeathUI.SetActive(true);
             }
@@ -329,7 +349,7 @@ public class Player : Character
     public void ButtonJump()
 	{
 		Jump = true;
-		MyAniamtor.SetTrigger("jump");
+		//MyAniamtor.SetTrigger("jump");
 	}
 
     public void PlayRandomSound(string sound1, string sound2)
@@ -337,14 +357,14 @@ public class Player : Character
         System.Random soundCount = new System.Random();
         if (soundCount.Next(0, 2) == 0)
             SoundManager.PlaySound(sound1);
-        //int choice = soundCount.Next(0, sounds.Length);
         else
             SoundManager.PlaySound(sound2);
     }
 
     public void ButtonAttack()
 	{
-		 MyAniamtor.SetTrigger("attack");
+        //MyAniamtor.SetTrigger("attack");
+        Attack = true;
 	}
 
 	public void ButtonMove(float input)
@@ -421,18 +441,19 @@ public class Player : Character
     {
         speedBonusNum++;
         movementSpeed = 14;
-        MyAniamtor.speed = 2;
+        //MyAniamtor.speed = 2;
         timeScalerMove = 0.7f;
         Camera cam = Camera.main;
         CameraEffect cef = cam.GetComponent<CameraEffect>();
         cef.StartBlur();
         yield return new WaitForSeconds(duration);
         speedBonusNum--;
+
         if (speedBonusNum == 0)
         {
             myRigidbody.gravityScale = 3;
             movementSpeed = 7;
-            MyAniamtor.speed = 1;
+            //MyAniamtor.speed = 1;
             timeScalerMove = 1;
             cef.StopBlur();
         }
@@ -451,19 +472,20 @@ public class Player : Character
         timeScalerJump = 3f;
         timeScalerMove = 1.3f;
         SoundManager.SetPitch(0.5f);
-        MyAniamtor.speed = 1.6f;
+        //MyAniamtor.speed = 1.6f;
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime = 0.01f;
         myRigidbody.gravityScale = 6;
         yield return new WaitForSeconds(duration);
         timeBonusNum--;
+
         if (timeBonusNum == 0)
         {
             SoundManager.SetPitch(1f);
             timeScaler = 1;
             timeScalerJump = 1;
             timeScalerMove = 1;
-            MyAniamtor.speed = 1;
+            //MyAniamtor.speed = 1;
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
             myRigidbody.gravityScale = 3;
@@ -482,7 +504,7 @@ public class Player : Character
         damage = 1;
         movementSpeed = 7;
         jumpForce = 700;
-        MyAniamtor.speed = 1;
+        //MyAniamtor.speed = 1;
         Time.fixedDeltaTime = 0.02000000f;
     }
 
@@ -498,16 +520,14 @@ public class Player : Character
     public void InstantiateGrave()
     {
         Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
-        instance.myRigidbody.bodyType = RigidbodyType2D.Static;
-        BoxCollider2D boxCollider = instance.GetComponent<BoxCollider2D>();
-        boxCollider.enabled = false;
+        myRigidbody.bodyType = RigidbodyType2D.Static;
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void PlayerRevive()
     {
-        instance.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
-        BoxCollider2D boxCollider = instance.GetComponent<BoxCollider2D>();
-        boxCollider.enabled = true;
+        myRigidbody.bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void Heal()

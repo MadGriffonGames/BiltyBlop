@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DragonBones;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -8,7 +9,9 @@ public abstract class Character : MonoBehaviour
 
     public bool TakingDamage { get; set; }
 
-    public Animator MyAniamtor { get; private set; }
+    //public Animator MyAniamtor { get; private set; }
+
+    public UnityArmatureComponent myArmature;
 
     [SerializeField]
     protected int health;
@@ -53,13 +56,9 @@ public abstract class Character : MonoBehaviour
     public virtual void Start ()
     {
         facingRight = true;
-        MyAniamtor = GetComponent<Animator>();
+        myArmature = GetComponent<UnityArmatureComponent>();
+        //MyAniamtor = GetComponent<Animator>();
     }
-
-	void Update ()
-    {
-		
-	}
 
     public void MeleeAttack()
     {

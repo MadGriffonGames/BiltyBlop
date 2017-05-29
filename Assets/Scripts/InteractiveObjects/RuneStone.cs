@@ -36,7 +36,7 @@ public class RuneStone : InteractiveObject
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             MyAnimator.SetTrigger("shine");
-            Player.Instance.MyAniamtor.SetTrigger("levelEnd");
+            //Player.Instance.MyAniamtor.SetTrigger("levelEnd");
 			StartCoroutine (WaitForGround ());
             Zoom.makeZoom(1, 3, 5);
             SaveGame();

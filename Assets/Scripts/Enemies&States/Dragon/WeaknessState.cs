@@ -13,6 +13,7 @@ public class WeaknessState : IDragonState
         this.enemy = enemy;
         enemy.armature.animation.timeScale = 1.5f;
         enemy.takeDamageCollider.enabled = true;
+        enemy.enemyDamageCollider.enabled = false;
     }
 
     public void Execute()
@@ -36,7 +37,7 @@ public class WeaknessState : IDragonState
         else
         {
             enemy.takeDamageCollider.enabled = false;
-			enemy.enemyDamageCollider.SetActive (false);
+			enemy.enemyDamageCollider.enabled = false;
             enemy.stun.SetActive(false);
             Player.Instance.collectables = 3;
             if (!dead)

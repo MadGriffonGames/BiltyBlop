@@ -6,7 +6,7 @@ public class PlayerRunState : IPlayerState
 {
     public void Enter(Player player)
     {
-        player.myArmature.animation.FadeIn("walk", -1, -1);
+        player.myArmature.animation.FadeIn("run", -1, -1);
     }
 
     public void Execute()
@@ -15,7 +15,7 @@ public class PlayerRunState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerIdleState());
         }
-        if (Player.Instance.Jump && !Player.Instance.OnGround)
+        if (Player.Instance.Jump || !Player.Instance.OnGround)
         {
             Player.Instance.ChangeState(new PlayerJumpState());
         }

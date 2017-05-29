@@ -59,6 +59,7 @@ public class DeathUI : MonoBehaviour
     {
         if (GameManager.CollectedCoins >= 50)
         {
+            SoundManager.PlayMusic("kid_music", true);
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;

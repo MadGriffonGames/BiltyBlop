@@ -9,9 +9,13 @@ public class PauseUI : MonoBehaviour
     [SerializeField]
     Image pauseMenu;
     [SerializeField]
+    Image warning;
+    [SerializeField]
     GameObject controls;
     [SerializeField]
     GameObject fade;
+    [SerializeField]
+    GameObject warningFade;
     [SerializeField]
     GameObject pauseButton;
     [SerializeField]
@@ -36,6 +40,18 @@ public class PauseUI : MonoBehaviour
         GameManager.collectedCoins = Player.Instance.startCoinCount;
     }
 
+    public void WarnActive()
+    {
+        warningFade.SetActive(true);
+        warningSetActive(true);
+    }
+
+    public void WarnOff()
+    {
+        warningFade.SetActive(false);
+        warningSetActive(false);
+    }
+
     public void Quit()
     {
         Time.timeScale = 1;
@@ -45,6 +61,11 @@ public class PauseUI : MonoBehaviour
     public void PlayUISound(string sound)
     {
         SoundManager.PlaySound(sound);
+    }
+
+    void warningSetActive(bool quit)
+    {
+        warning.gameObject.SetActive(quit);
     }
 
     void buttonsSetActive(bool pause) // переключатель кнопок

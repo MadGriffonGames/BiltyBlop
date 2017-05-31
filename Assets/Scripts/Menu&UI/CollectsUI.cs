@@ -25,6 +25,6 @@ public class CollectsUI : MonoBehaviour
         {
             value = 3;
         }
-        stars[value-1].SetActive(true);
+        stars[value-1].SetActive(true);        
     }
 }

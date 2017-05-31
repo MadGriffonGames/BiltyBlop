@@ -30,8 +30,10 @@ public class BossFightTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.gameObject.CompareTag("Player"))
         {
+            SoundManager.PlayMusic("boss drum", true);
             cameraTransform.position = bossCameraTransform.position;
             Player.Instance.bossFight = true;
             zoomOut = true;

@@ -22,7 +22,10 @@ public class DeathUI : MonoBehaviour
 
     public void Start ()
     {
+<<<<<<< HEAD
         SoundManager.PlayMusic("kid death", false);
+=======
+>>>>>>> origin/DevM
         controls.SetActive(false);
         restartButton.SetActive(false);
         continueButton.SetActive(false);
@@ -57,6 +60,7 @@ public class DeathUI : MonoBehaviour
 
     public void Continue()
     {
+        SoundManager.PlayMusic("kid_music", true);
         if (GameManager.CollectedCoins >= 50)
         {
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
@@ -92,6 +96,7 @@ public class DeathUI : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.PlayMusic("kid death", false);
         Player.Instance.ResetBonusValues();
     }
 }

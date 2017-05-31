@@ -19,9 +19,17 @@ public class PlayerRunState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerJumpState());
         }
-        if (Player.Instance.Attack)
+        if (Player.Instance.Attack && Mathf.Abs(Player.Instance.myRigidbody.velocity.x) >= 7.5f)
+        {
+            Player.Instance.ChangeState(new PlayerRunAttackState());
+        }
+        else if (Player.Instance.Attack && Mathf.Abs(Player.Instance.myRigidbody.velocity.x) < 7.5f)
         {
             Player.Instance.ChangeState(new PlayerAttackState());
+        }
+        if (Player.Instance.takeHit)
+        {
+            Player.Instance.ChangeState(new PlayerTakeHitState());
         }
     }
 

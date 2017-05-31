@@ -32,9 +32,9 @@ public abstract class Character : MonoBehaviour
     public abstract bool IsDead { get; }
 
     [SerializeField]
-    private EdgeCollider2D attackCollider;
+    private PolygonCollider2D attackCollider;
 
-    public EdgeCollider2D AttackCollider
+    public PolygonCollider2D AttackCollider
     {
         get
         {

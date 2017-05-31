@@ -10,7 +10,7 @@ public class Booster : InteractiveObject
     public override void Start()
     {
         base.Start();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     public void ResetBooster()
@@ -34,7 +34,7 @@ public class Booster : InteractiveObject
         if (other.gameObject.CompareTag("Player"))
         {
             
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         }
     }
 
@@ -42,7 +42,7 @@ public class Booster : InteractiveObject
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), false);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), false);
         }
     }
 }

@@ -62,10 +62,8 @@ public class DeathUI : MonoBehaviour
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;
-            Player.Instance.gameObject.layer = 0;
-			//Player.Instance.MyAniamtor.ResetTrigger ("death");      
+            Player.Instance.gameObject.layer = 0; 
             Player.Instance.Health = 3;
-			//Player.Instance.MyAniamtor.SetTrigger ("revive");
             FindObjectOfType<Light>().intensity = Player.Instance.lightIntencityCP;
             Player.Instance.transform.position = new Vector3(Player.Instance.checkpointPosition.x,
                                                         Player.Instance.checkpointPosition.y,
@@ -75,7 +73,8 @@ public class DeathUI : MonoBehaviour
                                                         Player.Instance.transform.position.y,
                                                         mainCamera.transform.position.z);
 
-            //Player.Instance.MyAniamtor.SetFloat("speed", 0);
+            Player.Instance.PlayerRevive();
+            Player.Instance.ChangeState(new PlayerIdleState());
 			Player.Instance.ButtonMove (0);
             Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);

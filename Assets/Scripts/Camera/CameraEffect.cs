@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class CameraEffect : MonoBehaviour
@@ -36,6 +37,10 @@ public class CameraEffect : MonoBehaviour
 
     public void ShowBlood(float duration)
     {
+        blood.GetComponent<Image>().color = new Color(blood.GetComponent<Image>().color.r,
+                                                                  blood.GetComponent<Image>().color.g,
+                                                                  blood.GetComponent<Image>().color.b,
+                                                                  0.65f);
         blood.gameObject.SetActive(true);
         bloodElapsed = 0f;
         bloodDuration = duration;
@@ -55,9 +60,13 @@ public class CameraEffect : MonoBehaviour
         if (bloodElapsed < bloodDuration)
         {
             bloodElapsed += Time.deltaTime;
-            if (bloodDuration - bloodElapsed < 0.05f)
+            if (bloodDuration - bloodElapsed < 0.1f)
             {
-                blood.gameObject.SetActive(false);
+                blood.GetComponent<Image>().color -= new Color(0, 0, 0, 0.06f);
+                if (blood.GetComponent<Image>().color.a <= 0)
+                {
+                    blood.SetActive(false);
+                }
             }
         }
         if (percentComplete == 1 && Player.Instance.bossFight)

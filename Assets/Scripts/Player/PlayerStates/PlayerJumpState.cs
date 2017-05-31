@@ -13,7 +13,14 @@ public class PlayerJumpState : IPlayerState
     {
         if (Player.Instance.OnGround)
         {
-            Player.Instance.ChangeState(new PlayerIdleState());
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+            {
+                Player.Instance.ChangeState(new PlayerRunState());
+            }
+            else
+            {
+                Player.Instance.ChangeState(new PlayerIdleState());
+            }
         }
         if (Player.Instance.Attack)
         {
@@ -24,5 +31,9 @@ public class PlayerJumpState : IPlayerState
     public void Exit()
     {
         Player.Instance.Jump = false;
+        if (Player.Instance.OnGround)
+        {
+            Player.Instance.gameObject.layer = 8;
+        }
     }
 }

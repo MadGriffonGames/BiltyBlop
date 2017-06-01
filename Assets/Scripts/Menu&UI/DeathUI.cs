@@ -25,7 +25,10 @@ public class DeathUI : MonoBehaviour
         SoundManager.PlayMusic("kid death", false);
         controls.SetActive(false);
         restartButton.SetActive(false);
-        continueButton.SetActive(false);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(false);
+        }
         fade.SetActive(true);
         mainCamera = GameObject.FindWithTag("MainCamera");
         StartCoroutine(ButtonDelay());
@@ -89,7 +92,10 @@ public class DeathUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         restartButton.SetActive(true);
-        continueButton.SetActive(true);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(true);
+        }
     }
 
     private void OnEnable()

@@ -11,6 +11,7 @@ public class CameraEffect : MonoBehaviour
     [SerializeField]
     GameObject blood;
     Color origColor;
+    bool hide = false;
 
     void Start()
     {
@@ -46,6 +47,16 @@ public class CameraEffect : MonoBehaviour
         bloodDuration = duration;
     }
 
+    void HideBlood()
+    {
+        blood.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.03f);
+        if (blood.GetComponent<SpriteRenderer>().color.a <= 0)
+        {
+            blood.SetActive(false);
+            hide = false;
+        }
+    }
+
     void Update()
     {
   
@@ -62,12 +73,12 @@ public class CameraEffect : MonoBehaviour
             bloodElapsed += Time.deltaTime;
             if (bloodDuration - bloodElapsed < 0.1f)
             {
-                blood.GetComponent<Image>().color -= new Color(0, 0, 0, 0.06f);
-                if (blood.GetComponent<Image>().color.a <= 0)
-                {
                     blood.SetActive(false);
-                }
             }
+        }
+        if (hide)
+        {
+            HideBlood();
         }
         if (percentComplete == 1 && Player.Instance.bossFight)
         {

@@ -9,15 +9,34 @@ public class Health : MonoBehaviour
     private Sprite[] healthSprites;
 
     [SerializeField]
-    private Image healthUI;
+    private RectTransform healthbar;
 
-	void Update ()
+    float firstHBScaleX;
+    int maxHealth;
+
+    private void Start()
     {
-        if (Player.Instance.Health < 0)
+        maxHealth = Player.Instance.Health;
+        firstHBScaleX = healthbar.localScale.x;
+        Debug.Log(1 / maxHealth);
+    }
+
+    void Update ()
+    {
+        if (Player.Instance.takeHit)
         {
-            healthUI.sprite = healthSprites[0];
+            SetHealthbar();
         }
-        else
-            healthUI.sprite = healthSprites[Player.Instance.Health];
 	}
+
+    public void SetHealthbar()
+    {
+        if (Player.Instance.Health != 0)
+        {
+            healthbar.localScale = new Vector3(healthbar.localScale.x - firstHBScaleX * (1 / maxHealth),
+                                               healthbar.localScale.y,
+                                               healthbar.localScale.z);
+        }
+        
+    }
 }

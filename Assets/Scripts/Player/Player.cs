@@ -101,6 +101,7 @@ public class Player : Character
         monstersKilled = 0;
         collectables = 0;
         lvlCoins = 0;
+        myArmature.armature.cacheFrameRate = 55;
     }
 
 	void Update()

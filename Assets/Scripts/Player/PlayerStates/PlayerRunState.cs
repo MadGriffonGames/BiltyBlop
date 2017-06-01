@@ -11,7 +11,7 @@ public class PlayerRunState : IPlayerState
 
     public void Execute()
     {
-        if (Input.GetAxis("Horizontal") == 0)
+        if (Input.GetAxis("Horizontal") == 0 && Player.Instance.mobileInput == 0)
         {
             Player.Instance.ChangeState(new PlayerIdleState());
         }

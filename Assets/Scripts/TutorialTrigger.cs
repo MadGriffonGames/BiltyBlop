@@ -42,11 +42,11 @@ public class TutorialTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && active)
         {
-            SoundManager.MakeSteps(false);
             if (arrow != null)
             {
                 arrow.SetActive(true);
             }
+            hide = false;
             show = true;
         }
     }
@@ -62,6 +62,7 @@ public class TutorialTrigger : MonoBehaviour
             {
                 arrow.SetActive(false);
             }
+            show = false;
             hide = true;
         }
     }

@@ -14,7 +14,7 @@ public class PlayerRunAttackState : IPlayerState
     {
         if (Player.Instance.myArmature.animation.isCompleted)
         {
-            if (Input.GetAxis("Horizontal") == 0)
+            if (Input.GetAxis("Horizontal") == 0 && Player.Instance.mobileInput == 0)
             {
                 Player.Instance.ChangeState(new PlayerIdleState());
             }

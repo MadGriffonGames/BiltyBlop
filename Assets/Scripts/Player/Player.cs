@@ -48,7 +48,7 @@ public class Player : Character
     public GameObject secretHalo;
     public bool Jump { get; set; }
     public bool takeHit = false;
-    private float mobileInput = 0;
+    public float mobileInput = 0;
     private float playerAxis = 0;
     public bool GotKey { get; set; }
     public bool immortal = false;

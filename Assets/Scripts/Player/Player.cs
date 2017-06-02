@@ -38,6 +38,7 @@ public class Player : Character
     public int lvlCoins;
     public int monstersKilled;
     public int collectables;
+    public float maxHealth;
 
     /*
      * Action vars
@@ -101,7 +102,7 @@ public class Player : Character
         monstersKilled = 0;
         collectables = 0;
         lvlCoins = 0;
-        myArmature.armature.cacheFrameRate = 55;
+        maxHealth = health;
     }
 
 	void Update()
@@ -313,6 +314,7 @@ public class Player : Character
         {
             CameraEffect.Shake(0.5f, 0.4f);
             health -= 1;
+            HealthUI.Instance.SetHealthbarDown();
             if (!IsDead)
             {
                 takeHit = true;

@@ -41,7 +41,6 @@ public class Coin : InteractiveObject
             MyAnimator.SetTrigger("collected");
             GameManager.CollectedCoins++;
             GameManager.lvlCollectedCoins++;
-            //timerOn = true;
             SoundManager.PlayPitchedSound("coin_collect2");
         }   
     }

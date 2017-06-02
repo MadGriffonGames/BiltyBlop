@@ -20,7 +20,7 @@ public class HP : InteractiveObject
             MyAnimator.SetTrigger("collected");
             Player.Instance.Health++;
             MakeFX.Instance.MakeHeal();
-            HealthUI.Instance.SetHealthbarUp();
+            HealthUI.Instance.SetHealthbar();
         }
     }
 

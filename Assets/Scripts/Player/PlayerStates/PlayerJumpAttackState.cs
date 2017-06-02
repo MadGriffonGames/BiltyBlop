@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerJumpAttackState : IPlayerState
 {
+    const int groundLayer = 8;
+    const int platformLayer = 9;
+
     public void Enter(Player player)
     {
         player.myArmature.animation.FadeIn("jump_attack", 0.03f, 1);
@@ -26,9 +29,9 @@ public class PlayerJumpAttackState : IPlayerState
     {
         Player.Instance.Attack = false;
         Player.Instance.AttackCollider.enabled = false;
-        if (Player.Instance.OnGround)
+        if (Player.Instance.OnGround && Player.Instance.gameObject.layer != platformLayer)
         {
-            Player.Instance.gameObject.layer = 8;
+            Player.Instance.gameObject.layer = groundLayer;
         }
     }
 }

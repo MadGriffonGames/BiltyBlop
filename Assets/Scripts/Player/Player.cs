@@ -217,7 +217,10 @@ public class Player : Character
             if (immortal)
             {
                 ParticleSystem tmp = GetComponentInChildren<ParticleSystem>();
-                tmp.gameObject.SetActive(false);
+                if (tmp != null)
+                {
+                    tmp.gameObject.SetActive(false);
+                }
             }
             immortal = false;
             StartCoroutine(TakeDamage());
@@ -316,7 +319,7 @@ public class Player : Character
         {
             CameraEffect.Shake(0.5f, 0.4f);
             health -= 1;
-            HealthUI.Instance.SetHealthbarDown();
+            HealthUI.Instance.SetHealthbar();
             if (!IsDead)
             {
                 takeHit = true;

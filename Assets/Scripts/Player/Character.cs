@@ -9,9 +9,9 @@ public abstract class Character : MonoBehaviour
 
     public bool TakingDamage { get; set; }
 
-    //public Animator MyAniamtor { get; private set; }
-
     public UnityArmatureComponent myArmature;
+    [SerializeField]
+    GameObject armatureObject;
 
     [SerializeField]
     protected int health;
@@ -56,8 +56,7 @@ public abstract class Character : MonoBehaviour
     public virtual void Start ()
     {
         facingRight = true;
-        myArmature = GetComponent<UnityArmatureComponent>();
-        //MyAniamtor = GetComponent<Animator>();
+        myArmature = armatureObject.GetComponent<UnityArmatureComponent>();
     }
 
     public void MeleeAttack()

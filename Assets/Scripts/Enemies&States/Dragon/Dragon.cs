@@ -117,7 +117,6 @@ public class Dragon : Boss
 
     IEnumerator Roar()
     {
-        //DRAGON SOUND HERE
         SoundManager.PlaySound("dragon_roar_long");
         yield return new WaitForSeconds(1);
         roar = false;

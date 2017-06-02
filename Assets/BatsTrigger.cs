@@ -15,8 +15,8 @@ public class BatsTrigger : MonoBehaviour {
         if(!wasUsed)
         if (other.gameObject.CompareTag("Player"))
         {
-                Bat[] bats = Bats.GetComponentsInChildren<Bat>();
-                foreach(Bat bat in bats)
+                Enemy[] bats = Bats.GetComponentsInChildren<Enemy>();
+                foreach(Enemy bat in bats)
                 {
                     bat.enabled = true;
                     bat.MyAniamtor.enabled = true;

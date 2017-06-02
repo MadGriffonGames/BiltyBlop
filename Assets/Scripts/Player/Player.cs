@@ -274,6 +274,7 @@ public class Player : Character
     public void EnableAttackCollider()
     {
         StartCoroutine(AttackColliderDelay());
+        StartCoroutine(KidHeadUI.Instance.ShowEmotion("angry"));
     }
 
     IEnumerator AttackColliderDelay()
@@ -310,6 +311,7 @@ public class Player : Character
     public override IEnumerator TakeDamage()
     {
         CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
+        StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
         if (!immortal)
         {
             CameraEffect.Shake(0.5f, 0.4f);

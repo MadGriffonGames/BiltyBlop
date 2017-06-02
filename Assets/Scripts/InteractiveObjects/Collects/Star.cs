@@ -6,17 +6,19 @@ public class Star : InteractiveObject
 {
 	[SerializeField]
 	private GameObject crystalParticle;
+    bool collect = false;
 
 	public override void Start ()
 	{
 		base.Start();
-	}
+    }
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
+		if(other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword") && !collect)
 		{
-			MyAnimator.SetTrigger("collected");
+            collect = true;
+            MyAnimator.SetTrigger("collected");
             Player.Instance.collectables++;
         }   
 	}

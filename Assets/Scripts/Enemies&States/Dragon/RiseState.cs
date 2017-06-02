@@ -30,7 +30,7 @@ public class RiseState : IDragonState
         }
         if (enemy.transform.position.y >= enemy.risePoint.transform.position.y)
         {
-            enemy.Move(10, 0);
+            enemy.Move(15, 0);
         }
         if (enemy.transform.position.x <= enemy.behindPosLeft.position.x && !reachLeft)
         {

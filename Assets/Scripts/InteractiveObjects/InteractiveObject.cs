@@ -9,6 +9,7 @@ public abstract class InteractiveObject : MonoBehaviour
     public virtual void Start ()
     {
         MyAnimator = GetComponent<Animator>();
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         enabled = false;
     }
 

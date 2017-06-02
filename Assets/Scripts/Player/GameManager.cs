@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         else
             collectedCoins = PlayerPrefs.GetInt("Coins");
         lvlCollectedCoins = 0;
-        if(SceneManager.GetActiveScene().name != "MainMenu")
+        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level9"))
             SoundManager.PlayMusic ("kid_music", true);
 	}
 

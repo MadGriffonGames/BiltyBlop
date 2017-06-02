@@ -31,7 +31,10 @@ public class LevelButton : MonoBehaviour
     {
         for (int i = 0; i < value; i++)
         {
-            stars[i].SetActive(true);
+            if (value <= 3)
+            {
+                stars[i].SetActive(true);
+            }
         }
     }
 
@@ -41,10 +44,5 @@ public class LevelButton : MonoBehaviour
         {
             stars[i].SetActive(false);
         }
-    }
-
-    private void OnRectTransformDimensionsChange()
-    {
-        
     }
 }

@@ -25,7 +25,10 @@ public class DeathUI : MonoBehaviour
         SoundManager.PlayMusic("kid death", false);
         controls.SetActive(false);
         restartButton.SetActive(false);
-        continueButton.SetActive(false);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(false);
+        }
         fade.SetActive(true);
         mainCamera = GameObject.FindWithTag("MainCamera");
         StartCoroutine(ButtonDelay());
@@ -57,15 +60,15 @@ public class DeathUI : MonoBehaviour
 
     public void Continue()
     {
+        SoundManager.PlayMusic("kid_music", true);
         if (GameManager.CollectedCoins >= 50)
         {
+            SoundManager.PlayMusic("kid_music", true);
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;
-            Player.Instance.gameObject.layer = 0;
-			Player.Instance.MyAniamtor.ResetTrigger ("death");      
+            Player.Instance.gameObject.layer = 0; 
             Player.Instance.Health = 3;
-			Player.Instance.MyAniamtor.SetTrigger ("revive");
             FindObjectOfType<Light>().intensity = Player.Instance.lightIntencityCP;
             Player.Instance.transform.position = new Vector3(Player.Instance.checkpointPosition.x,
                                                         Player.Instance.checkpointPosition.y,
@@ -75,7 +78,8 @@ public class DeathUI : MonoBehaviour
                                                         Player.Instance.transform.position.y,
                                                         mainCamera.transform.position.z);
 
-            Player.Instance.MyAniamtor.SetFloat("speed", 0);
+            Player.Instance.PlayerRevive();
+            Player.Instance.ChangeState(new PlayerIdleState());
 			Player.Instance.ButtonMove (0);
             Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
@@ -88,11 +92,15 @@ public class DeathUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         restartButton.SetActive(true);
-        continueButton.SetActive(true);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(true);
+        }
     }
 
     private void OnEnable()
     {
+        SoundManager.PlayMusic("kid death", false);
         Player.Instance.ResetBonusValues();
     }
 }

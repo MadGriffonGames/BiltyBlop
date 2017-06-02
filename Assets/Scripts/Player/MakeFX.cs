@@ -118,10 +118,6 @@ public class MakeFX : MonoBehaviour
 
     
 
-    public void makeSwordFX()
-    {
-        //swordEdge.StartDraw(0.06f, 1f);
 
-    }
 
 }

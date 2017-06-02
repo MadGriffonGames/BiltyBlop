@@ -18,12 +18,8 @@ public class BatsTrigger : MonoBehaviour {
                 Enemy[] bats = Bats.GetComponentsInChildren<Enemy>();
                 foreach(Enemy bat in bats)
                 {
-                    bat.enabled = true;
-                    bat.MyAniamtor.enabled = true;
-                    UnityArmatureComponent armature = bat.gameObject.GetComponent<UnityArmatureComponent>();
-                    armature.enabled = true;
+                    bat.ForceActivate();
                 }
-
                 wasUsed = true;
         }
     }

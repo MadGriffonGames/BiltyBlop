@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HP : InteractiveObject
 {
+    bool collected = false;
 
     public override void Start()
     {
@@ -12,12 +13,14 @@ public class HP : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.CompareTag("Player") && Player.Instance.Health < 3 && !other.transform.CompareTag("Sword"))
+        if (!collected && other.transform.CompareTag("Player") && Player.Instance.Health < Player.Instance.maxHealth && !other.transform.CompareTag("Sword"))
         {
-			SoundManager.PlaySound ("heart_collect");
+            collected = true;
+            SoundManager.PlaySound ("heart_collect");
             MyAnimator.SetTrigger("collected");
             Player.Instance.Health++;
             MakeFX.Instance.MakeHeal();
+            HealthUI.Instance.SetHealthbarUp();
         }
     }
 

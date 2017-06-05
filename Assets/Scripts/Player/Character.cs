@@ -10,6 +10,7 @@ public abstract class Character : MonoBehaviour
     public bool TakingDamage { get; set; }
 
     public UnityArmatureComponent myArmature;
+
     [SerializeField]
     GameObject armatureObject;
 

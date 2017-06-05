@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.Advertisements;
 
 public class DeathUI : MonoBehaviour
 {
@@ -22,16 +21,30 @@ public class DeathUI : MonoBehaviour
 
     GameObject mainCamera;
 
+    const int defaultLayer = 0;
+
     public void Start ()
     {
+<<<<<<< HEAD
         pauseBtn.SetActive(false);
+=======
+        SoundManager.PlayMusic("kid death", false);
+>>>>>>> origin/DevA
         controls.SetActive(false);
         restartButton.SetActive(false);
-        continueButton.SetActive(false);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(false);
+        }
         fade.SetActive(true);
+        if (TutorialUI.Instance.txt.text != "")
+        {
+            TutorialUI.Instance.oldmanFace.color -= new Color(0, 0, 0, TutorialUI.Instance.oldmanFace.color.a);
+            TutorialUI.Instance.textBar.color -= new Color(0, 0, 0, TutorialUI.Instance.textBar.color.a);
+            TutorialUI.Instance.txt.text = "";
+        }
         mainCamera = GameObject.FindWithTag("MainCamera");
         StartCoroutine(ButtonDelay());
-        //Advertisement.Show();
 	}
 
     private void Update()
@@ -62,13 +75,13 @@ public class DeathUI : MonoBehaviour
         SoundManager.PlayMusic("kid_music", true);
         if (GameManager.CollectedCoins >= 50)
         {
+            SoundManager.PlayMusic("kid_music", true);
             gameOverBar.GetComponent<Animator>().SetBool("animate", false);
 
             GameManager.CollectedCoins -= 50;
-            Player.Instance.gameObject.layer = 0;
-			Player.Instance.MyAniamtor.ResetTrigger ("death");      
+            Player.Instance.gameObject.layer = defaultLayer; 
             Player.Instance.Health = 3;
-			Player.Instance.MyAniamtor.SetTrigger ("revive");
+            HealthUI.Instance.SetHealthbar();
             FindObjectOfType<Light>().intensity = Player.Instance.lightIntencityCP;
             Player.Instance.transform.position = new Vector3(Player.Instance.checkpointPosition.x,
                                                         Player.Instance.checkpointPosition.y,
@@ -77,8 +90,9 @@ public class DeathUI : MonoBehaviour
             mainCamera.transform.position = new Vector3(Player.Instance.transform.position.x,
                                                         Player.Instance.transform.position.y,
                                                         mainCamera.transform.position.z);
-
-            Player.Instance.MyAniamtor.SetFloat("speed", 0);
+            
+            Player.Instance.PlayerRevive();
+            Player.Instance.ChangeState(new PlayerIdleState());
 			Player.Instance.ButtonMove (0);
             Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
@@ -91,7 +105,10 @@ public class DeathUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         restartButton.SetActive(true);
-        continueButton.SetActive(true);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(true);
+        }
     }
 
     private void OnEnable()

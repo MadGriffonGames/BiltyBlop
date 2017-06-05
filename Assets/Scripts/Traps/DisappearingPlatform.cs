@@ -59,7 +59,8 @@ public class DisappearingPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, true);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         }
     }
 
@@ -67,7 +68,8 @@ public class DisappearingPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other, false);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), false);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), false);
         }
     }
 }

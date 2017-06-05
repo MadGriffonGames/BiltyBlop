@@ -29,7 +29,7 @@ public class Dragon : Boss
     [SerializeField]
     public Collider2D takeDamageCollider;
     [SerializeField]
-    public GameObject enemyDamageCollider;
+    public Collider2D enemyDamageCollider;
     [SerializeField]
     public GameObject levelEnd;
     [SerializeField]
@@ -51,7 +51,6 @@ public class Dragon : Boss
     bool roar = true;
     int maxHealth;
     float firstHBScaleX;
-    float firstHBPosX;
 
     void Awake()
     {
@@ -59,7 +58,6 @@ public class Dragon : Boss
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
         maxHealth = Health;
         firstHBScaleX = healthbar.localScale.x;
-        firstHBPosX = healthbar.position.x;
         gameObject.SetActive(false);
     }
 
@@ -102,7 +100,7 @@ public class Dragon : Boss
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
         SetHealthbar();
-        yield return new WaitForSeconds(0.05f);
+        yield return null;
     }
 
     public void PlayAnimation(string name)
@@ -112,7 +110,7 @@ public class Dragon : Boss
 
     public void Move(float x, float y)
     {
-        MyRigidbody.velocity = new Vector2(x*transform.localScale.x/1.9f, y);
+        MyRigidbody.velocity = new Vector2(x * transform.localScale.x / 1.9f, y);
     }
 
     IEnumerator Roar()

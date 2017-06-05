@@ -13,6 +13,7 @@ public class WeaknessState : IDragonState
         this.enemy = enemy;
         enemy.armature.animation.timeScale = 1.5f;
         enemy.takeDamageCollider.enabled = true;
+        enemy.enemyDamageCollider.enabled = false;
     }
 
     public void Execute()
@@ -36,7 +37,7 @@ public class WeaknessState : IDragonState
         else
         {
             enemy.takeDamageCollider.enabled = false;
-			enemy.enemyDamageCollider.SetActive (false);
+			enemy.enemyDamageCollider.enabled = false;
             enemy.stun.SetActive(false);
             Player.Instance.collectables = 3;
             if (!dead)
@@ -44,6 +45,8 @@ public class WeaknessState : IDragonState
                 enemy.armature.animation.timeScale = 0.9f;
                 CameraEffect.Shake(0.2f, 1f);
                 enemy.armature.animation.FadeIn("DEATH", -1, 1);
+                GameManager.CollectedCoins += 200;
+                GameManager.lvlCollectedCoins += 200;
             }
             dead = true;
             if (enemy.armature.animation.lastAnimationName == "DEATH" && enemy.armature.animation.isCompleted)

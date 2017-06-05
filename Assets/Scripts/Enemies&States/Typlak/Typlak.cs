@@ -10,7 +10,7 @@ public class Typlak : MovingMeleeEnemy
     private GameObject typlakParticle;
     public bool attack;
     bool damaged = false;
-
+    public bool walk = false;
 
     void Awake()
     {
@@ -61,7 +61,7 @@ public class Typlak : MovingMeleeEnemy
                 SoundManager.PlaySound("enemyher loud");
                 Player.Instance.monstersKilled++;
                 Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
             }
             yield return null;
         }
@@ -72,6 +72,16 @@ public class Typlak : MovingMeleeEnemy
     private void OnCollisionEnter2D(Collision2D other)
     {
         currentState.OnCollisionEnter2D(other);
+    }
+
+    public void LocalMove()
+    {
+        if (!walk)
+            {
+                walk = true;
+                armature.animation.FadeIn("walk", -1, -1);
+            }
+         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
 
     public void AnimIdle()

@@ -8,8 +8,6 @@ public class LevelEndUI : MonoBehaviour
 {
     int coinsCollected;
     [SerializeField]
-    Text monstersText;
-    [SerializeField]
     Text coinsText;
     [SerializeField]
     GameObject[] starsFull;

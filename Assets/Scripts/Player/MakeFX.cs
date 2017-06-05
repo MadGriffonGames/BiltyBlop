@@ -41,9 +41,6 @@ public class MakeFX : MonoBehaviour
     [SerializeField]
     GameObject jumpBonus;
 
-    [SerializeField]
-    SwordEdge swordEdge;
-
 
     public void MakeDust()
     {
@@ -115,13 +112,4 @@ public class MakeFX : MonoBehaviour
         tmp.transform.SetParent(Player.Instance.transform);
         ps.Play();
     }
-
-    
-
-    public void makeSwordFX()
-    {
-        //swordEdge.StartDraw(0.06f, 1f);
-
-    }
-
 }

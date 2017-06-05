@@ -6,9 +6,9 @@ public class Portal : MonoBehaviour
 {
     [SerializeField]
     GameObject nextPortal;
-    GameObject mainCamera;
     [SerializeField]
     Animator MyAnimator;
+    GameObject mainCamera;
 
     private void Start()
     {

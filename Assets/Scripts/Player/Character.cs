@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DragonBones;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -8,7 +9,10 @@ public abstract class Character : MonoBehaviour
 
     public bool TakingDamage { get; set; }
 
-    public Animator MyAniamtor { get; private set; }
+    public UnityArmatureComponent myArmature;
+
+    [SerializeField]
+    GameObject armatureObject;
 
     [SerializeField]
     protected int health;
@@ -29,9 +33,9 @@ public abstract class Character : MonoBehaviour
     public abstract bool IsDead { get; }
 
     [SerializeField]
-    private EdgeCollider2D attackCollider;
+    private PolygonCollider2D attackCollider;
 
-    public EdgeCollider2D AttackCollider
+    public PolygonCollider2D AttackCollider
     {
         get
         {
@@ -53,13 +57,8 @@ public abstract class Character : MonoBehaviour
     public virtual void Start ()
     {
         facingRight = true;
-        MyAniamtor = GetComponent<Animator>();
+        myArmature = armatureObject.GetComponent<UnityArmatureComponent>();
     }
-
-	void Update ()
-    {
-		
-	}
 
     public void MeleeAttack()
     {

@@ -5,7 +5,7 @@ using DragonBones;
 
 public class Enemy : MonoBehaviour
 {
-    protected UnityArmatureComponent armature;
+    public UnityArmatureComponent armature;
 
     public GameObject Target { get; set; }
 

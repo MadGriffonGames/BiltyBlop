@@ -128,6 +128,55 @@ public class SoundManager : MonoBehaviour
 		Instance.PlaySoundInternal(name);
 	}
 
+    /*public static void PlaySoundLooped(string name)
+    {
+        Instance.PlaySoundLoopedInternal(name);
+    }
+
+    void PlaySoundLoopedInternal(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            Debug.Log(Instance + " :: Имя файла не указанно.");
+            return;
+        }
+
+        StartCoroutine(GetSoundLooped(name));
+    }
+
+    IEnumerator GetSoundLooped(string soundName)
+   {
+       ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
+
+       while (!request.isDone)
+       {
+           yield return null;
+       }
+
+       AudioClip clip = (AudioClip)request.asset;
+
+       if (clip == null)
+       {
+           Debug.Log(Instance + " :: Файл не найден: " + soundName);
+           yield return false;
+       }
+
+       GameObject obj = new GameObject("Sound: " + soundName);
+       AudioSource au = obj.AddComponent<AudioSource>();
+       obj.transform.parent = transform;
+       au.outputAudioMixerGroup = soundGroup;
+       au.playOnAwake = false;
+       au.loop = true;
+       au.pitch = currentPitch;
+       au.mute = muteSound;
+       au.volume = soundVolume;
+       au.clip = clip;
+       au.Play();
+       //Debug.Log(au.volume + " " + soundVolume);
+       Destroy(obj, clip.length);
+   }*/
+
+
     public static void PlayPitchedSound(string name)
     {
         Instance.PlaySoundInternalPitched(name, timer);
@@ -196,7 +245,9 @@ public class SoundManager : MonoBehaviour
 		current = au;
 	}
 
-	public IEnumerator GetSound(string soundName)
+   
+
+    public IEnumerator GetSound(string soundName)
 	{
 		ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
 

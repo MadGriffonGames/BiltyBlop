@@ -17,11 +17,14 @@ public class DeathUI : MonoBehaviour
     GameObject restartButton;
     [SerializeField]
     GameObject continueButton;
+    [SerializeField]
+    GameObject pauseBtn;
 
     GameObject mainCamera;
 
     public void Start ()
     {
+        pauseBtn.SetActive(false);
         controls.SetActive(false);
         restartButton.SetActive(false);
         continueButton.SetActive(false);

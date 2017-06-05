@@ -16,7 +16,7 @@ public class PlayerTakeHitState : IPlayerState
             Player.Instance.ChangeState(new PlayerIdleState());
         }
     }
-
+     
     public void Exit()
     {
         Player.Instance.takeHit = false;

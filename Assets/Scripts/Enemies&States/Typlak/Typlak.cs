@@ -61,7 +61,7 @@ public class Typlak : MovingMeleeEnemy
                 SoundManager.PlaySound("enemyher loud");
                 Player.Instance.monstersKilled++;
                 Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
             }
             yield return null;
         }

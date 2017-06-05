@@ -38,6 +38,7 @@ public class Player : Character
     public int lvlCoins;
     public int monstersKilled;
     public int collectables;
+    public float maxHealth;
 
     /*
      * Action vars
@@ -101,6 +102,7 @@ public class Player : Character
         monstersKilled = 0;
         collectables = 0;
         lvlCoins = 0;
+        maxHealth = health;
     }
 
 	void Update()
@@ -215,7 +217,10 @@ public class Player : Character
             if (immortal)
             {
                 ParticleSystem tmp = GetComponentInChildren<ParticleSystem>();
-                tmp.gameObject.SetActive(false);
+                if (tmp != null)
+                {
+                    tmp.gameObject.SetActive(false);
+                }
             }
             immortal = false;
             StartCoroutine(TakeDamage());
@@ -272,11 +277,12 @@ public class Player : Character
     public void EnableAttackCollider()
     {
         StartCoroutine(AttackColliderDelay());
+        StartCoroutine(KidHeadUI.Instance.ShowEmotion("angry"));
     }
 
     IEnumerator AttackColliderDelay()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         AttackCollider.enabled = true;
     }
 
@@ -308,10 +314,12 @@ public class Player : Character
     public override IEnumerator TakeDamage()
     {
         CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
+        StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
         if (!immortal)
         {
             CameraEffect.Shake(0.5f, 0.4f);
             health -= 1;
+            HealthUI.Instance.SetHealthbar();
             if (!IsDead)
             {
                 takeHit = true;

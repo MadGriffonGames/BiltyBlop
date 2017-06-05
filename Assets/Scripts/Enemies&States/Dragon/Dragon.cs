@@ -100,7 +100,7 @@ public class Dragon : Boss
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
         SetHealthbar();
-        yield return new WaitForSeconds(0.05f);
+        yield return null;
     }
 
     public void PlayAnimation(string name)

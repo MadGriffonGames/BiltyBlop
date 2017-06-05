@@ -26,11 +26,11 @@ public class FlyState : IDragonState
     {
         if (!reachRight)
         {
-            enemy.Move(10, 0);
+            enemy.Move(13, 0);
         }
         if (reachRight && !reachLeft)
         {
-            enemy.Move(10, 0);
+            enemy.Move(13, 0);
         }
         if (enemy.transform.position.x <= enemy.behindPosLeft.position.x && !reachLeft)
         {

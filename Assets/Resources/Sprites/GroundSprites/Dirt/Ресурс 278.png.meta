@@ -76,7 +76,7 @@ TextureImporter:
     overridden: 1
   - buildTarget: iPhone
     maxTextureSize: 128
-    textureFormat: -1
+    textureFormat: 33
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -94,7 +94,7 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: 
+  spritePackingTag: DirtSprites
   userData: 
   assetBundleName: 
   assetBundleVariant: 

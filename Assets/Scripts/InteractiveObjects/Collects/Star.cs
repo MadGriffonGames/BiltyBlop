@@ -30,7 +30,7 @@ public class Star : InteractiveObject
 
     public void ShowStar()
     {
-        CollectsUI.Instance.ShowStar(Player.Instance.collectables);
+        StarsUI.Instance.ShowStar(Player.Instance.collectables);
     }
 
     public void PlaySound()

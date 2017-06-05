@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class CollectsUI : MonoBehaviour
+public class StarsUI : MonoBehaviour
 {
-    private static CollectsUI instance;
-    public static CollectsUI Instance
+    private static StarsUI instance;
+    public static StarsUI Instance
     {
         get
         {
             if (instance == null)
-                instance = GameObject.FindObjectOfType<CollectsUI>();
+                instance = GameObject.FindObjectOfType<StarsUI>();
             return instance;
         }
     }

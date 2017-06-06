@@ -95,4 +95,10 @@ public class Enemy : MonoBehaviour
         MyAniamtor.enabled = true;
         armature.enabled = true;
     }
+    public void ForceActivate()
+    {
+        enabled = true;
+        MyAniamtor.enabled = true;
+        armature.enabled = true;
+    }
 }

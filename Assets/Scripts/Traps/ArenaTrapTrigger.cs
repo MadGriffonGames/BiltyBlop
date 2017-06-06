@@ -27,7 +27,8 @@ class ArenaTrapTrigger : MonoBehaviour
 
     private bool isActivated;
     private bool isBlocked;
-    private int playerKills;
+
+    private int MaxEnemies = 2; 
 
 
     private void Start()
@@ -43,14 +44,12 @@ class ArenaTrapTrigger : MonoBehaviour
     {
         if (isActivated)
         {
-            if (Player.Instance.monstersKilled > playerKills)
+            int enemy_count = spawner.getAliveEnemiesCount();
+            if (enemy_count < MaxEnemies)
             {
                 if (!spawner.isEmpty())
-                {
-                    spawner.SpawnEnemy();
-                    playerKills = Player.Instance.monstersKilled;
-                }
-                else if (Player.Instance.monstersKilled > playerKills+1) makeVictory();
+                    StartCoroutine(spawner.SpawnEnemy(true));
+                else if(enemy_count == 0) makeVictory();
             }
         }
     }
@@ -63,12 +62,13 @@ class ArenaTrapTrigger : MonoBehaviour
             RDoor.Activate();
             fight.Activate();
             mushroom.Activate();
-               
-            playerKills = Player.Instance.monstersKilled;
-                spawner.SpawnEnemy();
-                spawner.SpawnEnemy();
                 isActivated = true;
                 isBlocked = true;
+
+                for(int i=0; i<MaxEnemies;i++)
+                {
+                    StartCoroutine(spawner.SpawnEnemy(false));
+                }
         }
     }
     private void makeVictory()
@@ -78,11 +78,14 @@ class ArenaTrapTrigger : MonoBehaviour
         fight.Activate();
         mushroom.Activate();
         ArenaRewards.SetActive(true);
-        Collider2D [] colliders = ArenaRewards.GetComponentsInChildren<Collider2D>();
+        Collider2D [] colliders = ArenaRewards.GetComponentsInChildren<Collider2D>(true);
         foreach(Collider2D col in colliders)
         {
-            if(!col.isTrigger)
-            Physics2D.IgnoreCollision(Player.Instance.GetComponent<Collider2D>(), col);
+            if (!col.isTrigger)
+            {
+                Physics2D.IgnoreCollision(Player.Instance.gameObject.GetComponent<BoxCollider2D>(), col);
+                Physics2D.IgnoreCollision(Player.Instance.gameObject.GetComponent<CapsuleCollider2D>(), col);
+            }
         }
         isActivated = false;
     }

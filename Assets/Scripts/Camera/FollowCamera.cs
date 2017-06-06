@@ -72,7 +72,6 @@ public class FollowCamera : MonoBehaviour
 
         Vector3 targetDirection = (target.transform.position - posNoZ);
         // Adding Offsets 
-        Debug.Log(targetDirection);
         targetDirection += offsetY;
         targetDirection.x += offset.x;
 

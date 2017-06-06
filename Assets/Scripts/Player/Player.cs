@@ -124,7 +124,6 @@ public class Player : Character
         {
             shadow.SetActive(false);
         }
-
     }
 
     void FixedUpdate() 

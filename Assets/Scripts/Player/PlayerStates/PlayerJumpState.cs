@@ -16,7 +16,7 @@ public class PlayerJumpState : IPlayerState
     {
         if (Player.Instance.OnGround)
         {
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Player.Instance.mobileInput) > 0)
             {
                 Player.Instance.ChangeState(new PlayerRunState());
             }

@@ -9,5 +9,9 @@ public class Edge : MonoBehaviour
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.gameObject.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.gameObject.GetComponent<CapsuleCollider2D>(), true);
     }
-
+    private void OnEnable()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.gameObject.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.gameObject.GetComponent<CapsuleCollider2D>(), true);
+    }
 }

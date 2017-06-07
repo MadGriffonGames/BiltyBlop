@@ -46,7 +46,7 @@ public class Player : Character
     [SerializeField]
     private float jumpForce;
     [SerializeField]
-    public GameObject secretHalo;
+    public GameObject secretIndication;
     public bool Jump { get; set; }
     public bool takeHit = false;
     public float mobileInput = 0;
@@ -124,7 +124,6 @@ public class Player : Character
         {
             shadow.SetActive(false);
         }
-
     }
 
     void FixedUpdate() 

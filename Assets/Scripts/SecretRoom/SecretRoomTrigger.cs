@@ -15,7 +15,7 @@ public class SecretRoomTrigger : MonoBehaviour
         {
             secretRoom.SetActive(false);
             secretRoomHalo.SetActive(false);
-            Player.Instance.secretHalo.SetActive(false);
+            Player.Instance.secretIndication.SetActive(false);
         }
     }
 

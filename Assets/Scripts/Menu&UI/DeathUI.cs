@@ -16,6 +16,10 @@ public class DeathUI : MonoBehaviour
     GameObject restartButton;
     [SerializeField]
     GameObject continueButton;
+    [SerializeField]
+    GameObject pauseButton;
+    [SerializeField]
+    GameObject mainMenuButton;
 
     GameObject mainCamera;
 
@@ -24,8 +28,10 @@ public class DeathUI : MonoBehaviour
     public void Start ()
     {
         SoundManager.PlayMusic("kid death", false);
+        pauseButton.SetActive(false);
         controls.SetActive(false);
         restartButton.SetActive(false);
+        mainMenuButton.SetActive(false);
         if (continueButton != null)
         {
             continueButton.SetActive(false);
@@ -53,6 +59,7 @@ public class DeathUI : MonoBehaviour
         }
         if (controls.activeInHierarchy)
         {
+            pauseButton.SetActive(false);
             controls.SetActive(false);
         }
     }
@@ -90,15 +97,22 @@ public class DeathUI : MonoBehaviour
 			Player.Instance.ButtonMove (0);
             Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
             controls.SetActive(true);
+            pauseButton.SetActive(true);
             fade.SetActive(false);
             this.gameObject.SetActive(false);
         }     
+    }
+
+    public void PlayUISound(string sound)
+    {
+        SoundManager.PlaySound(sound);
     }
 
     IEnumerator ButtonDelay()
     {
         yield return new WaitForSeconds(1);
         restartButton.SetActive(true);
+        mainMenuButton.SetActive(true);
         if (continueButton != null)
         {
             continueButton.SetActive(true);

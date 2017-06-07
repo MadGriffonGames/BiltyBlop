@@ -8,7 +8,7 @@ public class SecretRoomHalo : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Player.Instance.secretHalo.SetActive(true);
+            Player.Instance.secretIndication.SetActive(true);
         }
     }
 
@@ -16,7 +16,7 @@ public class SecretRoomHalo : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Player.Instance.secretHalo.SetActive(false);
+            Player.Instance.secretIndication.SetActive(false);
         }
     }
 }

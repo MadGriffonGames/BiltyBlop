@@ -81,7 +81,7 @@ public class Portal : MonoBehaviour
             
 
             if (colorA < opacity)
-                colorA += 2.5f;
+                colorA += 5f;
             else
             {
                 showFade = false;
@@ -96,7 +96,7 @@ public class Portal : MonoBehaviour
             image.SetAlpha(colorA);
 
             if (colorA > 0)
-                colorA -= 2.5f;
+                colorA -= 1.5f;
             else
             {
                 hideFade = false;

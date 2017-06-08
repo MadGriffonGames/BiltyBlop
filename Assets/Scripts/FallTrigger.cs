@@ -8,11 +8,16 @@ public class FallTrigger : MonoBehaviour
     Transform spawnPoint;
 
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
+    {
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Player.Instance.Health -= 1;
+            Debug.Log(other.gameObject.name);
             StartCoroutine(Player.Instance.TakeDamage());
             Player.Instance.transform.position = spawnPoint.position;
         }

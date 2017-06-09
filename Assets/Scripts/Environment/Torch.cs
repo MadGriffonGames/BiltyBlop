@@ -20,21 +20,32 @@ public class Torch : MonoBehaviour
 	void Start ()
     {
         MyAnimator = GetComponentsInChildren<Animator>();
-        MyAnimator[0].enabled = false;
-        MyAnimator[1].enabled = false;
+
+        if (MyAnimator[0] != null)
+            MyAnimator[0].enabled = false;
+
+        if (MyAnimator[1] != null)
+            MyAnimator[1].enabled = false;
+
         isShining = true;
     }
 
     private void OnBecameVisible()
     {
-        MyAnimator[0].enabled = true;
-        MyAnimator[1].enabled = true;
+        if (MyAnimator[0] != null)
+            MyAnimator[0].enabled = true;
+
+        if (MyAnimator[1] != null)
+            MyAnimator[1].enabled = true;
     }
 
     private void OnBecameInvisible()
     {
-        MyAnimator[0].enabled = false;
-        MyAnimator[1].enabled = false;
+        if (MyAnimator[0] != null)
+            MyAnimator[0].enabled = false;
+
+        if (MyAnimator[1] != null)
+            MyAnimator[1].enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

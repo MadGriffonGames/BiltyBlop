@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
         coinTxt = FindObjectOfType<Text>();
         if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level9"))
             SoundManager.PlayMusic ("kid_music", true);
-	}
+        if (SceneManager.GetActiveScene().name == "Level6")
+            SoundManager.PlaySoundLooped("rain sfx");
+    }
 
     public void PlayUISound(string sound)
     {

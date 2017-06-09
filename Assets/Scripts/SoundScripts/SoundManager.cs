@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
 	public AudioMixerGroup musicGroup;
 	public AudioMixerGroup soundGroup;
 
-	private static AudioSource last, current, steps;
+	private static AudioSource last, last1, current, current1, steps;
 	public static float musicVolume, soundVolume;
 	private static bool muteMusic, muteSound;
     private static float currentPitch = 1;
@@ -88,17 +88,26 @@ public class SoundManager : MonoBehaviour
 	{
 		musicVolume = volume;
 		if(current) current.volume = volume;
-	}
+        if (current1) current1.volume = volume;
+    }
 
 	public static void MuteSound(bool value)
 	{
 		muteSound = value;
-	}
+        if (current1)
+        {
+            current1.mute = value;
+        }
+    }
 
 	public static void MuteMusic(bool value)
 	{
 		muteMusic = value;
-		if(current) current.mute = value;
+        if (current)
+        {
+            current.mute = value;
+        }
+        
 	}
 
 	 public void PlaySoundInternal(string soundName)
@@ -128,10 +137,14 @@ public class SoundManager : MonoBehaviour
 		Instance.PlaySoundInternal(name);
 	}
 
-    /*public static void PlaySoundLooped(string name)
+
+
+    public static void PlaySoundLooped(string name)
     {
         Instance.PlaySoundLoopedInternal(name);
     }
+
+
 
     void PlaySoundLoopedInternal(string name)
     {
@@ -143,6 +156,8 @@ public class SoundManager : MonoBehaviour
 
         StartCoroutine(GetSoundLooped(name));
     }
+
+
 
     IEnumerator GetSoundLooped(string soundName)
    {
@@ -161,20 +176,24 @@ public class SoundManager : MonoBehaviour
            yield return false;
        }
 
+        last1 = current1;
+
        GameObject obj = new GameObject("Sound: " + soundName);
        AudioSource au = obj.AddComponent<AudioSource>();
        obj.transform.parent = transform;
-       au.outputAudioMixerGroup = soundGroup;
+       au.outputAudioMixerGroup = musicGroup;
        au.playOnAwake = false;
        au.loop = true;
        au.pitch = currentPitch;
-       au.mute = muteSound;
-       au.volume = soundVolume;
+       au.mute = muteMusic;
+       au.volume = (last1 == null) ? musicVolume : 0;
        au.clip = clip;
        au.Play();
-       //Debug.Log(au.volume + " " + soundVolume);
-       Destroy(obj, clip.length);
-   }*/
+       current1 = au;
+       //Destroy(obj, clip.length);
+   }
+
+
 
 
     public static void PlayPitchedSound(string name)
@@ -239,7 +258,7 @@ public class SoundManager : MonoBehaviour
 		au.loop = loop;
         au.pitch = currentPitch;
 		au.mute = muteMusic;
-		au.volume = (last == null) ? musicVolume : 0;
+        au.volume = (last == null) ? musicVolume : 0;
 		au.clip = clip;
 		au.Play();
 		current = au;

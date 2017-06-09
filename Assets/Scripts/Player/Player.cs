@@ -151,9 +151,9 @@ public class Player : Character
 #endif
             OnGround = IsGrounded();
 
-            if ((PlayerPrefs.GetInt("SoundsIsOn") == 0) || (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1)))
+            if ((PlayerPrefs.GetInt("SoundsIsOn") == 0) | (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1)))
                 SoundManager.MakeSteps(false);
-            else if (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround))
+            else if ((PlayerPrefs.GetInt("SoundsIsOn") == 1) | (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround)))
                 SoundManager.MakeSteps(true);
         }
     }

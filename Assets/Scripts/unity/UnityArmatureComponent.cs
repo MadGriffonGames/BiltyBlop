@@ -25,7 +25,7 @@ namespace DragonBones
 #if UNITY_EDITOR
                     Object.DestroyImmediate(gameObject);
 #else
-                    Object.Destroy(gameObject);
+                    //Object.Destroy(gameObject);
 #endif
                 }
             }
@@ -197,7 +197,6 @@ namespace DragonBones
         public DragonBonesData LoadData(TextAsset dragonBonesJSON, List<string> textureAtlasJSON)
         {
             DragonBonesData dragonBonesData = null;
-
             if (dragonBonesJSON != null)
             {
                 dragonBonesData = UnityFactory.factory.LoadDragonBonesData(dragonBonesJSON);

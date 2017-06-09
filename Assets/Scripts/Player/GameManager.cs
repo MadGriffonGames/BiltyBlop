@@ -32,7 +32,14 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Coins", collectedCoins);
         }
         else
+        {
             collectedCoins = PlayerPrefs.GetInt("Coins");
+        }
+
+        if (!PlayerPrefs.HasKey("Skin"))
+        {
+            PlayerPrefs.SetString("Skin", "classickidarian");
+        }
         lvlCollectedCoins = 0;
         coinTxt = FindObjectOfType<Text>();
         if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level9"))

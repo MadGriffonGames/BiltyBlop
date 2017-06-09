@@ -6,6 +6,7 @@ public class PlayerRunAttackState : IPlayerState
 {
     public void Enter(Player player)
     {
+        SoundManager.PlaySound("swing2");
         player.myArmature.animation.FadeIn("run_attack", -1, 1);
         player.EnableAttackCollider();
     }

@@ -60,6 +60,7 @@ public class EvilFlower : MeleeEnemy
         {
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
 			SoundManager.PlaySound ("flower_death");
+            GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
         }
         yield return null;
@@ -86,5 +87,12 @@ public class EvilFlower : MeleeEnemy
         armature.animation.timeScale = 2f;
         
         armature.animation.Play("PREPARATION");
+    }
+
+    private void OnEnable()
+    {
+        Health = 1;
+        Target = null;
+        ChangeState(new EvilFlowerIdleState());
     }
 }

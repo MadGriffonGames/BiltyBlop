@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
 	public Text coinTxt;
     public static string levelName;
     public static int lvlCollectedCoins;
+    public static List<GameObject> deadEnemies = new List<GameObject>();
 
     void Start () 
 	{

@@ -60,6 +60,7 @@ public class EvilFlowerGreen : RangeEnemy
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
 			SoundManager.PlaySound ("green flower");
+            GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
         }
         yield return null;
@@ -77,6 +78,13 @@ public class EvilFlowerGreen : RangeEnemy
             GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.8f, -5), Quaternion.Euler(0, 0, 180));
             tmp.GetComponent<Seed>().Initialize(Vector2.right);
         }
+    }
+
+    private void OnEnable()
+    {
+        Health = 1;
+        Target = null;
+        ChangeState(new EFGreenIdleState());
     }
 
     public void AnimIdle()

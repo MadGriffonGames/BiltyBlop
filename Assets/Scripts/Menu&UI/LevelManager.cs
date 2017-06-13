@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
 	void Start ()
     {
         groupIndex = 0;
-		for (int i = 1; i < 10; i++) 
+		for (int i = 1; i < 11; i++) 
 		{
 			PlayerPrefs.SetInt ("Level" + i, 1);
 		}

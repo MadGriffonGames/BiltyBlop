@@ -58,7 +58,7 @@ public class Hedgehog : MovingMeleeEnemy
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("hedgehog_death");
             Instantiate(spikeParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
-            Destroy(transform.parent.gameObject);
+            gameObject.SetActive(false);
 
         }
         yield return null;

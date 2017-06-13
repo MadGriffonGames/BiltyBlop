@@ -96,6 +96,13 @@ public class Enemy : MonoBehaviour
         armature.enabled = true;
     }
 
+    private void OnBecameInvisible()
+    {
+        enabled = false;
+        MyAniamtor.enabled = false;
+        armature.enabled = false;
+    }
+
     public void ForceActivate()
     {
         enabled = true;

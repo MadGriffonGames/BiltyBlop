@@ -60,7 +60,7 @@ public class EvilFlower : MeleeEnemy
         {
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
 			SoundManager.PlaySound ("flower_death");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         yield return null;
     }

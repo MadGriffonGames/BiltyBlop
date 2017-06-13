@@ -6,14 +6,12 @@ using UnityEngine;
 public class kidariantest : MonoBehaviour
 {
     UnityArmatureComponent myArmature;
+
+    Slot sl;
+
     private void Start()
     {
-        Slot slot = myArmature.armature.GetSlot("part");
-        if (slot == null)
-        {
-            Debug.Log(1);
-        }
-        
+        myArmature.armature.GetSlotByDisplay(gameObject);
     }
 
     void Update ()

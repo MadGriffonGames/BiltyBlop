@@ -76,6 +76,16 @@ public class Hedgehog : MovingMeleeEnemy
 
     }
 
+    public void StartIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
+    }
+
+    public void StopIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
+    }
+
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);

@@ -7,6 +7,7 @@ public class PlayerAttackState : IPlayerState
     public void Enter(Player player)
     {
         player.myArmature.animation.FadeIn("attack", 0.03f, 1);
+        SoundManager.PlaySound("swing");
         player.EnableAttackCollider();
     }
 

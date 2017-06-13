@@ -20,7 +20,7 @@ public class RainDrop : MonoBehaviour
 
     private void OnBecameVisible()
     {
-        //SoundManager.PlayMusic("rain sfx", true);
+        
         MyAnimator.enabled = true;
         enabled = true;
     }

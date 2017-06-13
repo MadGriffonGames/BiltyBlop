@@ -71,6 +71,7 @@ public class RuneStone : InteractiveObject
 	{
 		yield return new WaitForSeconds (0.2f);
 		Player.Instance.myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;
+        Player.Instance.myRigidbody.freezeRotation = true;
         Player.Instance.ChangeState(new PlayerVictoryState());
     }
 }

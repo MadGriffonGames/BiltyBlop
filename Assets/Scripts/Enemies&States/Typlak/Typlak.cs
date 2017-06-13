@@ -54,6 +54,7 @@ public class Typlak : MovingMeleeEnemy
         {
             damaged = true;
             health -= Player.Instance.damage;
+            StartCoroutine(AnimationDelay());
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
             if (IsDead)

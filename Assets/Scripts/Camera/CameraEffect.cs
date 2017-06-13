@@ -8,7 +8,6 @@ public class CameraEffect : MonoBehaviour
     private static Transform position;
     private static float shakeElapsed, shakeDuration, initiatePower, percentComplete;
     private float bloodElapsed, bloodDuration;
-    [SerializeField]
     GameObject blood;
     Color origColor;
     bool hide = false;
@@ -17,6 +16,7 @@ public class CameraEffect : MonoBehaviour
     {
         percentComplete = 1;
         position = GetComponent<Transform>();
+        blood = GameObject.FindGameObjectWithTag("Blood");
     }
 
     public static void Shake(float duration, float power)

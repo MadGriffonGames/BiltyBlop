@@ -53,11 +53,14 @@ public abstract class Character : MonoBehaviour
 
     public bool Attack { get; set; }
 
-    // Use this for initialization
     public virtual void Start ()
     {
         facingRight = true;
         myArmature = armatureObject.GetComponent<UnityArmatureComponent>();
+        //myArmature.Dispose(false);//destroy all child game objects
+        //UnityFactory.factory.BuildArmatureComponent(PlayerPrefs.GetString("Skin", "Classic"), null, null, null, armatureObject.gameObject);
+        //myArmature.sortingLayerName = myArmature.sortingLayerName;
+        //myArmature.sortingOrder = myArmature.sortingOrder;
     }
 
     public void MeleeAttack()

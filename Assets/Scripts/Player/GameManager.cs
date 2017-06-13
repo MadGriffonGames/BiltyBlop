@@ -32,12 +32,26 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Coins", collectedCoins);
         }
         else
+        {
             collectedCoins = PlayerPrefs.GetInt("Coins");
+        }
+
+        if (!PlayerPrefs.HasKey("Skin"))
+        {
+            PlayerPrefs.SetString("Skin", "Classic");
+        }
+
         lvlCollectedCoins = 0;
-        coinTxt = FindObjectOfType<Text>();
-        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level9"))
+        if (SceneManager.GetActiveScene().name.Contains("Level"))
+        {
+            coinTxt = FindObjectOfType<Text>();
+        }
+        
+        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
             SoundManager.PlayMusic ("kid_music", true);
-	}
+        if (SceneManager.GetActiveScene().name == "Level6")
+            SoundManager.PlaySoundLooped("rain sfx");
+    }
 
     public void PlayUISound(string sound)
     {

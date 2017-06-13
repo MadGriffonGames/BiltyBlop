@@ -58,13 +58,14 @@ public class EvilFlower : MeleeEnemy
         CameraEffect.Shake(0.2f, 0.3f);
         if (IsDead)
         {
-            Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
 			SoundManager.PlaySound ("flower_death");
             Destroy(gameObject);
         }
         yield return null;
     }
+
+    
 
     public void AnimIdle()
 	{

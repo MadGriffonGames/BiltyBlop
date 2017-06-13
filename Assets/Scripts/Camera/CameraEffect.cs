@@ -82,7 +82,7 @@ public class CameraEffect : MonoBehaviour
         }
         if (percentComplete == 1 && Player.Instance.bossFight)
         {
-            position.localPosition = new Vector3(0, 0, 0); 
+            position.localPosition = new Vector3(0, 0, 0);
         }
     }
 }

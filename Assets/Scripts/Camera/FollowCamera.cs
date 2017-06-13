@@ -82,7 +82,9 @@ public class FollowCamera : MonoBehaviour
             else if (Player.Instance.myRigidbody.velocity.y <= 13f)
                 interpVelocityY = 20;
             else interpVelocityY = 150;
-            interpVelocityX = targetDirection.magnitude * Mathf.Abs(Player.Instance.myRigidbody.velocity.x) * 3f;
+            if (Player.Instance.myRigidbody.velocity.x != 0)
+                interpVelocityX = targetDirection.magnitude * Mathf.Abs(Player.Instance.myRigidbody.velocity.x) * 3f;
+            else interpVelocityX = targetDirection.magnitude * 12f;
         }
         else interpVelocityX = 0;
         if (Player.Instance.gameObject.layer == platformLayer)
@@ -90,7 +92,7 @@ public class FollowCamera : MonoBehaviour
             interpVelocityX = 25;
         }
         targetPos = transform.position + new Vector3(targetDirection.x * interpVelocityX * Time.deltaTime * Player.Instance.timeScaler, targetDirection.y * interpVelocityY * Time.deltaTime * Player.Instance.timeScaler, 0);
-
+        //Debug.Log(targetPos + " targetDir.x = " + targetDirection.x + " veloX = " + interpVelocityX);
         transform.position = Vector2.Lerp(transform.position, targetPos, 0.05f);
         transform.position = new Vector3(transform.position.x, transform.position.y, -20); // костыльный сет Z на позицмию камеры.
     }

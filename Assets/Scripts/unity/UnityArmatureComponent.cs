@@ -25,7 +25,7 @@ namespace DragonBones
 #if UNITY_EDITOR
                     Object.DestroyImmediate(gameObject);
 #else
-                    //Object.Destroy(gameObject);
+                    Object.Destroy(gameObject);
 #endif
                 }
             }

@@ -10,15 +10,19 @@ public class KidSkin : MonoBehaviour
     void Start ()
     {
         myArmature = GetComponent<UnityArmatureComponent>();
-        myArmature.Dispose(false);//destroy all child game objects
-        UnityFactory.factory.BuildArmatureComponent(PlayerPrefs.GetString("Skin", "classickidarian") , null, null, null, gameObject);
+        myArmature._onClear();
+        UnityFactory.factory.BuildArmatureComponent(PlayerPrefs.GetString("Skin", "Classic") , null, null, null, gameObject);
+        myArmature.sortingLayerName = myArmature.sortingLayerName;
+        myArmature.sortingOrder = myArmature.sortingOrder;
         myArmature.animation.Play("victory_idle");
     }
 
     public void ChangeSkin(string skinName)
     {
-        myArmature.Dispose(false);//destroy all child game objects
+        myArmature._onClear();
         UnityFactory.factory.BuildArmatureComponent(skinName, null, null, null, gameObject);
+        myArmature.sortingLayerName = myArmature.sortingLayerName;
+        myArmature.sortingOrder = myArmature.sortingOrder;
         PlayerPrefs.SetString("Skin", skinName);
         myArmature.animation.Play("victory_idle");
     }

@@ -57,10 +57,10 @@ public abstract class Character : MonoBehaviour
     {
         facingRight = true;
         myArmature = armatureObject.GetComponent<UnityArmatureComponent>();
-        myArmature.Dispose(false);//destroy all child game objects
-        UnityFactory.factory.BuildArmatureComponent(PlayerPrefs.GetString("Skin", "classickidarian") , null, null, null, armatureObject.gameObject);
-        myArmature.sortingLayerName = myArmature.sortingLayerName;
-        myArmature.sortingOrder = myArmature.sortingOrder;
+        //myArmature.Dispose(false);//destroy all child game objects
+        //UnityFactory.factory.BuildArmatureComponent(PlayerPrefs.GetString("Skin", "Classic"), null, null, null, armatureObject.gameObject);
+        //myArmature.sortingLayerName = myArmature.sortingLayerName;
+        //myArmature.sortingOrder = myArmature.sortingOrder;
     }
 
     public void MeleeAttack()

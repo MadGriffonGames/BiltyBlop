@@ -38,10 +38,15 @@ public class GameManager : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("Skin"))
         {
-            PlayerPrefs.SetString("Skin", "classickidarian");
+            PlayerPrefs.SetString("Skin", "Classic");
         }
+
         lvlCollectedCoins = 0;
-        coinTxt = FindObjectOfType<Text>();
+        if (SceneManager.GetActiveScene().name.Contains("Level"))
+        {
+            coinTxt = FindObjectOfType<Text>();
+        }
+        
         if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
             SoundManager.PlayMusic ("kid_music", true);
         if (SceneManager.GetActiveScene().name == "Level6")

@@ -19,9 +19,10 @@ public class LevelEndUI : MonoBehaviour
 
     void Start ()
     {
+        controlsUI.SetActive(false);
         SoundManager.PlayMusic("victory sound", false);
         fade.SetActive(true);
-        controlsUI.SetActive(false);
+
         coinsCollected = GameManager.lvlCollectedCoins;
         coinsText.text = (" x" + coinsCollected);
         StartCoroutine( ShowStars(Player.Instance.collectables));

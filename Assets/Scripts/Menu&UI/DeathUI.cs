@@ -97,10 +97,13 @@ public class DeathUI : MonoBehaviour
             Player.Instance.ChangeState(new PlayerIdleState());
 			Player.Instance.ButtonMove (0);
             Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
+
             foreach (GameObject enemy in GameManager.deadEnemies)
             {
                 enemy.SetActive(true);
             }
+            GameManager.deadEnemies.Clear();
+
             controls.SetActive(true);
             pauseButton.SetActive(true);
             fade.SetActive(false);

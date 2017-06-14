@@ -58,13 +58,15 @@ public class EvilFlower : MeleeEnemy
         CameraEffect.Shake(0.2f, 0.3f);
         if (IsDead)
         {
-            Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
 			SoundManager.PlaySound ("flower_death");
-            Destroy(gameObject);
+            GameManager.deadEnemies.Add(gameObject);
+            gameObject.SetActive(false);
         }
         yield return null;
     }
+
+    
 
     public void AnimIdle()
 	{
@@ -85,5 +87,12 @@ public class EvilFlower : MeleeEnemy
         armature.animation.timeScale = 2f;
         
         armature.animation.Play("PREPARATION");
+    }
+
+    private void OnEnable()
+    {
+        Health = 1;
+        Target = null;
+        ChangeState(new EvilFlowerIdleState());
     }
 }

@@ -95,10 +95,28 @@ public class Enemy : MonoBehaviour
         MyAniamtor.enabled = true;
         armature.enabled = true;
     }
+
+    private void OnBecameInvisible()
+    {
+        enabled = false;
+        MyAniamtor.enabled = false;
+        armature.enabled = false;
+    }
+
     public void ForceActivate()
     {
         enabled = true;
         MyAniamtor.enabled = true;
         armature.enabled = true;
+    }
+
+    public IEnumerator AnimationDelay()
+    {
+        float tmp = armature.animation.timeScale;
+
+        armature.animation.timeScale = 0.1f;
+        yield return new WaitForSeconds(0.3f);
+        armature.animation.timeScale = tmp;
+        yield return null;
     }
 }

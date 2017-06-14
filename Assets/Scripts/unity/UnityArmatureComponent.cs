@@ -197,7 +197,6 @@ namespace DragonBones
         public DragonBonesData LoadData(TextAsset dragonBonesJSON, List<string> textureAtlasJSON)
         {
             DragonBonesData dragonBonesData = null;
-
             if (dragonBonesJSON != null)
             {
                 dragonBonesData = UnityFactory.factory.LoadDragonBonesData(dragonBonesJSON);

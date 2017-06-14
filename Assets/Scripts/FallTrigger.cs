@@ -7,12 +7,10 @@ public class FallTrigger : MonoBehaviour
     [SerializeField]
     Transform spawnPoint;
 
-
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Player.Instance.Health -= 1;
             StartCoroutine(Player.Instance.TakeDamage());
             Player.Instance.transform.position = spawnPoint.position;
         }

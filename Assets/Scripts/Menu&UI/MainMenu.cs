@@ -25,5 +25,8 @@ public class MainMenu : MonoBehaviour
         SoundManager.PlaySound(sound);
     }
 
-    
+    public void ToShop()
+    {
+        SceneManager.LoadScene("Shop");
+    }
 }

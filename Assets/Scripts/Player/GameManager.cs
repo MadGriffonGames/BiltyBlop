@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -23,22 +24,38 @@ public class GameManager : MonoBehaviour
 	public Text coinTxt;
     public static string levelName;
     public static int lvlCollectedCoins;
+    public static List<GameObject> deadEnemies; 
 
     void Start () 
 	{
+        deadEnemies = new List<GameObject>();
+
         if (!PlayerPrefs.HasKey("Coins"))
         {
             collectedCoins = 500;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
             PlayerPrefs.SetInt("Coins", collectedCoins);
         }
         else
+        {
             collectedCoins = PlayerPrefs.GetInt("Coins");
-        lvlCollectedCoins = 0;
-        coinTxt = FindObjectOfType<Text>();
+        }
+
+        if (!PlayerPrefs.HasKey("Skin"))
+        {
+            PlayerPrefs.SetString("Skin", "Classic");
+        }
+
+        if (SceneManager.GetActiveScene().name.Contains("Level"))
+        {
+            coinTxt = FindObjectOfType<Text>();
+        }
+        
         if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
             SoundManager.PlayMusic ("kid_music", true);
         if (SceneManager.GetActiveScene().name == "Level6")
             SoundManager.PlaySoundLooped("rain sfx");
+
+        lvlCollectedCoins = 0;
     }
 
     public void PlayUISound(string sound)

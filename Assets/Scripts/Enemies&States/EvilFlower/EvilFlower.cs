@@ -9,6 +9,9 @@ public class EvilFlower : MeleeEnemy
     [SerializeField]
     private GameObject leafParticle;
 
+    [SerializeField]
+    GameObject enemySight;
+
     void Awake()
     {
 		armature = GetComponent<UnityArmatureComponent> ();
@@ -18,6 +21,7 @@ public class EvilFlower : MeleeEnemy
     {
         base.Start();
         ChangeState(new EvilFlowerIdleState());
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     void Update()
@@ -93,6 +97,19 @@ public class EvilFlower : MeleeEnemy
     {
         Health = 1;
         Target = null;
-        ChangeState(new EvilFlowerIdleState());
+        if (Health <= 0)
+        {
+            ChangeState(new EvilFlowerIdleState());
+        }
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+    }
+        public void StartIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
+    }
+
+    public void StopIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
     }
 }

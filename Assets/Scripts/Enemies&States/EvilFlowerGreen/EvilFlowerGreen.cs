@@ -11,7 +11,9 @@ public class EvilFlowerGreen : RangeEnemy
     [SerializeField]
     GameObject leafParticle;
     [SerializeField]
-    GameObject acidFx;
+    public GameObject acidFx;
+    [SerializeField]
+    GameObject enemySight;
 
     void Awake()
     {
@@ -22,6 +24,7 @@ public class EvilFlowerGreen : RangeEnemy
     {
         base.Start();
         ChangeState(new EFGreenIdleState());
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     void Update()
@@ -84,7 +87,11 @@ public class EvilFlowerGreen : RangeEnemy
     {
         Health = 1;
         Target = null;
-        ChangeState(new EFGreenIdleState());
+        if (Health <= 0)
+        {
+            ChangeState(new EFGreenIdleState());
+        }
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     public void AnimIdle()

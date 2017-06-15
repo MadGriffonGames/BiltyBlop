@@ -23,6 +23,7 @@ public class MovingPlatform : MonoBehaviour
         posB = transformPosB.localPosition;
         nextPos = posB;
         MyRigidbody = GetComponent<Rigidbody2D>();
+        enabled = false;
 	}
 
 	void FixedUpdate ()
@@ -56,5 +57,15 @@ public class MovingPlatform : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
         other.transform.SetParent(null);
+    }
+
+    private void OnBecameVisible()
+    {
+        enabled = true;
+    }
+
+    private void OnBecameInvisible()
+    {
+        enabled = false;
     }
 }

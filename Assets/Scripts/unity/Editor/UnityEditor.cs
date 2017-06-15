@@ -197,7 +197,7 @@ namespace DragonBones
             return false;
         }
 
-        private static void _changeArmatureData(UnityArmatureComponent _armatureComponent, string armatureName, string dragonBonesName)
+        public static void _changeArmatureData(UnityArmatureComponent _armatureComponent, string armatureName, string dragonBonesName)
         {
             Slot slot = null;
             if (_armatureComponent.armature != null)
@@ -484,7 +484,7 @@ namespace DragonBones
             }
         }
 
-        private void _updateParameters()
+        public void _updateParameters()
         {
             _dragonBoneJSON = _armatureComponent.dragonBonesJSON;
 

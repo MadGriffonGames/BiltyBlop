@@ -92,7 +92,7 @@ public class Player : Character
 	{
         base.Start();
         currentState = new PlayerIdleState();
-		meshRenderer = GetComponentsInChildren<MeshRenderer>();
+		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
         myRigidbody = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
         GotKey = false;

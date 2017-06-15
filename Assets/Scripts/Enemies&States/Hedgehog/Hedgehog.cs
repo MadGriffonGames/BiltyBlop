@@ -67,7 +67,10 @@ public class Hedgehog : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        Health = 2;
+        if (Health <= 0)
+        {
+            Health = 2;
+        }
         ChangeState(new HedgehogIdleState());
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);

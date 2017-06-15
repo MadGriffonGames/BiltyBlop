@@ -72,12 +72,18 @@ public class Typlak : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        Health = 2;
+        
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         SetHealthbar();
         Target = null;
         damaged = false;
+        
+        if (Health <= 0)
+        {
+            ChangeState(new TyplakPatrolState());
+            Health = 2;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

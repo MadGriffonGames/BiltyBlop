@@ -52,7 +52,6 @@ public class MovingMeleeEnemy : Enemy
     {
         if (!Attack)
         {
-            MyAniamtor.SetFloat("speed", 1);
             transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
         }
     }

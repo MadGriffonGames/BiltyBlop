@@ -31,6 +31,7 @@ public class EvilFlowerMeleeState : IEvilFlowerState
 
         if (enemy.armature.animation.lastAnimationName == ("ATTACK") && enemy.armature.animation.isCompleted)
         {
+            enemy.AttackCollider.enabled = false;
             enemy.ChangeState(new EvilFlowerIdleState());
         }
     }

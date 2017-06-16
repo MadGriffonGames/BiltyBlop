@@ -70,29 +70,6 @@ public class EvilFlower : MeleeEnemy
         yield return null;
     }
 
-    
-
-    public void AnimIdle()
-	{
-        armature.animation.timeScale = 1f;
-        armature.animation.Play ("IDLE");
-	}
-
-	public void AnimAttack()
-	{
-		armature.animation.timeScale = 1.5f;
-		armature.animation.Play ("ATTACK");
-        SoundManager.PlaySound("bite");
-
-    }
-
-    public void AnimPreparation()
-    {
-        armature.animation.timeScale = 2f;
-        
-        armature.animation.Play("PREPARATION");
-    }
-
     private void OnEnable()
     {
         Health = 1;

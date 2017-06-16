@@ -103,7 +103,7 @@ public class Hedgehog : MovingMeleeEnemy
         }
     }
 
-    public void AnimIdle()
+    /*public void AnimIdle()
     {
         armature.animation.timeScale = 1f;
         armature.animation.Play("Idle");
@@ -119,7 +119,7 @@ public class Hedgehog : MovingMeleeEnemy
     {
         armature.animation.timeScale = 3f;
         armature.animation.Play("Attack");
-    }
+    }*/
 
     public void EnableHealthbar (int enable)
     {

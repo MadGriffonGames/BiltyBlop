@@ -52,7 +52,6 @@ public class StoneHolem : MovingMeleeEnemy
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.5f, 0.4f);
         SetHealthbar();
-        MyAniamtor.SetTrigger("damage");
 		SoundManager.PlaySound ("holem_takingdamage");
         Instantiate(stoneParticle, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2f, -1f), Quaternion.identity);
         if (IsDead)
@@ -84,37 +83,4 @@ public class StoneHolem : MovingMeleeEnemy
         else
             Instantiate(attackParticle, gameObject.transform.position + new Vector3(3, 0, -2), Quaternion.identity);
     }
-
-    public void AnimIdle()
-    {
-        armature.animation.timeScale = 1f;
-        armature.animation.Play("IDLE");
-    }
-
-    public void AnimPreattack()
-    {
-        armature.animation.timeScale = 1f;
-        armature.animation.Play("PREATTACK");
-
-    }
-
-    public void AnimAttack()
-    {
-        armature.animation.timeScale = 1f;
-        armature.animation.Play("ATTACK_SHORT");
-
-    }
-
-    public void AnimWalk()
-    {
-        armature.animation.timeScale = 4f;
-        armature.animation.Play("WALK");
-    }
-
-    public void AnimGetHit()
-    {
-        armature.animation.timeScale = 4f;
-        armature.animation.Play("GETHIT");
-    }
-
 }

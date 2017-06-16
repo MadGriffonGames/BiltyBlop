@@ -42,7 +42,6 @@ public class HedgehogPatrolState : IHedgehogState
         if (other.tag == "Edge")
         {
             enemy.ChangeDirection();
-            enemy.MyAniamtor.SetFloat("speed", 0);
             enemy.ChangeState(new HedgehogIdleState());
         }
     }

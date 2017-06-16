@@ -100,36 +100,4 @@ public class Typlak : MovingMeleeEnemy
             }
          transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
-
-    public void AnimIdle()
-    {
-        armature.animation.timeScale = 1f;
-        armature.animation.Play("idle");
-    }
-
-    public void PlaySound(string sound)
-    {
-        SoundManager.PlaySound(sound);
-    }
-
-    public void AnimPreattack()
-    {
-        armature.animation.timeScale = 1.5f;
-        armature.animation.Play("preattack");
-
-    }
-
-    public void AnimAttack()
-    {
-        armature.animation.timeScale = 1.5f;
-        AttackCollider.enabled = true;
-        armature.animation.Play("Attack");
-
-    }
-
-    public void AnimWalk()
-    {
-        armature.animation.timeScale = 1f;
-        armature.animation.Play("walk");
-    }
 }

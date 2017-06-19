@@ -93,6 +93,7 @@ public class DeathUI : MonoBehaviour
                                                         mainCamera.transform.position.z);
             
             Player.Instance.PlayerRevive();
+            Player.Instance.AttackCollider.enabled = false;
             Player.Instance.transform.parent = null;
             Player.Instance.ChangeState(new PlayerIdleState());
 			Player.Instance.ButtonMove (0);

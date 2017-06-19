@@ -21,4 +21,7 @@ public class UI : MonoBehaviour
 
     [SerializeField]
     public GameObject DeathUI;
+
+    [SerializeField]
+    public GameObject timeRewindUI;
 }

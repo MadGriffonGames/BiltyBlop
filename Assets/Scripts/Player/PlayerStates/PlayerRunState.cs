@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerRunState : IPlayerState
 {
+    bool isRuning = false;
+
     public void Enter(Player player)
     {
         player.myArmature.animation.FadeIn("run", -1, -1);
@@ -11,7 +13,12 @@ public class PlayerRunState : IPlayerState
 
     public void Execute()
     {
-        if (Input.GetAxis("Horizontal") == 0 && Player.Instance.mobileInput == 0)
+        if (Player.Instance.isPlaying && !isRuning)
+        {
+            Player.Instance.myArmature.animation.FadeIn("run", -1, -1);
+            isRuning = true;
+        }
+        if (Player.Instance.myRigidbody.velocity.x == 0)
         {
             Player.Instance.ChangeState(new PlayerIdleState());
         }
@@ -31,7 +38,11 @@ public class PlayerRunState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerTakeHitState());
         }
+        
     }
 
-    public void Exit() { }
+    public void Exit()
+    {
+        isRuning = false;
+    }
 }

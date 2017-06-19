@@ -23,7 +23,7 @@ public class PlayerIdleState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerJumpState());
         }
-        if (Player.Instance.OnGround && (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Player.Instance.mobileInput) > 0))
+        if (Player.Instance.OnGround && Mathf.Abs(Player.Instance.myRigidbody.velocity.x) > 0)
         {
             Player.Instance.ChangeState(new PlayerRunState());
         }

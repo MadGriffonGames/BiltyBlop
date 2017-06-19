@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DragonBones;
 using System;
 using UnityEngine.SceneManagement;
@@ -26,7 +27,7 @@ public class Player : Character
     [SerializeField]
     GameObject shadow;
     public bool bossFight = false;
-    IPlayerState currentState;
+    public IPlayerState currentState;
 
     /*
      * Game Managment vars
@@ -39,6 +40,10 @@ public class Player : Character
     public int monstersKilled;
     public int collectables;
     public float maxHealth;
+    Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
+    [SerializeField]
+    TimeController timeController;
+    public bool isPlaying = false;
 
     /*
      * Action vars
@@ -156,6 +161,34 @@ public class Player : Character
             else if ((PlayerPrefs.GetInt("SoundsIsOn") == 1) | (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround)))
                 SoundManager.MakeSteps(true);
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            isPlaying = true;
+        }
+        if (isPlaying)
+        {
+            if (recording.ContainsKey(timeController.time))
+            {
+                PlayTimeState(recording[timeController.time]);
+            }
+        }
+    }
+
+    public void SetRecording(Dictionary<int, PlayerTimeState> recording)
+    {
+        this.recording = new Dictionary<int, PlayerTimeState> (recording);
+    }
+
+    void PlayTimeState(PlayerTimeState playerTimeState)
+    {
+        this.gameObject.transform.position = playerTimeState.position;
+        if (currentState.GetType() != playerTimeState.animationState.GetType())
+        {
+            ChangeState(playerTimeState.animationState);
+        }
+        Vector3 localScale = transform.localScale;
+        localScale.x = playerTimeState.direction ? Mathf.Abs(transform.localScale.x) : -1 * Mathf.Abs(transform.localScale.x);
+        transform.localScale = localScale;
     }
 
     public void ChangeState(IPlayerState newState)

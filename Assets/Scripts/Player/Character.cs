@@ -5,17 +5,6 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    public abstract IEnumerator TakeDamage();
-
-    public bool TakingDamage { get; set; }
-
-    public UnityArmatureComponent myArmature;
-
-    [SerializeField]
-    GameObject armatureObject;
-
-    [SerializeField]
-    protected int health;
 
     public int Health
     {
@@ -29,6 +18,15 @@ public abstract class Character : MonoBehaviour
             health = value;
         }
     }
+
+    public abstract IEnumerator TakeDamage();
+
+    public bool TakingDamage { get; set; }
+
+    public UnityArmatureComponent myArmature;
+
+    [SerializeField]
+    protected int health;
 
     public abstract bool IsDead { get; }
 
@@ -53,14 +51,35 @@ public abstract class Character : MonoBehaviour
 
     public bool Attack { get; set; }
 
+    Dictionary<string, GameObject> skins;
+
     public virtual void Start ()
     {
         facingRight = true;
-        myArmature = armatureObject.GetComponent<UnityArmatureComponent>();
-        //myArmature.Dispose(false);//destroy all child game objects
-        //UnityFactory.factory.BuildArmatureComponent(PlayerPrefs.GetString("Skin", "Classic"), null, null, null, armatureObject.gameObject);
-        //myArmature.sortingLayerName = myArmature.sortingLayerName;
-        //myArmature.sortingOrder = myArmature.sortingOrder;
+
+        skins = new Dictionary<string, GameObject>();
+        foreach (GameObject skin in SkinManager.Instance.skinPrefabs)
+        {
+            skins[skin.name] = skin;
+        }
+
+        myArmature = GetComponentInChildren<UnityArmatureComponent>();
+        Destroy(myArmature.gameObject);
+        string skinName = PlayerPrefs.GetString("Skin", "Classic");
+        if (skins.ContainsKey(skinName))
+        {
+            GameObject skinPrefab = Instantiate(skins[skinName], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            skinPrefab.transform.localScale = new Vector3(1, 1, 1);
+            //getting component here, cuz if you try to get armature outside "if statement" you get "old" component(i don't know why :) )
+            myArmature = skinPrefab.GetComponent<UnityArmatureComponent>();
+        }
+        else
+        {
+            GameObject skinPrefab = Instantiate(skins["Classic"], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            skinPrefab.transform.localScale = new Vector3(1, 1, 1);
+            //getting component here, cuz if you try to get armature outside "if statement" you get "old" component(i don't know why :) )
+            myArmature = skinPrefab.GetComponent<UnityArmatureComponent>();
+        }
     }
 
     public void MeleeAttack()

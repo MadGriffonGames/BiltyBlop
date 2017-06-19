@@ -10,10 +10,15 @@ public class HedgehogIdleState : IHedgehogState
 
     private float idleDuration;
 
+    bool idle = false;
+
     public void Enter(Hedgehog enemy)
     {
         this.enemy = enemy;
         idleDuration = enemy.idleDuration;
+        enemy.movementSpeed = 0;
+        enemy.EnableHealthbar(1);
+        enemy.StopIgnore();
     }
 
     public void Execute()
@@ -23,7 +28,11 @@ public class HedgehogIdleState : IHedgehogState
 
     private void Idle()
     {
-        enemy.MyAniamtor.SetFloat("speed", 0);
+        if (!idle)
+        {
+            enemy.armature.animation.FadeIn("Idle", -1, 1);
+            idle = true;
+        }
 
         idleTimer += Time.deltaTime;
 

@@ -8,4 +8,9 @@ public class SwordIgnoreCollision : MonoBehaviour
     {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
     }
+
+    private void OnEnable()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
+    }
 }

@@ -11,7 +11,9 @@ public class EvilFlowerGreen : RangeEnemy
     [SerializeField]
     GameObject leafParticle;
     [SerializeField]
-    GameObject acidFx;
+    public GameObject acidFx;
+    [SerializeField]
+    GameObject enemySight;
 
     void Awake()
     {
@@ -22,6 +24,7 @@ public class EvilFlowerGreen : RangeEnemy
     {
         base.Start();
         ChangeState(new EFGreenIdleState());
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     void Update()
@@ -60,7 +63,8 @@ public class EvilFlowerGreen : RangeEnemy
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
 			SoundManager.PlaySound ("green flower");
-			Destroy(gameObject);
+            GameManager.deadEnemies.Add(gameObject);
+            gameObject.SetActive(false);
         }
         yield return null;
     }
@@ -77,6 +81,17 @@ public class EvilFlowerGreen : RangeEnemy
             GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.8f, -5), Quaternion.Euler(0, 0, 180));
             tmp.GetComponent<Seed>().Initialize(Vector2.right);
         }
+    }
+
+    private void OnEnable()
+    {
+        Health = 1;
+        Target = null;
+        if (Health <= 0)
+        {
+            ChangeState(new EFGreenIdleState());
+        }
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     public void AnimIdle()

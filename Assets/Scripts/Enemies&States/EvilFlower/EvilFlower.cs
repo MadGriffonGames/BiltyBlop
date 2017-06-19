@@ -9,6 +9,9 @@ public class EvilFlower : MeleeEnemy
     [SerializeField]
     private GameObject leafParticle;
 
+    [SerializeField]
+    GameObject enemySight;
+
     void Awake()
     {
 		armature = GetComponent<UnityArmatureComponent> ();
@@ -18,6 +21,7 @@ public class EvilFlower : MeleeEnemy
     {
         base.Start();
         ChangeState(new EvilFlowerIdleState());
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     void Update()
@@ -60,7 +64,8 @@ public class EvilFlower : MeleeEnemy
         {
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
 			SoundManager.PlaySound ("flower_death");
-            Destroy(gameObject);
+            GameManager.deadEnemies.Add(gameObject);
+            gameObject.SetActive(false);
         }
         yield return null;
     }
@@ -86,5 +91,25 @@ public class EvilFlower : MeleeEnemy
         armature.animation.timeScale = 2f;
         
         armature.animation.Play("PREPARATION");
+    }
+
+    private void OnEnable()
+    {
+        Health = 1;
+        Target = null;
+        if (Health <= 0)
+        {
+            ChangeState(new EvilFlowerIdleState());
+        }
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+    }
+        public void StartIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
+    }
+
+    public void StopIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
     }
 }

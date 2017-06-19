@@ -60,14 +60,30 @@ public class Typlak : MovingMeleeEnemy
             if (IsDead)
             {
                 SoundManager.PlaySound("enemyher loud");
-                Player.Instance.monstersKilled++;
                 Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
-                Destroy(transform.parent.gameObject);
+                GameManager.deadEnemies.Add(gameObject);
+                gameObject.SetActive(false);
             }
             yield return null;
         }
         yield return new WaitForSeconds(0.05f);
         damaged = false;
+    }
+
+    private void OnEnable()
+    {
+        
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        SetHealthbar();
+        Target = null;
+        damaged = false;
+        
+        if (Health <= 0)
+        {
+            ChangeState(new TyplakPatrolState());
+            Health = 2;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

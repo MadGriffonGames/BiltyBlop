@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour
 
     public bool TakingDamage { get; set; }
 
-    public Animator MyAniamtor { get; private set; }
 
     [SerializeField]
     protected int health;
@@ -51,12 +50,10 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
-        MyAniamtor = GetComponent<Animator>();
         armature = GetComponent<UnityArmatureComponent>();
         healthbar[Health - 1].SetActive(true);
         facingRight = false;
         enabled = false;
-        MyAniamtor.enabled = false;
         armature.enabled = false;
         armature.armature.cacheFrameRate = 55;
     }
@@ -92,21 +89,18 @@ public class Enemy : MonoBehaviour
     private void OnBecameVisible()
     {
         enabled = true;
-        MyAniamtor.enabled = true;
         armature.enabled = true;
     }
 
     private void OnBecameInvisible()
     {
         enabled = false;
-        MyAniamtor.enabled = false;
         armature.enabled = false;
     }
 
     public void ForceActivate()
     {
         enabled = true;
-        MyAniamtor.enabled = true;
         armature.enabled = true;
     }
 

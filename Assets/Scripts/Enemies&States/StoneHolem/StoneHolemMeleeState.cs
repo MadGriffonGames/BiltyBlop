@@ -35,7 +35,6 @@ public class StoneHolemMeleeState : IStoneHolemState
 
     private void Attack()
     {
-        enemy.MyAniamtor.SetFloat("speed", 0);
         attackTimer += Time.deltaTime;
         if (attackTimer >= attackCoolDown)
         {
@@ -45,7 +44,6 @@ public class StoneHolemMeleeState : IStoneHolemState
         if (canAttack)
         {
             canAttack = false;
-            enemy.MyAniamtor.SetTrigger("attack");
         }
     }
 }

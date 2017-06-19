@@ -25,6 +25,7 @@ public class Bat : MovingMeleeEnemy
     public override void Start()
     {
         base.Start();
+        armature.animation.timeScale = 2f;
         ChangeState(new BatPatrolState());
         pathCordinates = new Vector3[pathPoints.Length];
         int i = 0;
@@ -76,11 +77,5 @@ public class Bat : MovingMeleeEnemy
     private void OnEnable()
     {
         Health = 1;
-    }
-
-    public void AnimFly()
-    {
-        armature.animation.timeScale = 2f;
-        armature.animation.Play("FLY");
     }
 }

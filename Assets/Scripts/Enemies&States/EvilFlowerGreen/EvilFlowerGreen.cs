@@ -100,19 +100,4 @@ public class EvilFlowerGreen : RangeEnemy
         armature.animation.Play("IDLE");
 
     }
-
-    public void AnimAttack()
-    {
-        SoundManager.PlaySound("spit");
-        armature.animation.timeScale = 1.5f;
-        ThrowSeed();
-        armature.animation.Play("ATTACK");
-        acidFx.SetActive(true);
-    }
-
-    public void AnimPreparation()
-    {
-        armature.animation.timeScale = 2f;
-        armature.animation.Play("PREPARATION");
-    }
 }

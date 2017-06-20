@@ -21,9 +21,6 @@ public class TimeRecorder : MonoBehaviour
 {
     const int TIME_BUFFER_SIZE = 800;
 
-    [SerializeField]
-    TimeController timeController;
-
     public static Dictionary<int, PlayerTimeState> states;
 
     public static bool isRecording = true;
@@ -36,24 +33,20 @@ public class TimeRecorder : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            isRecording = false;
-        }
-        if (isRecording)
+        if (isRecording && !Player.Instance.IsDead)
         {
             if (states.Count >= TIME_BUFFER_SIZE)//re-write states data
             {
-                for (int i = timeController.time - TIME_BUFFER_SIZE; i <= timeController.time - TIME_BUFFER_SIZE; i++)
+                for (int i = TimeController.internalTime - TIME_BUFFER_SIZE; i <= TimeController.internalTime - TIME_BUFFER_SIZE; i++)
                 {
                     states.Remove(i);
                 }
             }
-            states.Add(timeController.time, new PlayerTimeState(transform.position,
+            states.Add(TimeController.internalTime, new PlayerTimeState(transform.position,
                                                                 Player.Instance.currentState,
                                                                 transform.localScale.x > 0));
         }
-        else
+        else if (!isRecording)
         {
             Player.Instance.SetRecording(states);
         }

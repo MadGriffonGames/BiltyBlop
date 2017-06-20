@@ -6,31 +6,27 @@ public class TimeController : MonoBehaviour
 {
     const int TIME_BUFFER_SIZE = 800;
 
-    public int time;
+    public static int internalTime;
 
     public static bool isForward = true;
 
-    public int timeBufferStart;
+    public static int timeBufferStart;
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        //Debug.Log(internalTime);
+        if (isForward && !Player.Instance.IsDead)
         {
-            isForward = false;
-            timeBufferStart = time;
+            internalTime++;
         }
-        if (isForward)
-        {
-            time++;
-        }
-        else
+        else if (!isForward)
         {
             Player.Instance.immortal = true;
-            time--;
-            time = time < 0 ? 0 : time;
-            if (time <= timeBufferStart - 300)
+            internalTime--;
+            internalTime = internalTime < 0 ? 0 : internalTime;
+            if (internalTime <= timeBufferStart - 300 || internalTime == 0)
             {
-                if (Player.Instance.OnGround || time <= timeBufferStart - TIME_BUFFER_SIZE || time == 0)
+                if (Player.Instance.OnGround || internalTime <= timeBufferStart - TIME_BUFFER_SIZE || internalTime == 0)
                 {
                     StopRewindTime();
                 }
@@ -44,11 +40,19 @@ public class TimeController : MonoBehaviour
         StartCoroutine(Player.Instance.IndicateImmortal());
 
         TimeRecorder.states.Clear();
-        time = 0;
+        internalTime = 0;
 
         isForward = true;
         TimeRecorder.isRecording = true;
         Player.Instance.isPlaying = false;
+
+        Player.Instance.ChangeState(new PlayerIdleState());
+        Player.Instance.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
+        Player.Instance.GetComponent<BoxCollider2D>().enabled = true;
+        Player.Instance.GetComponent<CapsuleCollider2D>().enabled = true;
+        Player.Instance.facingRight = Player.Instance.transform.localScale.x > 0;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraEffect>().StopBlur();
+        Time.timeScale = 1;
 
         StartCoroutine(ImmortalTurnOff());
     }
@@ -61,9 +65,9 @@ public class TimeController : MonoBehaviour
 
     public void RewindTime()
     {
-        isForward = false;
+        TimeController.isForward = false;
         TimeRecorder.isRecording = false;
         Player.Instance.isPlaying = true;
-        timeBufferStart = time;
+        TimeController.timeBufferStart = internalTime;
     }
 }

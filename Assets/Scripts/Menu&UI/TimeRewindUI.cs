@@ -10,7 +10,6 @@ public class TimeRewindUI : MonoBehaviour
     void Start ()
     {
         Time.timeScale = 0;
-        fade.se
 	}
 
 	void Update ()

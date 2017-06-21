@@ -88,7 +88,9 @@ public class Portal : MonoBehaviour
                 hideFade = true;
                 mainCamera.transform.position = Vector3.Slerp(mainCamera.transform.position, nextPortal.transform.position + new Vector3(0, 0, -20), 1f);
                 SoundManager.PlaySound("portal loud");
-                Player.Instance.transform.position = nextPortal.transform.position + new Vector3(1 * Player.Instance.transform.localScale.x, -1.8f, -4);
+                Player.Instance.transform.position = new Vector3(nextPortal.transform.position.x, 
+                                                                 nextPortal.transform.position.y, 
+                                                                 -4) + new Vector3(1 * Player.Instance.transform.localScale.x, -1.8f, 0);
             }
         }
         if (hideFade)

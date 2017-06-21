@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeleeEnemy : Enemy
 {
     [SerializeField]
-    private EdgeCollider2D attackCollider;
+    public EdgeCollider2D attackCollider;
 
     [SerializeField]
     private float meleeRange;

@@ -16,7 +16,6 @@ public class EvilFlowerMeleeState : IEvilFlowerState
     {
         this.enemy = enemy;
         enemy.armature.animation.FadeIn("PREPARATION", -1, 1);
-        enemy.StopIgnore();
     }
 
     public void Execute()

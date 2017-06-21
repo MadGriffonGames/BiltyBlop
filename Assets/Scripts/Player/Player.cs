@@ -42,10 +42,13 @@ public class Player : Character
     public float maxHealth;
     Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
     public bool isPlaying = false;
+    public int freeCheckpoints;
 
     /*
      * Action vars
      */
+    const float MOVEMENT_SPEED = 8;
+    const int JUMP_FORCE = 700;
     [SerializeField]
     private float jumpForce;
     [SerializeField]
@@ -111,6 +114,7 @@ public class Player : Character
         monstersKilled = 0;
         collectables = 0;
         lvlCoins = 0;
+        freeCheckpoints = 3;
         maxHealth = health;
         HealthUI.Instance.SetHealthbar();
     }
@@ -549,8 +553,8 @@ public class Player : Character
         myRigidbody.gravityScale = 3;
         immortal = false;
         damage = 1;
-        movementSpeed = 7;
-        jumpForce = 700;
+        movementSpeed = MOVEMENT_SPEED;
+        jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
         Time.fixedDeltaTime = 0.02000000f;
     }

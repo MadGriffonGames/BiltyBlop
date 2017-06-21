@@ -87,10 +87,7 @@ public class EvilFlowerGreen : RangeEnemy
     {
         Health = 1;
         Target = null;
-        if (Health <= 0)
-        {
-            ChangeState(new EFGreenIdleState());
-        }
+        ChangeState(new EFGreenIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 

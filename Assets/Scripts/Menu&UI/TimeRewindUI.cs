@@ -37,7 +37,7 @@ public class TimeRewindUI : MonoBehaviour
 	void Update ()
     {
         timer -= Time.deltaTime;
-        text.text = "Rewind time?\n" + timer.ToString()[0].ToString();
+        text.text = timer.ToString()[0].ToString();
         if (timer <= 1)
         {
             UI.Instance.DeathUI.SetActive(true);
@@ -81,5 +81,11 @@ public class TimeRewindUI : MonoBehaviour
         fade.SetActive(true);
         pauseButton.SetActive(false);
         controls.SetActive(false);
+    }
+
+    public void Skip()
+    {
+        UI.Instance.DeathUI.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }

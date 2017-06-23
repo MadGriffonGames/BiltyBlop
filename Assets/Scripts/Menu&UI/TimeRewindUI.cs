@@ -85,7 +85,10 @@ public class TimeRewindUI : MonoBehaviour
 
     public void Skip()
     {
-        UI.Instance.DeathUI.SetActive(true);
-        this.gameObject.SetActive(false);
+        if (timer < 6)
+        {
+            UI.Instance.DeathUI.SetActive(true);
+            this.gameObject.SetActive(false);
+        }
     }
 }

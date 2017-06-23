@@ -368,39 +368,42 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-        CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
-        StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
-        if (!immortal)
+        if (!isPlaying && !IsDead)
         {
-            CameraEffect.Shake(0.5f, 0.4f);
-            health -= 1;
-            HealthUI.Instance.SetHealthbar();
-            if (!IsDead)
+            CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
+            StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
+            if (!immortal)
             {
-                takeHit = true;
-
-                if (IsFalling || !OnGround)
+                CameraEffect.Shake(0.5f, 0.4f);
+                health -= 1;
+                HealthUI.Instance.SetHealthbar();
+                if (!IsDead)
                 {
-                    Jump = false;
+                    takeHit = true;
+
+                    if (IsFalling || !OnGround)
+                    {
+                        Jump = false;
+                    }
+                    camEffect.ShowBlood(0.5f);
+                    System.Random soundFlag = new System.Random();
+                    if (soundFlag.Next(0, 2) == 0)
+                        SoundManager.PlaySound("player_damage1");
+                    else
+                        SoundManager.PlaySound("player_damage2");
+                    immortal = true;
+                    StartCoroutine(IndicateImmortal());
+                    yield return new WaitForSeconds(immortalTime);
+                    immortal = false;
                 }
-                camEffect.ShowBlood(0.5f);
-                System.Random soundFlag = new System.Random();
-                if (soundFlag.Next(0, 2) == 0)
-                    SoundManager.PlaySound("player_damage1");
                 else
-                    SoundManager.PlaySound("player_damage2");
-                immortal = true;
-                StartCoroutine(IndicateImmortal());
-                yield return new WaitForSeconds(immortalTime);
-                immortal = false;
+                {
+                    ChangeState(new PlayerDeathState());
+                    myRigidbody.velocity = Vector2.zero;
+                    UI.Instance.timeRewindUI.SetActive(true);
+                }
+                yield return null;
             }
-            else
-            {
-                ChangeState(new PlayerDeathState());
-                myRigidbody.velocity = Vector2.zero;
-                UI.Instance.timeRewindUI.SetActive(true);
-            }
-            yield return null;
         }
     }
 
@@ -571,9 +574,6 @@ public class Player : Character
     public void InstantiateGrave()
     {
         Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
-        myRigidbody.bodyType = RigidbodyType2D.Static;
-        GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     public void PlayerRevive()

@@ -20,7 +20,6 @@ class PenguinIdleState : IPenguinState
 
     public void Execute()
     {
-        Debug.Log("idled");
         if (!idled)
         {
             if (enemy.armature.animation.lastAnimationName == "attack" && enemy.armature.animation.isCompleted)

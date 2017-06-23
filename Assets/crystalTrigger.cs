@@ -5,7 +5,6 @@ using UnityEngine;
 public class crystalTrigger : MonoBehaviour {
 
     Animator[] myAnimator;
-    bool isTriggered = false;
     [SerializeField]
     GameObject[] holes;
 

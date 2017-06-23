@@ -71,14 +71,6 @@ public class MovingRangedEnemy : Enemy
         }
     }
 
-    public EdgeCollider2D AttackCollider
-    {
-        get
-        {
-            return attackCollider;
-        }
-    }
-
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);

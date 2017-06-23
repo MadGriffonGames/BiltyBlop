@@ -120,6 +120,7 @@ public class Penguin : MovingRangedEnemy {
         {
             ChangeState(new PenguinPatrolState());
             Health = 2;
+            SetHealthbar();
         }
     }
 }

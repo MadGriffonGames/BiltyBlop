@@ -16,7 +16,6 @@ using UnityEngine;
 
     public void Execute()
     {
-        Debug.Log("RangeState");
         if (enemy.InShootingRange)
         {
             enemy.ChangeState(new PenguinThrowState());

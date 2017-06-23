@@ -20,7 +20,6 @@ public class PenguinPatrolState : IPenguinState
 
     public void Execute()
     {
-        Debug.Log("PatrolState");
         enemy.LocalMove();
         if (enemy.Target != null)
         {

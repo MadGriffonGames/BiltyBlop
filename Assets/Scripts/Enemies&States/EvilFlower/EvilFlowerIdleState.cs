@@ -6,12 +6,12 @@ using UnityEngine;
 public class EvilFlowerIdleState : IEvilFlowerState
 {
     private EvilFlower enemy;
-    bool idle = false;
+    bool isIdle;
 
     public void Enter(EvilFlower enemy)
     {
         this.enemy = enemy;
-        enemy.StopIgnore();
+        isIdle = false;
         enemy.AttackCollider.enabled = false;
     }
 
@@ -21,10 +21,10 @@ public class EvilFlowerIdleState : IEvilFlowerState
     }
     private void Idle()
     {
-        if (!idle)
+        if (!isIdle)
         {
-            enemy.armature.animation.FadeIn("Idle", -1, -1);
-            idle = true;
+            enemy.armature.animation.FadeIn("IDLE", -1, -1);
+            isIdle = true;
         }
         if (enemy.Target != null)
         {

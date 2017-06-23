@@ -24,11 +24,46 @@ public class GameManager : MonoBehaviour
 	public Text coinTxt;
     public static string levelName;
     public static int lvlCollectedCoins;
-    public static List<GameObject> deadEnemies; 
+    public static List<GameObject> deadEnemies;
+
+    /* Inventory Items Names */ 
+    public static string hpPots = "HealthPotCount";
+    public static string damageBonuses = "DamageBonusCount";
+    public static string speedBonuses = "SpeedBonusCount";
+    public static string timeBonuses = "TimeBonusCount";
+    public static string immortalBonuses = "ImmortalBonusCount";
+    public static string clips = "ClipsCount";
 
     void Start () 
 	{
         deadEnemies = new List<GameObject>();
+
+        /* SETTING INVENTORY */
+        if (!PlayerPrefs.HasKey("Max" + hpPots))
+        {
+            PlayerPrefs.SetInt("Max" + hpPots, 5);
+        }
+        if (!PlayerPrefs.HasKey("Max" + damageBonuses))
+        {
+            PlayerPrefs.SetInt("Max" + damageBonuses, 5);
+        }
+        if (!PlayerPrefs.HasKey("Max" + speedBonuses))
+        {
+            PlayerPrefs.SetInt("Max" + speedBonuses, 5);
+        }
+        if (!PlayerPrefs.HasKey("Max" + timeBonuses))
+        {
+            PlayerPrefs.SetInt("Max" + timeBonuses, 5);
+        }
+        if (!PlayerPrefs.HasKey("Max" + immortalBonuses))
+        {
+            PlayerPrefs.SetInt("Max" + immortalBonuses, 5);
+        }
+        if (!PlayerPrefs.HasKey("Max" + clips))
+        {
+            PlayerPrefs.SetInt("Max" + clips, 5);
+        }
+        
 
         if (!PlayerPrefs.HasKey("Coins"))
         {
@@ -47,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
-            coinTxt = FindObjectOfType<Text>();
+            coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
         }
         
         if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))

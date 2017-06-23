@@ -41,13 +41,14 @@ public class Player : Character
     public int collectables;
     public float maxHealth;
     Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
-    [SerializeField]
-    TimeController timeController;
     public bool isPlaying = false;
+    public int freeCheckpoints;
 
     /*
      * Action vars
      */
+    const float MOVEMENT_SPEED = 8;
+    const int JUMP_FORCE = 700;
     [SerializeField]
     private float jumpForce;
     [SerializeField]
@@ -80,6 +81,8 @@ public class Player : Character
     private LayerMask whatIsGround;
     [SerializeField]
     public bool OnGround { get; set; }
+    [SerializeField]
+    public GameObject timeControllerPrefab;
 
     /*
      * Bonus vars
@@ -96,6 +99,10 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
+        if (timeControllerPrefab != null)
+        {
+            Instantiate(timeControllerPrefab);
+        }
         currentState = new PlayerIdleState();
 		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -107,7 +114,9 @@ public class Player : Character
         monstersKilled = 0;
         collectables = 0;
         lvlCoins = 0;
+        freeCheckpoints = 3;
         maxHealth = health;
+        HealthUI.Instance.SetHealthbar();
     }
 
 	void Update()
@@ -161,15 +170,11 @@ public class Player : Character
             else if ((PlayerPrefs.GetInt("SoundsIsOn") == 1) | (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround)))
                 SoundManager.MakeSteps(true);
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            isPlaying = true;
-        }
         if (isPlaying)
         {
-            if (recording.ContainsKey(timeController.time))
+            if (recording.ContainsKey(TimeController.internalTime))
             {
-                PlayTimeState(recording[timeController.time]);
+                PlayTimeState(recording[TimeController.internalTime]);
             }
         }
     }
@@ -184,7 +189,18 @@ public class Player : Character
         this.gameObject.transform.position = playerTimeState.position;
         if (currentState.GetType() != playerTimeState.animationState.GetType())
         {
-            ChangeState(playerTimeState.animationState);
+            if (playerTimeState.animationState.GetType() == new PlayerRunState().GetType())
+            {
+                if (myArmature.armature.animation.lastAnimationName != "run")
+                {
+                    myArmature.armature.animation.FadeIn("run", -1, -1);
+                }
+            }
+            else
+            {
+                myArmature.armature.animation.Stop();
+                ChangeState(playerTimeState.animationState);
+            }
         }
         Vector3 localScale = transform.localScale;
         localScale.x = playerTimeState.direction ? Mathf.Abs(transform.localScale.x) : -1 * Mathf.Abs(transform.localScale.x);
@@ -312,7 +328,10 @@ public class Player : Character
 
     public void EnableAttackCollider()
     {
-        StartCoroutine(AttackColliderDelay());
+        if (!isPlaying)
+        {
+            StartCoroutine(AttackColliderDelay());
+        }
         StartCoroutine(KidHeadUI.Instance.ShowEmotion("angry"));
     }
 
@@ -379,7 +398,7 @@ public class Player : Character
             {
                 ChangeState(new PlayerDeathState());
                 myRigidbody.velocity = Vector2.zero;
-                UI.Instance.DeathUI.SetActive(true);
+                UI.Instance.timeRewindUI.SetActive(true);
             }
             yield return null;
         }
@@ -477,7 +496,7 @@ public class Player : Character
         timeScalerMove = 0.7f;
         Camera cam = Camera.main;
         CameraEffect cef = cam.GetComponent<CameraEffect>();
-        cef.StartBlur();
+        cef.StartBlur(0.35f);
         yield return new WaitForSeconds(duration);
         speedBonusNum--;
 
@@ -534,8 +553,8 @@ public class Player : Character
         myRigidbody.gravityScale = 3;
         immortal = false;
         damage = 1;
-        movementSpeed = 7;
-        jumpForce = 700;
+        movementSpeed = MOVEMENT_SPEED;
+        jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
         Time.fixedDeltaTime = 0.02000000f;
     }
@@ -562,9 +581,9 @@ public class Player : Character
         myRigidbody.bodyType = RigidbodyType2D.Dynamic;
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;
-        foreach (MeshRenderer sprite in meshRenderer)
+        foreach (MeshRenderer mesh in meshRenderer)
         {
-            sprite.enabled = true;
+            mesh.enabled = true;
         }
     }
 

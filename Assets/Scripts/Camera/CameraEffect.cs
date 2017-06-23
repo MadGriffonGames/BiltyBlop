@@ -26,14 +26,16 @@ public class CameraEffect : MonoBehaviour
         initiatePower = power;
     }
 
-    public void StartBlur()
+    public void StartBlur(float blurAmmount)
     {
         GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = true;
+        GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().blurAmount = blurAmmount;
     }
 
     public void StopBlur()
     {
         GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
+        GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().blurAmount = 0.35f;
     }
 
     public void ShowBlood(float duration)

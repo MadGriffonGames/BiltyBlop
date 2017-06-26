@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
-            coinTxt = FindObjectOfType<Text>();
+            coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
         }
         
         if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))

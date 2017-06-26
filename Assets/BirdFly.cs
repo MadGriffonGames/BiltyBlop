@@ -40,7 +40,6 @@ public class BirdFly : MonoBehaviour {
 	void FixedUpdate () {
         if (isTriggered)
         {
-            int i = 0;
             nextPos = pathCordinates[nextPosNum];
             Move();
         }

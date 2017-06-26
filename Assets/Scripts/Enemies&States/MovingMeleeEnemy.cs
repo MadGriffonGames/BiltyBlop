@@ -8,7 +8,7 @@ public class MovingMeleeEnemy : Enemy
     public float movementSpeed = 3.0f;
 
     [SerializeField]
-    private EdgeCollider2D attackCollider;
+    private Collider2D attackCollider;
 
     [SerializeField]
     private float meleeRange;
@@ -18,6 +18,8 @@ public class MovingMeleeEnemy : Enemy
 
     [SerializeField]
     public float idleDuration;
+
+    public bool isAttacking;
 
     public override void Start()
     {
@@ -44,8 +46,11 @@ public class MovingMeleeEnemy : Enemy
 
     public void ChangeDirection()
     {
-        facingRight = !facingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        if (!isAttacking)
+        {
+            facingRight = !facingRight;
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
     }
 
     public void Move()
@@ -68,7 +73,7 @@ public class MovingMeleeEnemy : Enemy
         }
     }
 
-    public EdgeCollider2D AttackCollider
+    public Collider2D AttackCollider
     {
         get
         {

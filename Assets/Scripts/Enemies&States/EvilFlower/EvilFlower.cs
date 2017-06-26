@@ -74,19 +74,8 @@ public class EvilFlower : MeleeEnemy
     {
         Health = 1;
         Target = null;
-        if (Health <= 0)
-        {
-            ChangeState(new EvilFlowerIdleState());
-        }
+        ChangeState(new EvilFlowerIdleState());
+        attackCollider.enabled = false;
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-    }
-        public void StartIgnore()
-    {
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
-    }
-
-    public void StopIgnore()
-    {
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
     }
 }

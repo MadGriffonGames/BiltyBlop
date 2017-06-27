@@ -374,7 +374,10 @@ public class Player : Character
             StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
             if (!immortal)
             {
-                CameraEffect.Shake(0.5f, 0.4f);
+                if (bossFight)
+                    CameraEffect.Shake(0.5f, 0.4f);
+                else
+                    CameraEffect.Shake(0.5f, 0.4f);
                 health -= 1;
                 HealthUI.Instance.SetHealthbar();
                 if (!IsDead)

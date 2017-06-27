@@ -13,7 +13,10 @@ public class RunicGrave : MonoBehaviour
     {
         if (other.transform.CompareTag("Sword"))
         {
-            CameraEffect.Shake(0.2f, 0.1f);
+            if (!Player.Instance.bossFight)
+            {
+                CameraEffect.Shake(0.2f, 0.1f);
+            }
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
             SoundManager.PlaySound("door_explode");
             Destroy(this.gameObject);

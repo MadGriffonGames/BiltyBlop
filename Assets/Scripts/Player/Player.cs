@@ -259,9 +259,11 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-        if (other.CompareTag("DeathTrigger"))
+        
+        if (other.gameObject.CompareTag("DeathTrigger"))
         {
-            health -= health;
+            Debug.Log(1);
+            health -= health - 1;
             if (immortal)
             {
                 ParticleSystem tmp = GetComponentInChildren<ParticleSystem>();

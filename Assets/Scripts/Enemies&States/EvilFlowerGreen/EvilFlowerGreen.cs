@@ -62,7 +62,8 @@ public class EvilFlowerGreen : RangeEnemy
         {
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
-			SoundManager.PlaySound ("green flower");
+            SpawnCoins(1, 2);
+            SoundManager.PlaySound ("green flower");
             GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
         }
@@ -85,6 +86,8 @@ public class EvilFlowerGreen : RangeEnemy
 
     private void OnEnable()
     {
+        ResetCoinPack();
+
         Health = 1;
         Target = null;
         ChangeState(new EFGreenIdleState());

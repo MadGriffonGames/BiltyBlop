@@ -67,6 +67,7 @@ public class Bat : MovingMeleeEnemy
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("bat_death");
             Instantiate(batParticles, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
+            SpawnCoins(1, 2);
             GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
 
@@ -76,6 +77,8 @@ public class Bat : MovingMeleeEnemy
 
     private void OnEnable()
     {
+        ResetCoinPack();
+
         Health = 1;
     }
 }

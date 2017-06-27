@@ -24,11 +24,10 @@ public class SwipeMenu : MonoBehaviour
         int buttonCount = buttons.Length;
         distance = new float[buttonCount];
         buttonDistance = (int)Mathf.Abs(buttons[1].GetComponent<RectTransform>().anchoredPosition.x - buttons[0].GetComponent<RectTransform>().anchoredPosition.x);
-        minButtonsNumber = 2;
         panel.anchoredPosition = new Vector2(buttons[minButtonsNumber].transform.position.x, panel.anchoredPosition.y);
     }
 
-    private void Update()
+    public virtual void Update()
     {
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -63,9 +62,14 @@ public class SwipeMenu : MonoBehaviour
             tapping = false;
         }
     }
-    public void ObButtonClickLerp(int buttonNumber)
+    public virtual void ObButtonClickLerp(int buttonNumber)
     {
-        minButtonsNumber = buttonNumber;
+        if (buttonNumber == buttons.Length)
+        {
+            minButtonsNumber = buttonNumber - 2;
+        }
+        else
+            minButtonsNumber = buttonNumber;
         tapping = true;
     }
 

@@ -19,6 +19,7 @@ public class Torch : MonoBehaviour
 
 	void Start ()
     {
+        GameManager.torches++;
         MyAnimator = GetComponentsInChildren<Animator>();
 
         if (MyAnimator[0] != null)
@@ -52,6 +53,7 @@ public class Torch : MonoBehaviour
     {
         if (collision.CompareTag("Sword") && isShining)
         {
+            GameManager.torches--;
             torchLight.SetActive(false);
             flame.SetActive(false);
             Instantiate(torchParticle, torchLight.transform.position + new Vector3(0, -0.2f, -1f), Quaternion.Euler(-90,0,0));

@@ -8,25 +8,33 @@ public class GameManager : MonoBehaviour
 {
     public static int collectedCoins;
 
-	public static int CollectedCoins
-	{
-		get
-		{
-			return collectedCoins;
-		}
-		set
-		{
-			collectedCoins = value;
-		}
-	}
+    public static int torches;
 
-	[SerializeField]
-	public Text coinTxt;
+    bool isBirded = false;
+
+
+
+    public static int CollectedCoins
+    {
+        get
+        {
+            return collectedCoins;
+        }
+        set
+        {
+            collectedCoins = value;
+        }
+    }
+
+    [SerializeField]
+    public Text coinTxt;
     public static string levelName;
     public static int lvlCollectedCoins;
     public static List<GameObject> deadEnemies;
+    [SerializeField]
+    GameObject bird;
 
-    /* Inventory Items Names */ 
+    /* Inventory Items Names */
     public static string hpPots = "HealthPotCount";
     public static string damageBonuses = "DamageBonusCount";
     public static string speedBonuses = "SpeedBonusCount";
@@ -34,8 +42,8 @@ public class GameManager : MonoBehaviour
     public static string immortalBonuses = "ImmortalBonusCount";
     public static string clips = "ClipsCount";
 
-    void Start () 
-	{
+    void Start()
+    {
         deadEnemies = new List<GameObject>();
 
         /* SETTING INVENTORY */
@@ -63,7 +71,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Max" + clips, 5);
         }
-        
+
 
         if (!PlayerPrefs.HasKey("Coins"))
         {
@@ -84,9 +92,9 @@ public class GameManager : MonoBehaviour
         {
             coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
         }
-        
-        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
-            SoundManager.PlayMusic ("kid_music", true);
+
+        if ((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
+            SoundManager.PlayMusic("kid_music", true);
         if (SceneManager.GetActiveScene().name == "Level6")
             SoundManager.PlaySoundLooped("rain sfx");
 
@@ -98,8 +106,24 @@ public class GameManager : MonoBehaviour
         SoundManager.PlaySound(sound);
     }
 
-    void Update ()
-	{
+    void ThrowBird()
+    {
+        if (isBirded==false)
+        {
+            isBirded = true;
+            Vector3 firstPoint = new Vector3(Player.Instance.transform.position.x-10, Player.Instance.transform.position.y, Player.Instance.transform.position.z);
+            GameObject tmp = (GameObject)Instantiate(bird, new Vector3(), Quaternion.Euler(0, 0, 0));
+            tmp.transform.position = firstPoint;   
+        }
+    }
+
+    void Update()
+    {
+        Debug.Log(torches);
         coinTxt.text = (" " + collectedCoins);
+        if (torches == 0 && isBirded==false)
+        {
+            ThrowBird();
+        }
     }
 }

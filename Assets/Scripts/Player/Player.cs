@@ -38,7 +38,7 @@ public class Player : Character
     public int startCoinCount;
     public int lvlCoins;
     public int monstersKilled;
-    public int collectables;
+    public int stars;
     public float maxHealth;
     Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
     public bool isPlaying = false;
@@ -112,7 +112,7 @@ public class Player : Character
         lightIntencityCP = FindObjectOfType<Light>().intensity;
         startCoinCount = GameManager.CollectedCoins;
         monstersKilled = 0;
-        collectables = 0;
+        stars = 0;
         lvlCoins = 0;
         freeCheckpoints = 3;
         maxHealth = health;

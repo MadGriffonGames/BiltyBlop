@@ -19,7 +19,7 @@ public class Star : InteractiveObject
 		{
             collect = true;
             MyAnimator.SetTrigger("collected");
-            Player.Instance.collectables++;
+            Player.Instance.stars++;
         }   
 	}
 
@@ -30,7 +30,7 @@ public class Star : InteractiveObject
 
     public void ShowStar()
     {
-        StarsUI.Instance.ShowStar(Player.Instance.collectables);
+        StarsUI.Instance.ShowStar(Player.Instance.stars);
     }
 
     public void PlaySound()

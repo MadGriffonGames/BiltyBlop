@@ -39,7 +39,7 @@ public class WeaknessState : IDragonState
             enemy.takeDamageCollider.enabled = false;
 			enemy.enemyDamageCollider.enabled = false;
             enemy.stun.SetActive(false);
-            Player.Instance.collectables = 3;
+            Player.Instance.stars = 3;
             if (!dead)
             {
                 enemy.armature.animation.timeScale = 0.9f;

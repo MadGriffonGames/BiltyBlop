@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructionObject : InteractiveObject
+public class Box : InteractiveObject
 {
     [SerializeField]
     private HP hp;
@@ -32,18 +32,18 @@ public class DestructionObject : InteractiveObject
 
     public void SpawnObject()
     {
-        if (UnityEngine.Random.Range(1, 100) <= 65)//spawn or not
+        if (UnityEngine.Random.Range(1, 100) <= 80)//spawn or not
         {
             switch (Player.Instance.Health)
             {
                 case 1:
-                    if (UnityEngine.Random.Range(1, 100) <= 75)
+                    if (UnityEngine.Random.Range(1, 100) <= 85)
                         Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
                     else
                         Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
                     break;
                 case 2:
-                    if (UnityEngine.Random.Range(1, 100) <= 85)
+                    if (UnityEngine.Random.Range(1, 100) <= 90)
                         Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
                     else
                         Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);

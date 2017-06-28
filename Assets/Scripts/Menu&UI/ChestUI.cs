@@ -6,6 +6,15 @@ using UnityEngine;
 
 public class ChestUI : MonoBehaviour
 {
+    const int MIN_COIN_RANGE = 40;
+    const int MID_COIN_RANGE = 70;
+    const int BIG_COIN_RANGE = 92;
+
+    const int MIN_CRYSTAL_RANGE = 97;
+    const int MID_CRYSTAL_RANGE = 99;
+    const int BIG_CRYSTAL_RANGE = 100;
+
+
     [SerializeField]
     Image lightCircle;
     [SerializeField]
@@ -27,27 +36,41 @@ public class ChestUI : MonoBehaviour
     bool isSpined;
     Quaternion rotationVector;
     Animator lootAnimator;
+    bool isOpened;
+    bool isStarsCollected;
 
     private void Start()
     {
         chestImage = chest.GetComponent<Image>();
         lootAnimator = loot.gameObject.GetComponent<Animator>();
 
-        chestImage.sprite = chestClose; //change sprite based on playerprefs info
+        isOpened = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_chest") > 0;
+        isStarsCollected = (Player.Instance.stars >= 3) || (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") >= 3);
 
-        if (Player.Instance.stars >= 3 || PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") >= 3)
+        if (isOpened)
         {
-            lightCircle.gameObject.SetActive(true);
-            isSpined = true;
-            activateButton.SetActive(true);
+            chestImage.sprite = chestOpen;
+            activateButton.SetActive(false);
         }
         else
         {
-            lightCircle.gameObject.SetActive(false);
-            isSpined = false;
-            chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 0.55f);
-            activateButton.SetActive(false);
+            chestImage.sprite = chestClose;
+            if (isStarsCollected)
+            {
+                lightCircle.gameObject.SetActive(true);
+                isSpined = true;
+                activateButton.SetActive(true);
+            }
+            else
+            {
+                lightCircle.gameObject.SetActive(false);
+                isSpined = false;
+                chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 0.55f);
+                activateButton.SetActive(false);
+            }
         }
+
+        
     }
 
     private void Update()
@@ -62,16 +85,69 @@ public class ChestUI : MonoBehaviour
 
     public void OpenChest()
     {
-        //Write to player prefs here
+        if (!PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_chest"))
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_chest", 1);
+        }
+        RandomizeLoot();
         chestImage.sprite = chestOpen;
         chestFade.SetActive(true);
         loot.gameObject.SetActive(true);
-        loot.sprite = lootArray[0];
+        activateButton.SetActive(false);
     }
 
     public void CollectLoot()
     {
         chestFade.SetActive(false);
         loot.gameObject.SetActive(false);
+    }
+
+    public void RandomizeLoot()
+    {
+        int random = UnityEngine.Random.Range(1, 100);
+        if (random <= MIN_COIN_RANGE)
+        {
+            loot.sprite = lootArray[0];
+            AddCoins(50);
+        }
+        if (random > MIN_COIN_RANGE && random <= MID_COIN_RANGE)
+        {
+            loot.sprite = lootArray[1];
+            AddCoins(150);
+        }
+        if (random > MID_COIN_RANGE && random <= BIG_COIN_RANGE)
+        {
+            loot.sprite = lootArray[2];
+            AddCoins(300);
+        }
+        if (random > BIG_COIN_RANGE && random <= MIN_CRYSTAL_RANGE)
+        {
+            loot.sprite = lootArray[3];
+            AddCrystals(2);
+        }
+        if (random > MIN_CRYSTAL_RANGE && random <= MID_CRYSTAL_RANGE)
+        {
+            loot.sprite = lootArray[4];
+            AddCrystals(5);
+        }
+        if (random > MID_CRYSTAL_RANGE && random <= BIG_CRYSTAL_RANGE)
+        {
+            loot.sprite = lootArray[5];
+            AddCrystals(10);
+        }
+    }
+
+    void AddCoins(int value)
+    {
+        loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
+        GameManager.collectedCoins += value;
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
+    }
+
+    void AddCrystals(int value)
+    {
+        loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
+        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
+        GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
     }
 }

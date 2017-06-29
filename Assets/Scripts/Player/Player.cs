@@ -594,5 +594,11 @@ public class Player : Character
     {
         MakeFX.Instance.MakeHeal();
     }
+
+    public void ChangeCameraTarget(GameObject targetObject,Vector3 localPosition)
+    {
+        target.transform.SetParent(targetObject.gameObject.transform);
+        target.transform.localPosition = localPosition;
+    } 
 }
 

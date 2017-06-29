@@ -15,14 +15,14 @@ public class BossFightTrigger : MonoBehaviour
 
     public GameObject target;
 
-    static float bossCameraSize = 8.7f;
+    static float bossCameraSize =10.5f;
     bool zoomOut = false;
 
     private void Update()
     {
         if (zoomOut && mainCamera.orthographicSize < bossCameraSize)
         {
-            mainCamera.orthographicSize += 0.01f;
+            mainCamera.orthographicSize += 0.02f;
         }
         else if (mainCamera.orthographicSize > bossCameraSize)
         {

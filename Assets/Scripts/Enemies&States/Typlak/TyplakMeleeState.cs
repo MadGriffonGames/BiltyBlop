@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TyplakMeleeState : ITyplakState
 {
-
     private Typlak enemy;
 
     private float attackTimer;

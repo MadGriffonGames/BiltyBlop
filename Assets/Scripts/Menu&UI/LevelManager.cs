@@ -65,7 +65,6 @@ public class LevelManager : MonoBehaviour
             button.unlocked = level.unlocked;
             button.GetComponent<Button>().interactable = level.isInteractable;
             button.GetComponent<Button>().onClick.AddListener(() => LoadLevel("Level" + button.levelText.text));
-            button.GetComponent<Button>().gameObject.transform.localScale = new Vector3(Screen.width / screenSize.x, Screen.height / screenSize.y, 1);
             newButton.transform.SetParent(spacer, true);
         }
         SaveAll();

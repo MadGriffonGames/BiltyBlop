@@ -64,6 +64,7 @@ public class CrystalHolem : MovingMeleeEnemy
             {
                 SoundManager.PlaySound("enemyher loud");
                 //Instantiate(crystalParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
@@ -75,6 +76,8 @@ public class CrystalHolem : MovingMeleeEnemy
 
     private void OnEnable()
     {
+        ResetCoinPack();
+
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
 

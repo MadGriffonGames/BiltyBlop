@@ -60,6 +60,7 @@ public class Typlak : MovingMeleeEnemy
             {
                 SoundManager.PlaySound("enemyher loud");
                 Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
@@ -71,13 +72,15 @@ public class Typlak : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        
+        ResetCoinPack();
+
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
 
         Target = null;
         damaged = false;
         isAttacking = false;
+        AttackCollider.enabled = false;
 
         if (Health <= 0)
         {

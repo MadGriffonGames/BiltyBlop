@@ -87,6 +87,8 @@ public class DeathUI : MonoBehaviour
         gameOverBar.GetComponent<Animator>().SetBool("animate", false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.collectedCoins = Player.Instance.startCoinCount;
+        gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
+
     }
 
     public void Continue()
@@ -95,7 +97,7 @@ public class DeathUI : MonoBehaviour
         if (Player.Instance.freeCheckpoints > 0)
         {
             SoundManager.PlayMusic("kid_music", true);
-            gameOverBar.GetComponent<Animator>().SetBool("animate", false);
+            gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
             Player.Instance.freeCheckpoints--;
 
             Revive();

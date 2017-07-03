@@ -71,24 +71,45 @@ public class DeathUI : MonoBehaviour
         {
             gameOverBar.GetComponent<Animator>().SetBool("animate", true);
         }
+
         if (!fade.activeInHierarchy)
         {
             fade.SetActive(true);
         }
+
         if (controls.activeInHierarchy)
         {
             pauseButton.SetActive(false);
             controls.SetActive(false);
+        }
+
+        if (AdsManager.Instance.isInterstitialClosed)
+        {
+            GameManager.nextLevelName = SceneManager.GetActiveScene().name;
+
+            AdsManager.Instance.isInterstitialClosed = false;
+            SceneManager.LoadScene("Loading");
+
+            gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
         }
     }
 
     public void Restart()
     {
         gameOverBar.GetComponent<Animator>().SetBool("animate", false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameManager.collectedCoins = Player.Instance.startCoinCount;
-        gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
 
+#if UNITY_EDITOR
+        AdsManager.Instance.isInterstitialClosed = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#endif
+
+        GameManager.collectedCoins = Player.Instance.startCoinCount;
     }
 
     public void Continue()

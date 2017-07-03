@@ -58,6 +58,7 @@ public class Hedgehog : MovingMeleeEnemy
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("hedgehog_death");
             Instantiate(spikeParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
+            SpawnCoins(2, 4);
             GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
 
@@ -67,6 +68,8 @@ public class Hedgehog : MovingMeleeEnemy
 
     private void OnEnable()
     {
+        ResetCoinPack();
+
         if (Health <= 0)
         {
             Health = 2;

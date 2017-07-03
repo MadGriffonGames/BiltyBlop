@@ -8,30 +8,26 @@ public class SwipeMenu : MonoBehaviour
     public RectTransform panel;
     public RectTransform center;
     public Button[] buttons;
-    public Button applyButton;
-    public Button unlockButton;
 
 
-    private float[] distance;
+    protected float[] distance;
+    protected int buttonDistance;
+    public int minButtonsNumber;
     private bool dragging = false;
-    private int buttonDistance;
-    private int minButtonsNumber;
-    private int lastDraggingButton;
     private bool onStart = true;
+    protected bool tapping = false;
 
-    private void Start()
+    public static int changingDistance = 3;
+
+    public virtual void Start()
     {
-        int buttonLength = buttons.Length;
-        distance = new float[buttonLength];
-
+        int buttonCount = buttons.Length;
+        distance = new float[buttonCount];
         buttonDistance = (int)Mathf.Abs(buttons[1].GetComponent<RectTransform>().anchoredPosition.x - buttons[0].GetComponent<RectTransform>().anchoredPosition.x);
-        
-        panel.anchoredPosition = new Vector2(buttons[SkinManager.Instance.NumberOfSkin(KidSkin.Instance.CurrentSkinName())].transform.position.x, panel.anchoredPosition.y);
-        minButtonsNumber = SkinManager.Instance.NumberOfSkin(KidSkin.Instance.CurrentSkinName());
-
+        panel.anchoredPosition = new Vector2(buttons[minButtonsNumber].transform.position.x, panel.anchoredPosition.y);
     }
 
-    private void Update()
+    public virtual void Update()
     {
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -39,52 +35,55 @@ public class SwipeMenu : MonoBehaviour
         }
 
         float minDistance = Mathf.Min(distance);
-
-        for (int i = 0; i < buttons.Length; i++)
+        if (!tapping)
         {
-            if (minDistance == distance[i] && !onStart)
+            for (int i = 0; i < buttons.Length; i++)
             {
-                minButtonsNumber = i;
+                if (minDistance == distance[i] && !onStart)
+                {
+                    minButtonsNumber = i;
+                }
             }
         }
-        if (!dragging)
+        
+        if (!dragging || tapping)
         {
             LerpToButton(minButtonsNumber * -buttonDistance);
         }
     }
-    void LerpToButton(int position)
+    public virtual void LerpToButton(int position)
     {
         float newX = Mathf.Lerp(panel.anchoredPosition.x, position, Time.deltaTime * 10f);
         Vector2 newPosition = new Vector2(newX, panel.anchoredPosition.y);
-
         panel.anchoredPosition = newPosition;
+
+        if (Mathf.Abs(panel.anchoredPosition.x - position) < changingDistance)
+        {
+            tapping = false;
+        }
+    }
+    public virtual void ObButtonClickLerp(int buttonNumber)
+    {
+        if (buttonNumber == buttons.Length)
+        {
+            minButtonsNumber = buttonNumber - 2;
+        }
+        else
+            minButtonsNumber = buttonNumber;
+        tapping = true;
     }
 
     public void StartDrag()
     {
         dragging = true;
         onStart = false;
-
     }
     public void EndDrag()
     {
-        if (KidSkin.Instance.CurrentSkinName() != SkinManager.Instance.skinPrefabs[minButtonsNumber].name)
-        {
-            KidSkin.Instance.ChangeSkin(SkinManager.Instance.skinPrefabs[minButtonsNumber].name);
-            if (!SkinManager.Instance.isSkinUnlocked(minButtonsNumber))
-            {
-                applyButton.gameObject.SetActive(false);
-                unlockButton.gameObject.SetActive(true);
-                unlockButton.GetComponentInChildren<Text>().text = KidSkin.Instance.SkinCost().ToString();
-            }
-            else
-            {
-                applyButton.gameObject.SetActive(true);
-                unlockButton.gameObject.SetActive(false);
-            }
-        }
         dragging = false;
     }
+
+    
 
 
 

@@ -13,7 +13,7 @@ public class Collectables : InteractiveObject
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            Player.Instance.collectables++;
+            Player.Instance.stars++;
             MyAnimator.SetTrigger("collected");
         }
     }

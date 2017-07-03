@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public Text coinTxt;
+    [SerializeField]
+    public static Text crystalTxt;
     public static string levelName;
     public static int lvlCollectedCoins;
     public static List<GameObject> deadEnemies;
@@ -42,9 +44,69 @@ public class GameManager : MonoBehaviour
     public static string immortalBonuses = "ImmortalBonusCount";
     public static string clips = "ClipsCount";
 
-    void Start()
-    {
+    void Start () 
+	{
+        coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
+        crystalTxt = GameObject.Find("CrystalTxt").GetComponent<Text>();
+
         deadEnemies = new List<GameObject>();
+
+        SetMaxInventoryValues();
+
+        SetMoneyValues();
+
+        if (PlayerPrefs.HasKey("Crystals"))
+        {
+            crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
+        }
+
+        if (!PlayerPrefs.HasKey("Skin"))
+        {
+            PlayerPrefs.SetString("Skin", "Classic");
+        }       
+        
+        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
+            SoundManager.PlayMusic ("kid_music", true);
+        if (SceneManager.GetActiveScene().name == "Level6")
+            SoundManager.PlaySoundLooped("rain sfx");
+
+        lvlCollectedCoins = 0;
+    }
+
+    void Update()
+    {
+        coinTxt.text = (" " + collectedCoins);
+        if (torches == 0 && isBirded == false)
+        {
+            ThrowBird();
+        }
+    }
+
+    public void PlayUISound(string sound)
+    {
+        SoundManager.PlaySound(sound);
+    }
+
+    void SetMoneyValues()
+    {
+        if (!PlayerPrefs.HasKey("Coins"))
+        {
+            collectedCoins = 500;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
+            PlayerPrefs.SetInt("Coins", collectedCoins);
+        }
+        else
+        {
+            collectedCoins = PlayerPrefs.GetInt("Coins");
+        }
+
+        if (!PlayerPrefs.HasKey("Crystals"))
+        {
+            PlayerPrefs.SetInt("Crystals", 0);
+        }
+    }
+
+    void SetMaxInventoryValues()
+    {
 
         /* SETTING INVENTORY */
         if (!PlayerPrefs.HasKey("Max" + hpPots))
@@ -71,39 +133,6 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Max" + clips, 5);
         }
-
-
-        if (!PlayerPrefs.HasKey("Coins"))
-        {
-            collectedCoins = 500;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
-            PlayerPrefs.SetInt("Coins", collectedCoins);
-        }
-        else
-        {
-            collectedCoins = PlayerPrefs.GetInt("Coins");
-        }
-
-        if (!PlayerPrefs.HasKey("Skin"))
-        {
-            PlayerPrefs.SetString("Skin", "Classic");
-        }
-
-        if (SceneManager.GetActiveScene().name.Contains("Level"))
-        {
-            coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
-        }
-
-        if ((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
-            SoundManager.PlayMusic("kid_music", true);
-        if (SceneManager.GetActiveScene().name == "Level6")
-            SoundManager.PlaySoundLooped("rain sfx");
-
-        lvlCollectedCoins = 0;
-    }
-
-    public void PlayUISound(string sound)
-    {
-        SoundManager.PlaySound(sound);
     }
 
     void ThrowBird()
@@ -116,14 +145,5 @@ public class GameManager : MonoBehaviour
             tmp.transform.position = firstPoint;   
         }
     }
-
-    void Update()
-    {
-        Debug.Log(torches);
-        coinTxt.text = (" " + collectedCoins);
-        if (torches == 0 && isBirded==false)
-        {
-            ThrowBird();
-        }
-    }
+   
 }

@@ -8,7 +8,6 @@ public class Typlak : MovingMeleeEnemy
     private ITyplakState currentState;
     [SerializeField]
     private GameObject typlakParticle;
-    public bool attack;
     bool damaged = false;
     public bool walk = false;
 
@@ -17,12 +16,12 @@ public class Typlak : MovingMeleeEnemy
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        attack = false;
     }
 
     public override void Start()
     {
         base.Start();
+        isAttacking = false;
         ChangeState(new TyplakPatrolState());
     }
 
@@ -61,6 +60,7 @@ public class Typlak : MovingMeleeEnemy
             {
                 SoundManager.PlaySound("enemyher loud");
                 Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
@@ -72,18 +72,23 @@ public class Typlak : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        
+        ResetCoinPack();
+
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        SetHealthbar();
+
         Target = null;
         damaged = false;
-        
+        isAttacking = false;
+        AttackCollider.enabled = false;
+
         if (Health <= 0)
         {
             ChangeState(new TyplakPatrolState());
             Health = 2;
         }
+
+        SetHealthbar();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

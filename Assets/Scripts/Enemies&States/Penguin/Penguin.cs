@@ -53,6 +53,7 @@ public class Penguin : MovingRangedEnemy {
             {
                 SoundManager.PlaySound("enemyher loud");
                 Instantiate(penguinParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
@@ -109,6 +110,7 @@ public class Penguin : MovingRangedEnemy {
 
     private void OnEnable()
     {
+        ResetCoinPack();
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);

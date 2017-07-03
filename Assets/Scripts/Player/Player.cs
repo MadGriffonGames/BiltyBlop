@@ -38,7 +38,7 @@ public class Player : Character
     public int startCoinCount;
     public int lvlCoins;
     public int monstersKilled;
-    public int collectables;
+    public int stars;
     public float maxHealth;
     Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
     public bool isPlaying = false;
@@ -112,7 +112,7 @@ public class Player : Character
         lightIntencityCP = FindObjectOfType<Light>().intensity;
         startCoinCount = GameManager.CollectedCoins;
         monstersKilled = 0;
-        collectables = 0;
+        stars = 0;
         lvlCoins = 0;
         freeCheckpoints = 3;
         maxHealth = health;
@@ -259,9 +259,11 @@ public class Player : Character
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-        if (other.CompareTag("DeathTrigger"))
+        
+        if (other.gameObject.CompareTag("DeathTrigger"))
         {
-            health -= health;
+            Debug.Log(1);
+            health -= health - 1;
             if (immortal)
             {
                 ParticleSystem tmp = GetComponentInChildren<ParticleSystem>();
@@ -368,39 +370,45 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-        CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
-        StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
-        if (!immortal)
+        if (!isPlaying && !IsDead)
         {
-            CameraEffect.Shake(0.5f, 0.4f);
-            health -= 1;
-            HealthUI.Instance.SetHealthbar();
-            if (!IsDead)
+            CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
+            StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
+            if (!immortal)
             {
-                takeHit = true;
-
-                if (IsFalling || !OnGround)
-                {
-                    Jump = false;
-                }
-                camEffect.ShowBlood(0.5f);
-                System.Random soundFlag = new System.Random();
-                if (soundFlag.Next(0, 2) == 0)
-                    SoundManager.PlaySound("player_damage1");
+                if (bossFight)
+                    CameraEffect.Shake(0.5f, 0.4f);
                 else
-                    SoundManager.PlaySound("player_damage2");
-                immortal = true;
-                StartCoroutine(IndicateImmortal());
-                yield return new WaitForSeconds(immortalTime);
-                immortal = false;
+                    CameraEffect.Shake(0.5f, 0.4f);
+                health -= 1;
+                HealthUI.Instance.SetHealthbar();
+                if (!IsDead)
+                {
+                    takeHit = true;
+
+                    if (IsFalling || !OnGround)
+                    {
+                        Jump = false;
+                    }
+                    camEffect.ShowBlood(0.5f);
+                    System.Random soundFlag = new System.Random();
+                    if (soundFlag.Next(0, 2) == 0)
+                        SoundManager.PlaySound("player_damage1");
+                    else
+                        SoundManager.PlaySound("player_damage2");
+                    immortal = true;
+                    StartCoroutine(IndicateImmortal());
+                    yield return new WaitForSeconds(immortalTime);
+                    immortal = false;
+                }
+                else
+                {
+                    ChangeState(new PlayerDeathState());
+                    myRigidbody.velocity = Vector2.zero;
+                    UI.Instance.timeRewindUI.SetActive(true);
+                }
+                yield return null;
             }
-            else
-            {
-                ChangeState(new PlayerDeathState());
-                myRigidbody.velocity = Vector2.zero;
-                UI.Instance.timeRewindUI.SetActive(true);
-            }
-            yield return null;
         }
     }
 
@@ -571,9 +579,6 @@ public class Player : Character
     public void InstantiateGrave()
     {
         Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
-        myRigidbody.bodyType = RigidbodyType2D.Static;
-        GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     public void PlayerRevive()

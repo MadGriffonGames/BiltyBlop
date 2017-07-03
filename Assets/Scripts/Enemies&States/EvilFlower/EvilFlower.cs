@@ -63,6 +63,7 @@ public class EvilFlower : MeleeEnemy
         if (IsDead) 
         {
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
+            SpawnCoins(1, 2);
 			SoundManager.PlaySound ("flower_death");
             GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
@@ -72,6 +73,8 @@ public class EvilFlower : MeleeEnemy
 
     private void OnEnable()
     {
+        ResetCoinPack();
+
         Health = 1;
         Target = null;
         ChangeState(new EvilFlowerIdleState());

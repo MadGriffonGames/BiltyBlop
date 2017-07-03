@@ -65,7 +65,10 @@ public class FollowCamera : MonoBehaviour
     void FixedUpdate()
     {
         CalculateOffsets();
-
+        if (!Player.Instance.bossFight)
+        {
+            
+        }
         // Camera position with Target's position.z
         Vector3 posNoZ = transform.position;
         posNoZ.z = target.transform.position.z;

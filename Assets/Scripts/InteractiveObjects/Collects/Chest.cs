@@ -23,12 +23,11 @@ public class Chest : InteractiveObject
         {
 			MyAnimator.SetTrigger ("open");
             SoundManager.PlaySound("chest open");
-			foreach (GameObject coin in coins)
-			{
-				coin.SetActive(true);				
-				Rigidbody2D rb = coin.GetComponent<Rigidbody2D> ();
-				rb.velocity =  new Vector2 (UnityEngine.Random.Range(-2f,2f), UnityEngine.Random.Range(7f,9f));
-			}
+            for (int i = 0; i < 10; i++)
+            {
+                coins[i].SetActive(true);
+                coins[i].GetComponent<Rigidbody2D>().velocity = new Vector2(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(7f, 9f));
+            }
             isEmpty = true;
         }
     }

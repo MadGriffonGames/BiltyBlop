@@ -18,7 +18,7 @@ public class PlayerRunState : IPlayerState
             Player.Instance.myArmature.animation.FadeIn("run", -1, -1);
             isRuning = true;
         }
-        if (Player.Instance.myRigidbody.velocity.x == 0)
+        if (Input.GetAxis("Horizontal") == 0 && Player.Instance.mobileInput == 0)
         {
             Player.Instance.ChangeState(new PlayerIdleState());
         }

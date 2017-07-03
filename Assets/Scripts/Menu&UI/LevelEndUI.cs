@@ -15,17 +15,20 @@ public class LevelEndUI : MonoBehaviour
     GameObject fade;
     [SerializeField]
     GameObject controlsUI;
-    
+    [SerializeField]
+    GameObject pauseUI;
 
     void Start ()
     {
         controlsUI.SetActive(false);
+        pauseUI.SetActive(false);
+
         SoundManager.PlayMusic("victory sound", false);
         fade.SetActive(true);
 
         coinsCollected = GameManager.lvlCollectedCoins;
-        coinsText.text = (" x" + coinsCollected);
-        StartCoroutine( ShowStars(Player.Instance.collectables));
+        coinsText.text = "" + coinsCollected;
+        StartCoroutine(ShowStars(Player.Instance.stars));
     }
 
     public void Menu()
@@ -38,6 +41,11 @@ public class LevelEndUI : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Loading");
+    }
+
+    public void DoubleCoins()
+    {
+
     }
 
     public IEnumerator ShowStars(int value)

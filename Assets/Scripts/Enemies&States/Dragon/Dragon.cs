@@ -98,7 +98,7 @@ public class Dragon : Boss
     {
         SoundManager.PlaySound("dragon_damage");
         health -= Player.Instance.damage;
-        CameraEffect.Shake(0.2f, 0.3f);
+        CameraEffect.Shake(0.2f, 0.1f);
         SetHealthbar();
         yield return null;
     }

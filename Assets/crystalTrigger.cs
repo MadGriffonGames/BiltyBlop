@@ -2,64 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class crystalTrigger : MonoBehaviour {
-
+public class CrystalTrigger : MonoBehaviour
+{
     Animator[] myAnimator;
+
     [SerializeField]
     GameObject[] holes;
 
-    // Use this for initialization
     void Start ()
     {
         myAnimator = GetComponentsInChildren<Animator>();
-        foreach (GameObject item in holes)
+        foreach (GameObject hole in holes)
         {
-            item.SetActive(false);
+            hole.SetActive(false);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void CrystalAttack()
     {
-        if (collision.CompareTag("Player"))
-        {
-            for (int i = 0; i < holes.Length; i++)
-            {
-                holes[i].SetActive(true);
-            }
-            StartCoroutine(crystallize());
-           // yield return new WaitForSeconds(1.8f);
-            //StartCoroutine(crystallizeOff());
-        }
+        StartCoroutine(MakeCrystals());
     }
 
-    IEnumerator crystallize()
+    IEnumerator MakeCrystals()
     {
+        for (int i = 0; i < holes.Length; i++)
+        {
+            holes[i].SetActive(true);
+        }
         for (int i = 0; i < myAnimator.Length; i++)
         {
             myAnimator[i].SetTrigger("triggerOn");
             yield return new WaitForSeconds(0.4f);
         }
-        yield return new WaitForSeconds(0.3f);
-        for (int i = 0; i < holes.Length; i++)
-        {
-            Destroy(holes[i]);
-            Destroy(this);
-        }
-
+        yield return new WaitForSeconds(0.45f);
+        Disable();
     }
 
-    IEnumerator crystallizeOff()
+    public void Disable()
     {
-        yield return new WaitForSeconds(0.3f);
-        for (int i = 0; i < myAnimator.Length; i++)
+        for (int i = 0; i < holes.Length; i++)
         {
-            myAnimator[i].SetTrigger("triggerOff");
-            
+            holes[i].SetActive(false);
         }
     }
 }

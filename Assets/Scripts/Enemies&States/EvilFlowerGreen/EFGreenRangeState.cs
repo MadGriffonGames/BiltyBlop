@@ -5,7 +5,6 @@ using UnityEngine;
 public class EFGreenRangeState : IEFGreenState {
 
     private EvilFlowerGreen enemy;
-    bool prepeared = false;
     float attackTime;
 
     public void Enter(EvilFlowerGreen enemy)

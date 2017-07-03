@@ -8,7 +8,6 @@ public class MovingPlatformIgnore : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         }
     }
@@ -17,7 +16,6 @@ public class MovingPlatformIgnore : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), false);
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), false);
         }
     }

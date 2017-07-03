@@ -69,7 +69,9 @@ public class CameraEffect : MonoBehaviour
             percentComplete = Mathf.Clamp01(percentComplete);
             Vector3 rnd = Random.insideUnitSphere * initiatePower * (1f - percentComplete);
             position.localPosition += new Vector3(rnd.x, rnd.y, 0);
+            
         }
+
         if (bloodElapsed < bloodDuration)
         {
             bloodElapsed += Time.deltaTime;
@@ -78,13 +80,15 @@ public class CameraEffect : MonoBehaviour
                     blood.SetActive(false);
             }
         }
+
         if (hide)
         {
             HideBlood();
         }
+
         if (percentComplete == 1 && Player.Instance.bossFight)
         {
-            position.localPosition = new Vector3(0, 0, 0);
+            GetComponent<FollowCamera>().LerpToTargetWithoutOffsets();
         }
     }
 }

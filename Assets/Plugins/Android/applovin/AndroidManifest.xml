@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.appodeal.applovin.unity">
+  <application>
+	<activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
+	    android:configChanges="orientation|screenSize"
+	    android:theme="@android:style/Theme.Translucent" />
+	<activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
+  </application>
+</manifest>

@@ -83,7 +83,7 @@ public class DeathUI : MonoBehaviour
             controls.SetActive(false);
         }
 
-        if (AdsManager.Instance.isInterstitialClosed)
+        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
         {
             GameManager.nextLevelName = SceneManager.GetActiveScene().name;
 

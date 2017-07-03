@@ -23,7 +23,7 @@ public class PauseUI : MonoBehaviour
 
     private void Update()
     {
-        if (AdsManager.Instance.isInterstitialClosed)
+        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
         {
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
@@ -40,6 +40,11 @@ public class PauseUI : MonoBehaviour
     {
         Time.timeScale = 1;
         buttonsSetActive(false);
+    }
+
+    public void RWRD()
+    {
+        AdsManager.Instance.ShowRewardedVideo();
     }
 
     public void Restart()

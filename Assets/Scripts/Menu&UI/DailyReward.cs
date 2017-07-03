@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class ChestUI : MonoBehaviour
+public class DailyReward : MonoBehaviour
 {
     const int MIN_COIN_RANGE = 40;
     const int MID_COIN_RANGE = 70;
@@ -37,7 +38,7 @@ public class ChestUI : MonoBehaviour
     Quaternion rotationVector;
     Animator lootAnimator;
     bool isOpened;
-    bool isStarsCollected;
+    bool is24hoursPast;
 
     private void Start()
     {
@@ -45,7 +46,7 @@ public class ChestUI : MonoBehaviour
         lootAnimator = loot.gameObject.GetComponent<Animator>();
 
         isOpened = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_chest") > 0;
-        isStarsCollected = (Player.Instance.stars >= 3) || (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") >= 3);
+        is24hoursPast = false;
 
         if (isOpened)
         {
@@ -55,7 +56,7 @@ public class ChestUI : MonoBehaviour
         else
         {
             chestImage.sprite = chestClose;
-            if (isStarsCollected)
+            if (is24hoursPast)
             {
                 lightCircle.gameObject.SetActive(true);
                 isSpined = true;
@@ -70,7 +71,7 @@ public class ChestUI : MonoBehaviour
             }
         }
 
-        
+
     }
 
     private void Update()

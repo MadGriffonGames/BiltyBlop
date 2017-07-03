@@ -33,7 +33,7 @@ public class LevelEndUI : MonoBehaviour
 
     private void Update()
     {
-        if (AdsManager.Instance.isInterstitialClosed)
+        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
         {
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
@@ -89,10 +89,4 @@ public class LevelEndUI : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-
-    public void Rwrd()
-    {
-        AdsManager.Instance.ShowRewardedVideo();
-    }
-
 }

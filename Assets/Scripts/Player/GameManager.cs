@@ -24,7 +24,10 @@ public class GameManager : MonoBehaviour
 	public Text coinTxt;
     [SerializeField]
     public static Text crystalTxt;
-    public static string levelName;
+    [SerializeField]
+    public GameObject adsManager;
+
+    public static string nextLevelName;
     public static int lvlCollectedCoins;
     public static List<GameObject> deadEnemies;
 
@@ -40,6 +43,8 @@ public class GameManager : MonoBehaviour
 	{
         coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
         crystalTxt = GameObject.Find("CrystalTxt").GetComponent<Text>();
+
+        Instantiate(adsManager);
 
         deadEnemies = new List<GameObject>();
 
@@ -79,7 +84,7 @@ public class GameManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("Coins"))
         {
-            collectedCoins = 500;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
+            collectedCoins = 0;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
             PlayerPrefs.SetInt("Coins", collectedCoins);
         }
         else

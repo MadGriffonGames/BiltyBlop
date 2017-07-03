@@ -81,14 +81,27 @@ public class ChestUI : MonoBehaviour
             rotationVector.z -= 0.0005f;
             lightCircle.rectTransform.rotation = rotationVector;
         }
+
+        if (AdsManager.Instance.isRewardVideoWatched)
+        {
+            AdsManager.Instance.isRewardVideoWatched = false;
+            GiveLoot();
+        }
     }
 
-    public void OpenChest()
+    public void OpenChestButton()
     {
         if (!PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_chest"))
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_chest", 1);
         }
+
+        AdsManager.Instance.ShowRewardedVideo();
+
+    }
+
+    public void GiveLoot()
+    {
         RandomizeLoot();
         chestImage.sprite = chestOpen;
         chestFade.SetActive(true);

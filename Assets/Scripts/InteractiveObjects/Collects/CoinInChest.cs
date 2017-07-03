@@ -27,6 +27,7 @@ public class CoinInChest : InteractiveObject
             MyRigidbody.simulated = false;
             MyAnimator.SetTrigger("collected");
             GameManager.CollectedCoins++;
+            GameManager.lvlCollectedCoins++;
             SoundManager.PlaySound("coin_collect2");
         }
         if (other.gameObject.CompareTag("Coin"))

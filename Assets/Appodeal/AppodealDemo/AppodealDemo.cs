@@ -8,10 +8,10 @@ using AppodealAds.Unity.Common;
 public class AppodealDemo : MonoBehaviour, IInterstitialAdListener, IBannerAdListener, INonSkippableVideoAdListener, IRewardedVideoAdListener, IPermissionGrantedListener
 {
 
-	#if UNITY_EDITOR && !UNITY_ANDROID && !UNITY_IPHONE
-		string appKey = "";
-	#elif UNITY_ANDROID
+#if UNITY_EDITOR && !UNITY_ANDROID && !UNITY_IPHONE
 		string appKey = "3481dd986d45650597337fafb3b51bd88bc5d6862675c1d2";
+#elif UNITY_ANDROID
+    string appKey = "3481dd986d45650597337fafb3b51bd88bc5d6862675c1d2";
 	#elif UNITY_IPHONE
 		string appKey = "722fb56678445f72fe2ec58b2fa436688b920835405d3ca6";
 	#else

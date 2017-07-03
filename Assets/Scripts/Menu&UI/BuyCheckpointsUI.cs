@@ -12,9 +12,11 @@ public class BuyCheckpointsUI : MonoBehaviour
     [SerializeField]
     GameObject coinsButton;
     [SerializeField]
-    Text coinsText;
+    Text coinsPrice;
     [SerializeField]
     GameObject crystalsButton;
+    [SerializeField]
+    Text crystalPrice;
 
     int notPremiumAttemps = 3;
 
@@ -27,13 +29,13 @@ public class BuyCheckpointsUI : MonoBehaviour
             switch (notPremiumAttemps)
             {
                 case 3:
-                    coinsText.text = "25";
+                    coinsPrice.text = "25";
                     break;
                 case 2:
-                    coinsText.text = "50";
+                    coinsPrice.text = "50";
                     break;
                 case 1:
-                    coinsText.text = "75";
+                    coinsPrice.text = "75";
                     break;
             }
             crystalsButton.SetActive(false);
@@ -46,19 +48,42 @@ public class BuyCheckpointsUI : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (AdsManager.Instance.isRewardVideoWatched)
+        {
+            AdsManager.Instance.isRewardVideoWatched = false;
+
+            Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+            DeathUI.Instance.UpdateFreeCheckpointsCounter();
+
+            notPremiumAttemps--;
+
+            this.gameObject.SetActive(false);
+        }
+    }
+
     public void VideoButton()
     {
-        Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
-        DeathUI.Instance.UpdateFreeCheckpointsCounter();
-        notPremiumAttemps--;
-        this.gameObject.SetActive(false);
+#if UNITY_EDITOR
+        AdsManager.Instance.isRewardVideoWatched = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowRewardedVideo();//then check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowRewardedVideo();//then check if ad was showed in update()
+
+#endif
     }
 
     public void CoinsButton()
     {
         Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
         DeathUI.Instance.UpdateFreeCheckpointsCounter();
+
         notPremiumAttemps--;
+
         this.gameObject.SetActive(false);
     }
 
@@ -66,7 +91,9 @@ public class BuyCheckpointsUI : MonoBehaviour
     {
         Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
         DeathUI.Instance.UpdateFreeCheckpointsCounter();
+
         notPremiumAttemps--;
+
         this.gameObject.SetActive(false);
     }
 

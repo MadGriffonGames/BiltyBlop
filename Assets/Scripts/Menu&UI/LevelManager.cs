@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour
 
     void LoadLevel(string levelName)
     {
-        GameManager.levelName = levelName;
+        GameManager.nextLevelName = levelName;
         SceneManager.LoadScene("Loading");
     }
 

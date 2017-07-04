@@ -9,9 +9,9 @@ public class Yeti : RangeEnemy {
 
     private IYetiState currentState;
     [SerializeField]
-    Snowball snowball;
+    public Snowball snowball;
     [SerializeField]
-    GameObject leafParticle;
+    GameObject yetiParticle;
     [SerializeField]
     GameObject enemySight;
     [SerializeField]
@@ -71,7 +71,7 @@ public class Yeti : RangeEnemy {
             if (IsDead)
             {
                 SoundManager.PlaySound("enemyher loud");
-                Instantiate(leafParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                Instantiate(yetiParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);

@@ -10,7 +10,11 @@ public class YetiIdleState : IYetiState
     bool isIdle;
     float waitFor = 0.9f;
     bool timerStart = false;
+    bool attacked = false;
     float startTime;
+    [SerializeField]
+    GameObject snowball;
+
 
 
     public void Enter(Yeti enemy)
@@ -26,7 +30,7 @@ public class YetiIdleState : IYetiState
             if (enemy.armature.animation.lastAnimationName == "attack" && enemy.armature.animation.isCompleted)
             {
                 enemy.armature.animation.timeScale = 1;
-                
+                attacked = true;
                 startTime = Time.time;
                 enemy.armature.animation.FadeIn("idle2", -1, -1);
                 timerStart = true;
@@ -39,7 +43,7 @@ public class YetiIdleState : IYetiState
             isIdle = true;
         }
 
-        if (timerStart && (Time.time - startTime > waitFor))
+        if (!enemy.snowball.isActiveAndEnabled && attacked)
         {
 
             if (isIdle && enemy.Target != null)

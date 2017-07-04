@@ -33,7 +33,10 @@ using UnityEngine;
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            if (direction.x < 0)
+                Instantiate(particle, this.gameObject.transform.position + new Vector3(-0.1f, 0.1f, 0), Quaternion.identity);
+            else
+                Instantiate(particle, this.gameObject.transform.position + new Vector3(0.1f, 0.1f, 0), Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
@@ -42,7 +45,10 @@ using UnityEngine;
     {
         if (!other.gameObject.CompareTag("Player"))
         {
-            Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            if (direction.x < 0)
+                Instantiate(particle, this.gameObject.transform.position + new Vector3(-0.3f, 0.1f, 0), Quaternion.identity);
+            else
+                Instantiate(particle, this.gameObject.transform.position + new Vector3(0.3f, 0.1f, 0), Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

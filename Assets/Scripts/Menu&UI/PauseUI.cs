@@ -21,6 +21,15 @@ public class PauseUI : MonoBehaviour
     [SerializeField]
     GameObject continueButton;
 
+    private void Update()
+    {
+        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
+        {
+            AdsManager.Instance.isInterstitialClosed = false;
+            SceneManager.LoadScene("Loading");
+        }
+    }
+
     public void Pause()
     {
         Time.timeScale = 0;
@@ -33,11 +42,28 @@ public class PauseUI : MonoBehaviour
         buttonsSetActive(false);
     }
 
+    public void RWRD()
+    {
+        AdsManager.Instance.ShowRewardedVideo();
+    }
+
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+#if UNITY_EDITOR
+        AdsManager.Instance.isInterstitialClosed = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#endif
+
         GameManager.collectedCoins = Player.Instance.startCoinCount;
+        GameManager.nextLevelName = SceneManager.GetActiveScene().name;
     }
 
     public void WarnActive()

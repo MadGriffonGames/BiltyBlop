@@ -51,7 +51,7 @@ public class RuneStone : InteractiveObject
 
     public void SaveGame()
     {
-        GameManager.levelName = nextLvl;
+        GameManager.nextLevelName = nextLvl;
         PlayerPrefs.SetInt("Coins", GameManager.collectedCoins);
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
         {

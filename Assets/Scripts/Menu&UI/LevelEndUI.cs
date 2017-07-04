@@ -31,21 +31,54 @@ public class LevelEndUI : MonoBehaviour
         StartCoroutine(ShowStars(Player.Instance.stars));
     }
 
+    private void Update()
+    {
+        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
+        {
+            AdsManager.Instance.isInterstitialClosed = false;
+            SceneManager.LoadScene("Loading");
+        }
+        
+    }
+
     public void Menu()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 
     public void Continue()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("Loading");
+
+#if UNITY_EDITOR
+        AdsManager.Instance.isInterstitialClosed = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#endif
+
     }
 
-    public void DoubleCoins()
+    public void Restart()
     {
 
+#if UNITY_EDITOR
+        AdsManager.Instance.isInterstitialClosed = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#endif
+
+
+        GameManager.collectedCoins = Player.Instance.startCoinCount;
+        GameManager.nextLevelName = SceneManager.GetActiveScene().name;
     }
 
     public IEnumerator ShowStars(int value)

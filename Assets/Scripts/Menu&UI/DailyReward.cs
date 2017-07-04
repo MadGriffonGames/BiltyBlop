@@ -15,7 +15,9 @@ public class DailyReward : MonoBehaviour
     const int MID_CRYSTAL_RANGE = 99;
     const int BIG_CRYSTAL_RANGE = 100;
 
-
+    [SerializeField]
+    bool tmp;
+ 
     [SerializeField]
     Image lightCircle;
     [SerializeField]
@@ -32,46 +34,56 @@ public class DailyReward : MonoBehaviour
     GameObject chestFade;
     [SerializeField]
     Sprite[] lootArray;
+    [SerializeField]
+    Text timer;
 
     Image chestImage;
-    bool isSpined;
+    bool isSpined = false;
     Quaternion rotationVector;
     Animator lootAnimator;
-    bool isOpened;
+
     bool is24hoursPast;
+    bool isTimerTick;
+    DateTime lastOpenDate;
+    TimeSpan span;
+    TimeSpan hours24;
 
     private void Start()
     {
+        isTimerTick = false;
+        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);// 24hours in timespan format
+
         chestImage = chest.GetComponent<Image>();
         lootAnimator = loot.gameObject.GetComponent<Animator>();
 
-        isOpened = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_chest") > 0;
-        is24hoursPast = false;
-
-        if (isOpened)
+        if (!PlayerPrefs.HasKey("LastOpenDate"))
         {
-            chestImage.sprite = chestOpen;
+            PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
+        }
+        lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
+
+        is24hoursPast = NetworkTime.Check24hours(lastOpenDate);
+
+        if (!is24hoursPast)
+        {
+            chestImage.sprite = chestClose;
+            lightCircle.gameObject.SetActive(false);
+            isSpined = false;
+            chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 0.55f);
             activateButton.SetActive(false);
+            span = lastOpenDate - NetworkTime.GetNetworkTime();
+            isTimerTick = true;
+            timer.gameObject.SetActive(true);
         }
         else
         {
-            chestImage.sprite = chestClose;
-            if (is24hoursPast)
-            {
-                lightCircle.gameObject.SetActive(true);
-                isSpined = true;
-                activateButton.SetActive(true);
-            }
-            else
-            {
-                lightCircle.gameObject.SetActive(false);
-                isSpined = false;
-                chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 0.55f);
-                activateButton.SetActive(false);
-            }
+            ActivateChest();
         }
+    }
 
-
+    public void TMP()
+    {
+        tmp = true;
     }
 
     private void Update()
@@ -86,17 +98,45 @@ public class DailyReward : MonoBehaviour
         if (AdsManager.Instance.isRewardVideoWatched)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
-            if (!PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_chest"))
-            {
-                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_chest", 1);
-            }
+            PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
+            lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
             GiveLoot();
+        }
+
+        if (tmp)
+        {
+            PlayerPrefs.SetString("LastOpenDate", "7/4/2016 8:30:52 AM");
+            lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
+            tmp = false;
+        }
+
+        if (isTimerTick)
+        {
+            span = hours24 + (lastOpenDate - DateTime.Now);
+            timer.text = span.ToString().Substring(0, 8);
+            if (span <= TimeSpan.Zero)
+            {
+                ActivateChest();
+            }
         }
     }
 
     public void OpenChestButton()
     {
-        AdsManager.Instance.ShowRewardedVideo();
+
+        if (NetworkTime.Check24hours(lastOpenDate))
+        {
+#if UNITY_EDITOR
+            AdsManager.Instance.isRewardVideoWatched = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowRewardedVideo();//check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowRewardedVideo();//check if ad was showed in update()
+
+#endif
+        }
     }
 
     public void GiveLoot()
@@ -106,12 +146,25 @@ public class DailyReward : MonoBehaviour
         chestFade.SetActive(true);
         loot.gameObject.SetActive(true);
         activateButton.SetActive(false);
+        isTimerTick = true;
+        timer.gameObject.SetActive(true);
     }
 
     public void CollectLoot()
     {
         chestFade.SetActive(false);
         loot.gameObject.SetActive(false);
+    }
+
+    void ActivateChest()
+    {
+        chestImage.sprite = chestClose;
+        chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 1);
+        lightCircle.gameObject.SetActive(true);
+        isSpined = true;
+        activateButton.SetActive(true);
+        isTimerTick = false;
+        timer.gameObject.SetActive(false);
     }
 
     public void RandomizeLoot()
@@ -152,7 +205,6 @@ public class DailyReward : MonoBehaviour
     void AddCoins(int value)
     {
         loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
-        GameManager.collectedCoins += value;
         PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
     }
 
@@ -160,6 +212,6 @@ public class DailyReward : MonoBehaviour
     {
         loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
         PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
-        GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
     }
+
 }

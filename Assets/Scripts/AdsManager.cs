@@ -20,7 +20,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     }
 
     [SerializeField]
-    GameObject networkWarningPrefab;
+    public GameObject networkWarningPrefab;
 
     GameObject warning;
 
@@ -72,9 +72,17 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
         if (!Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched)
         {
-            warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
+            if (SceneManager.GetActiveScene().name.Contains("Level"))
+            {
+                warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
+                warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
+            }
+            else
+            {
+                warning = Instantiate(networkWarningPrefab, GameObject.Find("MainPanel").gameObject.transform);
+                warning.GetComponent<RectTransform>().localScale = new Vector2(3, 3);
+            }
             warning.GetComponent<RectTransform>().localPosition = new Vector2();
-            warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
         }
 
     }

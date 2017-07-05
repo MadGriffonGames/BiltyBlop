@@ -19,7 +19,7 @@ public class EFGreenIdleState : IEFGreenState
         if (!isIdle)
         {
             enemy.armature.animation.timeScale = 1;
-            enemy.armature.animation.FadeIn("IDLE", -1, -1);
+            enemy.armature.animation.FadeIn("idle2", -1, -1);
             isIdle = true;
         }
 

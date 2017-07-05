@@ -32,7 +32,7 @@ public class Throwing : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-        if (other.CompareTag("Enemy") || other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Chest"))
         {
             Disable();
         }
@@ -40,6 +40,7 @@ public class Throwing : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log(1);
         Disable();
     }
 
@@ -47,7 +48,7 @@ public class Throwing : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        speed = 0;
     }
 
     private void OnBecameInvisible()

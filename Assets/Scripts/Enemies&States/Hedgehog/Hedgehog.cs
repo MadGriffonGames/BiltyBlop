@@ -85,11 +85,19 @@ public class Hedgehog : MovingMeleeEnemy
     public void StartIgnore()
     {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
+        for (int i = 0; i < Player.Instance.clipSize; i++)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.throwingClip[i].GetComponent<Collider2D>(), true);
+        }
     }
 
     public void StopIgnore()
     {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
+        for (int i = 0; i < Player.Instance.clipSize; i++)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.throwingClip[i].GetComponent<Collider2D>(), false);
+        }
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
@@ -105,24 +113,6 @@ public class Hedgehog : MovingMeleeEnemy
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);
         }
     }
-
-    /*public void AnimIdle()
-    {
-        armature.animation.timeScale = 1f;
-        armature.animation.Play("Idle");
-    }
-
-    public void AnimPreattack()
-    {
-        armature.animation.timeScale = 2f;
-        armature.animation.Play("Pre attack");
-    }
-
-    public void AnimAttack()
-    {
-        armature.animation.timeScale = 3f;
-        armature.animation.Play("Attack");
-    }*/
 
     public void EnableHealthbar (int enable)
     {

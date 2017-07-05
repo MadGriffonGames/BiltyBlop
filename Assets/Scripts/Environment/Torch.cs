@@ -51,7 +51,7 @@ public class Torch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Sword") && isShining)
+        if ((collision.CompareTag("Sword") || collision.CompareTag("Throwing")) && isShining)
         {
             GameManager.torches--;
             torchLight.SetActive(false);

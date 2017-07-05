@@ -20,7 +20,7 @@ public class Box : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.CompareTag("Sword"))
+        if (other.transform.CompareTag("Sword") || other.transform.CompareTag("Throwing"))
         {
             SpawnObject();
             CameraEffect.Shake(0.2f, 0.2f);

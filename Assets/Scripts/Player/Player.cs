@@ -205,6 +205,7 @@ public class Player : Character
             //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
             throwingClip[i].GetComponent<SpriteRenderer>().enabled = false;
             throwingClip[i].GetComponent<Collider2D>().enabled = false;
+            throwingClip[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         }
     }
 

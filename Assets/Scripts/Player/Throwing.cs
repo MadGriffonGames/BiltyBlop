@@ -29,29 +29,32 @@ public class Throwing : MonoBehaviour
         this.direction = dir;
     }
 
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject.CompareTag("Player"))
-    //    {
-    //        Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-    //        Destroy(this.gameObject);
-    //    }
-    //}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        if (other.CompareTag("Enemy") || other.CompareTag("Enemy"))
+        {
+            Disable();
+        }
+    }
 
-    //private void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    if (!other.gameObject.CompareTag("Player"))
-    //    {
-    //        Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-    //        Destroy(this.gameObject);
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Disable();
+    }
+
+    private void Disable()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+    }
 
     private void OnBecameInvisible()
     {
         //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-        enabled = false;
+        Disable();
     }
+
+
 }

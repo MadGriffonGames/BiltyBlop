@@ -25,6 +25,10 @@ public class PlayerJumpState : IPlayerState
                 Player.Instance.ChangeState(new PlayerIdleState());
             }
         }
+        if (Player.Instance.Throw)
+        {
+            Player.Instance.ChangeState(new PlayerThrowState());
+        }
         if (Player.Instance.Attack)
         {
             Player.Instance.ChangeState(new PlayerJumpAttackState());

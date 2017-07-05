@@ -20,6 +20,12 @@ public class Player : Character
 
     [SerializeField]
     private GameObject grave;
+
+    GameObject throwing;
+    public GameObject[] throwingClip;
+    public int clipSize;
+    int throwingIterator;
+
     public Rigidbody2D myRigidbody;
     public MeshRenderer[] meshRenderer;
     [SerializeField]
@@ -41,7 +47,7 @@ public class Player : Character
     public int stars;
     public float maxHealth;
     Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
-    public bool isPlaying = false;
+    public bool isRewinding = false;
     public int freeCheckpoints;
 
     /*
@@ -54,6 +60,7 @@ public class Player : Character
     [SerializeField]
     public GameObject secretIndication;
     public bool Jump { get; set; }
+    public bool Throw { get; set; }
     public bool takeHit = false;
     public float mobileInput = 0;
     private float playerAxis = 0;
@@ -96,13 +103,20 @@ public class Player : Character
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
 
+    private void OnEnable()
+    {
+        SetThrowing();
+    }
+
     public override void Start () 
 	{
         base.Start();
+
         if (timeControllerPrefab != null)
         {
             Instantiate(timeControllerPrefab);
         }
+
         currentState = new PlayerIdleState();
 		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -170,12 +184,27 @@ public class Player : Character
             else if ((PlayerPrefs.GetInt("SoundsIsOn") == 1) | (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround)))
                 SoundManager.MakeSteps(true);
         }
-        if (isPlaying)
+        if (isRewinding)
         {
             if (recording.ContainsKey(TimeController.internalTime))
             {
                 PlayTimeState(recording[TimeController.internalTime]);
             }
+        }
+    }
+
+    void SetThrowing()
+    {
+        throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
+        clipSize = 5;
+        throwingIterator = clipSize - 1;
+        throwingClip = new GameObject[clipSize];
+        for (int i = 0; i < clipSize; i++)
+        {
+            throwingClip[i] = Instantiate(throwing);
+            //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
+            throwingClip[i].GetComponent<SpriteRenderer>().enabled = false;
+            throwingClip[i].GetComponent<Collider2D>().enabled = false;
         }
     }
 
@@ -254,6 +283,11 @@ public class Player : Character
 		{
             Attack = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            Throw = true;
+        }
 	}
 
 	public override void OnTriggerEnter2D(Collider2D other)
@@ -328,9 +362,43 @@ public class Player : Character
             SoundManager.PlaySound(sound2);
     }
 
+    public void ThrowWeapon()
+    {
+        if (!isRewinding)
+        {
+            StartCoroutine(ThrowWeaponDelay());
+        }
+    }
+
+    IEnumerator ThrowWeaponDelay()
+    {
+        if (throwingIterator >= 0)
+        {
+            yield return new WaitForSeconds(0.21f / myArmature.animation.timeScale);
+
+            throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
+            throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
+
+            if (this.gameObject.transform.localScale.x > 0)
+            {
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
+                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
+            }
+            else
+            {
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
+                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
+            }
+
+            --throwingIterator;
+        }
+    }
+
     public void EnableAttackCollider()
     {
-        if (!isPlaying)
+        if (!isRewinding)
         {
             StartCoroutine(AttackColliderDelay());
         }
@@ -339,7 +407,7 @@ public class Player : Character
 
     IEnumerator AttackColliderDelay()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.15f / myArmature.animation.timeScale);
         AttackCollider.enabled = true;
     }
 
@@ -370,7 +438,7 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-        if (!isPlaying && !IsDead)
+        if (!isRewinding && !IsDead)
         {
             CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
             StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));

@@ -51,6 +51,7 @@ public class LevelEndUI : MonoBehaviour
 
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;
+        AdsManager.Instance.fromShowfunction = true;
 
 #elif UNITY_ANDROID
         AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()

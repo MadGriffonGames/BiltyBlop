@@ -58,7 +58,7 @@ public class TimeRewindUI : MonoBehaviour
 
         TimeController.isForward = false;
         TimeRecorder.isRecording = false;
-        Player.Instance.isPlaying = true;
+        Player.Instance.isRewinding = true;
         TimeController.timeBufferStart = TimeController.internalTime;
 
         Player.Instance.gameObject.layer = DEFAULT_LAYER;

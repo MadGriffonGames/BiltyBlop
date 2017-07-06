@@ -13,7 +13,7 @@ public class PlayerThrowState : IPlayerState
         }
         else
         {
-            player.myArmature.animation.FadeIn("throw", 0.03f, 1);
+            player.myArmature.animation.FadeIn("throw_run", 0.03f, 1);
         }
         player.ThrowWeapon();
         Player.Instance.Throw = false;

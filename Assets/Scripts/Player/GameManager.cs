@@ -145,13 +145,17 @@ public class GameManager : MonoBehaviour
 
     void ThrowBird()
     {
-        if (isBirded==false)
+        try
         {
-            isBirded = true;
-            Vector3 firstPoint = new Vector3(Player.Instance.transform.position.x-10, Player.Instance.transform.position.y, Player.Instance.transform.position.z);
-            GameObject tmp = (GameObject)Instantiate(bird, new Vector3(), Quaternion.Euler(0, 0, 0));
-            tmp.transform.position = firstPoint;   
+            if (isBirded == false)
+            {
+                isBirded = true;
+                Vector3 firstPoint = new Vector3(Player.Instance.transform.position.x - 10, Player.Instance.transform.position.y, Player.Instance.transform.position.z);
+                GameObject tmp = (GameObject)Instantiate(bird, new Vector3(), Quaternion.Euler(0, 0, 0));
+                tmp.transform.position = firstPoint;
+            }
         }
+        catch (UnassignedReferenceException) { }
     }
    
 }

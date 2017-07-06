@@ -60,6 +60,8 @@ public class Player : Character
     [SerializeField]
     public GameObject secretIndication;
     public bool Jump { get; set; }
+    public bool DoubleJump { get; set; }
+    public bool canJump;
     public bool Throw { get; set; }
     public bool takeHit = false;
     public float mobileInput = 0;
@@ -255,7 +257,9 @@ public class Player : Character
         }
 		if (OnGround) 
 		{
-            if(!Attack)
+            canJump = true;
+
+            if (!Attack)
                 myRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, myRigidbody.velocity.y);
             else
                 myRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f * timeScalerMove, myRigidbody.velocity.y);
@@ -265,13 +269,22 @@ public class Player : Character
         if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
         {
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
-            myRigidbody.velocity = new Vector2(0,0);
+        }
+        else if (!OnGround && DoubleJump && canJump && myRigidbody.velocity.y < 6.5f)
+        {
+            if (myRigidbody.velocity.y < 0)
+            {
+                myRigidbody.velocity = new Vector2(0, 0);
+            }
+            myRigidbody.AddForce(new Vector2(0, (jumpForce * 0.45f) * timeScalerJump));
+            canJump = false;
+            DoubleJump = false;
         }
 	}
 
 	private void HandleInput()
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
+		if (!Jump && Input.GetKeyDown (KeyCode.Space)) 
 		{
 			Jump = true;
 			if (Mathf.Abs (myRigidbody.velocity.y) <= 0.01f)
@@ -279,8 +292,16 @@ public class Player : Character
 				SoundManager.PlaySound ("player_jump");
 			}
 		}
-		
-		if (Input.GetKeyDown (KeyCode.LeftControl)) 
+        else if (Jump && canJump && Input.GetKeyDown(KeyCode.Space))
+        {
+            DoubleJump = true;
+            if (Mathf.Abs(myRigidbody.velocity.y) <= 0.01f)
+            {
+                SoundManager.PlaySound("player_jump");
+            }
+        }
+
+        if (Input.GetKeyDown (KeyCode.LeftControl)) 
 		{
             Attack = true;
         }
@@ -323,10 +344,6 @@ public class Player : Character
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && myRigidbody.velocity.y != 0)
         {
             MakeFX.Instance.MakeDust();
-        }
-        if (other.transform.CompareTag("SlidingSurface"))
-        {
-
         }
     }
 

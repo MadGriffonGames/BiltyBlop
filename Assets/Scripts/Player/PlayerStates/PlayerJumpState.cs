@@ -9,6 +9,7 @@ public class PlayerJumpState : IPlayerState
 
     public void Enter(Player player)
     {
+        player.Jump = true;
         player.myArmature.animation.FadeIn("jump", -1, -1);
     }
 
@@ -33,11 +34,20 @@ public class PlayerJumpState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerJumpAttackState());
         }
+        if (Player.Instance.DoubleJump && Player.Instance.canJump && Player.Instance.myRigidbody.velocity.y < 6.5f)
+        {
+            Player.Instance.myArmature.animation.FadeIn("double_jump_start", -1, 1);
+        }
+        if (Player.Instance.myArmature.animation.isCompleted && Player.Instance.myArmature.animation.lastAnimationName == "double_jump_start")
+        {
+            Player.Instance.myArmature.animation.FadeIn("jump", -1, -1);
+        }
     }
 
     public void Exit()
     {
         Player.Instance.Jump = false;
+        Player.Instance.canJump = true;
         if (Player.Instance.OnGround && Player.Instance.gameObject.layer != platformLayer)
         {
             Player.Instance.gameObject.layer = groundLayer;

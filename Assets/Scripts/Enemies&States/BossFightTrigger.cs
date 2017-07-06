@@ -15,7 +15,7 @@ public class BossFightTrigger : MonoBehaviour
 
     public GameObject target;
 
-    static float bossCameraSize =10.5f;
+    static float bossCameraSize = 8.5f;
     bool zoomOut = false;
 
     private void Update()

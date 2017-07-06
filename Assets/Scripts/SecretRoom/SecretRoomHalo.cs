@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SecretRoomHalo : MonoBehaviour
 {
+    public void Start()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))

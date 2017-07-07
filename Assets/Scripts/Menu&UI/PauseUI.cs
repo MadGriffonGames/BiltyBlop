@@ -28,6 +28,13 @@ public class PauseUI : MonoBehaviour
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
         }
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
+            {
+                Pause();
+            }
+        }
     }
 
     public void Pause()

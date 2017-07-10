@@ -16,23 +16,25 @@ using UnityEngine;
 
     public void Execute()
     {
-        if (enemy.InShootingRange)
+        if (enemy.Target != null)
         {
-            enemy.ChangeState(new PenguinThrowState());
-        }
+            if (enemy.InShootingRange)
+            {
+                enemy.ChangeState(new PenguinThrowState());
+            }
 
-        else if (enemy.Target!=null)
-        {
-            pre_attacked = false;
-            attacked = false;
-            enemy.LocalMove();
-        }
+            else if (enemy.Target != null)
+            {
+                pre_attacked = false;
+                attacked = false;
+                enemy.LocalMove();
+            }
 
-        else if (enemy.Target == null && enemy.Attacked)
-        {
-            enemy.ChangeState(new PenguinPatrolState());
+            else if (enemy.Target == null && enemy.Attacked)
+            {
+                enemy.ChangeState(new PenguinPatrolState());
+            }
         }
-            
     }
 
     public void Exit()
@@ -46,6 +48,7 @@ using UnityEngine;
         {
             enemy.Target = null;
             enemy.ChangeDirection();
+            enemy.ChangeState(new PenguinPatrolState());
             enemy.Target = null;
         }
     }

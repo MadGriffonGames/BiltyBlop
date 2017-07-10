@@ -31,6 +31,10 @@ public class PlayerIdleState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerAttackState());
         }
+        if (Player.Instance.Throw)
+        {
+            Player.Instance.ChangeState(new PlayerThrowState());
+        }
         if (Player.Instance.takeHit)
         {
             Player.Instance.ChangeState(new PlayerTakeHitState());

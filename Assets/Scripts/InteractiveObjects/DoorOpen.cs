@@ -36,7 +36,7 @@ public class DoorOpen : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Sword"))
+        if (other.gameObject.CompareTag("Sword") || other.transform.CompareTag("Throwing"))
         {            
             if (!isBlocked)
             {

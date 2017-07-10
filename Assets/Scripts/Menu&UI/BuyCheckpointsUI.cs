@@ -6,6 +6,8 @@ using UnityEngine;
 public class BuyCheckpointsUI : MonoBehaviour
 {
     const int FREE_CHECKPOINTS_GIFT = 3;
+    const int CRYSTAL_PRICE = 4;
+    const int NOT_PREMIUM_ATTEMPS = 3;
 
     [SerializeField]
     GameObject videoButton;
@@ -15,10 +17,10 @@ public class BuyCheckpointsUI : MonoBehaviour
     Text coinsPrice;
     [SerializeField]
     GameObject crystalsButton;
-    [SerializeField]
-    Text crystalPrice;
 
-    int notPremiumAttemps = 3;
+    int coinsPriceInt;
+
+    int notPremiumAttemps = NOT_PREMIUM_ATTEMPS;
 
     private void OnEnable()
     {
@@ -29,15 +31,16 @@ public class BuyCheckpointsUI : MonoBehaviour
             switch (notPremiumAttemps)
             {
                 case 3:
-                    coinsPrice.text = "25";
-                    break;
-                case 2:
                     coinsPrice.text = "50";
                     break;
+                case 2:
+                    coinsPrice.text = "100";
+                    break;
                 case 1:
-                    coinsPrice.text = "75";
+                    coinsPrice.text = "150";
                     break;
             }
+            coinsPriceInt = int.Parse(coinsPrice.text);
             crystalsButton.SetActive(false);
         }
         else
@@ -79,22 +82,52 @@ public class BuyCheckpointsUI : MonoBehaviour
 
     public void CoinsButton()
     {
-        Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
-        DeathUI.Instance.UpdateFreeCheckpointsCounter();
+        if (PlayerPrefs.GetInt("Coins") >= coinsPriceInt)
+        {
+            Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+            DeathUI.Instance.UpdateFreeCheckpointsCounter();
 
-        notPremiumAttemps--;
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - coinsPriceInt);
+            GameManager.collectedCoins -= coinsPriceInt;
 
-        this.gameObject.SetActive(false);
+            notPremiumAttemps--;
+
+            this.gameObject.SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("Coins") + GameManager.lvlCollectedCoins >= coinsPriceInt)
+        {
+            Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+            DeathUI.Instance.UpdateFreeCheckpointsCounter();
+
+            GameManager.lvlCollectedCoins -= coinsPriceInt - PlayerPrefs.GetInt("Coins");
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - PlayerPrefs.GetInt("Coins"));
+            GameManager.collectedCoins -= coinsPriceInt;
+
+            notPremiumAttemps--;
+
+            this.gameObject.SetActive(false);
+        }
+        
     }
 
     public void CrystalsButton()
     {
-        Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
-        DeathUI.Instance.UpdateFreeCheckpointsCounter();
+        if (PlayerPrefs.GetInt("Crystals") >= CRYSTAL_PRICE)
+        {
+            Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+            DeathUI.Instance.UpdateFreeCheckpointsCounter();
 
-        notPremiumAttemps--;
+            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - CRYSTAL_PRICE);
+            GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
 
-        this.gameObject.SetActive(false);
+            notPremiumAttemps--;
+
+            this.gameObject.SetActive(false);
+        }
+        else
+        {
+            //GOTO SHOP TO BUY CRYSTALS, MOTHERFUCKER!!!!!!!
+        }
     }
 
     public void Skip()

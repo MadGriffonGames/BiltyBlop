@@ -63,7 +63,7 @@ public class CrystalHolem : MovingMeleeEnemy
             if (IsDead)
             {
                 SoundManager.PlaySound("enemyher loud");
-                //Instantiate(crystalParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                Instantiate(crystalParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);

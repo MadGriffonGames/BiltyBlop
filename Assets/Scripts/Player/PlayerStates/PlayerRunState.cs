@@ -13,7 +13,7 @@ public class PlayerRunState : IPlayerState
 
     public void Execute()
     {
-        if (Player.Instance.isPlaying && !isRuning)
+        if (Player.Instance.isRewinding && !isRuning)
         {
             Player.Instance.myArmature.animation.FadeIn("run", -1, -1);
             isRuning = true;
@@ -33,6 +33,10 @@ public class PlayerRunState : IPlayerState
         else if (Player.Instance.Attack && Mathf.Abs(Player.Instance.myRigidbody.velocity.x) < 6.8f)
         {
             Player.Instance.ChangeState(new PlayerAttackState());
+        }
+        if (Player.Instance.Throw)
+        {
+            Player.Instance.ChangeState(new PlayerThrowState());
         }
         if (Player.Instance.takeHit)
         {

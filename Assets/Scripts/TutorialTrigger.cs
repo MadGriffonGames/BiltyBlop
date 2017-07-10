@@ -20,6 +20,7 @@ public class TutorialTrigger : MonoBehaviour
 
     private void Start()
     {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         if (arrow != null)
         {
             arrow.SetActive(false);

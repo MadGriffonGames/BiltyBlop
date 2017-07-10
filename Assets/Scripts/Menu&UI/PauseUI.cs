@@ -28,6 +28,13 @@ public class PauseUI : MonoBehaviour
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
         }
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
+            {
+                Pause();
+            }
+        }
     }
 
     public void Pause()
@@ -53,6 +60,7 @@ public class PauseUI : MonoBehaviour
 
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;
+        AdsManager.Instance.fromShowfunction = true;
 
 #elif UNITY_ANDROID
         AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()

@@ -8,13 +8,12 @@ public class YetiIdleState : IYetiState
 {
     private Yeti enemy;
     bool isIdle;
-    float waitFor = 0.9f;
+    float waitFor = 1.3f;
     bool timerStart = false;
     bool attacked = false;
     float startTime;
     [SerializeField]
     GameObject snowball;
-
 
 
     public void Enter(Yeti enemy)
@@ -43,9 +42,9 @@ public class YetiIdleState : IYetiState
             isIdle = true;
         }
 
-        if (!enemy.snowball.isActiveAndEnabled && attacked)
+        if (!enemy.snowball.isActiveAndEnabled && attacked && (Time.time - startTime >= waitFor))
         {
-
+            Debug.Log("waited");
             if (isIdle && enemy.Target != null)
             {
                 enemy.ChangeState(new YetiRangeState());

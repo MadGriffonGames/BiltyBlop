@@ -93,11 +93,4 @@ public class EvilFlowerGreen : RangeEnemy
         ChangeState(new EFGreenIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
-
-    public void AnimIdle()
-    {
-        armature.animation.timeScale = 1.2f;
-        armature.animation.Play("IDLE");
-
-    }
 }

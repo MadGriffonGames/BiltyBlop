@@ -6,7 +6,6 @@ class YetiRangeState : IYetiState
 {
 
     private Yeti enemy;
-    float attackTime;
     bool isAttacking = false;
 
 

@@ -14,7 +14,6 @@ public class Snowball : MonoBehaviour
     private Vector2 direction;
 
 
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))

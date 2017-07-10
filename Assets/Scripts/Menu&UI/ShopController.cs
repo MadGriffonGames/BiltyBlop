@@ -7,59 +7,45 @@ public class ShopController : MonoBehaviour {
 
     public GameObject[] shops;
     [SerializeField]
-    Button leftButton;
+    Button skinsButton;
     [SerializeField]
-    Button middleButton;
+    Button itemsButton;
     [SerializeField]
-    Button rightButton;
+    Button perksButton;
+    [SerializeField]
+    Text coinText;
+    [SerializeField]
+    Text crystalText;
 
     public string[] shopNames;
     private int activeShopNumber;
     private int shopsCount;
-    private static int buttonsCount = 3;
 
-	private void Start ()
+    private void Update()
     {
-        shopsCount = shops.Length;
-        shopNames = new string[shopsCount];
-        for (int i = 0; i < shopsCount; i++)
-        {
-            shopNames[i] = shops[i].gameObject.name;
-        }
-        activeShopNumber = 1;
+        coinText.text = PlayerPrefs.GetInt("Coins").ToString();
+        crystalText.text = PlayerPrefs.GetInt("Crystals").ToString();
+    }
 
-        SetButtonText(rightButton, activeShopNumber + 1);
-        SetButtonText(middleButton, activeShopNumber);
-        SetButtonText(leftButton, activeShopNumber - 1);
-        shops[activeShopNumber].SetActive(true);
+    private void Start ()
+    {
+        perksButton.GetComponentInChildren<Text>().text = "PERKS";
+        itemsButton.GetComponentInChildren<Text>().text = "ITEMS";
+        skinsButton.GetComponentInChildren<Text>().text = "SKINS";
     }
 
 
-    public void ChangeShopNames(int inc)
+    public void ActivateShop(int number)
     {
-        shops[activeShopNumber].SetActive(false);
-        activeShopNumber = (activeShopNumber + inc) % (shopsCount);
-        shops[activeShopNumber].SetActive(true);
-        
-        if (activeShopNumber == shopsCount - 1)  // n-1 n 1
+        for (int i = 0; i < shops.Length; i++)
         {
-            SetButtonText(rightButton, 0);
-            SetButtonText(middleButton, shopsCount - 1);
-            SetButtonText(leftButton, shopsCount - 2);
+            if (number == i)
+            {
+                shops[i].SetActive(true);
+            }
+            else
+                shops[i].SetActive(false);
         }
-        else if (activeShopNumber == 0)          // n 1 2
-        {
-            SetButtonText(rightButton, 1);
-            SetButtonText(middleButton, 0);
-            SetButtonText(leftButton, shopsCount - 1);
-        }
-        else
-        {
-            SetButtonText(rightButton, activeShopNumber + 1);
-            SetButtonText(middleButton, activeShopNumber);
-            SetButtonText(leftButton, activeShopNumber - 1);
-        }
-
     }
 
     private void SetButtonText(Button button, int shopNumber)

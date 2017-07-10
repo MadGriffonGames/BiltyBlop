@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ItemShop : MonoBehaviour
 {
 
-    public GameObject itemButton;
+    public GameObject item;
     public Transform spacer;
 
     [SerializeField]
@@ -21,6 +22,8 @@ public class ItemShop : MonoBehaviour
     Button buyByCrystals;
     [SerializeField]
     Button buyByCoins;
+
+    const string itemsFolder = "Sprites/UI/InventoryUI/";
 
     bool onStart;
 
@@ -41,21 +44,34 @@ public class ItemShop : MonoBehaviour
     {
         for (int i = 0; i < Inventory.Instance.items.Length; i++)
         {
-            GameObject newButton = Instantiate(itemButton) as GameObject;
-            newButton.transform.SetParent(spacer, true);
-            newButton.transform.localScale.Set(1, 1, 1);
-            newButton.transform.localScale = new Vector3(1, 1, 1);
-            newButton.GetComponentInChildren<Text>().text = Inventory.Instance.items[i];
-            newButton.GetComponent<Button>().onClick.AddListener(() => ActivateBuyItemWindow(newButton.GetComponentInChildren<Text>().text));
+            GameObject newItem = Instantiate(item) as GameObject;
+            newItem.transform.SetParent(spacer, true);
+            
+            newItem.transform.localScale = new Vector3(1, 1, 1);
+            newItem.GetComponentInChildren<Text>().text = Inventory.Instance.items[i];
+            newItem.GetComponentInChildren<Button>().onClick.AddListener(() => ActivateBuyItemWindow(newItem.GetComponentInChildren<Text>().text));
+            newItem.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.items[i]);
         }
     }
 
+
     public void ActivateBuyItemWindow(string itemName)
     {
+        int itemNumber = 0;
+        for (int i = 0; i < Inventory.Instance.items.Length; i++)
+        {
+            if (Inventory.Instance.items[i] == itemName)
+            {
+                itemNumber = i;
+                break;
+            }
+        }
+
         closeWindowButton.SetActive(true);
         fade.SetActive(true);
         buyItemWindow.GetComponentInChildren<Text>().text = itemName;
         buyItemWindow.SetActive(true);
+        buyItemWindow.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.items[itemNumber]);
 
         buyByCoins.GetComponent<Button>().onClick.RemoveAllListeners();
         buyByCrystals.GetComponent<Button>().onClick.RemoveAllListeners();

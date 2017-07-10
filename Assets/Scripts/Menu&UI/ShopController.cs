@@ -12,20 +12,11 @@ public class ShopController : MonoBehaviour {
     Button itemsButton;
     [SerializeField]
     Button perksButton;
-    [SerializeField]
-    Text coinText;
-    [SerializeField]
-    Text crystalText;
 
     public string[] shopNames;
     private int activeShopNumber;
     private int shopsCount;
 
-    private void Update()
-    {
-        coinText.text = PlayerPrefs.GetInt("Coins").ToString();
-        crystalText.text = PlayerPrefs.GetInt("Crystals").ToString();
-    }
 
     private void Start ()
     {

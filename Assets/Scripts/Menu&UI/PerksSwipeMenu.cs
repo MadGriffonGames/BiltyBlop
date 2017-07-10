@@ -13,7 +13,7 @@ public class PerksSwipeMenu : SwipeMenu {
     // Use this for initialization
     public override void Start ()
     {
-        minButtonsNumber = 2;
+        minButtonsNumber = 1;
         ObButtonClickLerp(minButtonsNumber);
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -27,7 +27,34 @@ public class PerksSwipeMenu : SwipeMenu {
 
     public override void Update()
     {
-        base.Update();
+        if (minButtonsNumber == 0)
+        {
+            minButtonsNumber = 1;
+        }
+        else if (minButtonsNumber == buttons.Length - 1)
+        {
+            minButtonsNumber = buttons.Length - 2;
+        }
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            distance[i] = Mathf.Abs(center.transform.position.x - buttons[i].transform.position.x);
+        }
+
+        float minDistance = Mathf.Min(distance);
+        if (!tapping)
+        {
+            for (int i = 1; i < buttons.Length - 1; i++)
+            {
+                if (minDistance == distance[i] && !onStart)
+                {
+                    minButtonsNumber = i;
+                }
+            }
+        }
+        if (!dragging || tapping)
+        {
+            LerpToButton(minButtonsNumber * -buttonDistance);
+        }
         if (PlayerPrefs.GetString(buttons[minButtonsNumber].GetComponentInChildren<Text>().text) == "Unlocked")
         {
             unlockButton.gameObject.SetActive(false);
@@ -38,8 +65,9 @@ public class PerksSwipeMenu : SwipeMenu {
 
     public override void LerpToButton(int position)
     {
+
         base.LerpToButton(position);
-        MakeInctiveButton(previousActiveButton);
+        MakeInactiveButton(previousActiveButton);
         MakeActiveButton(minButtonsNumber);
         previousActiveButton = minButtonsNumber;
     }
@@ -48,7 +76,7 @@ public class PerksSwipeMenu : SwipeMenu {
     {
         base.ObButtonClickLerp(buttonNumber);
 
-        MakeInctiveButton(previousActiveButton);
+        MakeInactiveButton(previousActiveButton);
         MakeActiveButton(buttonNumber);
         previousActiveButton = buttonNumber;
     }
@@ -57,12 +85,12 @@ public class PerksSwipeMenu : SwipeMenu {
     public void MakeActiveButton(int buttonNumber)
     {
         buttons[buttonNumber].gameObject.transform.localScale = increasedButttonScale;
-        buttons[buttonNumber].GetComponentInChildren<Text>().enabled = true;
+        buttons[buttonNumber].GetComponentsInChildren<Text>()[1].enabled = true;
     }
-    public void MakeInctiveButton(int buttonNumber)
+    public void MakeInactiveButton(int buttonNumber)
     {
         buttons[buttonNumber].gameObject.transform.localScale = normalButttonScale;
-        buttons[buttonNumber].GetComponentInChildren<Text>().enabled = false;
+        buttons[buttonNumber].GetComponentsInChildren<Text>()[1].enabled = false;
     }
 
     public void UnlockPerk()

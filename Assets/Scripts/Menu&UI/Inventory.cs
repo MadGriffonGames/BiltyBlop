@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour {
     public static string speedBonuses = "SpeedBonus";
     public static string timeBonuses = "TimeBonus";
     public static string immortalBonuses = "ImmortalBonus";
-    public static string clips = "ClipsCount";
+    public static string clips = "Clips";
 
     public string[] items;
 
@@ -126,9 +126,9 @@ public class Inventory : MonoBehaviour {
             PlayerPrefs.SetInt(itemName + count, 0);
         }
         // Max Count
-        if (!PlayerPrefs.HasKey(max + itemName))
+        if (!PlayerPrefs.HasKey(max + itemName + count))
         {
-            PlayerPrefs.SetInt(max + itemName, maxCount);
+            PlayerPrefs.SetInt(max + itemName + count, maxCount);
         }
         // Cost in Coins
         if (!PlayerPrefs.HasKey(itemName + costCoins))

@@ -49,6 +49,17 @@ public class LevelManager : MonoBehaviour
         levelButtonsArray = FindObjectsOfType<LevelButton>();
     }
 
+    private void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Back();
+            }
+        }
+    }
+
     void SetButtons()
     {
         int lvlNum = 1;

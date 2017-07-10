@@ -28,6 +28,13 @@ public class PauseUI : MonoBehaviour
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
         }
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
+            {
+                Pause();
+            }
+        }
     }
 
     public void Pause()
@@ -38,7 +45,7 @@ public class PauseUI : MonoBehaviour
 
     public void Continue()
     {
-        Time.timeScale = 1;
+        Time.timeScale = Player.Instance.timeBonusNum > 0 ? 0.5f : 1;
         buttonsSetActive(false);
     }
 

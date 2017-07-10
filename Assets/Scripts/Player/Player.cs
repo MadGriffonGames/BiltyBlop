@@ -24,7 +24,7 @@ public class Player : Character
     GameObject throwing;
     public GameObject[] throwingClip;
     public int clipSize;
-    int throwingIterator;
+    public int throwingIterator;
 
     public Rigidbody2D myRigidbody;
     public MeshRenderer[] meshRenderer;
@@ -96,11 +96,11 @@ public class Player : Character
     /*
      * Bonus vars
      */
-    int speedBonusNum = 0;
-    int immortalBonusNum = 0;
-    int damageBonusNum = 0;
-    int jumpBonusNum = 0;
-    int timeBonusNum = 0;
+    public int speedBonusNum = 0;
+    public int immortalBonusNum = 0;
+    public int damageBonusNum = 0;
+    public int jumpBonusNum = 0;
+    public int timeBonusNum = 0;
     public float timeScaler = 1;
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
@@ -207,8 +207,16 @@ public class Player : Character
             //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
             throwingClip[i].GetComponent<SpriteRenderer>().enabled = false;
             throwingClip[i].GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
+    public void ResetThrowing()
+    {
+        for (int i = 0; i < clipSize; i++)
+        {
             throwingClip[i].GetComponent<Throwing>().speed = 14;
         }
+        ThrowingUI.Instance.SetThrowBar();
     }
 
     public void SetRecording(Dictionary<int, PlayerTimeState> recording)
@@ -318,7 +326,6 @@ public class Player : Character
         
         if (other.gameObject.CompareTag("DeathTrigger"))
         {
-            Debug.Log(1);
             health -= health - 1;
             if (immortal)
             {
@@ -396,6 +403,7 @@ public class Player : Character
 
             throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
+            throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
 
             if (this.gameObject.transform.localScale.x > 0)
             {
@@ -411,6 +419,7 @@ public class Player : Character
             }
 
             --throwingIterator;
+            ThrowingUI.Instance.SetThrowBar();
         }
     }
 
@@ -420,7 +429,6 @@ public class Player : Character
         {
             StartCoroutine(AttackColliderDelay());
         }
-        StartCoroutine(KidHeadUI.Instance.ShowEmotion("angry"));
     }
 
     IEnumerator AttackColliderDelay()
@@ -459,7 +467,6 @@ public class Player : Character
         if (!isRewinding && !IsDead)
         {
             CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
-            StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
             if (!immortal)
             {
                 if (bossFight)

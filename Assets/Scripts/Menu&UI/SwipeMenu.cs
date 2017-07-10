@@ -13,8 +13,8 @@ public class SwipeMenu : MonoBehaviour
     protected float[] distance;
     protected int buttonDistance;
     public int minButtonsNumber;
-    private bool dragging = false;
-    private bool onStart = true;
+    protected bool dragging = false;
+    protected bool onStart = true;
     protected bool tapping = false;
 
     public static int changingDistance = 3;

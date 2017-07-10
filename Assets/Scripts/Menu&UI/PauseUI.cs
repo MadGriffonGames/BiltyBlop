@@ -45,7 +45,7 @@ public class PauseUI : MonoBehaviour
 
     public void Continue()
     {
-        Time.timeScale = 1;
+        Time.timeScale = Player.Instance.timeBonusNum > 0 ? 0.5f : 1;
         buttonsSetActive(false);
     }
 

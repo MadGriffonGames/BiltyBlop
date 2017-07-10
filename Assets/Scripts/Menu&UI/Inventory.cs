@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour {
-
+public class Inventory : MonoBehaviour
+{
     private static Inventory instance;
     public static Inventory Instance
     {
@@ -16,39 +16,43 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-    /* Inventory Items Names */
-    public static string hpPots = "HealthPot";
-    public static string damageBonuses = "DamageBonus";
-    public static string speedBonuses = "SpeedBonus";
-    public static string timeBonuses = "TimeBonus";
-    public static string immortalBonuses = "ImmortalBonus";
-    public static string clips = "ClipsCount";
+    const int IMMORTAL_DURATION = 5;
+    const int DAMAGE_DURATION = 10;
+    const int SPEED_DURATION = 3;
+    const int TIME_DURATION = 7;
 
+    /* Inventory Items Names */
+    public const string HEAL = "HealthPot";
+    public const string DAMAGE_BONUS = "DamageBonus";
+    public const string SPEED_BONUS = "SpeedBonus";
+    public const string TIME_BONUS = "TimeBonus";
+    public const string IMMORTAL_BONUS = "ImmortalBonus";
+    public const string AMMO = "ClipsCount";
+
+    public const string MAX = "Max";
+    public const string COUNT = "Count";
+    public const string COST_COINS = "CostCoins";
+    public const string COST_CRYSTALS = "CostCrystal";
+
+    public Dictionary<string, int> boosters;
     public string[] items;
 
-    const string max = "Max";
-    const string count = "Count";
-    const string costCoins = "CostCoins";
-    const string costCrystal = "CostCrystal";
-
-    const int upgradingValue = 5;
-
-    private void Start()
+    private void Awake()
     {
-        items =new string[] { hpPots, damageBonuses, speedBonuses, timeBonuses, immortalBonuses, clips };
+        boosters = new Dictionary<string, int>();
+        items = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO };
 
-        /* SETTING STARTING PARAMS FOR ITEMS */
-        SetStartingParamsForItem(hpPots, 10, 25, 2);
-        SetStartingParamsForItem(damageBonuses, 5, 50, 4);
-        SetStartingParamsForItem(speedBonuses, 5, 50, 4);
-        SetStartingParamsForItem(timeBonuses, 5, 50, 4);
-        SetStartingParamsForItem(immortalBonuses, 5, 50, 4);
-        SetStartingParamsForItem(clips, 5, 50, 4);
+        SetStartingParamsForItem(HEAL, 3, 25, 2);
+        SetStartingParamsForItem(DAMAGE_BONUS, 3, 50, 4);
+        SetStartingParamsForItem(SPEED_BONUS, 3, 50, 4);
+        SetStartingParamsForItem(TIME_BONUS, 3, 50, 4);
+        SetStartingParamsForItem(IMMORTAL_BONUS, 3, 50, 4);
+        SetStartingParamsForItem(AMMO, 3, 50, 4);
     }
 
     public bool BuyItem(string itemName, int itemCount, bool coinPayment)
     {
-        if (CanAddItemToInventory(itemName, itemCount))
+        if (CanAddItem(itemName, itemCount))
         {
             /* 
              
@@ -56,89 +60,134 @@ public class Inventory : MonoBehaviour {
              
                                      */
 
-            AddItemToInventory(itemName, itemCount);
+            AddItem(itemName, itemCount);
             return true;
         }
         else return false;
     }
 
-    private bool CanAddItemToInventory(string itemName, int itemCount)
+    public bool CanAddItem(string itemName, int itemCount)
     {
-        if (!PlayerPrefs.HasKey(itemName + count))
+        if (!PlayerPrefs.HasKey(itemName + COUNT))
         {
-            PlayerPrefs.SetInt(itemName + count, 0);
+            PlayerPrefs.SetInt(itemName + COUNT, 0);
             return true;
         }
-        else if (PlayerPrefs.GetInt(itemName + count) + itemCount < PlayerPrefs.GetInt(max + itemName))
+        else if (PlayerPrefs.GetInt(itemName + COUNT) + itemCount < PlayerPrefs.GetInt(MAX + itemName))
         {
-            return true;
-        }
-        return false;
-    }
-
-    public bool AddItemToInventory(string itemName, int itemCount) 
-    {
-        if (!PlayerPrefs.HasKey(itemName + count))
-        {
-            PlayerPrefs.SetInt(itemName + count, itemCount);
-            return true;
-        }
-        else if (PlayerPrefs.GetInt(itemName + count) < PlayerPrefs.GetInt(max + itemName))
-        {
-            PlayerPrefs.SetInt(itemName + count, PlayerPrefs.GetInt(itemName + count) + itemCount);
             return true;
         }
         return false;
     }
 
-    public bool RemoveItemFromInventory(string itemName)  // = UseItem
+    public void AddItem(string itemName, int itemCount) 
     {
-        if (PlayerPrefs.GetInt(itemName + count) > 0)
+        if (!PlayerPrefs.HasKey(itemName + COUNT))
         {
-            PlayerPrefs.SetInt(itemName + count, PlayerPrefs.GetInt(itemName + count) - 1);
-            return true;
+            PlayerPrefs.SetInt(itemName + COUNT, itemCount);
+            UpdateItemValue(itemName);
         }
-        return false;
+        else if (PlayerPrefs.GetInt(itemName + COUNT) < PlayerPrefs.GetInt(MAX + itemName))
+        {
+            PlayerPrefs.SetInt(itemName + COUNT, PlayerPrefs.GetInt(itemName + COUNT) + itemCount);
+            UpdateItemValue(itemName);
+        }
     }
 
-    public void UpgradeStorage(string itemName, int cost)
+    public void RemoveItem(string itemName)  // = UseItem
     {
-        PlayerPrefs.SetInt(max + itemName + count, PlayerPrefs.GetInt(max + itemName + count) + upgradingValue);
-        GameManager.CollectedCoins -= cost;
+        if (PlayerPrefs.GetInt(itemName + COUNT) > 0)
+        {
+            PlayerPrefs.SetInt(itemName + COUNT, PlayerPrefs.GetInt(itemName + COUNT) - 1);
+            UpdateItemValue(itemName);
+        }
     }
 
-    public int GetCoinCostOfItem(string itemName)
+    public int GetCoinCost(string itemName)
     {
-        return PlayerPrefs.GetInt(itemName + costCoins);
+        return PlayerPrefs.GetInt(itemName + COST_COINS);
     }
 
-    public int GetCrystalCostOfItem(string itemName)
+    public int GetCrystalCost(string itemName)
     {
-        return PlayerPrefs.GetInt(itemName + costCrystal);
+        return PlayerPrefs.GetInt(itemName + COST_CRYSTALS);
+    }
+
+    public int GetItemCount(string itemName)
+    {
+        return boosters[itemName];
+    }
+
+    public void UpdateItemValue(string itemName)
+    {
+        boosters[itemName] = PlayerPrefs.GetInt(itemName + COUNT);
     }
 
     /* SETTING PLAYER PREFS METHODS */
     private void SetStartingParamsForItem(string itemName, int maxCount, int coinCost, int crystalCost)
     {
         // Start Count = 0
-        if (!PlayerPrefs.HasKey(itemName + count))
+        if (!PlayerPrefs.HasKey(itemName + COUNT))
         {
-            PlayerPrefs.SetInt(itemName + count, 0);
+            PlayerPrefs.SetInt(itemName + COUNT, 0);
         }
         // Max Count
-        if (!PlayerPrefs.HasKey(max + itemName))
+        if (!PlayerPrefs.HasKey(MAX + itemName))
         {
-            PlayerPrefs.SetInt(max + itemName, maxCount);
+            PlayerPrefs.SetInt(MAX + itemName, maxCount);
         }
         // Cost in Coins
-        if (!PlayerPrefs.HasKey(itemName + costCoins))
+        if (!PlayerPrefs.HasKey(itemName + COST_COINS))
         {
-            PlayerPrefs.SetInt(itemName + costCoins, coinCost);
+            PlayerPrefs.SetInt(itemName + COST_COINS, coinCost);
         }
         // Cost in Crystals
-        if (!PlayerPrefs.HasKey(itemName + costCrystal))
+        if (!PlayerPrefs.HasKey(itemName + COST_CRYSTALS))
         {
-            PlayerPrefs.SetInt(itemName + costCrystal, crystalCost);
+            PlayerPrefs.SetInt(itemName + COST_CRYSTALS, crystalCost);
+        }
+
+        boosters.Add(itemName, PlayerPrefs.GetInt(itemName + COUNT));
+    }
+
+    public void UseHP()
+    {
+        Player.Instance.Health++;
+        HealthUI.Instance.SetHealthbar();
+        MakeFX.Instance.MakeHeal();
+
+        RemoveItem(HEAL);
+    }
+
+    public void UseAmmo()
+    {
+        Player.Instance.throwingIterator = Player.Instance.clipSize - 1;
+        Player.Instance.ResetThrowing();
+
+        RemoveItem(AMMO);
+    }
+
+    public void UseBonus(string bonusType)
+    {
+        if (bonusType == IMMORTAL_BONUS)
+        {
+            Player.Instance.ExecBonusImmortal(IMMORTAL_DURATION);
+            RemoveItem(IMMORTAL_BONUS);
+        }
+        if (bonusType == DAMAGE_BONUS)
+        {
+            Player.Instance.ExecBonusDamage(DAMAGE_DURATION);
+            RemoveItem(DAMAGE_BONUS);
+        }
+        if (bonusType == TIME_BONUS)
+        {
+            Player.Instance.ExecBonusTime(TIME_DURATION);
+            RemoveItem(TIME_BONUS);
+        }
+        if (bonusType == SPEED_BONUS)
+        {
+            Player.Instance.ExecBonusSpeed(SPEED_DURATION);
+            RemoveItem(SPEED_BONUS);
         }
     }
 

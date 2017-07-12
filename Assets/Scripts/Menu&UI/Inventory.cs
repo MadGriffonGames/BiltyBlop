@@ -17,12 +17,12 @@ public class Inventory : MonoBehaviour {
 	}
 
     /* Inventory Items Names */
-    public static string hpPots = "HealthPot";
-    public static string damageBonuses = "DamageBonus";
-    public static string speedBonuses = "SpeedBonus";
-    public static string timeBonuses = "TimeBonus";
-    public static string immortalBonuses = "ImmortalBonus";
-    public static string clips = "Clips";
+    public const string hpPots = "HealthPot";
+    public const string damageBonuses = "DamageBonus";
+    public const string speedBonuses = "SpeedBonus";
+    public const string timeBonuses = "TimeBonus";
+    public const string immortalBonuses = "ImmortalBonus";
+    public const string clips = "Clips";
 
     public string[] items;
 
@@ -31,11 +31,23 @@ public class Inventory : MonoBehaviour {
     const string costCoins = "CostCoins";
     const string costCrystal = "CostCrystal";
 
+    private Dictionary<string, string> inGameItemNames;
+
     const int upgradingValue = 5;
 
     private void Start()
     {
         items =new string[] { hpPots, damageBonuses, speedBonuses, timeBonuses, immortalBonuses, clips };
+
+        inGameItemNames = new Dictionary<string, string>(items.Length);
+
+        inGameItemNames.Add(hpPots, "Heal Pot");
+        inGameItemNames.Add(damageBonuses, "Damage Pot");
+        inGameItemNames.Add(speedBonuses, "Speed Pot");
+        inGameItemNames.Add(timeBonuses, "Time Pot");
+        inGameItemNames.Add(immortalBonuses, "Immortal Pot");
+        inGameItemNames.Add(clips, "Clips");
+
 
         /* SETTING STARTING PARAMS FOR ITEMS */
         SetStartingParamsForItem(hpPots, 10, 25, 2);
@@ -115,6 +127,11 @@ public class Inventory : MonoBehaviour {
     public int GetCrystalCostOfItem(string itemName)
     {
         return PlayerPrefs.GetInt(itemName + costCrystal);
+    }
+
+    public string GetInGameItemName(string itemName)
+    {
+        return inGameItemNames[itemName];
     }
 
     /* SETTING PLAYER PREFS METHODS */

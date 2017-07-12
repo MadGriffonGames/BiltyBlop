@@ -48,7 +48,7 @@ public class ItemShop : MonoBehaviour
             newItem.transform.SetParent(spacer, true);
             
             newItem.transform.localScale = new Vector3(1, 1, 1);
-            newItem.GetComponentInChildren<Text>().text = Inventory.Instance.items[i];
+            newItem.GetComponentInChildren<Text>().text = Inventory.Instance.GetInGameItemName(Inventory.Instance.items[i]);
             newItem.GetComponentInChildren<Button>().onClick.AddListener(() => ActivateBuyItemWindow(newItem.GetComponentInChildren<Text>().text));
             newItem.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.items[i]);
         }

@@ -39,14 +39,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject bird;
 
-    /* Inventory Items Names */
-    public static string hpPots = "HealthPotCount";
-    public static string damageBonuses = "DamageBonusCount";
-    public static string speedBonuses = "SpeedBonusCount";
-    public static string timeBonuses = "TimeBonusCount";
-    public static string immortalBonuses = "ImmortalBonusCount";
-    public static string clips = "ClipsCount";
-
     void Start () 
 	{
         if (SceneManager.GetActiveScene().name.Contains("Level"))
@@ -60,7 +52,6 @@ public class GameManager : MonoBehaviour
 
         deadEnemies = new List<GameObject>();
 
-        SetMaxInventoryValues();
         SetMoneyValues();
 
         if (PlayerPrefs.HasKey("Crystals") && crystalTxt != null)
@@ -110,36 +101,6 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Crystals"))
         {
             PlayerPrefs.SetInt("Crystals", 0);
-        }
-    }
-
-    void SetMaxInventoryValues()
-    {
-
-        /* SETTING INVENTORY */
-        if (!PlayerPrefs.HasKey("Max" + hpPots))
-        {
-            PlayerPrefs.SetInt("Max" + hpPots, 5);
-        }
-        if (!PlayerPrefs.HasKey("Max" + damageBonuses))
-        {
-            PlayerPrefs.SetInt("Max" + damageBonuses, 5);
-        }
-        if (!PlayerPrefs.HasKey("Max" + speedBonuses))
-        {
-            PlayerPrefs.SetInt("Max" + speedBonuses, 5);
-        }
-        if (!PlayerPrefs.HasKey("Max" + timeBonuses))
-        {
-            PlayerPrefs.SetInt("Max" + timeBonuses, 5);
-        }
-        if (!PlayerPrefs.HasKey("Max" + immortalBonuses))
-        {
-            PlayerPrefs.SetInt("Max" + immortalBonuses, 5);
-        }
-        if (!PlayerPrefs.HasKey("Max" + clips))
-        {
-            PlayerPrefs.SetInt("Max" + clips, 5);
         }
     }
 

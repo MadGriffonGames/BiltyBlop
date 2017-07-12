@@ -42,15 +42,16 @@ public class ItemShop : MonoBehaviour
 
     void SetItemsButtons()
     {
-        for (int i = 0; i < Inventory.Instance.items.Length; i++)
+        for (int i = 0; i < Inventory.Instance.itemsNames.Length; i++)
         {
             GameObject newItem = Instantiate(item) as GameObject;
             newItem.transform.SetParent(spacer, true);
             
             newItem.transform.localScale = new Vector3(1, 1, 1);
-            newItem.GetComponentInChildren<Text>().text = Inventory.Instance.GetInGameItemName(Inventory.Instance.items[i]);
-            newItem.GetComponentInChildren<Button>().onClick.AddListener(() => ActivateBuyItemWindow(newItem.GetComponentInChildren<Text>().text));
-            newItem.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.items[i]);
+            newItem.GetComponentsInChildren<Text>()[0].text = Inventory.Instance.GetItemShopName(Inventory.Instance.itemsNames[i]); // shopName
+            newItem.GetComponentsInChildren<Text>()[1].text = Inventory.Instance.itemsNames[i];                                     // itemName
+            newItem.GetComponentInChildren<Button>().onClick.AddListener(() => ActivateBuyItemWindow(newItem.GetComponentsInChildren<Text>()[1].text));
+            newItem.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.itemsNames[i]);
         }
     }
 
@@ -58,9 +59,9 @@ public class ItemShop : MonoBehaviour
     public void ActivateBuyItemWindow(string itemName)
     {
         int itemNumber = 0;
-        for (int i = 0; i < Inventory.Instance.items.Length; i++)
+        for (int i = 0; i < Inventory.Instance.itemsNames.Length; i++)
         {
-            if (Inventory.Instance.items[i] == itemName)
+            if (Inventory.Instance.itemsNames[i] == itemName)
             {
                 itemNumber = i;
                 break;
@@ -69,17 +70,17 @@ public class ItemShop : MonoBehaviour
 
         closeWindowButton.SetActive(true);
         fade.SetActive(true);
-        buyItemWindow.GetComponentInChildren<Text>().text = itemName;
+        buyItemWindow.GetComponentInChildren<Text>().text = Inventory.Instance.GetItemShopName(itemName);
         buyItemWindow.SetActive(true);
-        buyItemWindow.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.items[itemNumber]);
+        buyItemWindow.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.itemsNames[itemNumber]);
 
         buyByCoins.GetComponent<Button>().onClick.RemoveAllListeners();
         buyByCrystals.GetComponent<Button>().onClick.RemoveAllListeners();
 
-        buyByCoins.GetComponentInChildren<Text>().text = Inventory.Instance.GetCoinCostOfItem(itemName).ToString();
+        buyByCoins.GetComponentInChildren<Text>().text = Inventory.Instance.GetCoinCost(itemName).ToString();
         buyByCoins.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, true));
 
-        buyByCrystals.GetComponentInChildren<Text>().text = Inventory.Instance.GetCrystalCostOfItem(itemName).ToString();
+        buyByCrystals.GetComponentInChildren<Text>().text = Inventory.Instance.GetCrystalCost(itemName).ToString();
         buyByCrystals.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, false));
     }
 

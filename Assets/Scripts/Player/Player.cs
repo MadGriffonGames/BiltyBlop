@@ -326,7 +326,6 @@ public class Player : Character
         
         if (other.gameObject.CompareTag("DeathTrigger"))
         {
-            Debug.Log(1);
             health -= health - 1;
             if (immortal)
             {

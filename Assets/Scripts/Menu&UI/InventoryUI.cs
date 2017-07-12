@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    const int IMMORTAL_DURATION = 5;
-    const int DAMAGE_DURATION = 10;
-    const int SPEED_DURATION = 3;
-    const int TIME_DURATION = 7;
-
     [SerializeField]
     Image backpack;
     [SerializeField]
@@ -22,12 +17,25 @@ public class InventoryUI : MonoBehaviour
     GameObject bonusBar;
     [SerializeField]
     GameObject inventoryFade;
+    [SerializeField]
+    Text hpCount;
+    [SerializeField]
+    Text clipsCount;
+    [SerializeField]
+    Text immortalCount;
+    [SerializeField]
+    Text damageCount;
+    [SerializeField]
+    Text speedCount;
+    [SerializeField]
+    Text timeCount;
 
     bool isOpen;
 
     private void Start()
     {
         isOpen = false;
+        SetBoostersValues();
     }
 
     public void OpenInventory()
@@ -53,7 +61,7 @@ public class InventoryUI : MonoBehaviour
 
     void DisactivateInventory()
     {
-        Time.timeScale = 1;
+        Time.timeScale = Player.Instance.timeBonusNum > 0 ? 0.5f : 1;
         backpack.sprite = backpackClose;
         isOpen = !isOpen;
         inventoryBar.SetActive(false);
@@ -62,11 +70,11 @@ public class InventoryUI : MonoBehaviour
 
     public void HPbutton()
     {
-        if (Player.Instance.Health != Player.Instance.maxHealth)
+        if (Inventory.Instance.GetItemCount(Inventory.HEAL) > 0 && Player.Instance.Health != Player.Instance.maxHealth)
         {
-            Player.Instance.Health++;
-            HealthUI.Instance.SetHealthbar();
-            MakeFX.Instance.MakeHeal();
+            Inventory.Instance.UseHP();
+            hpCount.text = Inventory.Instance.GetItemCount(Inventory.HEAL).ToString();
+
             DisactivateInventory();
         }
     }
@@ -85,19 +93,21 @@ public class InventoryUI : MonoBehaviour
 
     public void AmmoButton()
     {
-        if (Player.Instance.throwingIterator != Player.Instance.clipSize - 1)
+        if (Inventory.Instance.GetItemCount(Inventory.AMMO) > 0 && Player.Instance.throwingIterator != Player.Instance.clipSize - 1)
         {
-            Player.Instance.throwingIterator = Player.Instance.clipSize - 1;
-            Player.Instance.ResetThrowing();
+            Inventory.Instance.UseAmmo();
+            clipsCount.text = Inventory.Instance.GetItemCount(Inventory.AMMO).ToString();
+
             DisactivateInventory();
         }
     }
 
     public void ImmortalButton()
     {
-        if (Player.Instance.immortalBonusNum == 0)
+        if (Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS) > 0 && Player.Instance.immortalBonusNum == 0)
         {
-            Player.Instance.ExecBonusImmortal(IMMORTAL_DURATION);
+            Inventory.Instance.UseBonus(Inventory.IMMORTAL_BONUS);
+            immortalCount.text = Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS).ToString();
 
             DisactivateInventory();
         }
@@ -106,9 +116,10 @@ public class InventoryUI : MonoBehaviour
 
     public void DamageButton()
     {
-        if (Player.Instance.damageBonusNum == 0)
+        if (Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS) > 0 && Player.Instance.damageBonusNum == 0)
         {
-            Player.Instance.ExecBonusDamage(DAMAGE_DURATION);
+            Inventory.Instance.UseBonus(Inventory.DAMAGE_BONUS);
+            damageCount.text = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS).ToString();
 
             DisactivateInventory();
         }
@@ -116,9 +127,10 @@ public class InventoryUI : MonoBehaviour
 
     public void SpeedButton()
     {
-        if (Player.Instance.speedBonusNum == 0)
+        if (Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS) > 0 && Player.Instance.speedBonusNum == 0)
         {
-            Player.Instance.ExecBonusSpeed(SPEED_DURATION);
+            Inventory.Instance.UseBonus(Inventory.SPEED_BONUS);
+            speedCount.text = Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS).ToString();
 
             DisactivateInventory();
         }
@@ -126,11 +138,22 @@ public class InventoryUI : MonoBehaviour
 
     public void TimeButton()
     {
-        if (Player.Instance.timeBonusNum == 0)
+        if (Inventory.Instance.GetItemCount(Inventory.TIME_BONUS) > 0 && Player.Instance.timeBonusNum == 0)
         {
-            Player.Instance.ExecBonusTime(TIME_DURATION);
+            Inventory.Instance.UseBonus(Inventory.TIME_BONUS);
+            timeCount.text = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS).ToString();
 
             DisactivateInventory();
         }
+    }
+
+    void SetBoostersValues()
+    {
+        hpCount.text       = Inventory.Instance.GetItemCount(Inventory.HEAL).ToString();
+        clipsCount.text    = Inventory.Instance.GetItemCount(Inventory.AMMO).ToString();
+        immortalCount.text = Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS).ToString();
+        damageCount.text   = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS).ToString();
+        timeCount.text     = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS).ToString();
+        speedCount.text    = Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS).ToString();
     }
 }

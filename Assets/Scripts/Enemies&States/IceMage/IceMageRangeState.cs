@@ -18,10 +18,6 @@ public class IceMageRangeState : IceMageState
 
     public void Execute()
     {
-        if (enemy.isTakingDamage == true)
-        {
-            enemy.ChangeState(new IceMageDeathState());
-        }
         if ((enemy.armature.animation.lastAnimationName == ("attack") || enemy.armature.animation.lastAnimationName == "idle") && enemy.armature.animation.isCompleted)
         {
             SoundManager.PlaySound("spit");
@@ -29,9 +25,6 @@ public class IceMageRangeState : IceMageState
             enemy.fireball.SetActive(true);
             enemy.ChangeState(new IceMageIdleState());
         }
-
-        if (enemy.isDead)
-            enemy.fireball.SetActive(false);
     }
 
     public void Exit()

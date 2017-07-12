@@ -19,6 +19,7 @@ public class MageFireball : MonoBehaviour
 
     bool visible = false;
     bool isScaled = false;
+    bool faded = false;
 
     Renderer myRenderer;
 
@@ -43,21 +44,23 @@ public class MageFireball : MonoBehaviour
         float z = acos * Mathf.Rad2Deg * Mathf.Sign(targetVector.y - myVector.y);
         transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, z);
         transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, speed * Time.deltaTime);
+
+        timer += Time.deltaTime;
+        if (this.gameObject.GetComponent<Collider2D>().enabled == false)
+            FadeOut();
+        if (timer >= lifeTime)
+        {
+            FadeOut();
+        }
     }
 
     private void Update()
     {
+        if (this.gameObject.transform.localScale == new Vector3(0.3f, 0.3f))
+            this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         if (!visible)
         {
             FadeIn();
-        }
-        timer += Time.deltaTime;
-        if (timer >= lifeTime)
-        {
-            this.gameObject.SetActive(false);
-            timer = 0;
-            startTransform = startposition.GetComponent<Transform>();
-            this.transform.position = startTransform.transform.position;
         }
     }
 
@@ -91,6 +94,7 @@ public class MageFireball : MonoBehaviour
 
     private void OnEnable()
     {
+        this.gameObject.GetComponent<Collider2D>().enabled = true;
         this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         this.gameObject.transform.localScale = new Vector2(0.1f, 0.1f);
         visible = false;
@@ -104,13 +108,36 @@ public class MageFireball : MonoBehaviour
             this.gameObject.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.05f);
             if (!isScaled)
                 this.gameObject.transform.localScale += scaling;
-            if (this.gameObject.transform.localScale.x >= 0.4f)
+            if (this.gameObject.transform.localScale.x >= 0.5f)
             {
                 isScaled = true;
                 this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
             }
         }
-        if (this.gameObject.GetComponent<SpriteRenderer>().color.a == 1)
+        if (this.gameObject.GetComponent<SpriteRenderer>().color.a >= 1)
             visible = true;
+    }
+
+    public void FadeOut()
+    {
+            this.gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.1f);
+            if (isScaled)
+                this.gameObject.transform.localScale -= scaling;
+            if (this.gameObject.transform.localScale.x <= 0.02f)
+            {
+                isScaled = false;
+                this.gameObject.SetActive(false);
+            }
+
+        if (this.gameObject.GetComponent<SpriteRenderer>().color.a <= 0.02f)
+            visible = false;
+        if (!visible)
+        {
+            timer = 0;
+            this.gameObject.SetActive(false);
+            startTransform = startposition.GetComponent<Transform>();
+            this.transform.position = startTransform.transform.position;
+            this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
+        }
     }
 }

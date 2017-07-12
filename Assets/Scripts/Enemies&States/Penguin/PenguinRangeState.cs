@@ -35,6 +35,8 @@ using UnityEngine;
                 enemy.ChangeState(new PenguinPatrolState());
             }
         }
+        else if (enemy.Target == null)
+            enemy.ChangeState(new PenguinPatrolState());
     }
 
     public void Exit()

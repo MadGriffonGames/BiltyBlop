@@ -62,7 +62,7 @@ public class SwipeMenu : MonoBehaviour
             tapping = false;
         }
     }
-    public virtual void ObButtonClickLerp(int buttonNumber)
+    public virtual void OnButtonClickLerp(int buttonNumber)
     {
         if (buttonNumber == buttons.Length)
         {

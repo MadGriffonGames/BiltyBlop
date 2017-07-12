@@ -14,7 +14,7 @@ public class PerksSwipeMenu : SwipeMenu {
     public override void Start ()
     {
         minButtonsNumber = 1;
-        ObButtonClickLerp(minButtonsNumber);
+        OnButtonClickLerp(minButtonsNumber);
         for (int i = 0; i < buttons.Length; i++)
         {
             if (!PlayerPrefs.HasKey(buttons[i].GetComponentInChildren<Text>().text))
@@ -27,12 +27,14 @@ public class PerksSwipeMenu : SwipeMenu {
 
     public override void Update()
     {
-        if (minButtonsNumber == 0)
+        if (minButtonsNumber == 0 && tapping)
         {
+            MakeActiveButton(0);
             minButtonsNumber = 1;
         }
-        else if (minButtonsNumber == buttons.Length - 1)
+        else if (minButtonsNumber == buttons.Length - 1 && tapping)
         {
+            MakeActiveButton(minButtonsNumber);
             minButtonsNumber = buttons.Length - 2;
         }
         for (int i = 0; i < buttons.Length; i++)
@@ -65,20 +67,24 @@ public class PerksSwipeMenu : SwipeMenu {
 
     public override void LerpToButton(int position)
     {
-
         base.LerpToButton(position);
-        MakeInactiveButton(previousActiveButton);
-        MakeActiveButton(minButtonsNumber);
-        previousActiveButton = minButtonsNumber;
     }
 
-    public override void ObButtonClickLerp(int buttonNumber)
+    public override void OnButtonClickLerp(int buttonNumber)
     {
-        base.ObButtonClickLerp(buttonNumber);
-
-        MakeInactiveButton(previousActiveButton);
+        if (buttonNumber == 0)
+        {
+            minButtonsNumber = 1;
+        }
+        else if (buttonNumber == buttons.Length - 1)
+        {
+            minButtonsNumber = buttons.Length - 2;
+        } else
+        {
+            minButtonsNumber = buttonNumber;
+        }
         MakeActiveButton(buttonNumber);
-        previousActiveButton = buttonNumber;
+        tapping = true;
     }
 
 
@@ -86,11 +92,24 @@ public class PerksSwipeMenu : SwipeMenu {
     {
         buttons[buttonNumber].gameObject.transform.localScale = increasedButttonScale;
         buttons[buttonNumber].GetComponentsInChildren<Text>()[1].enabled = true;
+        MakeOtherButtonsInactive(buttonNumber);
     }
     public void MakeInactiveButton(int buttonNumber)
     {
         buttons[buttonNumber].gameObject.transform.localScale = normalButttonScale;
         buttons[buttonNumber].GetComponentsInChildren<Text>()[1].enabled = false;
+    }
+    private void MakeOtherButtonsInactive(int activeButton)
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+
+            if (i != activeButton)
+            {
+                MakeInactiveButton(i);
+                Debug.Log(i);
+            }
+        }
     }
 
     public void UnlockPerk()

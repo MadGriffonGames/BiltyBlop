@@ -30,7 +30,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     Text timeCount;
 
-    bool isOpen;
+    public static bool isOpen;
 
     private void Start()
     {

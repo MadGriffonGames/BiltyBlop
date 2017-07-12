@@ -87,14 +87,14 @@ public class Inventory : MonoBehaviour
             PlayerPrefs.SetInt(itemName + COUNT, itemCount);
             UpdateItemValue(itemName);
         }
-        else if (PlayerPrefs.GetInt(itemName + COUNT) < PlayerPrefs.GetInt(MAX + itemName))
+        else if (PlayerPrefs.GetInt(itemName + COUNT) + itemCount <= PlayerPrefs.GetInt(MAX + itemName))
         {
             PlayerPrefs.SetInt(itemName + COUNT, PlayerPrefs.GetInt(itemName + COUNT) + itemCount);
             UpdateItemValue(itemName);
         }
     }
 
-    public void RemoveItem(string itemName)  // = UseItem
+    public void RemoveItem(string itemName)
     {
         if (PlayerPrefs.GetInt(itemName + COUNT) > 0)
         {

@@ -31,10 +31,12 @@ public class InventoryUI : MonoBehaviour
     Text timeCount;
 
     public static bool isOpen;
+    public static bool isBonusBarOpen;
 
     private void Start()
     {
         isOpen = false;
+        isBonusBarOpen = false;
         SetBoostersValues();
     }
 
@@ -57,6 +59,7 @@ public class InventoryUI : MonoBehaviour
         isOpen = !isOpen;
         inventoryBar.SetActive(true);
         inventoryFade.SetActive(true);
+        SetBoostersValues();
     }
 
     void DisactivateInventory()
@@ -64,8 +67,10 @@ public class InventoryUI : MonoBehaviour
         Time.timeScale = Player.Instance.timeBonusNum > 0 ? 0.5f : 1;
         backpack.sprite = backpackClose;
         isOpen = !isOpen;
+        bonusBar.SetActive(false);
         inventoryBar.SetActive(false);
         inventoryFade.SetActive(false);
+        isBonusBarOpen = false;
     }
 
     public void HPbutton()
@@ -84,10 +89,12 @@ public class InventoryUI : MonoBehaviour
         if (!bonusBar.activeInHierarchy)
         {
             bonusBar.SetActive(true);
+            isBonusBarOpen = true;
         }
         else
         {
             bonusBar.SetActive(false);
+            isBonusBarOpen = false;
         }
     }
 

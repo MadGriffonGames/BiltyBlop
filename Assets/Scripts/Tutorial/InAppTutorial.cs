@@ -19,7 +19,7 @@ public class InAppTutorial : MonoBehaviour
     public bool isActive = false;
     public bool isTextChanged = false;
 
-    private void Update()
+    public void Update()
     {
         if (!isTextChanged && InventoryUI.isOpen && isActive)
         {
@@ -45,9 +45,7 @@ public class InAppTutorial : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             GetComponent<SpriteRenderer>().enabled = false;
 
-            Time.timeScale = 0;
             backpackLight.SetActive(true);
-
 
             TutorialUI.Instance.txt.fontSize = fontSize;
             TutorialUI.Instance.txt.text = textInventory;

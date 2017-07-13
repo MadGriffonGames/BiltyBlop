@@ -9,6 +9,8 @@ public class Snowman : MovingMeleeEnemy
     private ISnowmanState currentState;
     [SerializeField]
     private GameObject snowmanParticle;
+
+
     bool damaged = false;
     public bool walk = false;
 
@@ -54,6 +56,7 @@ public class Snowman : MovingMeleeEnemy
         {
             damaged = true;
             health -= Player.Instance.damage;
+            MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             StartCoroutine(AnimationDelay());
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();

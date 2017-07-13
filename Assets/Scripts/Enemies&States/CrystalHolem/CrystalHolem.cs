@@ -10,7 +10,8 @@ public class CrystalHolem : MovingMeleeEnemy
     [SerializeField]
     GameObject crystalParticle;
     [SerializeField]
-    public CrystalTrigger crystals; 
+    public CrystalTrigger crystals;
+
 
     bool damaged = false;
     public bool walk = false;
@@ -57,9 +58,9 @@ public class CrystalHolem : MovingMeleeEnemy
         {
             damaged = true;
             health -= Player.Instance.damage;
-            StartCoroutine(AnimationDelay());
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
+            MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             if (IsDead)
             {
                 SoundManager.PlaySound("enemyher loud");

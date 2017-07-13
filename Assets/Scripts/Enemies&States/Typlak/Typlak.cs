@@ -11,6 +11,7 @@ public class Typlak : MovingMeleeEnemy
     bool damaged = false;
     public bool walk = false;
 
+
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -54,6 +55,7 @@ public class Typlak : MovingMeleeEnemy
             damaged = true;
             health -= Player.Instance.damage;
             StartCoroutine(AnimationDelay());
+            MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1,1,1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
             if (IsDead)

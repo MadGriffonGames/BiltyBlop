@@ -12,6 +12,7 @@ public class EvilFlower : MeleeEnemy
     [SerializeField]
     GameObject enemySight;
 
+
     void Awake()
     {
 		armature = GetComponent<UnityArmatureComponent> ();
@@ -60,6 +61,7 @@ public class EvilFlower : MeleeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
         if (IsDead) 
         {
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);

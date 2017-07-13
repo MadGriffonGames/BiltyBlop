@@ -21,6 +21,7 @@ public class IceMage : RangeEnemy {
     [SerializeField]
     public GameObject deathPic;
 
+
     [SerializeField]
     GameObject crystall;
 
@@ -80,6 +81,7 @@ public class IceMage : RangeEnemy {
     {
         Target = null;
         isTakingDamage = true;
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0.5f, 2f, 0), new Vector3(0.8f, 0.8f, 1));
         gameObject.GetComponent<Collider2D>().enabled = false;
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.4f, 0.5f);

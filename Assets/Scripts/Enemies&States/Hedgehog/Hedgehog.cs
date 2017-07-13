@@ -12,6 +12,7 @@ public class Hedgehog : MovingMeleeEnemy
     [SerializeField]
     GameObject healthBar;
 
+
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -52,6 +53,7 @@ public class Hedgehog : MovingMeleeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
         SetHealthbar();
         if (IsDead)
         {

@@ -41,6 +41,17 @@ public class MakeFX : MonoBehaviour
     [SerializeField]
     GameObject jumpBonus;
 
+    [SerializeField]
+    GameObject hitFXpref;
+
+    public GameObject hitFX;
+
+    private void Start()
+    {
+        hitFX = Instantiate(hitFXpref);
+        hitFX.gameObject.SetActive(false);
+    }
+
 
     public void MakeDust()
     {
@@ -69,6 +80,13 @@ public class MakeFX : MonoBehaviour
         ps.Play();
     }
 
+    public void MakeHitFX(Vector3 currentPosition, Vector3 scale)
+    {
+        hitFX.gameObject.transform.position = currentPosition;
+        hitFX.gameObject.transform.localScale = scale;
+        hitFX.gameObject.SetActive(true);
+    }
+
     public void MakeTimeBonus(float time)
     {
         GameObject tmp = Instantiate(timeBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90, 0, 0));
@@ -91,6 +109,8 @@ public class MakeFX : MonoBehaviour
         ps.Play();
     }
 
+
+
     public void MakeSpeedBonus(float time)
     {
         GameObject tmp = Instantiate(speedBonus, transform.localPosition + new Vector3(0, -0.7f, 1), Quaternion.Euler(-90, 0, 0));
@@ -112,4 +132,6 @@ public class MakeFX : MonoBehaviour
         tmp.transform.SetParent(Player.Instance.transform);
         ps.Play();
     }
+
+
 }

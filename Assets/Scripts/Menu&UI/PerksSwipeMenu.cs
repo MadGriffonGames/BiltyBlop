@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class PerksSwipeMenu : SwipeMenu {
 
-    private int previousActiveButton;
     private static Vector3 normalButttonScale = new Vector3(1, 1, 1);
-    private static Vector3 increasedButttonScale = new Vector3(1.2f, 1.2f, 1);
+    private static Vector3 increasedButttonScale = new Vector3(1.1f, 1.1f, 1);
 
-    public Button unlockButton;
     // Use this for initialization
     public override void Start ()
     {
         minButtonsNumber = 1;
-        OnButtonClickLerp(minButtonsNumber);
         for (int i = 0; i < buttons.Length; i++)
         {
             if (!PlayerPrefs.HasKey(buttons[i].GetComponentInChildren<Text>().text))
@@ -23,6 +20,19 @@ public class PerksSwipeMenu : SwipeMenu {
             }
         }
         base.Start();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (PlayerPrefs.GetString(buttons[i].GetComponentInChildren<Text>().text) == "Locked")
+            {
+                buttons[i].GetComponent<Image>().color = new Color32(167, 167, 167, 255);
+                buttons[i].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "UNLOCK";
+            }
+            else
+            {
+                buttons[i].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
+                buttons[i].GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
+            }
+        }
 	}
 
     public override void Update()
@@ -57,12 +67,7 @@ public class PerksSwipeMenu : SwipeMenu {
         {
             LerpToButton(minButtonsNumber * -buttonDistance);
         }
-        if (PlayerPrefs.GetString(buttons[minButtonsNumber].GetComponentInChildren<Text>().text) == "Unlocked")
-        {
-            unlockButton.gameObject.SetActive(false);
-        }
-        else
-            unlockButton.gameObject.SetActive(true);
+       
     }
 
     public override void LerpToButton(int position)
@@ -83,8 +88,8 @@ public class PerksSwipeMenu : SwipeMenu {
         {
             minButtonsNumber = buttonNumber;
         }
-        MakeActiveButton(buttonNumber);
         tapping = true;
+        MakeActiveButton(buttonNumber);
     }
 
 
@@ -92,6 +97,7 @@ public class PerksSwipeMenu : SwipeMenu {
     {
         buttons[buttonNumber].gameObject.transform.localScale = increasedButttonScale;
         buttons[buttonNumber].GetComponentsInChildren<Text>()[1].enabled = true;
+
         MakeOtherButtonsInactive(buttonNumber);
     }
     public void MakeInactiveButton(int buttonNumber)
@@ -107,14 +113,18 @@ public class PerksSwipeMenu : SwipeMenu {
             if (i != activeButton)
             {
                 MakeInactiveButton(i);
-                Debug.Log(i);
             }
         }
     }
 
-    public void UnlockPerk()
+    public void UnlockPerk(int buttonNumber)
     {
-        PlayerPrefs.SetString(buttons[minButtonsNumber].GetComponentInChildren<Text>().text, "Unlocked");
+        Debug.Log(buttonNumber);
+        MakeActiveButton(buttonNumber);
+        MakeOtherButtonsInactive(buttonNumber);
+        
+        //PlayerPrefs.SetString(buttons[minButtonsNumber].GetComponentInChildren<Text>().text, "Unlocked");
+        //buttons[].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
         // need to add payment for perks
     }
 }

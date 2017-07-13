@@ -29,27 +29,27 @@ public class SwipeMenu : MonoBehaviour
 
     public virtual void Update()
     {
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            distance[i] = Mathf.Abs(center.transform.position.x - buttons[i].transform.position.x);
-        }
+        //for (int i = 0; i < buttons.Length; i++)
+        //{
+        //    distance[i] = Mathf.Abs(center.transform.position.x - buttons[i].transform.position.x);
+        //}
 
-        float minDistance = Mathf.Min(distance);
-        if (!tapping)
-        {
-            for (int i = 0; i < buttons.Length; i++)
-            {
-                if (minDistance == distance[i] && !onStart)
-                {
-                    minButtonsNumber = i;
-                }
-            }
-        }
+        //float minDistance = Mathf.Min(distance);
+        //if (!tapping)
+        //{
+        //    for (int i = 0; i < buttons.Length; i++)
+        //    {
+        //        if (minDistance == distance[i] && !onStart)
+        //        {
+        //            minButtonsNumber = i;
+        //        }
+        //    }
+        //}
         
-        if (!dragging || tapping)
-        {
-            LerpToButton(minButtonsNumber * -buttonDistance);
-        }
+        //if (!dragging || tapping)
+        //{
+        //    LerpToButton(minButtonsNumber * -buttonDistance);
+        //}
     }
     public virtual void LerpToButton(int position)
     {

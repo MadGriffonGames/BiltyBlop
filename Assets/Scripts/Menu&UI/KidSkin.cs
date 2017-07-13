@@ -40,7 +40,7 @@ public class KidSkin : MonoBehaviour
     void Start ()
     {
         currentSkinName = PlayerPrefs.GetString("Skin");
-
+        
         //add skin prefabs to dictionary, key in dictionary is name of skin(that equals name of gameObject)
         skins = new Dictionary<string, GameObject>();
         foreach (GameObject skin in SkinManager.Instance.skinPrefabs)
@@ -133,7 +133,6 @@ public class KidSkin : MonoBehaviour
     {
         buySkinWindow.SetActive(true);
         fade.SetActive(true);
-        Debug.Log(skinPrefab.gameObject.name);
         closeBuyWindowButton.SetActive(true);
         buySkinWindow.GetComponentInChildren<Text>().text = currentSkinName;
         skinPrefab.transform.SetParent(skinBuyTransform.transform);

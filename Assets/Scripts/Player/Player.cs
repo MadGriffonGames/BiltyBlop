@@ -204,7 +204,8 @@ public class Player : Character
     {
         throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
         clipSize = 5;
-        throwingIterator = clipSize - 1;
+        throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
+        ThrowingUI.Instance.SetThrowBar();
         throwingClip = new GameObject[clipSize];
         for (int i = 0; i < clipSize; i++)
         {
@@ -275,7 +276,7 @@ public class Player : Character
             if (!Attack)
                 myRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, myRigidbody.velocity.y);
             else
-                myRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f * timeScalerMove, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
         }
         else
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
@@ -404,7 +405,7 @@ public class Player : Character
     {
         if (throwingIterator >= 0)
         {
-            yield return new WaitForSeconds(0.21f / myArmature.animation.timeScale);
+            yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
 
             throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
@@ -438,7 +439,7 @@ public class Player : Character
 
     IEnumerator AttackColliderDelay()
     {
-        yield return new WaitForSeconds(0.15f / myArmature.animation.timeScale);
+        yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
         AttackCollider.enabled = true;
     }
 

@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
     const int IMMORTAL_DURATION = 5;
     const int DAMAGE_DURATION = 10;
     const int SPEED_DURATION = 3;
-    const int TIME_DURATION = 7;
+    const int TIME_DURATION = 4;
 
 
     /* Inventory Items Names */
@@ -106,7 +106,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItem(string itemName)  // = UseItem
+    public void RemoveItem(string itemName)
     {
         if (PlayerPrefs.GetInt(itemName + COUNT) > 0)
         {

@@ -8,6 +8,8 @@ public class IceMage : RangeEnemy {
 
     public bool isTakingDamage = false;
     public bool isDead = false;
+    bool visible = false;
+    bool isScaled = true;
 
     private IceMageState currentState;
     [SerializeField]
@@ -16,9 +18,15 @@ public class IceMage : RangeEnemy {
     GameObject leafParticle;
     [SerializeField]
     GameObject enemySight;
+    [SerializeField]
+    public GameObject deathPic;
 
     [SerializeField]
     GameObject crystall;
+
+    Vector3 scaling = new Vector3(0.01f, 0.01f, 0);
+
+
 
     void Awake()
     {
@@ -27,10 +35,11 @@ public class IceMage : RangeEnemy {
 
 
     public override void Start () {
+        deathPic.gameObject.SetActive(false);
+        isTakingDamage = false;
         base.Start();
         ChangeState(new IceMageIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-
     }
 
     // Update is called once per frame
@@ -43,6 +52,12 @@ public class IceMage : RangeEnemy {
                 currentState.Execute();
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isTakingDamage)
+            FireballFadeOut();
     }
 
     public void ChangeState(IceMageState newState)
@@ -63,32 +78,51 @@ public class IceMage : RangeEnemy {
 
     public override IEnumerator TakeDamage()
     {
+        Target = null;
         isTakingDamage = true;
-        //this.armature.animation.timeScale = 2f;
-        //this.armature.animation.FadeIn("death", 1, 1);
         gameObject.GetComponent<Collider2D>().enabled = false;
-        //health -= Player.Instance.damage;
+        health -= Player.Instance.damage;
         CameraEffect.Shake(0.4f, 0.5f);
+        SpawnCoins(2, 3);
+        
+        Player.Instance.monstersKilled++;
         if (IsDead)
         {
             Player.Instance.monstersKilled++;
             isDead = true;
             //Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
-            SpawnCoins(1, 2);
             SoundManager.PlaySound("green flower");
             GameManager.deadEnemies.Add(gameObject);
-            gameObject.SetActive(false);
+            ChangeState(new IceMageDeathState());
         }
         yield return null;
     }
 
     private void OnEnable()
     {
+        deathPic.gameObject.SetActive(false);
+        gameObject.SetActive(true);
+        isTakingDamage = false;
         ResetCoinPack();
-
+        this.gameObject.GetComponent<Collider2D>().enabled = true;
         Health = 1;
         Target = null;
         ChangeState(new IceMageIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+    }
+
+    void FireballFadeOut()
+    {
+        if (fireball.gameObject.activeInHierarchy)
+        {
+            fireball.gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.15f);
+            if (isScaled)
+                fireball.gameObject.transform.localScale -= scaling;
+            if (fireball.gameObject.transform.localScale.x <= 0.05f)
+            {
+                isScaled = false;
+                fireball.gameObject.SetActive(false);
+            }
+        }
     }
 }

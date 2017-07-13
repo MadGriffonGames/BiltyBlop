@@ -8,7 +8,7 @@ public class IceMageIdleState : IceMageState
 
     private IceMage enemy;
     bool isIdle;
-    float waitFor = 1.3f;
+    float waitFor = 3.3f;
     bool attacked = false;
     float startTime;
     [SerializeField]
@@ -22,10 +22,6 @@ public class IceMageIdleState : IceMageState
 
     public void Execute()
     {
-        if (enemy.isTakingDamage == true)
-        {
-            enemy.ChangeState(new IceMageDeathState());
-        }
         if (!isIdle)
         {
             if (enemy.armature.animation.lastAnimationName == "attack" && enemy.armature.animation.isCompleted)
@@ -43,14 +39,14 @@ public class IceMageIdleState : IceMageState
             isIdle = true;
         }
 
-        if (!enemy.fireball.active && attacked && (Time.time - startTime >= waitFor))
+        if (!enemy.fireball.activeInHierarchy && attacked && (Time.time - startTime >= waitFor))
         {
             if (isIdle && enemy.Target != null)
             {
                 enemy.ChangeState(new IceMageRangeState());
             }
-            else if (isIdle && enemy.Target == null)
-                enemy.ChangeState(new IceMageIdleState());
+            //else if (isIdle && enemy.Target == null)
+              //  enemy.ChangeState(new IceMageIdleState());
         }
 
         if (enemy.Target != null && attacked == false)

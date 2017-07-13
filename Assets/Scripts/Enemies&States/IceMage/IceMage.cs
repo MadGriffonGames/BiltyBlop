@@ -86,8 +86,7 @@ public class IceMage : RangeEnemy {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.4f, 0.5f);
         SpawnCoins(2, 3);
-        
-        Player.Instance.monstersKilled++;
+        //Player.Instance.monstersKilled++;
         if (IsDead)
         {
             Player.Instance.monstersKilled++;

@@ -15,6 +15,7 @@ public class EvilFlowerGreen : RangeEnemy
     [SerializeField]
     GameObject enemySight;
 
+
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -58,6 +59,7 @@ public class EvilFlowerGreen : RangeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.6f), new Vector3(1, 1, 1));
         if (IsDead)
         {
             Player.Instance.monstersKilled++;

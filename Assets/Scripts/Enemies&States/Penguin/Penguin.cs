@@ -13,6 +13,7 @@ public class Penguin : MovingRangedEnemy {
     [SerializeField]
     GameObject threezubets;
 
+
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -47,6 +48,7 @@ public class Penguin : MovingRangedEnemy {
             damaged = true;
             health -= Player.Instance.damage;
             StartCoroutine(AnimationDelay());
+            MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
             if (IsDead)

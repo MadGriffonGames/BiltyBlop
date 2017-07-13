@@ -92,6 +92,8 @@ public class Player : Character
     public bool OnGround { get; set; }
     [SerializeField]
     public GameObject timeControllerPrefab;
+    [SerializeField]
+    GameObject hitFX;
 
     /*
      * Bonus vars
@@ -118,6 +120,8 @@ public class Player : Character
         {
             Instantiate(timeControllerPrefab);
         }
+
+
 
         currentState = new PlayerIdleState();
 		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -194,6 +198,7 @@ public class Player : Character
             }
         }
     }
+
 
     void SetThrowing()
     {

@@ -15,6 +15,7 @@ public class Bat : MovingMeleeEnemy
     public UnityEngine.Transform[] pathPoints;
     public Vector3[] pathCordinates;
     public int nextPosNum = 0;
+
     
     void Awake()
     {
@@ -62,6 +63,7 @@ public class Bat : MovingMeleeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(0.7f, 0.7f, 1));
         if (IsDead)
         {
             Player.Instance.monstersKilled++;

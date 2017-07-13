@@ -23,8 +23,18 @@ public class KidSkin : MonoBehaviour
     Text txt;
     [SerializeField]
     GameObject armatureObject;
+    [SerializeField]
+    GameObject buySkinWindow;
+    [SerializeField]
+    GameObject fade;
+    [SerializeField]
+    GameObject closeBuyWindowButton;
+    [SerializeField]
+    GameObject skinBuyTransform;
+
     private string currentSkinName;
     private int skinCost;
+    private GameObject skinPrefab;
     public MeshRenderer[] skinMeshes;
 
     void Start ()
@@ -44,11 +54,11 @@ public class KidSkin : MonoBehaviour
         string skinName = PlayerPrefs.GetString("Skin", "Classic");
         if (skins.ContainsKey(skinName))
         {
-            GameObject skinPrefab = Instantiate(skins[skinName], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            skinPrefab = Instantiate(skins[skinName], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
         }
         else
         {
-            GameObject skinPrefab = Instantiate(skins["Classic"], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            skinPrefab = Instantiate(skins["Classic"], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
         }
 
         myArmature = GetComponentInChildren<UnityArmatureComponent>();
@@ -71,13 +81,13 @@ public class KidSkin : MonoBehaviour
         Destroy(myArmature.gameObject);
         if (skins.ContainsKey(skinName))
         {
-            GameObject skinPrefab = Instantiate(skins[skinName], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            skinPrefab = Instantiate(skins[skinName], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
             currentSkinName = skinName;
             skinCost = int.Parse(skinPrefab.gameObject.GetComponentInChildren<Text>().text);
         }
         else
         {
-            GameObject skinPrefab = Instantiate(skins["Classic"], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+            skinPrefab = Instantiate(skins["Classic"], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
             currentSkinName = "Classic";
             skinCost = int.Parse(skinPrefab.gameObject.GetComponentInChildren<Text>().text);
         }
@@ -117,5 +127,25 @@ public class KidSkin : MonoBehaviour
     public void UnlockSkin()  // unlocking new skin
     {
         SkinManager.Instance.UnlockSkin(currentSkinName);
+    }
+
+    public void OpenBuySkinWindow()
+    {
+        buySkinWindow.SetActive(true);
+        fade.SetActive(true);
+        Debug.Log(skinPrefab.gameObject.name);
+        closeBuyWindowButton.SetActive(true);
+        buySkinWindow.GetComponentInChildren<Text>().text = currentSkinName;
+        skinPrefab.transform.SetParent(skinBuyTransform.transform);
+        skinPrefab.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void CloseBuySkinWindow()
+    {
+        skinPrefab.transform.SetParent(transform);
+        skinPrefab.transform.localPosition = new Vector3(0, 0, 0);
+        fade.SetActive(false);
+        closeBuyWindowButton.SetActive(false);
+        buySkinWindow.SetActive(false);
     }
 }

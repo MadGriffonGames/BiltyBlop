@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         coinTxt.text = (" " + collectedCoins);
-        Debug.Log(torches);
         if (torches == 0 && isBirded == false)
         {
             ThrowBird();

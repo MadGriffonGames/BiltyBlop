@@ -11,10 +11,6 @@ public class SkinSwipeMenu : SwipeMenu {
     GameObject fade;
     [SerializeField]
     GameObject closeBuyWindowButton;
-    [SerializeField]
-
-    public Button applyButton;
-    public Button unlockButton;
 
     public override void Start()
     {
@@ -25,6 +21,7 @@ public class SkinSwipeMenu : SwipeMenu {
         //panel.anchoredPosition = new Vector2(buttons[SkinManager.Instance.NumberOfSkin(KidSkin.Instance.CurrentSkinName())].transform.position.x, panel.anchoredPosition.y);
         //minButtonsNumber = SkinManager.Instance.NumberOfSkin(KidSkin.Instance.CurrentSkinName());
         SetSkinCards();
+
     }
 
     private void SetSkinCards()
@@ -43,12 +40,38 @@ public class SkinSwipeMenu : SwipeMenu {
                     skinCardObj.transform.localScale = new Vector3(1, 1, 1);
                     skinCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = skin.shopName;
                     skinCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = skin.skinSprite;
-                    skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
+                    if (!skin.isLocked)
+                    {
+                        if (PlayerPrefs.GetString("Skin") == skin.name)
+                        {
+                            skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "EQUIPED";
+                        }
+                        else
+                            skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "EQUIP";
+                        skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplySkin(skin.orderNumber));
+                    }
+                    else
+                    {
+                        skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
+                    }
                     break;
                 }
             }
             
         }
+    }
+
+    public void ApplySkin(int skinOrderNumber) // writing to player prefs current skin
+    {
+        panel.GetChild(skinOrderNumber).GetComponentsInChildren<Text>()[1].text = "EQUIPED";
+        for (int i = 0; i < panel.childCount; i++)
+        {
+            if (i != skinOrderNumber && !SkinManager.Instance.isSkinLocked(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(i)))
+            {
+                panel.GetChild(i).GetComponentsInChildren<Text>()[1].text = "EQUIP";
+            }
+        }
+        SkinManager.Instance.ApplySkin(SkinManager.Instance.NameOfSkinPrefabBySkinOrder(skinOrderNumber));
     }
 
     public void ShowUnlockSkinWindow(int skinNumber)
@@ -66,25 +89,6 @@ public class SkinSwipeMenu : SwipeMenu {
         closeBuyWindowButton.gameObject.SetActive(false);
     }
 
-    //public void UpdateSkinModel()
-    //{
-    //    if (KidSkin.Instance.CurrentSkinName() != SkinManager.Instance.skinPrefabs[minButtonsNumber].name)
-    //    {
-    //        KidSkin.Instance.ChangeSkin(SkinManager.Instance.skinPrefabs[minButtonsNumber].name);
-    //        if (!SkinManager.Instance.isSkinUnlocked(minButtonsNumber))
-    //        {
-    //            applyButton.gameObject.SetActive(false);
-    //            unlockButton.gameObject.SetActive(true);
-    //            unlockButton.GetComponentInChildren<Text>().text = KidSkin.Instance.SkinCost().ToString();
-    //        }
-    //        else
-    //        {
-    //            applyButton.gameObject.SetActive(true);
-    //            unlockButton.gameObject.SetActive(false);
-    //        }
-    //    }
-    //}
-
     //public override void LerpToButton(int position)
     //{
     //    float newX = Mathf.Lerp(panel.anchoredPosition.x, position, Time.deltaTime * 10f);
@@ -93,7 +97,6 @@ public class SkinSwipeMenu : SwipeMenu {
 
     //    if (Mathf.Abs(panel.anchoredPosition.x - position) < changingDistance)
     //    {
-    //        UpdateSkinModel();
     //        tapping = false;
     //    }
     //}

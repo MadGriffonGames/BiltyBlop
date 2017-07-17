@@ -14,16 +14,24 @@ public class SkinSwipeMenu : SwipeMenu {
 
     public override void Start()
     {
-        //int buttonCount = buttons.Length;
-        //distance = new float[buttonCount];
-        //buttonDistance = (int)Mathf.Abs(buttons[1].GetComponent<RectTransform>().anchoredPosition.x - buttons[0].GetComponent<RectTransform>().anchoredPosition.x);
-
-        //panel.anchoredPosition = new Vector2(buttons[SkinManager.Instance.NumberOfSkin(KidSkin.Instance.CurrentSkinName())].transform.position.x, panel.anchoredPosition.y);
-        //minButtonsNumber = SkinManager.Instance.NumberOfSkin(KidSkin.Instance.CurrentSkinName());
         SetSkinCards();
+        buttons = new GameObject[panel.transform.childCount];
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i] = panel.GetChild(i).transform.gameObject;
+        }
+        
+        distance = new float[buttons.Length];
+        buttonDistance = (int)Mathf.Abs(buttons[1].GetComponent<RectTransform>().anchoredPosition.x - buttons[0].GetComponent<RectTransform>().anchoredPosition.x);
 
+        panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
+        minButtonsNumber = 1;
     }
 
+    public override void Update()
+    {
+        base.Update();
+    }
     private void SetSkinCards()
     {
         for (int i = 0; i < SkinManager.Instance.skinPrefabs.Length; i++)
@@ -89,16 +97,16 @@ public class SkinSwipeMenu : SwipeMenu {
         closeBuyWindowButton.gameObject.SetActive(false);
     }
 
-    //public override void LerpToButton(int position)
-    //{
-    //    float newX = Mathf.Lerp(panel.anchoredPosition.x, position, Time.deltaTime * 10f);
-    //    Vector2 newPosition = new Vector2(newX, panel.anchoredPosition.y);
-    //    panel.anchoredPosition = newPosition;
+    public override void LerpToButton(int position)
+    {
+        float newX = Mathf.Lerp(panel.anchoredPosition.x, position, Time.deltaTime * 10f);
+        Vector2 newPosition = new Vector2(newX, panel.anchoredPosition.y);
+        panel.anchoredPosition = newPosition;
 
-    //    if (Mathf.Abs(panel.anchoredPosition.x - position) < changingDistance)
-    //    {
-    //        tapping = false;
-    //    }
-    //}
+        if (Mathf.Abs(panel.anchoredPosition.x - position) < changingDistance)
+        {
+            tapping = false;
+        }
+    }
 
 }

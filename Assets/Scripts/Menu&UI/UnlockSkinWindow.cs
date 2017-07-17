@@ -101,7 +101,6 @@ public class UnlockSkinWindow : MonoBehaviour {
     }
     public void CanBuySkinByCoins(int skinNumber)
     {
-        Debug.Log("COINS");
         if (SkinManager.Instance.BuySkinByCoins(skinNumber))
         {
             // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА СКИНА

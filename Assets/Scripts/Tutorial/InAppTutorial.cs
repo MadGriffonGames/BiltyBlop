@@ -12,7 +12,7 @@ public class InAppTutorial : MonoBehaviour
     [SerializeField]
     public int fontSize;
     [SerializeField]
-    public GameObject arrow;
+    public GameObject light;
     [SerializeField]
     public GameObject backpackLight;
 
@@ -25,7 +25,7 @@ public class InAppTutorial : MonoBehaviour
         {
             isTextChanged = true;
 
-            arrow.SetActive(true);
+            light.SetActive(true);
             backpackLight.SetActive(false);
             TutorialUI.Instance.txt.text = textInApp;
         }
@@ -64,7 +64,7 @@ public class InAppTutorial : MonoBehaviour
     public void DisactivateTutorial()
     {
         TutorialUI.Instance.txt.text = "";
-        arrow.SetActive(false);
+        light.SetActive(false);
 
         TutorialUI.Instance.oldmanFace.gameObject.SetActive(false);
         TutorialUI.Instance.textBar.gameObject.SetActive(false);

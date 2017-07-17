@@ -9,7 +9,7 @@ public class BonusTutorial : InAppTutorial
     [SerializeField]
     GameObject bonusLight;
     [SerializeField]
-    Vector3 arrowPos;
+    Vector3 lightPos;
 
     bool isActivated;
     bool isCollected;
@@ -26,6 +26,11 @@ public class BonusTutorial : InAppTutorial
         if (isCollected)
         {
             base.Update();
+            if (!InventoryUI.isBonusBarOpen)
+            {
+                bonusLight.SetActive(false);
+            }
+
             if (InventoryUI.isBonusBarOpen && !isActivated)
             {
                 isActivated = true;
@@ -34,7 +39,6 @@ public class BonusTutorial : InAppTutorial
             }
             if (!InventoryUI.isOpen && bonusLight.activeInHierarchy)
             {
-                bonusLight.SetActive(false);
                 isActivated = false;
                 isCollected = false;
             }
@@ -45,7 +49,7 @@ public class BonusTutorial : InAppTutorial
     {
         base.OnTriggerEnter2D(other);
         isCollected = true;
-        bonusLight.GetComponent<RectTransform>().localPosition = arrowPos;
+        bonusLight.GetComponent<RectTransform>().transform.localPosition = lightPos;
         if (other.gameObject.CompareTag("Player") && PlayerPrefs.GetInt("Level3") == 0)
         {
             if (type == "Immortal")

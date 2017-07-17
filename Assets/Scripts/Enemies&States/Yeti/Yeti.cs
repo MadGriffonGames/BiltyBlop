@@ -80,7 +80,7 @@ public class Yeti : RangeEnemy {
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.01f);
         damaged = false;
     }
 

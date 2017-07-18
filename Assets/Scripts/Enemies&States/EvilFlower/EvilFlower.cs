@@ -16,6 +16,7 @@ public class EvilFlower : MeleeEnemy
     void Awake()
     {
 		armature = GetComponent<UnityArmatureComponent> ();
+        ResetCoinPack();
     }
 
     public override void Start()
@@ -75,9 +76,11 @@ public class EvilFlower : MeleeEnemy
 
     private void OnEnable()
     {
-        ResetCoinPack();
-
-        Health = 1;
+        if (Health <= 0)
+        {
+            ResetCoinPack();
+            Health = 1;
+        }
         Target = null;
         ChangeState(new EvilFlowerIdleState());
         attackCollider.enabled = false;

@@ -273,16 +273,15 @@ public class Player : Character
 		{
             canJump = true;
 
-            if (!Attack)
-                myRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, myRigidbody.velocity.y);
-            else
-                myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
+            //myRigidbody.velocity = new Vector2(0, 0);
         }
         else
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
         if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
         {
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
+            myRigidbody.velocity = new Vector2(0, 0);
         }
         else if (!OnGround && DoubleJump && canJump && myRigidbody.velocity.y < 6.5f)
         {

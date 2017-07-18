@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
         facingRight = false;
         enabled = false;
         armature.enabled = false;
-        armature.armature.cacheFrameRate = 55;
+        armature.armature.cacheFrameRate = 50;
 
     }
 

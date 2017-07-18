@@ -72,7 +72,7 @@ public class Yeti : RangeEnemy {
             SetHealthbar();
             if (IsDead)
             {
-                SoundManager.PlaySound("enemyher loud");
+                SoundManager.PlaySound("yeti_death");
                 Instantiate(yetiParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);

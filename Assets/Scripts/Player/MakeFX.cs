@@ -85,6 +85,7 @@ public class MakeFX : MonoBehaviour
         hitFX.gameObject.transform.position = currentPosition;
         hitFX.gameObject.transform.localScale = scale;
         hitFX.gameObject.SetActive(true);
+        SoundManager.PlaySound("punch2");
     }
 
     public void MakeTimeBonus(float time)

@@ -20,7 +20,7 @@ public class IceMageRangeState : IceMageState
     {
         if ((enemy.armature.animation.lastAnimationName == ("attack") || enemy.armature.animation.lastAnimationName == "idle") && enemy.armature.animation.isCompleted)
         {
-            SoundManager.PlaySound("spit");
+            SoundManager.PlaySound("mage_fireball");
             enemy.armature.animation.timeScale = 1.5f;
             enemy.fireball.SetActive(true);
             enemy.ChangeState(new IceMageIdleState());

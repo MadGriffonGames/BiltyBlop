@@ -410,6 +410,7 @@ public class Player : Character
             throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
+            SoundManager.PlaySound("kidarian_throw");
 
             if (this.gameObject.transform.localScale.x > 0)
             {

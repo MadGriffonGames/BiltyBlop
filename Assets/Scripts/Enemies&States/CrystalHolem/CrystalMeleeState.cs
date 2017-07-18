@@ -56,6 +56,7 @@ public class CrystalMeleeState : MonoBehaviour, ICrystalState
         }
         if (!isAttacked && enemy.armature.animation.lastAnimationName == "pre_attack" && enemy.armature.animation.isCompleted)
         {
+            SoundManager.PlaySound("holem_groundhit");
             enemy.armature.animation.timeScale = 1;
             enemy.armature.animation.FadeIn("attack", -1, 1);
             enemy.crystals.CrystalAttack();

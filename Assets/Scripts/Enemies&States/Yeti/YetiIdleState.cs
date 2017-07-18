@@ -44,7 +44,6 @@ public class YetiIdleState : IYetiState
 
         if (!enemy.snowball.isActiveAndEnabled && attacked && (Time.time - startTime >= waitFor))
         {
-            Debug.Log("waited");
             if (isIdle && enemy.Target != null)
             {
                 enemy.ChangeState(new YetiRangeState());

@@ -21,6 +21,7 @@ public class SnowmanRangeState : ISnowmanState
         {
             enemy.armature.animation.FadeIn("alert", -1, 1);
             isAlerted = true;
+            SoundManager.PlaySound("snowman_shock");
         }
         if (enemy.armature.animation.lastAnimationName == "alert" && enemy.armature.animation.isCompleted)
         {

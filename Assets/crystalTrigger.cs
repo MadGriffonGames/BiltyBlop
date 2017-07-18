@@ -28,9 +28,12 @@ public class CrystalTrigger : MonoBehaviour
         for (int i = 0; i < holes.Length; i++)
         {
             holes[i].SetActive(true);
+            SoundManager.PlaySound("trap1");
         }
         for (int i = 0; i < myAnimator.Length; i++)
         {
+            if (i !=0)
+                SoundManager.PlaySound("trap1");
             myAnimator[i].SetTrigger("triggerOn");
             yield return new WaitForSeconds(0.4f);
         }

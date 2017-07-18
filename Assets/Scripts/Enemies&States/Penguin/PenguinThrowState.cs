@@ -25,6 +25,7 @@ class PenguinThrowState : IPenguinState
         }
         if (pre_attacked && (enemy.armature.animation.lastAnimationName == "pre_attack") && enemy.armature.animation.isCompleted)
         {
+            SoundManager.PlaySound("throw_sound2");
             enemy.armature.animation.FadeIn("attack", -1, 1);
             attacked = true;
             enemy.ThrowThreezubets();

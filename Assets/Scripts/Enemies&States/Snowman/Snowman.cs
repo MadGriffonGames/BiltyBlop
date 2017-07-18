@@ -66,7 +66,7 @@ public class Snowman : MovingMeleeEnemy
             }
             if (IsDead)
             {
-                SoundManager.PlaySound("enemyher loud");
+                SoundManager.PlaySound("snowman_death");
                 Instantiate(snowmanParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);

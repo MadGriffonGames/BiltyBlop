@@ -92,7 +92,7 @@ public class IceMage : RangeEnemy {
             Player.Instance.monstersKilled++;
             isDead = true;
             //Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
-            SoundManager.PlaySound("green flower");
+            SoundManager.PlaySound("crystal_break");
             GameManager.deadEnemies.Add(gameObject);
             ChangeState(new IceMageDeathState());
         }

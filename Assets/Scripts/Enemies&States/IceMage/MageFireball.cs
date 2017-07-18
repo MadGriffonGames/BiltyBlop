@@ -127,6 +127,7 @@ public class MageFireball : MonoBehaviour
             {
                 isScaled = false;
                 this.gameObject.SetActive(false);
+                SoundManager.PlaySound("mage_fireball_destroy");
             }
 
         if (this.gameObject.GetComponent<SpriteRenderer>().color.a <= 0.02f)
@@ -135,6 +136,7 @@ public class MageFireball : MonoBehaviour
         {
             timer = 0;
             this.gameObject.SetActive(false);
+            SoundManager.PlaySound("mage_fireball_destroy");
             startTransform = startposition.GetComponent<Transform>();
             this.transform.position = startTransform.transform.position;
             this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);

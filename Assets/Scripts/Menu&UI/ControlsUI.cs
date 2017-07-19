@@ -18,4 +18,9 @@ public class ControlsUI : MonoBehaviour
     {
         Player.Instance.ButtonMove(value);
     }
+
+    public void Throw()
+    {
+        Player.Instance.ButtonThrow();
+    }
 }

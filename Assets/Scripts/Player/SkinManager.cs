@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using DragonBones;
 using UnityEngine;
+using System;
 
 public class SkinManager : MonoBehaviour
 {
@@ -18,54 +19,82 @@ public class SkinManager : MonoBehaviour
     }
 
     [SerializeField]
-    public GameObject[] skinPrefabs;
-    private string[] skinLocks;
-    private static string locked = "Locked";
-    private static string unlocked = "Unlocked";
+    public GameObject[] skinPrefabs;   // all skin prefabs
+
+    private const string LOCKED = "Locked";
+    private const string UNLOCKED = "Unlocked";
+
+    private const string CRYSTAL_COST = "CrystalCost";
+    private const string COIN_COST = "CoinCost";
+
+    private const string PREFABS_FOLDER = "Skins/";
 
     private void Start()
     {
-        skinLocks = new string[skinPrefabs.Length];
-        skinLocks[0] = unlocked;
-        for (int i = 1; i < skinPrefabs.Length; i++)
-        {
-            if (!PlayerPrefs.HasKey(skinPrefabs[i].name))
-            {
-                PlayerPrefs.SetString(skinPrefabs[i].name, locked);
-            }
-            skinLocks[i] = PlayerPrefs.GetString(skinPrefabs[i].name);
-        }
+        LoadSkinPrefabs();
     }
 
-    public bool isSkinUnlocked(string skinName)
+    private void LoadSkinPrefabs()
     {
-        int skinNumber = NumberOfSkin(skinName);
-        if (skinLocks[skinNumber] == unlocked)
-        {
-            return true;
-        }
-        else return false;
-    }
-    public bool isSkinUnlocked(int skinNumber)
-    {
-        if (skinLocks[skinNumber] == unlocked)
-        {
-            return true;
-        }
-        else return false;
+        skinPrefabs = Resources.LoadAll<GameObject>(PREFABS_FOLDER);
     }
 
-    public void UnlockSkin(int skinNumber)
+    public bool isSkinLocked(int skinNumber) // true - Locked | false - Unlocked
     {
-        skinLocks[skinNumber] = unlocked;
-        PlayerPrefs.SetString(skinPrefabs[skinNumber].name, unlocked);
+        return skinPrefabs[skinNumber].GetComponent<SkinPrefab>().isLocked;
+        
     }
-    public void UnlockSkin(string skinName)
+
+    public bool BuySkinByCrystals(int skinNumber)
+    {
+        // PAYMENT LOGIC
+        // UnlockSkin(skinNumber);
+        return false;
+    } // buying skin
+
+    public bool BuySkinByCoins(int skinNumber)
+    {
+        // PAYMENT LOGIC
+        // UnlockSkin(skinNumber);
+        return false;
+    } // buying skin
+
+    private void UnlockSkin(int skinNumber)
+    {
+        PlayerPrefs.SetString(skinPrefabs[skinNumber].name, UNLOCKED);
+    }
+    private void UnlockSkin(string skinName)
     {   
-        skinLocks[NumberOfSkin(skinName)] = unlocked;
-        PlayerPrefs.SetString(skinPrefabs[NumberOfSkin(skinName)].name, unlocked);
+        PlayerPrefs.SetString(skinPrefabs[NumberOfSkin(skinName)].name, UNLOCKED);
     }
 
+    public void ApplySkin(string skinName) // applying (equiping) "skinName" skin 
+    {
+        PlayerPrefs.SetString("Skin", skinName);
+    }
+
+    public int NumberOfSkinPrefabBySkinOrder(int orderNumber)
+    {
+        for (int i = 0; i < skinPrefabs.Length; i++)
+        {
+            if (skinPrefabs[i].GetComponent<SkinPrefab>().orderNumber == orderNumber)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+    public string NameOfSkinPrefabBySkinOrder(int orderNumber)
+    {
+        for (int i = 0; i < skinPrefabs.Length; i++)
+        {
+            if (skinPrefabs[i].GetComponent<SkinPrefab>().orderNumber == orderNumber)
+            {
+                return skinPrefabs[i].GetComponent<SkinPrefab>().name;
+            }
+        }
+        return "Classic";
+    }
     public int NumberOfSkin(string skinName)
     {
         for (int i = 0; i < skinPrefabs.Length; i++)

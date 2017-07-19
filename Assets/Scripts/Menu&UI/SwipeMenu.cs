@@ -7,7 +7,7 @@ public class SwipeMenu : MonoBehaviour
 
     public RectTransform panel;
     public RectTransform center;
-    public Button[] buttons;
+    public GameObject[] buttons;
 
 
     protected float[] distance;
@@ -45,7 +45,7 @@ public class SwipeMenu : MonoBehaviour
                 }
             }
         }
-        
+
         if (!dragging || tapping)
         {
             LerpToButton(minButtonsNumber * -buttonDistance);

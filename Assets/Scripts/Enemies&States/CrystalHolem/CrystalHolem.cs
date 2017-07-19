@@ -19,6 +19,7 @@ public class CrystalHolem : MovingMeleeEnemy
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
+        ResetCoinPack();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
@@ -77,7 +78,7 @@ public class CrystalHolem : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        ResetCoinPack();
+        
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -88,6 +89,8 @@ public class CrystalHolem : MovingMeleeEnemy
 
         if (Health <= 0)
         {
+            ResetCoinPack();
+
             crystals.Disable();
             ChangeState(new CrystalIdleState());
             Health = 3;

@@ -79,8 +79,11 @@ public class Bat : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        ResetCoinPack();
-
-        Health = 1;
+        
+        if (health <= 0)
+        {
+            ResetCoinPack();
+            Health = 1;
+        }
     }
 }

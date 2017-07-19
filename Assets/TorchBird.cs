@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TorchBird : MonoBehaviour {
+public class TorchBird : MonoBehaviour
+{
     public Transform target;
     Animator myAnimator;
     Vector3 nextPos;

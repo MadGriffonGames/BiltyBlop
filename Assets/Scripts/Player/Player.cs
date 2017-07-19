@@ -274,7 +274,6 @@ public class Player : Character
             canJump = true;
 
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
-            //myRigidbody.velocity = new Vector2(0, 0);
         }
         else
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);

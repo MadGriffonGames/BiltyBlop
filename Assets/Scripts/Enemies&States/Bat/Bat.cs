@@ -21,6 +21,7 @@ public class Bat : MovingMeleeEnemy
     {
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
+        ResetCoinPack();
     }
 
     public override void Start()

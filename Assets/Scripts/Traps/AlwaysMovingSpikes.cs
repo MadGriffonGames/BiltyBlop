@@ -7,8 +7,9 @@ public class AlwaysMovingSpikes : MonoBehaviour
     Animator MyAnimator;
     [SerializeField]
     float delay;
-	// Use this for initialization
-	void Start () {
+
+	void Start ()
+    {
         MyAnimator = GetComponent<Animator>();
         MyAnimator.enabled = false;
     }
@@ -24,6 +25,5 @@ public class AlwaysMovingSpikes : MonoBehaviour
     private void OnBecameInvisible()
     {
         MyAnimator.enabled = false;
-    
     }
 }

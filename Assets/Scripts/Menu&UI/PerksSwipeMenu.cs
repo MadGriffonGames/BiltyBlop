@@ -8,38 +8,67 @@ public class PerksSwipeMenu : SwipeMenu {
     private static Vector3 normalButttonScale = new Vector3(1, 1, 1);
     private static Vector3 increasedButttonScale = new Vector3(1.1f, 1.1f, 1);
 
-    // Use this for initialization
+    private const string PREFABS_FOLDER = "Perks/";
+
+    public GameObject[] perkPrefabs;
+    [SerializeField]
+    GameObject perkCard;
+    [SerializeField]
+    GameObject unlockPerkWindow;
+    [SerializeField]
+    GameObject fade;
+    [SerializeField]
+    GameObject closeUnlockPerkWindow;
+
+    private const float DISTANCE = 175f;
+
+    private static PerksSwipeMenu instance;
+    public static PerksSwipeMenu Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = GameObject.FindObjectOfType<PerksSwipeMenu>();
+            return instance;
+        }
+    }
+
     public override void Start ()
     {
-        minButtonsNumber = 1;
+        SetPerkCards();
+        buttons = new GameObject[panel.transform.childCount];
+        distance = new float[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (!PlayerPrefs.HasKey(buttons[i].GetComponentInChildren<Text>().text))
-            {
-                PlayerPrefs.SetString(buttons[i].GetComponentInChildren<Text>().text, "Locked");
-            }
+            buttons[i] = panel.GetChild(i).gameObject;
         }
-        base.Start();
+        buttonDistance = (int)DISTANCE;//(int)Mathf.Abs(buttons[1].transform.position.x - buttons[0].transform.position.x);
+
+        minButtonsNumber = 0;
+        panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
+
+
+        // make ACTIVE or UNLOCK cards
         for (int i = 0; i < buttons.Length; i++)
         {
-            if (PlayerPrefs.GetString(buttons[i].GetComponentInChildren<Text>().text) == "Locked")
+            int perkOrderNumber = perkPrefabs[i].GetComponent<PerkPrefab>().orderNumber;
+            if (perkPrefabs[i].GetComponent<PerkPrefab>().isLocked)
             {
-                buttons[i].GetComponent<Image>().color = new Color32(167, 167, 167, 255);
-                buttons[i].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "UNLOCK";
+                buttons[perkOrderNumber].GetComponent<Image>().color = new Color32(167, 167, 167, 255);
+                buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "UNLOCK";
             }
             else
             {
-                buttons[i].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
-                buttons[i].GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
+                buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
+                buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
             }
         }
-	}
-
+    }
     public override void Update()
     {
         if (minButtonsNumber == 0 && tapping)
         {
-            MakeActiveButton(0);
+            MakeActiveButton(minButtonsNumber);
             minButtonsNumber = 1;
         }
         else if (minButtonsNumber == buttons.Length - 1 && tapping)
@@ -47,34 +76,84 @@ public class PerksSwipeMenu : SwipeMenu {
             MakeActiveButton(minButtonsNumber);
             minButtonsNumber = buttons.Length - 2;
         }
+
         for (int i = 0; i < buttons.Length; i++)
         {
-            distance[i] = Mathf.Abs(center.transform.position.x - buttons[i].transform.position.x);
+            distance[i] = Mathf.Abs( Mathf.Abs(center.GetComponent<RectTransform>().anchoredPosition.x - panel.GetComponent<RectTransform>().anchoredPosition.x) - buttons[i].GetComponent<RectTransform>().anchoredPosition.x);
+            Debug.Log("distance " + i + " " +distance[i]);
         }
-
         float minDistance = Mathf.Min(distance);
+        Debug.Log("min dis " + minDistance);
+
         if (!tapping)
         {
             for (int i = 1; i < buttons.Length - 1; i++)
             {
-                if (minDistance == distance[i] && !onStart)
+                if (minDistance - distance[i] <= 20 && !onStart)
                 {
                     minButtonsNumber = i;
                 }
             }
         }
+        Debug.Log(minButtonsNumber);
         if (!dragging || tapping)
         {
             LerpToButton(minButtonsNumber * -buttonDistance);
         }
-       
+    }
+
+    private void SetPerkCards()
+    {
+        perkPrefabs = Resources.LoadAll<GameObject>(PREFABS_FOLDER);
+        for (int i = 0; i < perkPrefabs.Length; i++)
+        {
+            for (int j = 0; j < perkPrefabs.Length; j++)
+            {
+                if (perkPrefabs[j].GetComponent<PerkPrefab>().orderNumber == i)
+                {
+                    GameObject perkCardObj = Instantiate(perkCard) as GameObject;
+                    PerkPrefab perk = perkPrefabs[j].GetComponent<PerkPrefab>();
+
+                    perkCardObj.transform.SetParent(panel);
+                    perkCardObj.transform.localPosition = new Vector3(i*DISTANCE, 0, 0);
+                    perkCardObj.transform.localScale = new Vector3(1, 1, 1);
+                    perkCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = perk.shopName;
+                    perkCardObj.gameObject.GetComponentsInChildren<Text>()[1].text = perk.description;
+
+                    perkCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = perk.perkSprite;
+                    if (!perk.isLocked)
+                    {
+                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "ACTIVE";
+                    }
+                    else
+                    {
+                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockPerkWindow(perk.orderNumber));
+                        perkCardObj.gameObject.GetComponent<Image>().color = new Color32(188, 188, 188, 255);
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    public void ShowUnlockPerkWindow(int perkOrderNumber)
+    {
+        fade.SetActive(true);
+        closeUnlockPerkWindow.SetActive(true);
+        unlockPerkWindow.SetActive(true);
+        unlockPerkWindow.GetComponent<UnlockPerkWindow>().SetWindowWithPerkNumber(perkOrderNumber);
+    }
+    public void CloseUnlockPerkWindow()
+    {
+        fade.SetActive(false);
+        closeUnlockPerkWindow.SetActive(false);
+        unlockPerkWindow.SetActive(false);
     }
 
     public override void LerpToButton(int position)
     {
         base.LerpToButton(position);
     }
-
     public override void OnButtonClickLerp(int buttonNumber)
     {
         if (buttonNumber == 0)
@@ -117,14 +196,17 @@ public class PerksSwipeMenu : SwipeMenu {
         }
     }
 
-    public void UnlockPerk(int buttonNumber)
+    // Unlocking Perks if can (+payment) or returning FALSE
+    public bool CanUnlockPerkByCoins(int perkNumber)
     {
-        Debug.Log(buttonNumber);
-        MakeActiveButton(buttonNumber);
-        MakeOtherButtonsInactive(buttonNumber);
+        return false;
         
         //PlayerPrefs.SetString(buttons[minButtonsNumber].GetComponentInChildren<Text>().text, "Unlocked");
         //buttons[].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
         // need to add payment for perks
+    }
+    public bool CanUnlockPerkByCrystals(int perkNumber)
+    {
+        return false;
     }
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnlockSkinWindow : MonoBehaviour {
-
+public class UnlockPerkWindow : MonoBehaviour {
 
     // HANDLING ALL WINDOW EVENTS
 
@@ -13,9 +12,7 @@ public class UnlockSkinWindow : MonoBehaviour {
     [SerializeField]
     GameObject buyCrystalsButton;
     [SerializeField]
-    GameObject skinName;
-    [SerializeField]
-    GameObject statsPanel;
+    GameObject perkName;
     [SerializeField]
     GameObject applyButton;
     [SerializeField]
@@ -32,64 +29,69 @@ public class UnlockSkinWindow : MonoBehaviour {
     [SerializeField]
     Transform coinButtonTransform;
 
-    public void SetWindowWithSkinNumber(int skinNumber)
+
+    public void SetWindowWithPerkNumber(int perkOrderNumber)
     {
-        
-        SkinPrefab skin = SkinManager.Instance.skinPrefabs[skinNumber].gameObject.GetComponent<SkinPrefab>();
-        KidSkin.Instance.ChangeSkin(skinNumber);
-        skinName.GetComponent<Text>().text = skin.shopName;
-        statsPanel.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(skin.attackStat);
-        statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(skin.armorStat);
-        if (skin.isLocked)
+        int perkNumber = 0;
+        for (int i = 0; i < PerksSwipeMenu.Instance.perkPrefabs.Length; i++)
         {
-            if (skin.coinCost == 0 && skin.crystalCost != 0)
+            if (PerksSwipeMenu.Instance.perkPrefabs[i].GetComponent<PerkPrefab>().orderNumber == perkOrderNumber)
+            {
+                perkNumber = i;
+                break;
+            }
+        }
+        PerkPrefab perk = PerksSwipeMenu.Instance.perkPrefabs[perkNumber].gameObject.GetComponent<PerkPrefab>();
+        perkName.GetComponent<Text>().text = perk.shopName;
+
+        // perkNumber - number of chosen perk in perkPrefabs[]
+
+        if (perk.isLocked)
+        {
+            if (perk.coinCost == 0 && perk.crystalCost != 0)
             {
                 buyCrystalsButton.transform.localPosition = onebuttonTransform.localPosition;
-                buyCrystalsButton.GetComponentInChildren<Text>().text = skin.crystalCost.ToString();
+                buyCrystalsButton.GetComponentInChildren<Text>().text = perk.crystalCost.ToString();
 
                 buyCrystalsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuySkinByCrystals(skinNumber));
+                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCrystals(perkNumber));
 
                 buyCoinsButton.gameObject.SetActive(false);
             }
-            else if (skin.crystalCost == 0 && skin.coinCost != 0)
+            else if (perk.crystalCost == 0 && perk.coinCost != 0)
             {
                 buyCoinsButton.transform.localPosition = onebuttonTransform.localPosition;
-                buyCoinsButton.GetComponentInChildren<Text>().text = skin.coinCost.ToString();
-                
-                buyCoinsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCoinsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuySkinByCoins(skinNumber));
+                buyCoinsButton.GetComponentInChildren<Text>().text = perk.coinCost.ToString();
 
-                buyCrystalsButton.gameObject.SetActive(false);               
+                buyCoinsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+                buyCoinsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCoins(perkNumber));
+
+                buyCrystalsButton.gameObject.SetActive(false);
             }
-            else if (skin.crystalCost == 0 && skin.coinCost == 0)
+            else if (perk.crystalCost == 0 && perk.coinCost == 0)
             {
 
             }
             else
             {
-                ResetButtons();                
-                buyCrystalsButton.GetComponentInChildren<Text>().text = skin.crystalCost.ToString();
-                buyCoinsButton.GetComponentInChildren<Text>().text = skin.coinCost.ToString();
+                ResetButtons();
+                buyCrystalsButton.GetComponentInChildren<Text>().text = perk.crystalCost.ToString();
+                buyCoinsButton.GetComponentInChildren<Text>().text = perk.coinCost.ToString();
 
                 buyCrystalsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuySkinByCrystals(skinNumber));
+                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCrystals(perkNumber));
                 buyCoinsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCoinsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuySkinByCoins(skinNumber));
+                buyCoinsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCoins(perkNumber));
             }
         }
     }
 
-    public void ApplySkin()
+    public void CanBuyPerkByCrystals(int perkNmber)
     {
-        
-    }
-
-    public void CanBuySkinByCrystals (int skinNumber)
-    {
-        if (SkinManager.Instance.BuySkinByCrystals(skinNumber))
+        if (PerksSwipeMenu.Instance.CanUnlockPerkByCrystals(perkNmber))
         {
-            // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА СКИНА
+            // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
+
         }
         else
         {
@@ -99,11 +101,11 @@ public class UnlockSkinWindow : MonoBehaviour {
             errorWindow.GetComponentInChildren<Text>().text = "NOT ENOUGH CRYSTALS";
         }
     }
-    public void CanBuySkinByCoins(int skinNumber)
+    public void CanBuyPerkByCoins(int perkNumber)
     {
-        if (SkinManager.Instance.BuySkinByCoins(skinNumber))
+        if (PerksSwipeMenu.Instance.CanUnlockPerkByCoins(perkNumber))
         {
-            // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА СКИНА
+            // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
         }
         else
         {

@@ -15,15 +15,10 @@ public class SkinSwipeMenu : SwipeMenu {
     public override void Start()
     {
         SetSkinCards();
-        buttons = new GameObject[panel.transform.childCount];
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i] = panel.GetChild(i).transform.gameObject;
-        }
-        
+                
         distance = new float[buttons.Length];
         buttonDistance = (int)Mathf.Abs(buttons[1].GetComponent<RectTransform>().anchoredPosition.x - buttons[0].GetComponent<RectTransform>().anchoredPosition.x);
-
+        Debug.Log(buttonDistance);
         panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
         minButtonsNumber = 1;
     }
@@ -34,6 +29,7 @@ public class SkinSwipeMenu : SwipeMenu {
     }
     private void SetSkinCards()
     {
+        buttons = new GameObject[panel.transform.childCount];
         for (int i = 0; i < SkinManager.Instance.skinPrefabs.Length; i++)
         {
             for (int j = 0; j < SkinManager.Instance.skinPrefabs.Length; j++)
@@ -41,10 +37,11 @@ public class SkinSwipeMenu : SwipeMenu {
                 if (SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>().orderNumber == i)
                 {
                     
-                    GameObject skinCardObj = Instantiate(skinCard) as GameObject;
+                    GameObject skinCardObj = Instantiate(skinCard, new Vector3(buttonDistance * i, 0, 0),Quaternion.identity) as GameObject;
                     SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
 
                     skinCardObj.transform.SetParent(panel);
+                    skinCardObj.GetComponent<RectTransform>().transform.position = panel.transform.position;
                     skinCardObj.transform.localScale = new Vector3(1, 1, 1);
                     skinCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = skin.shopName;
                     skinCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = skin.skinSprite;
@@ -62,6 +59,7 @@ public class SkinSwipeMenu : SwipeMenu {
                     {
                         skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
                     }
+                    buttons[i] = skinCardObj;
                     break;
                 }
             }

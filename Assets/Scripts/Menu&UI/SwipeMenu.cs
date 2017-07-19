@@ -64,9 +64,9 @@ public class SwipeMenu : MonoBehaviour
     }
     public virtual void OnButtonClickLerp(int buttonNumber)
     {
-        if (buttonNumber == buttons.Length)
+        if (buttonNumber == buttons.Length-1)
         {
-            minButtonsNumber = buttonNumber - 2;
+            minButtonsNumber = buttons.Length - 2;
         }
         else
             minButtonsNumber = buttonNumber;

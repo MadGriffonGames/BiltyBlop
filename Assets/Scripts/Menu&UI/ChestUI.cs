@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class ChestUI : MonoBehaviour
 {
-    const int MIN_COIN_RANGE = 40;
-    const int MID_COIN_RANGE = 70;
-    const int BIG_COIN_RANGE = 92;
+    const int COINS_RANGE    = 90;
+    const int CRYSTALS_RANGE = 95;
+    const int ITEMS_RANGE    = 100;
 
-    const int MIN_CRYSTAL_RANGE = 97;
-    const int MID_CRYSTAL_RANGE = 99;
+    const int MIN_COIN_RANGE = 50;
+    const int MID_COIN_RANGE = 70;
+    const int BIG_COIN_RANGE = 100;
+
+    const int MIN_CRYSTAL_RANGE = 65;
+    const int MID_CRYSTAL_RANGE = 85;
     const int BIG_CRYSTAL_RANGE = 100;
 
 
@@ -100,7 +104,7 @@ public class ChestUI : MonoBehaviour
 
     public void GiveLoot()
     {
-        RandomizeLoot();
+        Randomize();
         chestImage.sprite = chestOpen;
         chestFade.SetActive(true);
         loot.gameObject.SetActive(true);
@@ -113,9 +117,28 @@ public class ChestUI : MonoBehaviour
         loot.gameObject.SetActive(false);
     }
 
-    public void RandomizeLoot()
+    public void Randomize()
     {
         int random = UnityEngine.Random.Range(1, 100);
+
+        if (random <= COINS_RANGE)
+        {
+            RandomizeCoins();
+        }
+        if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
+        {
+            RandomizeCrystals();
+        }
+        if (random > CRYSTALS_RANGE && random <= ITEMS_RANGE)
+        {
+            RandomizeItems();
+        }
+    }
+
+    void RandomizeCoins()
+    {
+        int random = UnityEngine.Random.Range(1, 100);
+
         if (random <= MIN_COIN_RANGE)
         {
             loot.sprite = lootArray[0];
@@ -131,7 +154,13 @@ public class ChestUI : MonoBehaviour
             loot.sprite = lootArray[2];
             AddCoins(300);
         }
-        if (random > BIG_COIN_RANGE && random <= MIN_CRYSTAL_RANGE)
+    }
+
+    void RandomizeCrystals()
+    {
+        int random = UnityEngine.Random.Range(1, 100);
+
+        if (random <= MIN_CRYSTAL_RANGE)
         {
             loot.sprite = lootArray[3];
             AddCrystals(2);
@@ -148,6 +177,11 @@ public class ChestUI : MonoBehaviour
         }
     }
 
+    void RandomizeItems()
+    {
+
+    }
+
     void AddCoins(int value)
     {
         loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
@@ -160,5 +194,10 @@ public class ChestUI : MonoBehaviour
         loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
         PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
         GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
+    }
+
+    void AddItem(string itemName)
+    {
+
     }
 }

@@ -40,12 +40,17 @@ public class Throwing : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(1);
         Disable();
     }
 
     private void Disable()
     {
+       /*
+        * 
+        * disable spriterenderer and collider instead just disable gameobject 
+        * because I can't get collider for ignore collision from disabled object
+        * 
+        */
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
         speed = 0;
@@ -53,7 +58,7 @@ public class Throwing : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
+        
         Disable();
     }
 

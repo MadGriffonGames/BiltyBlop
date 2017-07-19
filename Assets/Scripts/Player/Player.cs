@@ -527,8 +527,12 @@ public class Player : Character
 	public void ButtonMove(float input)
 	{
         playerAxis = input;
-		
 	}
+
+    public void ButtonThrow()
+    {
+        Throw = true;
+    }
 
     /*
      * Bonus functions

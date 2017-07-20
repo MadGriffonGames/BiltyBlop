@@ -12,15 +12,21 @@ public class SkinSwipeMenu : SwipeMenu {
     [SerializeField]
     GameObject closeBuyWindowButton;
 
+    private const float DISTANCE = 175f;
+
     public override void Start()
     {
         SetSkinCards();
-                
+        buttons = new GameObject[panel.transform.childCount];
         distance = new float[buttons.Length];
-        buttonDistance = (int)Mathf.Abs(buttons[1].GetComponent<RectTransform>().anchoredPosition.x - buttons[0].GetComponent<RectTransform>().anchoredPosition.x);
-        Debug.Log(buttonDistance);
-        panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i] = panel.GetChild(i).gameObject;
+        }
+        buttonDistance = (int)DISTANCE;
         minButtonsNumber = 1;
+        panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
+
     }
 
     public override void Update()
@@ -29,7 +35,6 @@ public class SkinSwipeMenu : SwipeMenu {
     }
     private void SetSkinCards()
     {
-        buttons = new GameObject[panel.transform.childCount];
         for (int i = 0; i < SkinManager.Instance.skinPrefabs.Length; i++)
         {
             for (int j = 0; j < SkinManager.Instance.skinPrefabs.Length; j++)
@@ -41,10 +46,11 @@ public class SkinSwipeMenu : SwipeMenu {
                     SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
 
                     skinCardObj.transform.SetParent(panel);
-                    skinCardObj.GetComponent<RectTransform>().transform.position = panel.transform.position;
+                    skinCardObj.transform.localPosition = new Vector3(i * DISTANCE, 0, 0);
                     skinCardObj.transform.localScale = new Vector3(1, 1, 1);
                     skinCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = skin.shopName;
                     skinCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = skin.skinSprite;
+
                     if (!skin.isLocked)
                     {
                         if (PlayerPrefs.GetString("Skin") == skin.name)

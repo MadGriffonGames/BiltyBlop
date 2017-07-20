@@ -44,7 +44,7 @@ public class PerksSwipeMenu : SwipeMenu {
         }
         buttonDistance = (int)DISTANCE;//(int)Mathf.Abs(buttons[1].transform.position.x - buttons[0].transform.position.x);
 
-        minButtonsNumber = 0;
+        minButtonsNumber = 1;
         panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
 
 
@@ -80,16 +80,14 @@ public class PerksSwipeMenu : SwipeMenu {
         for (int i = 0; i < buttons.Length; i++)
         {
             distance[i] = Mathf.Abs( Mathf.Abs(center.GetComponent<RectTransform>().anchoredPosition.x - panel.GetComponent<RectTransform>().anchoredPosition.x) - buttons[i].GetComponent<RectTransform>().anchoredPosition.x);
-            Debug.Log("distance " + i + " " +distance[i]);
         }
         float minDistance = Mathf.Min(distance);
-        Debug.Log("min dis " + minDistance);
 
         if (!tapping)
         {
             for (int i = 1; i < buttons.Length - 1; i++)
             {
-                if (minDistance - distance[i] <= 20 && !onStart)
+                if (minDistance == distance[i] && !onStart)
                 {
                     minButtonsNumber = i;
                 }

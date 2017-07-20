@@ -53,6 +53,7 @@ public class StoneHolem : MovingMeleeEnemy
         CameraEffect.Shake(0.5f, 0.4f);
         SetHealthbar();
 		SoundManager.PlaySound ("holem_takingdamage");
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
         Instantiate(stoneParticle, gameObject.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 2f, -1f), Quaternion.identity);
         if (IsDead)
         {

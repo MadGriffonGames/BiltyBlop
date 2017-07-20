@@ -92,6 +92,8 @@ public class Player : Character
     public bool OnGround { get; set; }
     [SerializeField]
     public GameObject timeControllerPrefab;
+    [SerializeField]
+    GameObject hitFX;
 
     /*
      * Bonus vars
@@ -118,6 +120,8 @@ public class Player : Character
         {
             Instantiate(timeControllerPrefab);
         }
+
+
 
         currentState = new PlayerIdleState();
 		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -195,11 +199,13 @@ public class Player : Character
         }
     }
 
+
     void SetThrowing()
     {
         throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
         clipSize = 5;
-        throwingIterator = clipSize - 1;
+        throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
+        ThrowingUI.Instance.SetThrowBar();
         throwingClip = new GameObject[clipSize];
         for (int i = 0; i < clipSize; i++)
         {
@@ -267,16 +273,14 @@ public class Player : Character
 		{
             canJump = true;
 
-            if (!Attack)
-                myRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, myRigidbody.velocity.y);
-            else
-                myRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f * timeScalerMove, myRigidbody.velocity.y);
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
         }
         else
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
         if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
         {
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
+            myRigidbody.velocity = new Vector2(0, 0);
         }
         else if (!OnGround && DoubleJump && canJump && myRigidbody.velocity.y < 6.5f)
         {
@@ -399,11 +403,12 @@ public class Player : Character
     {
         if (throwingIterator >= 0)
         {
-            yield return new WaitForSeconds(0.21f / myArmature.animation.timeScale);
+            yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
 
             throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
+            SoundManager.PlaySound("kidarian_throw");
 
             if (this.gameObject.transform.localScale.x > 0)
             {
@@ -433,7 +438,7 @@ public class Player : Character
 
     IEnumerator AttackColliderDelay()
     {
-        yield return new WaitForSeconds(0.15f / myArmature.animation.timeScale);
+        yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
         AttackCollider.enabled = true;
     }
 
@@ -522,8 +527,12 @@ public class Player : Character
 	public void ButtonMove(float input)
 	{
         playerAxis = input;
-		
 	}
+
+    public void ButtonThrow()
+    {
+        Throw = true;
+    }
 
     /*
      * Bonus functions

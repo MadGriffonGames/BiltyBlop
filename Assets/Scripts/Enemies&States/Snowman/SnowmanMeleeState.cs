@@ -48,6 +48,7 @@ public class SnowmanMeleeState : ISnowmanState
         }
         if (enemy.armature.animation.lastAnimationName == "pre_attack" && enemy.armature.animation.isCompleted)
         {
+            SoundManager.PlaySound("snowman_attack");
             enemy.armature.animation.FadeIn("attack", -1, 1);
             enemy.AttackCollider.enabled = true;
         }
@@ -60,3 +61,4 @@ public class SnowmanMeleeState : ISnowmanState
         }
     }
 }
+

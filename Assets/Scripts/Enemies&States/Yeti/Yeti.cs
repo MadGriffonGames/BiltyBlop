@@ -18,6 +18,7 @@ public class Yeti : RangeEnemy {
     Vector2 power;
 
 
+
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -66,11 +67,12 @@ public class Yeti : RangeEnemy {
             damaged = true;
             health -= Player.Instance.damage;
             StartCoroutine(AnimationDelay());
+            MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
             if (IsDead)
             {
-                SoundManager.PlaySound("enemyher loud");
+                SoundManager.PlaySound("yeti_death");
                 Instantiate(yetiParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
@@ -78,7 +80,7 @@ public class Yeti : RangeEnemy {
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.01f);
         damaged = false;
     }
 

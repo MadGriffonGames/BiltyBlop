@@ -10,7 +10,8 @@ public class CrystalHolem : MovingMeleeEnemy
     [SerializeField]
     GameObject crystalParticle;
     [SerializeField]
-    public CrystalTrigger crystals; 
+    public CrystalTrigger crystals;
+
 
     bool damaged = false;
     public bool walk = false;
@@ -18,6 +19,7 @@ public class CrystalHolem : MovingMeleeEnemy
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
+        ResetCoinPack();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
@@ -57,12 +59,12 @@ public class CrystalHolem : MovingMeleeEnemy
         {
             damaged = true;
             health -= Player.Instance.damage;
-            StartCoroutine(AnimationDelay());
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
+            MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             if (IsDead)
             {
-                SoundManager.PlaySound("enemyher loud");
+                SoundManager.PlaySound("holem_sound");
                 Instantiate(crystalParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);
@@ -76,7 +78,7 @@ public class CrystalHolem : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        ResetCoinPack();
+        
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -87,6 +89,8 @@ public class CrystalHolem : MovingMeleeEnemy
 
         if (Health <= 0)
         {
+            ResetCoinPack();
+
             crystals.Disable();
             ChangeState(new CrystalIdleState());
             Health = 3;

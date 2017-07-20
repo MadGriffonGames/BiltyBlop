@@ -81,9 +81,16 @@ public class LevelManager : MonoBehaviour
         SaveAll();
     }
 
-    void LoadLevel(string levelName)
+    void SetButton()
     {
-        GameManager.nextLevelName = levelName;
+
+    }
+
+    public void LoadLevel(string levelName)
+    {
+        SetButton();
+
+        GameManager.nextLevelName = "Level" + levelName;
         SceneManager.LoadScene("Loading");
     }
 

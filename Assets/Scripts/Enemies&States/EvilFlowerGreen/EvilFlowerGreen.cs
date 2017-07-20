@@ -15,6 +15,7 @@ public class EvilFlowerGreen : RangeEnemy
     [SerializeField]
     GameObject enemySight;
 
+
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -58,6 +59,7 @@ public class EvilFlowerGreen : RangeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(1f, 1f), new Vector3(1, 1, 1));
         if (IsDead)
         {
             Player.Instance.monstersKilled++;
@@ -92,12 +94,5 @@ public class EvilFlowerGreen : RangeEnemy
         Target = null;
         ChangeState(new EFGreenIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-    }
-
-    public void AnimIdle()
-    {
-        armature.animation.timeScale = 1.2f;
-        armature.animation.Play("IDLE");
-
     }
 }

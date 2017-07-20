@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
     const int IMMORTAL_DURATION = 5;
     const int DAMAGE_DURATION = 10;
     const int SPEED_DURATION = 3;
-    const int TIME_DURATION = 7;
+    const int TIME_DURATION = 4;
 
 
     /* Inventory Items Names */
@@ -62,30 +62,46 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public bool BuyItem(string itemName, int itemCount, bool coinPayment)
+    public void BuyItem(string itemName, int itemCount, string moneyType, int price)
     {
+        Debug.Log("Before");
+        Debug.Log("Coins " + PlayerPrefs.GetInt("Coins"));
+        //Debug.Log("Crystals " + PlayerPrefs.GetInt("Crystals"));
+        //Debug.Log("Count " + itemName+COUNT + PlayerPrefs.GetInt(itemName + COUNT));
         if (CanAddItem(itemName, itemCount))
         {
-            /* 
-             
-                 ADD PAYMENT HERE 
-             
-                                     */
-
-            AddItem(itemName, itemCount);
-            return true;
+            if (moneyType == "Coins")
+            {
+                if (PlayerPrefs.GetInt("Coins") >= price)
+                {
+                    PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price);
+                    AddItem(itemName, itemCount);
+                }
+            }
+            if (moneyType == "Crystals")
+            {
+                if (PlayerPrefs.GetInt("Crystals") >= price)
+                {
+                    PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price);
+                    AddItem(itemName, itemCount);
+                }
+            }
         }
-        else return false;
+        Debug.Log("After");
+        Debug.Log("Coins " + PlayerPrefs.GetInt("Coins"));
+        //Debug.Log("Crystals " + PlayerPrefs.GetInt("Crystals"));
+        //Debug.Log("Count " + PlayerPrefs.GetInt(HEAL + COUNT));
     }
 
     public bool CanAddItem(string itemName, int itemCount)
     {
+        Debug.Log(PlayerPrefs.GetInt(MAX + itemName));
         if (!PlayerPrefs.HasKey(itemName + COUNT))
         {
             PlayerPrefs.SetInt(itemName + COUNT, 0);
             return true;
         }
-        else if (PlayerPrefs.GetInt(itemName + COUNT) + itemCount < PlayerPrefs.GetInt(MAX + itemName))
+        else if (PlayerPrefs.GetInt(itemName + COUNT) + itemCount <= PlayerPrefs.GetInt(MAX + itemName))
         {
             return true;
         }
@@ -106,7 +122,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItem(string itemName)  // = UseItem
+    public void RemoveItem(string itemName)
     {
         if (PlayerPrefs.GetInt(itemName + COUNT) > 0)
         {
@@ -149,24 +165,13 @@ public class Inventory : MonoBehaviour
             PlayerPrefs.SetInt(itemName + COUNT, 0);
         }
         // Max Count
-        if (!PlayerPrefs.HasKey(MAX + itemName))
-        {
-            PlayerPrefs.SetInt(MAX + itemName, maxCount);
-        }
+        PlayerPrefs.SetInt(MAX + itemName, maxCount);
         // Cost in Coins
-        if (!PlayerPrefs.HasKey(itemName + COST_COINS))
-        {
-            PlayerPrefs.SetInt(itemName + COST_COINS, coinCost);
-        }
+        PlayerPrefs.SetInt(itemName + COST_COINS, coinCost);
         // Cost in Crystals
-        if (!PlayerPrefs.HasKey(itemName + COST_CRYSTALS))
-        {
-            PlayerPrefs.SetInt(itemName + COST_CRYSTALS, crystalCost);
-        }
-        if (!PlayerPrefs.HasKey(itemName + SHOP_NAME))
-        {
-            PlayerPrefs.SetString(itemName + SHOP_NAME, shopName);
-        }
+        PlayerPrefs.SetInt(itemName + COST_CRYSTALS, crystalCost);
+        //Name in Shop
+        PlayerPrefs.SetString(itemName + SHOP_NAME, shopName);
 
         boostersCount.Add(itemName, PlayerPrefs.GetInt(itemName + COUNT));
         shopNames.Add(itemName, shopName);

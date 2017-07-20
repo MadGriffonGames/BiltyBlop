@@ -78,10 +78,10 @@ public class ItemShop : MonoBehaviour
         buyByCrystals.GetComponent<Button>().onClick.RemoveAllListeners();
 
         buyByCoins.GetComponentInChildren<Text>().text = Inventory.Instance.GetCoinCost(itemName).ToString();
-        buyByCoins.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, true));
+        buyByCoins.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, "Coins", Inventory.Instance.GetCoinCost(itemName)));
 
         buyByCrystals.GetComponentInChildren<Text>().text = Inventory.Instance.GetCrystalCost(itemName).ToString();
-        buyByCrystals.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, false));
+        buyByCrystals.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, "Crystals", Inventory.Instance.GetCrystalCost(itemName)));
     }
 
     public void ShowErrorWindow(string error)

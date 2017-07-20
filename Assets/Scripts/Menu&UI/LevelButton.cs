@@ -24,7 +24,9 @@ public class LevelButton : MonoBehaviour
             Lock.SetActive(true);
         }
         else
+        {
             Lock.SetActive(false);
+        }
     }
 
     public void ShowStars(int value)

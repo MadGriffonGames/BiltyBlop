@@ -6,7 +6,6 @@ class YetiRangeState : IYetiState
 {
 
     private Yeti enemy;
-    float attackTime;
     bool isAttacking = false;
 
 
@@ -21,7 +20,7 @@ class YetiRangeState : IYetiState
     {
         if ((enemy.armature.animation.lastAnimationName == ("pre_attack") || enemy.armature.animation.lastAnimationName == "idle2") && enemy.armature.animation.isCompleted)
         {
-            SoundManager.PlaySound("spit");
+            SoundManager.PlaySound("throw_sound");
             enemy.armature.animation.timeScale = 1.5f;
             enemy.armature.animation.FadeIn("attack", -1, 1);
             enemy.ThrowSnowball();

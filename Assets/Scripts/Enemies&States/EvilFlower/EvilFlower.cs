@@ -12,9 +12,11 @@ public class EvilFlower : MeleeEnemy
     [SerializeField]
     GameObject enemySight;
 
+
     void Awake()
     {
 		armature = GetComponent<UnityArmatureComponent> ();
+        ResetCoinPack();
     }
 
     public override void Start()
@@ -60,6 +62,7 @@ public class EvilFlower : MeleeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
         if (IsDead) 
         {
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
@@ -73,9 +76,11 @@ public class EvilFlower : MeleeEnemy
 
     private void OnEnable()
     {
-        ResetCoinPack();
-
-        Health = 1;
+        if (Health <= 0)
+        {
+            ResetCoinPack();
+            Health = 1;
+        }
         Target = null;
         ChangeState(new EvilFlowerIdleState());
         attackCollider.enabled = false;

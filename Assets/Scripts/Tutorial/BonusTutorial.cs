@@ -18,7 +18,6 @@ public class BonusTutorial : InAppTutorial
     {
         isActivated = false;
         isCollected = false;
-        PlayerPrefs.DeleteKey("Level3");
     }
 
     private void Update()

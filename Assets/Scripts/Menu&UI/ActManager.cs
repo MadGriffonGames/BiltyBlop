@@ -2,26 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActManager : MonoBehaviour {
-
+public class ActManager : MonoBehaviour
+{
 	[SerializeField]
-	GameObject spacer;
+	GameObject map;
 	[SerializeField]
 	GameObject actSpacer;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void TurnOnLevelSelect(bool turn)
 	{
 		actSpacer.SetActive (!turn);
-		spacer.SetActive (turn);
+		map.SetActive (turn);
 	}
 }

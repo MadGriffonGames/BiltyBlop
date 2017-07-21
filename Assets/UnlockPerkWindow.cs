@@ -91,7 +91,10 @@ public class UnlockPerkWindow : MonoBehaviour {
         if (PerksSwipeMenu.Instance.CanUnlockPerkByCrystals(perkNmber))
         {
             // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
-
+            fade.gameObject.SetActive(true);
+            closeErrorWindowButton.gameObject.SetActive(true);
+            errorWindow.gameObject.SetActive(true);
+            errorWindow.GetComponentInChildren<Text>().text = "PERK UNLOCKED";
         }
         else
         {
@@ -106,6 +109,10 @@ public class UnlockPerkWindow : MonoBehaviour {
         if (PerksSwipeMenu.Instance.CanUnlockPerkByCoins(perkNumber))
         {
             // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
+            fade.gameObject.SetActive(true);
+            closeErrorWindowButton.gameObject.SetActive(true);
+            errorWindow.gameObject.SetActive(true);
+            errorWindow.GetComponentInChildren<Text>().text = "PERK UNLOCKED";
         }
         else
         {
@@ -118,9 +125,9 @@ public class UnlockPerkWindow : MonoBehaviour {
 
     public void CloseErrorWindow()
     {
+        errorWindow.gameObject.SetActive(false);
         fade.gameObject.SetActive(false);
         closeErrorWindowButton.gameObject.SetActive(false);
-        errorWindow.gameObject.SetActive(false);
     }
     private void ResetButtons()
     {

@@ -58,4 +58,10 @@ public class SkinPrefab : MonoBehaviour {
         }
         skinSprite = Resources.Load<Sprite>(SPRITE_FOLDER + name);
     }
+
+    public void UnlockSkin()
+    {
+        PlayerPrefs.SetString(gameObject.name, UNLOCKED);
+        isLocked = false;
+    }
 }

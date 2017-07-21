@@ -73,6 +73,30 @@ public class SkinSwipeMenu : SwipeMenu {
         }
     }
 
+    public void UpdateSkinCards()
+    {
+        for (int i = 0; i < SkinManager.Instance.skinPrefabs.Length; i++)
+        {
+            for (int j = 0; j < SkinManager.Instance.skinPrefabs.Length; j++)
+            {
+                if (SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>().orderNumber == i)
+                {
+                    SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
+                    if (!skin.isLocked)
+                    {
+                        buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
+                        if (PlayerPrefs.GetString("Skin") == skin.name)
+                        {
+                            buttons[i].gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "EQUIPED";
+                        }
+                        else
+                            buttons[i].gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "EQUIP";
+                        buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplySkin(skin.orderNumber));
+                    }
+                }
+            }
+        }
+    }
     public void ApplySkin(int skinOrderNumber) // writing to player prefs current skin
     {
         panel.GetChild(skinOrderNumber).GetComponentsInChildren<Text>()[1].text = "EQUIPED";

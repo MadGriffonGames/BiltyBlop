@@ -93,7 +93,6 @@ public class PerksSwipeMenu : SwipeMenu {
                 }
             }
         }
-        Debug.Log(minButtonsNumber);
         if (!dragging || tapping)
         {
             LerpToButton(minButtonsNumber * -buttonDistance);
@@ -128,7 +127,6 @@ public class PerksSwipeMenu : SwipeMenu {
                         perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockPerkWindow(perk.orderNumber));
                         perkCardObj.gameObject.GetComponent<Image>().color = new Color32(188, 188, 188, 255);
                     }
-                    
                 }
             }
         }
@@ -197,14 +195,30 @@ public class PerksSwipeMenu : SwipeMenu {
     // Unlocking Perks if can (+payment) or returning FALSE
     public bool CanUnlockPerkByCoins(int perkNumber)
     {
-        return false;
-        
-        //PlayerPrefs.SetString(buttons[minButtonsNumber].GetComponentInChildren<Text>().text, "Unlocked");
-        //buttons[].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
-        // need to add payment for perks
+        if (PlayerPrefs.GetInt("Coins") >= perkPrefabs[perkNumber].GetComponent<PerkPrefab>().coinCost)
+        {
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - perkPrefabs[perkNumber].GetComponent<PerkPrefab>().coinCost);
+            perkPrefabs[perkNumber].GetComponent<PerkPrefab>().UnlockPerk();
+            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
+            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            ShopController.Instance.UpdateMoneyValues();
+            return true;
+        }
+        else
+            return false;  
     }
     public bool CanUnlockPerkByCrystals(int perkNumber)
     {
-        return false;
+        if (PlayerPrefs.GetInt("Crystals") >= perkPrefabs[perkNumber].GetComponent<PerkPrefab>().crystalCost)
+        {
+            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - perkPrefabs[perkNumber].GetComponent<PerkPrefab>().crystalCost);
+            perkPrefabs[perkNumber].GetComponent<PerkPrefab>().UnlockPerk();
+            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
+            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            ShopController.Instance.UpdateMoneyValues();
+            return true;
+        }
+        else
+            return false;
     }
 }

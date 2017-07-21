@@ -55,4 +55,9 @@ public class PerkPrefab : MonoBehaviour {
 
         //perkSprite = Resources.Load<Sprite>(SPRITE_FOLDER + name);
     }
+    public void UnlockPerk()
+    {
+        PlayerPrefs.SetString(gameObject.name, UNLOCKED);
+        isLocked = false;
+    }
 }

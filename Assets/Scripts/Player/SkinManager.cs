@@ -47,16 +47,27 @@ public class SkinManager : MonoBehaviour
 
     public bool BuySkinByCrystals(int skinNumber)
     {
-        // PAYMENT LOGIC
-        // UnlockSkin(skinNumber);
-        return false;
+        if (PlayerPrefs.GetInt("Crystals") >= skinPrefabs[skinNumber].GetComponent<SkinPrefab>().crystalCost && skinPrefabs[skinNumber].GetComponent<SkinPrefab>().isLocked)
+        {
+            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - skinPrefabs[skinNumber].GetComponent<SkinPrefab>().crystalCost);
+            skinPrefabs[skinNumber].GetComponent<SkinPrefab>().UnlockSkin();
+            return true;
+        }
+        else
+            return false;
     } // buying skin
 
     public bool BuySkinByCoins(int skinNumber)
     {
         // PAYMENT LOGIC
-        // UnlockSkin(skinNumber);
-        return false;
+        if (PlayerPrefs.GetInt("Coins") >= skinPrefabs[skinNumber].GetComponent<SkinPrefab>().coinCost && skinPrefabs[skinNumber].GetComponent<SkinPrefab>().isLocked)
+        {
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - skinPrefabs[skinNumber].GetComponent<SkinPrefab>().coinCost);
+            skinPrefabs[skinNumber].GetComponent<SkinPrefab>().UnlockSkin();
+            return true;
+        }
+        else
+            return false;
     } // buying skin
 
     private void UnlockSkin(int skinNumber)

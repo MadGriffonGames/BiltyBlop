@@ -30,7 +30,7 @@ public class AxeTrap : MonoBehaviour
         after = Mathf.Abs(rotationVector.z);
         rotationVector.z += 0.005f * sign * acceleration;
         axe.transform.rotation = rotationVector;
-        if (Mathf.Abs(axe.transform.rotation.z) >= 0.73f)
+        if (Mathf.Abs(axe.transform.rotation.z) >= 0.73f)//if axe angle = 87 degrees
         {
             sign *= -1;
             acceleration = 0.5f;

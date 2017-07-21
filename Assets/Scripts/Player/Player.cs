@@ -307,6 +307,7 @@ public class Player : Character
         else if (Jump && canJump && Input.GetKeyDown(KeyCode.Space))
         {
             DoubleJump = true;
+            SoundManager.PlaySound("double_jump");
             if (Mathf.Abs(myRigidbody.velocity.y) <= 0.01f)
             {
                 SoundManager.PlaySound("player_jump");

@@ -26,6 +26,7 @@ public class Egg : MonoBehaviour {
             gameObject.SetActive(false);
             Instantiate(eggParticle, this.gameObject.transform.position + new Vector3(0, 1f), Quaternion.identity);
             crashedEgg.gameObject.SetActive(true);
+            SoundManager.PlaySound("egg_crack");
         }
     }
 }

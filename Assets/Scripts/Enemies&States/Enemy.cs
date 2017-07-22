@@ -53,10 +53,14 @@ public class Enemy : MonoBehaviour
 
     public GameObject Target { get; set; }
 
+    private void Awake()
+    {
+        armature = GetComponent<UnityArmatureComponent>();
+    }
+
     // Use this for initialization
     public virtual void Start()
     {
-        armature = GetComponent<UnityArmatureComponent>();
 
         if (coinPackSize == 0)
         {

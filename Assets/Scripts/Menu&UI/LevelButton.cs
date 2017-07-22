@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class LevelButton : MonoBehaviour
 {
-    public Text levelText;
+    public string levelText;
     public int unlocked;
     [SerializeField]
     public GameObject[] stars;
     [SerializeField]
     GameObject Lock;
     RectTransform MyRectTransfrom;
+    bool isInteractable = false;
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("Level" + levelText.text + "_collects"))
+        SetButton();
+
+        if (PlayerPrefs.HasKey("Level" + levelText + "_collects"))
         {
-            ShowStars(PlayerPrefs.GetInt("Level" + levelText.text + "_collects"));
+            ShowStars(PlayerPrefs.GetInt("Level" + levelText + "_collects"));
         }
         if (unlocked == 0)
         {
@@ -27,6 +30,16 @@ public class LevelButton : MonoBehaviour
         {
             Lock.SetActive(false);
         }
+    }
+
+    void SetButton()
+    {
+        if (PlayerPrefs.GetInt("Level" + levelText) == 1)
+        {
+            unlocked = 1;
+            isInteractable = true;
+        }
+        GetComponent<Button>().interactable = isInteractable;
     }
 
     public void ShowStars(int value)

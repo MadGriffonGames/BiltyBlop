@@ -79,7 +79,7 @@ public class InventoryUI : MonoBehaviour
         {
             Inventory.Instance.UseHP();
             hpCount.text = Inventory.Instance.GetItemCount(Inventory.HEAL).ToString();
-
+            SoundManager.PlaySound("heart_collect");
             DisactivateInventory();
         }
     }
@@ -102,6 +102,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Inventory.Instance.GetItemCount(Inventory.AMMO) > 0 && Player.Instance.throwingIterator != Player.Instance.clipSize - 1)
         {
+            SoundManager.PlaySound("ammo_inventory");
             Inventory.Instance.UseAmmo();
             clipsCount.text = Inventory.Instance.GetItemCount(Inventory.AMMO).ToString();
 
@@ -113,6 +114,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS) > 0 && Player.Instance.immortalBonusNum == 0)
         {
+            SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.IMMORTAL_BONUS);
             immortalCount.text = Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS).ToString();
 
@@ -125,6 +127,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS) > 0 && Player.Instance.damageBonusNum == 0)
         {
+            SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.DAMAGE_BONUS);
             damageCount.text = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS).ToString();
 
@@ -136,6 +139,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS) > 0 && Player.Instance.speedBonusNum == 0)
         {
+            SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.SPEED_BONUS);
             speedCount.text = Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS).ToString();
 
@@ -147,6 +151,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Inventory.Instance.GetItemCount(Inventory.TIME_BONUS) > 0 && Player.Instance.timeBonusNum == 0)
         {
+            SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.TIME_BONUS);
             timeCount.text = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS).ToString();
 

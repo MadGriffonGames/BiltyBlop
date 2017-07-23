@@ -5,6 +5,17 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour {
 
+    private static ShopController instance;
+    public static ShopController Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = GameObject.FindObjectOfType<ShopController>();
+            return instance;
+        }
+    }
+
     public GameObject[] shops;
     [SerializeField]
     Button skinsButton;
@@ -13,18 +24,33 @@ public class ShopController : MonoBehaviour {
     [SerializeField]
     Button perksButton;
 
+    [SerializeField]
+    Text coinTxt;
+    [SerializeField]
+    Text crystalTxt;
+
     public string[] shopNames;
     private int activeShopNumber;
     private int shopsCount;
 
 
-    private void Start ()
+    private void Awake ()
     {
         perksButton.GetComponentInChildren<Text>().text = "PERKS";
         itemsButton.GetComponentInChildren<Text>().text = "ITEMS";
         skinsButton.GetComponentInChildren<Text>().text = "SKINS";
     }
 
+    private void Update()
+    {
+        UpdateMoneyValues(); // так, ибо почему-то пообращению к методу он не обновляет значенияж
+    }
+
+    public void UpdateMoneyValues()
+    {
+        coinTxt.text = PlayerPrefs.GetInt("Coins").ToString();
+        crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
+    }
 
     public void ActivateShop(int number)
     {

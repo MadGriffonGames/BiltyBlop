@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DragonBones;
 
-public class Yeti : RangeEnemy {
-
+public class Yeti : RangeEnemy
+{
     bool damaged = false;
 
     private IYetiState currentState;
@@ -26,13 +26,12 @@ public class Yeti : RangeEnemy {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
-    // Use this for initialization
-    public override void Start () {
+    public override void Start ()
+    {
         base.Start();
         ChangeState(new YetiIdleState());
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         if (!IsDead)
@@ -80,7 +79,6 @@ public class Yeti : RangeEnemy {
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.01f);
         damaged = false;
     }
 

@@ -123,6 +123,7 @@ public class MageFireball : MonoBehaviour
             this.gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.1f);
             if (isScaled)
                 this.gameObject.transform.localScale -= scaling;
+
             if (this.gameObject.transform.localScale.x <= 0.02f)
             {
                 isScaled = false;
@@ -132,6 +133,7 @@ public class MageFireball : MonoBehaviour
 
         if (this.gameObject.GetComponent<SpriteRenderer>().color.a <= 0.02f)
             visible = false;
+
         if (!visible)
         {
             timer = 0;
@@ -141,5 +143,6 @@ public class MageFireball : MonoBehaviour
             this.transform.position = startTransform.transform.position;
             this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         }
+        timer = 0;
     }
 }

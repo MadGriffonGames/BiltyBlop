@@ -18,7 +18,6 @@ public class PlayerIdleState : IPlayerState
 
     public void Execute()
     {
-        
         if (Player.Instance.Jump || !Player.Instance.OnGround)
         {
             Player.Instance.ChangeState(new PlayerJumpState());

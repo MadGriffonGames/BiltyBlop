@@ -53,10 +53,14 @@ public class Enemy : MonoBehaviour
 
     public GameObject Target { get; set; }
 
+    private void Awake()
+    {
+        armature = GetComponent<UnityArmatureComponent>();
+    }
+
     // Use this for initialization
     public virtual void Start()
     {
-        armature = GetComponent<UnityArmatureComponent>();
 
         if (coinPackSize == 0)
         {
@@ -68,7 +72,7 @@ public class Enemy : MonoBehaviour
         facingRight = false;
         enabled = false;
         armature.enabled = false;
-        armature.armature.cacheFrameRate = 50;
+        armature.armature.cacheFrameRate = 30;
 
     }
 

@@ -24,6 +24,12 @@ public class UnlockSkinWindow : MonoBehaviour {
     GameObject fade;
     [SerializeField]
     GameObject closeErrorWindowButton;
+    [SerializeField]
+    GameObject closeWindowButton;
+    [SerializeField]
+    GameObject windowFade;
+    [SerializeField]
+    GameObject skinSwipe;
 
     [SerializeField]
     Transform onebuttonTransform;
@@ -34,7 +40,7 @@ public class UnlockSkinWindow : MonoBehaviour {
 
     public void SetWindowWithSkinNumber(int skinNumber)
     {
-        
+        Debug.Log(skinNumber);   
         SkinPrefab skin = SkinManager.Instance.skinPrefabs[skinNumber].gameObject.GetComponent<SkinPrefab>();
         KidSkin.Instance.ChangeSkin(skinNumber);
         skinName.GetComponent<Text>().text = skin.shopName;
@@ -42,6 +48,7 @@ public class UnlockSkinWindow : MonoBehaviour {
         statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(skin.armorStat);
         if (skin.isLocked)
         {
+            ResetButtons();
             if (skin.coinCost == 0 && skin.crystalCost != 0)
             {
                 buyCrystalsButton.transform.localPosition = onebuttonTransform.localPosition;
@@ -64,7 +71,7 @@ public class UnlockSkinWindow : MonoBehaviour {
             }
             else if (skin.crystalCost == 0 && skin.coinCost == 0)
             {
-
+                // if free skin;
             }
             else
             {
@@ -87,31 +94,69 @@ public class UnlockSkinWindow : MonoBehaviour {
 
     public void CanBuySkinByCrystals (int skinNumber)
     {
-        if (SkinManager.Instance.BuySkinByCrystals(skinNumber))
+        if (SkinManager.Instance.skinPrefabs[skinNumber].GetComponent<SkinPrefab>().isLocked)
         {
-            // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА СКИНА
+            if (SkinManager.Instance.BuySkinByCrystals(skinNumber))
+            {
+                // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА СКИНА
+                HideButtons();
+                closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
+                closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSkinWindow());
+                ShowErrorWindow("SKIN UNLOCKED");
+            }
+            else
+            {
+                ShowErrorWindow("NOT ENOUGH CRYSTALS");
+            }
         }
         else
         {
-            fade.gameObject.SetActive(true);
-            closeErrorWindowButton.gameObject.SetActive(true);
-            errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "NOT ENOUGH CRYSTALS";
         }
+            
     }
     public void CanBuySkinByCoins(int skinNumber)
     {
-        if (SkinManager.Instance.BuySkinByCoins(skinNumber))
+        if (SkinManager.Instance.skinPrefabs[skinNumber].GetComponent<SkinPrefab>().isLocked)
         {
-            // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА СКИНА
+            if (SkinManager.Instance.BuySkinByCoins(skinNumber))
+            {
+                // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА СКИНА
+                HideButtons();
+                closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
+                closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSkinWindow());
+                ShowErrorWindow("SKIN UNLOCKED");
+            }
+            else
+            {
+                ShowErrorWindow("NOT ENOUGH COINS");
+            }
         }
         else
         {
-            fade.gameObject.SetActive(true);
-            closeErrorWindowButton.gameObject.SetActive(true);
-            errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "NOT ENOUGH CRYSTALS";
-        }
+        }        
+    }
+
+    public void CloseUnlockSkinWindow()
+    {
+        CloseErrorWindow();
+        skinSwipe.GetComponent<SkinSwipeMenu>().UpdateSkinCards();
+        windowFade.SetActive(false);
+        closeWindowButton.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
+    private void ShowErrorWindow(string text)
+    {
+        fade.gameObject.SetActive(true);
+        closeErrorWindowButton.gameObject.SetActive(true);
+        errorWindow.gameObject.SetActive(true);
+        errorWindow.GetComponentInChildren<Text>().text = text;
+    }
+
+    private void HideButtons()
+    {
+        buyCoinsButton.SetActive(false);
+        buyCrystalsButton.SetActive(false);
     }
 
     public void CloseErrorWindow()
@@ -123,7 +168,11 @@ public class UnlockSkinWindow : MonoBehaviour {
     private void ResetButtons()
     {
         buyCrystalsButton.gameObject.SetActive(true);
+        buyCrystalsButton.gameObject.GetComponentInChildren<Text>().text = "";
+
         buyCoinsButton.gameObject.SetActive(true);
+        buyCoinsButton.gameObject.GetComponentInChildren<Text>().text = "";
+
         buyCoinsButton.transform.localPosition = coinButtonTransform.localPosition;
         buyCrystalsButton.transform.localPosition = crystalButtonTransform.transform.localPosition;
     }

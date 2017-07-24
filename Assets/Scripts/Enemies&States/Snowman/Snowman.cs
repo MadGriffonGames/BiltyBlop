@@ -85,7 +85,6 @@ public class Snowman : MovingMeleeEnemy
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
 
-        armature.animation.timeScale = 1;
         Target = null;
         damaged = false;
         AttackCollider.enabled = false;
@@ -93,6 +92,7 @@ public class Snowman : MovingMeleeEnemy
         if (Health <= 0)
         {
             ChangeState(new SnowmanPatrolState());
+            armature.animation.timeScale = 1;
             Health = 2;
         }
 

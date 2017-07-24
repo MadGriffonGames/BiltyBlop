@@ -64,10 +64,6 @@ public class Inventory : MonoBehaviour
 
     public void BuyItem(string itemName, int itemCount, string moneyType, int price)
     {
-        Debug.Log("Before");
-        Debug.Log("Coins " + PlayerPrefs.GetInt("Coins"));
-        //Debug.Log("Crystals " + PlayerPrefs.GetInt("Crystals"));
-        //Debug.Log("Count " + itemName+COUNT + PlayerPrefs.GetInt(itemName + COUNT));
         if (CanAddItem(itemName, itemCount))
         {
             if (moneyType == "Coins")
@@ -87,15 +83,10 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        Debug.Log("After");
-        Debug.Log("Coins " + PlayerPrefs.GetInt("Coins"));
-        //Debug.Log("Crystals " + PlayerPrefs.GetInt("Crystals"));
-        //Debug.Log("Count " + PlayerPrefs.GetInt(HEAL + COUNT));
     }
 
     public bool CanAddItem(string itemName, int itemCount)
     {
-        Debug.Log(PlayerPrefs.GetInt(MAX + itemName));
         if (!PlayerPrefs.HasKey(itemName + COUNT))
         {
             PlayerPrefs.SetInt(itemName + COUNT, 0);
@@ -144,6 +135,11 @@ public class Inventory : MonoBehaviour
     public int GetItemCount(string itemName)
     {
         return boostersCount[itemName];
+    }
+
+    public int GetItemMaxCount(string itemName)
+    {
+        return PlayerPrefs.GetInt(MAX+itemName);
     }
 
     public void UpdateItemValue(string itemName)

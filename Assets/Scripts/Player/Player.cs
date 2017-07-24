@@ -61,6 +61,7 @@ public class Player : Character
     public GameObject secretIndication;
     public bool Jump { get; set; }
     public bool DoubleJump { get; set; }
+    public int jumpTaps = 0;
     public bool canJump;
     public bool Throw { get; set; }
     public bool takeHit = false;
@@ -120,8 +121,6 @@ public class Player : Character
         {
             Instantiate(timeControllerPrefab);
         }
-
-
 
         currentState = new PlayerIdleState();
 		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -184,6 +183,11 @@ public class Player : Character
             Flip(mobileInput);
 #endif
             OnGround = IsGrounded();
+
+            if (!Jump && OnGround)
+            {
+                jumpTaps = 0;
+            }
 
             if ((PlayerPrefs.GetInt("SoundsIsOn") == 0) | (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1)))
                 SoundManager.MakeSteps(false);
@@ -307,6 +311,7 @@ public class Player : Character
         else if (Jump && canJump && Input.GetKeyDown(KeyCode.Space))
         {
             DoubleJump = true;
+            SoundManager.PlaySound("double_jump");
             if (Mathf.Abs(myRigidbody.velocity.y) <= 0.01f)
             {
                 SoundManager.PlaySound("player_jump");
@@ -517,6 +522,14 @@ public class Player : Character
     public void ButtonJump()
 	{
 		Jump = true;
+
+        jumpTaps++;
+
+        if (Jump && canJump && jumpTaps == 2)
+        {
+            DoubleJump = true;
+            jumpTaps = 0;
+        }
 	}
 
     public void ButtonAttack()

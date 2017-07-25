@@ -58,6 +58,8 @@ public class TorchBird : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        this.gameObject.SetActive(false);
+        Destroy(this);
         myAnimator.enabled = false;
     }
 

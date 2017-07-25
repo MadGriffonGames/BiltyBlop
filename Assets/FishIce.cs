@@ -18,10 +18,13 @@ public class FishIce : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        this.gameObject.SetActive(false);
-        Instantiate(iceBreakParticle, this.gameObject.transform.position + new Vector3(0, 1f), Quaternion.identity);
-        SoundManager.PlaySound("ice_crack");
+        if (other.gameObject.CompareTag("Sword"))
+        {
+            this.gameObject.SetActive(false);
+            Instantiate(iceBreakParticle, this.gameObject.transform.position + new Vector3(0, 1f), Quaternion.identity);
+            SoundManager.PlaySound("ice_crack");
+        }
     }
 }

@@ -101,7 +101,6 @@ public class LevelMaker : MonoBehaviour {
 			GameObject newTile = Instantiate<GameObject>(tiles[selectedTile]) as GameObject;
 			newTile.transform.position = position;
             newTile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotation));
-            Debug.Log(rotation);
 			newTile.transform.SetParent(transform);
 			levelTiles.Add(newTile);
 		}

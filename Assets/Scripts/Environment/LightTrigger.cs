@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightTrigger : MonoBehaviour
 {
     Light myLight;
-    float darkIntencity = 0.55f;
+    float darkIntencity = 0.1f;
     float lightIntencity = 1.4f;
     bool lightUp = false;
     bool lightDown = false;

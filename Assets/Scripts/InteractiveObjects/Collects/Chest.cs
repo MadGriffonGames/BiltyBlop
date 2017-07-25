@@ -19,7 +19,7 @@ public class Chest : InteractiveObject
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isEmpty && other.transform.CompareTag("Sword") || other.transform.CompareTag("Throwing"))
+        if (!isEmpty && (other.transform.CompareTag("Sword") || other.transform.CompareTag("Throwing")))
         {
 			MyAnimator.SetTrigger ("open");
             SoundManager.PlaySound("chest open");

@@ -108,7 +108,7 @@ public class Hedgehog : MovingMeleeEnemy
         currentState.OnTriggerEnter2D(other);
     }
 
-    public void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {

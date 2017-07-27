@@ -31,7 +31,8 @@ public class LevelManager : MonoBehaviour
     private int groupIndex;
     public List<Level> levelList;
     public GameObject levelButton;
-    public Transform map;
+    [SerializeField]
+    public Transform[] maps;
     public LevelButton[] levelButtonsArray;
     Vector2 screenSize;
 
@@ -64,7 +65,6 @@ public class LevelManager : MonoBehaviour
             }
             button.unlocked = level.unlocked;
             button.GetComponent<Button>().interactable = level.isInteractable;
-            newButton.transform.SetParent(map, true);
         }
         SaveAll();
     }
@@ -93,15 +93,27 @@ public class LevelManager : MonoBehaviour
 
     public void Back()
     {
-        if (map.gameObject.activeInHierarchy) 
-		{
-            map.gameObject.SetActive (false);
-			actsSpacer.SetActive (true);
-		}
-        else 
-		{
+        bool flag = false;
+        int mapNum = 0;
+
+        for (int i = 0; i < maps.Length; i++)
+        {
+            if (maps[i].gameObject.activeInHierarchy)
+            {
+                flag = true;
+                mapNum = i;
+            }
+            
+        }
+        if (flag)
+        {
+            maps[mapNum].gameObject.SetActive(false);
+            actsSpacer.SetActive(true);
+        }
+        else
+        {
             lvlSelectCanvas.SetActive(false);
             mainMenuCanvas.SetActive(true);
-		}
+        }
     }
 }

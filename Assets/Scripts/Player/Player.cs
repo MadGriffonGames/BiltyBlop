@@ -476,6 +476,7 @@ public class Player : Character
     {
         if (!isRewinding && !IsDead)
         {
+            AppMetrica.Instance.ReportEvent("takinDamage");
             CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
             if (!immortal)
             {
@@ -559,6 +560,7 @@ public class Player : Character
 
     public IEnumerator ImmortalBonus(float duration)
     {
+        AppMetrica.Instance.ReportEvent("Using Immortal Bonus");
         immortalBonusNum++;
         immortal = true;
         yield return new WaitForSeconds(duration);
@@ -688,6 +690,7 @@ public class Player : Character
 
     public void InstantiateDeathParticles()
     {
+        AppMetrica.Instance.ReportEvent("Death");
         MakeFX.Instance.MakeDeath();
     }
 

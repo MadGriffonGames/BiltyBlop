@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DragonBones;
 
-public class IceMage : RangeEnemy {
-
-
+public class IceMage : RangeEnemy
+{
     public bool isTakingDamage = false;
     public bool isDead = false;
     bool visible = false;
@@ -20,14 +19,10 @@ public class IceMage : RangeEnemy {
     GameObject enemySight;
     [SerializeField]
     public GameObject deathPic;
-
-
     [SerializeField]
     GameObject crystall;
 
     Vector3 scaling = new Vector3(0.01f, 0.01f, 0);
-
-
 
     void Awake()
     {
@@ -35,7 +30,8 @@ public class IceMage : RangeEnemy {
     }
 
 
-    public override void Start () {
+    public override void Start ()
+    {
         deathPic.gameObject.SetActive(false);
         isTakingDamage = false;
         base.Start();
@@ -43,7 +39,6 @@ public class IceMage : RangeEnemy {
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!IsDead)
@@ -86,12 +81,10 @@ public class IceMage : RangeEnemy {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.4f, 0.5f);
         SpawnCoins(2, 3);
-        //Player.Instance.monstersKilled++;
         if (IsDead)
         {
             Player.Instance.monstersKilled++;
             isDead = true;
-            //Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
             SoundManager.PlaySound("crystal_break");
             GameManager.deadEnemies.Add(gameObject);
             ChangeState(new IceMageDeathState());
@@ -116,10 +109,12 @@ public class IceMage : RangeEnemy {
     {
         if (fireball.gameObject.activeInHierarchy)
         {
-            fireball.gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.15f);
+            fireball.gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.25f);
             if (isScaled)
+            {
                 fireball.gameObject.transform.localScale -= scaling;
-            if (fireball.gameObject.transform.localScale.x <= 0.05f)
+            }
+            if (fireball.gameObject.transform.localScale.x <= 0.05)
             {
                 isScaled = false;
                 fireball.gameObject.SetActive(false);

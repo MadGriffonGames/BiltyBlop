@@ -58,10 +58,32 @@ public class Hedgehog : MovingMeleeEnemy
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("hedgehog_death");
             Instantiate(spikeParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
-            Destroy(transform.parent.gameObject);
+            GameManager.deadEnemies.Add(gameObject);
+            gameObject.SetActive(false);
 
         }
         yield return null;
+    }
+
+    private void OnEnable()
+    {
+        Health = 2;
+        ChangeState(new HedgehogIdleState());
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        movementSpeed = 10;
+        SetHealthbar();
+
+    }
+
+    public void StartIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
+    }
+
+    public void StopIgnore()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
     }
 
     public override void OnTriggerEnter2D(Collider2D other)

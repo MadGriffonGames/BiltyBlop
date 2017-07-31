@@ -16,7 +16,7 @@ public class CameraEffect : MonoBehaviour
     {
         percentComplete = 1;
         position = GetComponent<Transform>();
-        blood = GameObject.FindGameObjectWithTag("Blood");
+        blood = UI.Instance.transform.Find("Blood").gameObject;
     }
 
     public static void Shake(float duration, float power)

@@ -203,60 +203,6 @@ public class Player : Character
         }
     }
 
-
-    void SetThrowing()
-    {
-        throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
-        clipSize = 5;
-        throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
-        ThrowingUI.Instance.SetThrowBar();
-        throwingClip = new GameObject[clipSize];
-        for (int i = 0; i < clipSize; i++)
-        {
-            throwingClip[i] = Instantiate(throwing);
-            //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
-            throwingClip[i].GetComponent<SpriteRenderer>().enabled = false;
-            throwingClip[i].GetComponent<Collider2D>().enabled = false;
-        }
-    }
-
-    public void ResetThrowing()
-    {
-        for (int i = 0; i < clipSize; i++)
-        {
-            throwingClip[i].GetComponent<Throwing>().speed = 14;
-        }
-        ThrowingUI.Instance.SetThrowBar();
-    }
-
-    public void SetRecording(Dictionary<int, PlayerTimeState> recording)
-    {
-        this.recording = new Dictionary<int, PlayerTimeState> (recording);
-    }
-
-    void PlayTimeState(PlayerTimeState playerTimeState)
-    {
-        this.gameObject.transform.position = playerTimeState.position;
-        if (currentState.GetType() != playerTimeState.animationState.GetType())
-        {
-            if (playerTimeState.animationState.GetType() == new PlayerRunState().GetType())
-            {
-                if (myArmature.armature.animation.lastAnimationName != "run")
-                {
-                    myArmature.armature.animation.FadeIn("run", -1, -1);
-                }
-            }
-            else
-            {
-                myArmature.armature.animation.Stop();
-                ChangeState(playerTimeState.animationState);
-            }
-        }
-        Vector3 localScale = transform.localScale;
-        localScale.x = playerTimeState.direction ? Mathf.Abs(transform.localScale.x) : -1 * Mathf.Abs(transform.localScale.x);
-        transform.localScale = localScale;
-    }
-
     public void ChangeState(IPlayerState newState)
     {
         if (currentState != null)
@@ -396,43 +342,6 @@ public class Player : Character
             SoundManager.PlaySound(sound2);
     }
 
-    public void ThrowWeapon()
-    {
-        if (!isRewinding)
-        {
-            StartCoroutine(ThrowWeaponDelay());
-        }
-    }
-
-    IEnumerator ThrowWeaponDelay()
-    {
-        if (throwingIterator >= 0)
-        {
-            yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
-
-            throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
-            throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
-            throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
-            SoundManager.PlaySound("kidarian_throw");
-
-            if (this.gameObject.transform.localScale.x > 0)
-            {
-                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(0.8f, 0.1f, -5);
-                throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
-                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
-            }
-            else
-            {
-                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-0.8f, 0.1f, -5);
-                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
-                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
-            }
-
-            --throwingIterator;
-            ThrowingUI.Instance.SetThrowBar();
-        }
-    }
-
     public void EnableAttackCollider()
     {
         if (!isRewinding)
@@ -517,7 +426,105 @@ public class Player : Character
     }
 
     /*
-    * Input hendlers
+     * Rewind time functions
+     */
+
+    public void SetRecording(Dictionary<int, PlayerTimeState> recording)
+    {
+        this.recording = new Dictionary<int, PlayerTimeState>(recording);
+    }
+
+    void PlayTimeState(PlayerTimeState playerTimeState)
+    {
+        this.gameObject.transform.position = playerTimeState.position;
+        if (currentState.GetType() != playerTimeState.animationState.GetType())
+        {
+            if (playerTimeState.animationState.GetType() == new PlayerRunState().GetType())
+            {
+                if (myArmature.armature.animation.lastAnimationName != "run")
+                {
+                    myArmature.armature.animation.FadeIn("run", -1, -1);
+                }
+            }
+            else
+            {
+                myArmature.armature.animation.Stop();
+                ChangeState(playerTimeState.animationState);
+            }
+        }
+        Vector3 localScale = transform.localScale;
+        localScale.x = playerTimeState.direction ? Mathf.Abs(transform.localScale.x) : -1 * Mathf.Abs(transform.localScale.x);
+        transform.localScale = localScale;
+    }
+
+    /*
+     * Throwing weapon functions
+     */
+
+    void SetThrowing()
+    {
+        throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
+        clipSize = 5;
+        throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
+        ThrowingUI.Instance.SetThrowBar();
+        throwingClip = new GameObject[clipSize];
+        for (int i = 0; i < clipSize; i++)
+        {
+            throwingClip[i] = Instantiate(throwing);
+            //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
+            throwingClip[i].GetComponent<SpriteRenderer>().enabled = false;
+            throwingClip[i].GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
+    public void ResetThrowing()
+    {
+        for (int i = 0; i < clipSize; i++)
+        {
+            throwingClip[i].GetComponent<Throwing>().speed = 14;
+        }
+        ThrowingUI.Instance.SetThrowBar();
+    }
+
+    public void ThrowWeapon()
+    {
+        if (!isRewinding)
+        {
+            StartCoroutine(ThrowWeaponDelay());
+        }
+    }
+
+    IEnumerator ThrowWeaponDelay()
+    {
+        if (throwingIterator >= 0)
+        {
+            yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
+
+            throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
+            throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
+            throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
+            SoundManager.PlaySound("kidarian_throw");
+
+            if (this.gameObject.transform.localScale.x > 0)
+            {
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
+                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
+            }
+            else
+            {
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
+                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
+            }
+
+            --throwingIterator;
+            ThrowingUI.Instance.SetThrowBar();
+        }
+    }
+
+    /*
+    * Mobile Input hendlers
     */
 
     public void ButtonJump()

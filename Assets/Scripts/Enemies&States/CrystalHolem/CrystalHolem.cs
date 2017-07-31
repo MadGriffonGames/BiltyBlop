@@ -78,8 +78,6 @@ public class CrystalHolem : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        
-
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
 
@@ -102,6 +100,10 @@ public class CrystalHolem : MovingMeleeEnemy
     private void OnCollisionEnter2D(Collision2D other)
     {
         currentState.OnCollisionEnter2D(other);
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);
+        }
     }
 
     public void EnableAttackCollider()

@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class PlayerRunState : IPlayerState
 {
+    bool isRuning = false;
+
     public void Enter(Player player)
     {
         player.myArmature.animation.FadeIn("run", -1, -1);
+
+        Player.Instance.jumpTaps = 0;//костыль, который скрывает багу с двойным прыжком
     }
 
     public void Execute()
     {
+        if (Player.Instance.isRewinding && !isRuning)
+        {
+            Player.Instance.myArmature.animation.FadeIn("run", -1, -1);
+            isRuning = true;
+        }
         if (Input.GetAxis("Horizontal") == 0 && Player.Instance.mobileInput == 0)
         {
             Player.Instance.ChangeState(new PlayerIdleState());
@@ -27,11 +36,19 @@ public class PlayerRunState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerAttackState());
         }
+        if (Player.Instance.Throw)
+        {
+            Player.Instance.ChangeState(new PlayerThrowState());
+        }
         if (Player.Instance.takeHit)
         {
             Player.Instance.ChangeState(new PlayerTakeHitState());
         }
+        
     }
 
-    public void Exit() { }
+    public void Exit()
+    {
+        isRuning = false;
+    }
 }

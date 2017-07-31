@@ -21,11 +21,22 @@ public class FollowCamera : MonoBehaviour
 
     void Start()
     {
+        
         target = GameObject.FindGameObjectWithTag("CameraTarget");
+        
         targetPos = transform.position;
         lastX = target.transform.position.x;
         lastY = target.transform.position.y;
 
+    }
+
+    void FixedUpdate()
+    {
+        CalculateOffsets();
+        if (Player.Instance.bossFight)
+            LerpToTargetWithoutOffsets();
+        else
+            LerpToTarget();
     }
 
     void CalculateOffsets()
@@ -61,11 +72,8 @@ public class FollowCamera : MonoBehaviour
         //offsetY = Vector3.Slerp(offsetY, new Vector3(offsetY.x, offset.y, offsetY.z), 0.1f);
     }
 
-
-    void FixedUpdate()
+    public void LerpToTarget()
     {
-        CalculateOffsets();
-
         // Camera position with Target's position.z
         Vector3 posNoZ = transform.position;
         posNoZ.z = target.transform.position.z;
@@ -92,7 +100,35 @@ public class FollowCamera : MonoBehaviour
             interpVelocityX = 25;
         }
         targetPos = transform.position + new Vector3(targetDirection.x * interpVelocityX * Time.deltaTime * Player.Instance.timeScaler, targetDirection.y * interpVelocityY * Time.deltaTime * Player.Instance.timeScaler, 0);
-        //Debug.Log(targetPos + " targetDir.x = " + targetDirection.x + " veloX = " + interpVelocityX);
+        transform.position = Vector2.Lerp(transform.position, targetPos, 0.05f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -20); // костыльный сет Z на позицмию камеры.
+    }
+
+    public void LerpToTargetWithoutOffsets()
+    {
+        // Camera position with Target's position.z
+        Vector3 posNoZ = transform.position;
+        posNoZ.z = target.transform.position.z;
+
+        Vector3 targetDirection = (target.transform.position - posNoZ);
+
+        if (target.transform.position.x <= xMax && target.transform.position.x >= xMin)
+        {
+            if (Player.Instance.myRigidbody.velocity.y <= -7f)
+                interpVelocityY = 150;
+            else if (Player.Instance.myRigidbody.velocity.y <= 13f)
+                interpVelocityY = 20;
+            else interpVelocityY = 150;
+            if (Player.Instance.myRigidbody.velocity.x != 0)
+                interpVelocityX = targetDirection.magnitude * Mathf.Abs(Player.Instance.myRigidbody.velocity.x) * 3f;
+            else interpVelocityX = targetDirection.magnitude * 12f;
+        }
+        else interpVelocityX = 0;
+        if (Player.Instance.gameObject.layer == platformLayer)
+        {
+            interpVelocityX = 25;
+        }
+        targetPos = transform.position + new Vector3(targetDirection.x * interpVelocityX * Time.deltaTime * Player.Instance.timeScaler, targetDirection.y * interpVelocityY * Time.deltaTime * Player.Instance.timeScaler, 0);
         transform.position = Vector2.Lerp(transform.position, targetPos, 0.05f);
         transform.position = new Vector3(transform.position.x, transform.position.y, -20); // костыльный сет Z на позицмию камеры.
     }

@@ -19,9 +19,12 @@ public class MovingPlatform : MonoBehaviour
 
 	void Start ()
     {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+
         posA = platformTransform.localPosition;
         posB = transformPosB.localPosition;
         nextPos = posB;
+
         MyRigidbody = GetComponent<Rigidbody2D>();
 	}
 

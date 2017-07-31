@@ -11,7 +11,10 @@ public class EvilFlowerGreen : RangeEnemy
     [SerializeField]
     GameObject leafParticle;
     [SerializeField]
-    GameObject acidFx;
+    public GameObject acidFx;
+    [SerializeField]
+    GameObject enemySight;
+
 
     void Awake()
     {
@@ -22,6 +25,7 @@ public class EvilFlowerGreen : RangeEnemy
     {
         base.Start();
         ChangeState(new EFGreenIdleState());
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     void Update()
@@ -55,11 +59,13 @@ public class EvilFlowerGreen : RangeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(1f, 1f), new Vector3(1, 1, 1));
         if (IsDead)
         {
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
-			SoundManager.PlaySound ("green flower");
+            SpawnCoins(1, 2);
+            SoundManager.PlaySound ("green flower");
             GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
         }
@@ -82,30 +88,11 @@ public class EvilFlowerGreen : RangeEnemy
 
     private void OnEnable()
     {
+        ResetCoinPack();
+
         Health = 1;
         Target = null;
         ChangeState(new EFGreenIdleState());
-    }
-
-    public void AnimIdle()
-    {
-        armature.animation.timeScale = 1.2f;
-        armature.animation.Play("IDLE");
-
-    }
-
-    public void AnimAttack()
-    {
-        SoundManager.PlaySound("spit");
-        armature.animation.timeScale = 1.5f;
-        ThrowSeed();
-        armature.animation.Play("ATTACK");
-        acidFx.SetActive(true);
-    }
-
-    public void AnimPreparation()
-    {
-        armature.animation.timeScale = 2f;
-        armature.animation.Play("PREPARATION");
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 }

@@ -51,18 +51,18 @@ public class RuneStone : InteractiveObject
 
     public void SaveGame()
     {
-        GameManager.levelName = nextLvl;
+        GameManager.nextLevelName = nextLvl;
         PlayerPrefs.SetInt("Coins", GameManager.collectedCoins);
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
         {
-            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.collectables)
+            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.stars)
             {
-                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.collectables);
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
             }
         }
         else
         {
-            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.collectables);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
         }
         PlayerPrefs.SetInt(nextLvl, 1);
     }

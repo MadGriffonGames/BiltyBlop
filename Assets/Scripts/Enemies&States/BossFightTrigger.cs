@@ -13,16 +13,18 @@ public class BossFightTrigger : MonoBehaviour
     [SerializeField]
     Transform bossCameraTransform;
 
-    float bossCameraSize = 9;
+    public GameObject target;
+
+    static float bossCameraSize = 8.5f;
     bool zoomOut = false;
 
     private void Update()
     {
-        if (zoomOut && mainCamera.orthographicSize < 9)
+        if (zoomOut && mainCamera.orthographicSize < bossCameraSize)
         {
-            mainCamera.orthographicSize += 0.01f;
+            mainCamera.orthographicSize += 0.02f;
         }
-        else if (mainCamera.orthographicSize > 9)
+        else if (mainCamera.orthographicSize > bossCameraSize)
         {
             enabled = false;
         }
@@ -34,7 +36,8 @@ public class BossFightTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             SoundManager.PlayMusic("boss drum", true);
-            cameraTransform.position = bossCameraTransform.position;
+            Player.Instance.ChangeCameraTarget(bossCameraTransform.gameObject, new Vector3 (0,0,0));
+            
             Player.Instance.bossFight = true;
             zoomOut = true;
             boss.SetActive(true);

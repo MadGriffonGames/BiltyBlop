@@ -11,8 +11,9 @@ public class FallTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            SoundManager.PlaySound("water splash");
             StartCoroutine(Player.Instance.TakeDamage());
-            Player.Instance.transform.position = spawnPoint.position;
+            Player.Instance.transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, -4);
         }
     }
 }

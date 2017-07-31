@@ -5,13 +5,6 @@ using DragonBones;
 
 public class Enemy : MonoBehaviour
 {
-    public UnityArmatureComponent armature;
-
-    public GameObject Target { get; set; }
-
-    [SerializeField]
-    protected GameObject[] healthbar;
-
     public bool IsDead
     {
         get
@@ -19,14 +12,6 @@ public class Enemy : MonoBehaviour
             return health <= 0;
         }
     }
-
-
-    public bool TakingDamage { get; set; }
-
-    public Animator MyAniamtor { get; private set; }
-
-    [SerializeField]
-    protected int health;
 
     public int Health
     {
@@ -41,24 +26,54 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public UnityArmatureComponent armature;
+
+    [SerializeField]
+    protected GameObject[] healthbar;
+
+    [SerializeField]
+    protected int health;
+
     [SerializeField]
     public List<string> damageSources;
+
+    [SerializeField]
+    public int coinPackSize;
+
+    [SerializeField]
+    public GameObject coinPack;
+
+    GameObject[] coins;
 
     public bool facingRight;//check direction(true if we look right)
 
     public bool Attack { get; set; }
 
+    public bool TakingDamage { get; set; }
+
+    public GameObject Target { get; set; }
+
+    private void Awake()
+    {
+        armature = GetComponent<UnityArmatureComponent>();
+    }
+
     // Use this for initialization
     public virtual void Start()
     {
-        MyAniamtor = GetComponent<Animator>();
-        armature = GetComponent<UnityArmatureComponent>();
+
+        if (coinPackSize == 0)
+        {
+            Debug.Log("WARNING: You don't assign size of coinPack in " + gameObject.name);
+        }
+
         healthbar[Health - 1].SetActive(true);
+        
         facingRight = false;
         enabled = false;
-        MyAniamtor.enabled = false;
         armature.enabled = false;
-        armature.armature.cacheFrameRate = 55;
+        armature.armature.cacheFrameRate = 30;
+
     }
 
     public virtual IEnumerator TakeDamage()
@@ -92,22 +107,48 @@ public class Enemy : MonoBehaviour
     private void OnBecameVisible()
     {
         enabled = true;
-        MyAniamtor.enabled = true;
         armature.enabled = true;
     }
 
     private void OnBecameInvisible()
     {
         enabled = false;
-        MyAniamtor.enabled = false;
         armature.enabled = false;
+    }
+
+    public void ResetCoinPack()
+    {
+        coins = new GameObject[coinPackSize];
+        if (coinPackSize != 0)
+        {
+            for (int i = 0; i < coinPack.transform.childCount; i++)
+            {
+                coins[i] = coinPack.transform.GetChild(i).gameObject;
+            }
+        }
     }
 
     public void ForceActivate()
     {
         enabled = true;
-        MyAniamtor.enabled = true;
         armature.enabled = true;
+    }
+
+    public void SpawnCoins(int min, int max)
+    {
+        if (coinPackSize != 0)
+        {
+            int spawnCount = UnityEngine.Random.Range(min, max);
+            spawnCount = coinPackSize > spawnCount ? spawnCount : coinPackSize;
+            coinPackSize -= spawnCount;
+            for (int i = 0; i < spawnCount; i++)
+            {
+                coins[i].SetActive(true);
+                coins[i].GetComponent<Rigidbody2D>().velocity = new Vector2(UnityEngine.Random.Range(-2f, 2f), 3.5f);
+                coins[i].transform.parent = null;
+                coins[i].transform.localScale = new Vector2(0.78f, 0.78f);
+            }
+        }
     }
 
     public IEnumerator AnimationDelay()

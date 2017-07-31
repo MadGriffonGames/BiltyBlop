@@ -15,16 +15,19 @@ public class Bat : MovingMeleeEnemy
     public UnityEngine.Transform[] pathPoints;
     public Vector3[] pathCordinates;
     public int nextPosNum = 0;
+
     
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
+        ResetCoinPack();
     }
 
     public override void Start()
     {
         base.Start();
+        armature.animation.timeScale = 2f;
         ChangeState(new BatPatrolState());
         pathCordinates = new Vector3[pathPoints.Length];
         int i = 0;
@@ -61,11 +64,13 @@ public class Bat : MovingMeleeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(0.7f, 0.7f, 1));
         if (IsDead)
         {
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("bat_death");
             Instantiate(batParticles, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
+            SpawnCoins(1, 2);
             GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
 
@@ -75,12 +80,11 @@ public class Bat : MovingMeleeEnemy
 
     private void OnEnable()
     {
-        Health = 1;
-    }
-
-    public void AnimFly()
-    {
-        armature.animation.timeScale = 2f;
-        armature.animation.Play("FLY");
+        
+        if (health <= 0)
+        {
+            ResetCoinPack();
+            Health = 1;
+        }
     }
 }

@@ -18,18 +18,21 @@ public class PlayerIdleState : IPlayerState
 
     public void Execute()
     {
-        
         if (Player.Instance.Jump || !Player.Instance.OnGround)
         {
             Player.Instance.ChangeState(new PlayerJumpState());
         }
-        if (Player.Instance.OnGround && (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Player.Instance.mobileInput) > 0))
+        if (Player.Instance.OnGround && Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Player.Instance.mobileInput) > 0)
         {
             Player.Instance.ChangeState(new PlayerRunState());
         }
         if (Player.Instance.Attack)
         {
             Player.Instance.ChangeState(new PlayerAttackState());
+        }
+        if (Player.Instance.Throw)
+        {
+            Player.Instance.ChangeState(new PlayerThrowState());
         }
         if (Player.Instance.takeHit)
         {

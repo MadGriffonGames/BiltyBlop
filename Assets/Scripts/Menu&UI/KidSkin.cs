@@ -1,29 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using DragonBones;
 using UnityEngine;
 
 public class KidSkin : MonoBehaviour
 {
-    UnityArmatureComponent myArmature;
-
-    void Start ()
+    private static KidSkin instance;
+    public static KidSkin Instance
     {
-        myArmature = GetComponent<UnityArmatureComponent>();
-        myArmature._onClear();
-        UnityFactory.factory.BuildArmatureComponent(PlayerPrefs.GetString("Skin", "Classic") , null, null, null, gameObject);
-        myArmature.sortingLayerName = myArmature.sortingLayerName;
-        myArmature.sortingOrder = myArmature.sortingOrder;
-        myArmature.animation.Play("victory_idle");
+        get
+        {
+            if (instance == null)
+                instance = GameObject.FindObjectOfType<KidSkin>();
+            return instance;
+        }
     }
 
-    public void ChangeSkin(string skinName)
+    UnityArmatureComponent myArmature;
+    private GameObject skinPrefab;
+
+    public void ChangeSkin(int skinNumber)
     {
-        myArmature._onClear();
-        UnityFactory.factory.BuildArmatureComponent(skinName, null, null, null, gameObject);
-        myArmature.sortingLayerName = myArmature.sortingLayerName;
-        myArmature.sortingOrder = myArmature.sortingOrder;
-        PlayerPrefs.SetString("Skin", skinName);
+        myArmature = GetComponentInChildren<UnityArmatureComponent>();
+        Destroy(myArmature.gameObject);
+        skinPrefab = Instantiate(SkinManager.Instance.skinPrefabs[skinNumber], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+        skinPrefab.gameObject.transform.localScale = new Vector3(30, 30, 30);
+        myArmature = GetComponentInChildren<UnityArmatureComponent>();
         myArmature.animation.Play("victory_idle");
     }
 

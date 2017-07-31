@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DragonBones;
 using System;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,12 @@ public class Player : Character
 
     [SerializeField]
     private GameObject grave;
+
+    GameObject throwing;
+    public GameObject[] throwingClip;
+    public int clipSize;
+    public int throwingIterator;
+
     public Rigidbody2D myRigidbody;
     public MeshRenderer[] meshRenderer;
     [SerializeField]
@@ -26,7 +33,7 @@ public class Player : Character
     [SerializeField]
     GameObject shadow;
     public bool bossFight = false;
-    IPlayerState currentState;
+    public IPlayerState currentState;
 
     /*
      * Game Managment vars
@@ -37,17 +44,26 @@ public class Player : Character
     public int startCoinCount;
     public int lvlCoins;
     public int monstersKilled;
-    public int collectables;
+    public int stars;
     public float maxHealth;
+    Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
+    public bool isRewinding = false;
+    public int freeCheckpoints;
 
     /*
      * Action vars
      */
+    const float MOVEMENT_SPEED = 8;
+    const int JUMP_FORCE = 700;
     [SerializeField]
     private float jumpForce;
     [SerializeField]
     public GameObject secretIndication;
     public bool Jump { get; set; }
+    public bool DoubleJump { get; set; }
+    public int jumpTaps = 0;
+    public bool canJump;
+    public bool Throw { get; set; }
     public bool takeHit = false;
     public float mobileInput = 0;
     private float playerAxis = 0;
@@ -75,24 +91,39 @@ public class Player : Character
     private LayerMask whatIsGround;
     [SerializeField]
     public bool OnGround { get; set; }
+    [SerializeField]
+    public GameObject timeControllerPrefab;
+    [SerializeField]
+    GameObject hitFX;
 
     /*
      * Bonus vars
      */
-    int speedBonusNum = 0;
-    int immortalBonusNum = 0;
-    int damageBonusNum = 0;
-    int jumpBonusNum = 0;
-    int timeBonusNum = 0;
+    public int speedBonusNum = 0;
+    public int immortalBonusNum = 0;
+    public int damageBonusNum = 0;
+    public int jumpBonusNum = 0;
+    public int timeBonusNum = 0;
     public float timeScaler = 1;
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
 
+    private void OnEnable()
+    {
+        SetThrowing();
+    }
+
     public override void Start () 
 	{
         base.Start();
+
+        if (timeControllerPrefab != null)
+        {
+            Instantiate(timeControllerPrefab);
+        }
+
         currentState = new PlayerIdleState();
-		meshRenderer = GetComponentsInChildren<MeshRenderer>();
+		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
         myRigidbody = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
         GotKey = false;
@@ -100,9 +131,11 @@ public class Player : Character
         lightIntencityCP = FindObjectOfType<Light>().intensity;
         startCoinCount = GameManager.CollectedCoins;
         monstersKilled = 0;
-        collectables = 0;
+        stars = 0;
         lvlCoins = 0;
+        freeCheckpoints = 3;
         maxHealth = health;
+        HealthUI.Instance.SetHealthbar();
     }
 
 	void Update()
@@ -151,10 +184,22 @@ public class Player : Character
 #endif
             OnGround = IsGrounded();
 
+            if (!Jump && OnGround)
+            {
+                jumpTaps = 0;
+            }
+
             if ((PlayerPrefs.GetInt("SoundsIsOn") == 0) | (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1)))
                 SoundManager.MakeSteps(false);
             else if ((PlayerPrefs.GetInt("SoundsIsOn") == 1) | (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround)))
                 SoundManager.MakeSteps(true);
+        }
+        if (isRewinding)
+        {
+            if (recording.ContainsKey(TimeController.internalTime))
+            {
+                PlayTimeState(recording[TimeController.internalTime]);
+            }
         }
     }
 
@@ -176,23 +221,32 @@ public class Player : Character
         }
 		if (OnGround) 
 		{
-            if(!Attack)
-                myRigidbody.velocity = new Vector2 (horizontal * movementSpeed * timeScaler, myRigidbody.velocity.y);
-            else
-                myRigidbody.velocity = new Vector2(horizontal * movementSpeed * 0.85f * timeScalerMove, myRigidbody.velocity.y);
+            canJump = true;
+
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
         }
         else
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
         if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
         {
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
-            myRigidbody.velocity = new Vector2(0,0);
+            myRigidbody.velocity = new Vector2(0, 0);
+        }
+        else if (!OnGround && DoubleJump && canJump && myRigidbody.velocity.y < 6.5f)
+        {
+            if (myRigidbody.velocity.y < 0)
+            {
+                myRigidbody.velocity = new Vector2(0, 0);
+            }
+            myRigidbody.AddForce(new Vector2(0, (jumpForce * 0.45f) * timeScalerJump));
+            canJump = false;
+            DoubleJump = false;
         }
 	}
 
 	private void HandleInput()
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
+		if (!Jump && Input.GetKeyDown (KeyCode.Space)) 
 		{
 			Jump = true;
 			if (Mathf.Abs (myRigidbody.velocity.y) <= 0.01f)
@@ -200,19 +254,34 @@ public class Player : Character
 				SoundManager.PlaySound ("player_jump");
 			}
 		}
-		
-		if (Input.GetKeyDown (KeyCode.LeftControl)) 
+        else if (Jump && canJump && Input.GetKeyDown(KeyCode.Space))
+        {
+            DoubleJump = true;
+            SoundManager.PlaySound("double_jump");
+            if (Mathf.Abs(myRigidbody.velocity.y) <= 0.01f)
+            {
+                SoundManager.PlaySound("player_jump");
+            }
+        }
+
+        if (Input.GetKeyDown (KeyCode.LeftControl)) 
 		{
             Attack = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            Throw = true;
         }
 	}
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
         base.OnTriggerEnter2D(other);
-        if (other.CompareTag("DeathTrigger"))
+        
+        if (other.gameObject.CompareTag("DeathTrigger"))
         {
-            health -= health;
+            health -= health - 1;
             if (immortal)
             {
                 ParticleSystem tmp = GetComponentInChildren<ParticleSystem>();
@@ -237,10 +306,6 @@ public class Player : Character
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && myRigidbody.velocity.y != 0)
         {
             MakeFX.Instance.MakeDust();
-        }
-        if (other.transform.CompareTag("SlidingSurface"))
-        {
-
         }
     }
 
@@ -279,13 +344,15 @@ public class Player : Character
 
     public void EnableAttackCollider()
     {
-        StartCoroutine(AttackColliderDelay());
-        StartCoroutine(KidHeadUI.Instance.ShowEmotion("angry"));
+        if (!isRewinding)
+        {
+            StartCoroutine(AttackColliderDelay());
+        }
     }
 
     IEnumerator AttackColliderDelay()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
         AttackCollider.enabled = true;
     }
 
@@ -316,49 +383,161 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-        CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
-        StartCoroutine(KidHeadUI.Instance.ShowEmotion("sad"));
-        if (!immortal)
+        if (!isRewinding && !IsDead)
         {
-            CameraEffect.Shake(0.5f, 0.4f);
-            health -= 1;
-            HealthUI.Instance.SetHealthbar();
-            if (!IsDead)
+            AppMetrica.Instance.ReportEvent("takinDamage");
+            CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
+            if (!immortal)
             {
-                takeHit = true;
-
-                if (IsFalling || !OnGround)
-                {
-                    Jump = false;
-                }
-                camEffect.ShowBlood(0.5f);
-                System.Random soundFlag = new System.Random();
-                if (soundFlag.Next(0, 2) == 0)
-                    SoundManager.PlaySound("player_damage1");
+                if (bossFight)
+                    CameraEffect.Shake(0.5f, 0.4f);
                 else
-                    SoundManager.PlaySound("player_damage2");
-                immortal = true;
-                StartCoroutine(IndicateImmortal());
-                yield return new WaitForSeconds(immortalTime);
-                immortal = false;
+                    CameraEffect.Shake(0.5f, 0.4f);
+                health -= 1;
+                HealthUI.Instance.SetHealthbar();
+                if (!IsDead)
+                {
+                    takeHit = true;
+
+                    if (IsFalling || !OnGround)
+                    {
+                        Jump = false;
+                    }
+                    camEffect.ShowBlood(0.5f);
+                    System.Random soundFlag = new System.Random();
+                    if (soundFlag.Next(0, 2) == 0)
+                        SoundManager.PlaySound("player_damage1");
+                    else
+                        SoundManager.PlaySound("player_damage2");
+                    immortal = true;
+                    StartCoroutine(IndicateImmortal());
+                    yield return new WaitForSeconds(immortalTime);
+                    immortal = false;
+                }
+                else
+                {
+                    ChangeState(new PlayerDeathState());
+                    myRigidbody.velocity = Vector2.zero;
+                    UI.Instance.timeRewindUI.SetActive(true);
+                }
+                yield return null;
             }
-            else
-            {
-                ChangeState(new PlayerDeathState());
-                myRigidbody.velocity = Vector2.zero;
-                UI.Instance.DeathUI.SetActive(true);
-            }
-            yield return null;
         }
     }
 
     /*
-    * Input hendlers
+     * Rewind time functions
+     */
+
+    public void SetRecording(Dictionary<int, PlayerTimeState> recording)
+    {
+        this.recording = new Dictionary<int, PlayerTimeState>(recording);
+    }
+
+    void PlayTimeState(PlayerTimeState playerTimeState)
+    {
+        this.gameObject.transform.position = playerTimeState.position;
+        if (currentState.GetType() != playerTimeState.animationState.GetType())
+        {
+            if (playerTimeState.animationState.GetType() == new PlayerRunState().GetType())
+            {
+                if (myArmature.armature.animation.lastAnimationName != "run")
+                {
+                    myArmature.armature.animation.FadeIn("run", -1, -1);
+                }
+            }
+            else
+            {
+                myArmature.armature.animation.Stop();
+                ChangeState(playerTimeState.animationState);
+            }
+        }
+        Vector3 localScale = transform.localScale;
+        localScale.x = playerTimeState.direction ? Mathf.Abs(transform.localScale.x) : -1 * Mathf.Abs(transform.localScale.x);
+        transform.localScale = localScale;
+    }
+
+    /*
+     * Throwing weapon functions
+     */
+
+    void SetThrowing()
+    {
+        throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
+        clipSize = 5;
+        throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
+        ThrowingUI.Instance.SetThrowBar();
+        throwingClip = new GameObject[clipSize];
+        for (int i = 0; i < clipSize; i++)
+        {
+            throwingClip[i] = Instantiate(throwing);
+            //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
+            throwingClip[i].GetComponent<SpriteRenderer>().enabled = false;
+            throwingClip[i].GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
+    public void ResetThrowing()
+    {
+        for (int i = 0; i < clipSize; i++)
+        {
+            throwingClip[i].GetComponent<Throwing>().speed = 14;
+        }
+        ThrowingUI.Instance.SetThrowBar();
+    }
+
+    public void ThrowWeapon()
+    {
+        if (!isRewinding)
+        {
+            StartCoroutine(ThrowWeaponDelay());
+        }
+    }
+
+    IEnumerator ThrowWeaponDelay()
+    {
+        if (throwingIterator >= 0)
+        {
+            yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
+
+            throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
+            throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
+            throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
+            SoundManager.PlaySound("kidarian_throw");
+
+            if (this.gameObject.transform.localScale.x > 0)
+            {
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
+                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
+            }
+            else
+            {
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
+                throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
+            }
+
+            --throwingIterator;
+            ThrowingUI.Instance.SetThrowBar();
+        }
+    }
+
+    /*
+    * Mobile Input hendlers
     */
 
     public void ButtonJump()
 	{
 		Jump = true;
+
+        jumpTaps++;
+
+        if (Jump && canJump && jumpTaps == 2)
+        {
+            DoubleJump = true;
+            jumpTaps = 0;
+        }
 	}
 
     public void ButtonAttack()
@@ -369,8 +548,12 @@ public class Player : Character
 	public void ButtonMove(float input)
 	{
         playerAxis = input;
-		
 	}
+
+    public void ButtonThrow()
+    {
+        Throw = true;
+    }
 
     /*
      * Bonus functions
@@ -384,6 +567,7 @@ public class Player : Character
 
     public IEnumerator ImmortalBonus(float duration)
     {
+        AppMetrica.Instance.ReportEvent("Using Immortal Bonus");
         immortalBonusNum++;
         immortal = true;
         yield return new WaitForSeconds(duration);
@@ -444,7 +628,7 @@ public class Player : Character
         timeScalerMove = 0.7f;
         Camera cam = Camera.main;
         CameraEffect cef = cam.GetComponent<CameraEffect>();
-        cef.StartBlur();
+        cef.StartBlur(0.35f);
         yield return new WaitForSeconds(duration);
         speedBonusNum--;
 
@@ -501,8 +685,8 @@ public class Player : Character
         myRigidbody.gravityScale = 3;
         immortal = false;
         damage = 1;
-        movementSpeed = 7;
-        jumpForce = 700;
+        movementSpeed = MOVEMENT_SPEED;
+        jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
         Time.fixedDeltaTime = 0.02000000f;
     }
@@ -513,15 +697,13 @@ public class Player : Character
 
     public void InstantiateDeathParticles()
     {
+        AppMetrica.Instance.ReportEvent("Death");
         MakeFX.Instance.MakeDeath();
     }
 
     public void InstantiateGrave()
     {
         Instantiate(grave, new Vector3(transform.position.x, transform.position.y + 0.19f, transform.position.z + 4.5f), Quaternion.identity);
-        myRigidbody.bodyType = RigidbodyType2D.Static;
-        GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     public void PlayerRevive()
@@ -529,9 +711,9 @@ public class Player : Character
         myRigidbody.bodyType = RigidbodyType2D.Dynamic;
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;
-        foreach (MeshRenderer sprite in meshRenderer)
+        foreach (MeshRenderer mesh in meshRenderer)
         {
-            sprite.enabled = true;
+            mesh.enabled = true;
         }
     }
 
@@ -539,5 +721,11 @@ public class Player : Character
     {
         MakeFX.Instance.MakeHeal();
     }
+
+    public void ChangeCameraTarget(GameObject targetObject,Vector3 localPosition)
+    {
+        target.transform.SetParent(targetObject.gameObject.transform);
+        target.transform.localPosition = localPosition;
+    } 
 }
 

@@ -23,7 +23,6 @@ public class BatIdleState : IBatState
 
     private void Idle()
     {
-        enemy.MyAniamtor.SetFloat("speed", 0);
 
         idleTimer += Time.deltaTime;
 

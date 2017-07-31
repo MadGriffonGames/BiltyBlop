@@ -5,23 +5,29 @@ using UnityEngine;
 public class EFGreenRangeState : IEFGreenState {
 
     private EvilFlowerGreen enemy;
+    float attackTime;
 
     public void Enter(EvilFlowerGreen enemy)
     {
         this.enemy = enemy;
+        enemy.armature.animation.timeScale = 2f;
+        enemy.armature.animation.FadeIn("PREPARATION", -1, 1);
+
     }
 
     public void Execute()
     {
-        if (enemy.Target != null)
+        if ((enemy.armature.animation.lastAnimationName == ("PREPARATION") || enemy.armature.animation.lastAnimationName == "IDLE") && enemy.armature.animation.isCompleted)
         {
-            if (enemy.InShootingRange)
-                enemy.MyAniamtor.SetTrigger("attack");
+            SoundManager.PlaySound("spit");
+            enemy.armature.animation.timeScale = 1.5f;
+            attackTime += Time.deltaTime;
+            enemy.armature.animation.FadeIn("ATTACK", -1, 1);
+            enemy.ThrowSeed();
+            enemy.acidFx.SetActive(true);
         }
-        else
-        {
-            enemy.ChangeState(new EFGreenIdleState());
-        }
+        if ((enemy.armature.animation.lastAnimationName == ("ATTACK")) && enemy.armature.animation.isCompleted)
+            enemy.ChangeState(new EFGreenIdleState());           
     }
 
     public void Exit()

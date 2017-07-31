@@ -9,15 +9,21 @@ public class EvilFlower : MeleeEnemy
     [SerializeField]
     private GameObject leafParticle;
 
+    [SerializeField]
+    GameObject enemySight;
+
+
     void Awake()
     {
 		armature = GetComponent<UnityArmatureComponent> ();
+        ResetCoinPack();
     }
 
     public override void Start()
     {
         base.Start();
         ChangeState(new EvilFlowerIdleState());
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     void Update()
@@ -56,9 +62,11 @@ public class EvilFlower : MeleeEnemy
     {
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
-        if (IsDead)
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
+        if (IsDead) 
         {
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
+            SpawnCoins(1, 2);
 			SoundManager.PlaySound ("flower_death");
             GameManager.deadEnemies.Add(gameObject);
             gameObject.SetActive(false);
@@ -66,33 +74,16 @@ public class EvilFlower : MeleeEnemy
         yield return null;
     }
 
-    
-
-    public void AnimIdle()
-	{
-        armature.animation.timeScale = 1f;
-        armature.animation.Play ("IDLE");
-	}
-
-	public void AnimAttack()
-	{
-		armature.animation.timeScale = 1.5f;
-		armature.animation.Play ("ATTACK");
-        SoundManager.PlaySound("bite");
-
-    }
-
-    public void AnimPreparation()
-    {
-        armature.animation.timeScale = 2f;
-        
-        armature.animation.Play("PREPARATION");
-    }
-
     private void OnEnable()
     {
-        Health = 1;
+        if (Health <= 0)
+        {
+            ResetCoinPack();
+            Health = 1;
+        }
         Target = null;
         ChangeState(new EvilFlowerIdleState());
+        attackCollider.enabled = false;
+        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 }

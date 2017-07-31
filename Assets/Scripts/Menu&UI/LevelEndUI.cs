@@ -15,29 +15,72 @@ public class LevelEndUI : MonoBehaviour
     GameObject fade;
     [SerializeField]
     GameObject controlsUI;
-    
+    [SerializeField]
+    GameObject pauseUI;
 
     void Start ()
     {
         controlsUI.SetActive(false);
+        pauseUI.SetActive(false);
+
         SoundManager.PlayMusic("victory sound", false);
         fade.SetActive(true);
 
         coinsCollected = GameManager.lvlCollectedCoins;
-        coinsText.text = (" x" + coinsCollected);
-        StartCoroutine( ShowStars(Player.Instance.collectables));
+        coinsText.text = "" + coinsCollected;
+        StartCoroutine(ShowStars(Player.Instance.stars));
+    }
+
+    private void Update()
+    {
+        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
+        {
+            AdsManager.Instance.isInterstitialClosed = false;
+            SceneManager.LoadScene("Loading");
+        }
+        
     }
 
     public void Menu()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 
     public void Continue()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("Loading");
+
+#if UNITY_EDITOR
+        AdsManager.Instance.isInterstitialClosed = true;
+        AdsManager.Instance.fromShowfunction = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#endif
+
+    }
+
+    public void Restart()
+    {
+
+#if UNITY_EDITOR
+        AdsManager.Instance.isInterstitialClosed = true;
+        AdsManager.Instance.fromShowfunction = true;
+
+#elif UNITY_ANDROID
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#elif UNITY_IOS
+        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+
+#endif
+
+
+        GameManager.collectedCoins = Player.Instance.startCoinCount;
+        GameManager.nextLevelName = SceneManager.GetActiveScene().name;
     }
 
     public IEnumerator ShowStars(int value)

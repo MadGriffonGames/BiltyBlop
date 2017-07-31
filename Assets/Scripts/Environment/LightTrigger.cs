@@ -5,8 +5,8 @@ using UnityEngine;
 public class LightTrigger : MonoBehaviour
 {
     Light myLight;
-    float darkIntencity = 0.55f;
-    float lightIntencity = 1.4f;
+    const float DARK_INTENCITY = 0.3f;
+    const float LIGHT_INTENCITY = 1.4f;
     bool lightUp = false;
     bool lightDown = false;
 
@@ -41,20 +41,20 @@ public class LightTrigger : MonoBehaviour
             {
                 if (leaved_x >= extent_x + GetComponent<Collider2D>().bounds.center.x)
                 {
-                    if (myLight.intensity == darkIntencity)
+                    if (myLight.intensity == DARK_INTENCITY)
                         lightUp = true;
                 }
-                else if (myLight.intensity == lightIntencity)
+                else if (myLight.intensity == LIGHT_INTENCITY)
                     lightDown = true;
             }
             else
             {
                 if (leaved_x >= extent_x + GetComponent<Collider2D>().bounds.center.x)
                 {
-                    if (myLight.intensity == lightIntencity)
+                    if (myLight.intensity == LIGHT_INTENCITY)
                         lightDown = true;
                 }
-                else if (myLight.intensity == darkIntencity)
+                else if (myLight.intensity == DARK_INTENCITY)
                     lightUp = true;
             }
         }
@@ -63,9 +63,9 @@ public class LightTrigger : MonoBehaviour
     void LightUp()
     {
         myLight.intensity += 0.01f;
-        if (myLight.intensity >= lightIntencity)
+        if (myLight.intensity >= LIGHT_INTENCITY)
         {
-            myLight.intensity = lightIntencity;
+            myLight.intensity = LIGHT_INTENCITY;
             lightUp = false;
         }
     }
@@ -73,9 +73,9 @@ public class LightTrigger : MonoBehaviour
     void LightDown()
     {
         myLight.intensity -= 0.01f;
-        if (myLight.intensity <= darkIntencity)
+        if (myLight.intensity <= DARK_INTENCITY)
         {
-            myLight.intensity = darkIntencity;
+            myLight.intensity = DARK_INTENCITY;
             lightDown = false;
         }
     }

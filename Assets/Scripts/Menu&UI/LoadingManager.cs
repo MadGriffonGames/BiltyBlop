@@ -11,7 +11,7 @@ public class LoadingManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        async = SceneManager.LoadSceneAsync(GameManager.levelName);
+        async = SceneManager.LoadSceneAsync(GameManager.nextLevelName);
         
         yield return true;
         async.allowSceneActivation = true;

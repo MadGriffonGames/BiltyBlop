@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TyplakMeleeState : ITyplakState
 {
-
     private Typlak enemy;
 
     private float attackTimer;
@@ -35,6 +34,7 @@ public class TyplakMeleeState : ITyplakState
     public void Exit()
     {
         enemy.walk = false;
+        enemy.isAttacking = false;
         enemy.AttackCollider.enabled = false;
     }
 
@@ -46,6 +46,7 @@ public class TyplakMeleeState : ITyplakState
         if (!preattack)
         {
             canExit = false;
+            enemy.isAttacking = true;
             enemy.armature.animation.FadeIn("preattack", -1, 1);
             preattack = true;
         }
@@ -57,6 +58,7 @@ public class TyplakMeleeState : ITyplakState
         if (enemy.armature.animation.lastAnimationName == "Attack" && enemy.armature.animation.isCompleted)
         {
             enemy.AttackCollider.enabled = false;
+            enemy.isAttacking = false;
             preattack = false;
             canExit = true;
         }

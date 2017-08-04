@@ -96,6 +96,10 @@ public class Typlak : MovingMeleeEnemy
     private void OnCollisionEnter2D(Collision2D other)
     {
         currentState.OnCollisionEnter2D(other);
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);
+        }
     }
 
     public void LocalMove()

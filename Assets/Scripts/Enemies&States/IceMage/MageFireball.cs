@@ -17,7 +17,7 @@ public class MageFireball : MonoBehaviour
     float timer = 0;
     float lifeTime = 5f;
 
-    bool visible = false;
+    public bool visible = false;
     bool isScaled = false;
     bool faded = false;
 
@@ -26,7 +26,7 @@ public class MageFireball : MonoBehaviour
     Vector3 scaling = new Vector3(0.01f, 0.01f, 0);
 
     [SerializeField]
-    GameObject startposition;
+    GameObject startPosition;
 
     Transform startTransform;
 
@@ -68,9 +68,8 @@ public class MageFireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))
         {
-            //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
-            startTransform = startposition.GetComponent<Transform>();
+            startTransform = startPosition.GetComponent<Transform>();
             this.transform.position = startTransform.transform.position;
 
         }
@@ -80,9 +79,8 @@ public class MageFireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
-            startTransform = startposition.GetComponent<Transform>();
+            startTransform = startPosition.GetComponent<Transform>();
             this.transform.position = startTransform.transform.position;
         }
     }
@@ -120,7 +118,7 @@ public class MageFireball : MonoBehaviour
 
     public void FadeOut()
     {
-            this.gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.1f);
+            this.gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.2f);
             if (isScaled)
                 this.gameObject.transform.localScale -= scaling;
 
@@ -139,10 +137,9 @@ public class MageFireball : MonoBehaviour
             timer = 0;
             this.gameObject.SetActive(false);
             SoundManager.PlaySound("mage_fireball_destroy");
-            startTransform = startposition.GetComponent<Transform>();
+            startTransform = startPosition.GetComponent<Transform>();
             this.transform.position = startTransform.transform.position;
             this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         }
-        timer = 0;
     }
 }

@@ -46,8 +46,6 @@ public class LevelButton : MonoBehaviour
             unlocked = 0;
         }
         GetComponent<Button>().interactable = isInteractable;
-
-        Debug.Log(levelText + "  " + unlocked);
     }
 
     public void ShowStars(int value)

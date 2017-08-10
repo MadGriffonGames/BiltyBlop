@@ -18,17 +18,19 @@ public class LevelButton : MonoBehaviour
     {
         SetButton();
 
-        if (PlayerPrefs.HasKey("Level" + levelText + "_collects"))
-        {
-            ShowStars(PlayerPrefs.GetInt("Level" + levelText + "_collects"));
-        }
+        
         if (unlocked == 0)
         {
             Lock.SetActive(true);
+            
         }
         else
         {
             Lock.SetActive(false);
+            if (PlayerPrefs.HasKey("Level" + levelText + "_collects"))
+            {
+                ShowStars(PlayerPrefs.GetInt("Level" + levelText + "_collects"));
+            }
         }
     }
 
@@ -39,7 +41,13 @@ public class LevelButton : MonoBehaviour
             unlocked = 1;
             isInteractable = true;
         }
+        else
+        {
+            unlocked = 0;
+        }
         GetComponent<Button>().interactable = isInteractable;
+
+        Debug.Log(levelText + "  " + unlocked);
     }
 
     public void ShowStars(int value)

@@ -17,10 +17,8 @@ public class MainMenu : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("BetaReward"))
         {
-            PlayerPrefs.SetInt("BetaReward", 1);
             betaTestReward.SetActive(true);
         }
-
 
         SoundManager.PlayMusic("main menu", true);
     }

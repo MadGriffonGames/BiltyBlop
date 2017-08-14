@@ -13,7 +13,7 @@ public class Spider : Boss
     [SerializeField]
     public RectTransform healthbar;
     [SerializeField]
-    public float movementSpeed = 3.0f;
+    public float movementSpeed;
     [SerializeField]
     public GameObject spiderWall;
     [SerializeField]

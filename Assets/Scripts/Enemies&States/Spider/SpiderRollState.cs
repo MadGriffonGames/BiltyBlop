@@ -6,7 +6,7 @@ class SpiderRollState : MonoBehaviour, ISpiderState
 {
     private Spider enemy;
     float timer;
-    float changingTime = 3.5f;
+    float changingTime = 2f;
     float timer2;
     bool isUkused = false;
 

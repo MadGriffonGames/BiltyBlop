@@ -46,8 +46,8 @@ public class MageFireball : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, speed * Time.deltaTime);
 
         timer += Time.deltaTime;
-        if (this.gameObject.GetComponent<Collider2D>().enabled == false)
-            FadeOut();
+        //if (this.gameObject.GetComponent<Collider2D>().enabled == false)
+          //  FadeOut();
         if (timer >= lifeTime)
         {
             FadeOut();
@@ -141,6 +141,6 @@ public class MageFireball : MonoBehaviour
             this.transform.position = startTransform.transform.position;
             this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         }
-        timer = 0;
+        //timer = 0;
     }
 }

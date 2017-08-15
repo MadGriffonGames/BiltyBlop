@@ -19,6 +19,8 @@ public class HealTutorial : InAppTutorial
         base.OnTriggerEnter2D(other);
         if (other.gameObject.CompareTag("Player") && PlayerPrefs.GetInt("Level2") == 0)
         {
+            Player.Instance.Health -= 1;
+            HealthUI.Instance.SetHealthbar();
             Inventory.Instance.AddItem(Inventory.HEAL, 3);
         }
     }

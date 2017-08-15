@@ -59,6 +59,7 @@ public class Player : Character
     private float jumpForce;
     [SerializeField]
     public GameObject secretIndication;
+    bool isDoubleJumpAllowed;
     public bool Jump { get; set; }
     public bool DoubleJump { get; set; }
     public int jumpTaps = 0;
@@ -116,6 +117,15 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
+
+        if (PlayerPrefs.HasKey("Level11"))
+        {
+            isDoubleJumpAllowed = PlayerPrefs.GetInt("Level11") > 0;
+        }
+        else
+        {
+            isDoubleJumpAllowed = false;
+        }
 
         if (timeControllerPrefab != null)
         {
@@ -385,7 +395,7 @@ public class Player : Character
     {
         if (!isRewinding && !IsDead)
         {
-            AppMetrica.Instance.ReportEvent("takinDamage");
+
             CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
             if (!immortal)
             {
@@ -531,13 +541,17 @@ public class Player : Character
 	{
 		Jump = true;
 
-        jumpTaps++;
-
-        if (Jump && canJump && jumpTaps == 2)
+        if (isDoubleJumpAllowed)
         {
-            DoubleJump = true;
-            jumpTaps = 0;
+            jumpTaps++;
+
+            if (Jump && canJump && jumpTaps == 2)
+            {
+                DoubleJump = true;
+                jumpTaps = 0;
+            }
         }
+        
 	}
 
     public void ButtonAttack()
@@ -567,7 +581,6 @@ public class Player : Character
 
     public IEnumerator ImmortalBonus(float duration)
     {
-        AppMetrica.Instance.ReportEvent("Using Immortal Bonus");
         immortalBonusNum++;
         immortal = true;
         yield return new WaitForSeconds(duration);
@@ -697,7 +710,6 @@ public class Player : Character
 
     public void InstantiateDeathParticles()
     {
-        AppMetrica.Instance.ReportEvent("Death");
         MakeFX.Instance.MakeDeath();
     }
 

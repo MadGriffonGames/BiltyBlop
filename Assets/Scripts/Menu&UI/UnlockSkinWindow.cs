@@ -40,7 +40,6 @@ public class UnlockSkinWindow : MonoBehaviour {
 
     public void SetWindowWithSkinNumber(int skinNumber)
     {
-        Debug.Log(skinNumber);   
         SkinPrefab skin = SkinManager.Instance.skinPrefabs[skinNumber].gameObject.GetComponent<SkinPrefab>();
         KidSkin.Instance.ChangeSkin(skinNumber);
         skinName.GetComponent<Text>().text = skin.shopName;

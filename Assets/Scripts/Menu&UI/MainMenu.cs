@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
 
     public void BetaRewardButton()
     {
-        if (!PlayerPrefs.HasKey("BetaReward"))
+        if (PlayerPrefs.GetInt("Coins") == 0 && PlayerPrefs.GetInt("Crystals") == 0)
         {
             PlayerPrefs.SetInt("BetaReward", 1);
             PlayerPrefs.SetInt("Crystals", 100);

@@ -7,9 +7,6 @@ public class Throwing : MonoBehaviour
     [SerializeField]
     public float speed;
 
-    [SerializeField]
-    public GameObject particle;
-
     private Rigidbody2D myRigidbody;
 
     private Vector2 direction;
@@ -32,7 +29,7 @@ public class Throwing : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-        if (other.CompareTag("Enemy") || other.CompareTag("Chest"))
+        if (other.CompareTag("Enemy"))
         {
             Disable();
         }

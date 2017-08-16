@@ -237,7 +237,7 @@ public class Player : Character
         }
         else
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
-        if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
+        if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.5 )
         {
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
             myRigidbody.velocity = new Vector2(0, 0);
@@ -307,39 +307,31 @@ public class Player : Character
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders
     {
-
-        if (other.transform.CompareTag("movingPlatform"))//if character colliding with platform
-        {
-            transform.parent = other.transform;//make character chil object of platform
-            target.transform.SetParent(other.gameObject.transform);
-        }
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && myRigidbody.velocity.y != 0)
         {
             MakeFX.Instance.MakeDust();
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
-	{
-		if (other.transform.tag == "movingPlatform")//if character stop colliding with platform
-		{
-			transform.parent = null;//make charter object non child
-            target.transform.SetParent(this.gameObject.transform);
-		}
-			
-	}
-
     private bool IsGrounded()
 	{
-			foreach (UnityEngine.Transform ponint in groundPoints) 
-			{
-				Collider2D[] colliders = Physics2D.OverlapCircleAll (ponint.position, groundRadius, whatIsGround);//making circle collider for each groundPoint(area to check ground) 
-				for (int i = 0; i < colliders.Length; i++) 
-					if (colliders[i].gameObject != gameObject)//if current collider isn't player(gameObject is player, cuz we are in player class)
-					{
-						return true;//true if we colliding with smthing
-					}
-			}
+        int contactPoints = 0;
+        foreach (UnityEngine.Transform ponint in groundPoints)
+        {
+			Collider2D[] colliders = Physics2D.OverlapCircleAll (ponint.position, groundRadius, whatIsGround);//making circle collider for each groundPoint(area to check ground) 
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject != gameObject)//if current collider isn't player(gameObject is player, cuz we are in player class)
+                {
+                    contactPoints++;
+                }
+                if (contactPoints >= 2)
+                {
+                    return true;//true if we colliding with smthing
+                }
+            }
+				
+		}
 		return false;
 	}
 

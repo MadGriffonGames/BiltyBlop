@@ -54,6 +54,7 @@ public class MovingPlatform : MonoBehaviour
             other.gameObject.layer = 9;//9 - is layer called "Platform"
             other.transform.SetParent(platformTransform);
         }
+        
     }
 
     private void OnCollisionExit2D(Collision2D other)

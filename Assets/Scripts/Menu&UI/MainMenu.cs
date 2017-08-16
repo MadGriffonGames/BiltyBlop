@@ -15,6 +15,11 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        for (int i = 0; i < 20; i++)
+        {
+            PlayerPrefs.SetInt("Level"+i, 1);
+        }
+
         if (!PlayerPrefs.HasKey("BetaReward"))
         {
             PlayerPrefs.SetInt("BetaReward", 1);

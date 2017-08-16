@@ -307,27 +307,11 @@ public class Player : Character
 
     void OnCollisionEnter2D(Collision2D other)//interaction with other colliders
     {
-
-        if (other.transform.CompareTag("movingPlatform"))//if character colliding with platform
-        {
-            transform.parent = other.transform;//make character chil object of platform
-            target.transform.SetParent(other.gameObject.transform);
-        }
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && myRigidbody.velocity.y != 0)
         {
             MakeFX.Instance.MakeDust();
         }
     }
-
-    void OnCollisionExit2D(Collision2D other)
-	{
-		if (other.transform.tag == "movingPlatform")//if character stop colliding with platform
-		{
-			transform.parent = null;//make charter object non child
-            target.transform.SetParent(this.gameObject.transform);
-		}
-			
-	}
 
     private bool IsGrounded()
 	{

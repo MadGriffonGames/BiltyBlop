@@ -237,7 +237,7 @@ public class Player : Character
         }
         else
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
-        if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.1 )
+        if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.5 )
         {
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
             myRigidbody.velocity = new Vector2(0, 0);
@@ -331,15 +331,23 @@ public class Player : Character
 
     private bool IsGrounded()
 	{
-			foreach (UnityEngine.Transform ponint in groundPoints) 
-			{
-				Collider2D[] colliders = Physics2D.OverlapCircleAll (ponint.position, groundRadius, whatIsGround);//making circle collider for each groundPoint(area to check ground) 
-				for (int i = 0; i < colliders.Length; i++) 
-					if (colliders[i].gameObject != gameObject)//if current collider isn't player(gameObject is player, cuz we are in player class)
-					{
-						return true;//true if we colliding with smthing
-					}
-			}
+        int contactPoints = 0;
+        foreach (UnityEngine.Transform ponint in groundPoints)
+        {
+			Collider2D[] colliders = Physics2D.OverlapCircleAll (ponint.position, groundRadius, whatIsGround);//making circle collider for each groundPoint(area to check ground) 
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject != gameObject)//if current collider isn't player(gameObject is player, cuz we are in player class)
+                {
+                    contactPoints++;
+                }
+                if (contactPoints >= 2)
+                {
+                    return true;//true if we colliding with smthing
+                }
+            }
+				
+		}
 		return false;
 	}
 

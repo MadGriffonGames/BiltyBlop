@@ -9,8 +9,8 @@ class SpiderShopDaWoopState : ISpiderState
     bool isShoped = false;
     float timer;
     float timer2;
-    float pauseTime = 1.2f;
-    float attackTime = 3.2f;
+    float pauseTime = 1.8f;
+    float attackTime = 3.7f;
     bool isLazered = false;
 
 
@@ -32,7 +32,6 @@ class SpiderShopDaWoopState : ISpiderState
         {
             
             enemy.lazer.SetActive(true);
-            Debug.Log("lazer goes here");
             isLazered = true;
         }
 
@@ -40,7 +39,7 @@ class SpiderShopDaWoopState : ISpiderState
         {
             enemy.lazer.gameObject.SetActive(false);
 
-            enemy.ChangeState(new SpiderUndergroundState());
+            enemy.ChangeState(new SpiderIdleState());
         }
 
     }

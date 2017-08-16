@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-class SpiderJumpState : ISpiderState
+class SpiderJumpState : MonoBehaviour, ISpiderState
 {
     private Spider enemy;
     bool isJumped = false;
 
     public void Enter(Spider enemy)
     {
+        enemy.armature.sortingOrder = 0;
         this.enemy = enemy;
     }
 
@@ -19,6 +20,7 @@ class SpiderJumpState : ISpiderState
         if (!isJumped)
         {
             enemy.armature.animation.FadeIn("fast_jump", 1, 1);
+            Instantiate(enemy.groundParticles, enemy.gameObject.transform.position, Quaternion.identity);
             isJumped = true;
         }
 

@@ -20,21 +20,19 @@ class SpiderUkusState : ISpiderState
         if (!isUkused)
         {
             enemy.armature.animation.timeScale = 1.3f;
-            enemy.armature.animation.FadeIn("ukus", 1, 1);
+            enemy.armature.animation.FadeIn("ukus", -1, 1);
             isUkused = true;
-            Debug.Log("First ukus");
         }
 
         if (!isWeak && enemy.armature.animation.lastAnimationName == "ukus" && enemy.armature.animation.isCompleted)
         {
-            enemy.armature.animation.FadeIn("ukus_weak", 1, 1);
+            enemy.armature.animation.FadeIn("ukus_weak", -1, 1);
             isWeak = true;
-            Debug.Log("weak");
         }
 
         if (enemy.armature.animation.lastAnimationName == "ukus_weak" && enemy.armature.animation.isCompleted)
         {
-            enemy.armature.animation.FadeIn("ukus2", 1, 1);
+            enemy.armature.animation.FadeIn("ukus2", -1, 1);
             timer = Time.time;
         }
 

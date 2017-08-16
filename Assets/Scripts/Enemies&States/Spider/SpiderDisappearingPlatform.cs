@@ -13,9 +13,12 @@ public class SpiderDisappearingPlatform : MonoBehaviour
     Vector3 startPos;
     [SerializeField]
     GameObject groundCollider;
+    float lifeTimer;
+    float dropTime = 3.2f;
 
     void Start()
     {
+        lifeTimer = Time.time;
         MyRigidbody = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         startPos = transform.position;
@@ -27,6 +30,11 @@ public class SpiderDisappearingPlatform : MonoBehaviour
         {
             Vector3 rnd = Random.insideUnitCircle * 0.02f;
             platfrom.transform.localPosition += new Vector3(rnd.x, rnd.y, 0);
+        }
+
+        if (Time.time - lifeTimer > dropTime)
+        {
+            StartCoroutine(Fall(shakingTime));
         }
     }
 

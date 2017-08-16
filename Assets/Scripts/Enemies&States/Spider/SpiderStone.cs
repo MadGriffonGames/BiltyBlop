@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SpiderStone : MonoBehaviour {
 
-    [SerializeField]
-    public float speed;
 
     /*[SerializeField]
     public GameObject particle;*/
@@ -13,12 +11,14 @@ public class SpiderStone : MonoBehaviour {
     private Rigidbody2D myRigidbody;
 
     private Vector2 direction;
+    [SerializeField]
+    GameObject particle;
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("DestroyGround"))
         {
-            //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
             SoundManager.PlaySound("stone_crash");
         }
@@ -29,7 +29,7 @@ public class SpiderStone : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             SoundManager.PlaySound("stone_crash");
-            //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
+            Instantiate(particle, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
         }
     }

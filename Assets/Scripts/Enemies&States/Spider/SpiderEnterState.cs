@@ -14,15 +14,17 @@ public class SpiderEnterState : MonoBehaviour, ISpiderState
     public void Enter(Spider enemy)
     {
         this.enemy = enemy;
-        enemy.armature.animation.FadeIn("appear1", 1, 1);
+        enemy.armature.sortingOrder = 0;
+        enemy.armature.animation.FadeIn("appear1", -1, 1);
         enemy.armature.animation.timeScale = 1.5f;
         enemy.speed = 1;
+
     }
 
     public void Execute()
     {
         if (enemy.armature.animation.isCompleted)
-        { 
+        {
             enemy.ChangeState(new SpiderStonesState());
         }
     }

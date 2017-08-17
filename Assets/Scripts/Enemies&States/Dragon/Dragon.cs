@@ -46,6 +46,8 @@ public class Dragon : Boss
     public RectTransform healthbar;
     [SerializeField]
     public GameObject stun;
+    [SerializeField]
+    GameObject videoUI;
 
     float angle;
     bool roar = true;
@@ -100,6 +102,10 @@ public class Dragon : Boss
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.1f);
         SetHealthbar();
+        if (Health <= 0)
+        {
+            videoUI.SetActive(true);
+        }
         yield return null;
     }
 

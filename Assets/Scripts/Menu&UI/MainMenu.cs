@@ -15,8 +15,14 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        for (int i = 0; i < 20; i++)
+        {
+            PlayerPrefs.SetInt("Level"+i, 1);
+        }
+
         if (!PlayerPrefs.HasKey("BetaReward"))
         {
+            PlayerPrefs.SetInt("BetaReward", 1);
             betaTestReward.SetActive(true);
         }
 
@@ -40,7 +46,7 @@ public class MainMenu : MonoBehaviour
 
     public void BetaRewardButton()
     {
-        if (!PlayerPrefs.HasKey("BetaReward") && !PlayerPrefs.HasKey("Coins"))
+        if (PlayerPrefs.GetInt("Coins") == 0 && PlayerPrefs.GetInt("Crystals") == 0)
         {
             PlayerPrefs.SetInt("BetaReward", 1);
             PlayerPrefs.SetInt("Crystals", 100);

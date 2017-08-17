@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpiderWall : InteractiveObject {
     [SerializeField]
     public GameObject groundParticle;
+    [SerializeField]
+    Collider2D damageCollider;
     float movementSpeed = 3f;
     bool facingRight = false;
 
@@ -29,6 +31,7 @@ public class SpiderWall : InteractiveObject {
             Instantiate(groundParticle, this.gameObject.transform.position + new Vector3(0, 0.5f, -3), Quaternion.identity);
             SoundManager.PlaySound("wooden_box1");
             Destroy(this.gameObject);
+            Destroy(damageCollider);
         }
     }
 
@@ -45,6 +48,7 @@ public class SpiderWall : InteractiveObject {
             Instantiate(groundParticle, this.gameObject.transform.position + new Vector3(0, 0.5f, -3), Quaternion.identity);
             SoundManager.PlaySound("wooden_box1");
             Destroy(this.gameObject);
+            Destroy(damageCollider);
         }
 
     }

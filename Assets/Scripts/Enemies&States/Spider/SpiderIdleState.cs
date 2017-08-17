@@ -24,6 +24,7 @@ internal class SpiderIdleState : MonoBehaviour, ISpiderState
         {
             enemy.armature.animation.FadeIn("shoop_weak", -1, -1);
             isIdling = true;
+            enemy.stun.SetActive(true);
         }
 
         if (Time.time - timer > idlingTime)
@@ -35,6 +36,7 @@ internal class SpiderIdleState : MonoBehaviour, ISpiderState
     public void Exit()
     {
         enemy.GetComponent<PolygonCollider2D>().enabled = false;
+        enemy.stun.SetActive(false);
     }
 
     public void OnCollisionEnter2D(Collision2D other)

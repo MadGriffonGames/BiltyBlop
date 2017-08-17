@@ -32,6 +32,8 @@ public class Spider : Boss
     public GameObject cloudParticle;
     [SerializeField]
     public GameObject levelEnd;
+    [SerializeField]
+    public GameObject stun;
 
 
     [SerializeField]
@@ -162,12 +164,12 @@ public class Spider : Boss
     {
         if (this.gameObject.transform.localScale.x > 1)
         {
-            GameObject tmp = (GameObject)Instantiate(spiderWall[i], this.gameObject.transform.position + new Vector3(9.5f, 10.8f), Quaternion.identity);
+            GameObject tmp = (GameObject)Instantiate(spiderWall[i], this.gameObject.transform.position + new Vector3(5.5f, 10.8f), Quaternion.identity);
             SoundManager.PlaySound("door crash");
         }
         else
         {
-            GameObject tmp = (GameObject)Instantiate(spiderWall[i], this.gameObject.transform.position + new Vector3(-9.5f, 10.8f), Quaternion.identity);
+            GameObject tmp = (GameObject)Instantiate(spiderWall[i], this.gameObject.transform.position + new Vector3(-5.5f, 10.8f), Quaternion.identity);
             SoundManager.PlaySound("door crash");
         }
     }

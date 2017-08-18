@@ -8,7 +8,7 @@ class PenguinIdleState : IPenguinState
 {
     private Penguin enemy;
     bool idled = false;
-    float waitFor = 0.5f;
+    float waitFor = 0.75f;
     bool timerStart = false;
     float startTime;
 

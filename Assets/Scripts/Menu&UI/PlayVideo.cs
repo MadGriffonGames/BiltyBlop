@@ -11,7 +11,6 @@ public class PlayVideo : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(1);
         if (!PlayerPrefs.HasKey(movieName))
         { 
             Handheld.PlayFullScreenMovie(movieName + ".mp4", Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);

@@ -39,6 +39,8 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
         Appodeal.setAutoCache(Appodeal.INTERSTITIAL, false);
         Appodeal.setAutoCache(Appodeal.REWARDED_VIDEO, false);
 
+        AppMetrica.Instance.ActivateWithAPIKey("cefd065c-fd53-443d-9f27-9ddf930a936f");
+
         Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
 
         Appodeal.cache(Appodeal.INTERSTITIAL);

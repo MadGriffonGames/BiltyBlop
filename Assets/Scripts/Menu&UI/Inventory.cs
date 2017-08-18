@@ -72,7 +72,8 @@ public class Inventory : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price);
                     AddItem(itemName, itemCount);
-                    AppMetrica.Instance.ReportEvent(itemName + " bought for " + moneyType);
+
+                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
                 }
             }
             if (moneyType == "Crystals")
@@ -81,7 +82,9 @@ public class Inventory : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price);
                     AddItem(itemName, itemCount);
-                    AppMetrica.Instance.ReportEvent(itemName + " bought for " + moneyType);
+
+                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
+                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought before " + MetricaManager.Instance.lastUnlockedLevel);
                 }
             }
         }
@@ -182,6 +185,8 @@ public class Inventory : MonoBehaviour
         MakeFX.Instance.MakeHeal();
 
         RemoveItem(HEAL);
+
+        SendUseMetric(HEAL);
     }
 
     public void UseAmmo()
@@ -190,6 +195,8 @@ public class Inventory : MonoBehaviour
         Player.Instance.ResetThrowing();
 
         RemoveItem(AMMO);
+
+        SendUseMetric(HEAL);
     }
 
     public void UseBonus(string bonusType)
@@ -214,6 +221,12 @@ public class Inventory : MonoBehaviour
             Player.Instance.ExecBonusSpeed(SPEED_DURATION);
             RemoveItem(SPEED_BONUS);
         }
+
+        SendUseMetric(bonusType);
     }
 
+    void SendUseMetric(string bonusName)
+    {
+        AppMetrica.Instance.ReportEvent("#BONUS_USE " + bonusName + " used in " + MetricaManager.Instance.currentLevel);
+    }
 }

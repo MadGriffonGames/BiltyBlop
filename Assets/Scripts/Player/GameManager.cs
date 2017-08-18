@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
         Instantiate(adsManager);
         Instantiate(metricaManager);
 
+        CheckLastUnlockedLevel();
+
         deadEnemies = new List<GameObject>();
 
         SetMoneyValues();
@@ -121,5 +123,26 @@ public class GameManager : MonoBehaviour
         }
         catch (UnassignedReferenceException) { }
     }
-   
+
+    void CheckLastUnlockedLevel()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            for (int i = 1; i <= 20; i++)
+            {
+                if (PlayerPrefs.HasKey("Level" + i))
+                {
+                    if (PlayerPrefs.GetInt("Level" + i) > 0)
+                    {
+                        MetricaManager.Instance.lastUnlockedLevel = "Level" + i;
+                    }
+                }
+                
+            }
+            if (PlayerPrefs.GetString("LastUnlockedLevel") != MetricaManager.Instance.lastUnlockedLevel)
+            {
+                PlayerPrefs.SetString("LastUnlockedLevel", MetricaManager.Instance.lastUnlockedLevel);
+            }
+        }
+    }
 }

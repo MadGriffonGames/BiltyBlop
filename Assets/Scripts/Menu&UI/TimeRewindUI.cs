@@ -54,6 +54,8 @@ public class TimeRewindUI : MonoBehaviour
             PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - CRYSTAL_PRICE);
             GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
 
+            MetricaManager.Instance.rewindCount++;
+
             foreach (MeshRenderer mesh in Player.Instance.meshRenderer)
             {
                 mesh.enabled = true;
@@ -78,6 +80,8 @@ public class TimeRewindUI : MonoBehaviour
             Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraEffect>().StartBlur(0.8f);
             Time.timeScale = 2;
+
+            AppMetrica.Instance.ReportEvent("#REWIND_TIME Rewind time used in " + MetricaManager.Instance.currentLevel);
 
             this.gameObject.SetActive(false);
         }

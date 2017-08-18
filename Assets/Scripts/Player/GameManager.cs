@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public static Text crystalTxt;
     [SerializeField]
     public GameObject adsManager;
+    [SerializeField]
+    public GameObject metricaManager;
 
     public static string nextLevelName;
     public static int lvlCollectedCoins;
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
         coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
 
         Instantiate(adsManager);
+        Instantiate(metricaManager);
 
         deadEnemies = new List<GameObject>();
 

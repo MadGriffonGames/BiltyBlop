@@ -72,6 +72,7 @@ public class Inventory : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price);
                     AddItem(itemName, itemCount);
+                    AppMetrica.Instance.ReportEvent(itemName + " bought for " + moneyType);
                 }
             }
             if (moneyType == "Crystals")
@@ -80,6 +81,7 @@ public class Inventory : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price);
                     AddItem(itemName, itemCount);
+                    AppMetrica.Instance.ReportEvent(itemName + " bought for " + moneyType);
                 }
             }
         }

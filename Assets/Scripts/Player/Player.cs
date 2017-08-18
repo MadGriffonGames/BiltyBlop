@@ -418,6 +418,7 @@ public class Player : Character
                 }
                 else
                 {
+                    MetricaManager.Instance.deaths++;
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     UI.Instance.timeRewindUI.SetActive(true);

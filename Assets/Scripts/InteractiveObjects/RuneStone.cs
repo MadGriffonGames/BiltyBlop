@@ -35,6 +35,10 @@ public class RuneStone : InteractiveObject
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
+            MetricaManager.Instance.isTimerActive = false;
+            Debug.Log(MetricaManager.Instance.deaths);
+            Debug.Log(MetricaManager.Instance.levelCompleteTime);
+
             MyAnimator.SetTrigger("shine");
 			StartCoroutine (WaitForGround ());
             Zoom.makeZoom(1, 3, 5);

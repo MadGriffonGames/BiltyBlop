@@ -13,20 +13,45 @@ public class Spider : Boss
     [SerializeField]
     public RectTransform healthbar;
     [SerializeField]
-    public float movementSpeed = 3.0f;
+    public float movementSpeed;
     [SerializeField]
-    public GameObject spiderWall;
+    public GameObject[] spiderWall = new GameObject[3];
     [SerializeField]
     public GameObject lazer;
+    [SerializeField]
+    public GameObject column1;
+    [SerializeField]
+    public GameObject column2;
+    [SerializeField]
+    public GameObject rightEdge;
+    [SerializeField]
+    public Collider2D enemyDamageRoll;
+    [SerializeField]
+    public Collider2D enemyDamageStone;
+    [SerializeField]
+    public GameObject cloudParticle;
+    [SerializeField]
+    public GameObject levelEnd;
+    [SerializeField]
+    public GameObject stun;
+
+
+    [SerializeField]
+    public GameObject groundParticles;
+    [SerializeField]
+    public GameObject rollGroundParticles;
 
     [SerializeField]
     GameObject[] platforms = new GameObject[3];
 
-    public bool wallDestroy = false;
+    [SerializeField]
+    public GameObject shadow;
+    bool isDead = false;
+
 
 
     [SerializeField]
-    public GameObject[] spiderStones = new GameObject[5];
+    public GameObject[] spiderStones = new GameObject[20];
 
 
 
@@ -40,7 +65,9 @@ public class Spider : Boss
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spiderWall.GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spiderWall[0].GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spiderWall[1].GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spiderWall[2].GetComponent<Collider2D>(), true);
         maxHealth = Health;
         firstHBScaleX = healthbar.localScale.x;
         gameObject.SetActive(false);
@@ -50,10 +77,15 @@ public class Spider : Boss
     {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spiderWall[0].GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spiderWall[1].GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spiderWall[2].GetComponent<Collider2D>(), true);
         base.Start();
         MyRigidbody = GetComponent<Rigidbody2D>();
         bossUI.SetActive(true);
         ChangeState(new SpiderEnterState());
+        column1.SetActive(true);
+        column2.SetActive(true);
     }
 
     public void Update()
@@ -85,6 +117,11 @@ public class Spider : Boss
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.1f);
         SetHealthbar();
+        if (health <= 0)
+        {
+            isDead = true;
+            this.ChangeState(new SpiderDeathState());
+        }
         yield return null;
     }
 
@@ -123,16 +160,16 @@ public class Spider : Boss
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
 
-    public void WallFall()
+    public void WallFall(int i)
     {
         if (this.gameObject.transform.localScale.x > 1)
         {
-            GameObject tmp = (GameObject)Instantiate(spiderWall, this.gameObject.transform.position + new Vector3(-6, 10.8f), Quaternion.identity);
+            GameObject tmp = (GameObject)Instantiate(spiderWall[i], this.gameObject.transform.position + new Vector3(6.5f, 10.8f), Quaternion.identity);
             SoundManager.PlaySound("door crash");
         }
         else
         {
-            GameObject tmp = (GameObject)Instantiate(spiderWall, this.gameObject.transform.position + new Vector3(6, 10.8f), Quaternion.identity);
+            GameObject tmp = (GameObject)Instantiate(spiderWall[i], this.gameObject.transform.position + new Vector3(-6.5f, 10.8f), Quaternion.identity);
             SoundManager.PlaySound("door crash");
         }
     }
@@ -144,12 +181,12 @@ public class Spider : Boss
         {
             if (this.gameObject.transform.localScale.x > 1)
             {
-                GameObject tmp = (GameObject)Instantiate(platforms[i], this.gameObject.transform.position + new Vector3(-6 + j * i, 10.8f), Quaternion.identity);
+                GameObject tmp = (GameObject)Instantiate(platforms[i], this.gameObject.transform.position + new Vector3((8 + j * i), 10.8f), Quaternion.identity);
                 j++;
             }
             else
             {
-                GameObject tmp = (GameObject)Instantiate(platforms[i], this.gameObject.transform.position + new Vector3(6 + j * i, 10.8f), Quaternion.identity);
+                GameObject tmp = (GameObject)Instantiate(platforms[i], this.gameObject.transform.position + new Vector3(-(8 + j * i), 10.8f), Quaternion.identity);
                 j++;
             }
         }

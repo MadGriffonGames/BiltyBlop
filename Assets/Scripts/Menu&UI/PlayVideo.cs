@@ -15,6 +15,7 @@ public class PlayVideo : MonoBehaviour
         { 
             Handheld.PlayFullScreenMovie(movieName + ".mp4", Color.black, FullScreenMovieControlMode.Hidden, FullScreenMovieScalingMode.AspectFit);
             PlayerPrefs.SetString(movieName, "played");
-        } else Handheld.PlayFullScreenMovie(movieName + ".mp4", Color.black, FullScreenMovieControlMode.CancelOnInput,FullScreenMovieScalingMode.AspectFit);
+        }
+        else Handheld.PlayFullScreenMovie(movieName + ".mp4", Color.black, FullScreenMovieControlMode.CancelOnInput,FullScreenMovieScalingMode.AspectFit);
     }
 }

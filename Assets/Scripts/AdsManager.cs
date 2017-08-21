@@ -32,12 +32,14 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     public bool isRewardVideoWatched = false;
 
-    string appKey = "3481dd986d45650597337fafb3b51bd88bc5d6862675c1d2";
+	string appKey = "027fffae726e025f6f6e311d8e8370af0bac2f6ce6630a81";
 
     void Start ()
     {
         Appodeal.setAutoCache(Appodeal.INTERSTITIAL, false);
         Appodeal.setAutoCache(Appodeal.REWARDED_VIDEO, false);
+
+        AppMetrica.Instance.ActivateWithAPIKey("cefd065c-fd53-443d-9f27-9ddf930a936f");
 
         Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
 

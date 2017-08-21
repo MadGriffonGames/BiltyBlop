@@ -80,6 +80,7 @@ public class InventoryUI : MonoBehaviour
             Inventory.Instance.UseHP();
             hpCount.text = Inventory.Instance.GetItemCount(Inventory.HEAL).ToString();
             SoundManager.PlaySound("heart_collect");
+            
             DisactivateInventory();
         }
     }

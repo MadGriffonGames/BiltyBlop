@@ -112,6 +112,8 @@ public class DailyReward : MonoBehaviour
             PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
             lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
             GiveLoot();
+
+            AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
         }
 
         if (tmp)

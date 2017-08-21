@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class ChestUI : MonoBehaviour
 {
-    const int COINS_RANGE    = 90;
-    const int CRYSTALS_RANGE = 95;
+    const int COINS_RANGE    = 70;
+    const int CRYSTALS_RANGE = 99;
     const int ITEMS_RANGE    = 100;
 
     const int MIN_COIN_RANGE = 50;
@@ -94,6 +94,8 @@ public class ChestUI : MonoBehaviour
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_chest", 1);
             }
             GiveLoot();
+
+            AppMetrica.Instance.ReportEvent("#CHEST 3Stars chest activate");
         }
     }
 

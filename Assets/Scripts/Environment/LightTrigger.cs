@@ -62,7 +62,7 @@ public class LightTrigger : MonoBehaviour
 
     void LightUp()
     {
-        myLight.intensity += 0.01f;
+        myLight.intensity += 0.015f;
         if (myLight.intensity >= LIGHT_INTENCITY)
         {
             myLight.intensity = LIGHT_INTENCITY;
@@ -72,7 +72,7 @@ public class LightTrigger : MonoBehaviour
 
     void LightDown()
     {
-        myLight.intensity -= 0.01f;
+        myLight.intensity -= 0.015f;
         if (myLight.intensity <= DARK_INTENCITY)
         {
             myLight.intensity = DARK_INTENCITY;

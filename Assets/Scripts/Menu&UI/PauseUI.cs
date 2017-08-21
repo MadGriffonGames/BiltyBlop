@@ -30,7 +30,7 @@ public class PauseUI : MonoBehaviour
         }
         if (Application.platform == RuntimePlatform.Android)
         {
-            if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
+            if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Menu))
             {
                 Pause();
             }
@@ -89,7 +89,8 @@ public class PauseUI : MonoBehaviour
     public void Quit()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        GameManager.nextLevelName = "MainMenu";
+        SceneManager.LoadScene("Loading");
     }
 
     public void PlayUISound(string sound)

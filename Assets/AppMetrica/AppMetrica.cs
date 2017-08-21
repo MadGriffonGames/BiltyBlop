@@ -144,4 +144,8 @@ public class AppMetrica : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        AppMetrica.Instance.ReportEvent("#APP_EXIT User quit from scene " + MetricaManager.Instance.currentLevel);
+    }
 }

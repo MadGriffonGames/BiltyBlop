@@ -35,9 +35,9 @@ public class RuneStone : InteractiveObject
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            MetricaManager.Instance.isTimerActive = false;
-            Debug.Log(MetricaManager.Instance.deaths);
-            Debug.Log(MetricaManager.Instance.levelCompleteTime);
+            SetLevelMetrics();
+
+            SendMetrics();
 
             MyAnimator.SetTrigger("shine");
 			StartCoroutine (WaitForGround ());
@@ -68,7 +68,16 @@ public class RuneStone : InteractiveObject
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
         }
-        PlayerPrefs.SetInt(nextLvl, 1);
+
+        if (PlayerPrefs.GetInt(nextLvl) == 0)
+        {
+            PlayerPrefs.SetString("LastUnlockedLevel", nextLvl);
+            PlayerPrefs.SetInt(nextLvl, 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(nextLvl, 1);
+        }
     }
 
 	IEnumerator WaitForGround()
@@ -77,5 +86,18 @@ public class RuneStone : InteractiveObject
 		Player.Instance.myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;
         Player.Instance.myRigidbody.freezeRotation = true;
         Player.Instance.ChangeState(new PlayerVictoryState());
+    }
+
+    void SetLevelMetrics()
+    {
+        MetricaManager.Instance.collectedStars = Player.Instance.stars;
+        MetricaManager.Instance.collectedCoins = GameManager.lvlCollectedCoins;
+    }
+
+    void SendMetrics()
+    {
+        MetricaManager.Instance.SetParametrs();
+
+        AppMetrica.Instance.ReportEvent(MetricaManager.Instance.currentLevel + " complete with:", MetricaManager.Instance.levelParams);
     }
 }

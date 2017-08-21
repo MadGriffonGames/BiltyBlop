@@ -22,6 +22,7 @@ public class IceMage : RangeEnemy
     [SerializeField]
     GameObject crystall;
 
+
     Vector3 scaling = new Vector3(0.01f, 0.01f, 0);
 
     void Awake()
@@ -74,6 +75,7 @@ public class IceMage : RangeEnemy
 
     public override IEnumerator TakeDamage()
     {
+        SetHealthbar();
         Target = null;
         isTakingDamage = true;
         MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0.5f, 2f, 0), new Vector3(0.8f, 0.8f, 1));

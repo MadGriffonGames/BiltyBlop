@@ -17,6 +17,7 @@ class SpiderRollState : MonoBehaviour, ISpiderState
 
     public void Enter(Spider enemy)
     {
+        SoundManager.PlaySound("earthroll");
         enemy.shadow.gameObject.SetActive(false);
         enemy.armature.sortingOrder = 0;
         enemy.enemyDamageRoll.enabled = true;

@@ -32,6 +32,7 @@ class SpiderShopDaWoopState : ISpiderState
         {
             
             enemy.lazer.SetActive(true);
+            SoundManager.PlaySound("laserSound");
             isLazered = true;
         }
 

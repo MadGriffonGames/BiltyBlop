@@ -46,6 +46,7 @@ class SpiderGroundAttackState : MonoBehaviour, ISpiderState
             enemy.shadow.gameObject.SetActive(true);
             isAttacked1 = true;
             enemy.armature.animation.FadeIn("ground_attack", -1, 1);
+            SoundManager.PlaySound("spiderImpact");
             CameraEffect.Shake(0.2f, 0.2f);
             enemy.WallFall(i);
             i++;
@@ -61,6 +62,7 @@ class SpiderGroundAttackState : MonoBehaviour, ISpiderState
         {
             isAttacked2 = true;
             enemy.armature.animation.FadeIn("ground_attack", -1, 1);
+            SoundManager.PlaySound("spiderImpact");
             CameraEffect.Shake(0.2f, 0.2f);
             enemy.WallFall(i);
             i++;
@@ -76,6 +78,7 @@ class SpiderGroundAttackState : MonoBehaviour, ISpiderState
         {
             isAttacked3 = true;
             enemy.armature.animation.FadeIn("ground_attack", -1, 1);
+            SoundManager.PlaySound("spiderImpact");
             CameraEffect.Shake(0.2f, 0.2f);
             enemy.WallFall(i);
         }
@@ -90,12 +93,14 @@ class SpiderGroundAttackState : MonoBehaviour, ISpiderState
         {
             groundAttackedTwice = true;
             enemy.armature.animation.FadeIn("ground_attack", -1, 1);
+            //SoundManager.PlaySound("spiderImpact");
         }
 
         if (enemy.armature.animation.lastAnimationName == "ground_attack" && isAttacked1 && enemy.armature.animation.isCompleted && !platformed && groundAttackedTwice)
         {
             platformed = true;
             enemy.SpawnPlatforms();
+            SoundManager.PlaySound("spiderImpact");
         }
 
         if (platformed)

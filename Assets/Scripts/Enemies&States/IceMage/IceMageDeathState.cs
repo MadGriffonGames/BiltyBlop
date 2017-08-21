@@ -11,6 +11,7 @@ public class IceMageDeathState : IceMageState
 
     public void Enter(IceMage enemy)
     {
+        
         this.enemy = enemy;
         enemy.armature.animation.timeScale = 2.5f;
         enemy.armature.animation.FadeIn("death", 1, 1);

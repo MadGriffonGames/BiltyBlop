@@ -41,6 +41,10 @@ public class BuyCheckpointsUI : MonoBehaviour
                     break;
             }
             coinsPriceInt = int.Parse(coinsPrice.text);
+            if (coinsPriceInt > 50)
+            {
+                coinsPrice.fontSize = 35;
+            }
             crystalsButton.SetActive(false);
         }
         else

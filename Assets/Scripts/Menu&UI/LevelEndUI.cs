@@ -65,6 +65,7 @@ public class LevelEndUI : MonoBehaviour
 
     public void Restart()
     {
+        GameManager.nextLevelName = SceneManager.GetActiveScene().name;
 
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;

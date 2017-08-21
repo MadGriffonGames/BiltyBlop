@@ -8,6 +8,21 @@ public class RunicGrave : MonoBehaviour
     // Use this for initialization
     [SerializeField]
     GameObject particle;
+    float maxY;
+    float minY;
+    float value = 0.027f;
+
+    private void Start()
+    {
+        minY = this.transform.position.y - 0.7f;
+        maxY = this.transform.position.y + 0.7f;
+
+    }
+
+    private void FixedUpdate()
+    {
+        MoveTowards();
+    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -21,12 +36,6 @@ public class RunicGrave : MonoBehaviour
             SoundManager.PlaySound("door_explode");
             Destroy(this.gameObject);
         }
-
-        if (other.gameObject.layer == 8)
-        {
-            Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
-            rb.bodyType = RigidbodyType2D.Static;
-        }
     }
 
     private void OnBecameInvisible()
@@ -34,6 +43,19 @@ public class RunicGrave : MonoBehaviour
         if (transform.position.y < -70)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    void MoveTowards()
+    {
+        this.transform.position += new Vector3(0, value);
+        if (this.transform.position.y >= maxY)
+        {
+            value *= -1;
+        }
+        if (this.transform.position.y <= minY)
+        {
+            value *= -1f;
         }
     }
 }

@@ -32,6 +32,7 @@ public class SpiderStonesState : MonoBehaviour, ISpiderState
     {
         if (enemy.armature.animation.lastAnimationName == "Stone_down_preatk" && enemy.armature.animation.isCompleted)
         {
+            SoundManager.PlaySound("spiderImpact");
             tmpCloudParticle = (GameObject)Instantiate(enemy.cloudParticle, enemy.transform.position - new Vector3(3f, 1), Quaternion.identity);
             enemy.armature.sortingOrder = 1;
             stoneDown = true;

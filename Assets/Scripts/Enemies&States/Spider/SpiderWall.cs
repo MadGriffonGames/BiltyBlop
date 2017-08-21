@@ -31,7 +31,7 @@ public class SpiderWall : InteractiveObject {
             Instantiate(groundParticle, this.gameObject.transform.position + new Vector3(0, 0.5f, -3), Quaternion.identity);
             Instantiate(groundParticle, this.gameObject.transform.position + new Vector3(0, 2.5f, -3), Quaternion.identity);
             Instantiate(groundParticle, this.gameObject.transform.position + new Vector3(0, -2.5f, -3), Quaternion.identity);
-            SoundManager.PlaySound("wooden_box1");
+            SoundManager.PlaySound("stone_crash");
             Destroy(this.gameObject);
 
             Destroy(damageCollider);
@@ -49,7 +49,7 @@ public class SpiderWall : InteractiveObject {
         {
             CameraEffect.Shake(0.2f, 0.2f);
             Instantiate(groundParticle, this.gameObject.transform.position + new Vector3(0, 0.5f, -3), Quaternion.identity);
-            SoundManager.PlaySound("wooden_box1");
+            SoundManager.PlaySound("stone_crash_new");
             Destroy(this.gameObject);
             Destroy(damageCollider);
         }

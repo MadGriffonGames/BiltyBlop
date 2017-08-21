@@ -20,7 +20,7 @@ public class SpiderStone : MonoBehaviour {
         {
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
-            SoundManager.PlaySound("stone_crash");
+            SoundManager.PlaySound("stone_crash_new");
         }
     }
 
@@ -28,7 +28,7 @@ public class SpiderStone : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SoundManager.PlaySound("stone_crash");
+            SoundManager.PlaySound("stone_crash_new");
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
         }

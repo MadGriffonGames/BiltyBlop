@@ -7,6 +7,9 @@ public class SpiderStone : MonoBehaviour {
 
     /*[SerializeField]
     public GameObject particle;*/
+    string soundName;
+    int rand;
+
 
     private Rigidbody2D myRigidbody;
 
@@ -18,9 +21,14 @@ public class SpiderStone : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("DestroyGround"))
         {
+            rand = UnityEngine.Random.Range(0, 2);
+            Debug.Log(rand);
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
-            SoundManager.PlaySound("stone_crash_new");
+            if (rand == 1)
+                SoundManager.PlaySound("stoned3");
+            else
+                SoundManager.PlaySound("stoned4");
         }
     }
 
@@ -28,7 +36,11 @@ public class SpiderStone : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SoundManager.PlaySound("stone_crash_new");
+            rand = UnityEngine.Random.Range(0, 2);
+            if (rand == 1)
+                SoundManager.PlaySound("stoned3");
+            else
+                SoundManager.PlaySound("stoned4");
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
         }

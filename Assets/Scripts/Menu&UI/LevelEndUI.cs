@@ -54,10 +54,12 @@ public class LevelEndUI : MonoBehaviour
         AdsManager.Instance.fromShowfunction = true;
 
 #elif UNITY_ANDROID
-        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        //AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        SceneManager.LoadScene("Loading");
 
 #elif UNITY_IOS
-        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        //AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        SceneManager.LoadScene("Loading");
 
 #endif
 

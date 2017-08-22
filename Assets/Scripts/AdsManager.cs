@@ -32,7 +32,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     public bool isRewardVideoWatched = false;
 
-    string appKey = "3481dd986d45650597337fafb3b51bd88bc5d6862675c1d2";
+	string appKey = "027fffae726e025f6f6e311d8e8370af0bac2f6ce6630a81";
 
     void Start ()
     {

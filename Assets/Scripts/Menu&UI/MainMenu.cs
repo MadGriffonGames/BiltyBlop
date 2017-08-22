@@ -36,7 +36,9 @@ public class MainMenu : MonoBehaviour
 
     public void ToShop()
     {
-        SceneManager.LoadScene("Shop");
+        GameManager.nextLevelName = "Shop";
+
+        SceneManager.LoadScene("Loading");
     }
 
     public void BetaRewardButton()

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkinPrefab : MonoBehaviour {
+public class SkinPrefab : MonoBehaviour
+{
 
     public string shopName;
     public bool isLocked;  // true = skin locked; false = skin unlocked;

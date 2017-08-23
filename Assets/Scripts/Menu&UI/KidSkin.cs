@@ -27,7 +27,7 @@ public class KidSkin : MonoBehaviour
         skinPrefab = Instantiate(SkinManager.Instance.skinPrefabs[skinNumber], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
         skinPrefab.gameObject.transform.localScale = new Vector3(30, 30, 30);
         myArmature = GetComponentInChildren<UnityArmatureComponent>();
-        myArmature.animation.Play("victory_idle");
+        //myArmature.animation.Play("victory_idle");
     }
 
 }

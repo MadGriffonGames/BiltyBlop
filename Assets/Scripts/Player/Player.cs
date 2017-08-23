@@ -146,7 +146,7 @@ public class Player : Character
         freeCheckpoints = 3;
         startCoinCount = GameManager.CollectedCoins;
 
-        health = myArmature.GetComponent<SkinPrefab>().healthStat;
+        health = myArmature.GetComponent<SkinPrefab>().armorStat;
         damage = myArmature.GetComponent<SkinPrefab>().attackStat;
 
         maxHealth = health;

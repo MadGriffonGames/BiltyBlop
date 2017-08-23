@@ -14,7 +14,6 @@ public class SkinPrefab : MonoBehaviour {
     public int coinCost;
 
     public int armorStat;
-    public int healthStat;
     public int attackStat;
 
     private const string LOCKED = "Locked";

@@ -7,12 +7,15 @@ public class SkinPrefab : MonoBehaviour {
 
     public string shopName;
     public bool isLocked;  // true = skin locked; false = skin unlocked;
-    public int crystalCost;
-    public int coinCost;
-    public int armorStat;
-    public int attackStat;
     public int orderNumber;
     public Sprite skinSprite;
+
+    public int crystalCost;
+    public int coinCost;
+
+    public int armorStat;
+    public int healthStat;
+    public int attackStat;
 
     private const string LOCKED = "Locked";
     private const string UNLOCKED = "Unlocked";

@@ -161,7 +161,7 @@ public class DeathUI : MonoBehaviour
     void Revive()
     {
         Player.Instance.gameObject.layer = defaultLayer;
-        Player.Instance.Health = 3;
+        Player.Instance.Health = (int) Player.Instance.maxHealth;
         HealthUI.Instance.SetHealthbar();
         FindObjectOfType<Light>().intensity = Player.Instance.lightIntencityCP;
         Player.Instance.transform.position = new Vector3(Player.Instance.checkpointPosition.x,

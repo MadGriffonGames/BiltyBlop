@@ -71,7 +71,7 @@ public class TimeRewindUI : MonoBehaviour
             TimeController.timeBufferStart = TimeController.internalTime;
 
             Player.Instance.gameObject.layer = DEFAULT_LAYER;
-            Player.Instance.Health = 3;
+            Player.Instance.Health = (int)Player.Instance.maxHealth;
             HealthUI.Instance.SetHealthbar();
             Player.Instance.AttackCollider.enabled = false;
             Player.Instance.transform.parent = null;

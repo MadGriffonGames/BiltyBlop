@@ -71,7 +71,7 @@ public class Player : Character
     public bool GotKey { get; set; }
     public bool immortal = false;
     public float immortalTime;
-    public int damage = 1;
+    public int damage;
     public override bool IsDead
     {
         get { return health <= 0; }
@@ -135,15 +135,20 @@ public class Player : Character
         currentState = new PlayerIdleState();
 		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
         myRigidbody = GetComponent<Rigidbody2D>();
+
         startPosition = transform.position;
-        GotKey = false;
         checkpointPosition = startPosition;
         lightIntencityCP = FindObjectOfType<Light>().intensity;
-        startCoinCount = GameManager.CollectedCoins;
-        monstersKilled = 0;
+
+        GotKey = false;
         stars = 0;
         lvlCoins = 0;
         freeCheckpoints = 3;
+        startCoinCount = GameManager.CollectedCoins;
+
+        health = myArmature.GetComponent<SkinPrefab>().healthStat;
+        damage = myArmature.GetComponent<SkinPrefab>().attackStat;
+
         maxHealth = health;
         HealthUI.Instance.SetHealthbar();
     }

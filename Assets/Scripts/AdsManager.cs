@@ -79,8 +79,10 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
         {
             if (SceneManager.GetActiveScene().name.Contains("Level"))
             {
+#if !UNITY_IOS
                 warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
                 warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
+#endif
             }
             else
             {

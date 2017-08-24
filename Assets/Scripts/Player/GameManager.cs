@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public GameObject adsManager;
     [SerializeField]
     public GameObject metricaManager;
+    [SerializeField]
+    public GameObject achievementManager;
 
     public static string nextLevelName;
     public static int lvlCollectedCoins;
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
 
         Instantiate(adsManager);
         Instantiate(metricaManager);
+        Instantiate(achievementManager);
 
         CheckLastUnlockedLevel();
 

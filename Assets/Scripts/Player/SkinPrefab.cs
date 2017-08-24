@@ -26,23 +26,16 @@ public class SkinPrefab : MonoBehaviour
 
     private const string SPRITE_FOLDER = "SkinSprites/";
 
-
-    void Awake ()
+    public void SetPlayerPrefsParams()
     {
-        SetPlayerPrefsParams();		
-	}
-
-    private void SetPlayerPrefsParams()
-    {
-        if (!PlayerPrefs.HasKey(gameObject.name))
-        {
-            if (isLocked)
-            {
-                PlayerPrefs.SetString(gameObject.name, LOCKED);
-            }
-            else
-                PlayerPrefs.SetString(gameObject.name, UNLOCKED);
-        }
+		if (!PlayerPrefs.HasKey (gameObject.name)) {
+			if (isLocked) {
+				PlayerPrefs.SetString (gameObject.name, LOCKED);
+			} else
+				PlayerPrefs.SetString (gameObject.name, UNLOCKED);
+		} else
+			Debug.Log (gameObject.name + " " + PlayerPrefs.GetString (gameObject.name));
+		
         if (!PlayerPrefs.HasKey(gameObject.name + CRYSTAL_COST))
         {
             PlayerPrefs.SetInt(gameObject.name + CRYSTAL_COST, crystalCost);

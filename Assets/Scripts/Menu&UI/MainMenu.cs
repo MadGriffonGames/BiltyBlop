@@ -29,6 +29,13 @@ public class MainMenu : MonoBehaviour
         actCanvas.SetActive(true);
     }
 
+    public void ToIapTest()
+    {
+        GameManager.nextLevelName = "IapTest";
+
+        SceneManager.LoadScene("Loading");
+    }
+
     public void PlayUISound(string sound)
     {
         SoundManager.PlaySound(sound);

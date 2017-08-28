@@ -63,19 +63,39 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
         fromShowfunction = true;
         if (Appodeal.isPrecache(Appodeal.INTERSTITIAL))
         {
-            Appodeal.show(Appodeal.INTERSTITIAL);
+            if (PlayerPrefs.GetInt("NoAds") == 0)
+            {
+                Appodeal.show(Appodeal.INTERSTITIAL);
+            }
+            else
+            {
+                isInterstitialClosed = true;
+            }
         }
         else
         {
-            Appodeal.show(Appodeal.INTERSTITIAL);
+            if (PlayerPrefs.GetInt("NoAds") == 0)
+            {
+                Appodeal.show(Appodeal.INTERSTITIAL);
+            }
+            else
+            {
+                isInterstitialClosed = true;
+            }
         }
     }
 
     public void ShowRewardedVideo()
     {
-        Appodeal.show(Appodeal.REWARDED_VIDEO);
-
-        if (!Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched)
+        if (PlayerPrefs.GetInt("NoAds") == 0)
+        {
+            Appodeal.show(Appodeal.REWARDED_VIDEO);
+        }
+        else
+        {
+            isRewardVideoWatched = true;
+        }
+        if (PlayerPrefs.GetInt("NoAds") == 0 && !Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched)
         {
             if (SceneManager.GetActiveScene().name.Contains("Level"))
             {

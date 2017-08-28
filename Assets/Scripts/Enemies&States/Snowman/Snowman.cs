@@ -66,6 +66,7 @@ public class Snowman : MovingMeleeEnemy
             }
             if (IsDead)
             {
+                AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("snowman_death");
                 Instantiate(snowmanParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);

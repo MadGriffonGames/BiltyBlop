@@ -15,10 +15,16 @@ public class AchievementUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         achievementBox.gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        fading = true;
+    }
+
+    private void Awake()
+    {
+        fading = true;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -39,6 +45,7 @@ public class AchievementUI : MonoBehaviour {
     {
         achievementBox.gameObject.GetComponentInChildren<Text>().text = name;
         achievementBox.gameObject.SetActive(true);
+        fading = true;
         timeToFade = true;
     }
 
@@ -68,8 +75,10 @@ public class AchievementUI : MonoBehaviour {
         achievementBox.gameObject.GetComponentInChildren<Text>().color -= new Color(0, 0, 0, 0.05f);
         if (achievementBox.gameObject.GetComponent<Image>().color.a <= 0.2f)
         {
+            achievementBox.gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
             achievementBox.gameObject.SetActive(false);
             fadingOut = false;
+            
         }
     }
 }

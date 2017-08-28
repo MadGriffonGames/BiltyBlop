@@ -60,12 +60,12 @@ public class Typlak : MovingMeleeEnemy
             damaged = true;
             health -= Player.Instance.damage;
             StartCoroutine(AnimationDelay());
-            MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1,1,1));
+            MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
             if (IsDead)
             {
-                AchievementManager.Instance.CheckTyplak();
+                AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("enemyher loud");
                 Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);

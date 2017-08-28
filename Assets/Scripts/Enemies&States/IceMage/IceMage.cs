@@ -85,6 +85,7 @@ public class IceMage : RangeEnemy
         SpawnCoins(2, 3);
         if (IsDead)
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
             isDead = true;
             SoundManager.PlaySound("crystal_break");

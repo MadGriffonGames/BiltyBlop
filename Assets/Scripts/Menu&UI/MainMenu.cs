@@ -48,6 +48,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Loading");
     }
 
+    public void RateUs()
+    {
+        Application.OpenURL("https://docs.google.com/forms/d/1RzwBi5aEDaxPxkkPDz91RwuDNApOxV_VFm2UDZDob4s");
+    }
+
     public void BetaRewardButton()
     {
         if (PlayerPrefs.GetInt("Coins") == 0 && PlayerPrefs.GetInt("Crystals") == 0)

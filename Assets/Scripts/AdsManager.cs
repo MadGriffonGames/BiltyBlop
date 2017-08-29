@@ -40,7 +40,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 #if UNITY_EDITOR
 
 #elif UNITY_ANDROID
-    appKey = "3481dd986d45650597337fafb3b51bd88bc5d6862675c1d2";
+    appKey = "e98a9abebc918269e0b487f18fd271b1313447f412d4561e";
 
 #elif UNITY_IOS
     appKey = "027fffae726e025f6f6e311d8e8370af0bac2f6ce6630a81";

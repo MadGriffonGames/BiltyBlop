@@ -106,8 +106,10 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
             }
             else
             {
+#if !UNITY_IOS
                 warning = Instantiate(networkWarningPrefab, GameObject.Find("MainPanel").gameObject.transform);
                 warning.GetComponent<RectTransform>().localScale = new Vector2(3, 3);
+#endif
             }
             warning.GetComponent<RectTransform>().localPosition = new Vector2();
         }

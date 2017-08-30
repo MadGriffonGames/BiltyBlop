@@ -23,6 +23,9 @@ public class ShopController : MonoBehaviour {
     Button itemsButton;
     [SerializeField]
     Button perksButton;
+	[SerializeField]
+	Button gemsButton
+	;
 
     [SerializeField]
     Text coinTxt;
@@ -39,6 +42,7 @@ public class ShopController : MonoBehaviour {
         perksButton.GetComponentInChildren<Text>().text = "PERKS";
         itemsButton.GetComponentInChildren<Text>().text = "ITEMS";
         skinsButton.GetComponentInChildren<Text>().text = "SKINS";
+		gemsButton.GetComponentInChildren<Text>().text = "GEMS";
     }
 
     private void Update()

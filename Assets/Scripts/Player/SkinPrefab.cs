@@ -16,6 +16,7 @@ public class SkinPrefab : MonoBehaviour
 
     public int armorStat;
     public int attackStat;
+	public int displayIndex;
 
     private const string LOCKED = "Locked";
     private const string UNLOCKED = "Unlocked";
@@ -23,6 +24,7 @@ public class SkinPrefab : MonoBehaviour
     private const string COIN_COST = "CoinCost";
     private const string ARMOR = "ArmorStat";
     private const string ATTACK = "AttackStat";
+	private const string DISPLAY_INDEX = "DisplayIndex";
 
     private const string SPRITE_FOLDER = "SkinSprites/";
 
@@ -52,6 +54,10 @@ public class SkinPrefab : MonoBehaviour
         {
             PlayerPrefs.SetInt(gameObject.name + ATTACK, attackStat);
         }
+		if (!PlayerPrefs.HasKey(gameObject.name + DISPLAY_INDEX))
+		{
+			PlayerPrefs.SetInt(gameObject.name + DISPLAY_INDEX, displayIndex);
+		}
         skinSprite = Resources.Load<Sprite>(SPRITE_FOLDER + name);
     }
 

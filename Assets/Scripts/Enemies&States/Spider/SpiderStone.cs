@@ -22,7 +22,6 @@ public class SpiderStone : MonoBehaviour {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("DestroyGround"))
         {
             rand = UnityEngine.Random.Range(0, 2);
-            Debug.Log(rand);
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
             if (rand == 1)

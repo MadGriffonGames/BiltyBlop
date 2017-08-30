@@ -182,15 +182,25 @@ public class DailyReward : MonoBehaviour
 
     public void Randomize()
     {
-        int random = UnityEngine.Random.Range(1, 100);
+        if (PlayerPrefs.GetInt("FirstDailyChest") == 0)
+        {
+            loot.sprite = lootArray[5];
+            AddCrystals(10);
 
-        if (random <= COINS_RANGE)
-        {
-            RandomizeCoins();
+            PlayerPrefs.SetInt("FirstDailyChest", 1);
         }
-        if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
+        else
         {
-            RandomizeCrystals();
+            int random = UnityEngine.Random.Range(1, 100);
+
+            if (random <= COINS_RANGE)
+            {
+                RandomizeCoins();
+            }
+            if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
+            {
+                RandomizeCrystals();
+            }
         }
     }
 
@@ -252,7 +262,6 @@ public class DailyReward : MonoBehaviour
     {
         loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
         PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
-        GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
     }
 
     void AddItem(string itemName)

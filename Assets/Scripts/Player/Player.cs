@@ -126,6 +126,8 @@ public class Player : Character
 	{
         base.Start();
 
+        PlayerPrefs.DeleteKey("NoAds");
+
         skinSlots = new Slot [9];
 
         swordIndex = 3;
@@ -617,12 +619,12 @@ public class Player : Character
     public IEnumerator DamageBonus(float duration)
     {
         damageBonusNum++;
-        damage = 2;
+        damage *= 2;
         yield return new WaitForSeconds(duration);
         damageBonusNum--;
         if (damageBonusNum == 0)
         {
-            damage = 1;
+            damage /= 2;
         }
     }
 
@@ -683,9 +685,9 @@ public class Player : Character
         timeBonusNum++;
         timeScaler = 1.6f;
         timeScalerJump = 3f;
-        timeScalerMove = 1.3f;
+        timeScalerMove = 1.8f;
         SoundManager.SetPitch(0.5f);
-        myArmature.animation.timeScale = 1.6f;
+        myArmature.animation.timeScale = 2f;
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime = 0.01f;
         myRigidbody.gravityScale = 6;
@@ -725,14 +727,10 @@ public class Player : Character
      * Skin Managment
      */
 
-    public void SetIndexes()
+    public void AddSlot(string slotName, ref int i)
     {
-        swordSlot.displayIndex = swordIndex;
-
-        for (int i = 0; i < skinSlots.Length; i++)
-        {
-            skinSlots[i].displayIndex = skinIndex;
-        }
+        skinSlots[i] = myArmature.armature.GetSlot(slotName);
+        i++;
     }
 
     public void SetSlots()
@@ -754,10 +752,14 @@ public class Player : Character
         AddSlot("head", ref i);
     }
 
-    public void AddSlot(string slotName, ref int i)
+    public void SetIndexes()
     {
-        skinSlots[i] = myArmature.armature.GetSlot(slotName);
-        i++;
+        swordSlot.displayIndex = swordIndex;
+
+        for (int i = 0; i < skinSlots.Length; i++)
+        {
+            skinSlots[i].displayIndex = skinIndex;
+        }
     }
 
     /*

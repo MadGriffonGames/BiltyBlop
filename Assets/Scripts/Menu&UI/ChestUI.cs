@@ -121,19 +121,29 @@ public class ChestUI : MonoBehaviour
 
     public void Randomize()
     {
-        int random = UnityEngine.Random.Range(1, 100);
+        if (PlayerPrefs.GetInt("FirstChest") == 0)
+        {
+            loot.sprite = lootArray[5];
+            AddCrystals(10);
 
-        if (random <= COINS_RANGE)
-        {
-            RandomizeCoins();
+            PlayerPrefs.SetInt("FirstChest", 1);
         }
-        if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
+        else
         {
-            RandomizeCrystals();
-        }
-        if (random > CRYSTALS_RANGE && random <= ITEMS_RANGE)
-        {
-            RandomizeItems();
+            int random = UnityEngine.Random.Range(1, 100);
+
+            if (random <= COINS_RANGE)
+            {
+                RandomizeCoins();
+            }
+            if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
+            {
+                RandomizeCrystals();
+            }
+            if (random > CRYSTALS_RANGE && random <= ITEMS_RANGE)
+            {
+                RandomizeItems();
+            }
         }
     }
 

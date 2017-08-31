@@ -126,8 +126,6 @@ public class Player : Character
 	{
         base.Start();
 
-        PlayerPrefs.DeleteKey("NoAds");
-
         skinSlots = new Slot [9];
 
         swordIndex = 3;

@@ -24,8 +24,7 @@ public class ShopController : MonoBehaviour {
     [SerializeField]
     Button perksButton;
 	[SerializeField]
-	Button gemsButton
-	;
+	Button gemsButton;
 
     [SerializeField]
     Text coinTxt;

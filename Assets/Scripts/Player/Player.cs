@@ -109,6 +109,14 @@ public class Player : Character
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
 
+    /*
+     * Skin Managment
+     */
+    int swordIndex;
+    int skinIndex;
+    Slot swordSlot;
+    Slot[] skinSlots;
+
     private void OnEnable()
     {
         SetThrowing();
@@ -117,6 +125,14 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
+
+        skinSlots = new Slot [9];
+
+        swordIndex = 3;
+        skinIndex = 1;
+
+        SetSlots();
+
 
         if (PlayerPrefs.HasKey("Level11"))
         {
@@ -146,8 +162,11 @@ public class Player : Character
         freeCheckpoints = 3;
         startCoinCount = GameManager.CollectedCoins;
 
-        health = myArmature.GetComponent<SkinPrefab>().armorStat;
-        damage = myArmature.GetComponent<SkinPrefab>().attackStat;
+        //health = myArmature.GetComponent<SkinPrefab>().armorStat;
+        //damage = myArmature.GetComponent<SkinPrefab>().attackStat;
+
+        health = 3;
+        damage = 1;
 
         maxHealth = health;
         HealthUI.Instance.SetHealthbar();
@@ -700,6 +719,45 @@ public class Player : Character
         jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
         Time.fixedDeltaTime = 0.02000000f;
+    }
+
+    /*
+     * Skin Managment
+     */
+
+    public void SetIndexes()
+    {
+        swordSlot.displayIndex = swordIndex;
+
+        for (int i = 0; i < skinSlots.Length; i++)
+        {
+            skinSlots[i].displayIndex = skinIndex;
+        }
+    }
+
+    public void SetSlots()
+    {
+        int i = 0;
+
+        myArmature.zSpace = 0.02f;
+
+        swordSlot = myArmature.armature.GetSlot("Sword");
+
+        AddSlot("r_hand_2", ref i);
+        AddSlot("l_hand_2", ref i);
+        AddSlot("leg", ref i);
+        AddSlot("leg1", ref i);
+        AddSlot("Shoulder_l", ref i);
+        AddSlot("Shoulder_r", ref i);
+        AddSlot("torso", ref i);
+        AddSlot("mex", ref i);
+        AddSlot("head", ref i);
+    }
+
+    public void AddSlot(string slotName, ref int i)
+    {
+        skinSlots[i] = myArmature.armature.GetSlot(slotName);
+        i++;
     }
 
     /*

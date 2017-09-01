@@ -11,6 +11,8 @@ public class PlayerJumpState : IPlayerState
     {
         player.Jump = true;
         player.myArmature.animation.FadeIn("jump", -1, -1);
+
+        player.SetIndexes();
     }
 
     public void Execute()

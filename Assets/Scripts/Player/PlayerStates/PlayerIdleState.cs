@@ -9,11 +9,13 @@ public class PlayerIdleState : IPlayerState
 
     public void Enter(Player player)
     {
-        player.myArmature.animation.FadeIn("idle", 0.0001f, -1);
+        player.myArmature.animation.FadeIn("idle", -1, -1);
         if (Player.Instance.OnGround && Player.Instance.gameObject.layer != platformLayer)
         {
             Player.Instance.gameObject.layer = groundLayer;
         }
+
+        player.SetIndexes();
     }
 
     public void Execute()

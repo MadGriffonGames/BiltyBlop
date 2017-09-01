@@ -31,16 +31,17 @@ public class KidSkin : MonoBehaviour
     public void ChangeSkin(int skinNumber)
     {
         myArmature = GetComponentInChildren<UnityArmatureComponent>();
-		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponentInChildren<SkinPrefab> ().displayIndex;
+		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponentInChildren<SkinPrefab> ().GetSkinIndex();
+
 		SetSlots ();
+		Debug.Log (skinSlots.Length + "| skinInd = " + skinIndex);
 		SetIndexes ();
 
 		//myArmature.animation.Play("victory_idle");
     }
 	public void AddSlot(string slotName, ref int i)
 	{
-		skinSlots[i] = myArmature.armature.GetSlot(slotName);
-		Debug.Log (skinSlots[i]);
+		skinSlots [i] = myArmature.armature.GetSlot (slotName);
 		i++;
 	}
 
@@ -64,10 +65,9 @@ public class KidSkin : MonoBehaviour
 	public void SetIndexes()
 	{
 
-		for (int i = 0; i < skinSlots.Length; i++)
+		for (int j = 0; j < skinSlots.Length; j++)
 		{
-			skinSlots[i].displayIndex = skinIndex;
-
+			skinSlots[j].displayIndex = skinIndex;
 		}
 	}
 

@@ -20,8 +20,8 @@ public class SkinSwipeMenu : SwipeMenu {
 
     public override void Start()
     {
-        SetSkinCards();
-        buttons = new GameObject[panel.transform.childCount];
+		buttons = new GameObject[SkinManager.Instance.skinPrefabs.Length];
+		SetSkinCards();
         distance = new float[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -45,11 +45,11 @@ public class SkinSwipeMenu : SwipeMenu {
             {
                 if (SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>().orderNumber == i)
                 {
-                    
+					
                     GameObject skinCardObj = Instantiate(skinCard, new Vector3(buttonDistance * i, 0, 0),Quaternion.identity) as GameObject;
                     SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
 					skin.SetPlayerPrefsParams ();
-
+					PlayerPrefs.SetString(skin.name,"Locked");
                     skinCardObj.transform.SetParent(panel);
                     skinCardObj.transform.localPosition = new Vector3(i * DISTANCE, 0, 0);
                     skinCardObj.transform.localScale = new Vector3(1, 1, 1);
@@ -75,7 +75,6 @@ public class SkinSwipeMenu : SwipeMenu {
                     }
                     else
                     {
-						Debug.Log (PlayerPrefs.GetString(skin.name));
 						skinCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
                         skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
                     }

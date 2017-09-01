@@ -9,14 +9,16 @@ public class PlayerThrowState : IPlayerState
     {
         if (Input.GetAxis("Horizontal") != 0 || Player.Instance.mobileInput != 0)
         {
-            player.myArmature.animation.FadeIn("throw_run", 0.03f, 1);
+            player.myArmature.animation.FadeIn("throw_run", -1, 1);
         }
         else
         {
-            player.myArmature.animation.FadeIn("throw_run", 0.03f, 1);
+            player.myArmature.animation.FadeIn("throw_run", -1, 1);
         }
         player.ThrowWeapon();
         Player.Instance.Throw = false;
+
+        player.SetIndexes();
     }
 
     public void Execute()

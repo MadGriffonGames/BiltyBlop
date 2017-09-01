@@ -35,8 +35,7 @@ public class SkinPrefab : MonoBehaviour
 				PlayerPrefs.SetString (gameObject.name, LOCKED);
 			} else
 				PlayerPrefs.SetString (gameObject.name, UNLOCKED);
-		} else
-			Debug.Log (gameObject.name + " " + PlayerPrefs.GetString (gameObject.name));
+		}
 		
         if (!PlayerPrefs.HasKey(gameObject.name + CRYSTAL_COST))
         {
@@ -66,4 +65,8 @@ public class SkinPrefab : MonoBehaviour
         PlayerPrefs.SetString(gameObject.name, UNLOCKED);
         isLocked = false;
     }
+	public int GetSkinIndex()
+	{
+		return PlayerPrefs.GetInt (gameObject.name + DISPLAY_INDEX);
+	}
 }

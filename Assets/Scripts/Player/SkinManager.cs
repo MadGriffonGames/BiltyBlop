@@ -36,7 +36,7 @@ public class SkinManager : MonoBehaviour
 
     private void LoadSkinPrefabs()
     {
-        skinPrefabs = Resources.LoadAll<GameObject>(PREFABS_FOLDER);
+		skinPrefabs = Resources.LoadAll<GameObject>(PREFABS_FOLDER);
     }
 
     public bool isSkinLocked(int skinNumber) // true - Locked | false - Unlocked
@@ -73,10 +73,12 @@ public class SkinManager : MonoBehaviour
     private void UnlockSkin(int skinNumber)
     {
         PlayerPrefs.SetString(skinPrefabs[skinNumber].name, UNLOCKED);
+		skinPrefabs [skinNumber].GetComponent<SkinPrefab> ().isLocked = false;
     }
     private void UnlockSkin(string skinName)
     {   
         PlayerPrefs.SetString(skinPrefabs[NumberOfSkin(skinName)].name, UNLOCKED);
+		skinPrefabs [NumberOfSkin(skinName)].GetComponent<SkinPrefab> ().isLocked = false;
     }
 
     public void ApplySkin(string skinName) // applying (equiping) "skinName" skin 

@@ -17,6 +17,8 @@ public class InAppTutorial : MonoBehaviour
     [SerializeField]
     public GameObject backpackLight;
     [SerializeField]
+    Button targetButton;
+    [SerializeField]
     public Button[] otherButtons; 
 
     public bool isActive = false;
@@ -67,6 +69,7 @@ public class InAppTutorial : MonoBehaviour
         {
             otherButtons[i].enabled = false;
         }
+        targetButton.enabled = true;
     }
 
     public void DisactivateTutorial()

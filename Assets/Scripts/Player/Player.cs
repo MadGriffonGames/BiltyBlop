@@ -129,7 +129,9 @@ public class Player : Character
         skinSlots = new Slot [9];
 
         swordIndex = 3;
-        skinIndex = 1;
+		skinIndex = PlayerPrefs.GetInt ("SkinDisplayIndex");
+		health = PlayerPrefs.GetInt ("SkinArmorStat");
+		damage = PlayerPrefs.GetInt ("SkinAttackStat");
 
         SetSlots();
 
@@ -162,11 +164,6 @@ public class Player : Character
         freeCheckpoints = 3;
         startCoinCount = GameManager.CollectedCoins;
 
-        //health = myArmature.GetComponent<SkinPrefab>().armorStat;
-        //damage = myArmature.GetComponent<SkinPrefab>().attackStat;
-
-        health = 3;
-        damage = 1;
 
         maxHealth = health;
         HealthUI.Instance.SetHealthbar();

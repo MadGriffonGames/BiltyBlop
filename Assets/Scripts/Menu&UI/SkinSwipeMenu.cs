@@ -48,8 +48,8 @@ public class SkinSwipeMenu : SwipeMenu {
 					
                     GameObject skinCardObj = Instantiate(skinCard, new Vector3(buttonDistance * i, 0, 0),Quaternion.identity) as GameObject;
                     SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
-					skin.SetPlayerPrefsParams ();
-					PlayerPrefs.SetString(skin.name,"Locked");
+					skin.SetPlayerPrefsParams ();			
+
                     skinCardObj.transform.SetParent(panel);
                     skinCardObj.transform.localPosition = new Vector3(i * DISTANCE, 0, 0);
                     skinCardObj.transform.localScale = new Vector3(1, 1, 1);
@@ -62,7 +62,6 @@ public class SkinSwipeMenu : SwipeMenu {
 						{
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
 							skinCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipedButton;
-
 						} 
 						else 
 						{
@@ -71,7 +70,6 @@ public class SkinSwipeMenu : SwipeMenu {
 						}
 						skinCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySkin (skin.orderNumber));
 						skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySkin (skin.orderNumber));
-
                     }
                     else
                     {
@@ -130,7 +128,7 @@ public class SkinSwipeMenu : SwipeMenu {
 //            }
 //        }
 
-        SkinManager.Instance.ApplySkin(SkinManager.Instance.NameOfSkinPrefabBySkinOrder(skinOrderNumber));
+		SkinManager.Instance.ApplySkin(SkinManager.Instance.NameOfSkinPrefabBySkinOrder(skinOrderNumber));
 		UpdateSkinCards();
     }
 

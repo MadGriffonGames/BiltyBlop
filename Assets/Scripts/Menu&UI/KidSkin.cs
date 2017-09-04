@@ -23,7 +23,7 @@ public class KidSkin : MonoBehaviour
 	private Slot swordSlot;
 	private int skinIndex;
 
-	public void Start()
+	public void Awake()
 	{
 		skinSlots = new Slot[9];
 	}	
@@ -31,10 +31,10 @@ public class KidSkin : MonoBehaviour
     public void ChangeSkin(int skinNumber)
     {
         myArmature = GetComponentInChildren<UnityArmatureComponent>();
-		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponentInChildren<SkinPrefab> ().GetSkinIndex();
+		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponentInChildren<SkinPrefab> ().displayIndex;
 
 		SetSlots ();
-		Debug.Log (skinSlots.Length + "| skinInd = " + skinIndex);
+
 		SetIndexes ();
 
 		//myArmature.animation.Play("victory_idle");

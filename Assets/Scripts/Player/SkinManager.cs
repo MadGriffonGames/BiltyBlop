@@ -81,9 +81,13 @@ public class SkinManager : MonoBehaviour
 		skinPrefabs [NumberOfSkin(skinName)].GetComponent<SkinPrefab> ().isLocked = false;
     }
 
-    public void ApplySkin(string skinName) // applying (equiping) "skinName" skin 
+	public void ApplySkin(string skinName) // applying (equiping) "skinName" skin 
     {
         PlayerPrefs.SetString("Skin", skinName);
+		Debug.Log (skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().displayIndex);
+		PlayerPrefs.SetInt("SkinDisplayIndex", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().displayIndex);
+		PlayerPrefs.SetInt("SkinArmorStat", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().armorStat);
+		PlayerPrefs.SetInt("SkinAttackStat", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().attackStat);
     }
 
     public int NumberOfSkinPrefabBySkinOrder(int orderNumber)

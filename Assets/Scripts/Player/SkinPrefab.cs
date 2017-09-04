@@ -26,7 +26,7 @@ public class SkinPrefab : MonoBehaviour
     private const string ATTACK = "AttackStat";
 	private const string DISPLAY_INDEX = "DisplayIndex";
 
-    private const string SPRITE_FOLDER = "SkinSprites/";
+    private const string SPRITE_FOLDER = "Skins/SkinSprites/";
 
     public void SetPlayerPrefsParams()
     {

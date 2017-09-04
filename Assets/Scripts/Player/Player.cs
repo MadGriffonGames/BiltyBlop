@@ -128,7 +128,7 @@ public class Player : Character
 
         skinSlots = new Slot [9];
 
-        swordIndex = 3;
+		swordIndex = PlayerPrefs.GetInt("SwordDisplayIndex");
 		skinIndex = PlayerPrefs.GetInt ("SkinDisplayIndex");
 		health = PlayerPrefs.GetInt ("SkinArmorStat");
 		damage = PlayerPrefs.GetInt ("SkinAttackStat");

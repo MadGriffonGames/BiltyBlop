@@ -9,16 +9,32 @@ public class AchievementManager : MonoBehaviour {
     int killCounterTyplak;
     GameObject achievementUI;
 
-    Achieve[] achievement;
 
-    string typlakText = "You have killed 1 enemy";
-    string penguinText = "You have killed 1 enemy";
 
-    public Achieve penguinAchieve;
-    int[] penguinReward;
+    int[] mobKillerReward;
     int[] mobKillerTargetValue;
 
+    int[] treasureHunterReward;
+    int[] treasureHunterValue;
+
+    int[] idiotReward;
+    int[] idiotTargerValue;
+
+    int[] swimmerReward;
+    int[] swimmerTargetValue;
+
+    int[] torchCollectorReward;
+    int[] torchCollectorTargetValue;
+
+    int[] secretRoomerReward;
+    int[] secretRoomerTargetValue;
+
     public Achieve mobKiller;
+    public Achieve treasureHunter;
+    public Achieve idiot;
+    public Achieve swimmer;
+    public Achieve torchCollector;
+    public Achieve secretRoomer;
     int[] mobReward;
 
 
@@ -33,16 +49,45 @@ public class AchievementManager : MonoBehaviour {
         }
     }
 
+    private void Awake()
+    {
+        idiotReward = new int[] { -5, -10, -15 };
+        idiotTargerValue = new int[] { 1, 5, 10 };
+
+        swimmerReward = new int[] { 100, 150, 200 };
+        swimmerTargetValue = new int[] { 10, 15, 20 };
+    }
+
     // Use this for initialization
     void Start() {
+        //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
-        achievement = new Achieve[20];
-        //PlayerPrefs.SetInt("Penguin's king", 0);
-        penguinReward = new int[] { 100, 150, 200 };
-        mobKillerTargetValue = new int[] { 10, 15, 20 };
-        //penguinAchieve = new Achieve("Penguin's kingtest", "penguinPrefstest","Coins", 1, penguinReward, 1);
-        mobReward = new int[] { 1000, 1500, 5000 };
-        mobKiller = new Achieve("Mob killer test", "mobKillerPrefTest1", "Coins", mobKillerTargetValue, penguinReward, 100); 
+        mobKillerReward = new int[] { 100, 150, 200 };
+        mobKillerTargetValue = new int[] { 1, 2, 3 };
+
+        treasureHunterReward = new int[] { 10, 100, 500 };
+        treasureHunterValue = new int[] { 1, 10, 100 };
+
+        idiotReward = new int[] { -5, -10, -15 };
+        idiotTargerValue = new int[] { 1, 5, 10 };
+
+        swimmerReward = new int[] { 100, 150, 200 };
+        swimmerTargetValue = new int[] { 1, 3, 5 };
+
+        torchCollectorReward = new int[] { 100, 100, 100 };
+        torchCollectorTargetValue = new int[] { 1, 2, 3 };
+
+        secretRoomerReward = new int[] { 200, 400, 600 };
+        secretRoomerTargetValue = new int[] { 5, 10, 15 };
+
+        //ResetStat("Secret Rush test", "secretRoomerPref");
+
+        mobKiller = new Achieve("Mob killer test", "mobKillerPrefTest", "Coins", mobKillerTargetValue, mobKillerReward, true);
+        treasureHunter = new Achieve("Treasure Hunter", "treasureHuntertest", "Coins", treasureHunterValue, treasureHunterReward, true);
+        idiot = new Achieve("Idiot blyat?", "Coins", idiotTargerValue, idiotReward, false);
+        swimmer = new Achieve("Swim lover test", "Coins", swimmerTargetValue, swimmerReward, false);
+        torchCollector = new Achieve("No light on level anymore.", "Coins", torchCollectorTargetValue, torchCollectorReward, false);
+        secretRoomer = new Achieve("Secret Rush test", "secretRoomerPref", "Coins", secretRoomerTargetValue, secretRoomerReward, true);
     }
 	
 	// Update is called once per frame
@@ -51,17 +96,53 @@ public class AchievementManager : MonoBehaviour {
 	}
 
     public void CheckAchieve(Achieve achieve)
-    { 
-        PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
-        if (PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight])
+    {
+        if (achieve.isEndless)
         {
-            GameManager.CollectedCoins += achieve.reward[achieve.weight];
-            achieve.RewardUpdate();
-            achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
-            StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+
+            if (achieve.weight < 3)
+            {
+                PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
+                //Debug.Log(PlayerPrefs.GetInt(achieve.achieveName));
+                //Debug.Log(achieve.targetValue[achieve.weight]);
+                //Debug.Log(PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight]);
+                if (PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight])
+                {
+                    Debug.Log("Rewarding time");
+                    GameManager.CollectedCoins += achieve.reward[achieve.weight];
+                    achieve.RewardUpdate();
+                    achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
+                    StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+                }
+            }
+        }
+
+        else if (!achieve.isEndless)
+        {
+            if (achieve.weight < 3)
+            {
+                PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
+                if (PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight])
+                {
+                    achieve.LevelRewardUpdate();
+                    GameManager.CollectedCoins += achieve.reward[achieve.weight];  
+                    achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
+                    StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+                }
+            }
         }
     }
 
+    void ResetStat(string achieveName, string prefsName)
+    {
+        PlayerPrefs.SetInt(achieveName, 0);
+        PlayerPrefs.SetInt(prefsName + "weight", 0);
+        //PlayerPrefs.SetInt(prefsName + "targetValue0", 0);
+        //PlayerPrefs.SetInt(prefsName + "targetValue1", 0);
+        //PlayerPrefs.SetInt(prefsName + "targetValue2", 0);
+        //PlayerPrefs.SetInt(prefsName + "weight", 0);
 
+
+    }
 
 }

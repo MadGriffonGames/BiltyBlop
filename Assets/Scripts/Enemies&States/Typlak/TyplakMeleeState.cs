@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TyplakMeleeState : ITyplakState
+public class TyplakMeleeState : MonoBehaviour ,ITyplakState
 {
     private Typlak enemy;
 
@@ -10,6 +10,8 @@ public class TyplakMeleeState : ITyplakState
     private float attackCoolDown = 1.5f;
     private bool canExit = true;
     bool preattack = false;
+    float timer;
+    float delay = 0.1f;
 
     public void Enter(Typlak enemy)
     {
@@ -53,8 +55,13 @@ public class TyplakMeleeState : ITyplakState
         if (enemy.armature.animation.lastAnimationName == "preattack" && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.FadeIn("Attack", -1, 1);
-            enemy.AttackCollider.enabled = true;
+            timer = Time.time;
+            //StartCoroutine(EnableCollider());
         }
+
+        if (enemy.armature.animation.lastAnimationName == "Attack" && Time.time - timer > delay)
+            enemy.AttackCollider.enabled = true;
+
         if (enemy.armature.animation.lastAnimationName == "Attack" && enemy.armature.animation.isCompleted)
         {
             enemy.AttackCollider.enabled = false;
@@ -62,5 +69,11 @@ public class TyplakMeleeState : ITyplakState
             preattack = false;
             canExit = true;
         }
+    }
+
+    IEnumerator EnableCollider()
+    {
+        yield return new WaitForSeconds(0.2f);
+        enemy.AttackCollider.enabled = true;
     }
 }

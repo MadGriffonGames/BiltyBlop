@@ -70,7 +70,6 @@ public class TutorialTrigger : MonoBehaviour
 
     void FadeIn()
     {
-        
         TutorialUI.Instance.oldmanFace.gameObject.SetActive(true);
         TutorialUI.Instance.textBar.gameObject.SetActive(true);
         TutorialUI.Instance.oldmanFace.color += new Color(0, 0, 0, 0.05f);

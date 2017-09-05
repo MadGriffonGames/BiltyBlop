@@ -13,8 +13,8 @@ public class UnlockPerkWindow : MonoBehaviour {
     GameObject buyCrystalsButton;
     [SerializeField]
     GameObject perkName;
-    [SerializeField]
-    GameObject applyButton;
+	[SerializeField]
+	GameObject perkDescription;
     [SerializeField]
     GameObject errorWindow;
     [SerializeField]
@@ -43,6 +43,7 @@ public class UnlockPerkWindow : MonoBehaviour {
         }
         PerkPrefab perk = PerksSwipeMenu.Instance.perkPrefabs[perkNumber].gameObject.GetComponent<PerkPrefab>();
         perkName.GetComponent<Text>().text = perk.shopName;
+		perkDescription.GetComponent<Text>().text = perk.description;
 
         // perkNumber - number of chosen perk in perkPrefabs[]
 

@@ -15,25 +15,22 @@ public class PerkPrefab : MonoBehaviour {
 
     [SerializeField]
     Text perkName;
-    [SerializeField]
-    Text perkDeascription;
 
     private const string LOCKED = "Locked";
     private const string UNLOCKED = "Unlocked";
     private const string CRYSTAL_COST = "CrystalCost";
     private const string COIN_COST = "CoinCost";
 
-    private const string SPRITE_FOLDER = "PerkSprites/";
+    private const string SPRITE_FOLDER = "Perks/PerkSprites/";
 
 
     void Awake()
     {
         perkName.text = shopName;
-        perkDeascription.text = description;
         SetPlayerPrefsParams();
     }
 
-    private void SetPlayerPrefsParams()
+    public void SetPlayerPrefsParams()
     {
         if (!PlayerPrefs.HasKey(gameObject.name))
         {
@@ -53,7 +50,7 @@ public class PerkPrefab : MonoBehaviour {
             PlayerPrefs.SetInt(gameObject.name + COIN_COST, coinCost);
         }
 
-        //perkSprite = Resources.Load<Sprite>(SPRITE_FOLDER + name);
+        perkSprite = Resources.Load<Sprite>(SPRITE_FOLDER + name);
     }
     public void UnlockPerk()
     {

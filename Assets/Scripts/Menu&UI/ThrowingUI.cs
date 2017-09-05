@@ -15,11 +15,20 @@ public class ThrowingUI : MonoBehaviour
         }
     }
 
-    [SerializeField]
     GameObject[] throwBar;
+	[SerializeField]
+	GameObject throwingObject;
 
     public void SetThrowBar()
+
     {
+		throwBar = new GameObject[Player.Instance.clipSize];
+		for (int i = 0; i < Player.Instance.clipSize; i++) 
+		{
+			GameObject throwingKnife = Instantiate (throwingObject) as GameObject;
+			throwingKnife.transform.SetParent (this.transform);
+			throwBar [i] = throwingKnife;
+		}
         for (int i = 0; i < Player.Instance.clipSize; i++)
         {
             if (i < Player.Instance.throwingIterator + 1)

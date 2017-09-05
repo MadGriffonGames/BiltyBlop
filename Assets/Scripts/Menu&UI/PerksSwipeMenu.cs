@@ -115,7 +115,7 @@ public class PerksSwipeMenu : SwipeMenu {
                     perkCardObj.transform.localPosition = new Vector3(i*DISTANCE, 0, 0);
                     perkCardObj.transform.localScale = new Vector3(1, 1, 1);
                     perkCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = perk.shopName;
-                    perkCardObj.gameObject.GetComponentsInChildren<Text>()[1].text = perk.description;
+                    //perkCardObj.gameObject.GetComponentsInChildren<Text>()[1].text = perk.description;
 
                     perkCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = perk.perkSprite;
                     if (!perk.isLocked)
@@ -124,7 +124,8 @@ public class PerksSwipeMenu : SwipeMenu {
                     }
                     else
                     {
-                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockPerkWindow(perk.orderNumber));
+                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockPerkWindow(perk.orderNumber));
+						perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockPerkWindow(perk.orderNumber));
                         perkCardObj.gameObject.GetComponent<Image>().color = new Color32(188, 188, 188, 255);
                     }
                 }

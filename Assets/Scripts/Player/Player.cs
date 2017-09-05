@@ -116,15 +116,53 @@ public class Player : Character
     int skinIndex;
     Slot swordSlot;
     Slot[] skinSlots;
+	/*
+	 * Perk Managment params
+	 */
+	int dodgeChance; // in %
+	float potionTimeScale;
+	public float coinScale;
+
+	private void Awake()
+	{
+		SetPerkParams ();
+	}
 
     private void OnEnable()
     {
+
         SetThrowing();
     }
+
+	private void SetPerkParams()
+	{
+		if (PlayerPrefs.GetString ("Dodger") == "Unlocked") {
+			dodgeChance = 15;	
+			Debug.Log("dodger");
+		} else
+			dodgeChance = 0;
+		if (PlayerPrefs.GetString("PotionManiac") == "Unlocked") 
+		{
+			potionTimeScale = 1.5f;
+			Debug.Log ("potions");
+		} else
+			potionTimeScale = 1f;
+		if (PlayerPrefs.GetString ("Greedy") == "Unlocked") {
+			coinScale = 1.5f;	
+			Debug.Log ("greedy");
+		} else
+			coinScale = 1;
+		if (PlayerPrefs.GetString ("AmmoManiac") == "Unlocked") {
+			clipSize = 7;	
+			Debug.Log ("ammo maniac");
+		} else
+			clipSize = 5;
+	}
 
     public override void Start () 
 	{
         base.Start();
+	
 
         skinSlots = new Slot [9];
 
@@ -309,7 +347,11 @@ public class Player : Character
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
-        base.OnTriggerEnter2D(other);
+		int tmpNumber = UnityEngine.Random.Range (0, 100);   // DODGER PERK DETECTION
+		if (damageSources.Contains(other.tag) && tmpNumber > dodgeChance)
+		{
+			StartCoroutine(TakeDamage());
+		}
         
         if (other.gameObject.CompareTag("DeathTrigger"))
         {
@@ -492,6 +534,7 @@ public class Player : Character
         clipSize = 5;
         throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
         ThrowingUI.Instance.SetThrowBar();
+		Debug.Log (clipSize);
         throwingClip = new GameObject[clipSize];
         for (int i = 0; i < clipSize; i++)
         {
@@ -598,7 +641,7 @@ public class Player : Character
     {
         immortalBonusNum++;
         immortal = true;
-        yield return new WaitForSeconds(duration);
+			yield return new WaitForSeconds(duration * potionTimeScale);
         immortalBonusNum--;
         if (immortalBonusNum == 0)
         {
@@ -616,7 +659,7 @@ public class Player : Character
     {
         damageBonusNum++;
         damage *= 2;
-        yield return new WaitForSeconds(duration);
+			yield return new WaitForSeconds(duration * potionTimeScale);
         damageBonusNum--;
         if (damageBonusNum == 0)
         {
@@ -634,7 +677,7 @@ public class Player : Character
     {
         jumpBonusNum++;
         jumpForce = 1200;
-        yield return new WaitForSeconds(duration);
+			yield return new WaitForSeconds(duration * potionTimeScale);
         jumpBonusNum--;
         if (jumpBonusNum == 0)
         {
@@ -657,7 +700,7 @@ public class Player : Character
         Camera cam = Camera.main;
         CameraEffect cef = cam.GetComponent<CameraEffect>();
         cef.StartBlur(0.35f);
-        yield return new WaitForSeconds(duration);
+			yield return new WaitForSeconds(duration * potionTimeScale);
         speedBonusNum--;
 
         if (speedBonusNum == 0)
@@ -687,7 +730,7 @@ public class Player : Character
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime = 0.01f;
         myRigidbody.gravityScale = 6;
-        yield return new WaitForSeconds(duration);
+			yield return new WaitForSeconds(duration * potionTimeScale);
         timeBonusNum--;
 
         if (timeBonusNum == 0)

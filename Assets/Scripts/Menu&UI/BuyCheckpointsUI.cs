@@ -17,6 +17,8 @@ public class BuyCheckpointsUI : MonoBehaviour
     Text coinsPrice;
     [SerializeField]
     GameObject crystalsButton;
+    [SerializeField]
+    GameObject freeButton;
 
     int coinsPriceInt;
 
@@ -24,33 +26,48 @@ public class BuyCheckpointsUI : MonoBehaviour
 
     private void OnEnable()
     {
+        PlayerPrefs.SetInt("NoAds", 1);
         if (notPremiumAttemps > 0)
         {
-            videoButton.SetActive(true);
-            coinsButton.SetActive(true);
-            switch (notPremiumAttemps)
+            if (PlayerPrefs.GetInt("NoAds") != 0)
             {
-                case 3:
-                    coinsPrice.text = "50";
-                    break;
-                case 2:
-                    coinsPrice.text = "100";
-                    break;
-                case 1:
-                    coinsPrice.text = "150";
-                    break;
+                videoButton.SetActive(false);
+                coinsButton.SetActive(false);
+                crystalsButton.SetActive(false);
+
+                freeButton.SetActive(true);
             }
-            coinsPriceInt = int.Parse(coinsPrice.text);
-            if (coinsPriceInt > 50)
+            else
             {
-                coinsPrice.fontSize = 35;
+                videoButton.SetActive(true);
+                coinsButton.SetActive(true);
+                switch (notPremiumAttemps)
+                {
+                    case 3:
+                        coinsPrice.text = "100";
+                        break;
+                    case 2:
+                        coinsPrice.text = "200";
+                        break;
+                    case 1:
+                        coinsPrice.text = "300";
+                        break;
+                }
+                coinsPriceInt = int.Parse(coinsPrice.text);
+                if (coinsPriceInt > 50)
+                {
+                    coinsPrice.fontSize = 35;
+                }
+                crystalsButton.SetActive(false);
+                freeButton.SetActive(false);
             }
-            crystalsButton.SetActive(false);
         }
         else
         {
             videoButton.SetActive(false);
             coinsButton.SetActive(false);
+            freeButton.SetActive(false);
+
             crystalsButton.SetActive(true);
         }
     }
@@ -148,6 +165,17 @@ public class BuyCheckpointsUI : MonoBehaviour
         {
             //GOTO SHOP TO BUY CRYSTALS, MOTHERFUCKER!!!!!!!
         }
+    }
+
+    public void FreeButton()
+    {
+        Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+        DeathUI.Instance.UpdateFreeCheckpointsCounter();
+        Debug.Log(PlayerPrefs.GetInt("Crystals"));
+        notPremiumAttemps--;
+        Debug.Log(PlayerPrefs.GetInt("Crystals"));
+        this.gameObject.SetActive(false);
+        Debug.Log(PlayerPrefs.GetInt("Crystals"));
     }
 
     public void Skip()

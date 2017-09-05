@@ -6,8 +6,6 @@ using UnityEngine;
 public class RuneStone : InteractiveObject
 {
     public string nextLvl;
-	[SerializeField]
-	private GameObject lightParticle;
     float delay = 2.5f;
     float timer;
     bool timerIsOn = false;
@@ -47,11 +45,6 @@ public class RuneStone : InteractiveObject
             timerIsOn = true;
         }
     }
-
-	public void MakeFX()
-	{
-		Instantiate(lightParticle, this.gameObject.transform.position + new Vector3(0, -0.5f, 1), Quaternion.Euler(new Vector3 (-90, 0 , 0)));
-	}
 
     public void SaveGame()
     {

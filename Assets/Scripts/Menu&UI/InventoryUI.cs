@@ -11,12 +11,15 @@ public class InventoryUI : MonoBehaviour
     Sprite backpackOpen;
     [SerializeField]
     Sprite backpackClose;
+
     [SerializeField]
     GameObject inventoryBar;
     [SerializeField]
     GameObject bonusBar;
+
     [SerializeField]
     GameObject inventoryFade;
+
     [SerializeField]
     Text hpCount;
     [SerializeField]
@@ -29,6 +32,19 @@ public class InventoryUI : MonoBehaviour
     Text speedCount;
     [SerializeField]
     Text timeCount;
+
+    [SerializeField]
+    Image hpImage;
+    [SerializeField]
+    Image clipsImage;
+    [SerializeField]
+    Image immortalImage;
+    [SerializeField]
+    Image damageImage;
+    [SerializeField]
+    Image speedImage;
+    [SerializeField]
+    Image timeImage;
 
     public static bool isOpen;
     public static bool isBonusBarOpen;
@@ -60,6 +76,7 @@ public class InventoryUI : MonoBehaviour
         inventoryBar.SetActive(true);
         inventoryFade.SetActive(true);
         SetBoostersValues();
+        SetColors();
     }
 
     void DisactivateInventory()
@@ -168,5 +185,27 @@ public class InventoryUI : MonoBehaviour
         damageCount.text   = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS).ToString();
         timeCount.text     = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS).ToString();
         speedCount.text    = Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS).ToString();
+    }
+
+    void SetColors()
+    {
+        SetColor(hpImage, Inventory.HEAL);
+        SetColor(clipsImage, Inventory.AMMO);
+        SetColor(immortalImage, Inventory.IMMORTAL_BONUS);
+        SetColor(damageImage, Inventory.DAMAGE_BONUS);
+        SetColor(speedImage, Inventory.SPEED_BONUS);
+        SetColor(timeImage, Inventory.TIME_BONUS);
+    }
+
+    void SetColor(Image image, string itemName)
+    {
+        if (Inventory.Instance.GetItemCount(itemName) == 0)
+        {
+            image.color = new Color(1, 1, 1, 0.55f);
+        }
+        else
+        {
+            image.color = new Color(1, 1, 1, 1);
+        }
     }
 }

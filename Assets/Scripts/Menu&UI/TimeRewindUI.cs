@@ -18,7 +18,8 @@ public class TimeRewindUI : MonoBehaviour
     Text timerTxt;
     [SerializeField]
     GameObject rewindButton;
-
+    [SerializeField]
+    GameObject gameOverBar;
     float timer;
 
     void Start ()
@@ -71,7 +72,7 @@ public class TimeRewindUI : MonoBehaviour
             TimeController.timeBufferStart = TimeController.internalTime;
 
             Player.Instance.gameObject.layer = DEFAULT_LAYER;
-            Player.Instance.Health = 3;
+            Player.Instance.Health = (int)Player.Instance.maxHealth;
             HealthUI.Instance.SetHealthbar();
             Player.Instance.AttackCollider.enabled = false;
             Player.Instance.transform.parent = null;
@@ -93,6 +94,9 @@ public class TimeRewindUI : MonoBehaviour
 
     private void OnEnable()
     {
+        gameOverBar.SetActive(true);
+        gameOverBar.GetComponent<Animator>().SetBool("animate", true);
+
         timer = 7.99f;
         fade.SetActive(true);
         pauseButton.SetActive(false);

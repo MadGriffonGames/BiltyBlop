@@ -15,14 +15,14 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
-        for (int i = 0; i < 20; i++)
-        {
-            PlayerPrefs.SetInt("Level"+i, 1);
-        }
-
         if (!PlayerPrefs.HasKey("BetaReward"))
         {
             PlayerPrefs.SetInt("BetaReward", 1);
+			PlayerPrefs.SetInt("SwordDisplayIndex", 0);
+			PlayerPrefs.SetInt ("SkinDisplayIndex", 0);
+			PlayerPrefs.SetInt ("SkinArmorStat", 3);
+			PlayerPrefs.SetInt ("SkinAttackStat", 1);
+			PlayerPrefs.SetString ("Skin", "Classic");
             betaTestReward.SetActive(true);
         }
 
@@ -34,6 +34,13 @@ public class MainMenu : MonoBehaviour
         actCanvas.SetActive(true);
     }
 
+    public void ToIapTest()
+    {
+        GameManager.nextLevelName = "IapTest";
+
+        SceneManager.LoadScene("Loading");
+    }
+
     public void PlayUISound(string sound)
     {
         SoundManager.PlaySound(sound);
@@ -41,16 +48,19 @@ public class MainMenu : MonoBehaviour
 
     public void ToShop()
     {
-        SceneManager.LoadScene("Shop");
+        GameManager.nextLevelName = "Shop";
+
+        SceneManager.LoadScene("Loading");
     }
 
     public void BetaRewardButton()
     {
-        if (PlayerPrefs.GetInt("Coins") == 0 && PlayerPrefs.GetInt("Crystals") == 0)
+		if (PlayerPrefs.GetInt("Coins") == 0 && PlayerPrefs.GetInt("Crystals") == 0)
         {
             PlayerPrefs.SetInt("BetaReward", 1);
-            PlayerPrefs.SetInt("Crystals", 100);
-            PlayerPrefs.SetInt("Coins", 1500); 
+            PlayerPrefs.SetInt("Crystals", 150);
+            PlayerPrefs.SetInt("Coins", 1500);
+			PlayerPrefs.SetString ("FirstTimeInGame", "No");
         }
         betaTestReward.SetActive(false);
     }

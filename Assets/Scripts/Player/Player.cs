@@ -71,7 +71,7 @@ public class Player : Character
     public bool GotKey { get; set; }
     public bool immortal = false;
     public float immortalTime;
-    public int damage = 1;
+    public int damage;
     public override bool IsDead
     {
         get { return health <= 0; }
@@ -109,6 +109,14 @@ public class Player : Character
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
 
+    /*
+     * Skin Managment
+     */
+    int swordIndex;
+    int skinIndex;
+    Slot swordSlot;
+    Slot[] skinSlots;
+
     private void OnEnable()
     {
         SetThrowing();
@@ -117,6 +125,17 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
+
+        skinSlots = new Slot [9];
+
+		swordIndex = PlayerPrefs.GetInt("SwordDisplayIndex");
+		skinIndex = PlayerPrefs.GetInt ("SkinDisplayIndex");
+
+		health = PlayerPrefs.GetInt ("SkinArmorStat");
+		damage = PlayerPrefs.GetInt ("SkinAttackStat");
+
+        SetSlots();
+
 
         if (PlayerPrefs.HasKey("Level11"))
         {
@@ -135,15 +154,18 @@ public class Player : Character
         currentState = new PlayerIdleState();
 		meshRenderer = myArmature.gameObject.GetComponentsInChildren<MeshRenderer>();
         myRigidbody = GetComponent<Rigidbody2D>();
+
         startPosition = transform.position;
-        GotKey = false;
         checkpointPosition = startPosition;
         lightIntencityCP = FindObjectOfType<Light>().intensity;
-        startCoinCount = GameManager.CollectedCoins;
-        monstersKilled = 0;
+
+        GotKey = false;
         stars = 0;
         lvlCoins = 0;
         freeCheckpoints = 3;
+        startCoinCount = GameManager.CollectedCoins;
+
+
         maxHealth = health;
         HealthUI.Instance.SetHealthbar();
     }
@@ -594,12 +616,12 @@ public class Player : Character
     public IEnumerator DamageBonus(float duration)
     {
         damageBonusNum++;
-        damage = 2;
+        damage *= 2;
         yield return new WaitForSeconds(duration);
         damageBonusNum--;
         if (damageBonusNum == 0)
         {
-            damage = 1;
+            damage /= 2;
         }
     }
 
@@ -660,9 +682,9 @@ public class Player : Character
         timeBonusNum++;
         timeScaler = 1.6f;
         timeScalerJump = 3f;
-        timeScalerMove = 1.3f;
+        timeScalerMove = 1.8f;
         SoundManager.SetPitch(0.5f);
-        myArmature.animation.timeScale = 1.6f;
+        myArmature.animation.timeScale = 2f;
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime = 0.01f;
         myRigidbody.gravityScale = 6;
@@ -696,6 +718,45 @@ public class Player : Character
         jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
         Time.fixedDeltaTime = 0.02000000f;
+    }
+
+    /*
+     * Skin Managment
+     */
+
+    public void AddSlot(string slotName, ref int i)
+    {
+        skinSlots[i] = myArmature.armature.GetSlot(slotName);
+        i++;
+    }
+
+    public void SetSlots()
+    {
+        int i = 0;
+
+        myArmature.zSpace = 0.02f;
+
+        swordSlot = myArmature.armature.GetSlot("Sword");
+
+        AddSlot("r_hand_2", ref i);
+        AddSlot("l_hand_2", ref i);
+        AddSlot("leg", ref i);
+        AddSlot("leg1", ref i);
+        AddSlot("Shoulder_l", ref i);
+        AddSlot("Shoulder_r", ref i);
+        AddSlot("torso", ref i);
+        AddSlot("mex", ref i);
+        AddSlot("head", ref i);
+    }
+
+    public void SetIndexes()
+    {
+        swordSlot.displayIndex = swordIndex;
+
+        for (int i = 0; i < skinSlots.Length; i++)
+        {
+            skinSlots[i].displayIndex = skinIndex;
+        }
     }
 
     /*

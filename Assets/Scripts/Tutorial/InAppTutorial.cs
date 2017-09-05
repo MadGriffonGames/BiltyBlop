@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InAppTutorial : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class InAppTutorial : MonoBehaviour
     public GameObject light;
     [SerializeField]
     public GameObject backpackLight;
+    [SerializeField]
+    Button targetButton;
+    [SerializeField]
+    public Button[] otherButtons; 
 
     public bool isActive = false;
     public bool isTextChanged = false;
@@ -59,6 +64,12 @@ public class InAppTutorial : MonoBehaviour
         TutorialUI.Instance.textBar.gameObject.SetActive(true);
         TutorialUI.Instance.oldmanFace.color += new Color(0, 0, 0, 1);
         TutorialUI.Instance.textBar.color += new Color(0, 0, 0, 1);
+
+        for (int i = 0; i < otherButtons.Length; i++)
+        {
+            otherButtons[i].enabled = false;
+        }
+        targetButton.enabled = true;
     }
 
     public void DisactivateTutorial()
@@ -70,5 +81,10 @@ public class InAppTutorial : MonoBehaviour
         TutorialUI.Instance.textBar.gameObject.SetActive(false);
         TutorialUI.Instance.oldmanFace.color -= new Color(0, 0, 0, 1);
         TutorialUI.Instance.textBar.color -= new Color(0, 0, 0, 1);
+
+        for (int i = 0; i < otherButtons.Length; i++)
+        {
+            otherButtons[i].enabled = true;
+        }
     }
 }

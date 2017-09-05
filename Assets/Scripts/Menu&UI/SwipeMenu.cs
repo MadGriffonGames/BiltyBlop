@@ -7,7 +7,7 @@ public class SwipeMenu : MonoBehaviour
 
     public RectTransform panel;
     public RectTransform center;
-    public GameObject[] buttons;
+	public GameObject[] buttons;
 
 
     protected float[] distance;
@@ -37,7 +37,7 @@ public class SwipeMenu : MonoBehaviour
         float minDistance = Mathf.Min(distance);
         if (!tapping)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 1; i < buttons.Length-1; i++)
             {
                 if (minDistance == distance[i] && !onStart)
                 {
@@ -68,7 +68,10 @@ public class SwipeMenu : MonoBehaviour
         {
             minButtonsNumber = buttons.Length - 2;
         }
-        else
+		else if (buttonNumber == 0) {
+			buttonNumber = 1;
+		} 
+		else
             minButtonsNumber = buttonNumber;
         tapping = true;
     }

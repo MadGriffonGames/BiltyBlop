@@ -45,9 +45,16 @@ public class FollowCamera : MonoBehaviour
         float currentY = target.transform.position.y;
 
         if (currentX - lastX <= -runningDeltaX)
-            offset.x = -4f;
+            offset.x = -2f;
         else if (currentX - lastX >= runningDeltaX)
-            offset.x = 4f;
+            offset.x = 2f;
+
+        if (Player.Instance.myRigidbody.velocity.x < 5)
+        {
+            offset.x = 0;
+        }
+
+        offset = Vector2.Lerp(offset, new Vector2(offset.x, 0), 0.65f);
 
         if (Mathf.Abs(currentY - lastY) >= fallingDeltaY)
         {
@@ -62,14 +69,13 @@ public class FollowCamera : MonoBehaviour
                 else
                     offset.y = 0;
         }
-        //Debug.Log(offset.y + "    " + (currentY-lastY));
-        lastX = currentX;
-        lastY = currentY;
 
         offsetY.z = 0;
         offsetY.x = 0;
         offsetY = Vector2.Lerp(offsetY, new Vector2(0, offset.y), 0.1f);
-        //offsetY = Vector3.Slerp(offsetY, new Vector3(offsetY.x, offset.y, offsetY.z), 0.1f);
+
+        lastX = currentX;
+        lastY = currentY;
     }
 
     public void LerpToTarget()

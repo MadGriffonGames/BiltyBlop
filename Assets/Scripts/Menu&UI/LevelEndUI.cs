@@ -54,10 +54,12 @@ public class LevelEndUI : MonoBehaviour
         AdsManager.Instance.fromShowfunction = true;
 
 #elif UNITY_ANDROID
-        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        //AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        SceneManager.LoadScene("Loading");
 
 #elif UNITY_IOS
-        AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        //AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+        SceneManager.LoadScene("Loading");
 
 #endif
 
@@ -65,6 +67,7 @@ public class LevelEndUI : MonoBehaviour
 
     public void Restart()
     {
+        GameManager.nextLevelName = SceneManager.GetActiveScene().name;
 
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;

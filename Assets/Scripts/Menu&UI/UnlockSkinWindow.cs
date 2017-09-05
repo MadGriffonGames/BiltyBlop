@@ -30,6 +30,8 @@ public class UnlockSkinWindow : MonoBehaviour {
     GameObject windowFade;
     [SerializeField]
     GameObject skinSwipe;
+	[SerializeField]
+	GameObject skinTransform;
 
     [SerializeField]
     Transform onebuttonTransform;
@@ -38,12 +40,17 @@ public class UnlockSkinWindow : MonoBehaviour {
     [SerializeField]
     Transform coinButtonTransform;
 
+	private string chosenSkinName;
+	private int skinIndex;
+
+
     public void SetWindowWithSkinNumber(int skinNumber)
     {
         SkinPrefab skin = SkinManager.Instance.skinPrefabs[skinNumber].gameObject.GetComponent<SkinPrefab>();
-        KidSkin.Instance.ChangeSkin(skinNumber);
+		KidSkin.Instance.ChangeSkin(skinNumber);
+		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponent<SkinPrefab> ().displayIndex;
         skinName.GetComponent<Text>().text = skin.shopName;
-        statsPanel.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(skin.attackStat);
+		chosenSkinName = skin.name;
         statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(skin.armorStat);
         if (skin.isLocked)
         {
@@ -86,9 +93,9 @@ public class UnlockSkinWindow : MonoBehaviour {
         }
     }
 
-    public void ApplySkin()
+	public void ApplySkin(string skin)
     {
-        
+		SkinManager.Instance.ApplySkin (skin);
     }
 
     public void CanBuySkinByCrystals (int skinNumber)
@@ -101,11 +108,14 @@ public class UnlockSkinWindow : MonoBehaviour {
                 HideButtons();
                 closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
                 closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSkinWindow());
-                ShowErrorWindow("SKIN UNLOCKED");
+				skinTransform.SetActive (false);
+				ShowErrorWindow("SKIN UNLOCKED");
+				ApplySkin (chosenSkinName);
             }
             else
             {
                 ShowErrorWindow("NOT ENOUGH CRYSTALS");
+				skinTransform.SetActive (false);
             }
         }
         else
@@ -123,11 +133,14 @@ public class UnlockSkinWindow : MonoBehaviour {
                 HideButtons();
                 closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
                 closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSkinWindow());
-                ShowErrorWindow("SKIN UNLOCKED");
+				skinTransform.SetActive (false);
+				ShowErrorWindow("SKIN UNLOCKED");
+				ApplySkin (chosenSkinName);
             }
             else
             {
                 ShowErrorWindow("NOT ENOUGH COINS");
+				skinTransform.SetActive (false);
             }
         }
         else
@@ -160,6 +173,7 @@ public class UnlockSkinWindow : MonoBehaviour {
 
     public void CloseErrorWindow()
     {
+		skinTransform.SetActive (true);
         fade.gameObject.SetActive(false);
         closeErrorWindowButton.gameObject.SetActive(false);
         errorWindow.gameObject.SetActive(false);

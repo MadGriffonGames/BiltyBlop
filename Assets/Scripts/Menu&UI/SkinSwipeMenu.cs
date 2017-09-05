@@ -30,7 +30,6 @@ public class SkinSwipeMenu : SwipeMenu {
         buttonDistance = (int)DISTANCE;
         minButtonsNumber = 1;
         panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
-
     }
 
     public override void Update()
@@ -127,13 +126,14 @@ public class SkinSwipeMenu : SwipeMenu {
 //				panel.GetChild(i).GetComponentsInChildren<Image> () [2].sprite = equipButton;
 //            }
 //        }
-
+		base.OnButtonClickLerp(skinOrderNumber);
 		SkinManager.Instance.ApplySkin(SkinManager.Instance.NameOfSkinPrefabBySkinOrder(skinOrderNumber));
 		UpdateSkinCards();
     }
 
     public void ShowUnlockSkinWindow(int skinNumber)
     {
+		base.OnButtonClickLerp (SkinManager.Instance.skinPrefabs[skinNumber].GetComponent<SkinPrefab>().orderNumber);
         unlockSkinWindow.gameObject.SetActive(true);
         fade.gameObject.SetActive(true);
         closeBuyWindowButton.gameObject.SetActive(true);

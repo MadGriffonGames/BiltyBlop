@@ -483,6 +483,7 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
+                    AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     UI.Instance.timeRewindUI.SetActive(true);

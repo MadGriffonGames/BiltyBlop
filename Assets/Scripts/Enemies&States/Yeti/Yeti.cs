@@ -79,6 +79,7 @@ public class Yeti : RangeEnemy
             SetHealthbar();
             if (IsDead)
             {
+                AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("yeti_death");
                 Instantiate(yetiParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);

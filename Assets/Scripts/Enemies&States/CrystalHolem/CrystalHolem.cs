@@ -64,6 +64,7 @@ public class CrystalHolem : MovingMeleeEnemy
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             if (IsDead)
             {
+                AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("holem_sound");
                 Instantiate(crystalParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);

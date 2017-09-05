@@ -103,12 +103,9 @@ public class AchievementManager : MonoBehaviour {
             if (achieve.weight < 3)
             {
                 PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
-                //Debug.Log(PlayerPrefs.GetInt(achieve.achieveName));
-                //Debug.Log(achieve.targetValue[achieve.weight]);
-                //Debug.Log(PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight]);
+
                 if (PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight])
                 {
-                    Debug.Log("Rewarding time");
                     GameManager.CollectedCoins += achieve.reward[achieve.weight];
                     achieve.RewardUpdate();
                     achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);

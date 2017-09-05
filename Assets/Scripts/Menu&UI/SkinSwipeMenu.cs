@@ -75,7 +75,6 @@ public class SkinSwipeMenu : SwipeMenu {
 						skinCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
                         skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
                     }
-					skinCardObj.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(skin.attackStat);
 					skinCardObj.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(skin.armorStat);
 
                     buttons[i] = skinCardObj;

@@ -13,7 +13,6 @@ public class SwordPrefab : MonoBehaviour {
 	public int crystalCost;
 	public int coinCost;
 
-	public int armorStat;
 	public int attackStat;
 	public int displayIndex;
 
@@ -46,10 +45,6 @@ public class SwordPrefab : MonoBehaviour {
 		if (!PlayerPrefs.HasKey(gameObject.name + COIN_COST))
 		{
 			PlayerPrefs.SetInt(gameObject.name + COIN_COST, coinCost);
-		}
-		if (!PlayerPrefs.HasKey(gameObject.name + ARMOR))
-		{
-			PlayerPrefs.SetInt(gameObject.name + ARMOR, armorStat);
 		}
 		if (!PlayerPrefs.HasKey(gameObject.name + ATTACK))
 		{

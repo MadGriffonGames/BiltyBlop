@@ -47,7 +47,6 @@ public class RewardedChest : MonoBehaviour
 
     public void Randomize()
     {
-        Debug.Log(1);
         if (PlayerPrefs.GetInt("FirstChest") == 0)
         {
             loot.sprite = lootArray[5];

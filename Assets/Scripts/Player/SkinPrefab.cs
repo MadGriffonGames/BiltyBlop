@@ -15,7 +15,6 @@ public class SkinPrefab : MonoBehaviour
     public int coinCost;
 
     public int armorStat;
-    public int attackStat;
 	public int displayIndex;
 
     private const string LOCKED = "Locked";
@@ -48,10 +47,6 @@ public class SkinPrefab : MonoBehaviour
         if (!PlayerPrefs.HasKey(gameObject.name + ARMOR))
         {
             PlayerPrefs.SetInt(gameObject.name + ARMOR, armorStat);
-        }
-        if (!PlayerPrefs.HasKey(gameObject.name + ATTACK))
-        {
-            PlayerPrefs.SetInt(gameObject.name + ATTACK, attackStat);
         }
 		if (!PlayerPrefs.HasKey(gameObject.name + DISPLAY_INDEX))
 		{

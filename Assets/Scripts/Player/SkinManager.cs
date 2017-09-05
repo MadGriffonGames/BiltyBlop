@@ -119,14 +119,14 @@ public class SkinManager : MonoBehaviour
         PlayerPrefs.SetString("Skin", skinName);
 		PlayerPrefs.SetInt("SkinDisplayIndex", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().displayIndex);
 		PlayerPrefs.SetInt("SkinArmorStat", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().armorStat);
-		PlayerPrefs.SetInt("SkinAttackStat", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().attackStat);
     }
 
 	public void ApplySword(string swordName, int index) // applying (equiping) "skinName" skin 
 	{
 		PlayerPrefs.SetString("Sword", swordName);
 		PlayerPrefs.SetInt("SwordDisplayIndex", index);
-	}
+        PlayerPrefs.SetInt("SkinAttackStat", swordPrefabs[NumberOfSword(swordName)].GetComponent<SwordPrefab>().attackStat);
+    }
 
 	public int IndexOfSwordByOrderNumber(int orderNumber)
 	{
@@ -178,6 +178,16 @@ public class SkinManager : MonoBehaviour
         for (int i = 0; i < skinPrefabs.Length; i++)
         {
             if (skinPrefabs[i].name == skinName)
+                return i;
+        }
+        return 0;
+    }
+
+    int NumberOfSword(string swordName)
+    {
+        for (int i = 0; i < swordPrefabs.Length; i++)
+        {
+            if (swordPrefabs[i].name == swordName)
                 return i;
         }
         return 0;

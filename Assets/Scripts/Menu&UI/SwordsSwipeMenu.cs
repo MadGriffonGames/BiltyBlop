@@ -76,8 +76,7 @@ public class SwordsSwipeMenu : SwipeMenu {
 						swordCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(sword.orderNumber))); // wdfsdf
 						swordCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(sword.orderNumber)));
 					}
-					//swordCardObj.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
-					//swordCardObj.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(sword.armorStat);
+					swordCardObj.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
 
 					buttons[i] = swordCardObj;
 					break;

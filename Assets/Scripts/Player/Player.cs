@@ -133,6 +133,14 @@ public class Player : Character
     {
 		ThrowingUI.Instance.SetItems ();
         SetThrowing();
+
+        //for (int i = 1; i < 21; i++)
+        //{
+        //    PlayerPrefs.DeleteKey("Level" + i + "_collects");
+        //}
+        //PlayerPrefs.DeleteKey("GeneralStarsCount");
+
+        Debug.Log(PlayerPrefs.GetInt("GeneralStarsCount"));
     }
 
 	private void SetPerkParams()

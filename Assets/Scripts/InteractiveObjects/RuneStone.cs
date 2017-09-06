@@ -49,18 +49,27 @@ public class RuneStone : InteractiveObject
     public void SaveGame()
     {
         GameManager.nextLevelName = nextLvl;
+
 		PlayerPrefs.SetInt("Coins", Mathf.RoundToInt(GameManager.collectedCoins * Player.Instance.coinScale));   // GREEDY PERK
+
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
         {
             if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.stars)
             {
+                int previousStarsCount = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects");
+                PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + (Player.Instance.stars - previousStarsCount)); // minus old stars count, plus new stars count
+
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
             }
         }
         else
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
+
+            PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + Player.Instance.stars);
         }
+
+        
 
         if (PlayerPrefs.GetInt(nextLvl) == 0)
         {
@@ -71,6 +80,8 @@ public class RuneStone : InteractiveObject
         {
             PlayerPrefs.SetInt(nextLvl, 1);
         }
+
+        Debug.Log(PlayerPrefs.GetInt("GeneralStarsCount"));
     }
 
 	IEnumerator WaitForGround()

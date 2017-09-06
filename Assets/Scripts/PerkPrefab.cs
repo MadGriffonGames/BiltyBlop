@@ -13,6 +13,10 @@ public class PerkPrefab : MonoBehaviour {
     public int orderNumber;
     public Sprite perkSprite;
 
+	public float[] upgradeScales;
+	public int[] upgradeCoinCost;
+	public int[] upgradeCrystalCost;
+
     [SerializeField]
     Text perkName;
 
@@ -32,23 +36,22 @@ public class PerkPrefab : MonoBehaviour {
 
     public void SetPlayerPrefsParams()
     {
-        if (!PlayerPrefs.HasKey(gameObject.name))
-        {
-            if (isLocked)
-            {
-                PlayerPrefs.SetString(gameObject.name, LOCKED);
-            }
-            else
-                PlayerPrefs.SetString(gameObject.name, UNLOCKED);
-        }
-        if (!PlayerPrefs.HasKey(gameObject.name + CRYSTAL_COST))
-        {
-            PlayerPrefs.SetInt(gameObject.name + CRYSTAL_COST, crystalCost);
-        }
-        if (!PlayerPrefs.HasKey(gameObject.name + COIN_COST))
-        {
-            PlayerPrefs.SetInt(gameObject.name + COIN_COST, coinCost);
-        }
+		if (!PlayerPrefs.HasKey(gameObject.name)) 
+		{
+			PlayerPrefs.SetInt (gameObject.name, 0); // 0 = LOCKED
+		}
+		if (!PlayerPrefs.HasKey(gameObject.name + "1")) 
+		{
+			PlayerPrefs.SetFloat (gameObject.name + "1", upgradeScales[0]); // 1 = first scale
+		}
+		if (!PlayerPrefs.HasKey(gameObject.name + "2")) 
+		{
+			PlayerPrefs.SetFloat (gameObject.name + "2", upgradeScales[1]); // 2 = second scale
+		}
+		if (!PlayerPrefs.HasKey(gameObject.name + "3")) 
+		{
+			PlayerPrefs.SetFloat (gameObject.name + "3", upgradeScales[2]); // 3 = third scale
+		}
 
         perkSprite = Resources.Load<Sprite>(SPRITE_FOLDER + name);
     }
@@ -57,4 +60,15 @@ public class PerkPrefab : MonoBehaviour {
         PlayerPrefs.SetString(gameObject.name, UNLOCKED);
         isLocked = false;
     }
+
+	public bool CanUpgradePerk()
+	{
+		if (PlayerPrefs.GetInt (gameObject.name) < 3) 
+		{
+			PlayerPrefs.SetInt (gameObject.name, PlayerPrefs.GetInt (gameObject.name) + 1);
+			return true;
+		}
+		else
+		return false;
+	}
 }

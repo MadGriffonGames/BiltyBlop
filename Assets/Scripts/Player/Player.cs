@@ -122,6 +122,7 @@ public class Player : Character
 	int dodgeChance; // in %
 	float potionTimeScale;
 	public float coinScale;
+	public int maxClipSize;
 
 	private void Awake()
 	{
@@ -130,33 +131,71 @@ public class Player : Character
 
     private void OnEnable()
     {
-
+		ThrowingUI.Instance.SetItems ();
         SetThrowing();
     }
 
 	private void SetPerkParams()
 	{
-		if (PlayerPrefs.GetString ("Dodger") == "Unlocked") {
-			dodgeChance = 15;	
-			Debug.Log("dodger");
-		} else
-			dodgeChance = 0;
-		if (PlayerPrefs.GetString("PotionManiac") == "Unlocked") 
+		// DODRER
+		int dodgerLvl = PlayerPrefs.GetInt ("Dodger");
+		if (dodgerLvl == 0) 
 		{
-			potionTimeScale = 1.5f;
-			Debug.Log ("potions");
-		} else
-			potionTimeScale = 1f;
-		if (PlayerPrefs.GetString ("Greedy") == "Unlocked") {
-			coinScale = 1.5f;	
-			Debug.Log ("greedy");
-		} else
+			dodgeChance = 0;
+		} 
+		else 
+		{
+			if (dodgerLvl > 0)
+			{
+				dodgeChance = (int) PlayerPrefs.GetFloat ("Dodger" + dodgerLvl.ToString ());
+				Debug.Log("dodger " + dodgeChance);
+			}
+		}
+
+		// POTION MANIAC
+		int potionLvl = PlayerPrefs.GetInt ("PotionManiac");
+		if (potionLvl == 0) 
+		{
+			potionTimeScale = 1;
+		} 
+		else 
+		{
+			if (potionLvl > 0)
+			{
+				potionTimeScale = PlayerPrefs.GetFloat ("PotionManiac" + potionLvl.ToString ());
+				Debug.Log("potion " + potionTimeScale);
+			}
+		}
+
+		// GREEDY
+		int greedLvl = PlayerPrefs.GetInt ("Greedy");
+		if (greedLvl == 0) 
+		{
 			coinScale = 1;
-		if (PlayerPrefs.GetString ("AmmoManiac") == "Unlocked") {
-			clipSize = 7;	
-			Debug.Log ("ammo maniac");
-		} else
-			clipSize = 5;
+		} 
+		else 
+		{
+			if (greedLvl > 0)
+			{
+				coinScale = PlayerPrefs.GetFloat ("Greedy" + greedLvl.ToString ());
+				Debug.Log("Greedy " + coinScale);
+			}
+		}
+
+		// AMMO MANIAC
+		int clipsLvl = PlayerPrefs.GetInt ("AmmoManiac");
+		if (clipsLvl == 0) 
+		{
+			maxClipSize = 3;
+		} 
+		else 
+		{
+			if (clipsLvl > 0)
+			{
+				maxClipSize = (int) PlayerPrefs.GetFloat ("AmmoManiac" + clipsLvl.ToString ());
+				Debug.Log("AmmoManiac " + maxClipSize);
+			}
+		}
 	}
 
     public override void Start () 
@@ -532,10 +571,9 @@ public class Player : Character
     void SetThrowing()
     {
         throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
-        clipSize = 5;
+			clipSize = maxClipSize;
         throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
         ThrowingUI.Instance.SetThrowBar();
-		Debug.Log (clipSize);
         throwingClip = new GameObject[clipSize];
         for (int i = 0; i < clipSize; i++)
         {

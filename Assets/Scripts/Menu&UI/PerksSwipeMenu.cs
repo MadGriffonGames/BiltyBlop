@@ -21,6 +21,7 @@ public class PerksSwipeMenu : SwipeMenu {
     GameObject closeUnlockPerkWindow;
 
     private const float DISTANCE = 175f;
+	private const int MAX_PERK_LVL = 3;
 
     private static PerksSwipeMenu instance;
     public static PerksSwipeMenu Instance
@@ -36,33 +37,8 @@ public class PerksSwipeMenu : SwipeMenu {
     public override void Start ()
     {
         SetPerkCards();
-        buttons = new GameObject[panel.transform.childCount];
-        distance = new float[buttons.Length];
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i] = panel.GetChild(i).gameObject;
-        }
-        buttonDistance = (int)DISTANCE;//(int)Mathf.Abs(buttons[1].transform.position.x - buttons[0].transform.position.x);
-
-        minButtonsNumber = 1;
-        panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
-
-
-        // make ACTIVE or UNLOCK cards
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            int perkOrderNumber = perkPrefabs[i].GetComponent<PerkPrefab>().orderNumber;
-            if (perkPrefabs[i].GetComponent<PerkPrefab>().isLocked)
-            {
-                buttons[perkOrderNumber].GetComponent<Image>().color = new Color32(167, 167, 167, 255);
-                buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "UNLOCK";
-            }
-            else
-            {
-                buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
-                buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
-            }
-        }
+		UpdatePerkMenu ();
+        
     }
     public override void Update()
     {
@@ -110,22 +86,24 @@ public class PerksSwipeMenu : SwipeMenu {
                 {
                     GameObject perkCardObj = Instantiate(perkCard) as GameObject;
                     PerkPrefab perk = perkPrefabs[j].GetComponent<PerkPrefab>();
+					perk.SetPlayerPrefsParams ();
 
                     perkCardObj.transform.SetParent(panel);
                     perkCardObj.transform.localPosition = new Vector3(i*DISTANCE, 0, 0);
                     perkCardObj.transform.localScale = new Vector3(1, 1, 1);
-                    perkCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = perk.shopName;
+					perkCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = perk.shopName + " (" + PlayerPrefs.GetInt(perkPrefabs[j].name).ToString() + ")";
                     //perkCardObj.gameObject.GetComponentsInChildren<Text>()[1].text = perk.description;
 
                     perkCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = perk.perkSprite;
-                    if (!perk.isLocked)
+					if (PlayerPrefs.GetInt(perkPrefabs[j].name) == 3)
                     {
-                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "ACTIVE";
+						// PERK IS FULLY UPGRADED
+                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "UPGRADED";
                     }
                     else
                     {
-                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockPerkWindow(perk.orderNumber));
-						perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockPerkWindow(perk.orderNumber));
+                        perkCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUpgradePerkWindow(perk.orderNumber));
+						perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUpgradePerkWindow(perk.orderNumber));
                         perkCardObj.gameObject.GetComponent<Image>().color = new Color32(188, 188, 188, 255);
                     }
                 }
@@ -133,15 +111,20 @@ public class PerksSwipeMenu : SwipeMenu {
         }
     }
 
-    public void ShowUnlockPerkWindow(int perkOrderNumber)
+    public void ShowUpgradePerkWindow(int perkOrderNumber)
     {
         fade.SetActive(true);
         closeUnlockPerkWindow.SetActive(true);
         unlockPerkWindow.SetActive(true);
         unlockPerkWindow.GetComponent<UnlockPerkWindow>().SetWindowWithPerkNumber(perkOrderNumber);
     }
-    public void CloseUnlockPerkWindow()
+	public void ShowUpgradePerkWindowWithStats(int perkOrderNumber)
+	{
+		
+	}
+    public void CloseUpgradePerkWindow()
     {
+		UpdatePerkMenu ();
         fade.SetActive(false);
         closeUnlockPerkWindow.SetActive(false);
         unlockPerkWindow.SetActive(false);
@@ -194,32 +177,88 @@ public class PerksSwipeMenu : SwipeMenu {
     }
 
     // Unlocking Perks if can (+payment) or returning FALSE
-    public bool CanUnlockPerkByCoins(int perkNumber)
+    public bool CanUpgradePerkByCoins(int perkNumber)
     {
-        if (PlayerPrefs.GetInt("Coins") >= perkPrefabs[perkNumber].GetComponent<PerkPrefab>().coinCost)
+		int perkLevel = PlayerPrefs.GetInt(perkPrefabs[perkNumber].GetComponent<PerkPrefab>().name);
+		int coinCost = perkPrefabs[perkNumber].GetComponent<PerkPrefab>().upgradeCoinCost[perkLevel];
+		if (PlayerPrefs.GetInt("Coins") >= coinCost && perkLevel < MAX_PERK_LVL)
         {
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - perkPrefabs[perkNumber].GetComponent<PerkPrefab>().coinCost);
-            perkPrefabs[perkNumber].GetComponent<PerkPrefab>().UnlockPerk();
-            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
-            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+			PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - coinCost);
+			if (!perkPrefabs [perkNumber].GetComponent<PerkPrefab> ().CanUpgradePerk ()) 
+			{
+				// IF FINAL LVL OF PERK
+				buttons [perkPrefabs [perkNumber].GetComponent<PerkPrefab> ().orderNumber].GetComponentsInChildren<Button> () [1].gameObject.GetComponentInChildren<Text> ().text = "ACTIVE";
+				buttons [perkPrefabs [perkNumber].GetComponent<PerkPrefab> ().orderNumber].GetComponent<Image> ().color = new Color32 (255, 255, 255, 255);
+			} 
+			else 
+			{
+				// UPDATING STATUS OF PERK
+			}
+				
             ShopController.Instance.UpdateMoneyValues();
             return true;
         }
         else
             return false;  
     }
-    public bool CanUnlockPerkByCrystals(int perkNumber)
+    public bool CanUpgradePerkByCrystals(int perkNumber)
     {
-        if (PlayerPrefs.GetInt("Crystals") >= perkPrefabs[perkNumber].GetComponent<PerkPrefab>().crystalCost)
-        {
-            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - perkPrefabs[perkNumber].GetComponent<PerkPrefab>().crystalCost);
-            perkPrefabs[perkNumber].GetComponent<PerkPrefab>().UnlockPerk();
-            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
-            buttons[perkPrefabs[perkNumber].GetComponent<PerkPrefab>().orderNumber].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+		int perkLevel = PlayerPrefs.GetInt(perkPrefabs[perkNumber].GetComponent<PerkPrefab>().name);
+		int crystalCost = perkPrefabs[perkNumber].GetComponent<PerkPrefab>().upgradeCrystalCost[perkLevel];
+		if (PlayerPrefs.GetInt("Crystals") >= crystalCost && perkLevel < MAX_PERK_LVL)
+		{
+			PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - crystalCost);
+
+			if (!perkPrefabs [perkNumber].GetComponent<PerkPrefab> ().CanUpgradePerk ()) 
+			{
+				// IF FINAL LVL OF PERK
+				buttons [perkPrefabs [perkNumber].GetComponent<PerkPrefab> ().orderNumber].GetComponentsInChildren<Button> () [1].gameObject.GetComponentInChildren<Text> ().text = "ACTIVE";
+				buttons [perkPrefabs [perkNumber].GetComponent<PerkPrefab> ().orderNumber].GetComponent<Image> ().color = new Color32 (255, 255, 255, 255);
+			} 
+			else 
+			{
+				// UPDATING STATUS OF PERK
+
+			}
+
             ShopController.Instance.UpdateMoneyValues();
             return true;
         }
         else
             return false;
     }
+
+	public void UpdatePerkMenu()
+	{
+		buttons = new GameObject[panel.transform.childCount];
+		distance = new float[buttons.Length];
+		for (int i = 0; i < buttons.Length; i++)
+		{
+			buttons[i] = panel.GetChild(i).gameObject;
+		}
+		buttonDistance = (int)DISTANCE;//(int)Mathf.Abs(buttons[1].transform.position.x - buttons[0].transform.position.x);
+
+		minButtonsNumber = 1;
+		panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
+
+
+		// make ACTIVE or UNLOCK cards
+		for (int i = 0; i < buttons.Length; i++)
+		{
+			int perkOrderNumber = perkPrefabs[i].GetComponent<PerkPrefab>().orderNumber;
+			if (PlayerPrefs.GetInt(perkPrefabs[i].name) == 3)
+			{
+				buttons[perkOrderNumber].GetComponent<Image>().color = new Color32(167, 167, 167, 255);
+				buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "UPGRADED";
+				buttons [perkOrderNumber].GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ShowUpgradePerkWindowWithStats (perkOrderNumber));
+			}
+			else
+			{
+				buttons[perkOrderNumber].GetComponentsInChildren<Text>()[0].text = perkPrefabs[i].GetComponent<PerkPrefab>().shopName + " (" + PlayerPrefs.GetInt(perkPrefabs[i].name).ToString()+")";
+				buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "ACTIVE";
+				buttons [perkOrderNumber].GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ShowUpgradePerkWindow (perkOrderNumber));
+				buttons [perkOrderNumber].GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ShowUpgradePerkWindow (perkOrderNumber));
+			}
+		}
+	}
 }

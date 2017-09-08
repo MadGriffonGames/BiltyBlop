@@ -85,6 +85,7 @@ public class Enemy : MonoBehaviour
     {
         if (damageSources.Contains(other.tag))
         {
+            CheckDamageSource(other.tag);
             StartCoroutine(TakeDamage());
         }
     }
@@ -159,5 +160,17 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         armature.animation.timeScale = tmp;
         yield return null;
+    }
+
+    public void CheckDamageSource(string damageSourceName)
+    {
+        if (damageSourceName == "Sword")
+        {
+            health -= Player.Instance.meleeDamage;
+        }
+        else
+        {
+            health -= Player.Instance.throwDamage;
+        }
     }
 }

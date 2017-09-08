@@ -71,7 +71,8 @@ public class Player : Character
     public bool GotKey { get; set; }
     public bool immortal = false;
     public float immortalTime;
-    public int damage;
+    public int meleeDamage;
+    public int throwDamage;
     public override bool IsDead
     {
         get { return health <= 0; }
@@ -135,69 +136,6 @@ public class Player : Character
         SetThrowing();
     }
 
-	private void SetPerkParams()
-	{
-		// DODRER
-		int dodgerLvl = PlayerPrefs.GetInt ("Dodger");
-		if (dodgerLvl == 0) 
-		{
-			dodgeChance = 0;
-		} 
-		else 
-		{
-			if (dodgerLvl > 0)
-			{
-				dodgeChance = (int) PlayerPrefs.GetFloat ("Dodger" + dodgerLvl.ToString ());
-				Debug.Log("dodger " + dodgeChance);
-			}
-		}
-
-		// POTION MANIAC
-		int potionLvl = PlayerPrefs.GetInt ("PotionManiac");
-		if (potionLvl == 0) 
-		{
-			potionTimeScale = 1;
-		} 
-		else 
-		{
-			if (potionLvl > 0)
-			{
-				potionTimeScale = PlayerPrefs.GetFloat ("PotionManiac" + potionLvl.ToString ());
-				Debug.Log("potion " + potionTimeScale);
-			}
-		}
-
-		// GREEDY
-		int greedLvl = PlayerPrefs.GetInt ("Greedy");
-		if (greedLvl == 0) 
-		{
-			coinScale = 1;
-		} 
-		else 
-		{
-			if (greedLvl > 0)
-			{
-				coinScale = PlayerPrefs.GetFloat ("Greedy" + greedLvl.ToString ());
-				Debug.Log("Greedy " + coinScale);
-			}
-		}
-
-		// AMMO MANIAC
-		int clipsLvl = PlayerPrefs.GetInt ("AmmoManiac");
-		if (clipsLvl == 0) 
-		{
-			maxClipSize = 3;
-		} 
-		else 
-		{
-			if (clipsLvl > 0)
-			{
-				maxClipSize = (int) PlayerPrefs.GetFloat ("AmmoManiac" + clipsLvl.ToString ());
-				Debug.Log("AmmoManiac " + maxClipSize);
-			}
-		}
-	}
-
     public override void Start () 
 	{
         base.Start();
@@ -209,7 +147,8 @@ public class Player : Character
 		skinIndex = PlayerPrefs.GetInt ("SkinDisplayIndex");
 
 		health = PlayerPrefs.GetInt ("SkinArmorStat");
-		damage = PlayerPrefs.GetInt ("SkinAttackStat");
+		meleeDamage = PlayerPrefs.GetInt ("SkinAttackStat");
+        throwDamage = 1;
 
         SetSlots();
 
@@ -697,12 +636,12 @@ public class Player : Character
     public IEnumerator DamageBonus(float duration)
     {
         damageBonusNum++;
-        damage *= 2;
+        meleeDamage *= 2;
 			yield return new WaitForSeconds(duration * potionTimeScale);
         damageBonusNum--;
         if (damageBonusNum == 0)
         {
-            damage /= 2;
+            meleeDamage /= 2;
         }
     }
 
@@ -794,7 +733,7 @@ public class Player : Character
         Time.timeScale = 1;
         myRigidbody.gravityScale = 3;
         immortal = false;
-        damage = 1;
+        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat"); ;
         movementSpeed = MOVEMENT_SPEED;
         jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
@@ -874,6 +813,69 @@ public class Player : Character
     {
         target.transform.SetParent(targetObject.gameObject.transform);
         target.transform.localPosition = localPosition;
-    } 
+    }
+
+    private void SetPerkParams()
+    {
+        // DODRER
+        int dodgerLvl = PlayerPrefs.GetInt("Dodger");
+        if (dodgerLvl == 0)
+        {
+            dodgeChance = 0;
+        }
+        else
+        {
+            if (dodgerLvl > 0)
+            {
+                dodgeChance = (int)PlayerPrefs.GetFloat("Dodger" + dodgerLvl.ToString());
+                Debug.Log("dodger " + dodgeChance);
+            }
+        }
+
+        // POTION MANIAC
+        int potionLvl = PlayerPrefs.GetInt("PotionManiac");
+        if (potionLvl == 0)
+        {
+            potionTimeScale = 1;
+        }
+        else
+        {
+            if (potionLvl > 0)
+            {
+                potionTimeScale = PlayerPrefs.GetFloat("PotionManiac" + potionLvl.ToString());
+                Debug.Log("potion " + potionTimeScale);
+            }
+        }
+
+        // GREEDY
+        int greedLvl = PlayerPrefs.GetInt("Greedy");
+        if (greedLvl == 0)
+        {
+            coinScale = 1;
+        }
+        else
+        {
+            if (greedLvl > 0)
+            {
+                coinScale = PlayerPrefs.GetFloat("Greedy" + greedLvl.ToString());
+                Debug.Log("Greedy " + coinScale);
+            }
+        }
+
+        // AMMO MANIAC
+        int clipsLvl = PlayerPrefs.GetInt("AmmoManiac");
+        if (clipsLvl == 0)
+        {
+            maxClipSize = 3;
+        }
+        else
+        {
+            if (clipsLvl > 0)
+            {
+                maxClipSize = (int)PlayerPrefs.GetFloat("AmmoManiac" + clipsLvl.ToString());
+                Debug.Log("AmmoManiac " + maxClipSize);
+            }
+        }
+    }
 }
 

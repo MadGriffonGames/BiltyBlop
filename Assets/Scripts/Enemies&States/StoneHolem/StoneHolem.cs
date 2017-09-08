@@ -49,7 +49,6 @@ public class StoneHolem : MovingMeleeEnemy
 
     public override IEnumerator TakeDamage()
     {
-        health -= Player.Instance.damage;
         CameraEffect.Shake(0.5f, 0.4f);
         SetHealthbar();
 		SoundManager.PlaySound ("holem_takingdamage");

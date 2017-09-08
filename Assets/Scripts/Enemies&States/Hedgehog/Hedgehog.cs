@@ -51,7 +51,6 @@ public class Hedgehog : MovingMeleeEnemy
 
     public override IEnumerator TakeDamage()
     {
-        health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.3f);
         MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
         SetHealthbar();

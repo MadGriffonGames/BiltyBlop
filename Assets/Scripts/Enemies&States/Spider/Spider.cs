@@ -116,7 +116,12 @@ public class Spider : Boss
         SoundManager.PlaySound("dragon_damage");
         health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.1f);
-        SetHealthbar();
+
+        for (int i = 1; i <= Player.Instance.damage; i++)
+        {
+            SetHealthbar();
+        }
+
         if (health <= 0)
         {
             isDead = true;
@@ -127,7 +132,7 @@ public class Spider : Boss
 
     public void SetHealthbar()
     {
-        if (Health != 0)
+        if (Health > 0)
         {
             healthbar.localScale = new Vector3(healthbar.localScale.x - firstHBScaleX * 1 / maxHealth,
                                                healthbar.localScale.y,
@@ -137,7 +142,6 @@ public class Spider : Boss
         {
             bossUI.SetActive(false);
         }
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

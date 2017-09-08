@@ -23,6 +23,7 @@ public class Chest : InteractiveObject
         {
 			MyAnimator.SetTrigger ("open");
             SoundManager.PlaySound("chest open");
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.treasureHunter);
             for (int i = 0; i < 10; i++)
             {
                 coins[i].SetActive(true);

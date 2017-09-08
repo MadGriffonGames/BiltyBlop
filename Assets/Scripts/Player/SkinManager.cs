@@ -19,7 +19,8 @@ public class SkinManager : MonoBehaviour
     }
 
     [SerializeField]
-    public GameObject[] skinPrefabs;   // all skin prefabs
+	public GameObject[] skinPrefabs; // all skin prefabs
+	public GameObject[] swordPrefabs; 
 
     private const string LOCKED = "Locked";
     private const string UNLOCKED = "Unlocked";
@@ -27,17 +28,24 @@ public class SkinManager : MonoBehaviour
     private const string CRYSTAL_COST = "CrystalCost";
     private const string COIN_COST = "CoinCost";
 
-    private const string PREFABS_FOLDER = "Skins/";
+    private const string SKIN_PREFABS_FOLDER = "Skins/";
+	private const string SWORDS_PREFAB_FOLDER = "Swords/";
 
     private void Start()
     {
         LoadSkinPrefabs();
+		LoadSwordsPrefabs ();
+
     }
 
     private void LoadSkinPrefabs()
     {
-        skinPrefabs = Resources.LoadAll<GameObject>(PREFABS_FOLDER);
+		skinPrefabs = Resources.LoadAll<GameObject>(SKIN_PREFABS_FOLDER);
     }
+	private void LoadSwordsPrefabs()
+	{
+		swordPrefabs = Resources.LoadAll<GameObject> (SWORDS_PREFAB_FOLDER);
+	}
 
     public bool isSkinLocked(int skinNumber) // true - Locked | false - Unlocked
     {
@@ -70,19 +78,78 @@ public class SkinManager : MonoBehaviour
             return false;
     } // buying skin
 
+	public bool BuySwordByCrystals(int swordNumber)
+	{
+		if (PlayerPrefs.GetInt("Crystals") >= swordPrefabs[swordNumber].GetComponent<SwordPrefab>().crystalCost && swordPrefabs[swordNumber].GetComponent<SwordPrefab>().isLocked)
+		{
+			PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - swordPrefabs[swordNumber].GetComponent<SwordPrefab>().crystalCost);
+			swordPrefabs[swordNumber].GetComponent<SwordPrefab>().UnlockSword();
+			return true;
+		}
+		else
+			return false;
+	} // buying SWORD
+
+	public bool BuySwordByCoins(int swordNumber)
+	{
+		// PAYMENT LOGIC
+		if (PlayerPrefs.GetInt("Coins") >= swordPrefabs[swordNumber].GetComponent<SwordPrefab>().coinCost && swordPrefabs[swordNumber].GetComponent<SwordPrefab>().isLocked)
+		{
+			PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - swordPrefabs[swordNumber].GetComponent<SwordPrefab>().coinCost);
+			swordPrefabs[swordNumber].GetComponent<SwordPrefab>().UnlockSword();
+			return true;
+		}
+		else
+			return false;
+	} // buying SWORD
+
     private void UnlockSkin(int skinNumber)
     {
         PlayerPrefs.SetString(skinPrefabs[skinNumber].name, UNLOCKED);
+		skinPrefabs [skinNumber].GetComponent<SkinPrefab> ().isLocked = false;
     }
     private void UnlockSkin(string skinName)
     {   
         PlayerPrefs.SetString(skinPrefabs[NumberOfSkin(skinName)].name, UNLOCKED);
+		skinPrefabs [NumberOfSkin(skinName)].GetComponent<SkinPrefab> ().isLocked = false;
     }
 
-    public void ApplySkin(string skinName) // applying (equiping) "skinName" skin 
+	public void ApplySkin(string skinName) // applying (equiping) "skinName" skin 
     {
         PlayerPrefs.SetString("Skin", skinName);
+		PlayerPrefs.SetInt("SkinDisplayIndex", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().displayIndex);
+		PlayerPrefs.SetInt("SkinArmorStat", skinPrefabs [NumberOfSkin (skinName)].GetComponent<SkinPrefab> ().armorStat);
     }
+
+	public void ApplySword(string swordName, int index) // applying (equiping) "skinName" skin 
+	{
+		PlayerPrefs.SetString("Sword", swordName);
+		PlayerPrefs.SetInt("SwordDisplayIndex", index);
+        PlayerPrefs.SetInt("SkinAttackStat", swordPrefabs[NumberOfSword(swordName)].GetComponent<SwordPrefab>().attackStat);
+    }
+
+	public int IndexOfSwordByOrderNumber(int orderNumber)
+	{
+		for (int i = 0; i < swordPrefabs.Length; i++)
+		{
+			if (swordPrefabs[i].GetComponent<SwordPrefab>().orderNumber == orderNumber)
+			{
+				return swordPrefabs[i].GetComponent<SwordPrefab>().displayIndex;
+			}
+		}
+		return 0;
+	}
+	public string NameOfSwordPrefabBySwordOrder(int orderNumber)
+	{
+		for (int i = 0; i < swordPrefabs.Length; i++)
+		{
+			if (swordPrefabs[i].GetComponent<SwordPrefab>().orderNumber == orderNumber)
+			{
+				return swordPrefabs[i].GetComponent<SwordPrefab>().name;
+			}
+		}
+		return "Classic";
+	}
 
     public int NumberOfSkinPrefabBySkinOrder(int orderNumber)
     {
@@ -111,6 +178,16 @@ public class SkinManager : MonoBehaviour
         for (int i = 0; i < skinPrefabs.Length; i++)
         {
             if (skinPrefabs[i].name == skinName)
+                return i;
+        }
+        return 0;
+    }
+
+    int NumberOfSword(string swordName)
+    {
+        for (int i = 0; i < swordPrefabs.Length; i++)
+        {
+            if (swordPrefabs[i].name == swordName)
                 return i;
         }
         return 0;

@@ -19,15 +19,56 @@ public class KidSkin : MonoBehaviour
 
     UnityArmatureComponent myArmature;
     private GameObject skinPrefab;
+	private Slot[] skinSlots;
+	private Slot swordSlot;
+	private int skinIndex;
+
+	public void Awake()
+	{
+		skinSlots = new Slot[9];
+	}	
 
     public void ChangeSkin(int skinNumber)
     {
         myArmature = GetComponentInChildren<UnityArmatureComponent>();
-        Destroy(myArmature.gameObject);
-        skinPrefab = Instantiate(SkinManager.Instance.skinPrefabs[skinNumber], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
-        skinPrefab.gameObject.transform.localScale = new Vector3(30, 30, 30);
-        myArmature = GetComponentInChildren<UnityArmatureComponent>();
-        //myArmature.animation.Play("victory_idle");
+		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponentInChildren<SkinPrefab> ().displayIndex;
+
+		SetSlots ();
+
+		SetIndexes ();
+
+		//myArmature.animation.Play("victory_idle");
     }
+	public void AddSlot(string slotName, ref int i)
+	{
+		skinSlots [i] = myArmature.armature.GetSlot (slotName);
+		i++;
+	}
+
+	public void SetSlots()
+	{
+		int i = 0;
+
+		myArmature.zSpace = 0.02f;
+
+		AddSlot("r_hand_2", ref i);
+		AddSlot("l_hand_2", ref i);
+		AddSlot("leg", ref i);
+		AddSlot("leg1", ref i);
+		AddSlot("Shoulder_l", ref i);
+		AddSlot("Shoulder_r", ref i);
+		AddSlot("torso", ref i);
+		AddSlot("mex", ref i);
+		AddSlot("head", ref i);
+	}
+
+	public void SetIndexes()
+	{
+
+		for (int j = 0; j < skinSlots.Length; j++)
+		{
+			skinSlots[j].displayIndex = skinIndex;
+		}
+	}
 
 }

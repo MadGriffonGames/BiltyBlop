@@ -18,7 +18,8 @@ public class TimeRewindUI : MonoBehaviour
     Text timerTxt;
     [SerializeField]
     GameObject rewindButton;
-
+    [SerializeField]
+    GameObject gameOverBar;
     float timer;
 
     void Start ()
@@ -93,6 +94,9 @@ public class TimeRewindUI : MonoBehaviour
 
     private void OnEnable()
     {
+        gameOverBar.SetActive(true);
+        gameOverBar.GetComponent<Animator>().SetBool("animate", true);
+
         timer = 7.99f;
         fade.SetActive(true);
         pauseButton.SetActive(false);

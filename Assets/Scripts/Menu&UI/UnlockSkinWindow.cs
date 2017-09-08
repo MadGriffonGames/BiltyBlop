@@ -41,14 +41,16 @@ public class UnlockSkinWindow : MonoBehaviour {
     Transform coinButtonTransform;
 
 	private string chosenSkinName;
+	private int skinIndex;
+
 
     public void SetWindowWithSkinNumber(int skinNumber)
     {
         SkinPrefab skin = SkinManager.Instance.skinPrefabs[skinNumber].gameObject.GetComponent<SkinPrefab>();
-        KidSkin.Instance.ChangeSkin(skinNumber);
+		KidSkin.Instance.ChangeSkin(skinNumber);
+		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponent<SkinPrefab> ().displayIndex;
         skinName.GetComponent<Text>().text = skin.shopName;
 		chosenSkinName = skin.name;
-        statsPanel.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(skin.attackStat);
         statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(skin.armorStat);
         if (skin.isLocked)
         {

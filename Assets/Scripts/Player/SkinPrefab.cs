@@ -15,7 +15,7 @@ public class SkinPrefab : MonoBehaviour
     public int coinCost;
 
     public int armorStat;
-    public int attackStat;
+	public int displayIndex;
 
     private const string LOCKED = "Locked";
     private const string UNLOCKED = "Unlocked";
@@ -23,26 +23,19 @@ public class SkinPrefab : MonoBehaviour
     private const string COIN_COST = "CoinCost";
     private const string ARMOR = "ArmorStat";
     private const string ATTACK = "AttackStat";
+	private const string DISPLAY_INDEX = "DisplayIndex";
 
-    private const string SPRITE_FOLDER = "SkinSprites/";
+    private const string SPRITE_FOLDER = "Skins/SkinSprites/";
 
-
-    void Awake ()
+    public void SetPlayerPrefsParams()
     {
-        SetPlayerPrefsParams();		
-	}
-
-    private void SetPlayerPrefsParams()
-    {
-        if (!PlayerPrefs.HasKey(gameObject.name))
-        {
-            if (isLocked)
-            {
-                PlayerPrefs.SetString(gameObject.name, LOCKED);
-            }
-            else
-                PlayerPrefs.SetString(gameObject.name, UNLOCKED);
-        }
+		if (!PlayerPrefs.HasKey (gameObject.name)) {
+			if (isLocked) {
+				PlayerPrefs.SetString (gameObject.name, LOCKED);
+			} else
+				PlayerPrefs.SetString (gameObject.name, UNLOCKED);
+		}
+		
         if (!PlayerPrefs.HasKey(gameObject.name + CRYSTAL_COST))
         {
             PlayerPrefs.SetInt(gameObject.name + CRYSTAL_COST, crystalCost);
@@ -55,10 +48,10 @@ public class SkinPrefab : MonoBehaviour
         {
             PlayerPrefs.SetInt(gameObject.name + ARMOR, armorStat);
         }
-        if (!PlayerPrefs.HasKey(gameObject.name + ATTACK))
-        {
-            PlayerPrefs.SetInt(gameObject.name + ATTACK, attackStat);
-        }
+		if (!PlayerPrefs.HasKey(gameObject.name + DISPLAY_INDEX))
+		{
+			PlayerPrefs.SetInt(gameObject.name + DISPLAY_INDEX, displayIndex);
+		}
         skinSprite = Resources.Load<Sprite>(SPRITE_FOLDER + name);
     }
 
@@ -67,4 +60,8 @@ public class SkinPrefab : MonoBehaviour
         PlayerPrefs.SetString(gameObject.name, UNLOCKED);
         isLocked = false;
     }
+	public int GetSkinIndex()
+	{
+		return PlayerPrefs.GetInt (gameObject.name + DISPLAY_INDEX);
+	}
 }

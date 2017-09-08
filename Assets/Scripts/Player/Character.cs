@@ -64,22 +64,22 @@ public abstract class Character : MonoBehaviour
         }
 
         myArmature = GetComponentInChildren<UnityArmatureComponent>();
-        Destroy(myArmature.gameObject);
+        //Destroy(myArmature.gameObject);
         string skinName = PlayerPrefs.GetString("Skin", "Classic");
-        if (skins.ContainsKey(skinName))
-        {
-            GameObject skinPrefab = Instantiate(skins[skinName], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
-            skinPrefab.transform.localScale = new Vector3(1, 1, 1);
-            //getting component here, cuz if you try to get armature outside "if statement" you get "old" component(i don't know why :) )
-            myArmature = skinPrefab.GetComponent<UnityArmatureComponent>();
-        }
-        else
-        {
-            GameObject skinPrefab = Instantiate(skins["Classic"], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
-            skinPrefab.transform.localScale = new Vector3(1, 1, 1);
-            //getting component here, cuz if you try to get armature outside "if statement" you get "old" component(i don't know why :) )
-            myArmature = skinPrefab.GetComponent<UnityArmatureComponent>();
-        }
+        //if (skins.ContainsKey(skinName))
+        //{
+        //    GameObject skinPrefab = Instantiate(skins[skinName], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+        //    skinPrefab.transform.localScale = new Vector3(1, 1, 1);
+        //    //getting component here, cuz if you try to get armature outside "if statement" you get "old" component(i don't know why :) )
+        //    myArmature = skinPrefab.GetComponent<UnityArmatureComponent>();
+        //}
+        //else
+        //{
+        //    GameObject skinPrefab = Instantiate(skins["Classic"], gameObject.transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+        //    skinPrefab.transform.localScale = new Vector3(1, 1, 1);
+        //    //getting component here, cuz if you try to get armature outside "if statement" you get "old" component(i don't know why :) )
+        //    myArmature = skinPrefab.GetComponent<UnityArmatureComponent>();
+        //}
     }
 
     public void MeleeAttack()

@@ -5,27 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class DailyReward : MonoBehaviour
+public class DailyReward : RewardedChest
 {
-    const int COINS_RANGE = 90;
-    const int CRYSTALS_RANGE = 100;
-    const int ITEMS_RANGE = 100;
-
-    const int MIN_COIN_RANGE = 50;
-    const int MID_COIN_RANGE = 70;
-    const int BIG_COIN_RANGE = 100;
-
-    const int MIN_CRYSTAL_RANGE = 65;
-    const int MID_CRYSTAL_RANGE = 85;
-    const int BIG_CRYSTAL_RANGE = 100;
-
-    const int HP_RANGE = 35;
-    const int AMMO_RANGE = 70;
-    const int SPEED_RANGE = 80;
-    const int TIME_RANGE = 90;
-    const int DAMAGE_RANGE = 96;
-    const int IMMORTAL_RANGE = 100;
-
     [SerializeField]
     bool tmp;
  
@@ -40,11 +21,7 @@ public class DailyReward : MonoBehaviour
     [SerializeField]
     GameObject activateButton;
     [SerializeField]
-    Image loot;
-    [SerializeField]
     GameObject chestFade;
-    [SerializeField]
-    Sprite[] lootArray;
     [SerializeField]
     Text timer;
 
@@ -61,6 +38,8 @@ public class DailyReward : MonoBehaviour
 
     private void Start()
     {
+        base.Start();
+
         isTimerTick = false;
         hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);// 24hours in timespan format
 
@@ -180,67 +159,6 @@ public class DailyReward : MonoBehaviour
         timer.gameObject.SetActive(false);
     }
 
-    public void Randomize()
-    {
-        int random = UnityEngine.Random.Range(1, 100);
-
-        if (random <= COINS_RANGE)
-        {
-            RandomizeCoins();
-        }
-        if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
-        {
-            RandomizeCrystals();
-        }
-    }
-
-    void RandomizeCoins()
-    {
-        int random = UnityEngine.Random.Range(1, 100);
-
-        if (random <= MIN_COIN_RANGE)
-        {
-            loot.sprite = lootArray[0];
-            AddCoins(50);
-        }
-        if (random > MIN_COIN_RANGE && random <= MID_COIN_RANGE)
-        {
-            loot.sprite = lootArray[1];
-            AddCoins(150);
-        }
-        if (random > MID_COIN_RANGE && random <= BIG_COIN_RANGE)
-        {
-            loot.sprite = lootArray[2];
-            AddCoins(300);
-        }
-    }
-
-    void RandomizeCrystals()
-    {
-        int random = UnityEngine.Random.Range(1, 100);
-
-        if (random <= MIN_CRYSTAL_RANGE)
-        {
-            loot.sprite = lootArray[3];
-            AddCrystals(2);
-        }
-        if (random > MIN_CRYSTAL_RANGE && random <= MID_CRYSTAL_RANGE)
-        {
-            loot.sprite = lootArray[4];
-            AddCrystals(5);
-        }
-        if (random > MID_CRYSTAL_RANGE && random <= BIG_CRYSTAL_RANGE)
-        {
-            loot.sprite = lootArray[5];
-            AddCrystals(10);
-        }
-    }
-
-    void RandomizeItems()
-    {
-        int random = UnityEngine.Random.Range(1, 100);
-    }
-
     void AddCoins(int value)
     {
         loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
@@ -252,12 +170,5 @@ public class DailyReward : MonoBehaviour
     {
         loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
         PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
-        GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
     }
-
-    void AddItem(string itemName)
-    {
-
-    }
-
 }

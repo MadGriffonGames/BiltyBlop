@@ -62,15 +62,18 @@ public class DeathUI : MonoBehaviour
             TutorialUI.Instance.textBar.color -= new Color(0, 0, 0, TutorialUI.Instance.textBar.color.a);
             TutorialUI.Instance.txt.text = "";
         }
-        StartCoroutine(ButtonDelay());
-	}
+
+        restartButton.SetActive(true);
+        mainMenuButton.SetActive(true);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(true);
+            freeCheckpoints.GetComponentInChildren<Text>().text = Player.Instance.freeCheckpoints.ToString();
+        }
+    }
 
     private void Update()
     {
-        if (this.isActiveAndEnabled)
-        {
-            gameOverBar.GetComponent<Animator>().SetBool("animate", true);
-        }
 
         if (!fade.activeInHierarchy)
         {
@@ -146,18 +149,6 @@ public class DeathUI : MonoBehaviour
         SoundManager.PlaySound(sound);
     }
 
-    IEnumerator ButtonDelay()
-    {
-        yield return new WaitForSeconds(1);
-        restartButton.SetActive(true);
-        mainMenuButton.SetActive(true);
-        if (continueButton != null)
-        {
-            continueButton.SetActive(true);
-            freeCheckpoints.GetComponentInChildren<Text>().text = Player.Instance.freeCheckpoints.ToString();
-        }
-    }
-
     void Revive()
     {
         Player.Instance.gameObject.layer = defaultLayer;
@@ -209,7 +200,19 @@ public class DeathUI : MonoBehaviour
             TutorialUI.Instance.textBar.color -= new Color(0, 0, 0, TutorialUI.Instance.textBar.color.a);
             TutorialUI.Instance.txt.text = "";
         }
-        StartCoroutine(ButtonDelay());
+
+        restartButton.SetActive(true);
+        mainMenuButton.SetActive(true);
+        if (continueButton != null)
+        {
+            continueButton.SetActive(true);
+            freeCheckpoints.GetComponentInChildren<Text>().text = Player.Instance.freeCheckpoints.ToString();
+        }
+    }
+
+    private void OnDisable()
+    {
+        gameOverBar.SetActive(false);
     }
 
     public void UpdateFreeCheckpointsCounter()

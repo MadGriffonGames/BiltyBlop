@@ -13,8 +13,8 @@ public class UnlockPerkWindow : MonoBehaviour {
     GameObject buyCrystalsButton;
     [SerializeField]
     GameObject perkName;
-    [SerializeField]
-    GameObject applyButton;
+	[SerializeField]
+	GameObject perkDescription;
     [SerializeField]
     GameObject errorWindow;
     [SerializeField]
@@ -29,90 +29,125 @@ public class UnlockPerkWindow : MonoBehaviour {
     [SerializeField]
     Transform coinButtonTransform;
 
+	private int perkLvl;
+	private int chosenPerkOrderNumber;
+
 
     public void SetWindowWithPerkNumber(int perkOrderNumber)
     {
+		chosenPerkOrderNumber = perkOrderNumber;
         int perkNumber = 0;
         for (int i = 0; i < PerksSwipeMenu.Instance.perkPrefabs.Length; i++)
         {
             if (PerksSwipeMenu.Instance.perkPrefabs[i].GetComponent<PerkPrefab>().orderNumber == perkOrderNumber)
             {
-                perkNumber = i;
+                perkNumber = i; // number of PERK in PERKPREFABS
                 break;
             }
         }
         PerkPrefab perk = PerksSwipeMenu.Instance.perkPrefabs[perkNumber].gameObject.GetComponent<PerkPrefab>();
-        perkName.GetComponent<Text>().text = perk.shopName;
+
+		perkLvl = PlayerPrefs.GetInt (PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
 
         // perkNumber - number of chosen perk in perkPrefabs[]
 
-        if (perk.isLocked)
-        {
-            if (perk.coinCost == 0 && perk.crystalCost != 0)
-            {
-                buyCrystalsButton.transform.localPosition = onebuttonTransform.localPosition;
-                buyCrystalsButton.GetComponentInChildren<Text>().text = perk.crystalCost.ToString();
+		if (perkLvl < 3) {
+			perkName.GetComponent<Text> ().text = perk.shopName + " (" + (perkLvl + 1).ToString () + ")";
+			perkDescription.GetComponent<Text> ().text = string.Format (perk.description, perk.upgradeScales [perkLvl]);
+			int perkCoinCost = perk.upgradeCoinCost [perkLvl];
+			int perkCrystalCost = perk.upgradeCrystalCost [perkLvl];
+			if (perkCoinCost == 0 && perkCrystalCost != 0) {
+				buyCrystalsButton.transform.localPosition = onebuttonTransform.localPosition;
+				buyCrystalsButton.GetComponentInChildren<Text> ().text = perkCrystalCost.ToString ();
 
-                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCrystals(perkNumber));
+				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
+				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCrystals (perkNumber));
 
-                buyCoinsButton.gameObject.SetActive(false);
-            }
-            else if (perk.crystalCost == 0 && perk.coinCost != 0)
-            {
-                buyCoinsButton.transform.localPosition = onebuttonTransform.localPosition;
-                buyCoinsButton.GetComponentInChildren<Text>().text = perk.coinCost.ToString();
+				buyCoinsButton.gameObject.SetActive (false);
+			} else if (perkCrystalCost == 0 && perkCoinCost != 0) {
+				buyCoinsButton.transform.localPosition = onebuttonTransform.localPosition;
+				buyCoinsButton.GetComponentInChildren<Text> ().text = perkCoinCost.ToString ();
 
-                buyCoinsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCoinsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCoins(perkNumber));
+				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
+				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCoins (perkNumber));
 
-                buyCrystalsButton.gameObject.SetActive(false);
-            }
-            else if (perk.crystalCost == 0 && perk.coinCost == 0)
-            {
+				buyCrystalsButton.gameObject.SetActive (false);
+			} else if (perkCrystalCost == 0 && perkCoinCost == 0) {
 
-            }
-            else
-            {
-                ResetButtons();
-                buyCrystalsButton.GetComponentInChildren<Text>().text = perk.crystalCost.ToString();
-                buyCoinsButton.GetComponentInChildren<Text>().text = perk.coinCost.ToString();
+			} else {
+				ResetButtons ();
+				buyCrystalsButton.GetComponentInChildren<Text> ().text = perkCrystalCost.ToString ();
+				buyCoinsButton.GetComponentInChildren<Text> ().text = perkCoinCost.ToString ();
 
-                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCrystalsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCrystals(perkNumber));
-                buyCoinsButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-                buyCoinsButton.gameObject.GetComponent<Button>().onClick.AddListener(() => CanBuyPerkByCoins(perkNumber));
-            }
-        }
+				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
+				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCrystals (perkNumber));
+				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
+				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCoins (perkNumber));
+			}
+		} else 
+		{
+			perkName.GetComponent<Text> ().text = perk.shopName + " (" + perkLvl.ToString () + ")";
+			perkDescription.GetComponent<Text> ().text = string.Format (perk.description, perk.upgradeScales [2]);
+		}
     }
 
-    public void CanBuyPerkByCrystals(int perkNmber)
+	public void SetWindowWithPerkStats(int perkOrderNumber)
+	{
+		chosenPerkOrderNumber = perkOrderNumber;
+		int perkNumber = 0;
+		for (int i = 0; i < PerksSwipeMenu.Instance.perkPrefabs.Length; i++)
+		{
+			if (PerksSwipeMenu.Instance.perkPrefabs[i].GetComponent<PerkPrefab>().orderNumber == perkOrderNumber)
+			{
+				perkNumber = i; // number of PERK in PERKPREFABS
+				break;
+			}
+		}
+		PerkPrefab perk = PerksSwipeMenu.Instance.perkPrefabs[perkNumber].gameObject.GetComponent<PerkPrefab>();
+
+		perkLvl = PlayerPrefs.GetInt (PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
+		perkName.GetComponent<Text>().text = perk.shopName + " (" + perkLvl.ToString() +")";
+		perkDescription.GetComponent<Text>().text = string.Format(perk.description, perk.upgradeScales[perkLvl - 1]);
+
+		buyCoinsButton.gameObject.SetActive (false);
+		buyCrystalsButton.gameObject.SetActive (false);
+
+		// perkNumber - number of chosen perk in perkPrefabs[]
+	}
+
+    public void CanUpgradePerkByCrystals(int perkNumber)
     {
-        if (PerksSwipeMenu.Instance.CanUnlockPerkByCrystals(perkNmber))
+        if (PerksSwipeMenu.Instance.CanUpgradePerkByCrystals(perkNumber))
         {
             // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
+			perkLvl++;
             fade.gameObject.SetActive(true);
             closeErrorWindowButton.gameObject.SetActive(true);
             errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "PERK UNLOCKED";
+            errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
         }
         else
         {
+			if (PerksSwipeMenu.Instance.perkPrefabs[perkNumber])
+			{
+				
+			}
             fade.gameObject.SetActive(true);
             closeErrorWindowButton.gameObject.SetActive(true);
             errorWindow.gameObject.SetActive(true);
             errorWindow.GetComponentInChildren<Text>().text = "NOT ENOUGH CRYSTALS";
         }
     }
-    public void CanBuyPerkByCoins(int perkNumber)
+    public void CanUpgradePerkByCoins(int perkNumber)
     {
-        if (PerksSwipeMenu.Instance.CanUnlockPerkByCoins(perkNumber))
+        if (PerksSwipeMenu.Instance.CanUpgradePerkByCoins(perkNumber))
         {
             // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
+			perkLvl ++;
             fade.gameObject.SetActive(true);
             closeErrorWindowButton.gameObject.SetActive(true);
             errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "PERK UNLOCKED";
+            errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
         }
         else
         {
@@ -127,6 +162,7 @@ public class UnlockPerkWindow : MonoBehaviour {
     {
         errorWindow.gameObject.SetActive(false);
         fade.gameObject.SetActive(false);
+		UpdateWindowParams ();
         closeErrorWindowButton.gameObject.SetActive(false);
     }
     private void ResetButtons()
@@ -136,4 +172,11 @@ public class UnlockPerkWindow : MonoBehaviour {
         buyCoinsButton.transform.localPosition = coinButtonTransform.localPosition;
         buyCrystalsButton.transform.localPosition = crystalButtonTransform.transform.localPosition;
     }
+	private void UpdateWindowParams()
+	{
+		if (perkLvl < 3)
+			SetWindowWithPerkNumber (chosenPerkOrderNumber);
+		else
+			SetWindowWithPerkStats (chosenPerkOrderNumber);
+	}
 }

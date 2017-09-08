@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkinStatsPanel : MonoBehaviour {
-
+public class SkinStatsPanel : MonoBehaviour
+{
 	[SerializeField]
 	Text hpStatText;
 	[SerializeField]
@@ -12,12 +12,12 @@ public class SkinStatsPanel : MonoBehaviour {
 
     public void SetDefendIndicators(int stat)
     {      
-		hpStatText.text = stat.ToString();   
+		hpStatText.text = stat.ToString();
     }
 
     public void SetAttackIndicators(int stat)
     {
-		damageStatText.text = stat.ToString ();
+		damageStatText.text = stat.ToString();
     }
 
 }

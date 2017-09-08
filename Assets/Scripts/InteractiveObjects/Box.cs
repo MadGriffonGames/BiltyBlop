@@ -34,26 +34,26 @@ public class Box : InteractiveObject
     {
         if (UnityEngine.Random.Range(1, 100) <= 80)//spawn or not
         {
-            switch (Player.Instance.Health)
+            if (Player.Instance.Health == 1)
             {
-                case 1:
-                    if (UnityEngine.Random.Range(1, 100) <= 85)
-                        Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
-                    else
-                        Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
-                    break;
-                case 2:
-                    if (UnityEngine.Random.Range(1, 100) <= 90)
-                        Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
-                    else
-                        Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
-                    break;
-                case 3:
-                    if (UnityEngine.Random.Range(1, 100) <= 95)
-                        Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
-                    else
-                        Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
-                    break;
+                if (UnityEngine.Random.Range(1, 100) <= 80)
+                    Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
+                else
+                    Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
+            }
+            if (Player.Instance.Health == 2)
+            {
+                if (UnityEngine.Random.Range(1, 100) <= 90)
+                    Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
+                else
+                    Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
+            }
+            if (Player.Instance.Health >= 3)
+            {
+                if (UnityEngine.Random.Range(1, 100) <= 95)
+                    Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
+                else
+                    Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
             }
         }
     }

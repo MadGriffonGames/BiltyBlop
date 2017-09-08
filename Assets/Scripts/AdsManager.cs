@@ -100,15 +100,21 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
             if (SceneManager.GetActiveScene().name.Contains("Level"))
             {
 #if !UNITY_IOS
-                warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
-                warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
+                if (GameObject.Find("NetworkWarning(Clone)") == null)//if there is no active warnings in scene
+                {
+                    warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
+                    warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
+                }
 #endif
             }
             else
             {
 #if !UNITY_IOS
-                warning = Instantiate(networkWarningPrefab, GameObject.Find("MainPanel").gameObject.transform);
-                warning.GetComponent<RectTransform>().localScale = new Vector2(3, 3);
+                if (GameObject.Find("NetworkWarning(Clone)") == null)//if there is no active warnings in scene
+                {
+                    warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
+                    warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
+                }
 #endif
             }
             warning.GetComponent<RectTransform>().localPosition = new Vector2();

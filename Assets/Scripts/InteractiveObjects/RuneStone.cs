@@ -6,8 +6,6 @@ using UnityEngine;
 public class RuneStone : InteractiveObject
 {
     public string nextLvl;
-	[SerializeField]
-	private GameObject lightParticle;
     float delay = 2.5f;
     float timer;
     bool timerIsOn = false;
@@ -48,26 +46,30 @@ public class RuneStone : InteractiveObject
         }
     }
 
-	public void MakeFX()
-	{
-		Instantiate(lightParticle, this.gameObject.transform.position + new Vector3(0, -0.5f, 1), Quaternion.Euler(new Vector3 (-90, 0 , 0)));
-	}
-
     public void SaveGame()
     {
         GameManager.nextLevelName = nextLvl;
-        PlayerPrefs.SetInt("Coins", GameManager.collectedCoins);
+
+		PlayerPrefs.SetInt("Coins", Mathf.RoundToInt(GameManager.collectedCoins * Player.Instance.coinScale));   // GREEDY PERK
+
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
         {
             if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.stars)
             {
+                int previousStarsCount = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects");
+                PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + (Player.Instance.stars - previousStarsCount)); // minus old stars count, plus new stars count
+
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
             }
         }
         else
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
+
+            PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + Player.Instance.stars);
         }
+
+        
 
         if (PlayerPrefs.GetInt(nextLvl) == 0)
         {
@@ -78,6 +80,8 @@ public class RuneStone : InteractiveObject
         {
             PlayerPrefs.SetInt(nextLvl, 1);
         }
+
+        Debug.Log(PlayerPrefs.GetInt("GeneralStarsCount"));
     }
 
 	IEnumerator WaitForGround()

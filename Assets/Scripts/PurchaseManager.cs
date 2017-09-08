@@ -34,17 +34,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         InitializePurchasing();
     }
 
-    GameObject txt;
-    GameObject txt2;
-
     private void Start()
     {
-        txt = GameObject.FindGameObjectWithTag("UI");
-        txt2 = GameObject.FindGameObjectWithTag("Arrow");
-
-        txt.GetComponent<Text>().text = PlayerPrefs.GetInt("Crystals").ToString();
-        txt2.GetComponent<Text>().text = PlayerPrefs.GetInt("NoAds").ToString();
-
         OnPurchaseNonConsumable += PurchaseManager_OnPurchaseNonConsumable;
         OnPurchaseConsumable += PurchaseManager_OnPurchaseConsumable;
     }
@@ -53,16 +44,37 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         Debug.Log("Purchased: " + args.purchasedProduct.definition.id + " - NonConsumable");
         PlayerPrefs.SetInt("NoAds", 1);
-
-        txt2.GetComponent<Text>().text = PlayerPrefs.GetInt("NoAds").ToString();
     }
 
     private void PurchaseManager_OnPurchaseConsumable(PurchaseEventArgs args)
     {
         Debug.Log("Purchased: " + args.purchasedProduct.definition.id + " - Consumable");
-        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 30);
 
-        txt.GetComponent<Text>().text = PlayerPrefs.GetInt("Crystals").ToString();
+        switch (args.purchasedProduct.definition.id)
+        {
+            case "15_crystals":
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
+                break;
+
+            case "100__crystals":
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 100);
+                break;
+
+            case "200_crystals":
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 200);
+                break;
+
+            case "500_crystals":
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 500);
+                break;
+
+            case "1500_crystals":
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 1500);
+                break;
+
+            default:
+                break;
+        }
     }
 
     

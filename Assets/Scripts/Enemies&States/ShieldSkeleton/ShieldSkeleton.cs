@@ -1,30 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DragonBones;
+using UnityEngine;
 
-public class Snowman : MovingMeleeEnemy
+public class ShieldSkeleton : MovingMeleeEnemy
 {
-    private ISnowmanState currentState;
+    private IShieldSkeletonState currentState;
     [SerializeField]
     private GameObject snowmanParticle;
 
-
+    public bool isTimerTick;
     bool damaged = false;
     public bool walk = false;
+    bool isTurningAround;
+
+    float timer;
+
+    const float ATTACK_REFRESH = 1.2f;
+    const float TURN_AROUND_TIME = 0.85f;
 
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+
+        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
     public override void Start()
     {
         base.Start();
+
+        timer = 0;
+
         isAttacking = false;
-        ChangeState(new SnowmanPatrolState());
+        isTimerTick = false;
+
+        armature.armature.cacheFrameRate = 60;
+
+        ChangeState(new ShieldSkeletonPatrolState());
+
+
     }
 
     void Update()
@@ -35,11 +51,22 @@ public class Snowman : MovingMeleeEnemy
             {
                 currentState.Execute();
             }
-            LookAtTarget();
+            LookAtKid();
+        }
+
+        if (isTimerTick)
+        {
+            timer += Time.deltaTime;
+        }
+
+        if (timer >= ATTACK_REFRESH)
+        {
+            timer = 0;
+            isTimerTick = false;
         }
     }
 
-    public void ChangeState(ISnowmanState newState)
+    public void ChangeState(IShieldSkeletonState newState)
     {
         if (currentState != null)
         {
@@ -51,30 +78,39 @@ public class Snowman : MovingMeleeEnemy
 
     public override IEnumerator TakeDamage()
     {
-        if (!damaged)
+
+        float posDiference;
+
+        if (transform.localScale.x > 0)
+        {
+            posDiference = Mathf.Abs(Player.Instance.transform.position.x) - Mathf.Abs(transform.position.x);
+        }
+        else
+        {
+            posDiference = Mathf.Abs(transform.position.x) - Mathf.Abs(Player.Instance.transform.position.x);
+        }
+
+        if (!damaged && posDiference < 0)
         {
             damaged = true;
             health -= Player.Instance.damage;
             MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             StartCoroutine(AnimationDelay());
             CameraEffect.Shake(0.2f, 0.3f);
+
             SetHealthbar();
-            if (Target == null)
-            {
-                ChangeDirection();
-            }
+
             if (IsDead)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("snowman_death");
-                Instantiate(snowmanParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                //Instantiate(snowmanParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.05f);
         damaged = false;
     }
 
@@ -87,11 +123,10 @@ public class Snowman : MovingMeleeEnemy
 
         Target = null;
         damaged = false;
-        AttackCollider.enabled = false;
 
         if (Health <= 0)
         {
-            ChangeState(new SnowmanPatrolState());
+            ChangeState(new ShieldSkeletonPatrolState());
             armature.animation.timeScale = 1;
             Health = 2;
         }
@@ -116,5 +151,29 @@ public class Snowman : MovingMeleeEnemy
             armature.animation.FadeIn("walk", -1, -1);
         }
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+    }
+
+    IEnumerator ChangeDir()
+    {
+        if (!isTurningAround)
+        {
+            isTurningAround = true;
+            yield return new WaitForSeconds(TURN_AROUND_TIME);
+            ChangeDirection();
+            isTurningAround = false;
+        }
+    }
+
+    void LookAtKid()
+    {
+        if (Target != null)
+        {
+            float xDir = Target.transform.position.x - transform.position.x;//xDir shows target from left or right side 
+
+            if ((xDir < 0 && facingRight) || (xDir > 0 && !facingRight))
+            {
+                StartCoroutine(ChangeDir());
+            }
+        }
     }
 }

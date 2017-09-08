@@ -29,14 +29,15 @@ public class ActLocker : MonoBehaviour
         {
             collectStars = true;
 
-            levelPanel.SetActive(false);
+            starsPanel.SetActive(false);
+            
         }
 
         if (PlayerPrefs.GetInt("Level" + unlockLevel) > 0)
         {
             completeLevel = true;
 
-            starsPanel.SetActive(false);
+            levelPanel.SetActive(false);
         }
 
         if (collectStars && completeLevel)

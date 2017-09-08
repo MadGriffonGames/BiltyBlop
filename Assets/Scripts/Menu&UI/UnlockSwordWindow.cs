@@ -53,7 +53,7 @@ public class UnlockSwordWindow : MonoBehaviour {
 		swordIndex = SkinManager.Instance.swordPrefabs [swordNumber].GetComponent<SwordPrefab> ().displayIndex;
 		swordName.GetComponent<Text>().text = sword.shopName;
 		chosenSwordName = sword.name;
-		//statsPanel.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
+		statsPanel.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
 		//statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(sword.armorStat);
 		if (sword.isLocked)
 		{

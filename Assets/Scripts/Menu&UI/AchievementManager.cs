@@ -137,12 +137,6 @@ public class AchievementManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt(achieveName, 0);
         PlayerPrefs.SetInt(prefsName + "weight", 0);
-        //PlayerPrefs.SetInt(prefsName + "targetValue0", 0);
-        //PlayerPrefs.SetInt(prefsName + "targetValue1", 0);
-        //PlayerPrefs.SetInt(prefsName + "targetValue2", 0);
-        //PlayerPrefs.SetInt(prefsName + "weight", 0);
-
-
     }
 
 }

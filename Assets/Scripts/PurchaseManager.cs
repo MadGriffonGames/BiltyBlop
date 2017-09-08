@@ -56,7 +56,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
                 break;
 
-            case "100_crystals":
+            case "100__crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 100);
                 break;
 

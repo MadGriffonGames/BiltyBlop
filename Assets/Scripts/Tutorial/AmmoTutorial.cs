@@ -11,12 +11,12 @@ public class AmmoTutorial : InAppTutorial
 
     private void Start()
     {
-        if (PlayerPrefs.GetInt("Level2") != 0)
-        {
-            maneken.SetActive(false);
-            gameObject.SetActive(false);
-            tutorialTrigger.SetActive(false);
-        }
+        //if (PlayerPrefs.GetInt("Level2") != 0)
+        //{
+        //    maneken.SetActive(false);
+        //    gameObject.SetActive(false);
+        //    tutorialTrigger.SetActive(false);
+        //}
     }
 
     public override void OnTriggerEnter2D(Collider2D other)

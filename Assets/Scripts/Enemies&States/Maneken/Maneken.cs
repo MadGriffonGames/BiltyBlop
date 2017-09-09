@@ -30,15 +30,30 @@ public class Maneken : MonoBehaviour
         {
             if (!isNeedDoubleDamage)
             {
+                CheckDamageSource(other.tag);
                 StartCoroutine(TakeDamage());
             }
             else
             {
                 if (Player.Instance.damageBonusNum > 0)
                 {
+                    CheckDamageSource(other.tag);
                     StartCoroutine(TakeDamage());
                 }
             }
+        }
+    }
+
+    public void CheckDamageSource(string damageSourceName)
+    {
+        if (damageSourceName == "Sword")
+        {
+            health -= Player.Instance.meleeDamage;
+
+        }
+        else
+        {
+            health -= Player.Instance.throwDamage;
         }
     }
 

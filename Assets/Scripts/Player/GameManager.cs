@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour
             crystalTxt = GameObject.Find("CrystalTxt").GetComponent<Text>();
         }
 
+        if (!PlayerPrefs.HasKey("NoAds"))
+        {
+            PlayerPrefs.SetInt("NoAds", 0);
+        }
+
         coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
 
         Instantiate(adsManager);

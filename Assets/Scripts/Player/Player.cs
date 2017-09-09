@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DragonBones;
 using System;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Player : Character
@@ -139,7 +140,6 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
-	
 
         skinSlots = new Slot [9];
 
@@ -151,7 +151,6 @@ public class Player : Character
         throwDamage = 1;
 
         SetSlots();
-
 
         if (PlayerPrefs.HasKey("Level11"))
         {
@@ -490,6 +489,7 @@ public class Player : Character
                 if (myArmature.armature.animation.lastAnimationName != "run")
                 {
                     myArmature.armature.animation.FadeIn("run", -1, -1);
+                    SetIndexes();
                 }
             }
             else

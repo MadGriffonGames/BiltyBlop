@@ -87,8 +87,6 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     public void ShowRewardedVideo()
     {
-        Appodeal.cache(Appodeal.REWARDED_VIDEO);
-
         if (PlayerPrefs.GetInt("NoAds") == 0)
         {
             Appodeal.show(Appodeal.REWARDED_VIDEO);

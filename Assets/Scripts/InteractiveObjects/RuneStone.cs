@@ -49,8 +49,7 @@ public class RuneStone : InteractiveObject
     public void SaveGame()
     {
         GameManager.nextLevelName = nextLvl;
-
-		PlayerPrefs.SetInt("Coins", Mathf.RoundToInt(GameManager.collectedCoins * Player.Instance.coinScale));   // GREEDY PERK
+		PlayerPrefs.SetInt("Coins", GameManager.collectedCoins + Mathf.RoundToInt(GameManager.lvlCollectedCoins * (Player.Instance.coinScale - 1)));   // GREEDY PERK
 
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
         {

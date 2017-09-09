@@ -26,7 +26,7 @@ public class MageFireball : MonoBehaviour
     Vector3 scaling = new Vector3(0.01f, 0.01f, 0);
 
     [SerializeField]
-    GameObject startPosition;
+    public GameObject startPosition;
 
     Transform startTransform;
 

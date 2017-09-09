@@ -105,6 +105,9 @@ public class IceMage : RangeEnemy
         Target = null;
         ChangeState(new IceMageIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        SetHealthbar();
+
+        fireball.transform.position = fireball.GetComponent<MageFireball>().startPosition.transform.position;
     }
 
     void FireballFadeOut()

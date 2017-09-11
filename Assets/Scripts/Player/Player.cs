@@ -828,7 +828,6 @@ public class Player : Character
             if (dodgerLvl > 0)
             {
                 dodgeChance = (int)PlayerPrefs.GetFloat("Dodger" + dodgerLvl.ToString());
-                Debug.Log("dodger " + dodgeChance);
             }
         }
 
@@ -843,7 +842,6 @@ public class Player : Character
             if (potionLvl > 0)
             {
                 potionTimeScale = PlayerPrefs.GetFloat("PotionManiac" + potionLvl.ToString());
-                Debug.Log("potion " + potionTimeScale);
             }
         }
 
@@ -858,7 +856,6 @@ public class Player : Character
             if (greedLvl > 0)
             {
                 coinScale = PlayerPrefs.GetFloat("Greedy" + greedLvl.ToString());
-                Debug.Log("Greedy " + coinScale);
             }
         }
 
@@ -873,7 +870,6 @@ public class Player : Character
             if (clipsLvl > 0)
             {
                 maxClipSize = (int)PlayerPrefs.GetFloat("AmmoManiac" + clipsLvl.ToString());
-                Debug.Log("AmmoManiac " + maxClipSize);
             }
         }
     }

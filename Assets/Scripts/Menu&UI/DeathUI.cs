@@ -63,7 +63,7 @@ public class DeathUI : MonoBehaviour
             TutorialUI.Instance.txt.text = "";
         }
 
-        restartButton.SetActive(true);
+        //restartButton.SetActive(true);
         mainMenuButton.SetActive(true);
         if (continueButton != null)
         {
@@ -201,7 +201,7 @@ public class DeathUI : MonoBehaviour
             TutorialUI.Instance.txt.text = "";
         }
 
-        restartButton.SetActive(true);
+        //restartButton.SetActive(true);
         mainMenuButton.SetActive(true);
         if (continueButton != null)
         {

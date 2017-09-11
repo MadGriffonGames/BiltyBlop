@@ -64,6 +64,10 @@ public class DeathUI : MonoBehaviour
         }
 
         //restartButton.SetActive(true);
+        if (SceneManager.GetActiveScene().name.Contains("10") || SceneManager.GetActiveScene().name.Contains("20"))
+        {
+            restartButton.SetActive(true);
+        }
         mainMenuButton.SetActive(true);
         if (continueButton != null)
         {
@@ -202,6 +206,10 @@ public class DeathUI : MonoBehaviour
         }
 
         //restartButton.SetActive(true);
+        if (SceneManager.GetActiveScene().name.Contains("10") || SceneManager.GetActiveScene().name.Contains("20"))
+        {
+            restartButton.SetActive(true);
+        }
         mainMenuButton.SetActive(true);
         if (continueButton != null)
         {

@@ -13,6 +13,7 @@ public class OgrePatrolState : IOgreState
         this.enemy = enemy;
         patrolDuration = enemy.patrolDuration;
         enemy.armature.animation.timeScale = 1f;
+        enemy.AttackCollider.enabled = false;
     }
 
     public void Execute()

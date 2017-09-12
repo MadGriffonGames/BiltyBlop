@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TyplakMeleeState : MonoBehaviour ,ITyplakState
+public class OgreMeleeState : IOgreState
 {
-    private Typlak enemy;
+    private Ogre enemy;
 
     private float attackTimer;
     private float attackCoolDown = 1.5f;
@@ -13,23 +13,19 @@ public class TyplakMeleeState : MonoBehaviour ,ITyplakState
     float timer;
     float delay = 0.1f;
 
-    public void Enter(Typlak enemy)
+    public void Enter(Ogre enemy)
     {
         this.enemy = enemy;
-        enemy.armature.animation.timeScale = 1f;
-        
+        enemy.armature.animation.timeScale = 1.5f;
+
     }
 
     public void Execute()
     {
         Attack();
-        if (!enemy.InMeleeRange && canExit)
+        if (enemy.Target == null && canExit)
         {
-            enemy.ChangeState(new TyplakRangeState());
-        }
-        else if (enemy.Target == null && canExit)
-        {
-            enemy.ChangeState(new TyplakPatrolState());
+            enemy.ChangeState(new OgrePatrolState());
         }
     }
 
@@ -38,10 +34,11 @@ public class TyplakMeleeState : MonoBehaviour ,ITyplakState
         enemy.walk = false;
         enemy.isAttacking = false;
         enemy.AttackCollider.enabled = false;
+        enemy.armature.animation.timeScale = 1f;
     }
 
     public void OnCollisionEnter2D(Collision2D other)
-    {    }
+    { }
 
     private void Attack()
     {
@@ -49,19 +46,16 @@ public class TyplakMeleeState : MonoBehaviour ,ITyplakState
         {
             canExit = false;
             enemy.isAttacking = true;
-            enemy.armature.animation.FadeIn("preattack", -1, 1);
+            enemy.armature.animation.FadeIn("pre_atk", -1, 1);
             preattack = true;
         }
-        if (enemy.armature.animation.lastAnimationName == "preattack" && enemy.armature.animation.isCompleted)
+        if (enemy.armature.animation.lastAnimationName == "pre_atk" && enemy.armature.animation.isCompleted)
         {
-            enemy.armature.animation.FadeIn("Attack", -1, 1);
-            timer = Time.time;
-        }
-
-        if (enemy.armature.animation.lastAnimationName == "Attack" && Time.time - timer > delay)
+            enemy.armature.animation.FadeIn("atk", -1, 1);
             enemy.AttackCollider.enabled = true;
+        }            
 
-        if (enemy.armature.animation.lastAnimationName == "Attack" && enemy.armature.animation.isCompleted)
+        if (enemy.armature.animation.lastAnimationName == "atk" && enemy.armature.animation.isCompleted)
         {
             enemy.AttackCollider.enabled = false;
             enemy.isAttacking = false;

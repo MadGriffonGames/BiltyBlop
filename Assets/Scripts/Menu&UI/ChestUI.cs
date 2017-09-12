@@ -90,7 +90,6 @@ public class ChestUI : RewardedChest
     public void OpenChestButton()
     {
         AdsManager.Instance.ShowRewardedVideo();
-        //text.text = "BtnTap";
     }
 
     public void GiveLoot()

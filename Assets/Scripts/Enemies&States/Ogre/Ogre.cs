@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DragonBones;
+using UnityEngine;
 
-public class Typlak : MovingMeleeEnemy
+public class Ogre : MovingMeleeEnemy
 {
-    private ITyplakState currentState;
+    private IOgreState currentState;
     [SerializeField]
-    private GameObject typlakParticle;
+    private GameObject deathParticles;
     bool damaged = false;
     public bool walk = false;
 
     void Awake()
     {
-        
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -23,7 +22,7 @@ public class Typlak : MovingMeleeEnemy
     {
         base.Start();
         isAttacking = false;
-        ChangeState(new TyplakPatrolState());
+        ChangeState(new OgrePatrolState());
     }
 
     void Update()
@@ -38,7 +37,7 @@ public class Typlak : MovingMeleeEnemy
         }
     }
 
-    public void ChangeState(ITyplakState newState)
+    public void ChangeState(IOgreState newState)
     {
         if (currentState != null)
         {
@@ -61,8 +60,8 @@ public class Typlak : MovingMeleeEnemy
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("enemyher loud");
-                Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
-                SpawnCoins(2, 4);
+                //Instantiate(deathParticles, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                SpawnCoins(4, 6);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
@@ -82,12 +81,11 @@ public class Typlak : MovingMeleeEnemy
         Target = null;
         damaged = false;
         isAttacking = false;
-        AttackCollider.enabled = false;
 
         if (Health <= 0)
         {
-            ChangeState(new TyplakPatrolState());
-            Health = 2;
+            ChangeState(new OgrePatrolState());
+            Health = 5;
         }
 
         SetHealthbar();
@@ -109,10 +107,10 @@ public class Typlak : MovingMeleeEnemy
     public void LocalMove()
     {
         if (!walk)
-            {
-                walk = true;
-                armature.animation.FadeIn("walk", -1, -1);
-            }
-         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+        {
+            walk = true;
+            armature.animation.FadeIn("walk", -1, -1);
+        }
+        transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
 }

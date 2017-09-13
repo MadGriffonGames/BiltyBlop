@@ -83,24 +83,6 @@ public class Hedgehog : MovingMeleeEnemy
 
     }
 
-    //public void StartIgnore()
-    //{
-    //    Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
-    //    for (int i = 0; i < Player.Instance.clipSize; i++)
-    //    {
-    //        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.throwingClip[i].GetComponent<Collider2D>(), true);
-    //    }
-    //}
-
-    //public void StopIgnore()
-    //{
-    //    Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
-    //    for (int i = 0; i < Player.Instance.clipSize; i++)
-    //    {
-    //        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.throwingClip[i].GetComponent<Collider2D>(), false);
-    //    }
-    //}
-
     public override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
@@ -114,11 +96,4 @@ public class Hedgehog : MovingMeleeEnemy
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);
         }
     }
-
-    public void EnableHealthbar (int enable)
-    {
-        if (enable == 1) healthBar.SetActive(true);
-        else healthBar.SetActive(false);
-    } 
-
 }

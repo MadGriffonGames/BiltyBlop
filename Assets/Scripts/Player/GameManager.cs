@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject bird;
 
+	void Awake()
+	{
+		Application.targetFrameRate = 300;
+	}
+
     void Start () 
 	{
         if (SceneManager.GetActiveScene().name.Contains("Level"))

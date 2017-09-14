@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9982abc4237d3ae4f88a033d047ec270
-timeCreated: 1505118809
+guid: ce7075e2f65741e4186900ee46f1c780
+timeCreated: 1505306546
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -40,7 +40,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 300
+  spritePixelsToUnits: 325
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -75,7 +75,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 256
+    maxTextureSize: 512
     textureFormat: 56
     textureCompression: 1
     compressionQuality: 0

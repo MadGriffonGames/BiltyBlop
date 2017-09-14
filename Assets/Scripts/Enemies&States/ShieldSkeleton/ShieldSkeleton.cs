@@ -22,6 +22,7 @@ public class ShieldSkeleton : MovingMeleeEnemy
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
+        
 
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -33,15 +34,15 @@ public class ShieldSkeleton : MovingMeleeEnemy
 
         timer = 0;
 
+        armature.armature.GetSlot("r_hand_1").offset.x = 100;
+
         isAttacking = false;
         isTimerTick = false;
 
         armature.armature.cacheFrameRate = 60;
 
         ChangeState(new ShieldSkeletonPatrolState());
-
-
-    }
+   }
 
     void Update()
     {
@@ -64,6 +65,8 @@ public class ShieldSkeleton : MovingMeleeEnemy
             timer = 0;
             isTimerTick = false;
         }
+
+        armature.armature.GetSlot("r_hand_1").globalTransformMatrix.a = 100;
     }
 
     public void ChangeState(IShieldSkeletonState newState)

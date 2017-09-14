@@ -127,7 +127,8 @@ namespace DragonBones
          */
         override internal void _updateVisible()
         {
-            _renderDisplay.SetActive(_parent.visible);
+            //_renderDisplay.SetActive(_parent.visible);
+            _renderDisplay.SetActive(true);
         }
         /**
          * @private

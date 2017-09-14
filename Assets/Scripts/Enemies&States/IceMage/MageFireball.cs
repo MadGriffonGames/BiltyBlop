@@ -46,8 +46,6 @@ public class MageFireball : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, speed * Time.deltaTime);
 
         timer += Time.deltaTime;
-        //if (this.gameObject.GetComponent<Collider2D>().enabled == false)
-          //  FadeOut();
         if (timer >= lifeTime)
         {
             FadeOut();

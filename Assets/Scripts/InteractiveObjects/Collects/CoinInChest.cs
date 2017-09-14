@@ -7,12 +7,6 @@ public class CoinInChest : InteractiveObject
     Rigidbody2D MyRigidbody;
     bool isCollectable = false;
 
-    private void Awake()
-    {
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-    }
-
     public override void Start()
     {
         base.Start();
@@ -47,5 +41,11 @@ public class CoinInChest : InteractiveObject
     public void DestroyObject()
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnEnable()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 }

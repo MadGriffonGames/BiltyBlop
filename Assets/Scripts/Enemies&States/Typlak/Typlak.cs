@@ -10,11 +10,6 @@ public class Typlak : MovingMeleeEnemy
     private GameObject typlakParticle;
     bool damaged = false;
     public bool walk = false;
-    int killCounter;
-    [SerializeField]
-    GameObject achievement;
-
-
 
     void Awake()
     {

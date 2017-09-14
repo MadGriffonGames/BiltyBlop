@@ -180,7 +180,6 @@ public class Player : Character
         freeCheckpoints = 3;
         startCoinCount = GameManager.CollectedCoins;
 
-
         maxHealth = health;
         HealthUI.Instance.SetHealthbar();
     }

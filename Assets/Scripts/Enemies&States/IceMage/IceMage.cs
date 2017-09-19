@@ -75,6 +75,8 @@ public class IceMage : RangeEnemy
 
     public override IEnumerator TakeDamage()
     {
+        health -= actualDamage;
+
         SetHealthbar();
         Target = null;
         isTakingDamage = true;

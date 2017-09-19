@@ -51,6 +51,8 @@ public class Ogre : MovingMeleeEnemy
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));

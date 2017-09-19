@@ -57,6 +57,8 @@ public class CrystalHolem : MovingMeleeEnemy
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();

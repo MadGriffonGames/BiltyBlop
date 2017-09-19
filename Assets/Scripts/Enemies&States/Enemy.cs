@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public List<string> damageSources;
 
+    public int actualDamage = 0;
+
     [SerializeField]
     public int coinPackSize;
 
@@ -166,11 +168,11 @@ public class Enemy : MonoBehaviour
     {
         if (damageSourceName == "Sword")
         {
-            health -= Player.Instance.meleeDamage;
+            actualDamage = Player.Instance.meleeDamage;
         }
         else
         {
-            health -= Player.Instance.throwDamage;
+            actualDamage = Player.Instance.throwDamage;
         }
     }
 }

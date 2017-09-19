@@ -21,8 +21,17 @@ public class ActLocker : MonoBehaviour
     bool collectStars = false;
     bool completeLevel = false;
 
+    int starsCount = 0;
+
 	void Start ()
     {
+        for (int i = 0; i < 21; i++)
+        {
+            starsCount += PlayerPrefs.GetInt("Level" + i + "_collects");
+        }
+
+        PlayerPrefs.SetInt("GeneralStarsCount", starsCount);
+
         unlockNumber.text = unlockStarsCount.ToString();
 
         if (unlockStarsCount <= PlayerPrefs.GetInt("GeneralStarsCount"))
@@ -30,7 +39,6 @@ public class ActLocker : MonoBehaviour
             collectStars = true;
 
             starsPanel.SetActive(false);
-            
         }
 
         if (PlayerPrefs.GetInt("Level" + unlockLevel) > 0)

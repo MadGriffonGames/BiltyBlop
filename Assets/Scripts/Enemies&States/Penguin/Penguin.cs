@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DragonBones;
 
-public class Penguin : MovingRangedEnemy {
+public class Penguin : MovingRangedEnemy
+{
     private IPenguinState currentState;
     [SerializeField]
     private GameObject penguinParticle;
@@ -49,6 +50,8 @@ public class Penguin : MovingRangedEnemy {
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));

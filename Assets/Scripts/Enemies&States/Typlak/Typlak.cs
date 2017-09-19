@@ -13,7 +13,6 @@ public class Typlak : MovingMeleeEnemy
 
     void Awake()
     {
-        
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -52,6 +51,8 @@ public class Typlak : MovingMeleeEnemy
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));

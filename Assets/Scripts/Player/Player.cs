@@ -487,13 +487,16 @@ public class Player : Character
             {
                 if (myArmature.armature.animation.lastAnimationName != "run")
                 {
+                    SetIndexes();
                     myArmature.armature.animation.FadeIn("run", -1, -1);
                     SetIndexes();
                 }
             }
             else
             {
+                SetIndexes();
                 myArmature.armature.animation.Stop();
+                SetIndexes();
                 ChangeState(playerTimeState.animationState);
             }
         }

@@ -17,6 +17,7 @@ public class GroundState : MonoBehaviour, IDragonState
     {
         this.enemy = enemy;
         enemy.armature.animation.timeScale = 1.5f;
+        enemy.enemyDamageCollider.enabled = true;
     }
 
     public void Execute()
@@ -42,5 +43,8 @@ public class GroundState : MonoBehaviour, IDragonState
         }
     }
 
-    public void Exit() { }
+    public void Exit()
+    {
+        enemy.enemyDamageCollider.enabled = false;
+    }
 }

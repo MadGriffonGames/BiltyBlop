@@ -46,7 +46,7 @@ public class FollowCamera : MonoBehaviour
 
         
 
-        if (Mathf.Abs(Player.Instance.myRigidbody.velocity.x) > 2.75f)
+        if (Mathf.Abs(Player.Instance.myRigidbody.velocity.x) > 3.1f)
         {
 			if (currentX - lastX <= -runningDeltaX)
 				offset.x = -3.5f;

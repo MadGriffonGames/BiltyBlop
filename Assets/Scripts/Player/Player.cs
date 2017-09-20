@@ -529,7 +529,7 @@ public class Player : Character
     {
         for (int i = 0; i < clipSize; i++)
         {
-            throwingClip[i].GetComponent<Throwing>().speed = 14;
+            throwingClip[i].GetComponent<Throwing>().speed = 20;
         }
         ThrowingUI.Instance.SetThrowBar();
     }
@@ -546,7 +546,7 @@ public class Player : Character
     {
         if (throwingIterator >= 0)
         {
-            yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
+            yield return new WaitForSeconds(0.05f / myArmature.animation.timeScale);
 
             throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
@@ -555,13 +555,13 @@ public class Player : Character
 
             if (this.gameObject.transform.localScale.x > 0)
             {
-                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(1.5f, 0.1f, -5);
                 throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
             }
             else
             {
-                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-1.5f, 0.1f, -5);
                 throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
             }

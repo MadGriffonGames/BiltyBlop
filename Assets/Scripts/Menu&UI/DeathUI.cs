@@ -91,9 +91,7 @@ public class DeathUI : MonoBehaviour
 
         if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
         {
-            GameManager.nextLevelName = SceneManager.GetActiveScene().name;
-
-            AdsManager.Instance.isInterstitialClosed = false;
+			AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
 
             gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
@@ -107,6 +105,7 @@ public class DeathUI : MonoBehaviour
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;
         AdsManager.Instance.fromShowfunction = true;
+		Debug.Log(1);
 
 #elif UNITY_ANDROID
         AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
@@ -117,6 +116,7 @@ public class DeathUI : MonoBehaviour
 #endif
 
         GameManager.collectedCoins = Player.Instance.startCoinCount;
+		GameManager.nextLevelName = SceneManager.GetActiveScene().name;
     }
 
     public void Continue()

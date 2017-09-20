@@ -45,14 +45,14 @@ public class FollowCamera : MonoBehaviour
         float currentY = target.transform.position.y;
 
         if (currentX - lastX <= -runningDeltaX)
-            offset.x = -2f;
+            offset.x = -3.5f;
         else if (currentX - lastX >= runningDeltaX)
-            offset.x = 2f;
+            offset.x = 3.5f;
 
-        if (Mathf.Abs(Player.Instance.myRigidbody.velocity.x) < 3)
-        {
-            offset.x = 0;
-        }
+//        if (Mathf.Abs(Player.Instance.myRigidbody.velocity.x) < 3)
+//        {
+//            offset.x = 0;
+//        }
 
         offset = Vector2.Lerp(offset, new Vector2(offset.x, 0), 0.65f);
 
@@ -62,12 +62,12 @@ public class FollowCamera : MonoBehaviour
         }
         else
         {
-            if (currentY - lastY < -0.05f)
-                offset.y = -3;
-            else if (currentY - lastY < -0.15f)
-                    offset.y = -2.5f;
+            if (currentY - lastY < -0.17f)
+                offset.y = -4.5f;
+            else if (currentY - lastY < -0.05f)
+                    offset.y = -3f;
                 else
-                    offset.y = 0;
+                    offset.y = -1f;
         }
 
         offsetY.z = 0;

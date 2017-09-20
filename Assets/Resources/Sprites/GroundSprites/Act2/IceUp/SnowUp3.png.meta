@@ -67,8 +67,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: iPhone
-    maxTextureSize: 128
-    textureFormat: 54
+    maxTextureSize: 256
+    textureFormat: 56
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0

@@ -64,7 +64,7 @@ public class MageFireball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))
+        if (other.gameObject.CompareTag("Player"))
         {
             this.gameObject.SetActive(false);
             startTransform = startPosition.GetComponent<Transform>();

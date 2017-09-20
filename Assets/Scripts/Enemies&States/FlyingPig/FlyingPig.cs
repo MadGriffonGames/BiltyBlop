@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DragonBones;
+using UnityEngine;
 
-public class Penguin : MovingRangedEnemy
+public class FlyingPig : MovingRangedEnemy
 {
-    private IPenguinState currentState;
+    private IFlyingPigState currentState;
     [SerializeField]
     private GameObject penguinParticle;
     public bool walk = false;
@@ -13,6 +13,7 @@ public class Penguin : MovingRangedEnemy
     bool damaged = false;
     [SerializeField]
     GameObject threezubets;
+    UnityEngine.Transform startPos;
 
 
     void Awake()
@@ -23,13 +24,13 @@ public class Penguin : MovingRangedEnemy
         attack = false;
     }
 
-    public override void Start ()
+    public override void Start()
     {
         base.Start();
-        ChangeState(new PenguinPatrolState());
+        ChangeState(new FlyingPigPatrolState());
     }
-	
-	void Update ()
+
+    void Update()
     {
         if (!IsDead)
         {
@@ -38,7 +39,7 @@ public class Penguin : MovingRangedEnemy
                 currentState.Execute();
             }
             LookAtTarget();
-        }  
+        }
     }
 
     public override IEnumerator TakeDamage()
@@ -56,7 +57,7 @@ public class Penguin : MovingRangedEnemy
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("penguin_death");
-                Instantiate(penguinParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                //Instantiate(penguinParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
@@ -67,7 +68,7 @@ public class Penguin : MovingRangedEnemy
         damaged = false;
     }
 
-    public void ChangeState(IPenguinState newState)
+    public void ChangeState(IFlyingPigState newState)
     {
         if (currentState != null)
         {
@@ -75,22 +76,6 @@ public class Penguin : MovingRangedEnemy
         }
         currentState = newState;
         currentState.Enter(this);
-    }
-
-    public void LocalMove()
-    {
-        if (!walk)
-        {
-            walk = true;
-            armature.animation.FadeIn("walk", -1, -1);
-        }
-        transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
-    }
-
-    public void StopMoving()
-    {
-        walk = false;
-        transform.Translate(GetDirection() * 0);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -102,18 +87,9 @@ public class Penguin : MovingRangedEnemy
         }
     }
 
-    public void ThrowThreezubets()
+    public void ThrowFireball()
     {
-        if (this.gameObject.transform.localScale.x > 0)
-        {
-            GameObject tmp = (GameObject)Instantiate(threezubets, transform.position + new Vector3(0, 0.8f, -5), Quaternion.Euler(0, 0, 72));
-            tmp.GetComponent<Threezubets>().Initialize(Vector2.left);
-        }
-        else
-        {
-            GameObject tmp = (GameObject)Instantiate(threezubets, transform.position + new Vector3(0, 0.8f, -5), Quaternion.Euler(0, 0, -108));
-            tmp.GetComponent<Threezubets>().Initialize(Vector2.right);
-        }
+
     }
 
     private void OnEnable()
@@ -128,8 +104,8 @@ public class Penguin : MovingRangedEnemy
 
         if (Health <= 0)
         {
-            ChangeState(new PenguinPatrolState());
-            Health = 2;
+            ChangeState(new FlyingPigPatrolState());
+            Health = 3;
             SetHealthbar();
         }
     }

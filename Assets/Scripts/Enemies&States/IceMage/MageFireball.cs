@@ -139,6 +139,5 @@ public class MageFireball : MonoBehaviour
             this.transform.position = startTransform.transform.position;
             this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         }
-        //timer = 0;
     }
 }

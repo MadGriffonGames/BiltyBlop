@@ -119,7 +119,7 @@ public class Dragon : Boss
 
         if (Health <= 0)
         {
-            videoUI.SetActive(true);
+            //videoUI.SetActive(true);
         }
         yield return null;
     }

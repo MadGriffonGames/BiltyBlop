@@ -46,9 +46,11 @@ public class VulkanFireball : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector2 dir)
+    public void Initialize(Vector2 dir, float lifeTime, float _speed)
     {
-        this.direction = dir;
+        direction = dir;
+        timeToLife = lifeTime;
+        speed = _speed;
     }
 
     void OnTriggerEnter2D(Collider2D other)

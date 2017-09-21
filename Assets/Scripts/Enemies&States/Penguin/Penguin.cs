@@ -13,8 +13,6 @@ public class Penguin : MovingRangedEnemy
     bool damaged = false;
     [SerializeField]
     GameObject threezubets;
-    //Achieve penguinAchieve;
-    int[] reward = new int[3]{ 100, 150, 200 };
 
 
     void Awake()
@@ -23,19 +21,16 @@ public class Penguin : MovingRangedEnemy
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         attack = false;
-        
     }
 
-    // Use this for initialization
     public override void Start ()
     {
         base.Start();
         ChangeState(new PenguinPatrolState());
-        //penguinAchieve = new Achieve("Penguin's king", "coins", 2, reward, 1);
     }
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (!IsDead)
         {
             if (!TakingDamage && !Attack)

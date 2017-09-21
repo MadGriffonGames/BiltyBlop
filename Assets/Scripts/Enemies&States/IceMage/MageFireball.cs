@@ -64,7 +64,7 @@ public class MageFireball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))
+        if (other.gameObject.CompareTag("Player"))
         {
             this.gameObject.SetActive(false);
             startTransform = startPosition.GetComponent<Transform>();
@@ -139,6 +139,5 @@ public class MageFireball : MonoBehaviour
             this.transform.position = startTransform.transform.position;
             this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         }
-        //timer = 0;
     }
 }

@@ -51,7 +51,7 @@ public class FlyingPig : MovingRangedEnemy
             LookAtTarget();
         }
 
-        if (isTimerTick)
+        if (fireball.GetComponent<PigFireball>().isBlowed)
         {
             timer += Time.deltaTime;
         }
@@ -112,6 +112,12 @@ public class FlyingPig : MovingRangedEnemy
 
     public void ThrowFireball()
     {
+        StartCoroutine(FireballDelay());
+    }
+
+    IEnumerator FireballDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
         fireball.SetActive(true);
         fireball.transform.parent = null;
     }
@@ -131,6 +137,8 @@ public class FlyingPig : MovingRangedEnemy
             transform.position = startPos;
 
             ChangeState(new FlyingPigPatrolState());
+
+            canAttack = true;
 
             fireball.GetComponent<PigFireball>().transform.parent = transform;
             fireball.GetComponent<PigFireball>().transform.localPosition = fireball.GetComponent<PigFireball>().startPosition;

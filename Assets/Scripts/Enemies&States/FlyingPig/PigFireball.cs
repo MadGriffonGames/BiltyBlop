@@ -15,7 +15,7 @@ public class PigFireball : MonoBehaviour
     float module;
 
     float timer = 0;
-    float lifeTime = 7f;
+    public float lifeTime; 
 
     public bool visible = false;
     bool isScaled = false;
@@ -33,21 +33,29 @@ public class PigFireball : MonoBehaviour
 
     Transform parent;
 
+    [SerializeField]
+    GameObject blow;
+
+    public bool isBlowed;
+
     private void Awake()
     {
         parent = transform.parent;
         startPosition = transform.localPosition;
+        isBlowed = false;
     }
 
     private void FixedUpdate()
     {
+        this.gameObject.transform.localScale = new Vector2(-0.8f, 0.8f);
+
         targetVector = Player.Instance.transform.position - transform.position;
         scalar = targetVector.x * myVector.x + targetVector.y * myVector.y;
         module = Mathf.Sqrt(Mathf.Pow(targetVector.x, 2) + Mathf.Pow(targetVector.y, 2)) * Mathf.Sqrt(Mathf.Pow(myVector.x, 2) + Mathf.Pow(myVector.y, 2));
         cos = scalar / module;
         acos = Mathf.Acos(cos);
         float z = acos * Mathf.Rad2Deg * Mathf.Sign(targetVector.y - myVector.y);
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, z);
+        transform.rotation = Quaternion.Euler(-transform.rotation.x, transform.rotation.y, z);
         transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, speed * Time.deltaTime);
 
         timer += Time.deltaTime;
@@ -71,10 +79,9 @@ public class PigFireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            this.gameObject.SetActive(false);
-            transform.parent = parent;
-            transform.localPosition = startPosition;
+            Blow();
 
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -82,9 +89,9 @@ public class PigFireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Blow();
+
             this.gameObject.SetActive(false);
-            transform.parent = parent;
-            transform.localPosition = startPosition;
         }
     }
 
@@ -95,11 +102,12 @@ public class PigFireball : MonoBehaviour
 
     private void OnEnable()
     {
+        isBlowed = false;
+
         transform.parent = null;
 
         this.gameObject.GetComponent<Collider2D>().enabled = true;
         this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
-        this.gameObject.transform.localScale = new Vector2(0.1f, 0.1f);
         visible = false;
         isScaled = false;
     }
@@ -142,16 +150,26 @@ public class PigFireball : MonoBehaviour
         if (this.gameObject.GetComponent<SpriteRenderer>().color.a <= 0.02f)
             visible = false;
 
+        Blow();
+
         if (!visible)
         {
-            timer = 0;
             this.gameObject.SetActive(false);
 
             SoundManager.PlaySound("mage_fireball_destroy");
-
-            transform.parent = parent;
-            transform.localPosition = startPosition;
-            this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         }
+    }
+
+    void Blow()
+    {
+        isBlowed = true;
+
+        GameObject tmp = Instantiate(blow, this.gameObject.transform.position, Quaternion.identity);
+        tmp.transform.localScale = new Vector2(0.95f, 0.95f);
+
+        transform.parent = parent;
+        transform.localPosition = startPosition;
+
+        timer = 0;
     }
 }

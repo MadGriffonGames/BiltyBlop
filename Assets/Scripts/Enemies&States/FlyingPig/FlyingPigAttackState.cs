@@ -10,7 +10,6 @@ public class FlyingPigAttackState : IFlyingPigState
     public void Enter(FlyingPig enemy)
     {
         this.enemy = enemy;
-        Debug.Log(1);
     }
 
     public void Execute()
@@ -18,7 +17,6 @@ public class FlyingPigAttackState : IFlyingPigState
         if (enemy.canAttack)
         {
             enemy.canAttack = false;
-            enemy.isTimerTick = true;
 
             enemy.armature.animation.FadeIn("atk", -1, 1);
             enemy.ThrowFireball();

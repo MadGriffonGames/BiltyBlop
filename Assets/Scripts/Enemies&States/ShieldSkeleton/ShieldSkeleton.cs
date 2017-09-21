@@ -17,7 +17,7 @@ public class ShieldSkeleton : MovingMeleeEnemy
     float timer;
 
     const float ATTACK_REFRESH = 1.2f;
-    const float TURN_AROUND_TIME = 0.85f;
+    const float TURN_AROUND_TIME = 0.95f;
 
     void Awake()
     {

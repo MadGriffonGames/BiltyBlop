@@ -35,9 +35,8 @@ public class FlyingPigPatrolState : IFlyingPigState
             enemy.ChangeDirection();
         }
 
-        if (distanceToKidX < 6 && enemy.canAttack)
+        if (distanceToKidX < 5f && enemy.canAttack)
         {
-
             enemy.ChangeState(new FlyingPigAttackState());
         }
     }

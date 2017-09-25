@@ -62,6 +62,7 @@ public class EvilFlowerGreen : RangeEnemy
         MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(1f, 1f), new Vector3(1, 1, 1));
         if (IsDead)
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
             SpawnCoins(1, 2);

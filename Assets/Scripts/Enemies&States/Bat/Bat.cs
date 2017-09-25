@@ -67,6 +67,7 @@ public class Bat : MovingMeleeEnemy
         MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(0.7f, 0.7f, 1));
         if (IsDead)
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("bat_death");
             Instantiate(batParticles, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);

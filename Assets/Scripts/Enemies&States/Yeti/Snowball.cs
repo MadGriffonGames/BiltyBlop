@@ -13,7 +13,12 @@ public class Snowball : MonoBehaviour
 
     private Vector2 direction;
 
-
+    //----------------------------------------
+    private void Start()
+    {
+        Throw(transform.position, new Vector2(60, 15));
+    }
+    //----------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))

@@ -95,6 +95,19 @@ public class GameManager : MonoBehaviour
         SoundManager.PlaySound(sound);
     }
 
+    void GetReward(string achieveName, string achievePrefsName)
+    {
+        if (PlayerPrefs.GetString(achievePrefsName + "rewardType") == "Coins")
+        {
+            collectedCoins += PlayerPrefs.GetInt(achievePrefsName + "reward");
+        }
+
+        if (PlayerPrefs.GetString(achievePrefsName + "rewardType") == "Gems")
+        {
+            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + PlayerPrefs.GetInt(achievePrefsName + "reward"));
+        }
+    }
+
     void SetMoneyValues()
     {
         if (!PlayerPrefs.HasKey("Coins"))
@@ -149,4 +162,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    
 }

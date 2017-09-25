@@ -9,7 +9,7 @@ public class Zoom : MonoBehaviour
     public static float targetOrtho;
     public static float smoothSpeed;
     public static float minOrtho;
-    public static float maxOrtho = 20.0f;
+    public static float maxOrtho = 50.0f;
     public static bool zoomIsOn = false;
 
     void Start()

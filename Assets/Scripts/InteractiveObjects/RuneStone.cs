@@ -80,8 +80,6 @@ public class RuneStone : InteractiveObject
         {
             PlayerPrefs.SetInt(nextLvl, 1);
         }
-
-        Debug.Log(PlayerPrefs.GetInt("GeneralStarsCount"));
     }
 
 	IEnumerator WaitForGround()

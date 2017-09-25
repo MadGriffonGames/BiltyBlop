@@ -99,10 +99,20 @@ public class Dragon : Boss
     public override IEnumerator TakeDamage()
     {
         SoundManager.PlaySound("dragon_damage");
-        health -= Player.Instance.damage;
         CameraEffect.Shake(0.2f, 0.1f);
 
-        for (int i = 1; i <= Player.Instance.damage; i++)
+        int dmg;
+
+        if (damageSource == "Sword")
+        {
+            dmg = Player.Instance.meleeDamage;
+        }
+        else
+        {
+            dmg = Player.Instance.throwDamage;
+        }
+
+        for (int i = 1; i <= dmg; i++)
         {
             SetHealthbar();
         }

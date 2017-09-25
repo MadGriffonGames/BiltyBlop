@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
 {
     public UnityArmatureComponent armature;
 
-    
+    public string damageSource;
 
     public bool IsDead
     {
@@ -59,7 +59,23 @@ public class Boss : MonoBehaviour
     {
         if (damageSources.Contains(other.tag))
         {
+            CheckDamageSource(other.tag);
             StartCoroutine(TakeDamage());
+        }
+    }
+
+    public void CheckDamageSource(string damageSourceName)
+    {
+        damageSource = damageSourceName;
+
+        if (damageSourceName == "Sword")
+        {
+            health -= Player.Instance.meleeDamage;
+            
+        }
+        else
+        {
+            health -= Player.Instance.throwDamage;
         }
     }
 }

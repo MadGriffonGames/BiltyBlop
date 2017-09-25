@@ -93,7 +93,6 @@ public class ShieldSkeleton : MovingMeleeEnemy
         if (!damaged && posDiference < 0)
         {
             damaged = true;
-            health -= Player.Instance.damage;
             MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             StartCoroutine(AnimationDelay());
             CameraEffect.Shake(0.2f, 0.3f);
@@ -128,7 +127,7 @@ public class ShieldSkeleton : MovingMeleeEnemy
         {
             ChangeState(new ShieldSkeletonPatrolState());
             armature.animation.timeScale = 1;
-            Health = 2;
+            Health = 4;
         }
 
         SetHealthbar();

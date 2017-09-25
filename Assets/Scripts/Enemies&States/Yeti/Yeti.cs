@@ -72,7 +72,6 @@ public class Yeti : RangeEnemy
         if (!damaged)
         {
             damaged = true;
-            health -= Player.Instance.damage;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);

@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected int health;
 
+	[SerializeField]
+	public GameObject healthBarNew;
+
     [SerializeField]
     public List<string> damageSources;
 
@@ -44,6 +47,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     public GameObject coinPack;
+
+	[SerializeField]
+	public int maxHealth;
 
     GameObject[] coins;
 
@@ -63,13 +69,14 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
+		health = maxHealth;
 
         if (coinPackSize == 0)
         {
             Debug.Log("WARNING: You don't assign size of coinPack in " + gameObject.name);
         }
-
-        healthbar[Health - 1].SetActive(true);
+		healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
+       // healthbar[Health - 1].SetActive(true);
         
         facingRight = false;
         enabled = false;
@@ -94,17 +101,18 @@ public class Enemy : MonoBehaviour
 
     public void SetHealthbar()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            if (i + 1 == health)
-            {
-                healthbar[i].SetActive(true);
-            }
-            else
-            {
-                healthbar[i].SetActive(false);
-            }
-        }
+		healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
+//        for (int i = 0; i < 5; i++)
+//        {
+//            if (i + 1 == health)
+//            {
+//                healthbar[i].SetActive(true);
+//            }
+//            else
+//            {
+//                healthbar[i].SetActive(false);
+//            }
+//        }
     }
 
     private void OnBecameVisible()
@@ -175,4 +183,8 @@ public class Enemy : MonoBehaviour
             actualDamage = Player.Instance.throwDamage;
         }
     }
+	public void ChangeHealtBarDirection()
+	{
+		healthBarNew.transform.localScale = new Vector3(healthBarNew.transform.localScale.x * -1, healthBarNew.transform.localScale.y, healthBarNew.transform.localScale.z);
+	}
 }

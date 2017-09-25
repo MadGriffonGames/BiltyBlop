@@ -52,9 +52,12 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
         switch (args.purchasedProduct.definition.id)
         {
-            case "15_crystals":
+			case "15_crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
                 break;
+			case "kidarian.15_crystals":
+				PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
+				break;
 
             case "100__crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 100);
@@ -95,8 +98,16 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     public void InitializePurchasing()
     {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-        foreach (string s in ConsumableProducts) builder.AddProduct(s, ProductType.Consumable);
-        foreach (string s in NonConsumableProducts) builder.AddProduct(s, ProductType.NonConsumable);
+		foreach (string s in ConsumableProducts) 
+		{
+			builder.AddProduct (s, ProductType.Consumable);
+			builder.AddProduct ("kidarian." + s, ProductType.Consumable);
+		}
+		foreach (string s in NonConsumableProducts) 
+		{
+			builder.AddProduct (s, ProductType.NonConsumable);
+			builder.AddProduct ("kidarian." + s, ProductType.NonConsumable);
+		}
         UnityPurchasing.Initialize(this, builder);
     }
 

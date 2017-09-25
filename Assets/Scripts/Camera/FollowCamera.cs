@@ -53,7 +53,6 @@ public class FollowCamera : MonoBehaviour
 			else if (currentX - lastX >= runningDeltaX)
 				offset.x = 3.5f;
 			offset = Vector2.Lerp(offset, new Vector2(offset.x, 0), 0.65f);
-
         } 
 		else 
 		{

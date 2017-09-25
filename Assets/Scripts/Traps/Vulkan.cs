@@ -8,6 +8,9 @@ public class Vulkan : MonoBehaviour
     GameObject fireball;
 
     [SerializeField]
+    float startDelay;
+
+    [SerializeField]
     public float throwDealy;
 
     [SerializeField]
@@ -21,22 +24,34 @@ public class Vulkan : MonoBehaviour
 
     float timer;
 
+    bool canStart = false;
+
     Animator myAnimator;
 
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
+        StartCoroutine(StartDelay());
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        if (canStart)
+        {
+            timer += Time.deltaTime;
+        }
 
         if (timer >= throwDealy)
         {
             myAnimator.SetBool("Throw", true);
             timer = 0;
         }
+    }
+
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(startDelay);
+        canStart = true;
     }
 
     public void ThrowFireballAnim()

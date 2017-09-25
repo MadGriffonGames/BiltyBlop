@@ -17,10 +17,10 @@ public class Inventory : MonoBehaviour
 	}
 
 
-    const int IMMORTAL_DURATION = 5;
+    const int IMMORTAL_DURATION = 7;
     const int DAMAGE_DURATION = 10;
-    const int SPEED_DURATION = 3;
-    const int TIME_DURATION = 4;
+    const int SPEED_DURATION = 5;
+    const int TIME_DURATION = 5;
 
 
     /* Inventory Items Names */

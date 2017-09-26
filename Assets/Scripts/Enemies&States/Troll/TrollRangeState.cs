@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TyplakRangeState : ITyplakState
+public class TrollRangeState : ITrollState
 {
-    private Typlak enemy;
+    private Troll enemy;
 
-    public void Enter(Typlak enemy)
+    public void Enter(Troll enemy)
     {
         this.enemy = enemy;
-        enemy.armature.animation.timeScale = 1.2f;
     }
 
     public void Execute()
@@ -17,7 +16,7 @@ public class TyplakRangeState : ITyplakState
 
         if (enemy.InMeleeRange)
         {
-            enemy.ChangeState(new TyplakMeleeState());
+            enemy.ChangeState(new TrollSelfDestroyState());
         }
         else if (enemy.Target != null)
         {
@@ -25,7 +24,7 @@ public class TyplakRangeState : ITyplakState
         }
         else
         {
-            enemy.ChangeState(new TyplakPatrolState());
+            enemy.ChangeState(new TrollPatrolState());
         }
     }
 

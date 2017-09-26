@@ -41,8 +41,7 @@ public class VulkanFireball : MonoBehaviour
 
         if (timer >= timeToLife)
         {
-            Instantiate(blow, this.gameObject.transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            Blow();
         }
     }
 
@@ -57,17 +56,20 @@ public class VulkanFireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Instantiate(blow, this.gameObject.transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            Blow();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    void Blow()
     {
-        if (other.gameObject.CompareTag("Player"))
+        Vector3 offset = new Vector3(0, 0, 0);
+
+        if (transform.rotation.eulerAngles.z <= 270)
         {
-            Instantiate(blow, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-            Destroy(this.gameObject);
+            offset = new Vector3(0.4f, 0, 0);
         }
+
+        Instantiate(blow, this.gameObject.transform.position + offset, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 }

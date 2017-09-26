@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TyplakRangeState : ITyplakState
 {
-
     private Typlak enemy;
 
     public void Enter(Typlak enemy)

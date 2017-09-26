@@ -94,7 +94,7 @@ public class Snowman : MovingMeleeEnemy
         {
             ChangeState(new SnowmanPatrolState());
             armature.animation.timeScale = 1;
-            Health = 2;
+			Health = maxHealth;
         }
 
         SetHealthbar();

@@ -93,7 +93,7 @@ public class CrystalHolem : MovingMeleeEnemy
 
             crystals.Disable();
             ChangeState(new CrystalIdleState());
-            Health = 3;
+			Health = maxHealth;
         }
 
         SetHealthbar();

@@ -129,8 +129,9 @@ public class Penguin : MovingRangedEnemy
         if (Health <= 0)
         {
             ChangeState(new PenguinPatrolState());
-            Health = 2;
-            SetHealthbar();
+			Health = maxHealth;
+            
         }
+		SetHealthbar();
     }
 }

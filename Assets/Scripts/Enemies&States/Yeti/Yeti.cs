@@ -116,8 +116,8 @@ public class Yeti : RangeEnemy
         if (Health <= 0)
         {
             ChangeState(new YetiIdleState());
-            Health = 2;
-            SetHealthbar();
+			Health = maxHealth;
         }
+		SetHealthbar();
     }
 }

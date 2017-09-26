@@ -8,14 +8,13 @@ public class FollowCameraTest : MonoBehaviour
     float minDistance;
     float followDistance;
     GameObject target;
-
+    float lastX;
 
 
     void Start()
     {
-
         target = GameObject.FindGameObjectWithTag("MiniGameCameraTarget");
-
+        lastX = target.transform.position.x;
         //targetPos = transform.position;
         //lastX = target.transform.position.x;
         //lastY = target.transform.position.y;
@@ -26,8 +25,9 @@ public class FollowCameraTest : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
 
+            transform.position = new Vector3(target.transform.position.x + 2f, transform.position.y, transform.position.z);
+            lastX = target.transform.position.x;
 
 
         //Vector3 targetPos;

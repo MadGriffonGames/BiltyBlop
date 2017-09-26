@@ -16,12 +16,12 @@ public class Snowball : MonoBehaviour
     //----------------------------------------
     private void Start()
     {
-        Throw(transform.position, new Vector2(60, 15));
+        //Throw(transform.position, new Vector2(60, 15));
     }
     //----------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti") || other.transform.CompareTag("Sword"))
         {
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
@@ -31,7 +31,7 @@ public class Snowball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti") || other.transform.CompareTag("Sword"))
         {
             SoundManager.PlaySound("stone_crash");
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);

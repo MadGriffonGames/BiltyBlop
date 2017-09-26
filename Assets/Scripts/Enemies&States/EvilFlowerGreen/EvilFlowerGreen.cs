@@ -90,9 +90,13 @@ public class EvilFlowerGreen : RangeEnemy
 
     private void OnEnable()
     {
-        ResetCoinPack();
-		SetHealthbar ();
-		Health = maxHealth;
+		ResetCoinPack();
+		if (Health <= 0)
+		{
+			
+			Health = maxHealth;
+			SetHealthbar ();
+		}
         Target = null;
         ChangeState(new EFGreenIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);

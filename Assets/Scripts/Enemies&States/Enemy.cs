@@ -74,11 +74,15 @@ public class Enemy : MonoBehaviour
     {
 		health = maxHealth;
 		firstHBScaleX = healthbar.localScale.x;
+		if (gameObject.transform.localScale.x < 0) 
+		{
+			ChangeHealtBarDirection ();
+		}
         if (coinPackSize == 0)
         {
             Debug.Log("WARNING: You don't assign size of coinPack in " + gameObject.name);
         }
-		healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
+		SetHealthbar ();
         
         facingRight = false;
         enabled = false;
@@ -107,7 +111,6 @@ public class Enemy : MonoBehaviour
 
 		if (health > 0)
 		{
-			Debug.Log (firstHBScaleX);
 			healthbar.localScale = new Vector3(firstHBScaleX * health / maxHealth,
 				healthbar.localScale.y,
 				healthbar.localScale.z);

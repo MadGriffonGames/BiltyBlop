@@ -76,13 +76,12 @@ public class Hedgehog : MovingMeleeEnemy
         if (Health <= 0)
         {
 			Health = maxHealth;
+			SetHealthbar ();
         }
         ChangeState(new HedgehogIdleState());
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         movementSpeed = 10;
-        SetHealthbar();
-
     }
 
     public override void OnTriggerEnter2D(Collider2D other)

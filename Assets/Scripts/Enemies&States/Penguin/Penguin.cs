@@ -122,7 +122,6 @@ public class Penguin : MovingRangedEnemy
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        SetHealthbar();
         Target = null;
         damaged = false;
 
@@ -130,8 +129,7 @@ public class Penguin : MovingRangedEnemy
         {
             ChangeState(new PenguinPatrolState());
 			Health = maxHealth;
-            
+			SetHealthbar();   
         }
-		SetHealthbar();
     }
 }

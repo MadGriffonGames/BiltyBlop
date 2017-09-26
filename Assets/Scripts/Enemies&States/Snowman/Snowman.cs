@@ -95,9 +95,10 @@ public class Snowman : MovingMeleeEnemy
             ChangeState(new SnowmanPatrolState());
             armature.animation.timeScale = 1;
 			Health = maxHealth;
+			SetHealthbar();
         }
 
-        SetHealthbar();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)

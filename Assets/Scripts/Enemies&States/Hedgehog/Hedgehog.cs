@@ -58,6 +58,7 @@ public class Hedgehog : MovingMeleeEnemy
         SetHealthbar();
         if (IsDead)
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("hedgehog_death");
             Instantiate(spikeParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);

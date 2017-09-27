@@ -95,43 +95,43 @@ public class AchievementManager : MonoBehaviour {
     {
         if (achievementUI != null)
         {
-            if (achieve.isEndless)
-            {
-                if (PlayerPrefs.GetInt(achieve.prefsName + "unlocked") == 0)
-                {
-                    PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
-                    Debug.Log(PlayerPrefs.GetInt(achieve.achieveName));
-                    Debug.Log(PlayerPrefs.GetInt(achieve.prefsName + "targetValue")); 
-                    if (PlayerPrefs.GetInt(achieve.achieveName) == PlayerPrefs.GetInt(achieve.prefsName + "targetValue"))
-                    {
-                        GameManager.CollectedCoins += achieve.reward;
-                        achieve.UnlockAchieve();
-                        achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
-                        StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
-                    }
-                }
-            }
+            //    if (achieve.isEndless)
+            //    {
+            //        if (PlayerPrefs.GetInt(achieve.prefsName + "unlocked") == 0)
+            //        {
+            //            PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
+            //            Debug.Log(PlayerPrefs.GetInt(achieve.achieveName));
+            //            Debug.Log(PlayerPrefs.GetInt(achieve.prefsName + "targetValue")); 
+            //            if (PlayerPrefs.GetInt(achieve.achieveName) == PlayerPrefs.GetInt(achieve.prefsName + "targetValue"))
+            //            {
+            //                GameManager.CollectedCoins += achieve.reward;
+            //                achieve.UnlockAchieve();
+            //                achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
+            //                StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+            //            }
+            //        }
+            //    }
 
-            else if (!achieve.isEndless)
-            {
-                if (achieve.unlocked == 0)
-                {
-                    PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
-                    if (PlayerPrefs.GetInt(achieve.achieveName) >= achieve.targetValue)
-                    {
-                        achieve.UnlockLevelAchieve();
-                        GameManager.CollectedCoins += achieve.reward;
-                        achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
-                        StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
-                    }
-                }
-            }
-        }
-        else
-        {
+            //    else if (!achieve.isEndless)
+            //    {
+            //        if (achieve.unlocked == 0)
+            //        {
+            //            PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
+            //            if (PlayerPrefs.GetInt(achieve.achieveName) >= achieve.targetValue)
+            //            {
+            //                achieve.UnlockLevelAchieve();
+            //                GameManager.CollectedCoins += achieve.reward;
+            //                achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
+            //                StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+            //            }
+            //        }
+            //    }
+            //}
+            //else
+            //{
 
         }
-        
+
     }
 
     void ResetStat(string achieveName, string prefsName)

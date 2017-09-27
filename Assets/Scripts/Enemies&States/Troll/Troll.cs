@@ -8,6 +8,8 @@ public class Troll : MovingMeleeEnemy
     private ITrollState currentState;
     [SerializeField]
     private GameObject deathParticle;
+    [SerializeField]
+    public GameObject blow;
     bool damaged = false;
     public bool walk = false;
 
@@ -28,12 +30,12 @@ public class Troll : MovingMeleeEnemy
     void Update()
     {
         if (!IsDead)
-        {
-            if (!TakingDamage && !Attack)
-            {
-                currentState.Execute();
-            }
+        {           
             LookAtTarget();
+        }
+        if (!TakingDamage && !Attack)
+        {
+            currentState.Execute();
         }
     }
 
@@ -54,7 +56,6 @@ public class Troll : MovingMeleeEnemy
             health -= actualDamage;
 
             damaged = true;
-            StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
@@ -62,15 +63,23 @@ public class Troll : MovingMeleeEnemy
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("enemyher loud");
-                //Instantiate(deathParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
-                SpawnCoins(2, 5);
-                GameManager.deadEnemies.Add(gameObject);
-                gameObject.SetActive(false);
+
+                ChangeState(new TrollSelfDestroyState());
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.01f);
         damaged = false;
+    }
+
+    public void OnBlow()
+    {
+        health = 0;
+
+        SpawnCoins(2, 5);
+        GameManager.deadEnemies.Add(gameObject);
+        
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -82,7 +91,6 @@ public class Troll : MovingMeleeEnemy
 
         Target = null;
         damaged = false;
-        isAttacking = false;
 
         if (Health <= 0)
         {
@@ -111,7 +119,10 @@ public class Troll : MovingMeleeEnemy
         if (!walk)
         {
             walk = true;
-            armature.animation.FadeIn("Walk", -1, -1);
+            if (armature.animation.lastAnimationName != "charge")
+            {
+                armature.animation.FadeIn("Walk", -1, -1);
+            }
         }
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }

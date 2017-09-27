@@ -9,6 +9,8 @@ public class TrollRangeState : ITrollState
     public void Enter(Troll enemy)
     {
         this.enemy = enemy;
+        enemy.armature.animation.FadeIn("charge", -1, -1);
+        enemy.movementSpeed = 5;
     }
 
     public void Execute()

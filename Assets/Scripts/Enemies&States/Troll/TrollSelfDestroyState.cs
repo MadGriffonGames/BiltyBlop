@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrollSelfDestroyState : ITrollState
+public class TrollSelfDestroyState : MonoBehaviour, ITrollState
 {
     private Troll enemy;
 
@@ -17,55 +17,27 @@ public class TrollSelfDestroyState : ITrollState
     {
         this.enemy = enemy;
         enemy.armature.animation.timeScale = 1f;
+        
+        enemy.armature.animation.FadeIn("blow", -1, 1);
     }
 
     public void Execute()
     {
-        Attack();
-        if (!enemy.InMeleeRange && canExit)
+        if (enemy.armature.animation.isCompleted)
         {
-            enemy.ChangeState(new TrollRangeState());
-        }
-        else if (enemy.Target == null && canExit)
-        {
-            enemy.ChangeState(new TrollPatrolState());
+            GameObject tmp = Instantiate(enemy.blow, enemy.transform.position, Quaternion.identity);
+            tmp.transform.parent = null;
+
+            enemy.OnBlow();
         }
     }
 
     public void Exit()
     {
-        enemy.walk = false;
-        enemy.isAttacking = false;
-        enemy.AttackCollider.enabled = false;
+
     }
 
     public void OnCollisionEnter2D(Collision2D other)
     { }
 
-    private void Attack()
-    {
-        if (!preattack)
-        {
-            canExit = false;
-            enemy.isAttacking = true;
-            enemy.armature.animation.FadeIn("preattack", -1, 1);
-            preattack = true;
-        }
-        if (enemy.armature.animation.lastAnimationName == "preattack" && enemy.armature.animation.isCompleted)
-        {
-            enemy.armature.animation.FadeIn("Attack", -1, 1);
-            timer = Time.time;
-        }
-
-        if (enemy.armature.animation.lastAnimationName == "Attack" && Time.time - timer > delay)
-            enemy.AttackCollider.enabled = true;
-
-        if (enemy.armature.animation.lastAnimationName == "Attack" && enemy.armature.animation.isCompleted)
-        {
-            enemy.AttackCollider.enabled = false;
-            enemy.isAttacking = false;
-            preattack = false;
-            canExit = true;
-        }
-    }
 }

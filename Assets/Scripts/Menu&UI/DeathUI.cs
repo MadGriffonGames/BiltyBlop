@@ -226,5 +226,12 @@ public class DeathUI : MonoBehaviour
     {
         freeCheckpoints.GetComponentInChildren<Text>().text = Player.Instance.freeCheckpoints.ToString();
         freeCheckpoints.GetComponent<Image>().sprite = greenCircle;
-    } 
+    }
+
+    public void ToShop()
+    {
+        GameManager.nextLevelName = "Shop";
+
+        SceneManager.LoadScene("Loading");
+    }
 }

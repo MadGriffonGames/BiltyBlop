@@ -619,7 +619,7 @@ public class Player : Character
     {
         StartCoroutine(ImmortalBonus(duration));
         MakeFX.Instance.MakeImmortalBonus(duration);
-		FX.GetComponent<Animator> ().SetTrigger ("immortal");
+		//FX.GetComponent<Animator> ().SetTrigger ("immortal");
     }
 
     public IEnumerator ImmortalBonus(float duration)
@@ -631,7 +631,7 @@ public class Player : Character
         if (immortalBonusNum == 0)
         {
             immortal = false;
-			FX.GetComponent<Animator> ().SetTrigger ("reset");
+			//FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 
@@ -703,7 +703,7 @@ public class Player : Character
     {
         StartCoroutine(TimeBonus(duration));
         MakeFX.Instance.MakeTimeBonus(duration);
-			FX.GetComponent<Animator> ().SetTrigger ("time");
+	    //FX.GetComponent<Animator> ().SetTrigger ("time");
     }
 
     public IEnumerator TimeBonus(float duration)
@@ -730,7 +730,7 @@ public class Player : Character
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
             myRigidbody.gravityScale = 3;
-			FX.GetComponent<Animator> ().SetTrigger ("reset");
+			//FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 

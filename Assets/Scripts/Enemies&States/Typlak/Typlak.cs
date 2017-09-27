@@ -88,10 +88,11 @@ public class Typlak : MovingMeleeEnemy
         if (Health <= 0)
         {
             ChangeState(new TyplakPatrolState());
-            Health = 2;
+			Health = maxHealth;
+			SetHealthbar();
         }
 
-        SetHealthbar();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)

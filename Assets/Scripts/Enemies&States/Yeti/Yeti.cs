@@ -111,13 +111,13 @@ public class Yeti : RangeEnemy
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        SetHealthbar();
         Target = null;
         if (Health <= 0)
         {
             ChangeState(new YetiIdleState());
-            Health = 2;
-            SetHealthbar();
+			Health = maxHealth;
+			SetHealthbar();
         }
+
     }
 }

@@ -144,7 +144,7 @@ public class Spider : Boss
     {
         if (Health > 0)
         {
-            healthbar.localScale = new Vector3(healthbar.localScale.x - firstHBScaleX * 1 / maxHealth,
+            healthbar.localScale = new Vector3(healthbar.localScale.x - firstHBScaleX / maxHealth,
                                                healthbar.localScale.y,
                                                healthbar.localScale.z);
         }

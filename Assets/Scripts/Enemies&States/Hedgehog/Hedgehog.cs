@@ -58,6 +58,7 @@ public class Hedgehog : MovingMeleeEnemy
         SetHealthbar();
         if (IsDead)
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("hedgehog_death");
             Instantiate(spikeParticle, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
@@ -75,14 +76,13 @@ public class Hedgehog : MovingMeleeEnemy
 
         if (Health <= 0)
         {
-            Health = 2;
+			Health = maxHealth;
+			SetHealthbar ();
         }
         ChangeState(new HedgehogIdleState());
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         movementSpeed = 10;
-        SetHealthbar();
-
     }
 
     public override void OnTriggerEnter2D(Collider2D other)

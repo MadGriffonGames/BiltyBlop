@@ -24,6 +24,7 @@ public class EvilFlowerGreen : RangeEnemy
     public override void Start()
     {
         base.Start();
+		SetHealthbar ();
         ChangeState(new EFGreenIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
@@ -58,11 +59,12 @@ public class EvilFlowerGreen : RangeEnemy
     public override IEnumerator TakeDamage()
     {
         health -= actualDamage;
-
+		SetHealthbar ();
         CameraEffect.Shake(0.2f, 0.3f);
         MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(1f, 1f), new Vector3(1, 1, 1));
         if (IsDead)
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
             SpawnCoins(1, 2);
@@ -89,9 +91,13 @@ public class EvilFlowerGreen : RangeEnemy
 
     private void OnEnable()
     {
-        ResetCoinPack();
-
-        Health = 1;
+		ResetCoinPack();
+		if (Health <= 0)
+		{
+			
+			Health = maxHealth;
+			SetHealthbar ();
+		}
         Target = null;
         ChangeState(new EFGreenIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);

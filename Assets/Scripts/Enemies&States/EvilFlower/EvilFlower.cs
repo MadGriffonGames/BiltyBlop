@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DragonBones;
+using UnityEngine;
 
 public class EvilFlower : MeleeEnemy
 {
@@ -23,6 +23,7 @@ public class EvilFlower : MeleeEnemy
     {
         base.Start();
         ChangeState(new EvilFlowerIdleState());
+		//SetHealthbar ();
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
     }
 
@@ -61,11 +62,13 @@ public class EvilFlower : MeleeEnemy
     public override IEnumerator TakeDamage()
     {
         health -= actualDamage;
+		SetHealthbar ();
 
         CameraEffect.Shake(0.2f, 0.3f);
         MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
         if (IsDead) 
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
             SpawnCoins(1, 2);
 			SoundManager.PlaySound ("flower_death");
@@ -80,8 +83,10 @@ public class EvilFlower : MeleeEnemy
         if (Health <= 0)
         {
             ResetCoinPack();
-            Health = 1;
+			Health = maxHealth;
+			SetHealthbar ();
         }
+
         Target = null;
         ChangeState(new EvilFlowerIdleState());
         attackCollider.enabled = false;

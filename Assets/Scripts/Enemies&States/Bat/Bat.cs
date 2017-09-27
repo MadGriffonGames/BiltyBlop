@@ -63,11 +63,12 @@ public class Bat : MovingMeleeEnemy
     public override IEnumerator TakeDamage()
     {
         health -= actualDamage;
-
+		SetHealthbar();
         CameraEffect.Shake(0.2f, 0.3f);
         MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(0.7f, 0.7f, 1));
         if (IsDead)
         {
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
             SoundManager.PlaySound("bat_death");
             Instantiate(batParticles, gameObject.transform.position + new Vector3(0, 0.53f, -1f), Quaternion.identity);
@@ -85,7 +86,8 @@ public class Bat : MovingMeleeEnemy
         if (health <= 0)
         {
             ResetCoinPack();
-            Health = 1;
+			Health = maxHealth;
+			SetHealthbar();
         }
     }
 }

@@ -80,14 +80,15 @@ public class AchievementManager : MonoBehaviour {
         secretRoomerReward = new int[] { 200, 400, 600 };
         secretRoomerTargetValue = new int[] { 5, 10, 15 };
 
-        //ResetStat("Secret Rush test", "secretRoomerPref");
 
-        mobKiller = new Achieve("Mob killer test", "mobKillerPrefTest", "Coins", mobKillerTargetValue, mobKillerReward, true);
-        treasureHunter = new Achieve("Treasure Hunter", "treasureHuntertest", "Coins", treasureHunterValue, treasureHunterReward, true);
-        idiot = new Achieve("Idiot blyat?", "Coins", idiotTargerValue, idiotReward, false);
-        swimmer = new Achieve("Swim lover test", "Coins", swimmerTargetValue, swimmerReward, false);
-        torchCollector = new Achieve("No light on level anymore.", "Coins", torchCollectorTargetValue, torchCollectorReward, false);
-        secretRoomer = new Achieve("Secret Rush test", "secretRoomerPref", "Coins", secretRoomerTargetValue, secretRoomerReward, true);
+
+        ResetStat("Mob killer test1", "mobKillerPrefTest1");
+        mobKiller = new Achieve("Mob killer test1", "mobKillerPrefTest1", "Coins", 5, 100, true);
+        treasureHunter = new Achieve("Treasure Hunter", "treasureHuntertest", "Coins", 5, 10, true);
+        idiot = new Achieve("Idiot blyat?", "Coins", 1, 10, false);
+        swimmer = new Achieve("Swim lover test", "Coins", 1, 10, false);
+        //torchCollector = new Achieve("No light on level anymore.", "Coins", torchCollectorTargetValue, torchCollectorReward, false);
+        //secretRoomer = new Achieve("Secret Rush test", "secretRoomerPref", "Coins", secretRoomerTargetValue, secretRoomerReward, true);
     }
 
     public void CheckAchieve(Achieve achieve)
@@ -96,15 +97,15 @@ public class AchievementManager : MonoBehaviour {
         {
             if (achieve.isEndless)
             {
-
-                if (achieve.weight < 3)
+                if (PlayerPrefs.GetInt(achieve.prefsName + "unlocked") == 0)
                 {
                     PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
-
-                    if (PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight])
+                    Debug.Log(PlayerPrefs.GetInt(achieve.achieveName));
+                    Debug.Log(PlayerPrefs.GetInt(achieve.prefsName + "targetValue")); 
+                    if (PlayerPrefs.GetInt(achieve.achieveName) == PlayerPrefs.GetInt(achieve.prefsName + "targetValue"))
                     {
-                        GameManager.CollectedCoins += achieve.reward[achieve.weight];
-                        achieve.RewardUpdate();
+                        GameManager.CollectedCoins += achieve.reward;
+                        achieve.UnlockAchieve();
                         achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
                         StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
                     }
@@ -113,13 +114,13 @@ public class AchievementManager : MonoBehaviour {
 
             else if (!achieve.isEndless)
             {
-                if (achieve.weight < 3)
+                if (achieve.unlocked == 0)
                 {
                     PlayerPrefs.SetInt(achieve.achieveName, PlayerPrefs.GetInt(achieve.achieveName) + 1);
-                    if (PlayerPrefs.GetInt(achieve.achieveName) == achieve.targetValue[achieve.weight])
+                    if (PlayerPrefs.GetInt(achieve.achieveName) >= achieve.targetValue)
                     {
-                        achieve.LevelRewardUpdate();
-                        GameManager.CollectedCoins += achieve.reward[achieve.weight];
+                        achieve.UnlockLevelAchieve();
+                        GameManager.CollectedCoins += achieve.reward;
                         achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieve.achieveName);
                         StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
                     }
@@ -136,7 +137,21 @@ public class AchievementManager : MonoBehaviour {
     void ResetStat(string achieveName, string prefsName)
     {
         PlayerPrefs.SetInt(achieveName, 0);
-        PlayerPrefs.SetInt(prefsName + "weight", 0);
+        PlayerPrefs.SetInt(prefsName + "unlocked", 0);
+        //PlayerPrefs.SetInt(prefsName + "weight", 0);
+    }
+
+    void GetReward(string achieveName, string achievePrefsName)
+    {
+        if (PlayerPrefs.GetString(achievePrefsName + "rewardType") == "Coins")
+        {
+            GameManager.collectedCoins += PlayerPrefs.GetInt(achievePrefsName + "reward");
+        }
+
+        if (PlayerPrefs.GetString(achievePrefsName + "rewardType") == "Gems")
+        {
+            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + PlayerPrefs.GetInt(achievePrefsName + "reward"));
+        }
     }
 
 }

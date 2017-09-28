@@ -103,7 +103,7 @@ public class IceMage : RangeEnemy
         isTakingDamage = false;
         ResetCoinPack();
         this.gameObject.GetComponent<Collider2D>().enabled = true;
-        Health = 1;
+        Health = maxHealth;
         Target = null;
         ChangeState(new IceMageIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);

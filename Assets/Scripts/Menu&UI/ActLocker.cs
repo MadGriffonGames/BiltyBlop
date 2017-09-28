@@ -50,8 +50,9 @@ public class ActLocker : MonoBehaviour
 
         if (collectStars && completeLevel)
         {
-            this.gameObject.SetActive(false);
+            Debug.Log(1);
             statPanel.SetActive(true);
+            this.gameObject.SetActive(false);
         }
         else
         {

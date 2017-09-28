@@ -26,9 +26,7 @@ public class Snowball : MonoBehaviour
     }
     //----------------------------------------
     void OnTriggerEnter2D(Collider2D other)
-    {
-            Debug.Log("Sword collision");
-        
+    {       
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti") || other.transform.CompareTag("Sword") || other.transform.CompareTag("TestTag"))
         {
             

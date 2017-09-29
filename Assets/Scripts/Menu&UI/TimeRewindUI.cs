@@ -52,6 +52,8 @@ public class TimeRewindUI : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Crystals") >= CRYSTAL_PRICE)
         {
+            gameOverBar.SetActive(false);
+
             PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - CRYSTAL_PRICE);
             GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
 

@@ -10,15 +10,9 @@ public class Typlak : MovingMeleeEnemy
     private GameObject typlakParticle;
     bool damaged = false;
     public bool walk = false;
-    int killCounter;
-    [SerializeField]
-    GameObject achievement;
-
-
 
     void Awake()
     {
-        
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -57,6 +51,8 @@ public class Typlak : MovingMeleeEnemy
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
@@ -92,10 +88,11 @@ public class Typlak : MovingMeleeEnemy
         if (Health <= 0)
         {
             ChangeState(new TyplakPatrolState());
-            Health = 2;
+			Health = maxHealth;
+			SetHealthbar();
         }
 
-        SetHealthbar();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)

@@ -71,6 +71,8 @@ public class Yeti : RangeEnemy
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
@@ -109,13 +111,13 @@ public class Yeti : RangeEnemy
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        SetHealthbar();
         Target = null;
         if (Health <= 0)
         {
             ChangeState(new YetiIdleState());
-            Health = 2;
-            SetHealthbar();
+			Health = maxHealth;
+			SetHealthbar();
         }
+
     }
 }

@@ -18,6 +18,10 @@ public class MainMenu : MonoBehaviour
         if (!PlayerPrefs.HasKey("BetaReward"))
         {
             PlayerPrefs.SetInt("BetaReward", 1);
+            PlayerPrefs.SetInt("Crystals", 150);
+            PlayerPrefs.SetInt("Coins", 1500);
+
+            PlayerPrefs.SetInt("BetaReward", 1);
 			PlayerPrefs.SetInt("SwordDisplayIndex", 0);
 			PlayerPrefs.SetInt ("SkinDisplayIndex", 0);
 			PlayerPrefs.SetInt ("SkinArmorStat", 3);
@@ -69,9 +73,6 @@ public class MainMenu : MonoBehaviour
     {
 		if (PlayerPrefs.GetInt("Coins") == 0 && PlayerPrefs.GetInt("Crystals") == 0)
         {
-            PlayerPrefs.SetInt("BetaReward", 1);
-            PlayerPrefs.SetInt("Crystals", 150);
-            PlayerPrefs.SetInt("Coins", 1500);
 			PlayerPrefs.SetString ("FirstTimeInGame", "No");
         }
         betaTestReward.SetActive(false);

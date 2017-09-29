@@ -16,8 +16,8 @@ public class HealthUI : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private Sprite[] healthSprites;
+	[SerializeField]
+	Text healthStats;
 
     [SerializeField]
     private RectTransform healthbar;
@@ -27,5 +27,7 @@ public class HealthUI : MonoBehaviour
         healthbar.localScale = new Vector3(1  * (Player.Instance.Health / Player.Instance.maxHealth),
                                            healthbar.localScale.y,
                                            healthbar.localScale.z);
+		healthStats.text = Player.Instance.Health.ToString () + "/" + Player.Instance.maxHealth.ToString (); 
+		
     }
 }

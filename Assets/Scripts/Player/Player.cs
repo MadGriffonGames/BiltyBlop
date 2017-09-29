@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DragonBones;
 using System;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Player : Character
@@ -20,6 +21,9 @@ public class Player : Character
 
     [SerializeField]
     private GameObject grave;
+
+	[SerializeField]
+	public GameObject FX;
 
     GameObject throwing;
     public GameObject[] throwingClip;
@@ -53,6 +57,7 @@ public class Player : Character
     /*
      * Action vars
      */
+
     const float MOVEMENT_SPEED = 8;
     const int JUMP_FORCE = 700;
     [SerializeField]
@@ -139,7 +144,6 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
-	
 
         skinSlots = new Slot [9];
 
@@ -151,7 +155,6 @@ public class Player : Character
         throwDamage = 1;
 
         SetSlots();
-
 
         if (PlayerPrefs.HasKey("Level11"))
         {
@@ -180,7 +183,6 @@ public class Player : Character
         lvlCoins = 0;
         freeCheckpoints = 3;
         startCoinCount = GameManager.CollectedCoins;
-
 
         maxHealth = health;
         HealthUI.Instance.SetHealthbar();
@@ -494,12 +496,16 @@ public class Player : Character
             {
                 if (myArmature.armature.animation.lastAnimationName != "run")
                 {
+                    SetIndexes();
                     myArmature.armature.animation.FadeIn("run", -1, -1);
+                    SetIndexes();
                 }
             }
             else
             {
+                SetIndexes();
                 myArmature.armature.animation.Stop();
+                SetIndexes();
                 ChangeState(playerTimeState.animationState);
             }
         }
@@ -532,7 +538,7 @@ public class Player : Character
     {
         for (int i = 0; i < clipSize; i++)
         {
-            throwingClip[i].GetComponent<Throwing>().speed = 14;
+            throwingClip[i].GetComponent<Throwing>().speed = 20;
         }
         ThrowingUI.Instance.SetThrowBar();
     }
@@ -549,7 +555,7 @@ public class Player : Character
     {
         if (throwingIterator >= 0)
         {
-            yield return new WaitForSeconds(0.11f / myArmature.animation.timeScale);
+            yield return new WaitForSeconds(0.05f / myArmature.animation.timeScale);
 
             throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
@@ -558,13 +564,13 @@ public class Player : Character
 
             if (this.gameObject.transform.localScale.x > 0)
             {
-                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(1.5f, 0.1f, -5);
                 throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
             }
             else
             {
-                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-0.8f, 0.1f, -5);
+                throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-1.5f, 0.1f, -5);
                 throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
             }
@@ -618,6 +624,7 @@ public class Player : Character
     {
         StartCoroutine(ImmortalBonus(duration));
         MakeFX.Instance.MakeImmortalBonus(duration);
+		//FX.GetComponent<Animator> ().SetTrigger ("immortal");
     }
 
     public IEnumerator ImmortalBonus(float duration)
@@ -629,6 +636,7 @@ public class Player : Character
         if (immortalBonusNum == 0)
         {
             immortal = false;
+			//FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 
@@ -700,6 +708,7 @@ public class Player : Character
     {
         StartCoroutine(TimeBonus(duration));
         MakeFX.Instance.MakeTimeBonus(duration);
+	    //FX.GetComponent<Animator> ().SetTrigger ("time");
     }
 
     public IEnumerator TimeBonus(float duration)
@@ -726,6 +735,7 @@ public class Player : Character
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
             myRigidbody.gravityScale = 3;
+			//FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 
@@ -833,7 +843,6 @@ public class Player : Character
             if (dodgerLvl > 0)
             {
                 dodgeChance = (int)PlayerPrefs.GetFloat("Dodger" + dodgerLvl.ToString());
-                Debug.Log("dodger " + dodgeChance);
             }
         }
 
@@ -848,7 +857,6 @@ public class Player : Character
             if (potionLvl > 0)
             {
                 potionTimeScale = PlayerPrefs.GetFloat("PotionManiac" + potionLvl.ToString());
-                Debug.Log("potion " + potionTimeScale);
             }
         }
 
@@ -863,7 +871,6 @@ public class Player : Character
             if (greedLvl > 0)
             {
                 coinScale = PlayerPrefs.GetFloat("Greedy" + greedLvl.ToString());
-                Debug.Log("Greedy " + coinScale);
             }
         }
 
@@ -878,7 +885,6 @@ public class Player : Character
             if (clipsLvl > 0)
             {
                 maxClipSize = (int)PlayerPrefs.GetFloat("AmmoManiac" + clipsLvl.ToString());
-                Debug.Log("AmmoManiac " + maxClipSize);
             }
         }
     }

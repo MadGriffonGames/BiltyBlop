@@ -26,7 +26,7 @@ public class MageFireball : MonoBehaviour
     Vector3 scaling = new Vector3(0.01f, 0.01f, 0);
 
     [SerializeField]
-    GameObject startPosition;
+    public GameObject startPosition;
 
     Transform startTransform;
 
@@ -46,8 +46,6 @@ public class MageFireball : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, Player.Instance.transform.position, speed * Time.deltaTime);
 
         timer += Time.deltaTime;
-        //if (this.gameObject.GetComponent<Collider2D>().enabled == false)
-          //  FadeOut();
         if (timer >= lifeTime)
         {
             FadeOut();
@@ -66,7 +64,7 @@ public class MageFireball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))
+        if (other.gameObject.CompareTag("Player"))
         {
             this.gameObject.SetActive(false);
             startTransform = startPosition.GetComponent<Transform>();
@@ -141,6 +139,5 @@ public class MageFireball : MonoBehaviour
             this.transform.position = startTransform.transform.position;
             this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
         }
-        //timer = 0;
     }
 }

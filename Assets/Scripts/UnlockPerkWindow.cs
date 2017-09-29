@@ -21,6 +21,8 @@ public class UnlockPerkWindow : MonoBehaviour {
     GameObject fade;
     [SerializeField]
     GameObject closeErrorWindowButton;
+	[SerializeField]
+	Image perkImage;
 
     [SerializeField]
     Transform onebuttonTransform;
@@ -46,7 +48,7 @@ public class UnlockPerkWindow : MonoBehaviour {
             }
         }
         PerkPrefab perk = PerksSwipeMenu.Instance.perkPrefabs[perkNumber].gameObject.GetComponent<PerkPrefab>();
-
+		perkImage.sprite = perk.perkSprite;
 		perkLvl = PlayerPrefs.GetInt (PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
 
         // perkNumber - number of chosen perk in perkPrefabs[]
@@ -104,7 +106,7 @@ public class UnlockPerkWindow : MonoBehaviour {
 			}
 		}
 		PerkPrefab perk = PerksSwipeMenu.Instance.perkPrefabs[perkNumber].gameObject.GetComponent<PerkPrefab>();
-
+		perkImage.sprite = perk.perkSprite;
 		perkLvl = PlayerPrefs.GetInt (PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
 		perkName.GetComponent<Text>().text = perk.shopName + " (" + perkLvl.ToString() +")";
 		perkDescription.GetComponent<Text>().text = string.Format(perk.description, perk.upgradeScales[perkLvl - 1]);

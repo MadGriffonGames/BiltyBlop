@@ -43,11 +43,28 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject bird;
 
+	void Awake()
+	{
+		#if UNITY_EDITOR
+			Application.targetFrameRate = 1000;
+		#elif UNITY_IOS
+			Application.targetFrameRate = 60;
+		#elif UNITY_ANDROID
+			Application.targetFrameRate = 60;
+		#endif
+
+	}
+
     void Start () 
 	{
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
             crystalTxt = GameObject.Find("CrystalTxt").GetComponent<Text>();
+        }
+
+        if (!PlayerPrefs.HasKey("NoAds"))
+        {
+            PlayerPrefs.SetInt("NoAds", 0);
         }
 
         coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();

@@ -12,8 +12,6 @@ public class HedgehogPatrolState : IHedgehogState
         this.enemy = enemy;
         enemy.movementSpeed = 1;
         enemy.armature.animation.timeScale = 2f;
-        enemy.EnableHealthbar(0);
-        enemy.StartIgnore();
     }
 
     public void Execute()

@@ -53,6 +53,8 @@ public class Snowman : MovingMeleeEnemy
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             StartCoroutine(AnimationDelay());
@@ -92,10 +94,11 @@ public class Snowman : MovingMeleeEnemy
         {
             ChangeState(new SnowmanPatrolState());
             armature.animation.timeScale = 1;
-            Health = 2;
+			Health = maxHealth;
+			SetHealthbar();
         }
 
-        SetHealthbar();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)

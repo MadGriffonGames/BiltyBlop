@@ -48,6 +48,7 @@ public class UnlockSkinWindow : MonoBehaviour {
     {
         SkinPrefab skin = SkinManager.Instance.skinPrefabs[skinNumber].gameObject.GetComponent<SkinPrefab>();
 		KidSkin.Instance.ChangeSkin(skinNumber);
+		KidSkin.Instance.SwordInShop ();
 		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponent<SkinPrefab> ().displayIndex;
         skinName.GetComponent<Text>().text = skin.shopName;
 		chosenSkinName = skin.name;

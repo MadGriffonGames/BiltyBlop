@@ -18,6 +18,8 @@ public class ChestUI : RewardedChest
     GameObject activateButton;
     [SerializeField]
     GameObject chestFade;
+    [SerializeField]
+    Text text;
 
     Image chestImage;
     bool isSpined;
@@ -34,8 +36,6 @@ public class ChestUI : RewardedChest
         lootAnimator = loot.gameObject.GetComponent<Animator>();
 
         isOpened = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_chest") > 0;
-
-        isOpened = false;
 
         isStarsCollected = (Player.Instance.stars >= 3) || (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") >= 3);
 

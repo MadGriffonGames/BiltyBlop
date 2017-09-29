@@ -56,7 +56,6 @@ public class TyplakMeleeState : MonoBehaviour ,ITyplakState
         {
             enemy.armature.animation.FadeIn("Attack", -1, 1);
             timer = Time.time;
-            //StartCoroutine(EnableCollider());
         }
 
         if (enemy.armature.animation.lastAnimationName == "Attack" && Time.time - timer > delay)
@@ -69,11 +68,5 @@ public class TyplakMeleeState : MonoBehaviour ,ITyplakState
             preattack = false;
             canExit = true;
         }
-    }
-
-    IEnumerator EnableCollider()
-    {
-        yield return new WaitForSeconds(0.2f);
-        enemy.AttackCollider.enabled = true;
     }
 }

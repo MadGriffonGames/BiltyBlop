@@ -26,7 +26,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     bool isLvlEnd;
 
-     public bool fromShowfunction = false;
+    public bool fromShowfunction = false;
 
     public bool isInterstitialClosed = false;
 
@@ -95,6 +95,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
         {
             isRewardVideoWatched = true;
         }
+
         if (PlayerPrefs.GetInt("NoAds") == 0 && !Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched)
         {
             if (SceneManager.GetActiveScene().name.Contains("Level"))

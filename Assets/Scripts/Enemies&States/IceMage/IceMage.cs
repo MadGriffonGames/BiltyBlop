@@ -75,6 +75,8 @@ public class IceMage : RangeEnemy
 
     public override IEnumerator TakeDamage()
     {
+        health -= actualDamage;
+
         SetHealthbar();
         Target = null;
         isTakingDamage = true;
@@ -101,10 +103,13 @@ public class IceMage : RangeEnemy
         isTakingDamage = false;
         ResetCoinPack();
         this.gameObject.GetComponent<Collider2D>().enabled = true;
-        Health = 1;
+        Health = maxHealth;
         Target = null;
         ChangeState(new IceMageIdleState());
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        SetHealthbar();
+
+        fireball.transform.position = fireball.GetComponent<MageFireball>().startPosition.transform.position;
     }
 
     void FireballFadeOut()

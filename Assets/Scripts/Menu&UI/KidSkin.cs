@@ -39,6 +39,12 @@ public class KidSkin : MonoBehaviour
 
 		//myArmature.animation.Play("victory_idle");
     }
+
+	public void SwordInShop()
+	{
+		swordSlot = myArmature.armature.GetSlot("Sword");
+		swordSlot.displayIndex = 0;
+	}
 	public void AddSlot(string slotName, ref int i)
 	{
 		skinSlots [i] = myArmature.armature.GetSlot (slotName);

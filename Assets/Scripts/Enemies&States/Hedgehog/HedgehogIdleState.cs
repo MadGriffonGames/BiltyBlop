@@ -17,8 +17,6 @@ public class HedgehogIdleState : IHedgehogState
         this.enemy = enemy;
         idleDuration = enemy.idleDuration;
         enemy.movementSpeed = 0;
-        enemy.EnableHealthbar(1);
-        enemy.StopIgnore();
     }
 
     public void Execute()

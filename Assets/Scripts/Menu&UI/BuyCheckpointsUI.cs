@@ -26,7 +26,6 @@ public class BuyCheckpointsUI : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerPrefs.SetInt("NoAds", 1);
         if (notPremiumAttemps > 0)
         {
             if (PlayerPrefs.GetInt("NoAds") != 0)

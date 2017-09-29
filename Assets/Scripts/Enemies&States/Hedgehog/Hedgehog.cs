@@ -51,6 +51,8 @@ public class Hedgehog : MovingMeleeEnemy
 
     public override IEnumerator TakeDamage()
     {
+        health -= actualDamage;
+
         CameraEffect.Shake(0.2f, 0.3f);
         MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
         SetHealthbar();
@@ -74,32 +76,13 @@ public class Hedgehog : MovingMeleeEnemy
 
         if (Health <= 0)
         {
-            Health = 2;
+			Health = maxHealth;
+			SetHealthbar ();
         }
         ChangeState(new HedgehogIdleState());
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         movementSpeed = 10;
-        SetHealthbar();
-
-    }
-
-    public void StartIgnore()
-    {
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, true);
-        for (int i = 0; i < Player.Instance.clipSize; i++)
-        {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.throwingClip[i].GetComponent<Collider2D>(), true);
-        }
-    }
-
-    public void StopIgnore()
-    {
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
-        for (int i = 0; i < Player.Instance.clipSize; i++)
-        {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.throwingClip[i].GetComponent<Collider2D>(), false);
-        }
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
@@ -115,11 +98,4 @@ public class Hedgehog : MovingMeleeEnemy
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);
         }
     }
-
-    public void EnableHealthbar (int enable)
-    {
-        if (enable == 1) healthBar.SetActive(true);
-        else healthBar.SetActive(false);
-    } 
-
 }

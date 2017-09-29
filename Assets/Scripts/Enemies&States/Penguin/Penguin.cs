@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DragonBones;
 
-public class Penguin : MovingRangedEnemy {
+public class Penguin : MovingRangedEnemy
+{
     private IPenguinState currentState;
     [SerializeField]
     private GameObject penguinParticle;
@@ -12,8 +13,6 @@ public class Penguin : MovingRangedEnemy {
     bool damaged = false;
     [SerializeField]
     GameObject threezubets;
-    //Achieve penguinAchieve;
-    int[] reward = new int[3]{ 100, 150, 200 };
 
 
     void Awake()
@@ -22,19 +21,16 @@ public class Penguin : MovingRangedEnemy {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         attack = false;
-        
     }
 
-    // Use this for initialization
     public override void Start ()
     {
         base.Start();
         ChangeState(new PenguinPatrolState());
-        //penguinAchieve = new Achieve("Penguin's king", "coins", 2, reward, 1);
     }
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (!IsDead)
         {
             if (!TakingDamage && !Attack)
@@ -49,6 +45,8 @@ public class Penguin : MovingRangedEnemy {
     {
         if (!damaged)
         {
+            health -= actualDamage;
+
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
@@ -124,15 +122,14 @@ public class Penguin : MovingRangedEnemy {
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        SetHealthbar();
         Target = null;
         damaged = false;
 
         if (Health <= 0)
         {
             ChangeState(new PenguinPatrolState());
-            Health = 2;
-            SetHealthbar();
+			Health = maxHealth;
+			SetHealthbar();   
         }
     }
 }

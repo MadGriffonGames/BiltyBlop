@@ -13,6 +13,8 @@ public class TutorialTrigger : MonoBehaviour
     GameObject arrow;
     [SerializeField]
     bool reset;
+	[SerializeField]
+	int disablingOpenedLevel;
 
     bool active = true;
     bool hide = false;

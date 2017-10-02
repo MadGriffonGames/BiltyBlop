@@ -98,18 +98,22 @@ public class IceMage : RangeEnemy
 
     private void OnEnable()
     {
+		ResetCoinPack();
         deathPic.gameObject.SetActive(false);
-        gameObject.SetActive(true);
-        isTakingDamage = false;
-        ResetCoinPack();
-        this.gameObject.GetComponent<Collider2D>().enabled = true;
-        Health = maxHealth;
-        Target = null;
-        ChangeState(new IceMageIdleState());
-        Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        SetHealthbar();
-
-        fireball.transform.position = fireball.GetComponent<MageFireball>().startPosition.transform.position;
+		if (Health <= 0) 
+		{
+			gameObject.SetActive(true);
+			isTakingDamage = false;
+			this.gameObject.GetComponent<Collider2D>().enabled = true;
+			Health = maxHealth;
+			SetHealthbar();
+			Target = null;
+			ChangeState(new IceMageIdleState());
+			Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+			fireball.transform.position = fireball.GetComponent<MageFireball>().startPosition.transform.position;
+		}
+        
+        
     }
 
     void FireballFadeOut()

@@ -9,18 +9,32 @@ public class Maneken : MonoBehaviour
     private GameObject particle;
     [SerializeField]
     string damageType;
-    [SerializeField]
-    GameObject[] healthbar;
+
     [SerializeField]
     int health;
-    public bool IsDead
-    {
-        get { return health <= 0; }
-    }
+
+	public bool IsDead
+	{
+		get { return health <= 0; }
+	}
+
+	[SerializeField]
+	public UnityEngine.Transform healthbar;
+
+	[SerializeField]
+	public GameObject healthBarNew;
+
+	[SerializeField]
+	public int maxHealth;
+
+	float firstHBScaleX;
+   
     public bool isNeedDoubleDamage;
 
     private void Start()
-    {
+	{
+		health = maxHealth;
+		firstHBScaleX = healthbar.localScale.x;
         SetHealthbar();
     }
 
@@ -57,20 +71,22 @@ public class Maneken : MonoBehaviour
         }
     }
 
-    public void SetHealthbar()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            if (i + 1 == health)
-            {
-                healthbar[i].SetActive(true);
-            }
-            else
-            {
-                healthbar[i].SetActive(false);
-            }
-        }
-    }
+	public void SetHealthbar()
+	{
+		if (health > 0)
+		{
+			healthbar.localScale = new Vector3(firstHBScaleX * health / maxHealth,
+				healthbar.localScale.y,
+				healthbar.localScale.z);
+			healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
+		} else
+		{
+			healthbar.localScale = new Vector3(0,
+				healthbar.localScale.y,
+				healthbar.localScale.z);
+			healthBarNew.GetComponentInChildren<TextMesh> ().text = "0/" + maxHealth.ToString ();
+		}
+	}
 
     public IEnumerator TakeDamage()
     {

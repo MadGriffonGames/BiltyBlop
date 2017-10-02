@@ -37,16 +37,6 @@ public class ShopController : MonoBehaviour {
     private int activeShopNumber;
     private int shopsCount;
 
-
-    private void Awake ()
-    {
-        perksButton.GetComponentInChildren<Text>().text = "PERKS";
-        itemsButton.GetComponentInChildren<Text>().text = "ITEMS";
-        skinsButton.GetComponentInChildren<Text>().text = "SKINS";
-		gemsButton.GetComponentInChildren<Text>().text = "GEMS";
-		swordsButton.GetComponentInChildren<Text>().text = "SWORDS";
-    }
-
     private void Update()
     {
         UpdateMoneyValues(); // так, ибо почему-то пообращению к методу он не обновляет значенияж
@@ -71,9 +61,9 @@ public class ShopController : MonoBehaviour {
         }
     }
 
-    private void SetButtonText(Button button, int shopNumber)
+    public void ActivateButton(Button button)
     {
-        button.GetComponentInChildren<Text>().text = shopNames[shopNumber];
+        
     }
 
 

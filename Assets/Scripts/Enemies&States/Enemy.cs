@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
+		firstHBScaleX = firstHBScaleX = healthbar.localScale.x;	
 
     }
 
@@ -107,13 +108,18 @@ public class Enemy : MonoBehaviour
 
     public void SetHealthbar()
     {
-		healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
-
 		if (health > 0)
 		{
 			healthbar.localScale = new Vector3(firstHBScaleX * health / maxHealth,
 				healthbar.localScale.y,
 				healthbar.localScale.z);
+			healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
+		} else
+		{
+			healthbar.localScale = new Vector3(0,
+				healthbar.localScale.y,
+				healthbar.localScale.z);
+			healthBarNew.GetComponentInChildren<TextMesh> ().text = "0/" + maxHealth.ToString ();
 		}
     }
 
@@ -154,6 +160,7 @@ public class Enemy : MonoBehaviour
             int spawnCount = UnityEngine.Random.Range(min, max);
             spawnCount = coinPackSize > spawnCount ? spawnCount : coinPackSize;
             coinPackSize -= spawnCount;
+
             for (int i = 0; i < spawnCount; i++)
             {
                 coins[i].SetActive(true);

@@ -11,7 +11,7 @@ public class FallTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.swimmer);    
+            AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.swimmer);    
             SoundManager.PlaySound("water splash");
             StartCoroutine(Player.Instance.TakeDamage());
             Player.Instance.transform.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, -4);

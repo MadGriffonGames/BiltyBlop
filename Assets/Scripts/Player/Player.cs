@@ -327,7 +327,6 @@ public class Player : Character
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
-        Debug.Log(AttackCollider.IsTouching(other));
 
 		int tmpNumber = UnityEngine.Random.Range (0, 100);   // DODGER PERK DETECTION
 

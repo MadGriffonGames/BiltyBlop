@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject Target { get; set; }
 
-	float firstHBScaleX;
+	public float firstHBScaleX;
 
     private void Awake()
     {
@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
     {
 		health = maxHealth;
 		firstHBScaleX = healthbar.localScale.x;
-		if (gameObject.transform.localScale.x < 0) 
+        if (gameObject.transform.localScale.x < 0) 
 		{
 			ChangeHealtBarDirection ();
 		}
@@ -107,14 +107,24 @@ public class Enemy : MonoBehaviour
 
     public void SetHealthbar()
     {
-		healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
+        if (health < 0)
+        {
+            health = 0;
+        }
+        healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
 
 		if (health > 0)
 		{
 			healthbar.localScale = new Vector3(firstHBScaleX * health / maxHealth,
-				healthbar.localScale.y,
-				healthbar.localScale.z);
+				                               healthbar.localScale.y,
+				                               healthbar.localScale.z);
 		}
+        else
+        {
+            healthbar.localScale = new Vector3(firstHBScaleX * 0,
+                                               healthbar.localScale.y,
+                                               healthbar.localScale.z);
+        }
     }
 
     private void OnBecameVisible()

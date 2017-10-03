@@ -10,8 +10,12 @@ public class Troll : MovingMeleeEnemy
     private GameObject deathParticle;
     [SerializeField]
     public GameObject blow;
+    [SerializeField]
+    GameObject bomb;
     bool damaged = false;
     public bool walk = false;
+
+    
 
     void Awake()
     {
@@ -23,6 +27,7 @@ public class Troll : MovingMeleeEnemy
     public override void Start()
     {
         base.Start();
+
         isAttacking = false;
         ChangeState(new TrollPatrolState());
     }
@@ -64,6 +69,8 @@ public class Troll : MovingMeleeEnemy
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("enemyher loud");
 
+                GetComponent<SwordIgnoreCollision>().enabled = true;
+
                 ChangeState(new TrollSelfDestroyState());
             }
             yield return null;
@@ -78,26 +85,54 @@ public class Troll : MovingMeleeEnemy
 
         SpawnCoins(2, 5);
         GameManager.deadEnemies.Add(gameObject);
-        
+
+        walk = false;
+
+        GameObject tmp1 = Instantiate(bomb, transform.position + new Vector3(1, 1f, 0), Quaternion.identity);
+        tmp1.transform.parent = null;
+        tmp1.GetComponent<Rigidbody2D>().velocity = new Vector2(3,4);
+
+        GameObject tmp2 = Instantiate(bomb, transform.position + new Vector3(-1, 1f, 0), Quaternion.identity);
+        tmp2.transform.parent = null;
+        tmp2.GetComponent<Rigidbody2D>().velocity = new Vector2(-3, 4);
+
+        GameObject tmp3 = Instantiate(bomb, transform.position + new Vector3(1.5f, 1.5f, 0), Quaternion.identity);
+        tmp3.transform.parent = null;
+        tmp3.GetComponent<TrollBomb>().blowTime = 1.5f;
+        tmp3.GetComponent<Rigidbody2D>().velocity = new Vector2(5, 5);
+
+        GameObject tmp4 = Instantiate(bomb, transform.position + new Vector3(-1.5f, 1.5f, 0), Quaternion.identity);
+        tmp4.transform.parent = null;
+        tmp4.GetComponent<TrollBomb>().blowTime = 1.5f;
+        tmp4.GetComponent<Rigidbody2D>().velocity = new Vector2(-5, 5);
+
         gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
+        GetComponent<SwordIgnoreCollision>().enabled = false;
+
         ResetCoinPack();
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.AttackCollider, false);
+        for (int i = 0; i < Player.Instance.clipSize; i++)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.throwingClip[i].GetComponent<Collider2D>(), false);
+        }
 
         Target = null;
         damaged = false;
-
+       
         if (Health <= 0)
         {
             ChangeState(new TrollPatrolState());
+
             Health = maxHealth;
         }
-
+        
         SetHealthbar();
     }
 
@@ -119,10 +154,7 @@ public class Troll : MovingMeleeEnemy
         if (!walk)
         {
             walk = true;
-            if (armature.animation.lastAnimationName != "charge")
-            {
-                armature.animation.FadeIn("Walk", -1, -1);
-            }
+            armature.animation.FadeIn("Walk", -1, -1);
         }
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }

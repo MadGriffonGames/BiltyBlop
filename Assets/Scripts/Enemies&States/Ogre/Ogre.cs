@@ -54,7 +54,7 @@ public class Ogre : MovingMeleeEnemy
             health -= actualDamage;
 
             damaged = true;
-            StartCoroutine(AnimationDelay());
+            StartCoroutine(OgreAnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
@@ -83,6 +83,7 @@ public class Ogre : MovingMeleeEnemy
         Target = null;
         damaged = false;
         isAttacking = false;
+        AttackCollider.enabled = false;
 
         if (Health <= 0)
         {
@@ -114,5 +115,15 @@ public class Ogre : MovingMeleeEnemy
             armature.animation.FadeIn("walk", -1, -1);
         }
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+    }
+
+    IEnumerator OgreAnimationDelay()
+    {
+        float tmp = armature.animation.timeScale;
+
+        armature.animation.timeScale = 0.4f;
+        yield return new WaitForSeconds(0.15f);
+        armature.animation.timeScale = tmp;
+        yield return null;
     }
 }

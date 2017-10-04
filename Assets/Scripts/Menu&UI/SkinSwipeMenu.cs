@@ -13,10 +13,6 @@ public class SkinSwipeMenu : SwipeMenu {
     GameObject closeBuyWindowButton;
 	[SerializeField]
 	Sprite equipButton;
-	[SerializeField]
-	Sprite equipedButton;
-
-    private const float DISTANCE = 175f;
 
     public override void Start()
     {
@@ -57,16 +53,15 @@ public class SkinSwipeMenu : SwipeMenu {
 
 					if (PlayerPrefs.GetString(skin.name) == "Unlocked")
                     {
-						if (PlayerPrefs.GetString ("Skin") == skin.name)
+						if (PlayerPrefs.GetString ("Skin") == skin.name) 
 						{
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
-							skinCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipedButton;
-						} 
+						}
 						else 
 						{
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIP";
-							skinCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
 						}
+						skinCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
 						skinCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySkin (skin.orderNumber));
 						skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySkin (skin.orderNumber));
                     }
@@ -98,14 +93,15 @@ public class SkinSwipeMenu : SwipeMenu {
                     {
                         buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
-						if (PlayerPrefs.GetString ("Skin") == skin.name) {
+						if (PlayerPrefs.GetString ("Skin") == skin.name) 
+						{
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
-							buttons [i].gameObject.GetComponentsInChildren<Image> () [2].sprite = equipedButton;
-						} else 
+						} 
+						else 
 						{
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIP";
-							buttons[i].gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
 						}
+						buttons[i].gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
                         buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ApplySkin(skin.orderNumber));
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplySkin(skin.orderNumber));
                     }
@@ -157,5 +153,7 @@ public class SkinSwipeMenu : SwipeMenu {
             tapping = false;
         }
     }
+
+
 
 }

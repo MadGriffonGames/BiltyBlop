@@ -17,16 +17,7 @@ public class ShopController : MonoBehaviour {
     }
 
     public GameObject[] shops;
-    [SerializeField]
-    Button skinsButton;
-    [SerializeField]
-    Button itemsButton;
-    [SerializeField]
-    Button perksButton;
-	[SerializeField]
-	Button gemsButton;
-	[SerializeField]
-	Button swordsButton;
+	public Button[] buttons;
 
     [SerializeField]
     Text coinTxt;
@@ -52,19 +43,33 @@ public class ShopController : MonoBehaviour {
     {
         for (int i = 0; i < shops.Length; i++)
         {
-            if (number == i)
-            {
-                shops[i].SetActive(true);
-            }
-            else
-                shops[i].SetActive(false);
+			if (number == i) {
+				shops [i].SetActive (true);
+				ActivateButton (buttons [i]);				
+			}  
+			else 
+			{
+				shops [i].SetActive (false);
+				DisactivateButton (buttons [i]);
+			}	
         }
     }
 
     public void ActivateButton(Button button)
     {
-        
+		button.GetComponent<Image> ().color = ToColor ("FFFFFFF3", 255);
     }
+	public void DisactivateButton(Button button)
+	{
+		button.GetComponent<Image> ().color = ToColor ("C3C3C3DB", 219);
+	}
 
-
+	public Color32 ToColor(string hexString, byte A)
+	{
+		int hexVal = int.Parse (hexString, System.Globalization.NumberStyles.HexNumber);
+		byte R = (byte)((hexVal >> 16) & 0xFF);
+		byte G = (byte)((hexVal >> 8) & 0xFF);
+		byte B = (byte)((hexVal) & 0xFF);
+		return new Color32 (R,G,B,A);
+	}
 }

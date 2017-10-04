@@ -152,7 +152,6 @@ public class PerksSwipeMenu : SwipeMenu {
             minButtonsNumber = buttonNumber;
         }
         tapping = true;
-        MakeActiveButton(buttonNumber);
     }
 
 

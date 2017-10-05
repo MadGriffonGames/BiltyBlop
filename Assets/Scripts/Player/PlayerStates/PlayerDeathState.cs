@@ -4,22 +4,38 @@ using UnityEngine;
 
 public class PlayerDeathState : IPlayerState
 {
+    bool isTookHit;
+    bool isDead;
+
     public void Enter(Player player)
     {
-        player.InstantiateDeathParticles();
-        player.InstantiateGrave();
-        player.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
-        //player.GetComponent<BoxCollider2D>().enabled = false;
-        player.GetComponent<CapsuleCollider2D>().enabled = false;
-        foreach (MeshRenderer sprite in player.meshRenderer)
-        {
-            sprite.enabled = false;
-        }
+        isTookHit = false;
+        isDead = false;
     }
 
     public void Execute()
     {
+        if (!isTookHit)
+        {
+            isTookHit = true;
 
+            Player.Instance.SetIndexes();
+            Player.Instance.myArmature.animation.FadeIn("takehit", -1, 1);
+            Player.Instance.SetIndexes();
+        }
+        if (Player.Instance.myArmature.animation.isCompleted && !isDead)
+        {
+            isDead = true;
+            Player.Instance.InstantiateDeathParticles();
+            Player.Instance.InstantiateGrave();
+            Player.Instance.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
+            Player.Instance.GetComponent<CapsuleCollider2D>().enabled = false;
+            foreach (MeshRenderer sprite in Player.Instance.meshRenderer)
+            {
+                sprite.enabled = false;
+            }
+            //UI.Instance.timeRewindUI.SetActive(true);
+        }
     }
 
     public void Exit()

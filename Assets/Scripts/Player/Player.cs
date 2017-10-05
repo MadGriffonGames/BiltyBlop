@@ -102,7 +102,6 @@ public class Player : Character
     public GameObject timeControllerPrefab;
     [SerializeField]
     GameObject hitFX;
-
     /*
      * Bonus vars
      */
@@ -212,9 +211,7 @@ public class Player : Character
     void FixedUpdate() 
 	{
         if (!TakingDamage && !IsDead)
-        {
-            currentState.Execute();
-
+        {           
             if (Mathf.Abs(mobileInput + playerAxis / 10) <= 1 && playerAxis != 0)
                 mobileInput += playerAxis / 10;
             else mobileInput = playerAxis;
@@ -250,6 +247,11 @@ public class Player : Character
             {
                 PlayTimeState(recording[TimeController.internalTime]);
             }
+        }
+
+        if (!TakingDamage)
+        {
+            currentState.Execute();
         }
     }
 
@@ -466,7 +468,7 @@ public class Player : Character
                     AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
-                    UI.Instance.timeRewindUI.SetActive(true);
+                    
                 }
                 yield return null;
             }

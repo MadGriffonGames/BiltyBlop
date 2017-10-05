@@ -60,7 +60,7 @@ public class MakeFX : MonoBehaviour
 
 	public void MakeDeath()
 	{
-		Instantiate(death, transform.localPosition + new Vector3(-0.25f, 0, 0), Quaternion.identity);
+        Instantiate(death, Player.Instance.transform.position + new Vector3(-0.25f, 0, 0), Quaternion.identity);
 	}
 
     public void MakeHeal()

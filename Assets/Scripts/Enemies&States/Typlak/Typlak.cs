@@ -11,11 +11,15 @@ public class Typlak : MovingMeleeEnemy
     bool damaged = false;
     public bool walk = false;
 
+    List<Slot> slots;
+
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        slots = armature.armature.GetSlots();
+        SetIndexes();
     }
 
     public override void Start()
@@ -111,10 +115,20 @@ public class Typlak : MovingMeleeEnemy
     public void LocalMove()
     {
         if (!walk)
-            {
-                walk = true;
-                armature.animation.FadeIn("walk", -1, -1);
-            }
-         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+        {
+            walk = true;
+            SetIndexes();
+            armature.animation.FadeIn("walk1_slow", -1, -1);
+            SetIndexes();
+        }
+        transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
+    }
+
+    public void SetIndexes()
+    {
+        foreach (Slot slot in slots)
+        {
+            slot.displayIndex = 1;
+        }
     }
 }

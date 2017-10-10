@@ -26,15 +26,13 @@ public class PlayerDeathState : IPlayerState
         if (Player.Instance.myArmature.animation.isCompleted && !isDead)
         {
             isDead = true;
-            Player.Instance.InstantiateDeathParticles();
-            Player.Instance.InstantiateGrave();
+            Player.Instance.InstantiateDeathParticles();            
             Player.Instance.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
             Player.Instance.GetComponent<CapsuleCollider2D>().enabled = false;
             foreach (MeshRenderer sprite in Player.Instance.meshRenderer)
             {
                 sprite.enabled = false;
             }
-            //UI.Instance.timeRewindUI.SetActive(true);
         }
     }
 

@@ -17,8 +17,6 @@ public class PlayerThrowState : IPlayerState
         }
         player.ThrowWeapon();
         Player.Instance.Throw = false;
-
-        player.SetIndexes();
     }
 
     public void Execute()

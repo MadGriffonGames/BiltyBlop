@@ -11,8 +11,6 @@ public class PlayerRunState : IPlayerState
         player.myArmature.animation.FadeIn("run", -1, -1);
 
         Player.Instance.jumpTaps = 0;//костыль, который скрывает багу с двойным прыжком
-
-        player.SetIndexes();
     }
 
     public void Execute()

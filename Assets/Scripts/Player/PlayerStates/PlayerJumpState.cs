@@ -11,8 +11,6 @@ public class PlayerJumpState : IPlayerState
     {
         player.Jump = true;
         player.myArmature.animation.FadeIn("jump", -1, -1);
-
-        player.SetIndexes();
     }
 
     public void Execute()
@@ -36,15 +34,9 @@ public class PlayerJumpState : IPlayerState
         {
             Player.Instance.ChangeState(new PlayerJumpAttackState());
         }
-        if (Player.Instance.DoubleJump && Player.Instance.canJump && Player.Instance.myRigidbody.velocity.y < 6.5f)
-        {
-            Player.Instance.myArmature.animation.FadeIn("double_jump_start", -1, 1);
-            Player.Instance.SetIndexes();
-        }
         if (Player.Instance.myArmature.animation.isCompleted && Player.Instance.myArmature.animation.lastAnimationName == "double_jump_start")
         {
             Player.Instance.myArmature.animation.FadeIn("jump", -1, -1);
-            Player.Instance.SetIndexes();
         }
     }
 

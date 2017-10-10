@@ -18,10 +18,7 @@ public class PlayerDeathState : IPlayerState
         if (!isTookHit)
         {
             isTookHit = true;
-
-            Player.Instance.SetIndexes();
             Player.Instance.myArmature.animation.FadeIn("takehit", -1, 1);
-            Player.Instance.SetIndexes();
         }
         if (Player.Instance.myArmature.animation.isCompleted && !isDead)
         {

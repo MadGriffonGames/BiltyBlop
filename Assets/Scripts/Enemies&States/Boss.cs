@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    
     public UnityArmatureComponent armature;
 
     public string damageSource;
@@ -52,6 +53,7 @@ public class Boss : MonoBehaviour
 
     public virtual IEnumerator TakeDamage()
     {
+        Debug.Log(1);
         yield return null;
     }
 

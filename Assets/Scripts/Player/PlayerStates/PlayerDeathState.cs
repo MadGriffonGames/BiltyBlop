@@ -11,6 +11,7 @@ public class PlayerDeathState : IPlayerState
     {
         isTookHit = false;
         isDead = false;
+        player.myRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     public void Execute()
@@ -36,5 +37,6 @@ public class PlayerDeathState : IPlayerState
     public void Exit()
     {
         Player.Instance.takeHit = false;
+        Player.Instance.myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

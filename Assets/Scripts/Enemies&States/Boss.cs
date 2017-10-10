@@ -53,7 +53,6 @@ public class Boss : MonoBehaviour
 
     public virtual IEnumerator TakeDamage()
     {
-        Debug.Log(1);
         yield return null;
     }
 

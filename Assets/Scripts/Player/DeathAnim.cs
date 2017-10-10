@@ -12,5 +12,6 @@ public class DeathAnim : MonoBehaviour
     public void SwitchOnDeathUI()
     {
         UI.Instance.timeRewindUI.SetActive(true);
+        Destroy(this.gameObject);
     }
 }

@@ -121,10 +121,10 @@ public class DeathUI : MonoBehaviour
 
     public void Continue()
     {
-        SoundManager.PlayMusic("kid_music", true);
+        SoundManager.PlayRandomMusic("kid_music", true);
         if (Player.Instance.freeCheckpoints > 0)
         {
-            SoundManager.PlayMusic("kid_music", true);
+            SoundManager.PlayRandomMusic("kid_music", true);
             gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
             Player.Instance.freeCheckpoints--;
 

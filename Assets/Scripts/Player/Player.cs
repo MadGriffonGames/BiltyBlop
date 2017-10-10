@@ -517,14 +517,28 @@ public class Player : Character
 
     void SetThrowing()
     {
-        throwing = Resources.Load<GameObject>("Throwing/ThrowingKnife");
+        throwing = Resources.Load<GameObject>("Throwing/ThrowingObject");
 			clipSize = maxClipSize;
+		Sprite[] throwSprites = Resources.LoadAll<Sprite> ("Throw/ThrowSprites");
+		string throwName = PlayerPrefs.GetString ("Throw");
+		for(int i=0; i <= throwSprites.Length; i++)
+		{
+			if (throwSprites [i].name == throwName) 
+			{
+				throwing.GetComponent<SpriteRenderer> ().sprite = throwSprites [i];
+				break;
+			}
+		}
+		throwing.GetComponent<Throwing> ().damage = PlayerPrefs.GetInt ("ThrowAttackStat");
+		throwing.GetComponent<Throwing> ().speed = PlayerPrefs.GetFloat ("ThrowSpeedStat");
+
         throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
         ThrowingUI.Instance.SetThrowBar();
         throwingClip = new GameObject[clipSize];
         for (int i = 0; i < clipSize; i++)
         {
             throwingClip[i] = Instantiate(throwing);
+
             //disable spriterenderer and collider instead just disable gameobject, because I can't get collider for ignore collision from disabled object
             throwingClip[i].GetComponent<SpriteRenderer>().enabled = false;
             throwingClip[i].GetComponent<Collider2D>().enabled = false;
@@ -535,7 +549,8 @@ public class Player : Character
     {
         for (int i = 0; i < clipSize; i++)
         {
-            throwingClip[i].GetComponent<Throwing>().speed = 20;
+			throwingClip[i].GetComponent<Throwing>().speed = PlayerPrefs.GetFloat ("ThrowSpeedStat");
+			throwing.GetComponent<Throwing> ().damage = PlayerPrefs.GetInt ("ThrowAttackStat");
         }
         ThrowingUI.Instance.SetThrowBar();
     }
@@ -556,7 +571,7 @@ public class Player : Character
 
             throwingClip[throwingIterator].GetComponent<SpriteRenderer>().enabled = true;
             throwingClip[throwingIterator].GetComponent<Collider2D>().enabled = true;
-            throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
+            //throwingClip[throwingIterator].GetComponent<Throwing>().speed = 14;
             SoundManager.PlaySound("kidarian_throw");
 
             if (this.gameObject.transform.localScale.x > 0)
@@ -621,7 +636,7 @@ public class Player : Character
     {
         StartCoroutine(ImmortalBonus(duration));
         MakeFX.Instance.MakeImmortalBonus(duration);
-		//FX.GetComponent<Animator> ().SetTrigger ("immortal");
+		FX.GetComponent<Animator> ().SetTrigger ("immortal");
     }
 
     public IEnumerator ImmortalBonus(float duration)
@@ -633,7 +648,7 @@ public class Player : Character
         if (immortalBonusNum == 0)
         {
             immortal = false;
-			//FX.GetComponent<Animator> ().SetTrigger ("reset");
+			FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 
@@ -641,6 +656,8 @@ public class Player : Character
     {
         StartCoroutine(DamageBonus(duration));
         MakeFX.Instance.MakeDamageBonus(duration);
+		FX.GetComponent<Animator> ().SetTrigger ("damage");
+
     }
 
     public IEnumerator DamageBonus(float duration)
@@ -652,6 +669,7 @@ public class Player : Character
         if (damageBonusNum == 0)
         {
             meleeDamage /= 2;
+			FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 
@@ -659,6 +677,7 @@ public class Player : Character
     {
         StartCoroutine(JumpBonus(duration));
         MakeFX.Instance.MakeJumpBonus(duration);
+		FX.GetComponent<Animator> ().SetTrigger ("jump");
     }
 
     public IEnumerator JumpBonus(float duration)
@@ -670,6 +689,7 @@ public class Player : Character
         if (jumpBonusNum == 0)
         {
             jumpForce = 700;
+			FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 
@@ -677,6 +697,7 @@ public class Player : Character
     {
         StartCoroutine(SpeedBonus(duration));
         MakeFX.Instance.MakeSpeedBonus(duration);
+		FX.GetComponent<Animator> ().SetTrigger ("speed");
     }
 
     public IEnumerator SpeedBonus(float duration)
@@ -698,6 +719,7 @@ public class Player : Character
             myArmature.animation.timeScale = 1;
             timeScalerMove = 1;
             cef.StopBlur();
+			FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 
@@ -705,7 +727,7 @@ public class Player : Character
     {
         StartCoroutine(TimeBonus(duration));
         MakeFX.Instance.MakeTimeBonus(duration);
-	    //FX.GetComponent<Animator> ().SetTrigger ("time");
+	    FX.GetComponent<Animator> ().SetTrigger ("time");
     }
 
     public IEnumerator TimeBonus(float duration)
@@ -732,7 +754,7 @@ public class Player : Character
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
             myRigidbody.gravityScale = 3;
-			//FX.GetComponent<Animator> ().SetTrigger ("reset");
+			FX.GetComponent<Animator> ().SetTrigger ("reset");
         }
     }
 

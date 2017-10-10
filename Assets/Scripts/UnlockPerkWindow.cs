@@ -59,6 +59,7 @@ public class UnlockPerkWindow : MonoBehaviour {
 			int perkCoinCost = perk.upgradeCoinCost [perkLvl];
 			int perkCrystalCost = perk.upgradeCrystalCost [perkLvl];
 			if (perkCoinCost == 0 && perkCrystalCost != 0) {
+				buyCrystalsButton.SetActive (true);
 				buyCrystalsButton.transform.localPosition = onebuttonTransform.localPosition;
 				buyCrystalsButton.GetComponentInChildren<Text> ().text = perkCrystalCost.ToString ();
 
@@ -67,6 +68,7 @@ public class UnlockPerkWindow : MonoBehaviour {
 
 				buyCoinsButton.gameObject.SetActive (false);
 			} else if (perkCrystalCost == 0 && perkCoinCost != 0) {
+				buyCoinsButton.SetActive (true);
 				buyCoinsButton.transform.localPosition = onebuttonTransform.localPosition;
 				buyCoinsButton.GetComponentInChildren<Text> ().text = perkCoinCost.ToString ();
 

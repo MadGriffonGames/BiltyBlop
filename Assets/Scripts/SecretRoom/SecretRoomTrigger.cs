@@ -8,6 +8,8 @@ public class SecretRoomTrigger : MonoBehaviour
     GameObject secretRoom;
     [SerializeField]
     GameObject secretRoomHalo;
+	[SerializeField]
+	public GameObject[] disabledObjects;
 
     private void Start()
     {
@@ -25,6 +27,9 @@ public class SecretRoomTrigger : MonoBehaviour
             Player.Instance.secretIndication.SetActive(false);
             Destroy(this);
         }
+		foreach (GameObject disObject in disabledObjects)
+			disObject.SetActive (true);
+			
     }
 
 }

@@ -217,6 +217,12 @@ public class SoundManager : MonoBehaviour
 		Instance.PlayMusicInternal(name, loop);
 	}
 
+	public static void PlayRandomMusic(string name, bool loop)
+	{
+		int number = UnityEngine.Random.Range(1, 3);
+		Instance.PlayMusicInternal(name+"_"+number.ToString(), loop);
+	}
+
 	void Fader()
 	{
 		if(last == null) return;

@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         }       
         
         if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
-            SoundManager.PlayMusic ("kid_music", true);
+            SoundManager.PlayRandomMusic ("kid_music", true);
         if (SceneManager.GetActiveScene().name == "Level6")
             SoundManager.PlaySoundLooped("rain sfx");
 

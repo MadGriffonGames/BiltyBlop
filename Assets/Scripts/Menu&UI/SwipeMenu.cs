@@ -19,6 +19,21 @@ public class SwipeMenu : MonoBehaviour
 
     public static int changingDistance = 3;
 
+	[SerializeField]
+	Button leftArrow;
+	[SerializeField]
+	Button rightArrow;
+
+	protected const float DISTANCE = 175f;
+
+	private void OnEnable()
+	{
+		leftArrow.onClick.RemoveAllListeners ();
+		rightArrow.onClick.RemoveAllListeners ();
+		leftArrow.onClick.AddListener (() => MoveLeftButton());
+		rightArrow.onClick.AddListener (() => MoveRightButton());
+	}
+
     public virtual void Start()
     {
         int buttonCount = buttons.Length;
@@ -45,7 +60,6 @@ public class SwipeMenu : MonoBehaviour
                 }
             }
         }
-
         if (!dragging || tapping)
         {
             LerpToButton(minButtonsNumber * -buttonDistance);
@@ -87,7 +101,22 @@ public class SwipeMenu : MonoBehaviour
     }
 
     
-
+	public void MoveLeftButton()
+	{
+		if (minButtonsNumber >= 2) 
+		{
+			minButtonsNumber -= 1;
+			tapping = true;
+		}
+	}
+	public void MoveRightButton()
+	{
+		if (minButtonsNumber <= buttons.Length - 3) 
+		{
+			minButtonsNumber += 1;
+			tapping = true;
+		}
+	}
 
 
 }

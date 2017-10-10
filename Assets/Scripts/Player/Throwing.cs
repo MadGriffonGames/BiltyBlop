@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Throwing : MonoBehaviour
 {
-    [SerializeField]
     public float speed;
+	public int damage;
 
     private Rigidbody2D myRigidbody;
 

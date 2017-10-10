@@ -10,11 +10,10 @@ public class BuyItemWindow : MonoBehaviour {
     [SerializeField]
     Button buyByCoins;
     [SerializeField]
-    Text coins;
-    [SerializeField]
-    Text crystals;
-    [SerializeField]
     Text itemCount; // 2/3 items
+	[SerializeField]
+	Text buyCount;
+
 
     const string itemsFolder = "Sprites/UI/InventoryUI/";
 
@@ -22,9 +21,7 @@ public class BuyItemWindow : MonoBehaviour {
 
     public void Update()
     {
-        itemCount.text = Inventory.Instance.GetItemCount(item).ToString() + "/" + Inventory.Instance.GetItemMaxCount(item).ToString();
-        coins.text = PlayerPrefs.GetInt("Coins").ToString();
-        crystals.text = PlayerPrefs.GetInt("Crystals").ToString();
+        itemCount.text = Inventory.Instance.GetItemCount(item).ToString();
     }
 
     public void SetBuyItemWindow(string itemName)
@@ -39,16 +36,40 @@ public class BuyItemWindow : MonoBehaviour {
                 break;
             }
         }
+		buyCount.text = "1";
         GetComponentsInChildren<Text>()[0].text = Inventory.Instance.GetItemShopName(itemName);
         GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + itemName);
 
         buyByCoins.GetComponent<Button>().onClick.RemoveAllListeners();
         buyByCrystals.GetComponent<Button>().onClick.RemoveAllListeners();
 
-        buyByCoins.GetComponentInChildren<Text>().text = Inventory.Instance.GetCoinCost(itemName).ToString();
+		buyByCoins.GetComponentInChildren<Text>().text = (Inventory.Instance.GetCoinCost(itemName) * int.Parse (buyCount.text)).ToString();
         buyByCoins.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, "Coins", Inventory.Instance.GetCoinCost(itemName)));
 
-        buyByCrystals.GetComponentInChildren<Text>().text = Inventory.Instance.GetCrystalCost(itemName).ToString();
+		buyByCrystals.GetComponentInChildren<Text>().text = (Inventory.Instance.GetCrystalCost(itemName) * int.Parse (buyCount.text)).ToString();
         buyByCrystals.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(itemName, 1, "Crystals", Inventory.Instance.GetCrystalCost(itemName)));
     }
+
+	public void PlusButton()
+	{
+		buyCount.text = (int.Parse (buyCount.text) + 1).ToString ();
+		UpdateValues ();
+	}
+
+	public void MinusButton()
+	{
+		buyCount.text = (int.Parse (buyCount.text) - 1).ToString ();
+		UpdateValues ();
+	}
+	private void UpdateValues()
+	{
+		buyByCoins.GetComponent<Button>().onClick.RemoveAllListeners();
+		buyByCrystals.GetComponent<Button>().onClick.RemoveAllListeners();
+
+		buyByCoins.GetComponentInChildren<Text>().text = (Inventory.Instance.GetCoinCost(item) * int.Parse (buyCount.text)).ToString();
+		buyByCrystals.GetComponentInChildren<Text>().text = (Inventory.Instance.GetCrystalCost(item) * int.Parse (buyCount.text)).ToString();
+
+		buyByCoins.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(item, int.Parse (buyCount.text), "Coins", Inventory.Instance.GetCoinCost(item)));
+		buyByCrystals.GetComponent<Button>().onClick.AddListener(() => Inventory.Instance.BuyItem(item, int.Parse (buyCount.text), "Crystals", Inventory.Instance.GetCrystalCost(item)));
+	}
 }

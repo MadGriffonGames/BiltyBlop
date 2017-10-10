@@ -21,6 +21,7 @@ public class SkinManager : MonoBehaviour
     [SerializeField]
 	public GameObject[] skinPrefabs; // all skin prefabs
 	public GameObject[] swordPrefabs; 
+	public GameObject[] throwPrefabs;
 
     private const string LOCKED = "Locked";
     private const string UNLOCKED = "Unlocked";
@@ -30,13 +31,20 @@ public class SkinManager : MonoBehaviour
 
     private const string SKIN_PREFABS_FOLDER = "Skins/";
 	private const string SWORDS_PREFAB_FOLDER = "Swords/";
+	private const string THROW_PREFAB_FOLDER = "Throw/";
 
     private void Start()
     {
         LoadSkinPrefabs();
 		LoadSwordsPrefabs ();
+		LoadThrowPrefabs ();
 
     }
+
+	private void LoadThrowPrefabs()
+	{
+		throwPrefabs = Resources.LoadAll<GameObject>(THROW_PREFAB_FOLDER);
+	}
 
     private void LoadSkinPrefabs()
     {
@@ -103,6 +111,31 @@ public class SkinManager : MonoBehaviour
 			return false;
 	} // buying SWORD
 
+	public bool BuyThrowByCrystals(int throwNumber)
+	{
+		if (PlayerPrefs.GetInt("Crystals") >= throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().crystalCost && throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().isLocked)
+		{
+			PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().crystalCost);
+			throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().UnlockThrow();
+			return true;
+		}
+		else
+			return false;
+	} // buying THROW
+
+	public bool BuyThrowByCoins(int throwNumber)
+	{
+		// PAYMENT LOGIC
+		if (PlayerPrefs.GetInt("Coins") >= throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().coinCost && throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().isLocked)
+		{
+			PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().coinCost);
+			throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().UnlockThrow();
+			return true;
+		}
+		else
+			return false;
+	} // buying THROW
+
     private void UnlockSkin(int skinNumber)
     {
         PlayerPrefs.SetString(skinPrefabs[skinNumber].name, UNLOCKED);
@@ -125,8 +158,15 @@ public class SkinManager : MonoBehaviour
 	{
 		PlayerPrefs.SetString("Sword", swordName);
 		PlayerPrefs.SetInt("SwordDisplayIndex", index);
-        PlayerPrefs.SetInt("SkinAttackStat", swordPrefabs[NumberOfSword(swordName)].GetComponent<SwordPrefab>().attackStat);
+        PlayerPrefs.SetInt("SwordAttackStat", swordPrefabs[NumberOfSword(swordName)].GetComponent<SwordPrefab>().attackStat);
     }
+
+	public void ApplyThrow(string throwName) // applying (equiping) "skinName" skin 
+	{
+		PlayerPrefs.SetString("Throw", throwName);
+		PlayerPrefs.SetFloat("ThrowSpeedStat", throwPrefabs[NumberOfThrow(throwName)].GetComponent<ThrowPrefab>().speedStat);
+		PlayerPrefs.SetInt("ThrowAttackStat", throwPrefabs[NumberOfThrow(throwName)].GetComponent<ThrowPrefab>().attackStat);
+	}
 
 	public int IndexOfSwordByOrderNumber(int orderNumber)
 	{
@@ -139,16 +179,17 @@ public class SkinManager : MonoBehaviour
 		}
 		return 0;
 	}
-	public string NameOfSwordPrefabBySwordOrder(int orderNumber)
+
+	public string SpriteOfThrowByOrderNumber(int orderNumber)
 	{
-		for (int i = 0; i < swordPrefabs.Length; i++)
+		for (int i = 0; i < throwPrefabs.Length; i++)
 		{
-			if (swordPrefabs[i].GetComponent<SwordPrefab>().orderNumber == orderNumber)
+			if (throwPrefabs[i].GetComponent<ThrowPrefab>().orderNumber == orderNumber)
 			{
-				return swordPrefabs[i].GetComponent<SwordPrefab>().name;
+				return throwPrefabs[i].name;
 			}
 		}
-		return "Classic";
+		return "ClassicThrow";
 	}
 
     public int NumberOfSkinPrefabBySkinOrder(int orderNumber)
@@ -162,6 +203,19 @@ public class SkinManager : MonoBehaviour
         }
         return 0;
     }
+
+	public int NumberOfThrowPrefabByOrder(int orderNumber)
+	{
+		for (int i = 0; i < throwPrefabs.Length; i++)
+		{
+			if (throwPrefabs[i].GetComponent<ThrowPrefab>().orderNumber == orderNumber)
+			{
+				return i;
+			}
+		}
+		return 0;
+	}
+
     public string NameOfSkinPrefabBySkinOrder(int orderNumber)
     {
         for (int i = 0; i < skinPrefabs.Length; i++)
@@ -173,6 +227,31 @@ public class SkinManager : MonoBehaviour
         }
         return "Classic";
     }
+
+	public string NameOfSwordPrefabBySwordOrder(int orderNumber)
+	{
+		for (int i = 0; i < swordPrefabs.Length; i++)
+		{
+			if (swordPrefabs[i].GetComponent<SwordPrefab>().orderNumber == orderNumber)
+			{
+				return swordPrefabs[i].GetComponent<SwordPrefab>().name;
+			}
+		}
+		return "Classic";
+	}
+
+	public string NameOfThrowPrefabBySwordOrder(int orderNumber)
+	{
+		for (int i = 0; i < throwPrefabs.Length; i++)
+		{
+			if (throwPrefabs[i].GetComponent<ThrowPrefab>().orderNumber == orderNumber)
+			{
+				return throwPrefabs[i].GetComponent<ThrowPrefab>().name;
+			}
+		}
+		return "Classic";
+	}
+
     public int NumberOfSkin(string skinName)
     {
         for (int i = 0; i < skinPrefabs.Length; i++)
@@ -192,4 +271,13 @@ public class SkinManager : MonoBehaviour
         }
         return 0;
     }
+	int NumberOfThrow(string throwName)
+	{
+		for (int i = 0; i < throwPrefabs.Length; i++)
+		{
+			if (throwPrefabs[i].name == throwName)
+				return i;
+		}
+		return 0;
+	}
 }

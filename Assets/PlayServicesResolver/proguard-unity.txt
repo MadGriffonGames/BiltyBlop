@@ -55,14 +55,6 @@
 -dontwarn com.startapp.**
 -keepattributes Exceptions, InnerClasses, Signature, Deprecated, SourceFile, LineNumberTable, *Annotation*, EnclosingMethod
 
-# Flurry
--keep class com.flurry.** { *; }
--dontwarn com.flurry.**
--keepattributes *Annotation*,EnclosingMethod,Signature
--keepclasseswithmembers class * {
-  public <init>(android.content.Context, android.util.AttributeSet, int);
-}
-
 # Avocarrot
 -keep class com.avocarrot.** { *; }
 -keepclassmembers class com.avocarrot.** { *; }
@@ -129,32 +121,6 @@
 -dontwarn com.squareup.okhttp.**
 -keep class com.moat.** {*;}
 -dontwarn com.moat.**
-
-# MMdeia
--keepclassmembers class com.millennialmedia** {public *;}
--keep class com.millennialmedia**
--dontwarn com.millennialmedia.**
-
-# Ogury
--dontwarn io.presage.**
--dontnote io.presage.**
--dontwarn shared_presage.**
--dontwarn org.codehaus.**
--keepattributes Signature
--keep class shared_presage.** { *; }
--keep class io.presage.** { *; }
--keepclassmembers class io.presage.** { *; }
--keepattributes *Annotation*
--keepattributes JavascriptInterface
--keepclassmembers class * {
-  @android.webkit.JavascriptInterface <methods>;
-}
--dontnote okhttp3.**
--dontnote okio.**
--dontwarn okhttp3.**
--dontwarn okio.**
--dontwarn javax.annotation.Nullable
--dontwarn javax.annotation.ParametersAreNonnullByDefault
 
 -dontnote sun.misc.Unsafe
 -dontnote android.net.http.*

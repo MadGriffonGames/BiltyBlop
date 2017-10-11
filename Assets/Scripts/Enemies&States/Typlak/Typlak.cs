@@ -11,20 +11,23 @@ public class Typlak : MovingMeleeEnemy
     bool damaged = false;
     public bool walk = false;
 
+    [SerializeField]
+    string typlakType;
+
     List<Slot> slots;
 
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
-        slots = armature.armature.GetSlots();
-        SetIndexes();
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);        
     }
 
     public override void Start()
     {
         base.Start();
+        slots = armature.armature.GetSlots();
+        SetIndexes();
         isAttacking = false;
         ChangeState(new TyplakPatrolState());
     }
@@ -94,9 +97,7 @@ public class Typlak : MovingMeleeEnemy
             ChangeState(new TyplakPatrolState());
 			Health = maxHealth;
 			SetHealthbar();
-        }
-
-        
+        }        
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -117,18 +118,18 @@ public class Typlak : MovingMeleeEnemy
         if (!walk)
         {
             walk = true;
-            SetIndexes();
             armature.animation.FadeIn("walk1_slow", -1, -1);
-            SetIndexes();
         }
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
 
     public void SetIndexes()
     {
+        int tmp = UnityEngine.Random.Range(0, 2);
         foreach (Slot slot in slots)
         {
-            slot.displayIndex = 1;
+            slot.displayIndex = tmp;
+            slot.displayController = "none";
         }
     }
 }

@@ -127,7 +127,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
      * Interstitial callback handlers
      */
 
-    public void onInterstitialLoaded()
+    public void onInterstitialLoaded(bool var)
     {
         print("Interstitial loaded");
     }
@@ -172,7 +172,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
         print("Video shown");
     }
 
-    public void onRewardedVideoClosed()
+    public void onRewardedVideoClosed(bool var)
     {
         print("Video closed");
     }

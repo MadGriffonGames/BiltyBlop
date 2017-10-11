@@ -25,6 +25,7 @@ public class DailyReward : RewardedChest
     [SerializeField]
     Text timer;
 
+
     Image chestImage;
     bool isSpined = false;
     Quaternion rotationVector;

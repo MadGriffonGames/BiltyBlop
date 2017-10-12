@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ISnowTyplakState : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public interface ISnowTyplakState 
+{
+    void Execute();
+    void Enter(SnowTyplak enemy);
+    void Exit();
+    void OnCollisionEnter2D(Collision2D other);
 }

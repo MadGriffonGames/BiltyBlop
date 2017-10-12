@@ -122,69 +122,27 @@ public class RewardedChest : MonoBehaviour
         switch (itemsStorage[random])
         {
             case 0:
-                if (Inventory.Instance.GetItemCount(Inventory.HEAL) < Inventory.Instance.GetItemMaxCount(Inventory.HEAL))
-                {
-                    AddItem(Inventory.HEAL, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
-                }
-                else
-                {
-                    Randomize();
-                }
+                AddItem(Inventory.HEAL, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
                 break;
 
             case 1:
-                if (Inventory.Instance.GetItemCount(Inventory.AMMO) < Inventory.Instance.GetItemMaxCount(Inventory.AMMO))
-                {
-                    AddItem(Inventory.AMMO, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
-                }
-                else
-                {
-                    Randomize();
-                }
+                AddItem(Inventory.AMMO, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
                 break;
 
             case 2:
-                if (Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS) < Inventory.Instance.GetItemMaxCount(Inventory.IMMORTAL_BONUS))
-                {
-                    AddItem(Inventory.IMMORTAL_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
-                }
-                else
-                {
-                    Randomize();
-                }
+                AddItem(Inventory.IMMORTAL_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
                 break;
 
             case 3:
-                if (Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS) < Inventory.Instance.GetItemMaxCount(Inventory.DAMAGE_BONUS))
-                {
-                    AddItem(Inventory.DAMAGE_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
-                }
-                else
-                {
-                    Randomize();
-                }
+                AddItem(Inventory.DAMAGE_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
                 break;
 
             case 4:
-                if (Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS) < Inventory.Instance.GetItemMaxCount(Inventory.SPEED_BONUS))
-                {
-                    AddItem(Inventory.SPEED_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
-                }
-                else
-                {
-                    Randomize();
-                }
+                AddItem(Inventory.SPEED_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
                 break;
 
             case 5:
-                if (Inventory.Instance.GetItemCount(Inventory.TIME_BONUS) < Inventory.Instance.GetItemMaxCount(Inventory.TIME_BONUS))
-                {
-                    AddItem(Inventory.TIME_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
-                }
-                else
-                {
-                    Randomize();
-                }
+                AddItem(Inventory.TIME_BONUS, itemsStorage[random] + 6);//6 - позиция первого итема в массиве lootArray
                 break;
 
             default:

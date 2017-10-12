@@ -180,5 +180,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    public static void AddCoins(int value)
+    {
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
+    }
+
+    public static void AddCrystals(int value)
+    {
+        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
+    }
 }

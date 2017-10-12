@@ -16,7 +16,7 @@ public class OgreMeleeState : IOgreState
     public void Enter(Ogre enemy)
     {
         this.enemy = enemy;
-        enemy.armature.animation.timeScale = 1.5f;
+        enemy.armature.animation.timeScale = 1.8f;
 
     }
 
@@ -49,6 +49,7 @@ public class OgreMeleeState : IOgreState
     {
         if (!preattack)
         {
+            enemy.armature.animation.timeScale = 1.8f;
             canExit = false;
             enemy.isAttacking = true;
             enemy.armature.animation.FadeIn("pre_atk", -1, 1);

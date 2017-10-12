@@ -5,10 +5,20 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class DailyReward : RewardedChest
+public class DailyReward : MonoBehaviour
 {
     [SerializeField]
     bool tmp;
+
+    [SerializeField]
+    GameObject rewardWindow;
+    [SerializeField]
+    GameObject leftButton;
+    [SerializeField]
+    GameObject rightButton;
+
+    [SerializeField]
+    DailyRewardSlot[] dailySlots;
  
     [SerializeField]
     Image lightCircle;
@@ -30,27 +40,48 @@ public class DailyReward : RewardedChest
     Quaternion rotationVector;
     Animator lootAnimator;
 
+    int rewardDay;
     bool is24hoursPast;
     bool isTimerTick;
     DateTime lastOpenDate;
     TimeSpan span;
     TimeSpan hours24;
 
+    struct Reward
+    {
+        string type;
+        int rewardValue;
+
+        void GiveReward()
+        {
+
+        }
+    }
+
+    Reward myReward;
+
     private void Start()
     {
-        base.Start();
+        SetRewardWindow();
 
         isTimerTick = false;
         hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);// 24hours in timespan format
 
         chestImage = chest.GetComponent<Image>();
-        lootAnimator = loot.gameObject.GetComponent<Animator>();
+
+        if (!PlayerPrefs.HasKey("RewardDay"))
+        {
+            PlayerPrefs.SetInt("RewardDay", 0);
+        }
 
         if (!PlayerPrefs.HasKey("LastOpenDate"))
         {
             PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
         }
+
         lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
+
+        rewardDay = PlayerPrefs.GetInt("RewardDay");
 
         is24hoursPast = NetworkTime.Check24hours(lastOpenDate);
 
@@ -85,16 +116,6 @@ public class DailyReward : RewardedChest
             lightCircle.rectTransform.rotation = rotationVector;
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched)
-        {
-            AdsManager.Instance.isRewardVideoWatched = false;
-            PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
-            lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
-            GiveLoot();
-
-            AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
-        }
-
         if (tmp)
         {
             PlayerPrefs.SetString("LastOpenDate", "7/4/2016 8:30:52 AM");
@@ -111,41 +132,73 @@ public class DailyReward : RewardedChest
                 ActivateChest();
             }
         }
+
+        if (AdsManager.Instance.isRewardVideoWatched)
+        {
+            AdsManager.Instance.isRewardVideoWatched = false;
+
+
+        }
+    }
+
+    void SetRewardWindow()
+    {
+        leftButton.GetComponent<Button>().enabled = false;
+        Color tmp = leftButton.GetComponent<Image>().color;
+        tmp -= new Color(0.05f, 0.05f, 0.05f);
+        leftButton.GetComponent<Image>().color = tmp;
+
+        rewardWindow.SetActive(false);
     }
 
     public void OpenChestButton()
     {
-
         if (NetworkTime.Check24hours(lastOpenDate))
         {
-#if UNITY_EDITOR
-            AdsManager.Instance.isRewardVideoWatched = true;
+            chestImage.sprite = chestOpen;
+            lightCircle.gameObject.SetActive(false);
+            isSpined = false;
+            activateButton.SetActive(false);
+            span = lastOpenDate - NetworkTime.GetNetworkTime();
+            isTimerTick = true;
+            timer.gameObject.SetActive(true);
 
-#elif UNITY_ANDROID
-        AdsManager.Instance.ShowRewardedVideo();//check if ad was showed in update()
+            chestFade.SetActive(true);
 
-#elif UNITY_IOS
-        AdsManager.Instance.ShowRewardedVideo();//check if ad was showed in update()
+            rewardDay++;
+            PlayerPrefs.SetInt("RewardDay", rewardDay);
 
-#endif
+            int i;
+
+            if (rewardDay <= 5)
+            {
+                i = 1;
+            }
+            else
+            {
+                i = 6;
+            }
+
+            for (int j = 0; j < dailySlots.Length; j++)
+            {
+                dailySlots[j].dayNum = i;
+                dailySlots[j].SetReward();
+                i++;
+            }      
+
+            rewardWindow.SetActive(true);
+
+            PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
+            lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
+
+            AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
         }
     }
 
-    public void GiveLoot()
-    {
-        Randomize();
-        chestImage.sprite = chestOpen;
-        chestFade.SetActive(true);
-        loot.gameObject.SetActive(true);
-        activateButton.SetActive(false);
-        isTimerTick = true;
-        timer.gameObject.SetActive(true);
-    }
-
-    public void CollectLoot()
+    public void ClaimButton()
     {
         chestFade.SetActive(false);
-        loot.gameObject.SetActive(false);
+        rewardWindow.SetActive(false);
     }
 
     void ActivateChest()
@@ -159,16 +212,47 @@ public class DailyReward : RewardedChest
         timer.gameObject.SetActive(false);
     }
 
-    void AddCoins(int value)
+    public void ButtonLeft()
     {
-        loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
-        GameManager.collectedCoins += value;
-        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
+        leftButton.GetComponent<Button>().enabled = false;
+        Color tmp = leftButton.GetComponent<Image>().color;
+        tmp -= new Color(0.05f, 0.05f, 0.05f);
+        leftButton.GetComponent<Image>().color = tmp;
+
+        rightButton.GetComponent<Button>().enabled = true;
+        Color tmp1 = rightButton.GetComponent<Image>().color;
+        tmp1 += new Color(0.05f, 0.05f, 0.05f);
+        rightButton.GetComponent<Image>().color = tmp1;
+
+        int i = 1;
+
+        for (int j = 0; j < dailySlots.Length; j++)
+        {
+            dailySlots[j].dayNum = i;
+            dailySlots[j].SetReward();
+            i++;
+        }
     }
 
-    void AddCrystals(int value)
+    public void ButtonRight()
     {
-        loot.gameObject.GetComponentInChildren<Text>().text = value.ToString();
-        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
+        rightButton.GetComponent<Button>().enabled = false;
+        Color tmp = rightButton.GetComponent<Image>().color;
+        tmp -= new Color(0.05f, 0.05f, 0.05f);
+        rightButton.GetComponent<Image>().color = tmp;
+
+        leftButton.GetComponent<Button>().enabled = true;
+        Color tmp1 = leftButton.GetComponent<Image>().color;
+        tmp1 += new Color(0.05f, 0.05f, 0.05f);
+        leftButton.GetComponent<Image>().color = tmp1;
+
+        int i = 6;
+
+        for (int j = 0; j < dailySlots.Length; j++)
+        {
+            dailySlots[j].dayNum = i;
+            dailySlots[j].SetReward();
+            i++;
+        }
     }
 }

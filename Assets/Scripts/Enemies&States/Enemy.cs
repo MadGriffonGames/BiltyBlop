@@ -61,12 +61,11 @@ public class Enemy : MonoBehaviour
 
     public GameObject Target { get; set; }
 
-	float firstHBScaleX;
+	public float firstHBScaleX;
 
     private void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
-		firstHBScaleX = firstHBScaleX = healthbar.localScale.x;	
 
     }
 
@@ -75,7 +74,7 @@ public class Enemy : MonoBehaviour
     {
 		health = maxHealth;
 		firstHBScaleX = healthbar.localScale.x;
-		if (gameObject.transform.localScale.x < 0) 
+        if (gameObject.transform.localScale.x < 0) 
 		{
 			ChangeHealtBarDirection ();
 		}
@@ -108,19 +107,24 @@ public class Enemy : MonoBehaviour
 
     public void SetHealthbar()
     {
+        if (health < 0)
+        {
+            health = 0;
+        }
+        healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
+
 		if (health > 0)
 		{
 			healthbar.localScale = new Vector3(firstHBScaleX * health / maxHealth,
-				healthbar.localScale.y,
-				healthbar.localScale.z);
-			healthBarNew.GetComponentInChildren<TextMesh> ().text = health.ToString () + "/" + maxHealth.ToString ();
-		} else
-		{
-			healthbar.localScale = new Vector3(0,
-				healthbar.localScale.y,
-				healthbar.localScale.z);
-			healthBarNew.GetComponentInChildren<TextMesh> ().text = "0/" + maxHealth.ToString ();
+				                               healthbar.localScale.y,
+				                               healthbar.localScale.z);
 		}
+        else
+        {
+            healthbar.localScale = new Vector3(firstHBScaleX * 0,
+                                               healthbar.localScale.y,
+                                               healthbar.localScale.z);
+        }
     }
 
     private void OnBecameVisible()
@@ -160,7 +164,6 @@ public class Enemy : MonoBehaviour
             int spawnCount = UnityEngine.Random.Range(min, max);
             spawnCount = coinPackSize > spawnCount ? spawnCount : coinPackSize;
             coinPackSize -= spawnCount;
-
             for (int i = 0; i < spawnCount; i++)
             {
                 coins[i].SetActive(true);

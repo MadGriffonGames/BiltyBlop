@@ -12,6 +12,8 @@ public class TrollPatrolState : ITrollState
     {
         this.enemy = enemy;
         patrolDuration = enemy.patrolDuration;
+
+        enemy.armature.animation.timeScale = 1;
     }
 
     public void Execute()

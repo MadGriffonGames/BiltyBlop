@@ -41,6 +41,7 @@ public class TrollRangeState : ITrollState
         {
             enemy.Target = null;
             enemy.ChangeDirection();
+            enemy.Target = null;
         }
     }
 }

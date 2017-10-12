@@ -43,7 +43,7 @@ public class PostprocessBuildPlayerAppMetrica
 #if UNITY_5
         var expectedTarget = BuildTarget.iOS;
 #else
-		var expectedTarget = BuildTarget.iPhone;
+		var expectedTarget = BuildTarget.iOS;
 #endif
         if (buildTarget == expectedTarget) {
             var projectPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";

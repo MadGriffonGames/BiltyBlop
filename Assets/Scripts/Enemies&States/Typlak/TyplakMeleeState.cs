@@ -49,19 +49,21 @@ public class TyplakMeleeState : MonoBehaviour ,ITyplakState
         {
             canExit = false;
             enemy.isAttacking = true;
-            enemy.armature.animation.FadeIn("preattack", -1, 1);
+            enemy.armature.animation.FadeIn("atk1_pre", -1, 1);
+            enemy.SetIndexes();
             preattack = true;
         }
-        if (enemy.armature.animation.lastAnimationName == "preattack" && enemy.armature.animation.isCompleted)
+        if (enemy.armature.animation.lastAnimationName == "atk1_pre" && enemy.armature.animation.isCompleted)
         {
-            enemy.armature.animation.FadeIn("Attack", -1, 1);
+            enemy.armature.animation.FadeIn("atk1", -1, 1);
+            enemy.SetIndexes();
             timer = Time.time;
         }
 
-        if (enemy.armature.animation.lastAnimationName == "Attack" && Time.time - timer > delay)
+        if (enemy.armature.animation.lastAnimationName == "atk1" && Time.time - timer > delay)
             enemy.AttackCollider.enabled = true;
 
-        if (enemy.armature.animation.lastAnimationName == "Attack" && enemy.armature.animation.isCompleted)
+        if (enemy.armature.animation.lastAnimationName == "atk1" && enemy.armature.animation.isCompleted)
         {
             enemy.AttackCollider.enabled = false;
             enemy.isAttacking = false;

@@ -31,6 +31,8 @@ public class AdsChest : MonoBehaviour
     Sprite[] lootArray;
     [SerializeField]
     public SpriteRenderer loot;
+    [SerializeField]
+    Sprite openChest;
 
     public int[] itemsDropRate;
     public int[] itemsStorage;
@@ -40,25 +42,52 @@ public class AdsChest : MonoBehaviour
         itemsDropRate = new int[ITEMS_COUNT];
         itemsStorage = new int[100];
 
+        if (!PlayerPrefs.HasKey("LevelAdsChest"))
+        {
+            PlayerPrefs.SetInt("LevelAdsChest", 0);
+        }
+
         SetItems();
+    }
+
+    private void Update()
+    {
+        if (AdsManager.Instance.isRewardVideoWatched)
+        {
+            AdsManager.Instance.isRewardVideoWatched = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+
+            Randomize();
+            loot.gameObject.SetActive(true);          
+        }
     }
 
     public void Randomize()
     {
-        int random = UnityEngine.Random.Range(1, 100);
+        if (PlayerPrefs.GetInt("LevelAdsChest") == 0)
+        {
+            PlayerPrefs.SetInt("LevelAdsChest", 1);
 
-        if (random <= COINS_RANGE)
-        {
-            RandomizeCoins();
+            loot.sprite = lootArray[1];
+            AddCrystals(4);
         }
-        if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
+        else
         {
-            RandomizeCrystals();
-        }
-        if (random > CRYSTALS_RANGE && random <= ITEMS_RANGE)
-        {
-            RandomizeItems();
-        }
+            int random = UnityEngine.Random.Range(1, 100);
+
+            if (random <= COINS_RANGE)
+            {
+                RandomizeCoins();
+            }
+            if (random > COINS_RANGE && random <= CRYSTALS_RANGE)
+            {
+                RandomizeCrystals();
+            }
+            if (random > CRYSTALS_RANGE && random <= ITEMS_RANGE)
+            {
+                RandomizeItems();
+            }
+        }     
     }
 
     void RandomizeCoins()
@@ -200,7 +229,13 @@ public class AdsChest : MonoBehaviour
     {
         other.CompareTag("Sword");
         {
-            Randomize();
+            GetComponent<SpriteRenderer>().sprite = openChest;
+
+#if UNITY_EDITOR
+            AdsManager.Instance.isRewardVideoWatched = true;
+#elif UNITY_ANDROID || UNITY_IOS
+            AdsManager.Instance.ShowRewardedVideo();
+#endif
         }
     }
 }

@@ -111,7 +111,8 @@ public class DailyReward : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("LastOpenDate"))
         {
-            PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
+            PlayerPrefs.SetString("LastOpenDate", "7/4/2016 8:30:52 AM");
+            lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
         }
 
         lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));

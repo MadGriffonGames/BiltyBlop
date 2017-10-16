@@ -101,6 +101,8 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 0)         // Get button has never been pressed
         {
+            Debug.Log(achievementName);
+            Debug.Log("never pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[0];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue0");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue0"));
@@ -116,6 +118,8 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 2)         // Get butten has been pressed twice
         {
+            Debug.Log(achievementName);
+            Debug.Log("twice pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[2];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue2");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
@@ -175,6 +179,24 @@ public class AchievementBox : MonoBehaviour {
         //else
         //    doneImg.SetActive(false);
 
+        if (currentValue < targetValue0)
+        {
+            inProgress.gameObject.SetActive(true);
+        }
+
+        if (currentValue < targetValue1 && currentValue >= targetValue0)
+        {
+            if (achievementName == "Treasure Hunter")
+            {
+                Debug.Log("inProgress");
+            }
+            inProgress.gameObject.SetActive(true);
+        }
+
+        if (currentValue < targetValue2 && currentValue >= targetValue1)
+        {
+            inProgress.gameObject.SetActive(true);
+        }
 
 
             if (currentValue >= targetValue0 && PlayerPrefs.GetInt(achievementName + btn) == 0)

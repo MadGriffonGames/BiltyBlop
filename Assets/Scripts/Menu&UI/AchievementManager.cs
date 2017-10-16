@@ -32,7 +32,7 @@ public class AchievementManager : MonoBehaviour {
     public Achieve treasureHunter;
     public Achieve idiot;
     public LevelAchieve swimmer;
-    public Achieve torchCollector;
+    public LevelAchieve torchCollector;
     public Achieve secretRoomer;
     int[] mobReward;
 
@@ -64,7 +64,7 @@ public class AchievementManager : MonoBehaviour {
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
 
         treasureHunterReward = new int[] { 10, 100, 500 };
-        treasureHunterValue = new int[] { 1, 10, 100 };
+        treasureHunterValue = new int[] { 3, 10, 15 };
 
         idiotReward = new int[] { -5, -10, -15 };
         idiotTargerValue = new int[] { 1, 5, 10 };
@@ -72,19 +72,19 @@ public class AchievementManager : MonoBehaviour {
         torchCollectorReward = new int[] { 100, 100, 100 };
         torchCollectorTargetValue = new int[] { 1, 2, 3 };
 
-        secretRoomerReward = new int[] { 200, 400, 600 };
-        secretRoomerTargetValue = new int[] { 5, 10, 15 };
+        secretRoomerReward = new int[] { 250, 450, 800 };
+        secretRoomerTargetValue = new int[] { 1, 5, 10 };
 
 
 
         //ResetStat("Mob killer test8");
         //ResetStat("DiverTest");
+        //ResetStat("Secret Rush test");
         mobKiller = new Achieve("Mob killer test8", tripleCoins, mobKillerTargetValue, mobKillerReward);
-        treasureHunter = new Achieve("Treasure Hunter", tripleCoins, treasureHunterValue, treasureHunterReward);
+        treasureHunter = new Achieve("Treasure Hunter Test", tripleCoins, treasureHunterValue, treasureHunterReward);
         swimmer = new LevelAchieve("DiverTest", "Coins", 5, 500);
-        //idiot = new Achieve("Idiot blyat?", "Coins", 1, 10, false);
-        //torchCollector = new Achieve("No light on level anymore.", "Coins", torchCollectorTargetValue, torchCollectorReward, false);
-        //secretRoomer = new Achieve("Secret Rush test", "secretRoomerPref", "Coins", secretRoomerTargetValue, secretRoomerReward, true);
+        torchCollector = new LevelAchieve("Torch Collector Test", "Coins", 1, 500);
+        secretRoomer = new Achieve("Secret Rush test", tripleCoins, secretRoomerTargetValue, secretRoomerReward);
     }
 
     public void CheckAchieve(Achieve achieve)

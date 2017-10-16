@@ -29,6 +29,30 @@ public class AchievementBoxOneLevel : MonoBehaviour
     [SerializeField]
     RectTransform status;
 
+    [SerializeField]
+    GameObject description;
+
+    [SerializeField]
+    string descriptionText;
+
+    [SerializeField]
+    GameObject lootVolume;
+
+    [SerializeField]
+    GameObject fadeButton;
+
+    [SerializeField]
+    GameObject rewardFade;
+
+    [SerializeField]
+    GameObject loot;
+
+    [SerializeField]
+    Sprite coins;
+
+    [SerializeField]
+    Sprite crystals;
+
 
     int gotReward;
     const string btn = "btn";
@@ -52,6 +76,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
         {
             doneImg.gameObject.SetActive(true);
         }
+
+        description.gameObject.GetComponent<Text>().text = descriptionText;
 
 
         GetInfo();
@@ -105,6 +131,11 @@ public class AchievementBoxOneLevel : MonoBehaviour
         PlayerPrefs.SetInt(achievementName + medal, 1);
         gold.gameObject.SetActive(true);
         doneImg.gameObject.SetActive(true);
+        if (PlayerPrefs.GetString(achievementName + "rewardType") == "Coins")
+        {
+            Debug.Log(PlayerPrefs.GetString(achievementName + "rewardType"));
+            StartCoroutine(ShowCoinLoot());
+        }
     }
 
     void UpdateStatus(int currentValue, int currenTargetValue)
@@ -118,5 +149,15 @@ public class AchievementBoxOneLevel : MonoBehaviour
             newX = (float)currentValue / (float)currenTargetValue;
         }
         status.localScale = new Vector3(newX, status.localScale.y, status.localScale.z);
+    }
+
+    IEnumerator ShowCoinLoot()
+    {
+        lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
+        rewardFade.gameObject.SetActive(true);
+        loot.gameObject.GetComponent<Image>().sprite = coins;
+        loot.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        fadeButton.SetActive(true);
     }
 }

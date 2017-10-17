@@ -47,13 +47,15 @@ public class GameManager : MonoBehaviour
 	{
 		#if UNITY_EDITOR
 			Application.targetFrameRate = 1000;
-		#elif UNITY_IOS
+#elif UNITY_IOS
 			Application.targetFrameRate = 60;
-		#elif UNITY_ANDROID
+#elif UNITY_ANDROID
 			Application.targetFrameRate = 60;
-		#endif
+#endif
 
-	}
+        Instantiate(achievementManager);
+
+    }
 
     void Start () 
 	{
@@ -71,7 +73,6 @@ public class GameManager : MonoBehaviour
 
         Instantiate(adsManager);
         Instantiate(metricaManager);
-        Instantiate(achievementManager);
 
         CheckLastUnlockedLevel();
 
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
         if (torches == 0 && isBirded == false)
         {
             ThrowBird();
-            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.torchCollector);
+            AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.torchCollector);
         }
     }
 
@@ -131,6 +132,7 @@ public class GameManager : MonoBehaviour
         {
             collectedCoins = 0;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
             PlayerPrefs.SetInt("Coins", collectedCoins);
+            PlayerPrefs.SetInt("Millionare Test", collectedCoins);
         }
         else
         {

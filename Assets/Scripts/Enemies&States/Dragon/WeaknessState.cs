@@ -45,6 +45,7 @@ public class WeaknessState : IDragonState
                 enemy.armature.animation.timeScale = 0.9f;
                 CameraEffect.Shake(0.2f, 1f);
                 enemy.armature.animation.FadeIn("DEATH", -1, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBoss);
                 GameManager.CollectedCoins += 200;
                 GameManager.lvlCollectedCoins += 200;
             }

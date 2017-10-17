@@ -41,6 +41,7 @@ public class Coin : InteractiveObject
             MyAnimator.SetTrigger("collected");
             GameManager.CollectedCoins++;
             GameManager.lvlCollectedCoins++;
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.millionare);
             SoundManager.PlayPitchedSound("coin_collect2");
         }   
     }

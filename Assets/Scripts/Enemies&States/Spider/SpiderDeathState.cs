@@ -24,6 +24,7 @@ class SpiderDeathState : MonoBehaviour, ISpiderState
             Destroy(enemy.enemyDamageRoll);
             Destroy(enemy.enemyDamageStone);
             deadAnimated = true;
+            AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.spiderKiller);
         }
     }
 

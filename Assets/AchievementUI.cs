@@ -8,6 +8,13 @@ public class AchievementUI : MonoBehaviour {
 
     [SerializeField]
     public GameObject achievementBox;
+    [SerializeField]
+    GameObject gold;
+    [SerializeField]
+    GameObject silver;
+    [SerializeField]
+    GameObject bronze;
+
     bool timeToFade = false;
     bool fading = true;
     bool fadingOut = false;
@@ -45,6 +52,22 @@ public class AchievementUI : MonoBehaviour {
     {
         achievementBox.gameObject.GetComponentInChildren<Text>().text = name;
         achievementBox.gameObject.SetActive(true);
+        if (PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue0"))
+        {
+            bronze.gameObject.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue1"))
+        {
+            bronze.gameObject.SetActive(false);
+            silver.gameObject.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue2") || PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue"))
+        {
+            silver.gameObject.SetActive(false);
+            gold.gameObject.SetActive(true);
+        }
         fading = true;
         timeToFade = true;
     }

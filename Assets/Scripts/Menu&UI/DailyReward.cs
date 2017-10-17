@@ -39,6 +39,7 @@ public class DailyReward : MonoBehaviour
     [SerializeField]
     Text timer;
 
+
     Image chestImage;
     bool isSpined = false;
     Quaternion rotationVector;

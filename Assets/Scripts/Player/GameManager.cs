@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
         {
             collectedCoins = 0;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
             PlayerPrefs.SetInt("Coins", collectedCoins);
+            PlayerPrefs.SetInt("Millionare Test", collectedCoins);
         }
         else
         {

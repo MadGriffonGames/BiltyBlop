@@ -63,9 +63,8 @@ public class AchievementUI : MonoBehaviour {
             silver.gameObject.SetActive(true);
         }
 
-        if (PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue2"))
+        if (PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue2") || PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue"))
         {
-            bronze.gameObject.SetActive(false);
             silver.gameObject.SetActive(false);
             gold.gameObject.SetActive(true);
         }

@@ -66,9 +66,9 @@ public class Inventory : MonoBehaviour
     {
             if (moneyType == "Coins")
             {
-                if (PlayerPrefs.GetInt("Coins") >= price)
+			if (PlayerPrefs.GetInt("Coins") >= price * itemCount)
                 {
-                    PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price);
+				PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price * itemCount);
                     AddItem(itemName, itemCount);
 
                     AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
@@ -76,9 +76,9 @@ public class Inventory : MonoBehaviour
             }
             if (moneyType == "Crystals")
             {
-                if (PlayerPrefs.GetInt("Crystals") >= price)
+			if (PlayerPrefs.GetInt("Crystals") >= price * itemCount)
                 {
-                    PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price);
+				PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price * itemCount);
                     AddItem(itemName, itemCount);
 
                     AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
@@ -108,12 +108,11 @@ public class Inventory : MonoBehaviour
             PlayerPrefs.SetInt(itemName + COUNT, itemCount);
             UpdateItemValue(itemName);
         }
-        else if (PlayerPrefs.GetInt(itemName + COUNT) + itemCount <= PlayerPrefs.GetInt(MAX + itemName))
+        else
         {
-            
-        }
-        PlayerPrefs.SetInt(itemName + COUNT, PlayerPrefs.GetInt(itemName + COUNT) + itemCount);
-        UpdateItemValue(itemName);
+			PlayerPrefs.SetInt(itemName + COUNT, PlayerPrefs.GetInt(itemName + COUNT) + itemCount);
+			UpdateItemValue(itemName);
+        }  
     }
 
     public void RemoveItem(string itemName)

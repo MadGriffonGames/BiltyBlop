@@ -40,7 +40,10 @@ public class ShamanFireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Player.Instance.InvertControls();
+            if (!Player.Instance.isRewinding)
+            {
+                Player.Instance.InvertControls();
+            }
             Destroy(this.gameObject);
         }
     }

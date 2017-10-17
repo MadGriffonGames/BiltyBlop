@@ -514,6 +514,7 @@ public class Player : Character
     void PlayTimeState(PlayerTimeState playerTimeState)
     {
         this.gameObject.transform.position = playerTimeState.position;
+
         if (currentState.GetType() != playerTimeState.animationState.GetType())
         {
             if (playerTimeState.animationState.GetType() == new PlayerRunState().GetType())
@@ -938,8 +939,13 @@ public class Player : Character
         if (!invertedControls)
         {
             invertedControls = true;
+            CameraEffect.changeColors = true;
+            Time.timeScale = 0.75f;
             yield return new WaitForSeconds(5);
             invertedControls = false;
+            Time.timeScale = 1f;
+            CameraEffect.changeColors = false;
+            FindObjectOfType<Camera>().GetComponent<CameraEffect>().ResetColors();
         }        
     }
 

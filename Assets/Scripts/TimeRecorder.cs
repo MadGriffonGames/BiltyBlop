@@ -48,7 +48,7 @@ public class TimeRecorder : MonoBehaviour
         }
         else if (!isRecording)
         {
-            Player.Instance.SetRecording(states);
+            Player.Instance.SetRecording(states);           
         }
     }
 }

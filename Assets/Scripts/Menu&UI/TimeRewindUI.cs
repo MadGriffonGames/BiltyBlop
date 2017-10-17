@@ -82,6 +82,7 @@ public class TimeRewindUI : MonoBehaviour
             Player.Instance.ButtonMove(0);
             Player.Instance.myRigidbody.velocity = new Vector2(0, 0);
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraEffect>().StartBlur(0.8f);
+            FindObjectOfType<Camera>().GetComponent<CameraEffect>().SwitchOnRewindEffect(true);
             Time.timeScale = 2;
 
             AppMetrica.Instance.ReportEvent("#REWIND_TIME Rewind time used in " + MetricaManager.Instance.currentLevel);

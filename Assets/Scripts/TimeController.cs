@@ -45,6 +45,7 @@ public class TimeController : MonoBehaviour
         isForward = true;
         TimeRecorder.isRecording = true;
         Player.Instance.isRewinding = false;
+        FindObjectOfType<Camera>().GetComponent<CameraEffect>().SwitchOnRewindEffect(false);
 
         Player.Instance.ChangeState(new PlayerIdleState());
         Player.Instance.myRigidbody.bodyType = RigidbodyType2D.Dynamic;

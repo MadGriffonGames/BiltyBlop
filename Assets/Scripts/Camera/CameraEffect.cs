@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class CameraEffect : MonoBehaviour
 {
@@ -12,11 +13,20 @@ public class CameraEffect : MonoBehaviour
     Color origColor;
     bool hide = false;
 
+    public static bool changeColors;
+    PostProcessingProfile myProfile;
+    float hueShift = 0;
+    ColorGradingModel.Settings tmp;
+
     void Start()
     {
         percentComplete = 1;
         position = GetComponent<Transform>();
         blood = UI.Instance.transform.Find("Blood").gameObject;
+        myProfile = GetComponent<PostProcessingBehaviour>().profile;
+        myProfile.colorGrading.enabled = false;
+        myProfile.chromaticAberration.enabled = false;
+        myProfile.grain.enabled = false;
     }
 
     public static void Shake(float duration, float power)
@@ -89,6 +99,32 @@ public class CameraEffect : MonoBehaviour
         if (percentComplete == 1 && Player.Instance.bossFight)
         {
             GetComponent<FollowCamera>().LerpToTargetWithoutOffsets();
+        }
+
+        if (changeColors)
+        {
+            myProfile.colorGrading.enabled = true;
+            myProfile.chromaticAberration.enabled = true;
+        }
+    }
+
+    public void ResetColors()
+    {
+        myProfile.colorGrading.enabled = false;
+        myProfile.chromaticAberration.enabled = false;
+    }
+
+    public void SwitchOnRewindEffect(bool switchOn)
+    {
+        if (switchOn)
+        {
+            myProfile.chromaticAberration.enabled = true;
+            myProfile.grain.enabled = true;
+        }
+        else
+        {
+            myProfile.chromaticAberration.enabled = false;
+            myProfile.grain.enabled = false;
         }
     }
 }

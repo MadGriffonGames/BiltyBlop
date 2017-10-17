@@ -154,6 +154,7 @@ public class Player : Character
         throwDamage = 1;
 
         SetSlots();
+        SetIndexes();
 
         if (PlayerPrefs.HasKey("Level11"))
         {
@@ -291,6 +292,7 @@ public class Player : Character
                 myRigidbody.velocity = new Vector2(0, 0);
             }
             myRigidbody.AddForce(new Vector2(0, (jumpForce * 0.45f) * timeScalerJump));
+            myArmature.animation.FadeIn("double_jump_start", -1, 1);
             canJump = false;
             DoubleJump = false;
         }
@@ -493,16 +495,12 @@ public class Player : Character
             {
                 if (myArmature.armature.animation.lastAnimationName != "run")
                 {
-                    SetIndexes();
                     myArmature.armature.animation.FadeIn("run", -1, -1);
-                    SetIndexes();
                 }
             }
             else
             {
-                SetIndexes();
                 myArmature.armature.animation.Stop();
-                SetIndexes();
                 ChangeState(playerTimeState.animationState);
             }
         }
@@ -781,6 +779,7 @@ public class Player : Character
     public void AddSlot(string slotName, ref int i)
     {
         skinSlots[i] = myArmature.armature.GetSlot(slotName);
+        skinSlots[i].displayController = "none";
         i++;
     }
 
@@ -791,6 +790,7 @@ public class Player : Character
         myArmature.zSpace = 0.02f;
 
         swordSlot = myArmature.armature.GetSlot("Sword");
+        swordSlot.displayController = "none";
 
         AddSlot("r_hand_2", ref i);
         AddSlot("l_hand_2", ref i);

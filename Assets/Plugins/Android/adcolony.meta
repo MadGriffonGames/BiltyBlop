@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 60f2750dc982247dbbf65ccda9aab059
+guid: b478e246d41684c8ba82be52b0837fb1
 folderAsset: yes
-timeCreated: 1496679567
-licenseType: Pro
+timeCreated: 1506026532
+licenseType: Free
 PluginImporter:
   serializedVersion: 1
   iconMap: {}
@@ -13,21 +13,6 @@ PluginImporter:
     Android:
       enabled: 1
       settings: {}
-    Any:
-      enabled: 0
-      settings:
-        Exclude Android: 0
-        Exclude Editor: 1
-        Exclude Linux: 1
-        Exclude Linux64: 1
-        Exclude LinuxUniversal: 1
-        Exclude OSXIntel: 1
-        Exclude OSXIntel64: 1
-        Exclude OSXUniversal: 1
-        Exclude Win: 1
-        Exclude Win64: 1
-        Exclude WindowsStoreApps: 1
-        Exclude iOS: 1
     Editor:
       enabled: 0
       settings:

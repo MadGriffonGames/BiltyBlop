@@ -12,8 +12,6 @@ public class PlayerJumpAttackState : IPlayerState
         SoundManager.PlaySound("swing3");
         player.myArmature.animation.FadeIn("jump_attack", -1, 1);
         player.EnableAttackCollider();
-
-        player.SetIndexes();
     }
 
     public void Execute()

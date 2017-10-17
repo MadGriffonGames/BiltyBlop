@@ -50,13 +50,11 @@ public class TyplakMeleeState : MonoBehaviour ,ITyplakState
             canExit = false;
             enemy.isAttacking = true;
             enemy.armature.animation.FadeIn("atk1_pre", -1, 1);
-            enemy.SetIndexes();
             preattack = true;
         }
         if (enemy.armature.animation.lastAnimationName == "atk1_pre" && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.FadeIn("atk1", -1, 1);
-            enemy.SetIndexes();
             timer = Time.time;
         }
 

@@ -11,6 +11,7 @@ public class PlayerDeathState : IPlayerState
     {
         isTookHit = false;
         isDead = false;
+        player.myRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     public void Execute()
@@ -18,10 +19,7 @@ public class PlayerDeathState : IPlayerState
         if (!isTookHit)
         {
             isTookHit = true;
-
-            Player.Instance.SetIndexes();
             Player.Instance.myArmature.animation.FadeIn("takehit", -1, 1);
-            Player.Instance.SetIndexes();
         }
         if (Player.Instance.myArmature.animation.isCompleted && !isDead)
         {
@@ -39,5 +37,6 @@ public class PlayerDeathState : IPlayerState
     public void Exit()
     {
         Player.Instance.takeHit = false;
+        Player.Instance.myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

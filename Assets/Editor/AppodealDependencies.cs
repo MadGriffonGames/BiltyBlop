@@ -35,7 +35,7 @@ public class AppodealDependencies : AssetPostprocessor {
 			new object[] {
 				"com.google.android.gms",
 				"play-services-ads",
-				"8+" },
+				"9.8" },
 			namedArgs: new Dictionary<string, object>() {
 				{"packageIds", new string[] { "extra-google-m2repository" } }
 			});
@@ -45,14 +45,14 @@ public class AppodealDependencies : AssetPostprocessor {
 			new object[] {
 				"com.google.android.gms",
 				"play-services-location",
-				"8+" },
+				"9.8" },
 			namedArgs: new Dictionary<string, object>() {
 				{"packageIds", new string[] { "extra-google-m2repository" } }
 			});
 
 		Google.VersionHandler.InvokeInstanceMethod(
 			svcSupport, "DependOn",
-			new object[] { "com.android.support", "support-v4", "25.+" },
+			new object[] { "com.android.support", "support-v4", "25.2.0" },
 			namedArgs: new Dictionary<string, object>() {
 				{"packageIds", new string[] { "extra-android-m2repository" } }
 			});

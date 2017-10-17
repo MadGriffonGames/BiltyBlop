@@ -16,6 +16,10 @@ public class DailyReward : MonoBehaviour
     GameObject leftButton;
     [SerializeField]
     GameObject rightButton;
+    [SerializeField]
+    GameObject doubleButton;
+    [SerializeField]
+    Text rewardText;
 
     [SerializeField]
     DailyRewardSlot[] dailySlots;
@@ -47,21 +51,52 @@ public class DailyReward : MonoBehaviour
     TimeSpan span;
     TimeSpan hours24;
 
-    struct Reward
+    public class Reward//conteiner for reward, made to give it for rewarded video
     {
-        string type;
-        int rewardValue;
+        public string type;
+        public string itemType;
+        public int rewardValue;
 
-        void GiveReward()
+        public void SetReward(string _type, int _rewardValue = 0, string _itemType = null)
         {
+            type = _type;
+            rewardValue = _rewardValue;
+            itemType = _itemType;
+        }
 
+        public void GiveReward()
+        {
+            switch (type)
+            {
+                case "Coins":
+                    GameManager.AddCoins(rewardValue);
+                    break;
+                case "Crystals":
+                    GameManager.AddCrystals(rewardValue);
+                    break;
+                case "Item":
+                    Inventory.Instance.AddItem(itemType, rewardValue);
+                    break;
+                case "Pots":
+                    Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 1);
+                    Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 1);
+                    Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
+                    Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
+                    break;
+                case "Skin":
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    Reward myReward;
+    public Reward myReward;
 
     private void Start()
     {
+        myReward = new Reward();
+
         SetRewardWindow();
 
         isTimerTick = false;
@@ -82,6 +117,10 @@ public class DailyReward : MonoBehaviour
         lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
 
         rewardDay = PlayerPrefs.GetInt("RewardDay");
+        if (rewardDay == 9)
+        {
+            doubleButton.GetComponent<Button>().interactable = false;            
+        }
 
         is24hoursPast = NetworkTime.Check24hours(lastOpenDate);
 
@@ -137,7 +176,8 @@ public class DailyReward : MonoBehaviour
         {
             AdsManager.Instance.isRewardVideoWatched = false;
 
-
+            rewardText.text = (int.Parse(rewardText.text)*2).ToString();
+            myReward.GiveReward();
         }
     }
 
@@ -254,5 +294,14 @@ public class DailyReward : MonoBehaviour
             dailySlots[j].SetReward();
             i++;
         }
+    }
+
+    public void RewardedVideoButton()
+    {
+#if UNITY_EDITOR
+        AdsManager.Instance.isRewardVideoWatched = true;
+#elif UNITY_ANDROID || UNITY_IOS
+        AdsManager.Instance.ShowRewardedVideo();
+#endif
     }
 }

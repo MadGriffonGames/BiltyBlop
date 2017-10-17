@@ -66,7 +66,6 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
-
     }
 
     // Use this for initialization

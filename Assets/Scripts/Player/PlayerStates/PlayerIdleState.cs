@@ -14,8 +14,6 @@ public class PlayerIdleState : IPlayerState
         {
             Player.Instance.gameObject.layer = groundLayer;
         }
-
-        player.SetIndexes();
     }
 
     public void Execute()

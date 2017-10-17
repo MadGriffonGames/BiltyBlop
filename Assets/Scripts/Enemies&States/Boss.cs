@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    
     public UnityArmatureComponent armature;
 
     public string damageSource;

@@ -53,11 +53,6 @@ public class DailyRewardSlot : MonoBehaviour
         slotBackground = GetComponent<Image>();
     }
 
-    private void Update()
-    {
-
-    }
-
     public void SetReward()
     {
         dayText.text = "Day" + dayNum.ToString();
@@ -73,6 +68,7 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardValue.text = "100";
                     generalRewardValue.text = "100";
                     rewardValue.enabled = true;
+                    dailyRewardObject.myReward.SetReward("Coins", 100);
                     GameManager.AddCoins(100);
                     break;
                 case 2:
@@ -81,6 +77,7 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardValue.text = "150";
                     generalRewardValue.text = "150";
                     rewardValue.enabled = true;
+                    dailyRewardObject.myReward.SetReward("Coins", 150);
                     GameManager.AddCoins(150);
                     break;
                 case 3:
@@ -89,6 +86,7 @@ public class DailyRewardSlot : MonoBehaviour
                     generalRewardImage.sprite = hpSprite;
                     generalRewardValue.text = "1";
                     rewardValue.enabled = false;
+                    dailyRewardObject.myReward.SetReward("Item", 1, Inventory.HEAL);
                     Inventory.Instance.AddItem(Inventory.HEAL, 1);
                     break;
                 case 4:
@@ -97,6 +95,7 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardValue.text = "200";
                     generalRewardValue.text = "200";
                     rewardValue.enabled = true;
+                    dailyRewardObject.myReward.SetReward("Coins", 200);
                     GameManager.AddCoins(200);
                     break;
                 case 5:
@@ -105,6 +104,7 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardValue.text = "250";
                     generalRewardValue.text = "250";
                     rewardValue.enabled = true;
+                    dailyRewardObject.myReward.SetReward("Coins", 250);
                     GameManager.AddCoins(250);
                     break;
                 case 6:
@@ -113,6 +113,7 @@ public class DailyRewardSlot : MonoBehaviour
                     generalRewardImage.sprite = ammoSprite;
                     generalRewardValue.text = "1";
                     rewardValue.enabled = false;
+                    dailyRewardObject.myReward.SetReward("Item", 1, Inventory.AMMO);
                     Inventory.Instance.AddItem(Inventory.AMMO, 1);
                     break;
                 case 7:
@@ -121,6 +122,7 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardValue.text = "2";
                     generalRewardValue.text = "2";
                     rewardValue.enabled = true;
+                    dailyRewardObject.myReward.SetReward("Crystals", 2);
                     GameManager.AddCrystals(2);                    
                     break;
                 case 8:
@@ -129,6 +131,7 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardValue.text = "4";
                     generalRewardValue.text = "4";
                     rewardValue.enabled = true;
+                    dailyRewardObject.myReward.SetReward("Crystals", 4);
                     GameManager.AddCrystals(4);
                     break;
                 case 9:
@@ -137,6 +140,7 @@ public class DailyRewardSlot : MonoBehaviour
                     generalRewardImage.sprite = potionsSprite;
                     generalRewardValue.text = "1";
                     rewardValue.enabled = false;
+                    dailyRewardObject.myReward.SetReward("Pots");
                     Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 1);
                     Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 1);
                     Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
@@ -147,6 +151,8 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardImage.sprite = skinSprite;
                     generalRewardImage.sprite = skinSprite;
                     generalRewardValue.text = "+ skin";
+                    dailyRewardObject.myReward.SetReward("Skin");
+                    rewardValue.enabled = false;
 
                     PlayerPrefs.SetInt("RewardDay", 0);
                     break;

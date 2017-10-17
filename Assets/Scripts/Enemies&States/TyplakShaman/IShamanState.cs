@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IShamanState : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public interface IShamanState
+{
+    void Execute();
+    void Enter(Shaman enemy);
+    void Exit();
+    void OnCollisionEnter2D(Collision2D other);
 }

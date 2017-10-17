@@ -11,9 +11,6 @@ public class SnowTyplak : MovingMeleeEnemy
     bool damaged = false;
     public bool walk = false;
 
-    [SerializeField]
-    string typlakType;
-
     List<Slot> slots;
 
     void Awake()

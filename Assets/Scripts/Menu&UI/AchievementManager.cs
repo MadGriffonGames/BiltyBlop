@@ -120,7 +120,6 @@ public class AchievementManager : MonoBehaviour {
                 if (achieve.weight <= 2)
                 {
                     PlayerPrefs.SetInt(achieveName, PlayerPrefs.GetInt(achieveName) + 1);
-                    Debug.Log(PlayerPrefs.GetInt(achieveName));
                     if (PlayerPrefs.GetInt(achieveName) == achieve.targetValueArray[achieve.weight])
                     {
                         GameManager.CollectedCoins += achieve.rewardArray[achieve.weight];

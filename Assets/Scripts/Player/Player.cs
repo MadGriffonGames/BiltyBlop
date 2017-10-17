@@ -37,6 +37,7 @@ public class Player : Character
     [SerializeField]
     GameObject shadow;
     public bool bossFight = false;
+    public bool invertedControls = false;
     public IPlayerState currentState;
 
     /*
@@ -216,19 +217,43 @@ public class Player : Character
             if (Mathf.Abs(mobileInput + playerAxis / 10) <= 1 && playerAxis != 0)
                 mobileInput += playerAxis / 10;
             else mobileInput = playerAxis;
-            
+
 #if UNITY_EDITOR
-            float horizontal = Input.GetAxis("Horizontal");
+            float horizontal;
+            if (!invertedControls)
+            {
+                horizontal = Input.GetAxis("Horizontal");
+            }
+            else
+            {
+                horizontal = -Input.GetAxis("Horizontal");
+            }
             HandleMovement(horizontal);
             Flip(horizontal);
 
 #elif UNITY_ANDROID
-            HandleMovement(mobileInput);
-            Flip(mobileInput);
+            if (invertedControls)
+	        {
+                HandleMovement(-mobileInput);
+                Flip(-mobileInput);
+	        }
+            else
+            {
+                HandleMovement(mobileInput);
+                Flip(mobileInput);
+            }
 
 #elif UNITY_IOS
-            HandleMovement(mobileInput);
-            Flip(mobileInput);
+            if (invertedControls)
+	        {
+                HandleMovement(-mobileInput);
+                Flip(-mobileInput);
+	        }
+            else
+            {
+                HandleMovement(mobileInput);
+                Flip(mobileInput);
+            }
 #endif
             OnGround = IsGrounded();
 
@@ -906,6 +931,21 @@ public class Player : Character
                 maxClipSize = (int)PlayerPrefs.GetFloat("AmmoManiac" + clipsLvl.ToString());
             }
         }
+    }
+
+    IEnumerator Invert()
+    {
+        if (!invertedControls)
+        {
+            invertedControls = true;
+            yield return new WaitForSeconds(5);
+            invertedControls = false;
+        }        
+    }
+
+    public void InvertControls()
+    {
+        StartCoroutine(Invert());
     }
 }
 

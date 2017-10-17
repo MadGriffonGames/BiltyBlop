@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IFireTyplakState : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public interface IFireTyplakState
+{
+    void Execute();
+    void Enter(FireTyplak enemy);
+    void Exit();
+    void OnCollisionEnter2D(Collision2D other);
 }

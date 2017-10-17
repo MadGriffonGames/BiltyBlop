@@ -40,6 +40,7 @@ public class SnowmanPatrolState : ISnowmanState
     {
         if (other.gameObject.CompareTag("Edge"))
         {
+            enemy.Target = null;
             enemy.ChangeDirection();
         }
     }

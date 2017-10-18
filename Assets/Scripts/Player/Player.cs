@@ -605,13 +605,13 @@ public class Player : Character
             if (this.gameObject.transform.localScale.x > 0)
             {
                 throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(1.5f, 0.1f, -5);
-                throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
+				throwingClip [throwingIterator].transform.rotation = Quaternion.Euler (0, 0, -90);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
             }
             else
             {
                 throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-1.5f, 0.1f, -5);
-                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 90);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
             }
 
@@ -663,7 +663,7 @@ public class Player : Character
     public void ExecBonusImmortal(float duration)
     {
         StartCoroutine(ImmortalBonus(duration));
-        MakeFX.Instance.MakeImmortalBonus(duration);
+			MakeFX.Instance.MakeImmortalBonus(duration * potionTimeScale);
 		FX.GetComponent<Animator> ().SetTrigger ("immortal");
     }
 
@@ -683,7 +683,7 @@ public class Player : Character
     public void ExecBonusDamage(float duration)
     {
         StartCoroutine(DamageBonus(duration));
-        MakeFX.Instance.MakeDamageBonus(duration);
+			MakeFX.Instance.MakeDamageBonus(duration * potionTimeScale);
 		FX.GetComponent<Animator> ().SetTrigger ("damage");
 
     }
@@ -704,7 +704,7 @@ public class Player : Character
     public void ExecBonusJump(float duration)
     {
         StartCoroutine(JumpBonus(duration));
-        MakeFX.Instance.MakeJumpBonus(duration);
+			MakeFX.Instance.MakeJumpBonus(duration * potionTimeScale);
 		FX.GetComponent<Animator> ().SetTrigger ("jump");
     }
 
@@ -724,7 +724,7 @@ public class Player : Character
     public void ExecBonusSpeed(float duration)
     {
         StartCoroutine(SpeedBonus(duration));
-        MakeFX.Instance.MakeSpeedBonus(duration);
+			MakeFX.Instance.MakeSpeedBonus(duration * potionTimeScale);
 		FX.GetComponent<Animator> ().SetTrigger ("speed");
     }
 
@@ -754,7 +754,7 @@ public class Player : Character
     public void ExecBonusTime(float duration)
     {
         StartCoroutine(TimeBonus(duration));
-        MakeFX.Instance.MakeTimeBonus(duration);
+			MakeFX.Instance.MakeTimeBonus(duration * potionTimeScale);
 	    FX.GetComponent<Animator> ().SetTrigger ("time");
     }
 

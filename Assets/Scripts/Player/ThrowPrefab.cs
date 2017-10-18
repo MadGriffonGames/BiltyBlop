@@ -30,7 +30,7 @@ public class ThrowPrefab : MonoBehaviour {
 	{
 		if (!PlayerPrefs.HasKey("Throw")) 
 		{
-			PlayerPrefs.SetString ("Throw", "Classic");
+			PlayerPrefs.SetString ("Throw", "ClassicThrow");
 		}
 		if (!PlayerPrefs.HasKey (gameObject.name)) {
 			if (isLocked) {

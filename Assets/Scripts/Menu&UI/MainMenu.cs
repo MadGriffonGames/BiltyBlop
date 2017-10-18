@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour
 			PlayerPrefs.SetString ("Skin", "Classic");
             betaTestReward.SetActive(true);
         }
+		if (!PlayerPrefs.HasKey ("Throw"))
+			PlayerPrefs.SetString ("Throw", "ClassicThrow");
 
         SoundManager.PlayMusic("main menu", true);
     }

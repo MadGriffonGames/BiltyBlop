@@ -222,6 +222,28 @@ public class Inventory : MonoBehaviour
         SendUseMetric(bonusType);
     }
 
+	public string DescriptionOfItem(string itemName)
+	{
+		switch (itemName) 
+		{
+			case "HealthPot":
+				return "This pot immedeately restores your health!";
+		case "DamageBonus":
+			return "Gives you a 'Double damage' bonus for a short time.";
+		case "SpeedBonus":
+			return "Increases your speed for a short time.";
+		case "TimeBonus":
+			return "This potion makes time go slower";
+		case "ImmortalBonus":
+			return "Gives you a shield that protect you from any damage you can take";
+		case "ClipsCount":
+			return "Fully restores all your throwing weapons";
+		default:
+			return "NO DESCRIPTION";
+		}
+		return "";
+	}
+
     void SendUseMetric(string bonusName)
     {
         AppMetrica.Instance.ReportEvent("#BONUS_USE " + bonusName + " used in " + MetricaManager.Instance.currentLevel);

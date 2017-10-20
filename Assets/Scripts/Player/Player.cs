@@ -152,7 +152,7 @@ public class Player : Character
 
 		health = PlayerPrefs.GetInt ("SkinArmorStat");
 		meleeDamage = PlayerPrefs.GetInt ("SkinAttackStat");
-        throwDamage = 1;
+		throwDamage = PlayerPrefs.GetInt ("ThrowAttackStat");
 
         SetSlots();
         SetIndexes();
@@ -501,10 +501,7 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
-<<<<<<< HEAD
-=======
                     //AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
->>>>>>> fe995e23cbb2747872ed512941b71901a9e1d400
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     

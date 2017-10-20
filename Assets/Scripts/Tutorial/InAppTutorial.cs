@@ -19,7 +19,11 @@ public class InAppTutorial : MonoBehaviour
     [SerializeField]
     Button targetButton;
     [SerializeField]
-    public Button[] otherButtons; 
+    public Button[] otherButtons;
+    [SerializeField]
+    GameObject controlsUI;
+    [SerializeField]
+    protected GameObject inventoryFade;
 
     public bool isActive = false;
     public bool isTextChanged = false;
@@ -28,8 +32,7 @@ public class InAppTutorial : MonoBehaviour
     {
         if (!isTextChanged && InventoryUI.isOpen && isActive)
         {
-            isTextChanged = true;
-
+            isTextChanged = true;          
             light.SetActive(true);
             backpackLight.SetActive(false);
             TutorialUI.Instance.txt.text = textInApp;
@@ -74,6 +77,8 @@ public class InAppTutorial : MonoBehaviour
 
     public void DisactivateTutorial()
     {
+        EnableControls(true);
+
         TutorialUI.Instance.txt.text = "";
         light.SetActive(false);
 
@@ -85,6 +90,19 @@ public class InAppTutorial : MonoBehaviour
         for (int i = 0; i < otherButtons.Length; i++)
         {
             otherButtons[i].enabled = true;
+        }
+    }
+
+    protected void EnableControls(bool switcher)
+    {
+        if (switcher)
+        {          
+            controlsUI.SetActive(true);
+        }
+        else
+        {
+            inventoryFade.SetActive(true);
+            controlsUI.SetActive(false);
         }
     }
 }

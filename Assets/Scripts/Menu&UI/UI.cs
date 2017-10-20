@@ -24,4 +24,11 @@ public class UI : MonoBehaviour
 
     [SerializeField]
     public GameObject timeRewindUI;
+
+    public GameObject controlsUI;
+
+    private void Start()
+    {
+        controlsUI = GetComponentInChildren<ControlsUI>().gameObject;
+    }
 }

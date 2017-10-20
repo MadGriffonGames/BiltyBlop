@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class HealTutorial : InAppTutorial
 {
     [SerializeField]
     GameObject hpPot;
+    [SerializeField]
+    GameObject bonusLight;
+
+    bool isActivated;
+    bool isCollected;
 
     private void Start()
     {
@@ -13,15 +19,25 @@ public class HealTutorial : InAppTutorial
         {
             gameObject.SetActive(false);
         }
+        isActivated = false;
+        isCollected = false;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
-        if (other.gameObject.CompareTag("Player") && PlayerPrefs.GetInt("Level2") == 0)
+
+        EnableControls(false);
+        Player.Instance.mobileInput = 0;
+        inventoryFade.SetActive(true);
+
+        string currentLevel = SceneManager.GetActiveScene().name;
+        if (other.gameObject.CompareTag("Player") && currentLevel == "Level1" && PlayerPrefs.GetInt("Level2") == 0)
         {
             Player.Instance.Health -= 1;
             HealthUI.Instance.SetHealthbar();
-            Inventory.Instance.AddItem(Inventory.HEAL, 3);
+            int currentCount = Inventory.Instance.GetItemCount(Inventory.HEAL);
+            currentCount = currentCount > 3 ? 3 : currentCount;
+            Inventory.Instance.AddItem(Inventory.HEAL, 3 - currentCount);
         }
     }
 }

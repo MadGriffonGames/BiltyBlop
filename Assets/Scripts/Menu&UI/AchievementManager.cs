@@ -33,6 +33,7 @@ public class AchievementManager : MonoBehaviour {
     int[] millionareReward;
 
     string[] tripleCoins;
+    string[] tripleCrystals;
 
     public Achieve mobKiller;
     public Achieve treasureHunter;
@@ -70,9 +71,12 @@ public class AchievementManager : MonoBehaviour {
     void Start() {
         //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
-        mobKillerReward = new int[] { 100, 150, 200 };
-        mobKillerTargetValue = new int[] { 1, 3, 5 };
+
+        mobKillerReward = new int[] { 50, 150, 200 };
+        mobKillerTargetValue = new int[] { 10, 50, 100 };
+
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
+        tripleCrystals = new string[] { "Crystals", "Crystals", "Crystals" };
 
         treasureHunterReward = new int[] { 10, 100, 500 };
         treasureHunterValue = new int[] { 3, 10, 15 };
@@ -93,20 +97,20 @@ public class AchievementManager : MonoBehaviour {
         millionareReward = new int[] { 100, 150, 200 };
 
 
-        //ResetStat("Mob killer test8");
-        //ResetStat("DiverTest");
+        ResetStat("Mob killer");
+        ResetStat("Diver");
         //ResetStat("Secret Rush test");
         //ResetStat("Spider Boss killer test");
-        ResetStat("First Buy Test");
-        mobKiller = new Achieve("Mob killer test8", tripleCoins, mobKillerTargetValue, mobKillerReward);
-        treasureHunter = new Achieve("Treasure Hunter Test", tripleCoins, treasureHunterValue, treasureHunterReward);
-        swimmer = new LevelAchieve("DiverTest", "Coins", 5, 500);
-        torchCollector = new LevelAchieve("Torch Collector Test", "Coins", 1, 500);
-        secretRoomer = new Achieve("Secret Rush test", tripleCoins, secretRoomerTargetValue, secretRoomerReward);
-        firstBuy = new LevelAchieve("First Buy Test", "Coins", 1, 1000);
-        spiderKiller = new LevelAchieve("Spider Boss killer test", "Coins", 1, 1500);
-        starWalker = new Achieve("StarWalker test", tripleCoins, starWalkerTargetValue, starWalkerReward);
-        firstBoss = new LevelAchieve("Dragon Killer Test", "Coins", 1, 1500);
+        //ResetStat("First Buy Test");
+        mobKiller = new Achieve("Mob killer", tripleCrystals, mobKillerTargetValue, mobKillerReward);
+        treasureHunter = new Achieve("Treasure Hunter", tripleCoins, treasureHunterValue, treasureHunterReward);
+        swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
+        torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 500);
+        secretRoomer = new Achieve("Secret Rush", tripleCoins, secretRoomerTargetValue, secretRoomerReward);
+        firstBuy = new LevelAchieve("First Buy", "Coins", 1, 1000);
+        spiderKiller = new LevelAchieve("Spider Boss killer", "Coins", 1, 1500);
+        starWalker = new Achieve("StarWalker", tripleCoins, starWalkerTargetValue, starWalkerReward);
+        firstBoss = new LevelAchieve("Dragon Killer", "Coins", 1, 1500);
     }
 
     public void CheckAchieve(Achieve achieve)
@@ -152,13 +156,9 @@ public class AchievementManager : MonoBehaviour {
 
     public void CheckLevelAchieve(LevelAchieve levelAchieve)
     {
-
         PlayerPrefs.SetInt(levelAchieve.achieveName, PlayerPrefs.GetInt(levelAchieve.achieveName) + 1);
-        Debug.Log(PlayerPrefs.GetInt(levelAchieve.achieveName));
         if (PlayerPrefs.GetInt(levelAchieve.achieveName) == levelAchieve.targetValue)
         {
-            Debug.Log("achieved");
-            GameManager.CollectedCoins += levelAchieve.reward;
             achievementUI.GetComponent<AchievementUI>().AchievementAppear(levelAchieve.achieveName);
             StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
             Destroy(levelAchieve);

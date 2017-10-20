@@ -496,7 +496,7 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
-                    AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
+                    //AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     

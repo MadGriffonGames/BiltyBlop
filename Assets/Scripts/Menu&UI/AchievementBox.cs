@@ -239,6 +239,12 @@ public class AchievementBox : MonoBehaviour {
             StartCoroutine(ShowCoinLoot(0));
         }
 
+        else if (PlayerPrefs.GetString(achievementName + "rewardType0") == "Crystals")
+        {
+            StartCoroutine(ShowCrystalLoot(0));
+        }
+
+
         if (currentValue >= targetValue1)
         {
 
@@ -265,6 +271,11 @@ public class AchievementBox : MonoBehaviour {
             StartCoroutine(ShowCoinLoot(1));
         }
 
+        else if (PlayerPrefs.GetString(achievementName + "rewardType1") == "Crystals")
+        {
+            StartCoroutine(ShowCrystalLoot(1));
+        }
+
         if (currentValue < targetValue2)
         {
             inProgress.SetActive(true);
@@ -287,6 +298,11 @@ public class AchievementBox : MonoBehaviour {
         if (PlayerPrefs.GetString(achievementName + "rewardType2") == "Coins")
         {
             StartCoroutine(ShowCoinLoot(2));
+        }
+
+        else if (PlayerPrefs.GetString(achievementName + "rewardType2") == "Crystals")
+        {
+            StartCoroutine(ShowCrystalLoot(2));
         }
 
         UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
@@ -329,6 +345,18 @@ public class AchievementBox : MonoBehaviour {
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + level.ToString()).ToString();
         rewardFade.gameObject.SetActive(true);
         loot.gameObject.GetComponent<Image>().sprite = coins;
+        loot.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        fadeButton.SetActive(true);
+    }
+
+    IEnumerator ShowCrystalLoot(int level)
+    {
+        Debug.Log(PlayerPrefs.GetInt(achievementName + level.ToString()));
+        lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + level.ToString()).ToString();
+        rewardFade.gameObject.SetActive(true);
+        loot.gameObject.GetComponent<Image>().sprite = crystals;
+        GameManager.CollectedCoins += PlayerPrefs.GetInt(achievementName + level.ToString());
         loot.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);

@@ -148,7 +148,6 @@ public class Player : Character
             DevToDev.Analytics.Tutorial(-1);
         }
 
-        PlayerPrefs.DeleteKey("Level2");
         bonusFX = GetComponentInChildren<Animator>();
 
         skinSlots = new Slot [9];

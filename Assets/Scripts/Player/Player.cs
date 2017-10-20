@@ -562,6 +562,7 @@ public class Player : Character
 			}
 		}
 		throwing.GetComponent<Throwing> ().damage = PlayerPrefs.GetInt ("ThrowAttackStat");
+		throwDamage = throwing.GetComponent<Throwing> ().damage;
 		throwing.GetComponent<Throwing> ().speed = PlayerPrefs.GetFloat ("ThrowSpeedStat");
 
         throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;

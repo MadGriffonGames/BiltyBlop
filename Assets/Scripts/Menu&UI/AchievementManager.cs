@@ -91,7 +91,7 @@ public class AchievementManager : MonoBehaviour {
         secretRoomerTargetValue = new int[] { 1, 5, 10 };
 
         starWalkerReward = new int[] { 100, 150, 200 };
-        starWalkerTargetValue = new int[] { 3, 5, 10 };
+        starWalkerTargetValue = new int[] { 5, 15, 30 };
 
         millionareTargetValue = new int[] { 1000, 10000, 15000 };
         millionareReward = new int[] { 100, 150, 200 };

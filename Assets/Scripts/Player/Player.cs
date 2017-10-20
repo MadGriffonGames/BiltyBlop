@@ -506,10 +506,6 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
-<<<<<<< HEAD
-=======
-                    //AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
->>>>>>> origin/DevG
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     

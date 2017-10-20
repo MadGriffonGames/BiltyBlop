@@ -80,8 +80,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 1
   - buildTarget: Android
-    maxTextureSize: 256
-    textureFormat: 56
+    maxTextureSize: 2048
+    textureFormat: 57
     textureCompression: 1
     compressionQuality: 0
     crunchedCompression: 0

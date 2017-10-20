@@ -36,8 +36,8 @@ public class ThrowingUI : MonoBehaviour
     {
 		if (onStart) 
 		{			
-			//throwText.text = "x " + Player.Instance.maxClipSize.ToString();
-			//throwImage.GetComponent<Image> ().sprite = Resources.Load<GameObject> ("Throwing/ThrowingObject").GetComponent<SpriteRenderer> ().sprite;
+			throwText.text = "x " + Player.Instance.maxClipSize.ToString();
+			throwImage.GetComponent<Image> ().sprite = Resources.Load<GameObject> ("Throwing/ThrowingObject").GetComponent<SpriteRenderer> ().sprite;
 			throwBar = new GameObject[Player.Instance.maxClipSize];
 			for (int i = 0; i < Player.Instance.maxClipSize; i++) 
 			{
@@ -52,7 +52,7 @@ public class ThrowingUI : MonoBehaviour
 			
 		}
 
-		//throwText.text = "x " + (Player.Instance.throwingIterator + 1).ToString();
+		throwText.text = "x " + (Player.Instance.throwingIterator + 1).ToString();
         for (int i = 0; i < Player.Instance.clipSize; i++)
         {
             if (i < Player.Instance.throwingIterator + 1)

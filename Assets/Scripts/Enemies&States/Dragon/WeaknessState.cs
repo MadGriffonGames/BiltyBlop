@@ -53,7 +53,7 @@ public class WeaknessState : IDragonState
             if (enemy.armature.animation.lastAnimationName == "DEATH" && enemy.armature.animation.isCompleted)
             {
                 enemy.armature.animation.FadeIn("DEATH_IDLE", -1, -1);
-                enemy.levelEnd.SetActive(true);
+                //enemy.levelEnd.SetActive(true);
             }
         }
     }

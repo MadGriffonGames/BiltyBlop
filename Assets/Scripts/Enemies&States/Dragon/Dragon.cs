@@ -48,6 +48,8 @@ public class Dragon : Boss
     public GameObject stun;
     [SerializeField]
     GameObject videoUI;
+	[SerializeField]
+	PlayVideo playVideo;
 
     float angle;
     bool roar = true;
@@ -119,6 +121,7 @@ public class Dragon : Boss
 
         if (Health <= 0)
         {
+			playVideo.enabled = true;
             //videoUI.SetActive(true);
         }
         yield return null;

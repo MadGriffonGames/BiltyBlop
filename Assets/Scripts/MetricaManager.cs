@@ -39,7 +39,6 @@ public class MetricaManager : MonoBehaviour
         string lvlName = SceneManager.GetActiveScene().name;
         string tmp = "" + lvlName[lvlName.Length - 1];
         int currentLvl = int.Parse(tmp);
-        Debug.Log(currentLvl);
         DevToDev.Analytics.CurrentLevel(currentLvl);
 
         levelParams = new Dictionary<string, object>();

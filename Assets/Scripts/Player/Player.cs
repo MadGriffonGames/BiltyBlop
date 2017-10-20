@@ -142,6 +142,12 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
+
+        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
+        {
+            DevToDev.Analytics.Tutorial(-1);
+        }
+
         PlayerPrefs.DeleteKey("Level2");
         bonusFX = GetComponentInChildren<Animator>();
 

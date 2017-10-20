@@ -133,8 +133,12 @@ public class AchievementBoxOneLevel : MonoBehaviour
         doneImg.gameObject.SetActive(true);
         if (PlayerPrefs.GetString(achievementName + "rewardType") == "Coins")
         {
-            Debug.Log(PlayerPrefs.GetString(achievementName + "rewardType"));
             StartCoroutine(ShowCoinLoot());
+        }
+
+        else if (PlayerPrefs.GetString(achievementName + "rewardType") == "Crystals")
+        {
+            StartCoroutine(ShowCrystalLoot());
         }
     }
 
@@ -156,6 +160,17 @@ public class AchievementBoxOneLevel : MonoBehaviour
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
         rewardFade.gameObject.SetActive(true);
         loot.gameObject.GetComponent<Image>().sprite = coins;
+        loot.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        fadeButton.SetActive(true);
+    }
+
+    IEnumerator ShowCrystalLoot()
+    {
+        lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
+        rewardFade.gameObject.SetActive(true);
+        loot.gameObject.GetComponent<Image>().sprite = crystals;
+        GameManager.CollectedCoins += PlayerPrefs.GetInt(achievementName + "reward ");
         loot.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);

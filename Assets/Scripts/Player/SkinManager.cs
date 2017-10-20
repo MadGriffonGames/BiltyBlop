@@ -32,13 +32,15 @@ public class SkinManager : MonoBehaviour
     private const string SKIN_PREFABS_FOLDER = "Skins/";
 	private const string SWORDS_PREFAB_FOLDER = "Swords/";
 	private const string THROW_PREFAB_FOLDER = "Throw/";
+    public const string firstBuy = "firstBuy";
 
     private void Start()
     {
         LoadSkinPrefabs();
 		LoadSwordsPrefabs ();
 		LoadThrowPrefabs ();
-
+        //PlayerPrefs.DeleteAll();
+        //PlayerPrefs.SetInt("Coins", 20000);
     }
 
 	private void LoadThrowPrefabs()
@@ -67,6 +69,11 @@ public class SkinManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - skinPrefabs[skinNumber].GetComponent<SkinPrefab>().crystalCost);
             skinPrefabs[skinNumber].GetComponent<SkinPrefab>().UnlockSkin();
+            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
+            {
+                PlayerPrefs.SetInt(firstBuy, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+            }
             return true;
         }
         else
@@ -80,6 +87,11 @@ public class SkinManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - skinPrefabs[skinNumber].GetComponent<SkinPrefab>().coinCost);
             skinPrefabs[skinNumber].GetComponent<SkinPrefab>().UnlockSkin();
+            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
+            {
+                PlayerPrefs.SetInt(firstBuy, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+            }
             return true;
         }
         else
@@ -92,7 +104,12 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - swordPrefabs[swordNumber].GetComponent<SwordPrefab>().crystalCost);
 			swordPrefabs[swordNumber].GetComponent<SwordPrefab>().UnlockSword();
-			return true;
+            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
+            {
+                PlayerPrefs.SetInt(firstBuy, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+            }
+            return true;
 		}
 		else
 			return false;
@@ -105,7 +122,12 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - swordPrefabs[swordNumber].GetComponent<SwordPrefab>().coinCost);
 			swordPrefabs[swordNumber].GetComponent<SwordPrefab>().UnlockSword();
-			return true;
+            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
+            {
+                PlayerPrefs.SetInt(firstBuy, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+            }
+            return true;
 		}
 		else
 			return false;
@@ -117,7 +139,12 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().crystalCost);
 			throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().UnlockThrow();
-			return true;
+            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
+            {
+                PlayerPrefs.SetInt(firstBuy, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+            }
+            return true;
 		}
 		else
 			return false;
@@ -130,7 +157,12 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().coinCost);
 			throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().UnlockThrow();
-			return true;
+            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
+            {
+                PlayerPrefs.SetInt(firstBuy, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+            }
+            return true;
 		}
 		else
 			return false;

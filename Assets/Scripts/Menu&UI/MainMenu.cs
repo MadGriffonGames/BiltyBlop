@@ -45,9 +45,9 @@ public class MainMenu : MonoBehaviour
         actCanvas.SetActive(true);
     }
 
-    public void ToIapTest()
+    public void ToAchievmentMenu()
     {
-        GameManager.nextLevelName = "IapTest";
+        GameManager.nextLevelName = "AchievementMenu";
 
         SceneManager.LoadScene("Loading");
     }

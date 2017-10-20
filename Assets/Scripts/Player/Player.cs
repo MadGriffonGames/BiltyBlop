@@ -157,7 +157,7 @@ public class Player : Character
 
 		health = PlayerPrefs.GetInt ("SkinArmorStat");
 		meleeDamage = PlayerPrefs.GetInt ("SkinAttackStat");
-        throwDamage = 1;
+		throwDamage = PlayerPrefs.GetInt ("ThrowAttackStat");
 
         SetSlots();
         SetIndexes();
@@ -506,6 +506,10 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
+<<<<<<< HEAD
+=======
+                    //AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
+>>>>>>> origin/DevG
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     
@@ -567,6 +571,7 @@ public class Player : Character
 			}
 		}
 		throwing.GetComponent<Throwing> ().damage = PlayerPrefs.GetInt ("ThrowAttackStat");
+		throwDamage = throwing.GetComponent<Throwing> ().damage;
 		throwing.GetComponent<Throwing> ().speed = PlayerPrefs.GetFloat ("ThrowSpeedStat");
 
         throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;

@@ -191,4 +191,12 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
     }
+
+	public static void DestroyDeadEnemies()
+	{
+		foreach (GameObject enemy in deadEnemies) 
+		{
+			Destroy (enemy.gameObject);
+		}
+	}
 }

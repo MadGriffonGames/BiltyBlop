@@ -9,6 +9,7 @@ PluginImporter:
   isPreloaded: 0
   isOverridable: 0
   platformData:
+<<<<<<< HEAD
     Android:
       enabled: 1
       settings:
@@ -69,6 +70,12 @@ PluginImporter:
       enabled: 1
       settings:
         CPU: AnyCPU
+=======
+    Editor:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+>>>>>>> fe995e23cbb2747872ed512941b71901a9e1d400
     WindowsStoreApps:
       enabled: 0
       settings:
@@ -76,11 +83,14 @@ PluginImporter:
     data:
       enabled: 0
       settings: {}
+<<<<<<< HEAD
     iOS:
       enabled: 1
       settings:
         CompileFlags: 
         FrameworkDependencies: 
+=======
+>>>>>>> fe995e23cbb2747872ed512941b71901a9e1d400
   userData: 
   assetBundleName: 
   assetBundleVariant: 

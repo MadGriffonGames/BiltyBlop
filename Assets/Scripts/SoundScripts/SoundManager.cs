@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour
 {
@@ -31,10 +32,13 @@ public class SoundManager : MonoBehaviour
 	public static float musicVolume, soundVolume;
 	private static bool muteMusic, muteSound;
     private static float currentPitch = 1;
+    Dictionary<string, AudioClip> soundBank;
 
 
     void Awake()
 	{
+        soundBank = new Dictionary<string, AudioClip>();
+
         if (!PlayerPrefs.HasKey("MusicIsOn"))
             PlayerPrefs.SetInt("MusicIsOn", 1);
         if (!PlayerPrefs.HasKey("SoundsIsOn"))
@@ -53,6 +57,11 @@ public class SoundManager : MonoBehaviour
 
         StartCoroutine(InitiateSteps("player_step")); // стринговое константа требует замены на переменную
 
+    }
+
+    private void Start()
+    {
+        SoundCash();
     }
 
     void Update()
@@ -274,14 +283,15 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator GetSound(string soundName)
 	{
-		ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
+        //ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
 
-		while(!request.isDone)
-		{
-			yield return null;
-		}
+        //while(!request.isDone)
+        //{
+        //	yield return null;
+        //}
 
-		AudioClip clip = (AudioClip)request.asset;
+        //AudioClip clip = (AudioClip)request.asset;
+        AudioClip clip = soundBank[soundName];
 
 		if(clip == null)
 		{
@@ -306,14 +316,18 @@ public class SoundManager : MonoBehaviour
 
     IEnumerator GetSoundPitched(string soundName, float pitch)
     {
-        ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
+        //ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
 
-        while (!request.isDone)
-        {
-            yield return null;
-        }
 
-        AudioClip clip = (AudioClip)request.asset;
+
+        //while (!request.isDone)
+        //{
+        //    yield return null;
+        //}
+
+        //AudioClip clip = (AudioClip)request.asset;
+
+        AudioClip clip = soundBank[soundName];
 
         if (clip == null)
         {
@@ -382,5 +396,27 @@ public class SoundManager : MonoBehaviour
 			else if (!steps.isPlaying && isStepping)
 				steps.Play ();
 		}
+    }
+
+    void SoundCash()
+    {
+        object[] tmp = Resources.LoadAll("GameSound/Sounds");
+        string[] tmpName = new string[tmp.Length];
+        int i = 0;
+        foreach (object sound in tmp)
+        {
+            tmpName[i] = sound.ToString();
+            soundBank.Add(NameCorrector(tmpName[i]), (AudioClip)sound);
+            i++;
+        }
+        
+
+    }
+
+    string NameCorrector(string wrongName)
+    {
+        string correctName;
+        correctName = wrongName.Remove(wrongName.IndexOf("(") - 1);
+        return correctName;
     }
 }

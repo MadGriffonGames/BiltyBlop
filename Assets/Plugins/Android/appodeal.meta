@@ -10,9 +10,12 @@ PluginImporter:
   isPreloaded: 0
   isOverridable: 0
   platformData:
+<<<<<<< HEAD
     Android:
       enabled: 1
       settings: {}
+=======
+>>>>>>> fe995e23cbb2747872ed512941b71901a9e1d400
     Editor:
       enabled: 0
       settings:

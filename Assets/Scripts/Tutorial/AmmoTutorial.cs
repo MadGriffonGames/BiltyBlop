@@ -54,9 +54,10 @@ public class AmmoTutorial : InAppTutorial
         string currentLevel = SceneManager.GetActiveScene().name;
         if (other.gameObject.CompareTag("Player") && currentLevel == "Level1" && PlayerPrefs.GetInt("Level2") == 0)
         {
-            int currentCount = Inventory.Instance.GetItemCount(Inventory.HEAL);
+            int currentCount = Inventory.Instance.GetItemCount(Inventory.AMMO);
             currentCount = currentCount > 3 ? 3 : currentCount;
             Inventory.Instance.AddItem(Inventory.AMMO, 3 - currentCount);
+            DevToDev.Analytics.Tutorial(2);
         }
     }
 }

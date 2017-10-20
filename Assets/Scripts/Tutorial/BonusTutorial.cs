@@ -75,12 +75,14 @@ public class BonusTutorial : InAppTutorial
                 int currentCount = Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS);
                 currentCount = currentCount > 3 ? 3 : currentCount;
                 Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 3 - currentCount);
+                DevToDev.Analytics.Tutorial(4);
             }
             if (type == "Damage")
             {
                 int currentCount = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS);
                 currentCount = currentCount > 3 ? 3 : currentCount;
                 Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 3 - currentCount);
+                DevToDev.Analytics.Tutorial(3);
             }            
         }
 		else if (other.gameObject.CompareTag("Player") && currentLevel == "Level2" && PlayerPrefs.GetInt("Level3") == 1)
@@ -128,12 +130,14 @@ public class BonusTutorial : InAppTutorial
                 int currentCount = Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS);
                 currentCount = currentCount > 3 ? 3 : currentCount;
                 Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 3 - currentCount);
+                DevToDev.Analytics.Tutorial(6);
             }
             if (type == "Time")
             {
                 int currentCount = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS);
                 currentCount = currentCount > 3 ? 3 : currentCount;
                 Inventory.Instance.AddItem(Inventory.TIME_BONUS, 3 - currentCount);
+                DevToDev.Analytics.Tutorial(5);
             }
         }
         else if (other.gameObject.CompareTag("Player") && currentLevel == "Level3" && PlayerPrefs.GetInt("Level4") == 1)

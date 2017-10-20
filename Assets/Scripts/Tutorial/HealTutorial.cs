@@ -38,6 +38,7 @@ public class HealTutorial : InAppTutorial
             int currentCount = Inventory.Instance.GetItemCount(Inventory.HEAL);
             currentCount = currentCount > 3 ? 3 : currentCount;
             Inventory.Instance.AddItem(Inventory.HEAL, 3 - currentCount);
+            DevToDev.Analytics.Tutorial(1);
         }
     }
 }

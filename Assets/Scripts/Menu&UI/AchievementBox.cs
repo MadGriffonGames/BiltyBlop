@@ -65,6 +65,13 @@ public class AchievementBox : MonoBehaviour {
 
     string recordName;
 
+    public const string HEAL = "HealthPot";
+    public const string DAMAGE_BONUS = "DamageBonus";
+    public const string SPEED_BONUS = "SpeedBonus";
+    public const string TIME_BONUS = "TimeBonus";
+    public const string IMMORTAL_BONUS = "ImmortalBonus";
+    public const string AMMO = "ClipsCount";
+
 
     int gotReward;
     const string btn = "btn";
@@ -244,6 +251,11 @@ public class AchievementBox : MonoBehaviour {
             StartCoroutine(ShowCrystalLoot(0));
         }
 
+        else if (PlayerPrefs.GetString(achievementName + "rewardType0") == HEAL || PlayerPrefs.GetString(achievementName + "rewardType0") == DAMAGE_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == SPEED_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == TIME_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == IMMORTAL_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == AMMO)
+        {
+            StartCoroutine(ShowItemLoot(0));
+        }
+
 
         if (currentValue >= targetValue1)
         {
@@ -276,6 +288,11 @@ public class AchievementBox : MonoBehaviour {
             StartCoroutine(ShowCrystalLoot(1));
         }
 
+        else if (PlayerPrefs.GetString(achievementName + "rewardType0") == HEAL || PlayerPrefs.GetString(achievementName + "rewardType0") == DAMAGE_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == SPEED_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == TIME_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == IMMORTAL_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == AMMO)
+        {
+            StartCoroutine(ShowItemLoot(1));
+        }
+
         if (currentValue < targetValue2)
         {
             inProgress.SetActive(true);
@@ -303,6 +320,11 @@ public class AchievementBox : MonoBehaviour {
         else if (PlayerPrefs.GetString(achievementName + "rewardType2") == "Crystals")
         {
             StartCoroutine(ShowCrystalLoot(2));
+        }
+
+        else if (PlayerPrefs.GetString(achievementName + "rewardType0") == HEAL || PlayerPrefs.GetString(achievementName + "rewardType0") == DAMAGE_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == SPEED_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == TIME_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == IMMORTAL_BONUS || PlayerPrefs.GetString(achievementName + "rewardType0") == AMMO)
+        {
+            StartCoroutine(ShowItemLoot(2));
         }
 
         UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
@@ -357,6 +379,18 @@ public class AchievementBox : MonoBehaviour {
         rewardFade.gameObject.SetActive(true);
         loot.gameObject.GetComponent<Image>().sprite = crystals;
         GameManager.CollectedCoins += PlayerPrefs.GetInt(achievementName + level.ToString());
+        loot.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        fadeButton.SetActive(true);
+    }
+
+    IEnumerator ShowItemLoot(int level)
+    {
+        Debug.Log(PlayerPrefs.GetInt(achievementName + level.ToString()));
+        lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + level.ToString()).ToString();
+        rewardFade.gameObject.SetActive(true);
+        loot.gameObject.GetComponent<Image>().sprite = crystals;
+        Inventory.Instance.AddItem(PlayerPrefs.GetString(achievementName + "rewardType"), PlayerPrefs.GetInt(achievementName + level.ToString()));
         loot.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);

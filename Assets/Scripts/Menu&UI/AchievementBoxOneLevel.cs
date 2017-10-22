@@ -53,6 +53,13 @@ public class AchievementBoxOneLevel : MonoBehaviour
     [SerializeField]
     Sprite crystals;
 
+    public const string HEAL = "HealthPot";
+    public const string DAMAGE_BONUS = "DamageBonus";
+    public const string SPEED_BONUS = "SpeedBonus";
+    public const string TIME_BONUS = "TimeBonus";
+    public const string IMMORTAL_BONUS = "ImmortalBonus";
+    public const string AMMO = "ClipsCount";
+
 
     int gotReward;
     const string btn = "btn";
@@ -140,6 +147,11 @@ public class AchievementBoxOneLevel : MonoBehaviour
         {
             StartCoroutine(ShowCrystalLoot());
         }
+
+        else if (PlayerPrefs.GetString(achievementName + "rewardType") == HEAL || PlayerPrefs.GetString(achievementName + "rewardType") == DAMAGE_BONUS || PlayerPrefs.GetString(achievementName + "rewardType") == SPEED_BONUS || PlayerPrefs.GetString(achievementName + "rewardType") == TIME_BONUS || PlayerPrefs.GetString(achievementName + "rewardType") == IMMORTAL_BONUS || PlayerPrefs.GetString(achievementName + "rewardType") == AMMO)
+        {
+            StartCoroutine(ShowItemLoot());
+        }
     }
 
     void UpdateStatus(int currentValue, int currenTargetValue)
@@ -170,8 +182,21 @@ public class AchievementBoxOneLevel : MonoBehaviour
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
         rewardFade.gameObject.SetActive(true);
         loot.gameObject.GetComponent<Image>().sprite = crystals;
-        GameManager.CollectedCoins += PlayerPrefs.GetInt(achievementName + "reward ");
+        GameManager.CollectedCoins += PlayerPrefs.GetInt(achievementName + "reward");
         loot.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        fadeButton.SetActive(true);
+    }
+
+    IEnumerator ShowItemLoot()
+    {
+        lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
+        rewardFade.gameObject.SetActive(true);
+        loot.gameObject.GetComponent<Image>().sprite = crystals;
+        Debug.Log(PlayerPrefs.GetInt(HEAL + "Count"));
+        Inventory.Instance.AddItem(PlayerPrefs.GetString(achievementName + "rewardType"), PlayerPrefs.GetInt(achievementName + "reward"));
+        loot.gameObject.SetActive(true);
+        Debug.Log(PlayerPrefs.GetInt(HEAL + "Count"));
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);
     }

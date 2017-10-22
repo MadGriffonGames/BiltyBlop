@@ -10,6 +10,7 @@ public class AchievementManager : MonoBehaviour {
     GameObject achievementUI;
 
 
+    string[] itemsNames;
 
     int[] mobKillerReward;
     int[] mobKillerTargetValue;
@@ -34,6 +35,14 @@ public class AchievementManager : MonoBehaviour {
 
     string[] tripleCoins;
     string[] tripleCrystals;
+    string[] items;
+
+    public const string HEAL = "HealthPot";
+    public const string DAMAGE_BONUS = "DamageBonus";
+    public const string SPEED_BONUS = "SpeedBonus";
+    public const string TIME_BONUS = "TimeBonus";
+    public const string IMMORTAL_BONUS = "ImmortalBonus";
+    public const string AMMO = "ClipsCount";
 
     public Achieve mobKiller;
     public Achieve treasureHunter;
@@ -64,13 +73,15 @@ public class AchievementManager : MonoBehaviour {
     {
         idiotReward = new int[] { -5, -10, -15 };
         idiotTargerValue = new int[] { 1, 5, 10 };
-
+        itemsNames = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO };
     }
 
     // Use this for initialization
     void Start() {
         //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
+
+        items = new string[] { HEAL, HEAL, HEAL };
 
         mobKillerReward = new int[] { 50, 150, 200 };
         mobKillerTargetValue = new int[] { 10, 50, 100 };
@@ -104,7 +115,8 @@ public class AchievementManager : MonoBehaviour {
         //ResetStat("First Buy Test");
         mobKiller = new Achieve("Mob killer", tripleCrystals, mobKillerTargetValue, mobKillerReward);
         treasureHunter = new Achieve("Treasure Hunter", tripleCoins, treasureHunterValue, treasureHunterReward);
-        swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
+        swimmer = new LevelAchieve("Diver", HEAL, 5, 1);
+        //swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
         torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 500);
         secretRoomer = new Achieve("Secret Rush", tripleCoins, secretRoomerTargetValue, secretRoomerReward);
         firstBuy = new LevelAchieve("First Buy", "Coins", 1, 1000);

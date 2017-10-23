@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class AchievementUI : MonoBehaviour {
-
+public class AchievementUI : MonoBehaviour
+{
     [SerializeField]
     public GameObject achievementBox;
     [SerializeField]
@@ -19,8 +19,8 @@ public class AchievementUI : MonoBehaviour {
     bool fading = true;
     bool fadingOut = false;
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         achievementBox.gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         fading = true;
     }
@@ -29,11 +29,6 @@ public class AchievementUI : MonoBehaviour {
     {
         fading = true;
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 
     private void FixedUpdate()
     {

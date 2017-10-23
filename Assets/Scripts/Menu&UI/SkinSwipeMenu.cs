@@ -32,6 +32,7 @@ public class SkinSwipeMenu : SwipeMenu {
     {
         base.Update();
     }
+
     private void SetSkinCards()
     {
         for (int i = 0; i < SkinManager.Instance.skinPrefabs.Length; i++)

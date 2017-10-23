@@ -33,11 +33,11 @@ public class AmmoTutorial : InAppTutorial
                 light.SetActive(false);
                 bonusLight.SetActive(true);
             }
-            if (!InventoryUI.isOpen && bonusLight.activeInHierarchy)
-            {
-                isActivated = false;
-                isCollected = false;
-            }
+            //if (!InventoryUI.isOpen && bonusLight.activeInHierarchy)
+            //{
+            //    isActivated = false;
+            //    isCollected = false;
+            //}
         }
     }
 

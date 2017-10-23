@@ -142,7 +142,12 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
-        PlayerPrefs.DeleteKey("Level2");
+
+        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
+        {
+            DevToDev.Analytics.Tutorial(-1);
+        }
+
         bonusFX = GetComponentInChildren<Animator>();
 
         skinSlots = new Slot [9];
@@ -501,7 +506,6 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
-                    //AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     

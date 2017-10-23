@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 	{
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
-            crystalTxt = GameObject.Find("CrystalTxt").GetComponent<Text>();
+            crystalTxt = GameObject.FindGameObjectWithTag("CrystalTxt").GetComponent<Text>();
         }
 
         if (!PlayerPrefs.HasKey("NoAds"))

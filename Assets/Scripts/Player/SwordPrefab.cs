@@ -30,7 +30,7 @@ public class SwordPrefab : MonoBehaviour {
 	{
 		if (!PlayerPrefs.HasKey("Sword")) 
 		{
-			PlayerPrefs.SetString ("Sword", "Classic");
+			PlayerPrefs.SetString ("Sword", "ClassicSword");
 		}
 		if (!PlayerPrefs.HasKey (gameObject.name)) {
 			if (isLocked) {

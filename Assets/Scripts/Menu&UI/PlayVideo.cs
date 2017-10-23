@@ -32,7 +32,7 @@ public class PlayVideo : MonoBehaviour
 		else
 			skipButton.SetActive (true);
     }
-
+		
 	public void SkipVideo()
 	{
 		videoPlayer.Stop ();

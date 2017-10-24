@@ -130,7 +130,7 @@ public class InventoryUI : MonoBehaviour
 
     public void ImmortalButton()
     {
-        if (Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS) > 0 && Player.Instance.immortalBonusNum == 0)
+        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS) > 0 && Player.Instance.immortalBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.IMMORTAL_BONUS);
@@ -143,7 +143,7 @@ public class InventoryUI : MonoBehaviour
 
     public void DamageButton()
     {
-        if (Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS) > 0 && Player.Instance.damageBonusNum == 0)
+        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS) > 0 && Player.Instance.damageBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.DAMAGE_BONUS);
@@ -155,7 +155,7 @@ public class InventoryUI : MonoBehaviour
 
     public void SpeedButton()
     {
-        if (Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS) > 0 && Player.Instance.speedBonusNum == 0)
+        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS) > 0 && Player.Instance.speedBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.SPEED_BONUS);
@@ -167,7 +167,7 @@ public class InventoryUI : MonoBehaviour
 
     public void TimeButton()
     {
-        if (Inventory.Instance.GetItemCount(Inventory.TIME_BONUS) > 0 && Player.Instance.timeBonusNum == 0)
+        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.TIME_BONUS) > 0 && Player.Instance.timeBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.TIME_BONUS);

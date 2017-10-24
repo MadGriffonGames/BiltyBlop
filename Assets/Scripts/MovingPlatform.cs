@@ -49,10 +49,8 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(1);
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log(2);
             other.gameObject.layer = 9;//9 - is layer called "Platform"
             other.transform.SetParent(platformTransform);
         }

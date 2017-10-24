@@ -22,9 +22,6 @@ public class Player : Character
     [SerializeField]
     private GameObject grave;
 
-	[SerializeField]
-	public GameObject FX;
-
     GameObject throwing;
     public GameObject[] throwingClip;
     public int clipSize;
@@ -114,6 +111,7 @@ public class Player : Character
     public float timeScaler = 1;
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
+    public Animator bonusFX;
 
     /*
      * Skin Managment
@@ -133,7 +131,13 @@ public class Player : Character
 	private void Awake()
 	{
 		SetPerkParams ();
-	}
+        health = PlayerPrefs.GetInt("SkinArmorStat");
+        maxHealth = health;
+        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat");
+        throwDamage = PlayerPrefs.GetInt("ThrowAttackStat");
+
+        HealthUI.Instance.SetHealthbar();
+    }
 
     private void OnEnable()
     {
@@ -145,14 +149,18 @@ public class Player : Character
 	{
         base.Start();
 
+        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
+        {
+            DevToDev.Analytics.Tutorial(-1);
+        }
+
+        bonusFX = GetComponentInChildren<Animator>();
+
         skinSlots = new Slot [9];
 
 		swordIndex = PlayerPrefs.GetInt("SwordDisplayIndex");
 		skinIndex = PlayerPrefs.GetInt ("SkinDisplayIndex");
-
-		health = PlayerPrefs.GetInt ("SkinArmorStat");
-		meleeDamage = PlayerPrefs.GetInt ("SkinAttackStat");
-        throwDamage = 1;
+		
 
         SetSlots();
         SetIndexes();
@@ -184,9 +192,6 @@ public class Player : Character
         lvlCoins = 0;
         freeCheckpoints = 3;
         startCoinCount = GameManager.CollectedCoins;
-
-        maxHealth = health;
-        HealthUI.Instance.SetHealthbar();
     }
 
 	void Update()
@@ -217,6 +222,11 @@ public class Player : Character
             if (Mathf.Abs(mobileInput + playerAxis / 10) <= 1 && playerAxis != 0)
                 mobileInput += playerAxis / 10;
             else mobileInput = playerAxis;
+            if (!UI.Instance.controlsUI.activeInHierarchy)
+            {
+                mobileInput = 0;
+                playerAxis = 0;
+            }
 
 #if UNITY_EDITOR
             float horizontal;
@@ -496,7 +506,6 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
-                    //AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.idiot);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     
@@ -558,6 +567,7 @@ public class Player : Character
 			}
 		}
 		throwing.GetComponent<Throwing> ().damage = PlayerPrefs.GetInt ("ThrowAttackStat");
+		throwDamage = throwing.GetComponent<Throwing> ().damage;
 		throwing.GetComponent<Throwing> ().speed = PlayerPrefs.GetFloat ("ThrowSpeedStat");
 
         throwingIterator = SceneManager.GetActiveScene().name == "Level1" ? -1 : clipSize - 1;
@@ -605,13 +615,13 @@ public class Player : Character
             if (this.gameObject.transform.localScale.x > 0)
             {
                 throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(1.5f, 0.1f, -5);
-                throwingClip[throwingIterator].transform.rotation = Quaternion.identity;
+				throwingClip [throwingIterator].transform.rotation = Quaternion.Euler (0, 0, -90);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.right);
             }
             else
             {
                 throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-1.5f, 0.1f, -5);
-                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 180);
+                throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 90);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
             }
 
@@ -663,8 +673,8 @@ public class Player : Character
     public void ExecBonusImmortal(float duration)
     {
         StartCoroutine(ImmortalBonus(duration));
-        MakeFX.Instance.MakeImmortalBonus(duration);
-		FX.GetComponent<Animator> ().SetTrigger ("immortal");
+			MakeFX.Instance.MakeImmortalBonus(duration * potionTimeScale);
+		bonusFX.SetTrigger ("immortal");
     }
 
     public IEnumerator ImmortalBonus(float duration)
@@ -676,15 +686,15 @@ public class Player : Character
         if (immortalBonusNum == 0)
         {
             immortal = false;
-			FX.GetComponent<Animator> ().SetTrigger ("reset");
+			bonusFX.SetTrigger ("reset");
         }
     }
 
     public void ExecBonusDamage(float duration)
     {
         StartCoroutine(DamageBonus(duration));
-        MakeFX.Instance.MakeDamageBonus(duration);
-		FX.GetComponent<Animator> ().SetTrigger ("damage");
+			MakeFX.Instance.MakeDamageBonus(duration * potionTimeScale);
+		bonusFX.SetTrigger ("damage");
 
     }
 
@@ -697,15 +707,15 @@ public class Player : Character
         if (damageBonusNum == 0)
         {
             meleeDamage /= 2;
-			FX.GetComponent<Animator> ().SetTrigger ("reset");
+			bonusFX.SetTrigger ("reset");
         }
     }
 
     public void ExecBonusJump(float duration)
     {
         StartCoroutine(JumpBonus(duration));
-        MakeFX.Instance.MakeJumpBonus(duration);
-		FX.GetComponent<Animator> ().SetTrigger ("jump");
+			MakeFX.Instance.MakeJumpBonus(duration * potionTimeScale);
+		bonusFX.SetTrigger ("jump");
     }
 
     public IEnumerator JumpBonus(float duration)
@@ -717,15 +727,15 @@ public class Player : Character
         if (jumpBonusNum == 0)
         {
             jumpForce = 700;
-			FX.GetComponent<Animator> ().SetTrigger ("reset");
+			bonusFX.SetTrigger ("reset");
         }
     }
 
     public void ExecBonusSpeed(float duration)
     {
         StartCoroutine(SpeedBonus(duration));
-        MakeFX.Instance.MakeSpeedBonus(duration);
-		FX.GetComponent<Animator> ().SetTrigger ("speed");
+			MakeFX.Instance.MakeSpeedBonus(duration * potionTimeScale);
+		bonusFX.SetTrigger ("speed");
     }
 
     public IEnumerator SpeedBonus(float duration)
@@ -747,15 +757,15 @@ public class Player : Character
             myArmature.animation.timeScale = 1;
             timeScalerMove = 1;
             cef.StopBlur();
-			FX.GetComponent<Animator> ().SetTrigger ("reset");
+			bonusFX.SetTrigger ("reset");
         }
     }
 
     public void ExecBonusTime(float duration)
     {
         StartCoroutine(TimeBonus(duration));
-        MakeFX.Instance.MakeTimeBonus(duration);
-	    FX.GetComponent<Animator> ().SetTrigger ("time");
+			MakeFX.Instance.MakeTimeBonus(duration * potionTimeScale);
+	    bonusFX.SetTrigger ("time");
     }
 
     public IEnumerator TimeBonus(float duration)
@@ -782,7 +792,7 @@ public class Player : Character
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f;
             myRigidbody.gravityScale = 3;
-			FX.GetComponent<Animator> ().SetTrigger ("reset");
+            bonusFX.SetTrigger("reset");
         }
     }
 
@@ -800,6 +810,7 @@ public class Player : Character
         jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
         Time.fixedDeltaTime = 0.02000000f;
+        bonusFX.enabled = false;
     }
 
     /*

@@ -74,8 +74,8 @@ public class TutorialTrigger : MonoBehaviour
     {
         TutorialUI.Instance.oldmanFace.gameObject.SetActive(true);
         TutorialUI.Instance.textBar.gameObject.SetActive(true);
-        TutorialUI.Instance.oldmanFace.color += new Color(0, 0, 0, 0.05f);
-        TutorialUI.Instance.textBar.color += new Color(0, 0, 0, 0.05f);
+        TutorialUI.Instance.oldmanFace.color += new Color(0, 0, 0, 0.12f);
+        TutorialUI.Instance.textBar.color += new Color(0, 0, 0, 0.12f);
         if (TutorialUI.Instance.textBar.color.a >= 0.2f)
         {
             TutorialUI.Instance.txt.fontSize = fontSize;
@@ -89,8 +89,8 @@ public class TutorialTrigger : MonoBehaviour
 
     void FadeOut()
     {
-        TutorialUI.Instance.oldmanFace.color -= new Color(0, 0, 0, 0.05f);
-        TutorialUI.Instance.textBar.color -= new Color(0, 0, 0, 0.05f);
+        TutorialUI.Instance.oldmanFace.color -= new Color(0, 0, 0, 0.12f);
+        TutorialUI.Instance.textBar.color -= new Color(0, 0, 0, 0.12f);
         if (TutorialUI.Instance.textBar.color.a <= 0.5f)
         {
             TutorialUI.Instance.txt.text = "";

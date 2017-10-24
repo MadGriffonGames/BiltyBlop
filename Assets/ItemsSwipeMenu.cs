@@ -24,12 +24,13 @@ public class ItemsSwipeMenu : SwipeMenu {
 	public override void Start ()
 	{
 		onStart1 = true;
-	}
+        buttons = new GameObject[Inventory.Instance.itemsNames.Length];
+    }
 
 	public override void Update ()
 	{
 		if (onStart1 && Inventory.Instance.isActiveAndEnabled) {
-			buttons = new GameObject[Inventory.Instance.itemsNames.Length];
+			//buttons = new GameObject[Inventory.Instance.itemsNames.Length];
 			SetItemCards();
 			distance = new float[buttons.Length];
 			for (int i = 0; i < buttons.Length; i++)

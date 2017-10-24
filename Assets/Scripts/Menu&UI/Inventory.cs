@@ -66,9 +66,9 @@ public class Inventory : MonoBehaviour
     {
             if (moneyType == "Coins")
             {
-                if (PlayerPrefs.GetInt("Coins") >= price)
+			if (PlayerPrefs.GetInt("Coins") >= price * itemCount)
                 {
-                    PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price);
+				PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price * itemCount);
                     AddItem(itemName, itemCount);
 
                     AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
@@ -76,9 +76,9 @@ public class Inventory : MonoBehaviour
             }
             if (moneyType == "Crystals")
             {
-                if (PlayerPrefs.GetInt("Crystals") >= price)
+			if (PlayerPrefs.GetInt("Crystals") >= price * itemCount)
                 {
-                    PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price);
+				PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price * itemCount);
                     AddItem(itemName, itemCount);
 
                     AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
@@ -108,12 +108,11 @@ public class Inventory : MonoBehaviour
             PlayerPrefs.SetInt(itemName + COUNT, itemCount);
             UpdateItemValue(itemName);
         }
-        else if (PlayerPrefs.GetInt(itemName + COUNT) + itemCount <= PlayerPrefs.GetInt(MAX + itemName))
+        else
         {
-            
-        }
-        PlayerPrefs.SetInt(itemName + COUNT, PlayerPrefs.GetInt(itemName + COUNT) + itemCount);
-        UpdateItemValue(itemName);
+			PlayerPrefs.SetInt(itemName + COUNT, PlayerPrefs.GetInt(itemName + COUNT) + itemCount);
+			UpdateItemValue(itemName);
+        }  
     }
 
     public void RemoveItem(string itemName)
@@ -222,6 +221,28 @@ public class Inventory : MonoBehaviour
 
         SendUseMetric(bonusType);
     }
+
+	public string DescriptionOfItem(string itemName)
+	{
+		switch (itemName) 
+		{
+			case "HealthPot":
+				return "This pot immedeately restores your health!";
+		case "DamageBonus":
+			return "Gives you a 'Double damage' bonus for a short time.";
+		case "SpeedBonus":
+			return "Increases your speed for a short time.";
+		case "TimeBonus":
+			return "This potion makes time go slower";
+		case "ImmortalBonus":
+			return "Gives you a shield that protect you from any damage you can take";
+		case "ClipsCount":
+			return "Fully restores all your throwing weapons";
+		default:
+			return "NO DESCRIPTION";
+		}
+		return "";
+	}
 
     void SendUseMetric(string bonusName)
     {

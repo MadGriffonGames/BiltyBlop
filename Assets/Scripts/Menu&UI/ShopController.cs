@@ -23,14 +23,26 @@ public class ShopController : MonoBehaviour {
     Text coinTxt;
     [SerializeField]
     Text crystalTxt;
+	[SerializeField]
+	Text HP;
+	[SerializeField]
+	Text DMG;
+	[SerializeField]
+	Text IMM;
+	[SerializeField]
+	Text SPD;
+	[SerializeField]
+	Text TM;
+	[SerializeField]
+	Text THR;
 
-    public string[] shopNames;
     private int activeShopNumber;
     private int shopsCount;
 
     private void Update()
     {
-        UpdateMoneyValues(); // так, ибо почему-то пообращению к методу он не обновляет значенияж
+        UpdateMoneyValues();
+		UpdateItemsValues ();// так, ибо почему-то пообращению к методу он не обновляет значенияж
     }
 
     public void UpdateMoneyValues()
@@ -38,6 +50,16 @@ public class ShopController : MonoBehaviour {
         coinTxt.text = PlayerPrefs.GetInt("Coins").ToString();
         crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
     }
+
+	public void UpdateItemsValues()
+	{
+		HP.text = Inventory.Instance.GetItemCount ("HealthPot").ToString();
+		DMG.text = Inventory.Instance.GetItemCount ("DamageBonus").ToString();
+		IMM.text = Inventory.Instance.GetItemCount ("ImmortalBonus").ToString();
+		SPD.text = Inventory.Instance.GetItemCount ("SpeedBonus").ToString();
+		TM.text = Inventory.Instance.GetItemCount ("TimeBonus").ToString();
+		THR.text = Inventory.Instance.GetItemCount ("ClipsCount").ToString();
+	}
 
     public void ActivateShop(int number)
     {

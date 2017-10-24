@@ -76,4 +76,14 @@ public class MetricaManager : MonoBehaviour
         levelParams.Add("Checkpoint packs for coins: ", coinCheckpoints);
         levelParams.Add("Checkpoint packs for crystals: ", crystalCheckpoints);
     }
+
+    void DevToDevInitialize()
+    {
+        string lvlName = SceneManager.GetActiveScene().name;
+        string tmp = "" + lvlName[lvlName.Length - 1];
+        int currentLvl = int.Parse(tmp);
+
+        DevToDev.Analytics.CurrentLevel(currentLvl);
+        DevToDev.Analytics.SetActiveLog(true);
+    }
 }

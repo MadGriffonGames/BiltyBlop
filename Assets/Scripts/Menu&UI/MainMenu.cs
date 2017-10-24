@@ -29,6 +29,13 @@ public class MainMenu : MonoBehaviour
 			PlayerPrefs.SetString ("Skin", "Classic");
             betaTestReward.SetActive(true);
         }
+		if (!PlayerPrefs.HasKey ("Throw")) 
+		{
+			PlayerPrefs.SetString ("Throw", "ClassicThrow");
+			PlayerPrefs.SetFloat ("ThrowAttackStat", 1);
+			PlayerPrefs.SetInt ("ThrowSpeedStat", 14);
+		}
+			
 
         SoundManager.PlayMusic("main menu", true);
     }
@@ -38,9 +45,9 @@ public class MainMenu : MonoBehaviour
         actCanvas.SetActive(true);
     }
 
-    public void ToIapTest()
+    public void ToAchievmentMenu()
     {
-        GameManager.nextLevelName = "IapTest";
+        GameManager.nextLevelName = "AchievementMenu";
 
         SceneManager.LoadScene("Loading");
     }

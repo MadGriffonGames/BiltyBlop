@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject bird;
 
+    string currentLvl;
+    bool isLevel;
+
 	void Awake()
 	{
 		#if UNITY_EDITOR
@@ -55,21 +58,23 @@ public class GameManager : MonoBehaviour
 
         Instantiate(achievementManager);
 
+        if (SceneManager.GetActiveScene().name.Contains("Level"))
+        {
+            crystalTxt = GameObject.FindGameObjectWithTag("CrystalTxt").GetComponent<Text>();
+        }
+        coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
+
+        currentLvl = SceneManager.GetActiveScene().name;
     }
 
     void Start () 
-	{
-        if (SceneManager.GetActiveScene().name.Contains("Level"))
-        {
-            crystalTxt = GameObject.Find("CrystalTxt").GetComponent<Text>();
-        }
-
+	{      
         if (!PlayerPrefs.HasKey("NoAds"))
         {
             PlayerPrefs.SetInt("NoAds", 0);
         }
 
-        coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
+        isLevel = currentLvl.Contains("Level") ? true : false;
 
         Instantiate(adsManager);
         Instantiate(metricaManager);
@@ -99,8 +104,11 @@ public class GameManager : MonoBehaviour
     }
 
     void Update()
-    {
-        coinTxt.text = (" " + collectedCoins);
+    {        
+        if (isLevel && UI.Instance.isActiveAndEnabled)
+        {
+            coinTxt.text = (" " + collectedCoins);
+        }
         if (torches == 0 && isBirded == false)
         {
             ThrowBird();
@@ -191,4 +199,12 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
     }
+
+	public static void DestroyDeadEnemies()
+	{
+		foreach (GameObject enemy in deadEnemies) 
+		{
+			Destroy (enemy.gameObject);
+		}
+	}
 }

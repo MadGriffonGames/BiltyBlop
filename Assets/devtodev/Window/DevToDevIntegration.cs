@@ -38,7 +38,7 @@ namespace com.devtodev {
 		private string webKey = "";
 		private string webSecret = "";
 		
-		private bool pushEnabled = false;
+		private bool pushEnabled = true;
 		private bool logEnabled = false;
 
 		void Awake() {

@@ -36,6 +36,7 @@ public class AchievementManager : MonoBehaviour {
     string[] tripleCoins;
     string[] tripleCrystals;
     string[] items;
+    string[] differentItems;
 
     public const string HEAL = "HealthPot";
     public const string DAMAGE_BONUS = "DamageBonus";
@@ -80,14 +81,16 @@ public class AchievementManager : MonoBehaviour {
     void Start() {
         //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
-
         items = new string[] { HEAL, HEAL, HEAL };
 
+
+
         mobKillerReward = new int[] { 50, 150, 200 };
-        mobKillerTargetValue = new int[] { 10, 50, 100 };
+        mobKillerTargetValue = new int[] { 1, 2, 3 };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
         tripleCrystals = new string[] { "Crystals", "Crystals", "Crystals" };
+        differentItems = new string[] { "Black_ninjaSword", "King", "BarbarianSword" };
 
         treasureHunterReward = new int[] { 10, 100, 500 };
         treasureHunterValue = new int[] { 3, 10, 15 };
@@ -108,17 +111,20 @@ public class AchievementManager : MonoBehaviour {
         millionareReward = new int[] { 100, 150, 200 };
 
 
-        ResetStat("Mob killer");
-        ResetStat("Diver");
+        PlayerPrefs.SetString("Black_ninja", "Locked");
+        PlayerPrefs.SetString("Sword3Throw", "Locked");
+
+        //ResetStat("Mob killer");
+        //ResetStat("Diver");
         //ResetStat("Secret Rush test");
         //ResetStat("Spider Boss killer test");
         //ResetStat("First Buy Test");
-        ResetStat("StarWalker");
-        mobKiller = new Achieve("Mob killer", tripleCrystals, mobKillerTargetValue, mobKillerReward);
+        //ResetStat("StarWalker");
+        mobKiller = new Achieve("Mob killer", differentItems, mobKillerTargetValue, mobKillerReward);
         treasureHunter = new Achieve("Treasure Hunter", tripleCoins, treasureHunterValue, treasureHunterReward);
-        swimmer = new LevelAchieve("Diver", HEAL, 5, 1);
+        swimmer = new LevelAchieve("Diver", "KingSword", 5, 1);
         //swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
-        torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 500);
+        torchCollector = new LevelAchieve("Torch Collector", "Crystals", 1, 2);
         secretRoomer = new Achieve("Secret Rush", tripleCoins, secretRoomerTargetValue, secretRoomerReward);
         firstBuy = new LevelAchieve("First Buy", "Coins", 1, 1000);
         spiderKiller = new LevelAchieve("Spider Boss killer", "Coins", 1, 1500);

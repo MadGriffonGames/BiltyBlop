@@ -14,7 +14,7 @@ public class PlayVideo : MonoBehaviour
 
 	VideoPlayer videoPlayer;
 
-    private void Awake()
+    private void Start()
     {
 		videoPlayer = this.gameObject.GetComponent<VideoPlayer> ();
 		videoPlayer.isLooping = false;

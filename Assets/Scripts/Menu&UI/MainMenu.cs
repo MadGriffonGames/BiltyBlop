@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
 		{
 			PlayerPrefs.SetString ("Throw", "ClassicThrow");
 			PlayerPrefs.SetFloat ("ThrowAttackStat", 1);
-			PlayerPrefs.SetInt ("ThrowSpeedStat", 14);
+			PlayerPrefs.SetFloat ("ThrowSpeedStat", 14);
 		}
 			
 

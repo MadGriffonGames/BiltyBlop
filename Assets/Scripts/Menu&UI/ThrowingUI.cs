@@ -39,31 +39,31 @@ public class ThrowingUI : MonoBehaviour
 			throwText.text = "x " + Player.Instance.maxClipSize.ToString();
 			throwImage.GetComponent<Image> ().sprite = Resources.Load<GameObject> ("Throwing/ThrowingObject").GetComponent<SpriteRenderer> ().sprite;
 			throwBar = new GameObject[Player.Instance.maxClipSize];
-			for (int i = 0; i < Player.Instance.maxClipSize; i++) 
-			{
-				GameObject throwingKnife = Instantiate (throwingObject) as GameObject;
-
-
-				throwingKnife.transform.SetParent (this.transform);
-				throwingKnife.transform.localScale = new Vector3 (1, 1, 1);
-				throwBar [i] = throwingKnife;
-			}
+//			for (int i = 0; i < Player.Instance.maxClipSize; i++) 
+//			{
+//				GameObject throwingKnife = Instantiate (throwingObject) as GameObject;
+//
+//
+//				throwingKnife.transform.SetParent (this.transform);
+//				throwingKnife.transform.localScale = new Vector3 (1, 1, 1);
+//				throwBar [i] = throwingKnife;
+//			}
 			onStart = false;
 			
 		}
 
 		throwText.text = "x " + (Player.Instance.throwingIterator + 1).ToString();
-        for (int i = 0; i < Player.Instance.clipSize; i++)
-        {
-            if (i < Player.Instance.throwingIterator + 1)
-            {
-                throwBar[i].SetActive(true);
-            }
-            else
-            {
-                throwBar[i].SetActive(false);
-            }
-        }
+//        for (int i = 0; i < Player.Instance.clipSize; i++)
+//        {
+//            if (i < Player.Instance.throwingIterator + 1)
+//            {
+//                throwBar[i].SetActive(true);
+//            }
+//            else
+//            {
+//                throwBar[i].SetActive(false);
+//            }
+//        }
     }
 
 	public void SetItems()

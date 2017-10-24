@@ -176,8 +176,8 @@ public class AchievementBox : MonoBehaviour {
 
         recordName = text.GetComponent<Text>().text;
 
-        PlayerPrefs.SetInt(achievementName + medal, 0);
-        PlayerPrefs.SetInt(achievementName + btn, 0);
+        //PlayerPrefs.SetInt(achievementName + medal, 0);
+        //PlayerPrefs.SetInt(achievementName + btn, 0);
 
         if (!PlayerPrefs.HasKey(achievementName + btn))
             PlayerPrefs.SetInt(achievementName + btn, 0);
@@ -508,7 +508,6 @@ public class AchievementBox : MonoBehaviour {
     }
     IEnumerator ShowThrowLoot(int level)
     {
-        //lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
         rewardFade.gameObject.SetActive(true);
         string lootType = PlayerPrefs.GetString(achievementName + "rewardType" + level.ToString());
 
@@ -595,9 +594,6 @@ public class AchievementBox : MonoBehaviour {
             loot.gameObject.GetComponent<Image>().sprite = sword4Throw;
             lootVolume.GetComponent<Text>().text = "Unlocked";
         }
-
-        //loot.gameObject.GetComponent<Image>().sprite = crystals;
-        //GameManager.CollectedCoins += PlayerPrefs.GetInt(achievementName + "reward");
         loot.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);

@@ -152,8 +152,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        PlayerPrefs.SetInt(achievementName + medal, 0);
-        PlayerPrefs.SetInt(achievementName + btn, 0);
+        //PlayerPrefs.SetInt(achievementName + medal, 0);
+        //PlayerPrefs.SetInt(achievementName + btn, 0);
 
 
         UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue"));

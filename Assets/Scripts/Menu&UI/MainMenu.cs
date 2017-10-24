@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
 		if (!PlayerPrefs.HasKey ("Throw")) 
 		{
 			PlayerPrefs.SetString ("Throw", "ClassicThrow");
-			PlayerPrefs.SetFloat ("ThrowAttackStat", 1);
+			PlayerPrefs.SetInt ("ThrowAttackStat", 1);
 			PlayerPrefs.SetFloat ("ThrowSpeedStat", 14);
 		}
 			

@@ -113,6 +113,7 @@ public class AchievementManager : MonoBehaviour {
         //ResetStat("Secret Rush test");
         //ResetStat("Spider Boss killer test");
         //ResetStat("First Buy Test");
+        ResetStat("StarWalker");
         mobKiller = new Achieve("Mob killer", tripleCrystals, mobKillerTargetValue, mobKillerReward);
         treasureHunter = new Achieve("Treasure Hunter", tripleCoins, treasureHunterValue, treasureHunterReward);
         swimmer = new LevelAchieve("Diver", HEAL, 5, 1);

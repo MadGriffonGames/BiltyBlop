@@ -50,19 +50,36 @@ public class RuneStone : InteractiveObject
     {
         GameManager.nextLevelName = nextLvl;
 		PlayerPrefs.SetInt("Coins", GameManager.collectedCoins + Mathf.RoundToInt(GameManager.lvlCollectedCoins * (Player.Instance.coinScale - 1)));   // GREEDY PERK
-
+        Debug.Log("0lvl");
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
         {
+            Debug.Log("1lvl");
+            Debug.Log(PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects"));
+            Debug.Log(Player.Instance.stars);
             if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.stars)
             {
                 int previousStarsCount = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects");
+                int delta = Player.Instance.stars - previousStarsCount;
                 PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + (Player.Instance.stars - previousStarsCount)); // minus old stars count, plus new stars count
+                for (int i = 0; i < delta; i++)
+                {
+                    AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
+                    Debug.Log("Star");
+                }
 
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
             }
         }
         else
         {
+
+            int delta = Player.Instance.stars;
+            for (int i = 0; i < delta; i++)
+            {
+                AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
+                Debug.Log("Star");
+            }
+
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
 
             PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + Player.Instance.stars);

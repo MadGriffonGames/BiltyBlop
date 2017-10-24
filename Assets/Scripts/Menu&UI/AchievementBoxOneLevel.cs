@@ -53,6 +53,24 @@ public class AchievementBoxOneLevel : MonoBehaviour
     [SerializeField]
     Sprite crystals;
 
+    [SerializeField]
+    Sprite healthPot;
+
+    [SerializeField]
+    Sprite DamageBonus;
+
+    [SerializeField]
+    Sprite SpeedBonus;
+
+    [SerializeField]
+    Sprite TimeBonus;
+
+    [SerializeField]
+    Sprite ImmortalBonus;
+
+    [SerializeField]
+    Sprite ClipsCount;
+
     public const string HEAL = "HealthPot";
     public const string DAMAGE_BONUS = "DamageBonus";
     public const string SPEED_BONUS = "SpeedBonus";
@@ -68,8 +86,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //PlayerPrefs.SetInt(achievementName + medal, 0);
-        //PlayerPrefs.SetInt(achievementName + btn, 0);
+        PlayerPrefs.SetInt(achievementName + medal, 0);
+        PlayerPrefs.SetInt(achievementName + btn, 0);
 
 
         UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue"));
@@ -133,7 +151,6 @@ public class AchievementBoxOneLevel : MonoBehaviour
         int targetValue = PlayerPrefs.GetInt(achievementName + "targetValue");
         UpdateStatus(currentValue, targetValue);
         PlayerPrefs.SetInt(achievementName + btn, 1);
-        getBtn.gameObject.SetActive(false);
         inProgress.SetActive(false);
         PlayerPrefs.SetInt(achievementName + medal, 1);
         gold.gameObject.SetActive(true);
@@ -152,6 +169,13 @@ public class AchievementBoxOneLevel : MonoBehaviour
         {
             StartCoroutine(ShowItemLoot());
         }
+
+        else if (PlayerPrefs.GetString(achievementName + "rewardType") == "ClassicThrow" || PlayerPrefs.GetString(achievementName + "rewardType") == "CoinThrow" || PlayerPrefs.GetString(achievementName + "rewardType") == "MagicThrow" || PlayerPrefs.GetString(achievementName + "rewardType") == "SheepThrow")
+        {
+
+        }
+
+        getBtn.gameObject.SetActive(false);
     }
 
     void UpdateStatus(int currentValue, int currenTargetValue)
@@ -192,8 +216,24 @@ public class AchievementBoxOneLevel : MonoBehaviour
     {
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
         rewardFade.gameObject.SetActive(true);
-        loot.gameObject.GetComponent<Image>().sprite = crystals;
+        string lootType = PlayerPrefs.GetString(achievementName + "rewardType");
+
+        if (lootType == HEAL)
+            loot.gameObject.GetComponent<Image>().sprite = healthPot;
+        if (lootType == DAMAGE_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = DamageBonus;
+        if (lootType == SPEED_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = SpeedBonus;
+        if (lootType == TIME_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = TimeBonus;
+        if (lootType == IMMORTAL_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = ImmortalBonus;
+        if (lootType == AMMO)
+            loot.gameObject.GetComponent<Image>().sprite = ClipsCount;
+
+
         Debug.Log(PlayerPrefs.GetInt(HEAL + "Count"));
+        Debug.Log(PlayerPrefs.GetString(achievementName + "rewardType"));
         Inventory.Instance.AddItem(PlayerPrefs.GetString(achievementName + "rewardType"), PlayerPrefs.GetInt(achievementName + "reward"));
         loot.gameObject.SetActive(true);
         Debug.Log(PlayerPrefs.GetInt(HEAL + "Count"));

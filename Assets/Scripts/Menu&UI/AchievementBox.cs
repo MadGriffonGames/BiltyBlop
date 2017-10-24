@@ -54,6 +54,25 @@ public class AchievementBox : MonoBehaviour {
     Sprite crystals;
 
     [SerializeField]
+    Sprite healthPot;
+
+    [SerializeField]
+    Sprite DamageBonus;
+
+    [SerializeField]
+    Sprite SpeedBonus;
+
+    [SerializeField]
+    Sprite TimeBonus;
+
+    [SerializeField]
+    Sprite ImmortalBonus;
+
+    [SerializeField]
+    Sprite ClipsCount;
+
+
+    [SerializeField]
     RectTransform status;
 
     [SerializeField]
@@ -389,8 +408,20 @@ public class AchievementBox : MonoBehaviour {
         Debug.Log(PlayerPrefs.GetInt(achievementName + level.ToString()));
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + level.ToString()).ToString();
         rewardFade.gameObject.SetActive(true);
-        loot.gameObject.GetComponent<Image>().sprite = crystals;
-        Inventory.Instance.AddItem(PlayerPrefs.GetString(achievementName + "rewardType"), PlayerPrefs.GetInt(achievementName + level.ToString()));
+        string lootType = PlayerPrefs.GetString(achievementName + "rewardType" + level.ToString());
+        if (lootType == HEAL)
+            loot.gameObject.GetComponent<Image>().sprite = healthPot;
+        if (lootType == DAMAGE_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = DamageBonus;
+        if (lootType == SPEED_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = SpeedBonus;
+        if (lootType == TIME_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = TimeBonus;
+        if (lootType == IMMORTAL_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = ImmortalBonus;
+        if (lootType == AMMO)
+            loot.gameObject.GetComponent<Image>().sprite = ClipsCount;
+        Inventory.Instance.AddItem(PlayerPrefs.GetString(achievementName + "rewardType" + level.ToString()), PlayerPrefs.GetInt(achievementName + level.ToString()));
         loot.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);

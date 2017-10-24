@@ -131,7 +131,13 @@ public class Player : Character
 	private void Awake()
 	{
 		SetPerkParams ();
-	}
+        health = PlayerPrefs.GetInt("SkinArmorStat");
+        maxHealth = health;
+        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat");
+        throwDamage = PlayerPrefs.GetInt("ThrowAttackStat");
+
+        HealthUI.Instance.SetHealthbar();
+    }
 
     private void OnEnable()
     {
@@ -154,10 +160,7 @@ public class Player : Character
 
 		swordIndex = PlayerPrefs.GetInt("SwordDisplayIndex");
 		skinIndex = PlayerPrefs.GetInt ("SkinDisplayIndex");
-
-		health = PlayerPrefs.GetInt ("SkinArmorStat");
-		meleeDamage = PlayerPrefs.GetInt ("SkinAttackStat");
-		throwDamage = PlayerPrefs.GetInt ("ThrowAttackStat");
+		
 
         SetSlots();
         SetIndexes();
@@ -189,9 +192,6 @@ public class Player : Character
         lvlCoins = 0;
         freeCheckpoints = 3;
         startCoinCount = GameManager.CollectedCoins;
-
-        maxHealth = health;
-        HealthUI.Instance.SetHealthbar();
     }
 
 	void Update()

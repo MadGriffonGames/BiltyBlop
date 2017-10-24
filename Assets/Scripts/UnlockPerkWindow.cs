@@ -64,7 +64,7 @@ public class UnlockPerkWindow : MonoBehaviour {
 				buyCrystalsButton.GetComponentInChildren<Text> ().text = perkCrystalCost.ToString ();
 
 				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
-				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCrystals (perkNumber));
+				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => UpgradePerkByCrystals (perkNumber));
 
 				buyCoinsButton.gameObject.SetActive (false);
 			} else if (perkCrystalCost == 0 && perkCoinCost != 0) {
@@ -73,7 +73,7 @@ public class UnlockPerkWindow : MonoBehaviour {
 				buyCoinsButton.GetComponentInChildren<Text> ().text = perkCoinCost.ToString ();
 
 				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
-				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCoins (perkNumber));
+				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => UpgradePerkByCoins (perkNumber));
 
 				buyCrystalsButton.gameObject.SetActive (false);
 			} else if (perkCrystalCost == 0 && perkCoinCost == 0) {
@@ -84,9 +84,9 @@ public class UnlockPerkWindow : MonoBehaviour {
 				buyCoinsButton.GetComponentInChildren<Text> ().text = perkCoinCost.ToString ();
 
 				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
-				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCrystals (perkNumber));
+				buyCrystalsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => UpgradePerkByCrystals (perkNumber));
 				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
-				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => CanUpgradePerkByCoins (perkNumber));
+				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => UpgradePerkByCoins (perkNumber));
 			}
 		} else 
 		{
@@ -119,7 +119,7 @@ public class UnlockPerkWindow : MonoBehaviour {
 		// perkNumber - number of chosen perk in perkPrefabs[]
 	}
 
-    public void CanUpgradePerkByCrystals(int perkNumber)
+    public void UpgradePerkByCrystals(int perkNumber)
     {
         if (PerksSwipeMenu.Instance.CanUpgradePerkByCrystals(perkNumber))
         {
@@ -129,6 +129,7 @@ public class UnlockPerkWindow : MonoBehaviour {
             closeErrorWindowButton.gameObject.SetActive(true);
             errorWindow.gameObject.SetActive(true);
             errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
+            AppMetrica.Instance.ReportEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
         }
         else
         {
@@ -142,7 +143,7 @@ public class UnlockPerkWindow : MonoBehaviour {
             errorWindow.GetComponentInChildren<Text>().text = "NOT ENOUGH CRYSTALS";
         }
     }
-    public void CanUpgradePerkByCoins(int perkNumber)
+    public void UpgradePerkByCoins(int perkNumber)
     {
         if (PerksSwipeMenu.Instance.CanUpgradePerkByCoins(perkNumber))
         {
@@ -152,6 +153,7 @@ public class UnlockPerkWindow : MonoBehaviour {
             closeErrorWindowButton.gameObject.SetActive(true);
             errorWindow.gameObject.SetActive(true);
             errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
+            AppMetrica.Instance.ReportEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
         }
         else
         {

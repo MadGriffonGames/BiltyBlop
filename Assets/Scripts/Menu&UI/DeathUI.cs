@@ -145,6 +145,7 @@ public class DeathUI : MonoBehaviour
         {
             buyCheckpointsUI.SetActive(true);
         }
+        AppMetrica.Instance.ReportEvent("#CHECKPOINT_USE in " + GameManager.currentLvl);
     }
 
     public void PlayUISound(string sound)

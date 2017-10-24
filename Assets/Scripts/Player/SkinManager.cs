@@ -73,7 +73,9 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+                AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             }
+            
             return true;
         }
         else
@@ -91,7 +93,9 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+                AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             }
+            
             return true;
         }
         else
@@ -108,7 +112,9 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+                AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + skinPrefabs[swordNumber].name);
             }
+            
             return true;
 		}
 		else
@@ -126,7 +132,8 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-            }
+                AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + skinPrefabs[swordNumber].name);
+            }          
             return true;
 		}
 		else
@@ -143,7 +150,8 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-            }
+                AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + skinPrefabs[throwNumber].name);
+            }         
             return true;
 		}
 		else
@@ -161,6 +169,7 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+                AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + skinPrefabs[throwNumber].name);
             }
             return true;
 		}

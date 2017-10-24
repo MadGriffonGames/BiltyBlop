@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject bird;
 
-    string currentLvl;
+    public static string currentLvl;
     bool isLevel;
 
 	void Awake()
@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
         coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
 
         currentLvl = SceneManager.GetActiveScene().name;
+
+        AppMetrica.Instance.ReportEvent("#ENTER in " + currentLvl);
     }
 
     void Start () 

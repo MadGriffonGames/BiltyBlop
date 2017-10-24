@@ -33,21 +33,30 @@ VideoClipImporter:
       codec: 0
       resizeFormat: 0
       aspectRatio: 0
-      customWidth: -1
-      customHeight: -1
+      customWidth: 1
+      customHeight: 1
       bitrateMode: 2
       spatialQuality: 2
+    7:
+      enableTranscoding: 0
+      codec: 0
+      resizeFormat: 0
+      aspectRatio: 5
+      customWidth: 1
+      customHeight: 1
+      bitrateMode: 1
+      spatialQuality: 1
   output:
     format: 1
     settings:
       enableTranscoding: 0
       codec: 0
       resizeFormat: 0
-      aspectRatio: 0
-      customWidth: -1
-      customHeight: -1
-      bitrateMode: 2
-      spatialQuality: 2
+      aspectRatio: 5
+      customWidth: 1
+      customHeight: 1
+      bitrateMode: 1
+      spatialQuality: 1
     encodedWidth: 1280
     encodedHeight: 720
     encodedStartFrame: 0

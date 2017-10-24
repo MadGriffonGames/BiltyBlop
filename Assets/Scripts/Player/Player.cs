@@ -813,6 +813,16 @@ public class Player : Character
         bonusFX.enabled = false;
     }
 
+    public bool IsBonusUsed()
+    {
+        int tmp = damageBonusNum + immortalBonusNum + speedBonusNum + timeBonusNum;
+        if (tmp > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
     /*
      * Skin Managment
      */

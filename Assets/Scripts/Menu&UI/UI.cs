@@ -30,6 +30,5 @@ public class UI : MonoBehaviour
     private void Start()
     {
         controlsUI = GetComponentInChildren<ControlsUI>().gameObject;
-        PlayerPrefs.SetInt("NoAds", 1);
     }
 }

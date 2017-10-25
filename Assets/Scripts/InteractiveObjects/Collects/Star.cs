@@ -20,7 +20,6 @@ public class Star : InteractiveObject
             collect = true;
             MyAnimator.SetTrigger("collected");
             Player.Instance.stars++;
-            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
         }   
 	}
 

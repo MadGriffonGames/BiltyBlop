@@ -200,8 +200,8 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 0)         // Get button has never been pressed
         {
-            Debug.Log(achievementName);
-            Debug.Log("never pressed");
+            //Debug.Log(achievementName);
+            //Debug.Log("never pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[0];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue0");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue0"));
@@ -217,8 +217,8 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 2)         // Get butten has been pressed twice
         {
-            Debug.Log(achievementName);
-            Debug.Log("twice pressed");
+            //Debug.Log(achievementName);
+            //Debug.Log("twice pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[2];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue2");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));

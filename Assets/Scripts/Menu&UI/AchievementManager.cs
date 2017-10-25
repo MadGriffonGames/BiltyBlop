@@ -88,7 +88,7 @@ public class AchievementManager : MonoBehaviour {
 
 
         mobKillerReward = new int[] { 50, 150, 200 };
-        mobKillerTargetValue = new int[] { 1, 2, 3 };
+        mobKillerTargetValue = new int[] { 10, 50, 150 };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
         tripleCrystals = new string[] { "Crystals", "Crystals", "Crystals" };
@@ -111,8 +111,8 @@ public class AchievementManager : MonoBehaviour {
         starWalkerReward = new int[] { 250, 350, 2 };
         starWalkerTargetValue = new int[] { 5, 25, 35 };
 
-        millionareTargetValue = new int[] { 1000, 10000, 15000 };
-        millionareReward = new int[] { 100, 150, 200 };
+        millionareTargetValue = new int[] { 100, 500, 1000 };
+        millionareReward = new int[] { 100, 500, 1000 };
 
 
         PlayerPrefs.SetString("Black_ninja", "Locked");

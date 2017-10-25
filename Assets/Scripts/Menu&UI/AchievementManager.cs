@@ -36,9 +36,11 @@ public class AchievementManager : MonoBehaviour {
     string[] tripleCoins;
     string[] tripleCrystals;
     string[] items;
-    string[] differentItems;
-    string[] differentItems1;
+    string[] mobKillerRewardType;
+    string[] secretRoomRewardType;
     string[] differentItems2;
+    string[] treasureHunterRewardType;
+    string[] starWalkerRewardType;
 
     public const string HEAL = "HealthPot";
     public const string DAMAGE_BONUS = "DamageBonus";
@@ -87,26 +89,29 @@ public class AchievementManager : MonoBehaviour {
 
 
 
-        mobKillerReward = new int[] { 50, 150, 200 };
-        mobKillerTargetValue = new int[] { 1, 2, 3 };
+        mobKillerReward = new int[] { 1, 3, 1 };
+        mobKillerTargetValue = new int[] { 5, 50, 100 };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
         tripleCrystals = new string[] { "Crystals", "Crystals", "Crystals" };
-        differentItems = new string[] { DAMAGE_BONUS, "PizzaThrow", "BarbarianSword" };
-        differentItems1 = new string[] { "Coins", "Crystals", SPEED_BONUS };
+        mobKillerRewardType = new string[] { DAMAGE_BONUS, "PizzaThrow", "BarbarianSword" };
+        secretRoomRewardType = new string[] { "Coins", AMMO, "Crystals" };
         differentItems2 = new string[] { "Coins", "Coins", "MeatThrow" };
+        treasureHunterRewardType = new string[] { "Coins", SPEED_BONUS, "Crystals" };
+        starWalkerRewardType = new string[] { "Coins", };
 
-        treasureHunterReward = new int[] { 10, 100, 500 };
-        treasureHunterValue = new int[] { 3, 10, 15 };
+        treasureHunterReward = new int[] { 300, 3, 2 };
+
+        treasureHunterValue = new int[] { 5, 15, 25 };
 
         idiotReward = new int[] { -5, -10, -15 };
         idiotTargerValue = new int[] { 1, 5, 10 };
 
-        torchCollectorReward = new int[] { 100, 100, 100 };
-        torchCollectorTargetValue = new int[] { 1, 2, 3 };
+        torchCollectorReward = new int[] { 100, 1, 1 };
+        torchCollectorTargetValue = new int[] { 1, 7, 15 };
 
-        secretRoomerReward = new int[] { 350, 2, 3 };
-        secretRoomerTargetValue = new int[] { 2, 5, 10 };
+        secretRoomerReward = new int[] { 350, 2, 2 };
+        secretRoomerTargetValue = new int[] { 1, 7, 15 };
 
         starWalkerReward = new int[] { 250, 350, 2 };
         starWalkerTargetValue = new int[] { 5, 25, 35 };
@@ -124,16 +129,16 @@ public class AchievementManager : MonoBehaviour {
         //ResetStat("Spider Boss killer test");
         //ResetStat("First Buy Test");
         //ResetStat("StarWalker");
-        mobKiller = new Achieve("Mob killer", differentItems, mobKillerTargetValue, mobKillerReward);
-        treasureHunter = new Achieve("Treasure Hunter", tripleCoins, treasureHunterValue, treasureHunterReward);
+        mobKiller = new Achieve("Mob killer", mobKillerRewardType, mobKillerTargetValue, mobKillerReward);
+        treasureHunter = new Achieve("Treasure Hunter", treasureHunterRewardType, treasureHunterValue, treasureHunterReward);
         swimmer = new LevelAchieve("Diver", HEAL, 5, 1);
         //swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
-        torchCollector = new LevelAchieve("Torch Collector", "Crystals", 1, 2);
-        secretRoomer = new Achieve("Secret Rush", differentItems1, secretRoomerTargetValue, secretRoomerReward);
-        firstBuy = new LevelAchieve("First Buy", "Crystals", 1, 3);
-        spiderKiller = new LevelAchieve("Spider Boss killer", "Crystals", 1, 3);
+        torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 300);
+        secretRoomer = new Achieve("Secret Rush", secretRoomRewardType, secretRoomerTargetValue, secretRoomerReward);
+        firstBuy = new LevelAchieve("First Buy", "Crystals", 1, 2);
+        spiderKiller = new LevelAchieve("Spider Boss killer", "Crystals", 1, 6);
         starWalker = new Achieve("StarWalker", tripleCoins, starWalkerTargetValue, starWalkerReward);
-        firstBoss = new LevelAchieve("Dragon Killer", "Crystals", 1, 2);
+        firstBoss = new LevelAchieve("Dragon Killer", "Crystals", 1, 3);
     }
 
     public void CheckAchieve(Achieve achieve)

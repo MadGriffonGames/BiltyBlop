@@ -108,7 +108,7 @@ public class UnlockThrowWindow : MonoBehaviour {
 				HideButtons();
 				closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
 				closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockThrowWindow());
-				ShowErrorWindow("SWORD UNLOCKED");
+				ShowErrorWindow("WEAPON UNLOCKED");
 				ApplyThrow (chosenThrowName);
 			}
 			else
@@ -131,7 +131,7 @@ public class UnlockThrowWindow : MonoBehaviour {
 				HideButtons();
 				closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
 				closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockThrowWindow());
-				throwTransform.SetActive (false);
+				ShowErrorWindow("WEAPON UNLOCKED");
 				ApplyThrow (chosenThrowName);
 			}
 			else
@@ -146,8 +146,8 @@ public class UnlockThrowWindow : MonoBehaviour {
 
 	public void CloseUnlockThrowWindow()
 	{
-		CloseErrorWindow();
 		throwSwipe.GetComponent<ThrowingSwipeMenu>().UpdateThrowCards();
+		CloseErrorWindow();
 		windowFade.SetActive(false);
 		closeWindowButton.SetActive(false);
 		gameObject.SetActive(false);

@@ -17,6 +17,8 @@ public class PlayVideo : MonoBehaviour
     private void Start()
     {
 		videoPlayer = this.gameObject.GetComponent<VideoPlayer> ();
+		videoPlayer.isLooping = false;
+		videoPlayer.loopPointReached += EndReached;
 		string movieName = videoPlayer.clip.name;
 		foreach (GameObject sceneui  in sceneUI) 
 		{
@@ -32,7 +34,21 @@ public class PlayVideo : MonoBehaviour
 		else
 			skipButton.SetActive (true);
     }
-		
+
+//	private void Update()
+//	{
+//		if (videoPlayer.loopPointReached) 
+//		{
+//			SkipVideo ();
+//		}
+//	}
+
+	private void EndReached(UnityEngine.Video.VideoPlayer vp)
+	{
+		vp.playbackSpeed = vp.playbackSpeed / 10.0F;
+		SkipVideo ();
+	}
+
 	public void SkipVideo()
 	{
 		videoPlayer.Stop ();

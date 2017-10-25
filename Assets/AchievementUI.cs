@@ -78,8 +78,8 @@ public class AchievementUI : MonoBehaviour
     {
         if (fading)
         {
-            achievementBox.gameObject.GetComponent<Image>().color += new Color(0, 0, 0, 0.05f);
-            achievementBox.gameObject.GetComponentInChildren<Text>().color += new Color(0, 0, 0, 0.05f);
+            achievementBox.gameObject.GetComponent<Image>().color += new Color(0, 0, 0, 0.1f);
+            achievementBox.gameObject.GetComponentInChildren<Text>().color += new Color(0, 0, 0, 0.1f);
             if (achievementBox.gameObject.GetComponent<Image>().color.a >= 1f)
             {
                 fading = false;
@@ -89,8 +89,8 @@ public class AchievementUI : MonoBehaviour
 
     void FadeOut()
     {
-        achievementBox.gameObject.GetComponent<Image>().color -= new Color(0, 0, 0, 0.05f);
-        achievementBox.gameObject.GetComponentInChildren<Text>().color -= new Color(0, 0, 0, 0.05f);
+        achievementBox.gameObject.GetComponent<Image>().color -= new Color(0, 0, 0, 0.1f);
+        achievementBox.gameObject.GetComponentInChildren<Text>().color -= new Color(0, 0, 0, 0.1f);
         if (achievementBox.gameObject.GetComponent<Image>().color.a <= 0.2f)
         {
             achievementBox.gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);

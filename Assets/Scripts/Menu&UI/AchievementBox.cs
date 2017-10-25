@@ -506,6 +506,7 @@ public class AchievementBox : MonoBehaviour {
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);
     }
+
     IEnumerator ShowThrowLoot(int level)
     {
         rewardFade.gameObject.SetActive(true);

@@ -137,8 +137,7 @@ public class InventoryUI : MonoBehaviour
             immortalCount.text = Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS).ToString();
 
             DisactivateInventory();
-        }
-        
+        }        
     }
 
     public void DamageButton()

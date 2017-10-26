@@ -713,6 +713,7 @@ public class Player : Character
         {
             meleeDamage /= 2;
 			bonusFX.SetTrigger ("reset");
+			bonusFXObject.SetActive (false);
         }
     }
 

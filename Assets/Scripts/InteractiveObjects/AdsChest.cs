@@ -231,6 +231,8 @@ public class AdsChest : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = openChest;
 
+            AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+
 #if UNITY_EDITOR
             AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS

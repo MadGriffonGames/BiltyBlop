@@ -72,10 +72,9 @@ public class SkinManager : MonoBehaviour
             if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-                AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                
             }
-            
+            AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             return true;
         }
         else
@@ -92,10 +91,9 @@ public class SkinManager : MonoBehaviour
             if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-                AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);             
             }
-            
+            AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             return true;
         }
         else
@@ -111,10 +109,9 @@ public class SkinManager : MonoBehaviour
             if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-                AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + skinPrefabs[swordNumber].name);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);              
             }
-            
+            AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             return true;
 		}
 		else
@@ -131,9 +128,9 @@ public class SkinManager : MonoBehaviour
             if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-                AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + skinPrefabs[swordNumber].name);
-            }          
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                
+            }
+            AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             return true;
 		}
 		else
@@ -149,9 +146,9 @@ public class SkinManager : MonoBehaviour
             if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-                AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + skinPrefabs[throwNumber].name);
-            }         
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                            
+            }
+            AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             return true;
 		}
 		else
@@ -169,8 +166,8 @@ public class SkinManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt(firstBuy, 1);
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-                AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + skinPrefabs[throwNumber].name);
             }
+            AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             return true;
 		}
 		else

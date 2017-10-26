@@ -713,6 +713,7 @@ public class Player : Character
         {
             meleeDamage /= 2;
 			bonusFX.SetTrigger ("reset");
+            bonusFXObject.SetActive(false);
         }
     }
 
@@ -768,7 +769,6 @@ public class Player : Character
             cef.StopBlur();
 			bonusFX.SetTrigger ("reset");
 			bonusFXObject.SetActive (false);
-			Debug.Log (bonusFXObject.activeInHierarchy);
         }
     }
 

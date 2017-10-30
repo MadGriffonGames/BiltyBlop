@@ -34,6 +34,11 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     string appKey;
 
+    private void Awake()
+    {
+        AppMetrica.Instance.ActivateWithAPIKey("cefd065c-fd53-443d-9f27-9ddf930a936f");
+    }
+
     void Start ()
     {
 
@@ -46,8 +51,6 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     appKey = "027fffae726e025f6f6e311d8e8370af0bac2f6ce6630a81";
 
 #endif
-
-        AppMetrica.Instance.ActivateWithAPIKey("cefd065c-fd53-443d-9f27-9ddf930a936f");
 
         Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
 

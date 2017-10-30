@@ -77,6 +77,7 @@ public class AppMetrica : MonoBehaviour
 
     private void Awake ()
     {
+        APIKey = "cefd065c-fd53-443d-9f27-9ddf930a936f"; 
         if (!_isInitialized) {
             _isInitialized = true;
             DontDestroyOnLoad (this.gameObject);

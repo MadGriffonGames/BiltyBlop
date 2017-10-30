@@ -53,6 +53,7 @@ public class MovingPlatform : MonoBehaviour
         {
             other.gameObject.layer = 9;//9 - is layer called "Platform"
             other.transform.SetParent(platformTransform);
+			//Player.Instance.target.transform.localPosition -= new Vector3 (0, 2.5f, 0);
         }
         
     }
@@ -60,5 +61,6 @@ public class MovingPlatform : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
         other.transform.SetParent(null);
+		//Player.Instance.target.transform.localPosition += new Vector3 (0, 2.5f, 0);
     }
 }

@@ -145,12 +145,14 @@ public class Player : Character
     {
 		ThrowingUI.Instance.SetItems ();
         SetThrowing();
+        
     }
 
     public override void Start () 
 	{
         base.Start();
-		bonusFX = bonusFXObject.GetComponent<Animator> ();
+        PlayerPrefs.DeleteKey("Level8_chest");
+        bonusFX = bonusFXObject.GetComponent<Animator> ();
         if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
         {
             DevToDev.Analytics.Tutorial(-1);
@@ -368,14 +370,20 @@ public class Player : Character
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
-
-		int tmpNumber = UnityEngine.Random.Range (0, 100);   // DODGER PERK DETECTION
+        
+        int tmpNumber = UnityEngine.Random.Range (0, 100);   // DODGER PERK DETECTION
 
   		if (damageSources.Contains(other.tag) && tmpNumber > dodgeChance)
 		{
+            Debug.Log(1);
             if (!AttackCollider.IsTouching(other))
-			    StartCoroutine(TakeDamage());
-		}
+            {
+                StartCoroutine(TakeDamage());
+                AppMetrica.Instance.ReportEvent("#DAMAGE_SOURCE is " + other.gameObject.name);
+            }
+            
+
+        }
 
         if (other.gameObject.CompareTag("DeathTrigger"))
         {
@@ -473,7 +481,6 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
-
         if (!isRewinding && !IsDead)
         {
 

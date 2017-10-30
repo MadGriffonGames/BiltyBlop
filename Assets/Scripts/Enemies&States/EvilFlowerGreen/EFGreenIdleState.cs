@@ -7,24 +7,29 @@ public class EFGreenIdleState : IEFGreenState
 
     private EvilFlowerGreen enemy;
     bool isIdle;
+    float timer;
 
     public void Enter(EvilFlowerGreen enemy)
     {
         this.enemy = enemy;
         isIdle = false;
+        timer = 0;
     }
 
     public void Execute()
     {
+        timer += Time.deltaTime;
+
         if (!isIdle)
         {
             enemy.armature.animation.timeScale = 1;
-            enemy.armature.animation.FadeIn("idle2", -1, -1);
+            enemy.armature.animation.FadeIn("IDLE", -1, -1);
             isIdle = true;
         }
 
-        if (enemy.Target != null)
+        if (enemy.Target != null && timer >= 2)
         {
+            timer = 0;
             enemy.ChangeState(new EFGreenRangeState());
         }
     }

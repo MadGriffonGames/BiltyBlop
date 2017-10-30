@@ -331,6 +331,8 @@ public class DailyReward : MonoBehaviour
 
     public void RewardedVideoButton()
     {
+        AppMetrica.Instance.ReportEvent("#REWARDx2_BUTTON pressed");
+
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS

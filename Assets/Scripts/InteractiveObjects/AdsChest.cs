@@ -57,6 +57,8 @@ public class AdsChest : MonoBehaviour
             AdsManager.Instance.isRewardVideoWatched = false;
             GetComponent<BoxCollider2D>().enabled = false;
 
+            EnableControls(true);
+
             Randomize();
             loot.gameObject.SetActive(true);          
         }
@@ -233,11 +235,26 @@ public class AdsChest : MonoBehaviour
 
             AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
 
+            EnableControls(false);
+            Player.Instance.mobileInput = 0;
+
 #if UNITY_EDITOR
             AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
             AdsManager.Instance.ShowRewardedVideo();
 #endif
+        }
+    }
+
+    protected void EnableControls(bool switcher)
+    {
+        if (switcher)
+        {
+            UI.Instance.controlsUI.SetActive(true);
+        }
+        else
+        {
+            UI.Instance.controlsUI.SetActive(false);
         }
     }
 }

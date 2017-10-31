@@ -1,5 +1,7 @@
 -dontwarn com.google.vr.ndk.base.DaydreamApi
 
+-keep class com.devtodev.** { *; }
+
 # Appodeal
 -keep class com.appodeal.** { *; }
 -keep class org.nexage.** { *; }

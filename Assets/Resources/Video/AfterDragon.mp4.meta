@@ -16,7 +16,7 @@ VideoClipImporter:
   frameCount: 361
   frameRate: 23.976043701171875
   colorSpace: 0
-  deinterlace: 0
+  deinterlace: 1
   sourceFileSize: 7595855
   encodeAlpha: 0
   sourceHasAlpha: 0
@@ -64,7 +64,7 @@ VideoClipImporter:
     streamedResource:
       source: library/metadata/c1/c1e648c25abfe411d96ba58fe2c11987.resource
       offset: 0
-      size: 2658019
+      size: 2660025
   userData: 
   assetBundleName: 
   assetBundleVariant: 

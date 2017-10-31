@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         if (torches == 0 && isBirded == false)
         {
             ThrowBird();
-            AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.torchCollector);
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.torchCollector3);
         }
     }
 

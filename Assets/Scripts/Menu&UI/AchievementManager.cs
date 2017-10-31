@@ -90,7 +90,7 @@ public class AchievementManager : MonoBehaviour {
 
 
         mobKillerReward = new int[] { 1, 3, 1 };
-        mobKillerTargetValue = new int[] { 5, 50, 100 };
+        mobKillerTargetValue = new int[] { 10, 50, 100 };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
         tripleCrystals = new string[] { "Crystals", "Crystals", "Crystals" };

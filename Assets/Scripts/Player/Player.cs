@@ -135,7 +135,7 @@ public class Player : Character
 		SetPerkParams ();
         health = PlayerPrefs.GetInt("SkinArmorStat");
         maxHealth = health;
-        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat");
+        meleeDamage = PlayerPrefs.GetInt("SwordAttackStat");
         throwDamage = PlayerPrefs.GetInt("ThrowAttackStat");
 
         HealthUI.Instance.SetHealthbar();
@@ -145,14 +145,12 @@ public class Player : Character
     {
 		ThrowingUI.Instance.SetItems ();
         SetThrowing();
-        
     }
 
     public override void Start () 
 	{
         base.Start();
-        PlayerPrefs.DeleteKey("Level8_chest");
-        bonusFX = bonusFXObject.GetComponent<Animator> ();
+		bonusFX = bonusFXObject.GetComponent<Animator> ();
         if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
         {
             DevToDev.Analytics.Tutorial(-1);
@@ -370,20 +368,14 @@ public class Player : Character
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
-        
-        int tmpNumber = UnityEngine.Random.Range (0, 100);   // DODGER PERK DETECTION
+
+		int tmpNumber = UnityEngine.Random.Range (0, 100);   // DODGER PERK DETECTION
 
   		if (damageSources.Contains(other.tag) && tmpNumber > dodgeChance)
 		{
-            Debug.Log(1);
             if (!AttackCollider.IsTouching(other))
-            {
-                StartCoroutine(TakeDamage());
-                AppMetrica.Instance.ReportEvent("#DAMAGE_SOURCE is " + other.gameObject.name);
-            }
-            
-
-        }
+			    StartCoroutine(TakeDamage());
+		}
 
         if (other.gameObject.CompareTag("DeathTrigger"))
         {
@@ -481,6 +473,7 @@ public class Player : Character
 
     public override IEnumerator TakeDamage()
     {
+
         if (!isRewinding && !IsDead)
         {
 
@@ -720,7 +713,7 @@ public class Player : Character
         {
             meleeDamage /= 2;
 			bonusFX.SetTrigger ("reset");
-            bonusFXObject.SetActive(false);
+			bonusFXObject.SetActive (false);
         }
     }
 
@@ -776,6 +769,7 @@ public class Player : Character
             cef.StopBlur();
 			bonusFX.SetTrigger ("reset");
 			bonusFXObject.SetActive (false);
+			Debug.Log (bonusFXObject.activeInHierarchy);
         }
     }
 
@@ -825,7 +819,7 @@ public class Player : Character
         Time.timeScale = 1;
         myRigidbody.gravityScale = 3;
         immortal = false;
-        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat"); ;
+        meleeDamage = PlayerPrefs.GetInt("SwordAttackStat"); ;
         movementSpeed = MOVEMENT_SPEED;
         jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;

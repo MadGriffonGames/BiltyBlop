@@ -304,12 +304,12 @@ public class AchievementBox : MonoBehaviour {
 
         else if (lootType == HEAL || lootType == DAMAGE_BONUS || lootType == SPEED_BONUS || lootType == TIME_BONUS || lootType == IMMORTAL_BONUS || lootType == AMMO)
         {
-            StartCoroutine(ShowItemLoot(1));
+            StartCoroutine(ShowItemLoot(0));
         }
 
         else if (lootType == "ClassicThrow" || lootType == "HammerThrow" || lootType == "IcecreamThrow" || lootType == "MagicThrow" || lootType == "MeatThrow" || lootType == "PizzaThrow" || lootType == "RavenThrow" || lootType == "SheepThrow" || lootType == "Sword1Throw" || lootType == "Sword2Throw" || lootType == "Sword3Throw" || lootType == "Sword4Throw")
         {
-            StartCoroutine(ShowThrowLoot(1));
+            StartCoroutine(ShowThrowLoot(0));
         }
 
         else if (lootType == "BarbarianSword" || lootType == "Black_ninjaSword" || lootType == "ClassicSword" || lootType == "JonSnowSword" || lootType == "KingSword")
@@ -338,6 +338,8 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetSecondReward()
     {
+        Debug.Log(1);
+
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue2 = PlayerPrefs.GetInt(achievementName + "targetValue2");
         UpdateValue(2);
@@ -492,7 +494,8 @@ public class AchievementBox : MonoBehaviour {
         if (lootType == HEAL)
             loot.gameObject.GetComponent<Image>().sprite = healthPot;
         if (lootType == DAMAGE_BONUS)
-            loot.gameObject.GetComponent<Image>().sprite = DamageBonus;
+        { loot.gameObject.GetComponent<Image>().sprite = DamageBonus; Debug.Log(loot.gameObject.GetComponent<Image>().sprite); }
+            
         if (lootType == SPEED_BONUS)
             loot.gameObject.GetComponent<Image>().sprite = SpeedBonus;
         if (lootType == TIME_BONUS)
@@ -506,6 +509,7 @@ public class AchievementBox : MonoBehaviour {
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);
     }
+
     IEnumerator ShowThrowLoot(int level)
     {
         rewardFade.gameObject.SetActive(true);

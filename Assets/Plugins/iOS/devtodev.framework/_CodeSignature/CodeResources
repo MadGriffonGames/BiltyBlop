@@ -6,11 +6,11 @@
 	<dict>
 		<key>Headers/devtodev.h</key>
 		<data>
-		k5hFO/lmtlKuRPvjigXwPEgxu0I=
+		YpOLJqTGmVv2qtn6EetOY8jKmho=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		93FGuMSZVsUbuUhGO7WFtYuXn34=
+		h8v0Y/8ikx9QrXWz3fXzPgfXe00=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -23,11 +23,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			k5hFO/lmtlKuRPvjigXwPEgxu0I=
+			YpOLJqTGmVv2qtn6EetOY8jKmho=
 			</data>
 			<key>hash2</key>
 			<data>
-			6hnW3CGCbckndTjEpkwhrLbMLTXy6Povr5bpWJlhKrU=
+			qaouwZsmB2mqqdsfrmh16ypPb6TxciVb2xTHZ/iQjzw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -59,6 +59,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
@@ -104,6 +109,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>

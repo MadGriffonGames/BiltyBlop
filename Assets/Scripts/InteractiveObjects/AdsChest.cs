@@ -227,9 +227,11 @@ public class AdsChest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other.CompareTag("Sword");
+        if (other.CompareTag("Sword"))
         {
             GetComponent<SpriteRenderer>().sprite = openChest;
+
+            AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
 
 #if UNITY_EDITOR
             AdsManager.Instance.isRewardVideoWatched = true;

@@ -29,6 +29,6 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        controlsUI = GetComponentInChildren<ControlsUI>().gameObject;
+        controlsUI = GetComponentInChildren<ControlsUI>().gameObject;     
     }
 }

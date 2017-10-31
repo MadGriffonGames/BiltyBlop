@@ -135,7 +135,7 @@ public class Player : Character
 		SetPerkParams ();
         health = PlayerPrefs.GetInt("SkinArmorStat");
         maxHealth = health;
-        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat");
+        meleeDamage = PlayerPrefs.GetInt("SwordAttackStat");
         throwDamage = PlayerPrefs.GetInt("ThrowAttackStat");
 
         HealthUI.Instance.SetHealthbar();
@@ -819,7 +819,7 @@ public class Player : Character
         Time.timeScale = 1;
         myRigidbody.gravityScale = 3;
         immortal = false;
-        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat"); ;
+        meleeDamage = PlayerPrefs.GetInt("SwordAttackStat"); ;
         movementSpeed = MOVEMENT_SPEED;
         jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;

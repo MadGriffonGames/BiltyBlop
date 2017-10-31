@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviour
 			Application.targetFrameRate = 1000;
 #elif UNITY_IOS
 			Application.targetFrameRate = 60;
-#elif UNITY_ANDROID
-			Application.targetFrameRate = 60;
 #endif
 
         Instantiate(achievementManager);

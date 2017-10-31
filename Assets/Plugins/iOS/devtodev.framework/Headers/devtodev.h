@@ -37,4 +37,6 @@ extern "C" {
     const char * dtd_s();
     const char * dtd_p();
     void dtd_t(const char* categories);
+    void logger_setLogEnabled(bool isEnabled);
+    int getTimeZoneOffset();
 }

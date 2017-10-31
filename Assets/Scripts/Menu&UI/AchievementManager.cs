@@ -90,7 +90,7 @@ public class AchievementManager : MonoBehaviour {
 
 
         mobKillerReward = new int[] { 1, 3, 1 };
-        mobKillerTargetValue = new int[] { 10, 50, 100 };
+        mobKillerTargetValue = new int[] { 20, 200, 1000 };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
         tripleCrystals = new string[] { "Crystals", "Crystals", "Crystals" };
@@ -111,7 +111,7 @@ public class AchievementManager : MonoBehaviour {
         torchCollectorTargetValue = new int[] { 1, 7, 15 };
 
         secretRoomerReward = new int[] { 350, 2, 2 };
-        secretRoomerTargetValue = new int[] { 1, 7, 15 };
+        secretRoomerTargetValue = new int[] { 2, 7, 15 };
 
         starWalkerReward = new int[] { 250, 350, 2 };
         starWalkerTargetValue = new int[] { 5, 25, 35 };
@@ -152,6 +152,8 @@ public class AchievementManager : MonoBehaviour {
                 if (achieve.weight <= 2)
                 {
                     PlayerPrefs.SetInt(achieveName, PlayerPrefs.GetInt(achieveName) + 1);
+                    if (achieveName == "Mob killer")
+                        Debug.Log(PlayerPrefs.GetInt(achieveName));
                     if (PlayerPrefs.GetInt(achieveName) == achieve.targetValueArray[achieve.weight])
                     {
                         GameManager.CollectedCoins += achieve.rewardArray[achieve.weight];

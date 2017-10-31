@@ -14,6 +14,9 @@ public class DailyLoot : MonoBehaviour {
     bool isTimerTickCoin;
 
     [SerializeField]
+    bool changeDate;
+
+    [SerializeField]
     GameObject coinButton;
     [SerializeField]
     Text timer;
@@ -22,8 +25,11 @@ public class DailyLoot : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        PlayerPrefs.SetString("CoinLastOpenDate", "7/4/2016 8:30:52 AM");
-        CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
+        if (changeDate)
+        {
+            PlayerPrefs.SetString("CoinLastOpenDate", "7/4/2016 8:30:52 AM");
+            CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
+        }
         isTimerTickCoin = false;
         hours24Coin = (DateTime.Now.AddDays(1) - DateTime.Now);
 
@@ -52,8 +58,8 @@ public class DailyLoot : MonoBehaviour {
 
         if (isTimerTickCoin)
         {
-            spanCoin = hours24Coin + (CoinlastOpenDate - DateTime.Now);
-            timer.text = spanCoin.ToString().Substring(0, 10);
+            spanCoin = hours24Coin + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
+            timer.text = spanCoin.ToString().Substring(0, 8);
             if (spanCoin <= TimeSpan.Zero)
             {
                 ActivateCoinLoot();
@@ -64,6 +70,8 @@ public class DailyLoot : MonoBehaviour {
     void ActivateCoinLoot()
     {
         coinButton.gameObject.SetActive(true);
+        isTimerTickCoin = false;
+        timer.gameObject.SetActive(false);
     }
 
     public void OpenCoinButton()
@@ -73,6 +81,15 @@ public class DailyLoot : MonoBehaviour {
             Debug.Log("Button Pressed");
             spanCoin = CoinlastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTickCoin = true;
+            timer.gameObject.SetActive(true);
+            PlayerPrefs.SetString("CoinLastOpenDate", NetworkTime.GetNetworkTime().ToString());
+            Debug.Log(DateTime.Parse(NetworkTime.GetNetworkTime().ToString()));
+            Debug.Log(DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate")));
+            Debug.Log(DateTime.Now);
+            Debug.Log(hours24Coin);
+            CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
+
+            AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
         }
     }
 

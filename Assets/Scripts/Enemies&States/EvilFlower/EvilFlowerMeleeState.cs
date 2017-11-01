@@ -7,30 +7,35 @@ public class EvilFlowerMeleeState : IEvilFlowerState
 {
     private EvilFlower enemy;
 
-    private float attackTimer;
     private float attackCoolDown = 2;
-    private bool canAttack = true;
+    private bool preAttacked;
     bool preparated = false;
 
     public void Enter(EvilFlower enemy)
     {
         this.enemy = enemy;
-        enemy.armature.animation.FadeIn("PREPARATION", -1, 1);
+        
+        preAttacked = false;
     }
 
     public void Execute()
     {
-        if (enemy.armature.animation.lastAnimationName == ("PREPARATION") && enemy.armature.animation.isCompleted)
+        if (!preAttacked && !enemy.isAttacked)
         {
-            enemy.armature.animation.timeScale = 1.5f;
-            enemy.armature.animation.FadeIn("ATTACK", -1, 1);
+            preAttacked = true;
+            enemy.armature.animation.FadeIn("pre_atk", -1, 1);
+        }
+        if (enemy.armature.animation.lastAnimationName == ("pre_atk") && enemy.armature.animation.isCompleted)
+        {
+            enemy.armature.animation.FadeIn("atk", -1, 1);
             enemy.AttackCollider.enabled = true;
             SoundManager.PlaySound("bite");
         }
 
-        if (enemy.armature.animation.lastAnimationName == ("ATTACK") && enemy.armature.animation.isCompleted)
+        if (enemy.armature.animation.lastAnimationName == ("atk") && enemy.armature.animation.isCompleted)
         {
             enemy.AttackCollider.enabled = false;
+            enemy.isAttacked = true;
             enemy.ChangeState(new EvilFlowerIdleState());
         }
     }

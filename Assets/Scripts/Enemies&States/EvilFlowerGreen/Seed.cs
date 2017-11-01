@@ -6,13 +6,14 @@ public class Seed : MonoBehaviour
 {
     [SerializeField]
     public float speed;
-
     [SerializeField]
-    public GameObject particle;
+    public GameObject blow;
 
     private Rigidbody2D myRigidbody;
 
     private Vector2 direction;
+
+    Quaternion rotation;
 
 	void Start ()
     {
@@ -33,7 +34,7 @@ public class Seed : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            Instantiate(blow, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
@@ -42,7 +43,7 @@ public class Seed : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Player"))
         {
-            Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            Instantiate(blow, this.gameObject.transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

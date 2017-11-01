@@ -153,7 +153,6 @@ public class AchievementManager : MonoBehaviour {
                 {
                     PlayerPrefs.SetInt(achieveName, PlayerPrefs.GetInt(achieveName) + 1);
                     if (achieveName == "Mob killer")
-                        Debug.Log(PlayerPrefs.GetInt(achieveName));
                     if (PlayerPrefs.GetInt(achieveName) == achieve.targetValueArray[achieve.weight])
                     {
                         GameManager.CollectedCoins += achieve.rewardArray[achieve.weight];

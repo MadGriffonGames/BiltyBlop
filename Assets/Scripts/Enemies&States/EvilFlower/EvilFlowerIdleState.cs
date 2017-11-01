@@ -23,7 +23,7 @@ public class EvilFlowerIdleState : IEvilFlowerState
     {
         if (!isIdle)
         {
-            enemy.armature.animation.FadeIn("IDLE", -1, -1);
+            enemy.armature.animation.FadeIn("idle", -1, -1);
             isIdle = true;
         }
         if (enemy.Target != null)

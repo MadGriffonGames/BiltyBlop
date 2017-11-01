@@ -84,7 +84,7 @@ public class EvilFlower : MeleeEnemy
         if (IsDead) 
         {
             AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
+            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.5f, 1.8f, -3), Quaternion.identity);
             SpawnCoins(1, 2);
 			SoundManager.PlaySound ("flower_death");
             GameManager.deadEnemies.Add(gameObject);

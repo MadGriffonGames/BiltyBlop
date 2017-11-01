@@ -36,21 +36,21 @@ public class Box : InteractiveObject
         {
             if (Player.Instance.Health == 1)
             {
-                if (UnityEngine.Random.Range(1, 100) <= 50)
+                if (UnityEngine.Random.Range(1, 100) <= 65)
                     Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
                 else
                     Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
             }
             if (Player.Instance.Health == 2)
             {
-                if (UnityEngine.Random.Range(1, 100) <= 70)
+                if (UnityEngine.Random.Range(1, 100) <= 80)
                     Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
                 else
                     Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);
             }
             if (Player.Instance.Health >= 3)
             {
-                if (UnityEngine.Random.Range(1, 100) <= 75)
+                if (UnityEngine.Random.Range(1, 100) <= 90)
                     Instantiate(coin, this.gameObject.transform.position, Quaternion.identity);
                 else
                     Instantiate(hp, this.gameObject.transform.position, Quaternion.identity);

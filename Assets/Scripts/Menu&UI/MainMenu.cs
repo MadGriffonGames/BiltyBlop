@@ -17,13 +17,15 @@ public class MainMenu : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("FirstEnter"))
         {
-            PlayerPrefs.SetInt("FirstEnter", 1);
-
+            PlayerPrefs.SetInt("FirstEnter", 1); 
+                      
             PlayerPrefs.SetInt("SwordDisplayIndex", 0);
+            PlayerPrefs.SetInt("SwordAttackStat", 1);
+
             PlayerPrefs.SetInt("SkinDisplayIndex", 0);
             PlayerPrefs.SetInt("SkinArmorStat", 3);
-            PlayerPrefs.SetInt("SkinAttackStat", 1);
             PlayerPrefs.SetString("Skin", "Classic");
+
             PlayerPrefs.SetString("Throw", "ClassicThrow");
             PlayerPrefs.SetInt("ThrowAttackStat", 1);
             PlayerPrefs.SetFloat("ThrowSpeedStat", 14);

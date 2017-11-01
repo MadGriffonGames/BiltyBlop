@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuyCheckpointsUI : MonoBehaviour
 {
-    const int FREE_CHECKPOINTS_GIFT = 3;
+    const int FREE_CHECKPOINTS_GIFT = 1;
     const int CRYSTAL_PRICE = 4;
     const int NOT_PREMIUM_ATTEMPS = 3;
 
@@ -170,11 +170,8 @@ public class BuyCheckpointsUI : MonoBehaviour
     {
         Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
         DeathUI.Instance.UpdateFreeCheckpointsCounter();
-        Debug.Log(PlayerPrefs.GetInt("Crystals"));
         notPremiumAttemps--;
-        Debug.Log(PlayerPrefs.GetInt("Crystals"));
         this.gameObject.SetActive(false);
-        Debug.Log(PlayerPrefs.GetInt("Crystals"));
     }
 
     public void Skip()

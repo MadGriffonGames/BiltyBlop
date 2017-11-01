@@ -12,6 +12,10 @@ public class EvilFlower : MeleeEnemy
     [SerializeField]
     GameObject enemySight;
 
+    public bool isAttacked;
+    public float timer;
+    float attackCoolDown = 2;
+
 
     void Awake()
     {
@@ -25,6 +29,8 @@ public class EvilFlower : MeleeEnemy
         ChangeState(new EvilFlowerIdleState());
 		//SetHealthbar ();
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+
+        isAttacked = false;
     }
 
     void Update()
@@ -34,6 +40,15 @@ public class EvilFlower : MeleeEnemy
             if (!TakingDamage && !Attack)
             {
                 currentState.Execute();
+            }
+            if (isAttacked)
+            {
+                timer += Time.deltaTime;
+            }
+            if (timer >= attackCoolDown)
+            {
+                timer = 0;
+                isAttacked = false;
             }
         }
     }

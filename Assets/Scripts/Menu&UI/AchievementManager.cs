@@ -54,6 +54,7 @@ public class AchievementManager : MonoBehaviour {
     public Achieve idiot;
     public LevelAchieve swimmer;
     public LevelAchieve torchCollector;
+    public Achieve torchCollector3;
     public LevelAchieve firstBuy;
     public Achieve secretRoomer;
     public LevelAchieve spiderKiller;
@@ -90,31 +91,31 @@ public class AchievementManager : MonoBehaviour {
 
 
         mobKillerReward = new int[] { 1, 3, 1 };
-        mobKillerTargetValue = new int[] { 5, 50, 100 };
+        mobKillerTargetValue = new int[] { 25, 250, 1000 };
+        mobKillerRewardType = new string[] { DAMAGE_BONUS, "PizzaThrow", "JonSnowSword" };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
         tripleCrystals = new string[] { "Crystals", "Crystals", "Crystals" };
-        mobKillerRewardType = new string[] { DAMAGE_BONUS, "PizzaThrow", "BarbarianSword" };
         secretRoomRewardType = new string[] { "Coins", AMMO, "Crystals" };
         differentItems2 = new string[] { "Coins", "Coins", "MeatThrow" };
-        treasureHunterRewardType = new string[] { "Coins", SPEED_BONUS, "Crystals" };
-        starWalkerRewardType = new string[] { "Coins", };
+        treasureHunterRewardType = new string[] { "Coins", DAMAGE_BONUS, "Crystals" };
+        starWalkerRewardType = new string[] { "Coins" };
 
-        treasureHunterReward = new int[] { 300, 3, 2 };
+        treasureHunterReward = new int[] { 150, 3, 8 };
 
-        treasureHunterValue = new int[] { 5, 15, 25 };
+        treasureHunterValue = new int[] { 10, 25, 50 };
 
         idiotReward = new int[] { -5, -10, -15 };
         idiotTargerValue = new int[] { 1, 5, 10 };
 
-        torchCollectorReward = new int[] { 100, 1, 1 };
-        torchCollectorTargetValue = new int[] { 1, 7, 15 };
+        torchCollectorReward = new int[] { 100, 150, 250 };
+        torchCollectorTargetValue = new int[] { 10, 25, 50 };
 
-        secretRoomerReward = new int[] { 350, 2, 2 };
-        secretRoomerTargetValue = new int[] { 1, 7, 15 };
+        secretRoomerReward = new int[] { 150, 3, 8 };
+        secretRoomerTargetValue = new int[] { 5, 10, 15 };
 
-        starWalkerReward = new int[] { 250, 350, 2 };
-        starWalkerTargetValue = new int[] { 5, 25, 35 };
+        starWalkerReward = new int[] { 150, 200, 250 };
+        starWalkerTargetValue = new int[] { 10, 25, 50 };
 
         millionareTargetValue = new int[] { 1000, 10000, 15000 };
         millionareReward = new int[] { 100, 150, 200 };
@@ -131,9 +132,10 @@ public class AchievementManager : MonoBehaviour {
         //ResetStat("StarWalker");
         mobKiller = new Achieve("Mob killer", mobKillerRewardType, mobKillerTargetValue, mobKillerReward);
         treasureHunter = new Achieve("Treasure Hunter", treasureHunterRewardType, treasureHunterValue, treasureHunterReward);
-        swimmer = new LevelAchieve("Diver", HEAL, 5, 1);
+        swimmer = new LevelAchieve("Diver", HEAL, 5, 3);
         //swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
-        torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 300);
+        //torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 150);
+        torchCollector3 = new Achieve("TorchCollector", tripleCoins, torchCollectorTargetValue, torchCollectorReward);
         secretRoomer = new Achieve("Secret Rush", secretRoomRewardType, secretRoomerTargetValue, secretRoomerReward);
         firstBuy = new LevelAchieve("First Buy", "Crystals", 1, 2);
         spiderKiller = new LevelAchieve("Spider Boss killer", "Crystals", 1, 6);
@@ -152,6 +154,7 @@ public class AchievementManager : MonoBehaviour {
                 if (achieve.weight <= 2)
                 {
                     PlayerPrefs.SetInt(achieveName, PlayerPrefs.GetInt(achieveName) + 1);
+                    if (achieveName == "Mob killer")
                     if (PlayerPrefs.GetInt(achieveName) == achieve.targetValueArray[achieve.weight])
                     {
                         GameManager.CollectedCoins += achieve.rewardArray[achieve.weight];

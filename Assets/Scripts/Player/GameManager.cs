@@ -48,8 +48,10 @@ public class GameManager : MonoBehaviour
 
 	void Awake()
 	{
-		#if UNITY_EDITOR
+        #if UNITY_EDITOR
 			Application.targetFrameRate = 1000;
+#elif UNITY_ANDROID
+        Application.targetFrameRate = 60;
 #elif UNITY_IOS
 			Application.targetFrameRate = 60;
 #endif
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour
         if (torches == 0 && isBirded == false)
         {
             ThrowBird();
-            AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.torchCollector);
+            AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.torchCollector3);
         }
     }
 

@@ -84,6 +84,7 @@ public class ChestUI : RewardedChest
             GiveLoot();
 
             AppMetrica.Instance.ReportEvent("#CHEST 3Stars chest activate");
+            DevToDev.Analytics.CustomEvent("#CHEST 3Stars chest activate");
         }
     }
 

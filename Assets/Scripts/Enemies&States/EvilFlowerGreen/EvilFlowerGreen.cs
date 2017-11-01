@@ -64,7 +64,7 @@ public class EvilFlowerGreen : RangeEnemy
         {
             AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
-            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
+            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.5f, 1.8f, -1f), Quaternion.identity);
             SpawnCoins(1, 2);
             SoundManager.PlaySound ("green flower");
             GameManager.deadEnemies.Add(gameObject);

@@ -130,6 +130,7 @@ public class UnlockPerkWindow : MonoBehaviour {
             errorWindow.gameObject.SetActive(true);
             errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
             AppMetrica.Instance.ReportEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
+            DevToDev.Analytics.CustomEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
         }
         else
         {
@@ -154,6 +155,7 @@ public class UnlockPerkWindow : MonoBehaviour {
             errorWindow.gameObject.SetActive(true);
             errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
             AppMetrica.Instance.ReportEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
+            DevToDev.Analytics.CustomEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
         }
         else
         {

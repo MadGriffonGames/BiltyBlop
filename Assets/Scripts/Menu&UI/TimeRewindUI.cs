@@ -120,6 +120,7 @@ public class TimeRewindUI : MonoBehaviour
         Time.timeScale = 2;
 
         AppMetrica.Instance.ReportEvent("#REWIND_TIME Rewind time used in " + MetricaManager.Instance.currentLevel);
+        DevToDev.Analytics.CustomEvent("#REWIND_TIME Rewind time used in " + MetricaManager.Instance.currentLevel);
 
         this.gameObject.SetActive(false);
     }

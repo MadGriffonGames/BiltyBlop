@@ -117,5 +117,12 @@ public class RuneStone : InteractiveObject
         MetricaManager.Instance.SetParametrs();
 
         AppMetrica.Instance.ReportEvent(MetricaManager.Instance.currentLevel + " complete with:", MetricaManager.Instance.levelParams);
+
+        DevToDev.CustomEventParams customEventParams = new DevToDev.CustomEventParams(); ;
+        foreach (KeyValuePair<string, object> param in MetricaManager.Instance.levelParams)
+        {
+            customEventParams.AddParam(param.Key, param.Value.ToString());
+        }
+        DevToDev.Analytics.CustomEvent(MetricaManager.Instance.currentLevel + " complete with:", customEventParams);
     }
 }

@@ -247,5 +247,6 @@ public class Inventory : MonoBehaviour
     void SendUseMetric(string bonusName)
     {
         AppMetrica.Instance.ReportEvent("#BONUS_USE " + bonusName + " used in " + MetricaManager.Instance.currentLevel);
+        DevToDev.Analytics.CustomEvent("#BONUS_USE " + bonusName + " used in " + MetricaManager.Instance.currentLevel);
     }
 }

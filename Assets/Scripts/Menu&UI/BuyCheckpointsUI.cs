@@ -102,6 +102,7 @@ public class BuyCheckpointsUI : MonoBehaviour
 #endif
 
         AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Rewarded Video in " + MetricaManager.Instance.currentLevel);
+        DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Rewarded Video in " + MetricaManager.Instance.currentLevel);
     }
 
     public void CoinsButton()
@@ -119,7 +120,7 @@ public class BuyCheckpointsUI : MonoBehaviour
             notPremiumAttemps--;
 
             AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
-
+            DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
             this.gameObject.SetActive(false);
         }
         else if (PlayerPrefs.GetInt("Coins") + GameManager.lvlCollectedCoins >= coinsPriceInt)
@@ -136,7 +137,7 @@ public class BuyCheckpointsUI : MonoBehaviour
             notPremiumAttemps--;
 
             AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
-
+            DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
             this.gameObject.SetActive(false);
         }
         
@@ -157,6 +158,7 @@ public class BuyCheckpointsUI : MonoBehaviour
             notPremiumAttemps--;
 
             AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Crystals in " + MetricaManager.Instance.currentLevel);
+            DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Crystals in " + MetricaManager.Instance.currentLevel);
 
             this.gameObject.SetActive(false);
         }

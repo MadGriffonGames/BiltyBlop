@@ -509,6 +509,7 @@ public class Player : Character
                 {
                     MetricaManager.Instance.deaths++;
                     AppMetrica.Instance.ReportEvent("#DEATH in " + GameManager.currentLvl);
+                    DevToDev.Analytics.CustomEvent("#DEATH in " + GameManager.currentLvl);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     

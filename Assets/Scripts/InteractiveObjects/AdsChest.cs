@@ -234,6 +234,7 @@ public class AdsChest : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = openChest;
 
             AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+            DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
 
             EnableControls(false);
             Player.Instance.mobileInput = 0;

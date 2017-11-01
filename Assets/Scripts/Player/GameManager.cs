@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         currentLvl = SceneManager.GetActiveScene().name;
 
         AppMetrica.Instance.ReportEvent("#ENTER in " + currentLvl);
+        DevToDev.Analytics.CustomEvent("#ENTER in " + currentLvl);
     }
 
     void Start () 

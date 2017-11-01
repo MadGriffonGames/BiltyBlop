@@ -75,6 +75,7 @@ public class SkinManager : MonoBehaviour
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                
             }
             AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
+            DevToDev.Analytics.CustomEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             return true;
         }
         else
@@ -94,6 +95,7 @@ public class SkinManager : MonoBehaviour
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);             
             }
             AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
+            DevToDev.Analytics.CustomEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             return true;
         }
         else
@@ -112,6 +114,7 @@ public class SkinManager : MonoBehaviour
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);              
             }
             AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
+            DevToDev.Analytics.CustomEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             return true;
 		}
 		else
@@ -131,6 +134,7 @@ public class SkinManager : MonoBehaviour
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                
             }
             AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
+            DevToDev.Analytics.CustomEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             return true;
 		}
 		else
@@ -149,6 +153,7 @@ public class SkinManager : MonoBehaviour
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                            
             }
             AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
+            DevToDev.Analytics.CustomEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             return true;
 		}
 		else
@@ -168,6 +173,7 @@ public class SkinManager : MonoBehaviour
                 AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
             }
             AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
+            DevToDev.Analytics.CustomEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             return true;
 		}
 		else

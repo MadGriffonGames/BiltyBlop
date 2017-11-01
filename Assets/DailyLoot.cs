@@ -90,6 +90,7 @@ public class DailyLoot : MonoBehaviour {
             CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
+            DevToDev.Analytics.CustomEvent("#CHEST Daily chest activate");
         }
     }
 

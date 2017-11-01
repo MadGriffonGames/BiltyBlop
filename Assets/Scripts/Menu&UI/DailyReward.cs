@@ -245,6 +245,7 @@ public class DailyReward : MonoBehaviour
             lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
+            DevToDev.Analytics.CustomEvent("#CHEST Daily chest activate");
         }       
 
         int i;
@@ -332,6 +333,7 @@ public class DailyReward : MonoBehaviour
     public void RewardedVideoButton()
     {
         AppMetrica.Instance.ReportEvent("#REWARDx2_BUTTON pressed");
+        DevToDev.Analytics.CustomEvent("#REWARDx2_BUTTON pressed");
 
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;

@@ -735,7 +735,6 @@ public class Player : Character
         if (jumpBonusNum == 0)
         {
             jumpForce = 700;
-			Debug.Log ("reset jumpbonus");
 			bonusFX.SetTrigger ("reset");
 			bonusFXObject.SetActive (false);
         }

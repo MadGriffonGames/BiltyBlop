@@ -77,12 +77,17 @@ public class BuyCheckpointsUI : MonoBehaviour
         {
             AdsManager.Instance.isRewardVideoWatched = false;
 
+            this.gameObject.SetActive(false);
+
+            Debug.Log("Window disabled");
+
             Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+            Debug.Log("free checkpoint set");
             DeathUI.Instance.UpdateFreeCheckpointsCounter();
+            Debug.Log("updated");
 
             notPremiumAttemps--;
-
-            this.gameObject.SetActive(false);
+            Debug.Log("attemps--");
         }
     }
 

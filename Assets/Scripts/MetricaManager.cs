@@ -36,6 +36,8 @@ public class MetricaManager : MonoBehaviour
 
 	void Start ()
     {
+        DevToDevInitialize();
+
         levelParams = new Dictionary<string, object>();
 
         deaths              = 0;
@@ -52,7 +54,7 @@ public class MetricaManager : MonoBehaviour
 
         currentLevel = SceneManager.GetActiveScene().name;
         lastUnlockedLevel = PlayerPrefs.GetString("LastUnlockedLevel");
-	}
+    }
 
 	void Update ()
     {

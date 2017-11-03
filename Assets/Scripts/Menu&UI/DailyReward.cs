@@ -68,6 +68,7 @@ public class DailyReward : MonoBehaviour
     TimeSpan hours24;
     
 
+
     public class Reward//conteiner for reward, made to give it for rewarded video
     {
         public string type;

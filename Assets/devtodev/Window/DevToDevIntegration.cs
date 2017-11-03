@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using DevToDev;
 using System;
 using System.Text;
-using UnityEngine.SceneManagement;
-
 #if UNITY_METRO && !UNITY_EDITOR
 using System.Reflection;
 #endif
@@ -50,7 +48,8 @@ namespace com.devtodev {
 
         public void PushOpened(DevToDev.PushMessage pushMessage, DevToDev.ActionButton actionButton)
         {
-            SceneManager.LoadScene("MainMenu");
+            //pushMessage - DevToDev.PushMessage. Represents toast notification message
+            //actionButton - DevToDev.ActionButton. Represents toast button that was clicked. Could be null if toast body was clicked
         }
 
         public void PushTokenFailed(string error)
@@ -61,9 +60,9 @@ namespace com.devtodev {
         public void PushTokenReceived(string pushToken)
         {
             //pushToken - your push token
-        } 
+        }
 
-		void Awake() {
+        void Awake() {
 			DontDestroyOnLoad(this);
 		}
 
@@ -71,17 +70,8 @@ namespace com.devtodev {
 			if (logEnabled) {
 				Analytics.SetActiveLog(true);
 			}
-
-
-            DevToDev.PushManager.PushReceived = PushReceived;
-            DevToDev.PushManager.PushOpened = PushOpened;
-            DevToDev.PushManager.PushTokenFailed = PushTokenFailed;
-            DevToDev.PushManager.PushTokenReceived = PushTokenReceived;
-
-            DevToDev.PushManager.PushNotificationsEnabled = true;
-
 #if UNITY_ANDROID
-            if (androidKey == null || androidSecret == null) return;
+			if (androidKey == null || androidSecret == null) return;
 	        Analytics.Initialize(androidKey, androidSecret);
 #elif UNITY_IOS
 			if (iosKey == null || iosSecret == null) return;
@@ -144,6 +134,4 @@ namespace com.devtodev {
 	    	}
 	    }
 	}
-
-
 }

@@ -37,10 +37,9 @@ public class RuneStone : InteractiveObject
 
             SendMetrics();
 
-            if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
+            if (SceneManager.GetActiveScene().name == "Level3")
             {
                 DevToDev.Analytics.Tutorial(-2);
-                Debug.Log(1);
             }
 
             MyAnimator.SetTrigger("shine");

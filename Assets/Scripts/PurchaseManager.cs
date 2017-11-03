@@ -97,7 +97,6 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     public void InitializePurchasing()
     {
-        Debug.Log(1);
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 		foreach (string s in ConsumableProducts) 
 		{

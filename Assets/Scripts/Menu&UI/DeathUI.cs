@@ -105,7 +105,6 @@ public class DeathUI : MonoBehaviour
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;
         AdsManager.Instance.fromShowfunction = true;
-		Debug.Log(1);
 
 #elif UNITY_ANDROID
         AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
@@ -145,6 +144,8 @@ public class DeathUI : MonoBehaviour
         {
             buyCheckpointsUI.SetActive(true);
         }
+        AppMetrica.Instance.ReportEvent("#CHECKPOINT_USE in " + GameManager.currentLvl);
+        DevToDev.Analytics.CustomEvent("#CHECKPOINT_USE in " + GameManager.currentLvl);
     }
 
     public void PlayUISound(string sound)
@@ -204,7 +205,6 @@ public class DeathUI : MonoBehaviour
             TutorialUI.Instance.txt.text = "";
         }
 
-        //restartButton.SetActive(true);
         if (SceneManager.GetActiveScene().name.Contains("10") || SceneManager.GetActiveScene().name.Contains("20"))
         {
             restartButton.SetActive(true);

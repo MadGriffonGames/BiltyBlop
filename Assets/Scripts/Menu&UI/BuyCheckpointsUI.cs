@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuyCheckpointsUI : MonoBehaviour
 {
-    const int FREE_CHECKPOINTS_GIFT = 3;
+    const int FREE_CHECKPOINTS_GIFT = 1;
     const int CRYSTAL_PRICE = 4;
     const int NOT_PREMIUM_ATTEMPS = 3;
 
@@ -77,12 +77,17 @@ public class BuyCheckpointsUI : MonoBehaviour
         {
             AdsManager.Instance.isRewardVideoWatched = false;
 
+            this.gameObject.SetActive(false);
+
+            Debug.Log("Window disabled");
+
             Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+            Debug.Log("free checkpoint set");
             DeathUI.Instance.UpdateFreeCheckpointsCounter();
+            Debug.Log("updated");
 
             notPremiumAttemps--;
-
-            this.gameObject.SetActive(false);
+            Debug.Log("attemps--");
         }
     }
 
@@ -102,6 +107,7 @@ public class BuyCheckpointsUI : MonoBehaviour
 #endif
 
         AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Rewarded Video in " + MetricaManager.Instance.currentLevel);
+        DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Rewarded Video in " + MetricaManager.Instance.currentLevel);
     }
 
     public void CoinsButton()
@@ -119,7 +125,7 @@ public class BuyCheckpointsUI : MonoBehaviour
             notPremiumAttemps--;
 
             AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
-
+            DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
             this.gameObject.SetActive(false);
         }
         else if (PlayerPrefs.GetInt("Coins") + GameManager.lvlCollectedCoins >= coinsPriceInt)
@@ -136,7 +142,7 @@ public class BuyCheckpointsUI : MonoBehaviour
             notPremiumAttemps--;
 
             AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
-
+            DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Coins in " + MetricaManager.Instance.currentLevel);
             this.gameObject.SetActive(false);
         }
         
@@ -157,6 +163,7 @@ public class BuyCheckpointsUI : MonoBehaviour
             notPremiumAttemps--;
 
             AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Crystals in " + MetricaManager.Instance.currentLevel);
+            DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Crystals in " + MetricaManager.Instance.currentLevel);
 
             this.gameObject.SetActive(false);
         }
@@ -170,11 +177,8 @@ public class BuyCheckpointsUI : MonoBehaviour
     {
         Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
         DeathUI.Instance.UpdateFreeCheckpointsCounter();
-        Debug.Log(PlayerPrefs.GetInt("Crystals"));
         notPremiumAttemps--;
-        Debug.Log(PlayerPrefs.GetInt("Crystals"));
         this.gameObject.SetActive(false);
-        Debug.Log(PlayerPrefs.GetInt("Crystals"));
     }
 
     public void Skip()

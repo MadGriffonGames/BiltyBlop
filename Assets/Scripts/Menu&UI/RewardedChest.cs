@@ -10,7 +10,7 @@ public class RewardedChest : MonoBehaviour
     public const int CRYSTALS_RANGE = 75;
     public const int ITEMS_RANGE = 100;
 
-    public const int MIN_COIN_RANGE = 50;
+    public const int MIN_COIN_RANGE = 40;
     public const int MID_COIN_RANGE = 70;
     public const int BIG_COIN_RANGE = 100;
 

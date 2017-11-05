@@ -38,12 +38,27 @@ public class DailyReward : MonoBehaviour
     GameObject chestFade;
     [SerializeField]
     Text timer;
+    [SerializeField]
+    Image rewardedButtonImage;
+    [SerializeField]
+    Sprite freeSprite;
+    [SerializeField]
+    GameObject freeText;
+    [SerializeField]
+    Image getRewardButtonImage;
+    [SerializeField]
+    Text getRewardButtonText;
+    [SerializeField]
+    Sprite orangeButtonSprite;
+    [SerializeField]
+    Sprite greenButtonSprite;
 
 
     Image chestImage;
     bool isSpined = false;
     Quaternion rotationVector;
     Animator lootAnimator;
+    public static bool isRewardCollected;
 
     int rewardDay;
     bool is24hoursPast;
@@ -51,6 +66,8 @@ public class DailyReward : MonoBehaviour
     DateTime lastOpenDate;
     TimeSpan span;
     TimeSpan hours24;
+    
+
 
     public class Reward//conteiner for reward, made to give it for rewarded video
     {
@@ -100,6 +117,12 @@ public class DailyReward : MonoBehaviour
 
         SetRewardWindow();
 
+        if (PlayerPrefs.GetInt("NoAds") > 0)
+        {
+            rewardedButtonImage.sprite = freeSprite;
+            freeText.SetActive(true);
+        }
+
         isTimerTick = false;
         hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);// 24hours in timespan format
 
@@ -128,18 +151,21 @@ public class DailyReward : MonoBehaviour
 
         if (!is24hoursPast)
         {
+            doubleButton.GetComponent<Button>().interactable = false;
             chestImage.sprite = chestClose;
             lightCircle.gameObject.SetActive(false);
             isSpined = false;
-            chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 0.55f);
-            activateButton.SetActive(false);
             span = lastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTick = true;
             timer.gameObject.SetActive(true);
+            getRewardButtonImage.sprite = orangeButtonSprite;
+            getRewardButtonText.text = "ok";
+            isRewardCollected = true;
         }
         else
         {
             ActivateChest();
+            isRewardCollected = false;
         }
     }
 
@@ -161,6 +187,7 @@ public class DailyReward : MonoBehaviour
         {
             PlayerPrefs.SetString("LastOpenDate", "7/4/2016 8:30:52 AM");
             lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
+            isRewardCollected = false;
             tmp = false;
         }
 
@@ -195,46 +222,52 @@ public class DailyReward : MonoBehaviour
 
     public void OpenChestButton()
     {
-        if (NetworkTime.Check24hours(lastOpenDate))
+
+
+        chestFade.SetActive(true);
+
+        if (!isRewardCollected)
         {
-            chestImage.sprite = chestOpen;
-            lightCircle.gameObject.SetActive(false);
-            isSpined = false;
-            activateButton.SetActive(false);
-            span = lastOpenDate - NetworkTime.GetNetworkTime();
-            isTimerTick = true;
-            timer.gameObject.SetActive(true);
-
-            chestFade.SetActive(true);
-
             rewardDay++;
             PlayerPrefs.SetInt("RewardDay", rewardDay);
 
-            int i;
+            getRewardButtonImage.sprite = greenButtonSprite;
+            getRewardButtonText.text = "get";
+            doubleButton.GetComponent<Button>().interactable = true;
 
-            if (rewardDay <= 5)
-            {
-                i = 1;
-            }
-            else
-            {
-                i = 6;
-            }
-
-            for (int j = 0; j < dailySlots.Length; j++)
-            {
-                dailySlots[j].dayNum = i;
-                dailySlots[j].SetReward();
-                i++;
-            }      
-
-            rewardWindow.SetActive(true);
+            chestImage.sprite = chestOpen;
+            lightCircle.gameObject.SetActive(false);
+            isSpined = false;
+            span = lastOpenDate - NetworkTime.GetNetworkTime();
+            isTimerTick = true;
+            timer.gameObject.SetActive(true);
 
             PlayerPrefs.SetString("LastOpenDate", NetworkTime.GetNetworkTime().ToString());
             lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
+            DevToDev.Analytics.CustomEvent("#CHEST Daily chest activate");
+        }       
+
+        int i;
+
+        if (rewardDay <= 5)
+        {
+            i = 1;
         }
+        else
+        {
+            i = 6;
+        }
+
+        for (int j = 0; j < dailySlots.Length; j++)
+        {
+            dailySlots[j].dayNum = i;
+            dailySlots[j].SetReward();
+            i++;
+        }
+
+        rewardWindow.SetActive(true);       
     }
 
     public void ClaimButton()
@@ -300,10 +333,14 @@ public class DailyReward : MonoBehaviour
 
     public void RewardedVideoButton()
     {
+        AppMetrica.Instance.ReportEvent("#REWARDx2_BUTTON pressed");
+        DevToDev.Analytics.CustomEvent("#REWARDx2_BUTTON pressed");
+
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
         AdsManager.Instance.ShowRewardedVideo();
 #endif
+        doubleButton.GetComponent<Button>().interactable = false;
     }
 }

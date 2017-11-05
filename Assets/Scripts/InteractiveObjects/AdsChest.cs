@@ -33,12 +33,17 @@ public class AdsChest : MonoBehaviour
     public SpriteRenderer loot;
     [SerializeField]
     Sprite openChest;
+    bool isOpened;
+    bool isRewardCollected;
 
     public int[] itemsDropRate;
     public int[] itemsStorage;
 
     public void Start()
     {
+        isOpened = false;
+        isRewardCollected = false;
+
         itemsDropRate = new int[ITEMS_COUNT];
         itemsStorage = new int[100];
 
@@ -52,10 +57,13 @@ public class AdsChest : MonoBehaviour
 
     private void Update()
     {
-        if (AdsManager.Instance.isRewardVideoWatched)
+        if (isOpened && !isRewardCollected && AdsManager.Instance.isRewardVideoWatched)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
             GetComponent<BoxCollider2D>().enabled = false;
+            isRewardCollected = true;
+
+            EnableControls(true);
 
             Randomize();
             loot.gameObject.SetActive(true);          
@@ -227,15 +235,35 @@ public class AdsChest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other.CompareTag("Sword");
+        if (other.CompareTag("Sword"))
         {
+            isOpened = true;
+
             GetComponent<SpriteRenderer>().sprite = openChest;
+
+            AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+            DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+
+            EnableControls(false);
+            Player.Instance.mobileInput = 0;
 
 #if UNITY_EDITOR
             AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
             AdsManager.Instance.ShowRewardedVideo();
 #endif
+        }
+    }
+
+    protected void EnableControls(bool switcher)
+    {
+        if (switcher)
+        {
+            UI.Instance.controlsUI.SetActive(true);
+        }
+        else
+        {
+            UI.Instance.controlsUI.SetActive(false);
         }
     }
 }

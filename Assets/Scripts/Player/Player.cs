@@ -111,7 +111,9 @@ public class Player : Character
     public float timeScaler = 1;
     public float timeScalerJump = 1;
     public float timeScalerMove = 1;
-    public Animator bonusFX;
+	[SerializeField]
+	public GameObject bonusFXObject;
+	public Animator bonusFX;
 
     /*
      * Skin Managment
@@ -133,7 +135,7 @@ public class Player : Character
 		SetPerkParams ();
         health = PlayerPrefs.GetInt("SkinArmorStat");
         maxHealth = health;
-        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat");
+        meleeDamage = PlayerPrefs.GetInt("SwordAttackStat");
         throwDamage = PlayerPrefs.GetInt("ThrowAttackStat");
 
         HealthUI.Instance.SetHealthbar();
@@ -148,7 +150,7 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
-
+		bonusFX = bonusFXObject.GetComponent<Animator> ();
         if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
         {
             DevToDev.Analytics.Tutorial(-1);
@@ -506,6 +508,8 @@ public class Player : Character
                 else
                 {
                     MetricaManager.Instance.deaths++;
+                    AppMetrica.Instance.ReportEvent("#DEATH in " + GameManager.currentLvl);
+                    DevToDev.Analytics.CustomEvent("#DEATH in " + GameManager.currentLvl);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
                     
@@ -672,8 +676,9 @@ public class Player : Character
 
     public void ExecBonusImmortal(float duration)
     {
+		bonusFXObject.SetActive (true);
         StartCoroutine(ImmortalBonus(duration));
-			MakeFX.Instance.MakeImmortalBonus(duration * potionTimeScale);
+		MakeFX.Instance.MakeImmortalBonus(duration * potionTimeScale);
 		bonusFX.SetTrigger ("immortal");
     }
 
@@ -681,19 +686,20 @@ public class Player : Character
     {
         immortalBonusNum++;
         immortal = true;
-			yield return new WaitForSeconds(duration * potionTimeScale);
+		yield return new WaitForSeconds(duration * potionTimeScale);
         immortalBonusNum--;
         if (immortalBonusNum == 0)
         {
             immortal = false;
 			bonusFX.SetTrigger ("reset");
+			bonusFXObject.SetActive (false);
         }
     }
 
     public void ExecBonusDamage(float duration)
     {
         StartCoroutine(DamageBonus(duration));
-			MakeFX.Instance.MakeDamageBonus(duration * potionTimeScale);
+		MakeFX.Instance.MakeDamageBonus(duration * potionTimeScale);
 		bonusFX.SetTrigger ("damage");
 
     }
@@ -702,19 +708,21 @@ public class Player : Character
     {
         damageBonusNum++;
         meleeDamage *= 2;
-			yield return new WaitForSeconds(duration * potionTimeScale);
+		yield return new WaitForSeconds(duration * potionTimeScale);
         damageBonusNum--;
         if (damageBonusNum == 0)
         {
             meleeDamage /= 2;
 			bonusFX.SetTrigger ("reset");
+			bonusFXObject.SetActive (false);
         }
     }
 
     public void ExecBonusJump(float duration)
     {
+		bonusFXObject.SetActive (true);
         StartCoroutine(JumpBonus(duration));
-			MakeFX.Instance.MakeJumpBonus(duration * potionTimeScale);
+		MakeFX.Instance.MakeJumpBonus(duration * potionTimeScale);
 		bonusFX.SetTrigger ("jump");
     }
 
@@ -722,19 +730,21 @@ public class Player : Character
     {
         jumpBonusNum++;
         jumpForce = 1200;
-			yield return new WaitForSeconds(duration * potionTimeScale);
+		yield return new WaitForSeconds(duration * potionTimeScale);
         jumpBonusNum--;
         if (jumpBonusNum == 0)
         {
             jumpForce = 700;
 			bonusFX.SetTrigger ("reset");
+			bonusFXObject.SetActive (false);
         }
     }
 
     public void ExecBonusSpeed(float duration)
     {
+		bonusFXObject.SetActive (true);
         StartCoroutine(SpeedBonus(duration));
-			MakeFX.Instance.MakeSpeedBonus(duration * potionTimeScale);
+		MakeFX.Instance.MakeSpeedBonus(duration * potionTimeScale);
 		bonusFX.SetTrigger ("speed");
     }
 
@@ -747,7 +757,7 @@ public class Player : Character
         Camera cam = Camera.main;
         CameraEffect cef = cam.GetComponent<CameraEffect>();
         cef.StartBlur(0.35f);
-			yield return new WaitForSeconds(duration * potionTimeScale);
+		yield return new WaitForSeconds(duration * potionTimeScale);
         speedBonusNum--;
 
         if (speedBonusNum == 0)
@@ -758,13 +768,16 @@ public class Player : Character
             timeScalerMove = 1;
             cef.StopBlur();
 			bonusFX.SetTrigger ("reset");
+			bonusFXObject.SetActive (false);
+			Debug.Log (bonusFXObject.activeInHierarchy);
         }
     }
 
     public void ExecBonusTime(float duration)
     {
+		bonusFXObject.SetActive (true);
         StartCoroutine(TimeBonus(duration));
-			MakeFX.Instance.MakeTimeBonus(duration * potionTimeScale);
+		MakeFX.Instance.MakeTimeBonus(duration * potionTimeScale);
 	    bonusFX.SetTrigger ("time");
     }
 
@@ -779,7 +792,7 @@ public class Player : Character
         Time.timeScale = 0.5f;
         Time.fixedDeltaTime = 0.01f;
         myRigidbody.gravityScale = 6;
-			yield return new WaitForSeconds(duration * potionTimeScale);
+		yield return new WaitForSeconds(duration * potionTimeScale);
         timeBonusNum--;
 
         if (timeBonusNum == 0)
@@ -793,6 +806,7 @@ public class Player : Character
             Time.fixedDeltaTime = 0.02f;
             myRigidbody.gravityScale = 3;
             bonusFX.SetTrigger("reset");
+			bonusFXObject.SetActive (false);
         }
     }
 
@@ -805,12 +819,22 @@ public class Player : Character
         Time.timeScale = 1;
         myRigidbody.gravityScale = 3;
         immortal = false;
-        meleeDamage = PlayerPrefs.GetInt("SkinAttackStat"); ;
+        meleeDamage = PlayerPrefs.GetInt("SwordAttackStat"); ;
         movementSpeed = MOVEMENT_SPEED;
         jumpForce = JUMP_FORCE;
         myArmature.animation.timeScale = 1;
         Time.fixedDeltaTime = 0.02000000f;
         bonusFX.enabled = false;
+    }
+
+    public bool IsBonusUsed()
+    {
+        int tmp = damageBonusNum + immortalBonusNum + speedBonusNum + timeBonusNum;
+        if (tmp > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     /*

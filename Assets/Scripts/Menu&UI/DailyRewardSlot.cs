@@ -68,84 +68,130 @@ public class DailyRewardSlot : MonoBehaviour
                     rewardValue.text = "100";
                     generalRewardValue.text = "100";
                     rewardValue.enabled = true;
-                    dailyRewardObject.myReward.SetReward("Coins", 100);
-                    GameManager.AddCoins(100);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Coins", 100);
+                        GameManager.AddCoins(100);
+                    }
                     break;
+
                 case 2:
                     rewardImage.sprite = coinSprite;
                     generalRewardImage.sprite = coinSprite;
                     rewardValue.text = "150";
                     generalRewardValue.text = "150";
                     rewardValue.enabled = true;
-                    dailyRewardObject.myReward.SetReward("Coins", 150);
-                    GameManager.AddCoins(150);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Coins", 150);
+                        GameManager.AddCoins(150);
+                    }
+                    
                     break;
+
                 case 3:
                     slotBackground.sprite = todayBack;
                     rewardImage.sprite = misteriousSprite;
                     generalRewardImage.sprite = hpSprite;
                     generalRewardValue.text = "1";
                     rewardValue.enabled = false;
-                    dailyRewardObject.myReward.SetReward("Item", 1, Inventory.HEAL);
-                    Inventory.Instance.AddItem(Inventory.HEAL, 1);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Item", 1, Inventory.HEAL);
+                        Inventory.Instance.AddItem(Inventory.HEAL, 1);
+                    }
                     break;
+
                 case 4:
                     rewardImage.sprite = coinSprite;
                     generalRewardImage.sprite = coinSprite;
                     rewardValue.text = "200";
                     generalRewardValue.text = "200";
                     rewardValue.enabled = true;
-                    dailyRewardObject.myReward.SetReward("Coins", 200);
-                    GameManager.AddCoins(200);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Coins", 200);
+                        GameManager.AddCoins(200);
+                    }
                     break;
+
                 case 5:
                     rewardImage.sprite = coinSprite;
                     generalRewardImage.sprite = coinSprite;
                     rewardValue.text = "250";
                     generalRewardValue.text = "250";
                     rewardValue.enabled = true;
-                    dailyRewardObject.myReward.SetReward("Coins", 250);
-                    GameManager.AddCoins(250);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Coins", 250);
+                        GameManager.AddCoins(250);
+                    }
                     break;
+
                 case 6:
                     slotBackground.sprite = todayBack;
                     rewardImage.sprite = misteriousSprite;
                     generalRewardImage.sprite = ammoSprite;
                     generalRewardValue.text = "1";
                     rewardValue.enabled = false;
-                    dailyRewardObject.myReward.SetReward("Item", 1, Inventory.AMMO);
-                    Inventory.Instance.AddItem(Inventory.AMMO, 1);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Item", 1, Inventory.AMMO);
+                        Inventory.Instance.AddItem(Inventory.AMMO, 1);
+                    }                   
                     break;
+
                 case 7:
                     rewardImage.sprite = crystalSprite;
                     generalRewardImage.sprite = crystalSprite;
                     rewardValue.text = "2";
                     generalRewardValue.text = "2";
                     rewardValue.enabled = true;
-                    dailyRewardObject.myReward.SetReward("Crystals", 2);
-                    GameManager.AddCrystals(2);                    
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Crystals", 2);
+                        GameManager.AddCrystals(2);
+                    }                                      
                     break;
+
                 case 8:
                     rewardImage.sprite = crystalSprite;
                     generalRewardImage.sprite = crystalSprite;
                     rewardValue.text = "4";
                     generalRewardValue.text = "4";
                     rewardValue.enabled = true;
-                    dailyRewardObject.myReward.SetReward("Crystals", 4);
-                    GameManager.AddCrystals(4);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Crystals", 4);
+                        GameManager.AddCrystals(4);
+                    }
                     break;
+
                 case 9:
                     slotBackground.sprite = todayBack;
                     rewardImage.sprite = misteriousSprite;
                     generalRewardImage.sprite = potionsSprite;
                     generalRewardValue.text = "1";
                     rewardValue.enabled = false;
-                    dailyRewardObject.myReward.SetReward("Pots");
-                    Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 1);
-                    Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 1);
-                    Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
-                    Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
+                        dailyRewardObject.myReward.SetReward("Pots");
+                        Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 1);
+                        Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 1);
+                        Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
+                        Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
+                    }
                     break;
+
                 case 10:
                     slotBackground.sprite = skinBack;
                     rewardImage.sprite = skinSprite;
@@ -153,9 +199,14 @@ public class DailyRewardSlot : MonoBehaviour
                     generalRewardValue.text = "+ skin";
                     dailyRewardObject.myReward.SetReward("Skin");
                     rewardValue.enabled = false;
+                    if (!DailyReward.isRewardCollected)
+                    {
+                        DailyReward.isRewardCollected = true;
 
-                    PlayerPrefs.SetInt("RewardDay", 0);
+                        PlayerPrefs.SetInt("RewardDay", 0);
+                    }
                     break;
+
                 default:
                     break;
             }

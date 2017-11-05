@@ -43,16 +43,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject bird;
 
-    string currentLvl;
+    public static string currentLvl;
     bool isLevel;
 
 	void Awake()
 	{
-		#if UNITY_EDITOR
+        #if UNITY_EDITOR
 			Application.targetFrameRate = 1000;
-#elif UNITY_IOS
-			Application.targetFrameRate = 60;
 #elif UNITY_ANDROID
+        Application.targetFrameRate = 60;
+#elif UNITY_IOS
 			Application.targetFrameRate = 60;
 #endif
 
@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
         coinTxt = GameObject.Find("CoinTxt").GetComponent<Text>();
 
         currentLvl = SceneManager.GetActiveScene().name;
+
+        AppMetrica.Instance.ReportEvent("#ENTER in " + currentLvl);
+        DevToDev.Analytics.CustomEvent("#ENTER in " + currentLvl);
     }
 
     void Start () 

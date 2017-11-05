@@ -50,8 +50,8 @@ public class Inventory : MonoBehaviour
         // ADDING ITEMS // 
         itemsNames = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO }; // ADD NEW GOOD TO THE SHOP
 
-        SetStartingParamsForItem(HEAL, "Heal Pot", 3, 180, 4);
-        SetStartingParamsForItem(DAMAGE_BONUS, "Damage Pot", 3, 270, 6);
+        SetStartingParamsForItem(HEAL, "Heal Pot", 3, 250, 5);
+        SetStartingParamsForItem(DAMAGE_BONUS, "Damage Pot", 3, 200, 4);
         SetStartingParamsForItem(SPEED_BONUS, "Speed Pot", 3, 135, 3);
         SetStartingParamsForItem(TIME_BONUS, "Time Pot", 3, 225, 5);
         SetStartingParamsForItem(IMMORTAL_BONUS, "Immortal Pot", 3, 360, 8);
@@ -247,5 +247,6 @@ public class Inventory : MonoBehaviour
     void SendUseMetric(string bonusName)
     {
         AppMetrica.Instance.ReportEvent("#BONUS_USE " + bonusName + " used in " + MetricaManager.Instance.currentLevel);
+        DevToDev.Analytics.CustomEvent("#BONUS_USE " + bonusName + " used in " + MetricaManager.Instance.currentLevel);
     }
 }

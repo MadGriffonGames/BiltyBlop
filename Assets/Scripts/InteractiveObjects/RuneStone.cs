@@ -37,10 +37,9 @@ public class RuneStone : InteractiveObject
 
             SendMetrics();
 
-            if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
+            if (SceneManager.GetActiveScene().name == "Level3")
             {
                 DevToDev.Analytics.Tutorial(-2);
-                Debug.Log(1);
             }
 
             MyAnimator.SetTrigger("shine");
@@ -56,12 +55,8 @@ public class RuneStone : InteractiveObject
     {
         GameManager.nextLevelName = nextLvl;
 		PlayerPrefs.SetInt("Coins", GameManager.collectedCoins + Mathf.RoundToInt(GameManager.lvlCollectedCoins * (Player.Instance.coinScale - 1)));   // GREEDY PERK
-        Debug.Log("0lvl");
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
         {
-            Debug.Log("1lvl");
-            Debug.Log(PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects"));
-            Debug.Log(Player.Instance.stars);
             if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.stars)
             {
                 int previousStarsCount = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects");
@@ -70,7 +65,6 @@ public class RuneStone : InteractiveObject
                 for (int i = 0; i < delta; i++)
                 {
                     AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
-                    Debug.Log("Star");
                 }
 
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
@@ -83,7 +77,6 @@ public class RuneStone : InteractiveObject
             for (int i = 0; i < delta; i++)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
-                Debug.Log("Star");
             }
 
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
@@ -123,5 +116,12 @@ public class RuneStone : InteractiveObject
         MetricaManager.Instance.SetParametrs();
 
         AppMetrica.Instance.ReportEvent(MetricaManager.Instance.currentLevel + " complete with:", MetricaManager.Instance.levelParams);
+
+        DevToDev.CustomEventParams customEventParams = new DevToDev.CustomEventParams(); ;
+        foreach (KeyValuePair<string, object> param in MetricaManager.Instance.levelParams)
+        {
+            customEventParams.AddParam(param.Key, param.Value.ToString());
+        }
+        DevToDev.Analytics.CustomEvent(MetricaManager.Instance.currentLevel + " complete with:", customEventParams);
     }
 }

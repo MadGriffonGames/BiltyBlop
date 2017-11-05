@@ -192,6 +192,7 @@ public class DailyLoot : MonoBehaviour {
             PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
+            DevToDev.Analytics.CustomEvent("#CHEST Daily chest activate");
         }
     }
 

@@ -97,16 +97,16 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     public void InitializePurchasing()
     {
-        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 		foreach (string s in ConsumableProducts) 
 		{
 			builder.AddProduct (s, ProductType.Consumable);
-			builder.AddProduct ("kidarian." + s, ProductType.Consumable);
+			builder.AddProduct ("com.hardslime.kidarian." + s, ProductType.Consumable);
 		}
 		foreach (string s in NonConsumableProducts) 
 		{
 			builder.AddProduct (s, ProductType.NonConsumable);
-			builder.AddProduct ("kidarian." + s, ProductType.NonConsumable);
+			builder.AddProduct ("com.hardslime.kidarian." + s, ProductType.NonConsumable);
 		}
         UnityPurchasing.Initialize(this, builder);
     }

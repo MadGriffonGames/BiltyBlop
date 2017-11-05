@@ -11,8 +11,6 @@ public class EvilFlowerGreen : RangeEnemy
     [SerializeField]
     GameObject leafParticle;
     [SerializeField]
-    public GameObject acidFx;
-    [SerializeField]
     GameObject enemySight;
 
 
@@ -66,7 +64,7 @@ public class EvilFlowerGreen : RangeEnemy
         {
             AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
             Player.Instance.monstersKilled++;
-            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.3f, 0.4f, -1f), Quaternion.identity);
+            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.5f, 1.8f, -1f), Quaternion.identity);
             SpawnCoins(1, 2);
             SoundManager.PlaySound ("green flower");
             GameManager.deadEnemies.Add(gameObject);
@@ -79,12 +77,12 @@ public class EvilFlowerGreen : RangeEnemy
     {
         if (this.gameObject.transform.localScale.x > 0)
         {
-            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.8f, -5), Quaternion.identity);
+            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(-0.3f, 1.65f, -5), Quaternion.identity);
             tmp.GetComponent<Seed>().Initialize(Vector2.left);
         }
         else
         {
-            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0, 0.8f, -5), Quaternion.Euler(0, 0, 180));
+            GameObject tmp = (GameObject)Instantiate(seed, transform.position + new Vector3(0.3f, 1.65f, -5), Quaternion.Euler(0, 0, 180));
             tmp.GetComponent<Seed>().Initialize(Vector2.right);
         }
     }

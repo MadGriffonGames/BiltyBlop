@@ -15,29 +15,21 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
-
-
-        if (!PlayerPrefs.HasKey("BetaReward"))
+        if (!PlayerPrefs.HasKey("FirstEnter"))
         {
-            PlayerPrefs.SetInt("BetaReward", 1);
-            PlayerPrefs.SetInt("Crystals", 150);
-            PlayerPrefs.SetInt("Coins", 1500);
+            PlayerPrefs.SetInt("FirstEnter", 1); 
+                      
+            PlayerPrefs.SetInt("SwordDisplayIndex", 0);
+            PlayerPrefs.SetInt("SwordAttackStat", 1);
 
-            PlayerPrefs.SetInt("BetaReward", 1);
-			PlayerPrefs.SetInt("SwordDisplayIndex", 0);
-			PlayerPrefs.SetInt ("SkinDisplayIndex", 0);
-			PlayerPrefs.SetInt ("SkinArmorStat", 3);
-			PlayerPrefs.SetInt ("SkinAttackStat", 1);
-			PlayerPrefs.SetString ("Skin", "Classic");
-            betaTestReward.SetActive(true);
-        }
-		if (!PlayerPrefs.HasKey ("Throw")) 
-		{
-			PlayerPrefs.SetString ("Throw", "ClassicThrow");
-			PlayerPrefs.SetFloat ("ThrowAttackStat", 1);
-			PlayerPrefs.SetInt ("ThrowSpeedStat", 14);
-		}
-			
+            PlayerPrefs.SetInt("SkinDisplayIndex", 0);
+            PlayerPrefs.SetInt("SkinArmorStat", 3);
+            PlayerPrefs.SetString("Skin", "Classic");
+
+            PlayerPrefs.SetString("Throw", "ClassicThrow");
+            PlayerPrefs.SetInt("ThrowAttackStat", 1);
+            PlayerPrefs.SetFloat("ThrowSpeedStat", 14);
+        }			
 
         SoundManager.PlayMusic("main menu", true);
     }
@@ -50,13 +42,6 @@ public class MainMenu : MonoBehaviour
     public void ToAchievmentMenu()
     {
         GameManager.nextLevelName = "AchievementMenu";
-
-        SceneManager.LoadScene("Loading");
-    }
-
-    public void ToGiftsMenu()
-    {
-        GameManager.nextLevelName = "Gifts";
 
         SceneManager.LoadScene("Loading");
     }

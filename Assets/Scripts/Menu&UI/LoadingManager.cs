@@ -15,7 +15,5 @@ public class LoadingManager : MonoBehaviour
         
         yield return true;
         async.allowSceneActivation = true;
-        
-
     }
 }

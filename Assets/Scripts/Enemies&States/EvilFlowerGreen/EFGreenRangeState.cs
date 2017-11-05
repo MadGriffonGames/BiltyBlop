@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EFGreenRangeState : IEFGreenState {
+public class EFGreenRangeState : IEFGreenState
+{
 
     private EvilFlowerGreen enemy;
     float attackTime;
@@ -11,23 +12,24 @@ public class EFGreenRangeState : IEFGreenState {
     {
         this.enemy = enemy;
         enemy.armature.animation.timeScale = 2f;
-        enemy.armature.animation.FadeIn("PREPARATION", -1, 1);
+        enemy.armature.animation.FadeIn("pre_atk", -1, 1);
 
     }
 
     public void Execute()
     {
-        if ((enemy.armature.animation.lastAnimationName == ("PREPARATION") || enemy.armature.animation.lastAnimationName == "IDLE") && enemy.armature.animation.isCompleted)
+        if ((enemy.armature.animation.lastAnimationName == ("pre_atk") || enemy.armature.animation.lastAnimationName == "IDLE") && enemy.armature.animation.isCompleted)
         {
             SoundManager.PlaySound("spit");
-            enemy.armature.animation.timeScale = 1.5f;
             attackTime += Time.deltaTime;
-            enemy.armature.animation.FadeIn("ATTACK", -1, 1);
+            enemy.armature.animation.FadeIn("atk", -1, 1);
             enemy.ThrowSeed();
-            enemy.acidFx.SetActive(true);
         }
-        if ((enemy.armature.animation.lastAnimationName == ("ATTACK")) && enemy.armature.animation.isCompleted)
-            enemy.ChangeState(new EFGreenIdleState());           
+        if ((enemy.armature.animation.lastAnimationName == ("atk")) && enemy.armature.animation.isCompleted)
+        {
+            enemy.ChangeState(new EFGreenIdleState());
+        }
+                     
     }
 
     public void Exit()

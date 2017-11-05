@@ -12,28 +12,36 @@ public class PlayVideo : MonoBehaviour
 	[SerializeField]
 	GameObject skipButton;
 
-	VideoPlayer videoPlayer;
+    VideoPlayer videoPlayer;
 
     private void Start()
     {
-		videoPlayer = this.gameObject.GetComponent<VideoPlayer> ();
-		string movieName = videoPlayer.clip.name;
-		foreach (GameObject sceneui  in sceneUI) 
-		{
-			sceneui.SetActive (false);			
-		}
-		videoPlayer.Play ();
-		SoundManager.MuteMusic (true);
-		if (!PlayerPrefs.HasKey(movieName))
-		{
-			skipButton.SetActive (false);
-			PlayerPrefs.SetString (movieName, "played");
-		} 
-		else
-			skipButton.SetActive (true);
+        videoPlayer = this.gameObject.GetComponent<VideoPlayer>();
+        videoPlayer.isLooping = false;
+        videoPlayer.loopPointReached += EndReached;
+        string movieName = videoPlayer.clip.name;
+        foreach (GameObject sceneui in sceneUI)
+        {
+            sceneui.SetActive(false);
+        }
+        videoPlayer.Play();
+        SoundManager.MuteMusic(true);
+        if (!PlayerPrefs.HasKey(movieName))
+        {
+            skipButton.SetActive(false);
+            PlayerPrefs.SetString(movieName, "played");
+        }
+        else
+            skipButton.SetActive (true);
     }
 
-	public void SkipVideo()
+    private void EndReached(UnityEngine.Video.VideoPlayer vp)
+    {
+        vp.playbackSpeed = vp.playbackSpeed / 10.0F;
+        SkipVideo();
+    }
+
+    public void SkipVideo()
 	{
 		videoPlayer.Stop ();
 		skipButton.SetActive (false);

@@ -12,6 +12,10 @@ public class EvilFlower : MeleeEnemy
     [SerializeField]
     GameObject enemySight;
 
+    public bool isAttacked;
+    public float timer;
+    float attackCoolDown = 2;
+
 
     void Awake()
     {
@@ -25,6 +29,8 @@ public class EvilFlower : MeleeEnemy
         ChangeState(new EvilFlowerIdleState());
 		//SetHealthbar ();
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+
+        isAttacked = false;
     }
 
     void Update()
@@ -34,6 +40,15 @@ public class EvilFlower : MeleeEnemy
             if (!TakingDamage && !Attack)
             {
                 currentState.Execute();
+            }
+            if (isAttacked)
+            {
+                timer += Time.deltaTime;
+            }
+            if (timer >= attackCoolDown)
+            {
+                timer = 0;
+                isAttacked = false;
             }
         }
     }
@@ -69,7 +84,7 @@ public class EvilFlower : MeleeEnemy
         if (IsDead) 
         {
             AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(-0.4f, 0, -3), Quaternion.identity);
+            Instantiate(leafParticle, this.gameObject.transform.position + new Vector3(0.5f, 1.8f, -3), Quaternion.identity);
             SpawnCoins(1, 2);
 			SoundManager.PlaySound ("flower_death");
             GameManager.deadEnemies.Add(gameObject);

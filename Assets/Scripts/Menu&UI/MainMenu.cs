@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+
+
         if (!PlayerPrefs.HasKey("BetaReward"))
         {
             PlayerPrefs.SetInt("BetaReward", 1);
@@ -48,6 +50,13 @@ public class MainMenu : MonoBehaviour
     public void ToAchievmentMenu()
     {
         GameManager.nextLevelName = "AchievementMenu";
+
+        SceneManager.LoadScene("Loading");
+    }
+
+    public void ToGiftsMenu()
+    {
+        GameManager.nextLevelName = "Gifts";
 
         SceneManager.LoadScene("Loading");
     }

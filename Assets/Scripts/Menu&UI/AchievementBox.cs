@@ -8,6 +8,7 @@ public class AchievementBox : MonoBehaviour {
 
     [SerializeField]
     public string achievementName;
+    public const string availableLoots = "avaliableLoots";
 
     [SerializeField]
     GameObject getBtn;
@@ -281,7 +282,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetFirstReward()
     {
-
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue1 = PlayerPrefs.GetInt(achievementName + "targetValue1");
         UpdateValue(1);
@@ -338,6 +339,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetSecondReward()
     {
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue2 = PlayerPrefs.GetInt(achievementName + "targetValue2");
         UpdateValue(2);
@@ -391,6 +393,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetThirdReward()
     {
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         PlayerPrefs.SetInt(achievementName + btn, 3);
         getBtn2.gameObject.SetActive(false);
         doneImg.gameObject.SetActive(true);

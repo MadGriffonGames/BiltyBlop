@@ -48,6 +48,7 @@ public class AchievementManager : MonoBehaviour {
     public const string TIME_BONUS = "TimeBonus";
     public const string IMMORTAL_BONUS = "ImmortalBonus";
     public const string AMMO = "ClipsCount";
+    public const string availableLoots = "avaliableLoots";
 
     public Achieve mobKiller;
     public Achieve treasureHunter;
@@ -84,9 +85,13 @@ public class AchievementManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+
+        if (!PlayerPrefs.HasKey(availableLoots))
+            PlayerPrefs.SetInt(availableLoots, 0);
         //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
         items = new string[] { HEAL, HEAL, HEAL };
+
 
 
 
@@ -124,7 +129,7 @@ public class AchievementManager : MonoBehaviour {
         PlayerPrefs.SetString("Black_ninja", "Locked");
         PlayerPrefs.SetString("Sword3Throw", "Locked");
 
-        //ResetStat("Mob killer");
+        ResetStat("Mob killer");
         //ResetStat("Diver");
         //ResetStat("Secret Rush test");
         //ResetStat("Spider Boss killer test");
@@ -154,11 +159,9 @@ public class AchievementManager : MonoBehaviour {
                 if (achieve.weight <= 2)
                 {
                     PlayerPrefs.SetInt(achieveName, PlayerPrefs.GetInt(achieveName) + 1);
-                    if (achieveName == "Mob killer")
-                        Debug.Log(PlayerPrefs.GetInt(achieveName));
                     if (PlayerPrefs.GetInt(achieveName) == achieve.targetValueArray[achieve.weight])
                     {
-                        GameManager.CollectedCoins += achieve.rewardArray[achieve.weight];
+                        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) + 1);
                         achieve.weight++;
                         PlayerPrefs.SetInt(achieveName + "weight", achieve.weight);
                         achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieveName);
@@ -191,6 +194,7 @@ public class AchievementManager : MonoBehaviour {
         PlayerPrefs.SetInt(levelAchieve.achieveName, PlayerPrefs.GetInt(levelAchieve.achieveName) + 1);
         if (PlayerPrefs.GetInt(levelAchieve.achieveName) == levelAchieve.targetValue)
         {
+            PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) + 1);
             achievementUI.GetComponent<AchievementUI>().AchievementAppear(levelAchieve.achieveName);
             StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
             Destroy(levelAchieve);

@@ -46,6 +46,7 @@ public class InAppTutorial : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
+        PlayerPrefs.DeleteKey("Level3");
         if (other.gameObject.CompareTag("Player"))
         {
             isActive = true;

@@ -55,27 +55,7 @@ public class BonusTutorial : InAppTutorial
         string currentLevel = SceneManager.GetActiveScene().name;
 
         bonusLight.GetComponent<RectTransform>().transform.localPosition = lightPos;
-        if (other.gameObject.CompareTag("Player") && currentLevel == "Level4" && PlayerPrefs.GetInt("Level5") == 0)
-        {
-            isActive = true;
 
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
-
-            backpackLight.SetActive(true);
-
-            TutorialUI.Instance.txt.fontSize = fontSize;
-            TutorialUI.Instance.txt.text = textInventory;
-            ActivateTutorial();
-
-            if (type == "Damage")
-            {
-                int currentCount = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS);
-                currentCount = currentCount > 3 ? 3 : currentCount;
-                Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 3 - currentCount);
-                DevToDev.Analytics.Tutorial(3);
-            }
-        }
 		if (other.gameObject.CompareTag("Player") && currentLevel == "Level2" && PlayerPrefs.GetInt("Level3") == 0)
         {
             //EnableControls(false);
@@ -116,7 +96,6 @@ public class BonusTutorial : InAppTutorial
 
         if (isCollected && currentLevel == "Level3" && PlayerPrefs.GetInt("Level4") == 0)
         {
-            Debug.Log(1);
             EnableControls(false);
             Player.Instance.mobileInput = 0;
 

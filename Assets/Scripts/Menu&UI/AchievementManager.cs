@@ -96,7 +96,7 @@ public class AchievementManager : MonoBehaviour {
 
 
         mobKillerReward = new int[] { 1, 3, 1 };
-        mobKillerTargetValue = new int[] { 25, 250, 1000 };
+        mobKillerTargetValue = new int[] { 1, 2, 3 };
         mobKillerRewardType = new string[] { DAMAGE_BONUS, "PizzaThrow", "JonSnowSword" };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
@@ -129,7 +129,7 @@ public class AchievementManager : MonoBehaviour {
         PlayerPrefs.SetString("Black_ninja", "Locked");
         PlayerPrefs.SetString("Sword3Throw", "Locked");
 
-        ResetStat("Mob killer");
+        //ResetStat("Mob killer");
         //ResetStat("Diver");
         //ResetStat("Secret Rush test");
         //ResetStat("Spider Boss killer test");

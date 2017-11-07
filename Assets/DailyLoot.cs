@@ -22,9 +22,7 @@ public class DailyLoot : MonoBehaviour {
     TimeSpan spanCrystal;
     TimeSpan spanPotion;
 
-    TimeSpan hours24Coin;
-    TimeSpan hours24Crystal;
-    TimeSpan hours24Potion;
+    TimeSpan hours24;
 
     bool is24hoursPastCoin;
     bool is24hoursPastCrystal;
@@ -50,27 +48,25 @@ public class DailyLoot : MonoBehaviour {
     [SerializeField]
     Text potionTimer;
 
-    [SerializeField]
-    GameObject coinDailyRewardWindow;
-    [SerializeField]
-    GameObject crystalDailyRewardWindow;
-    [SerializeField]
-    GameObject potionDailyRewardWindow;
+    //[SerializeField]
+    //GameObject coinDailyRewardWindow;
+    //[SerializeField]
+    //GameObject crystalDailyRewardWindow;
+    //[SerializeField]
+    //GameObject potionDailyRewardWindow;
 
-    [SerializeField]
-    GameObject getCoin;
-    [SerializeField]
-    GameObject getCrystal;
-    [SerializeField]
-    GameObject getPotion;
+    public const string dailyLootCounter = "dailyLootCounter";
+    public const string dailyCoins = "dailyCoins";
+    public const string dailyCrystals = "dailyCrystals";
+    public const string dailyPotions = "dailyPotions";
 
 
 
     // Use this for initialization
     void Start () {
-        coinDailyRewardWindow.gameObject.SetActive(false);
-        crystalDailyRewardWindow.gameObject.SetActive(false);
-        potionDailyRewardWindow.gameObject.SetActive(false);
+        //coinDailyRewardWindow.gameObject.SetActive(false);
+        //crystalDailyRewardWindow.gameObject.SetActive(false);
+        //potionDailyRewardWindow.gameObject.SetActive(false);
         CoinStart();
         CrystalStart();
         PotionStart();
@@ -86,7 +82,7 @@ public class DailyLoot : MonoBehaviour {
 
         if (isTimerTickCoin)
         {
-            spanCoin = hours24Coin + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
+            spanCoin = hours24 + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
             coinTimer.text = spanCoin.ToString().Substring(0, 8);
             if (spanCoin <= TimeSpan.Zero)
             {
@@ -96,7 +92,7 @@ public class DailyLoot : MonoBehaviour {
 
         if (isTimerTickCrystal)
         {
-            spanCrystal = hours24Crystal + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
+            spanCrystal = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
             crystalTimer.text = spanCrystal.ToString().Substring(0, 8);
             if (spanCrystal <= TimeSpan.Zero)
             {
@@ -106,7 +102,7 @@ public class DailyLoot : MonoBehaviour {
 
         if (isTimerTickPotion)
         {
-            spanPotion = hours24Potion + (PotionlastOpenDate - NetworkTime.GetNetworkTime());
+            spanPotion = hours24 + (PotionlastOpenDate - NetworkTime.GetNetworkTime());
             potionTimer.text = spanPotion.ToString().Substring(0, 8);
             if (spanPotion <= TimeSpan.Zero)
             {
@@ -143,13 +139,13 @@ public class DailyLoot : MonoBehaviour {
     {
         if (NetworkTime.Check24hours(CoinlastOpenDate))
         {
+            PlayerPrefs.SetInt(dailyCoins, 0);
             Debug.Log("Button Pressed");
             spanCoin = CoinlastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTickCoin = true;
             coinTimer.gameObject.SetActive(true);
             coinButton.GetComponent<Button>().interactable = false;
             PlayerPrefs.SetString("CoinLastOpenDate", NetworkTime.GetNetworkTime().ToString());
-            coinDailyRewardWindow.gameObject.SetActive(true);
             CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
@@ -160,6 +156,7 @@ public class DailyLoot : MonoBehaviour {
     {
         if (NetworkTime.Check24hours(CrystallastOpenDate))
         {
+            PlayerPrefs.SetInt(dailyCrystals, 0);
             Debug.Log("Crystal Button Pressed");
             spanCrystal = CrystallastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTickCrystal = true;
@@ -169,7 +166,7 @@ public class DailyLoot : MonoBehaviour {
             Debug.Log(DateTime.Parse(NetworkTime.GetNetworkTime().ToString()));
             Debug.Log(DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate")));
             Debug.Log(DateTime.Now);
-            Debug.Log(hours24Crystal);
+            Debug.Log(hours24);
             CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
         }
@@ -179,6 +176,7 @@ public class DailyLoot : MonoBehaviour {
     {
         if (NetworkTime.Check24hours(PotionlastOpenDate))
         {
+            PlayerPrefs.SetInt(dailyPotions, 0);
             Debug.Log("Crystal Button Pressed");
             spanPotion = PotionlastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTickPotion = true;
@@ -188,7 +186,7 @@ public class DailyLoot : MonoBehaviour {
             Debug.Log(DateTime.Parse(NetworkTime.GetNetworkTime().ToString()));
             Debug.Log(DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate")));
             Debug.Log(DateTime.Now);
-            Debug.Log(hours24Potion);
+            Debug.Log(hours24);
             PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
@@ -231,7 +229,7 @@ public class DailyLoot : MonoBehaviour {
             CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
         }
         isTimerTickCoin = false;
-        hours24Coin = (DateTime.Now.AddDays(1) - DateTime.Now);
+        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
 
         CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
 
@@ -257,7 +255,7 @@ public class DailyLoot : MonoBehaviour {
             CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
         }
         isTimerTickCrystal = false;
-        hours24Crystal = (DateTime.Now.AddDays(1) - DateTime.Now);
+        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
 
         CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
 
@@ -283,7 +281,7 @@ public class DailyLoot : MonoBehaviour {
             PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
         }
         isTimerTickPotion = false;
-        hours24Potion = (DateTime.Now.AddDays(1) - DateTime.Now);
+        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
 
         PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
 

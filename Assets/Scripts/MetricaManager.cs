@@ -86,6 +86,5 @@ public class MetricaManager : MonoBehaviour
         int currentLvl = int.Parse(tmp);
 
         DevToDev.Analytics.CurrentLevel(currentLvl);
-        DevToDev.Analytics.SetActiveLog(true);
     }
 }

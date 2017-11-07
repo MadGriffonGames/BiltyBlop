@@ -40,8 +40,11 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        greenCircleAchieve.SetActive(false);
+        greenCircleDailyLoot.SetActive(false);
+
         GeneralDailyCount();
-        Debug.Log(PlayerPrefs.GetInt(dailyLootCounter));
+
         if (!PlayerPrefs.HasKey(dailyLootCounter))
             PlayerPrefs.SetInt(dailyLootCounter, 0);
 
@@ -50,7 +53,7 @@ public class MainMenu : MonoBehaviour
             dailyLootCount.GetComponent<Text>().text = PlayerPrefs.GetInt(dailyLootCounter).ToString();
             greenCircleDailyLoot.gameObject.SetActive(true);
         }
-        else
+        else if (PlayerPrefs.GetInt(dailyLootCounter) == 0 || !PlayerPrefs.HasKey(dailyLootCounter))
         {
             dailyLootCount.GetComponent<Text>().text = "";
             greenCircleDailyLoot.gameObject.SetActive(false);
@@ -62,7 +65,7 @@ public class MainMenu : MonoBehaviour
             greenCircleAchieve.gameObject.SetActive(true);
             availableLootCounter.gameObject.GetComponent<Text>().text = PlayerPrefs.GetInt(availableLoots).ToString();
         }
-        else
+        else if (PlayerPrefs.GetInt(availableLoots) == 0 || !PlayerPrefs.HasKey(availableLoots))
         {
             availableLootCounter.gameObject.GetComponent<Text>().text = "";
             greenCircleAchieve.gameObject.SetActive(false);

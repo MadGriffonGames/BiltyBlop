@@ -28,7 +28,7 @@ public class HealTutorial : InAppTutorial
 
         EnableControls(false);
         Player.Instance.mobileInput = 0;
-        inventoryFade.SetActive(true);
+        //inventoryFade.SetActive(true);
 
         string currentLevel = SceneManager.GetActiveScene().name;
         if (other.gameObject.CompareTag("Player") && currentLevel == "Level1" && PlayerPrefs.GetInt("Level2") == 0)

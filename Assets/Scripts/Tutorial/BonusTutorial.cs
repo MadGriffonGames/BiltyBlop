@@ -55,10 +55,11 @@ public class BonusTutorial : InAppTutorial
         string currentLevel = SceneManager.GetActiveScene().name;
 
         bonusLight.GetComponent<RectTransform>().transform.localPosition = lightPos;
+
 		if (other.gameObject.CompareTag("Player") && currentLevel == "Level2" && PlayerPrefs.GetInt("Level3") == 0)
         {
-            EnableControls(false);
-            Player.Instance.mobileInput = 0;
+            //EnableControls(false);
+            //Player.Instance.mobileInput = 0;
 
             isActive = true;
 
@@ -76,14 +77,7 @@ public class BonusTutorial : InAppTutorial
                 currentCount = currentCount > 3 ? 3 : currentCount;
                 Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 3 - currentCount);
                 DevToDev.Analytics.Tutorial(4);
-            }
-            if (type == "Damage")
-            {
-                int currentCount = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS);
-                currentCount = currentCount > 3 ? 3 : currentCount;
-                Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 3 - currentCount);
-                DevToDev.Analytics.Tutorial(3);
-            }            
+            }        
         }
 		else if (other.gameObject.CompareTag("Player") && currentLevel == "Level2" && PlayerPrefs.GetInt("Level3") == 1)
 		{
@@ -92,25 +86,16 @@ public class BonusTutorial : InAppTutorial
 			GetComponent<Collider2D>().enabled = false;
 			GetComponent<SpriteRenderer>().enabled = false;			
 
-			if (type == "Damage")
-			{
-				tutorialManeken.GetComponent<Maneken> ().isNeedDoubleDamage = false;
-				Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 1);
-				Inventory.Instance.UseBonus (Inventory.DAMAGE_BONUS);
-                backpackLight.SetActive(false);
-            }
 			if (type == "Immortal")
 			{
 				Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 1);
 				Inventory.Instance.UseBonus (Inventory.IMMORTAL_BONUS);
                 backpackLight.SetActive(false);
             }
-			
 		}
 
         if (isCollected && currentLevel == "Level3" && PlayerPrefs.GetInt("Level4") == 0)
         {
-            Debug.Log(1);
             EnableControls(false);
             Player.Instance.mobileInput = 0;
 

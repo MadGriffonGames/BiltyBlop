@@ -53,7 +53,7 @@ public class AmmoTutorial : InAppTutorial
 		if (other.gameObject.CompareTag ("Player") && currentLevel == "Level1" && PlayerPrefs.GetInt ("Level2") == 0) 
 		{
 			Player.Instance.mobileInput = 0;
-			inventoryFade.SetActive(true);
+			//inventoryFade.SetActive(true);
 			EnableControls(false);
 			currentCount = currentCount > 3 ? 3 : currentCount;
 			Inventory.Instance.AddItem (Inventory.AMMO, 3 - currentCount);

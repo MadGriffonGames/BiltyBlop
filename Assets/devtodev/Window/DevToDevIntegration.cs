@@ -64,10 +64,18 @@ namespace com.devtodev {
 
         void Awake() {
 			DontDestroyOnLoad(this);
-		}
+            DevToDev.Analytics.SetActiveLog(true);
+        }
 
 		void Start() {
-			if (logEnabled) {
+            DevToDev.PushManager.PushReceived = PushReceived;
+            DevToDev.PushManager.PushOpened = PushOpened;
+            DevToDev.PushManager.PushTokenFailed = PushTokenFailed;
+            DevToDev.PushManager.PushTokenReceived = PushTokenReceived;
+
+            DevToDev.PushManager.PushNotificationsEnabled = true;
+
+            if (logEnabled) {
 				Analytics.SetActiveLog(true);
 			}
 #if UNITY_ANDROID
@@ -91,7 +99,7 @@ namespace com.devtodev {
 #else 
 			return;
 #endif
-			if (pushEnabled) {
+            if (pushEnabled) {
 		      PushManager.PushReceived = delegate(IDictionary<string, string> pushAdditionalData) {
 		            if (pushListeners != null && onPushReceived != null) {
 #if !UNITY_METRO || UNITY_EDITOR

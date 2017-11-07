@@ -10,6 +10,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
     [SerializeField]
     public string achievementName;
 
+    public const string availableLoots = "avaliableLoots";
+
     [SerializeField]
     GameObject getBtn;
 
@@ -213,6 +215,7 @@ public class AchievementBoxOneLevel : MonoBehaviour
 
     public void GetReward()
     {
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue = PlayerPrefs.GetInt(achievementName + "targetValue");
         UpdateStatus(currentValue, targetValue);

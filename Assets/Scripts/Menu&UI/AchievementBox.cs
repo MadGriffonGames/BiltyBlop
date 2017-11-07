@@ -8,6 +8,7 @@ public class AchievementBox : MonoBehaviour {
 
     [SerializeField]
     public string achievementName;
+    public const string availableLoots = "avaliableLoots";
 
     [SerializeField]
     GameObject getBtn;
@@ -200,8 +201,8 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 0)         // Get button has never been pressed
         {
-            //Debug.Log(achievementName);
-            //Debug.Log("never pressed");
+            Debug.Log(achievementName);
+            Debug.Log("never pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[0];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue0");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue0"));
@@ -217,8 +218,8 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 2)         // Get butten has been pressed twice
         {
-            //Debug.Log(achievementName);
-            //Debug.Log("twice pressed");
+            Debug.Log(achievementName);
+            Debug.Log("twice pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[2];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue2");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
@@ -281,7 +282,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetFirstReward()
     {
-
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue1 = PlayerPrefs.GetInt(achievementName + "targetValue1");
         UpdateValue(1);
@@ -304,12 +305,12 @@ public class AchievementBox : MonoBehaviour {
 
         else if (lootType == HEAL || lootType == DAMAGE_BONUS || lootType == SPEED_BONUS || lootType == TIME_BONUS || lootType == IMMORTAL_BONUS || lootType == AMMO)
         {
-            StartCoroutine(ShowItemLoot(0));
+            StartCoroutine(ShowItemLoot(1));
         }
 
         else if (lootType == "ClassicThrow" || lootType == "HammerThrow" || lootType == "IcecreamThrow" || lootType == "MagicThrow" || lootType == "MeatThrow" || lootType == "PizzaThrow" || lootType == "RavenThrow" || lootType == "SheepThrow" || lootType == "Sword1Throw" || lootType == "Sword2Throw" || lootType == "Sword3Throw" || lootType == "Sword4Throw")
         {
-            StartCoroutine(ShowThrowLoot(0));
+            StartCoroutine(ShowThrowLoot(1));
         }
 
         else if (lootType == "BarbarianSword" || lootType == "Black_ninjaSword" || lootType == "ClassicSword" || lootType == "JonSnowSword" || lootType == "KingSword")
@@ -338,8 +339,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetSecondReward()
     {
-        Debug.Log(1);
-
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue2 = PlayerPrefs.GetInt(achievementName + "targetValue2");
         UpdateValue(2);
@@ -393,6 +393,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetThirdReward()
     {
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         PlayerPrefs.SetInt(achievementName + btn, 3);
         getBtn2.gameObject.SetActive(false);
         doneImg.gameObject.SetActive(true);
@@ -494,8 +495,7 @@ public class AchievementBox : MonoBehaviour {
         if (lootType == HEAL)
             loot.gameObject.GetComponent<Image>().sprite = healthPot;
         if (lootType == DAMAGE_BONUS)
-        { loot.gameObject.GetComponent<Image>().sprite = DamageBonus; Debug.Log(loot.gameObject.GetComponent<Image>().sprite); }
-            
+            loot.gameObject.GetComponent<Image>().sprite = DamageBonus;
         if (lootType == SPEED_BONUS)
             loot.gameObject.GetComponent<Image>().sprite = SpeedBonus;
         if (lootType == TIME_BONUS)
@@ -509,7 +509,6 @@ public class AchievementBox : MonoBehaviour {
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);
     }
-
     IEnumerator ShowThrowLoot(int level)
     {
         rewardFade.gameObject.SetActive(true);

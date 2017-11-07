@@ -71,7 +71,7 @@ public class EvilFlower : MeleeEnemy
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        ChangeState(new EvilFlowerIdleState());
+        
     }
 
     public override IEnumerator TakeDamage()

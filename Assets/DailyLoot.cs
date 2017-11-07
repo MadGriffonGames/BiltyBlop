@@ -32,6 +32,10 @@ public class DailyLoot : MonoBehaviour {
     bool isTimerTickCrystal;
     bool isTimerTickPotion;
 
+    bool coinVideo;
+    bool crystalVideo;
+    bool potionVideo;
+
 
     [SerializeField]
     GameObject coinButton;
@@ -74,10 +78,25 @@ public class DailyLoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (AdsManager.Instance.isRewardVideoWatched)
+        if (AdsManager.Instance.isRewardVideoWatched && coinVideo)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
             GiveCoinReward(150);
+            coinVideo = false;
+        }
+
+        if (AdsManager.Instance.isRewardVideoWatched && crystalVideo == true)
+        {
+            AdsManager.Instance.isRewardVideoWatched = false;
+            GiveCrystalReward(10);
+            crystalVideo = false;
+        }
+
+        if (AdsManager.Instance.isRewardVideoWatched && potionVideo == true)
+        {
+            AdsManager.Instance.isRewardVideoWatched = false;
+            GivePotionReward(3);
+            crystalVideo = false;
         }
 
         if (isTimerTickCoin)
@@ -212,14 +231,36 @@ public class DailyLoot : MonoBehaviour {
         Debug.Log("RewardedPotions");
     }
 
-    public void RewardedVideoButton()
+    public void RewardedCoinVideoButton()
     {
+        coinVideo = true;
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
         AdsManager.Instance.ShowRewardedVideo();
 #endif
     }
+
+    public void RewardedCrystalVideoButton()
+    {
+        crystalVideo = false;
+#if UNITY_EDITOR
+        AdsManager.Instance.isRewardVideoWatched = true;
+#elif UNITY_ANDROID || UNITY_IOS
+        AdsManager.Instance.ShowRewardedVideo();
+#endif
+    }
+
+    public void RewardedPotionVideoButton()
+    {
+        potionVideo = true;
+#if UNITY_EDITOR
+        AdsManager.Instance.isRewardVideoWatched = true;
+#elif UNITY_ANDROID || UNITY_IOS
+        AdsManager.Instance.ShowRewardedVideo();
+#endif
+    }
+
 
     void CoinStart()
     {

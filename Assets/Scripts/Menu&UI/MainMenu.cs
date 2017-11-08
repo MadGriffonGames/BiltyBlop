@@ -38,6 +38,25 @@ public class MainMenu : MonoBehaviour
     public string sceneName { get; set; }
     public const string availableLoots = "avaliableLoots";
 
+    private void Awake()
+    {
+        if (!PlayerPrefs.HasKey("FirstEnter"))
+        {
+            PlayerPrefs.SetInt("FirstEnter", 1);
+
+            PlayerPrefs.SetInt("SwordDisplayIndex", 0);
+            PlayerPrefs.SetInt("SwordAttackStat", 1);
+
+            PlayerPrefs.SetInt("SkinDisplayIndex", 0);
+            PlayerPrefs.SetInt("SkinArmorStat", 3);
+            PlayerPrefs.SetString("Skin", "Classic");
+
+            PlayerPrefs.SetString("Throw", "ClassicThrow");
+            PlayerPrefs.SetInt("ThrowAttackStat", 1);
+            PlayerPrefs.SetFloat("ThrowSpeedStat", 14);
+        }
+    }
+
     public void Start()
     {
         greenCircleAchieve.SetActive(false);
@@ -69,24 +88,7 @@ public class MainMenu : MonoBehaviour
         {
             availableLootCounter.gameObject.GetComponent<Text>().text = "";
             greenCircleAchieve.gameObject.SetActive(false);
-        }
-
-
-        if (!PlayerPrefs.HasKey("FirstEnter"))
-        {
-            PlayerPrefs.SetInt("FirstEnter", 1); 
-                      
-            PlayerPrefs.SetInt("SwordDisplayIndex", 0);
-            PlayerPrefs.SetInt("SwordAttackStat", 1);
-
-            PlayerPrefs.SetInt("SkinDisplayIndex", 0);
-            PlayerPrefs.SetInt("SkinArmorStat", 3);
-            PlayerPrefs.SetString("Skin", "Classic");
-
-            PlayerPrefs.SetString("Throw", "ClassicThrow");
-            PlayerPrefs.SetInt("ThrowAttackStat", 1);
-            PlayerPrefs.SetFloat("ThrowSpeedStat", 14);
-        }			
+        }     			
 
         SoundManager.PlayMusic("main menu", true);
     }

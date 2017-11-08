@@ -36,6 +36,15 @@ public class DailyLoot : MonoBehaviour {
     bool crystalVideo;
     bool potionVideo;
 
+    public const string HEAL = "HealthPot";
+    public const string DAMAGE_BONUS = "DamageBonus";
+    public const string SPEED_BONUS = "SpeedBonus";
+    public const string TIME_BONUS = "TimeBonus";
+    public const string IMMORTAL_BONUS = "ImmortalBonus";
+    public const string AMMO = "ClipsCount";
+
+    public string[] itemArray;
+
 
     [SerializeField]
     GameObject coinButton;
@@ -71,6 +80,7 @@ public class DailyLoot : MonoBehaviour {
         //coinDailyRewardWindow.gameObject.SetActive(false);
         //crystalDailyRewardWindow.gameObject.SetActive(false);
         //potionDailyRewardWindow.gameObject.SetActive(false);
+        itemArray = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO };
         CoinStart();
         CrystalStart();
         PotionStart();
@@ -78,24 +88,24 @@ public class DailyLoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (AdsManager.Instance.isRewardVideoWatched && coinVideo)
+        if (AdsManager.Instance.isRewardVideoWatched && (coinVideo == true))
         {
             AdsManager.Instance.isRewardVideoWatched = false;
-            GiveCoinReward(150);
+            GiveCoinReward(40);
             coinVideo = false;
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched && crystalVideo == true)
+        if (AdsManager.Instance.isRewardVideoWatched && (crystalVideo == true))
         {
             AdsManager.Instance.isRewardVideoWatched = false;
-            GiveCrystalReward(10);
+            GiveCrystalReward(5);
             crystalVideo = false;
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched && potionVideo == true)
+        if (AdsManager.Instance.isRewardVideoWatched && (potionVideo == true))
         {
             AdsManager.Instance.isRewardVideoWatched = false;
-            GivePotionReward(3);
+            GivePotionReward(1);
             crystalVideo = false;
         }
 
@@ -154,6 +164,12 @@ public class DailyLoot : MonoBehaviour {
         potionTimer.gameObject.SetActive(false);
     }
 
+    public string PotionRandomizer()
+    {
+        int tmp = UnityEngine.Random.Range(0, 5);
+        return itemArray[tmp];
+    }
+
     public void OpenCoinButton()
     {
         if (NetworkTime.Check24hours(CoinlastOpenDate))
@@ -176,7 +192,6 @@ public class DailyLoot : MonoBehaviour {
         if (NetworkTime.Check24hours(CrystallastOpenDate))
         {
             PlayerPrefs.SetInt(dailyCrystals, 0);
-            Debug.Log("Crystal Button Pressed");
             spanCrystal = CrystallastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTickCrystal = true;
             crystalTimer.gameObject.SetActive(true);
@@ -191,21 +206,18 @@ public class DailyLoot : MonoBehaviour {
         }
     }
 
+
+
     public void OpenPotionButton()
     {
         if (NetworkTime.Check24hours(PotionlastOpenDate))
         {
             PlayerPrefs.SetInt(dailyPotions, 0);
-            Debug.Log("Crystal Button Pressed");
             spanPotion = PotionlastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTickPotion = true;
             potionTimer.gameObject.SetActive(true);
             potionButton.GetComponent<Button>().interactable = false;
             PlayerPrefs.SetString("PotionLastOpenDate", NetworkTime.GetNetworkTime().ToString());
-            Debug.Log(DateTime.Parse(NetworkTime.GetNetworkTime().ToString()));
-            Debug.Log(DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate")));
-            Debug.Log(DateTime.Now);
-            Debug.Log(hours24);
             PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
@@ -216,19 +228,20 @@ public class DailyLoot : MonoBehaviour {
     void GiveCoinReward(int lootVol)
     {
         GameManager.AddCoins(lootVol);
-        Debug.Log("RewardedCoins");
     }
 
     void GiveCrystalReward(int lootVol)
     {
         GameManager.AddCrystals(lootVol);
-        Debug.Log("RewardedCrystals");
     }
 
     void GivePotionReward(int lootVol)
     {
-        GameManager.AddCoins(lootVol);
-        Debug.Log("RewardedPotions");
+        string temp = PotionRandomizer();
+        Debug.Log(temp);
+        Debug.Log(PlayerPrefs.GetInt(temp + "Count"));
+        Inventory.Instance.AddItem(temp, lootVol);
+        Debug.Log(PlayerPrefs.GetInt(temp + "Count"));
     }
 
     public void RewardedCoinVideoButton()
@@ -243,7 +256,7 @@ public class DailyLoot : MonoBehaviour {
 
     public void RewardedCrystalVideoButton()
     {
-        crystalVideo = false;
+        crystalVideo = true;
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
@@ -275,7 +288,6 @@ public class DailyLoot : MonoBehaviour {
         CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
 
         is24hoursPastCoin = NetworkTime.Check24hours(CoinlastOpenDate);
-        Debug.Log(is24hoursPastCoin);
         if (!is24hoursPastCoin)
         {
             //coinButton.gameObject.SetActive(false);
@@ -301,7 +313,6 @@ public class DailyLoot : MonoBehaviour {
         CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
 
         is24hoursPastCrystal = NetworkTime.Check24hours(CrystallastOpenDate);
-        Debug.Log(is24hoursPastCrystal);
         if (!is24hoursPastCrystal)
         {
             //coinButton.gameObject.SetActive(false);
@@ -327,7 +338,6 @@ public class DailyLoot : MonoBehaviour {
         PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
 
         is24hoursPastPotion = NetworkTime.Check24hours(PotionlastOpenDate);
-        Debug.Log(is24hoursPastPotion);
         if (!is24hoursPastPotion)
         {
             //coinButton.gameObject.SetActive(false);

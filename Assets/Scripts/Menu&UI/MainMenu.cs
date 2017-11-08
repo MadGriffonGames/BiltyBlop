@@ -20,6 +20,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     GameObject greenCircleDailyLoot;
 
+    [SerializeField]
+    GameObject fade;
+
+    [SerializeField]
+    GameObject giftsPanel;
+
     TimeSpan spanCoin;
     TimeSpan spanCrystal;
     TimeSpan spanPotion;
@@ -105,9 +111,11 @@ public class MainMenu : MonoBehaviour
 
     public void ToGiftsMenu()
     {
-        GameManager.nextLevelName = "Gifts";
+        fade.gameObject.SetActive(true);
+        giftsPanel.gameObject.SetActive(true);
+        //GameManager.nextLevelName = "Gifts";
 
-        SceneManager.LoadScene("Loading");
+        //SceneManager.LoadScene("Loading");
     }
 
     public void PlayUISound(string sound)
@@ -120,6 +128,12 @@ public class MainMenu : MonoBehaviour
         GameManager.nextLevelName = "Shop";
 
         SceneManager.LoadScene("Loading");
+    }
+
+    public void GiftClose()
+    {
+        fade.gameObject.SetActive(false);
+        giftsPanel.gameObject.SetActive(false);
     }
 
     public void RateUs()

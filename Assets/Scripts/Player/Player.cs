@@ -769,7 +769,6 @@ public class Player : Character
             cef.StopBlur();
 			bonusFX.SetTrigger ("reset");
 			bonusFXObject.SetActive (false);
-			Debug.Log (bonusFXObject.activeInHierarchy);
         }
     }
 

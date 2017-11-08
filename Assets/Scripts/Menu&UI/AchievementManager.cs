@@ -96,7 +96,7 @@ public class AchievementManager : MonoBehaviour {
 
 
         mobKillerReward = new int[] { 1, 3, 1 };
-        mobKillerTargetValue = new int[] { 1, 2, 3 };
+        mobKillerTargetValue = new int[] { 25, 250, 1000 };
         mobKillerRewardType = new string[] { DAMAGE_BONUS, "PizzaThrow", "JonSnowSword" };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };

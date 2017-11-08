@@ -50,7 +50,7 @@ public class TimeTutorial : InAppTutorial
     private void OnTriggerEnter2D(Collider2D other)
     {
         isCollected = true;
-        PlayerPrefs.DeleteKey("Level7");
+
         bonusLight.GetComponent<RectTransform>().transform.localPosition = lightPos;
         if (other.gameObject.CompareTag("Player") && PlayerPrefs.GetInt("Level7") == 0)
         {
@@ -68,11 +68,10 @@ public class TimeTutorial : InAppTutorial
             int currentCount = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS);
             currentCount = currentCount > 3 ? 3 : currentCount;
             Inventory.Instance.AddItem(Inventory.TIME_BONUS, 3 - currentCount);
-            DevToDev.Analytics.Tutorial(3);
+            DevToDev.Analytics.Tutorial(5);
         }
         else if (PlayerPrefs.GetInt("Level7") > 0)
         {
-            //tutorialManeken.GetComponent<Maneken> ().isNeedDoubleDamage = false;
             Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
             Inventory.Instance.UseBonus(Inventory.TIME_BONUS);
             backpackLight.SetActive(false);

@@ -20,10 +20,8 @@ public class InAppTutorial : MonoBehaviour
     Button targetButton;
     [SerializeField]
     public Button[] otherButtons;
-    //[SerializeField]
-    //GameObject controlsUI;
-    //[SerializeField]
-    //protected GameObject inventoryFade;
+    [SerializeField]
+    protected GameObject inventoryFade;
 
     public bool isActive = false;
     public bool isTextChanged = false;
@@ -95,14 +93,14 @@ public class InAppTutorial : MonoBehaviour
 
     protected void EnableControls(bool switcher)
     {
-        //if (switcher)
-        //{          
-        //    controlsUI.SetActive(true);
-        //}
-        //else
-        //{
-        //    inventoryFade.SetActive(true);
-        //    controlsUI.SetActive(false);
-        //}
+        if (switcher)
+        {
+            UI.Instance.controlsUI.SetActive(true);
+        }
+        else
+        {
+            inventoryFade.SetActive(true);
+            UI.Instance.controlsUI.SetActive(false);
+        }
     }
 }

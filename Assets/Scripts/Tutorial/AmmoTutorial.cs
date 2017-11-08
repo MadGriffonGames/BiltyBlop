@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class AmmoTutorial : InAppTutorial
@@ -47,13 +48,15 @@ public class AmmoTutorial : InAppTutorial
     {
         base.OnTriggerEnter2D(other);
 
-		int currentCount = Inventory.Instance.GetItemCount (Inventory.AMMO);
+        MakeThrowButtonBrighter();
+
+        int currentCount = Inventory.Instance.GetItemCount (Inventory.AMMO);
         string currentLevel = SceneManager.GetActiveScene().name;
 		isCollected = true;
 		if (other.gameObject.CompareTag ("Player") && currentLevel == "Level1" && PlayerPrefs.GetInt ("Level2") == 0) 
 		{
 			Player.Instance.mobileInput = 0;
-			//inventoryFade.SetActive(true);
+			inventoryFade.SetActive(true);
 			EnableControls(false);
 			currentCount = currentCount > 3 ? 3 : currentCount;
 			Inventory.Instance.AddItem (Inventory.AMMO, 3 - currentCount);
@@ -65,5 +68,15 @@ public class AmmoTutorial : InAppTutorial
 			DisactivateTutorial ();
 			isActive = false;
 		}
+    }
+
+    void MakeThrowButtonBrighter()
+    {
+        ControlsUI controls = UI.Instance.GetComponentInChildren<ControlsUI>();
+
+        controls.throwButton.SetActive(true);
+        Color tmp = controls.throwButtonImage.color;
+        tmp.a = 1;
+        controls.throwButtonImage.color = tmp;
     }
 }

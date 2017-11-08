@@ -97,6 +97,13 @@ public class Maneken : MonoBehaviour
         {
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0.8f, 0, -3), Quaternion.identity);
             SoundManager.PlaySound("wooden_box1");
+
+            ControlsUI controls = UI.Instance.GetComponentInChildren<ControlsUI>();
+
+            Color tmp = controls.throwButtonImage.color;
+            tmp.a = 0.3921f;
+            controls.throwButtonImage.color = tmp;
+
             gameObject.SetActive(false);
         }
         yield return null;

@@ -51,6 +51,7 @@ public class TimeRewindUI : MonoBehaviour
             timer = 7.99f;
             fade.SetActive(true);
             pauseButton.SetActive(false);
+            rewindButton.SetActive(true);
             controls.SetActive(false);            
         }
 
@@ -83,7 +84,7 @@ public class TimeRewindUI : MonoBehaviour
         }
         else
         {
-            GetComponent<PurchaseManager>().BuyConsumable(1);
+            UI.Instance.GetComponent<PurchaseManager>().BuyConsumable(1);
         }
     }
 
@@ -146,6 +147,8 @@ public class TimeRewindUI : MonoBehaviour
         {
             timer = 7.99f;
             fade.SetActive(true);
+            rewindButton.SetActive(true);
+            freeButton.SetActive(false);
             pauseButton.SetActive(false);
             controls.SetActive(false);
         }

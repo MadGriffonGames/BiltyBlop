@@ -57,9 +57,7 @@ public class BonusTutorial : InAppTutorial
         bonusLight.GetComponent<RectTransform>().transform.localPosition = lightPos;
 
 		if (other.gameObject.CompareTag("Player") && currentLevel == "Level2" && PlayerPrefs.GetInt("Level3") == 0)
-        {
-            //EnableControls(false);
-            //Player.Instance.mobileInput = 0;
+        {           
 
             isActive = true;
 
@@ -96,7 +94,6 @@ public class BonusTutorial : InAppTutorial
 
         if (isCollected && currentLevel == "Level3" && PlayerPrefs.GetInt("Level4") == 0)
         {
-            EnableControls(false);
             Player.Instance.mobileInput = 0;
 
             isActive = true;
@@ -117,13 +114,6 @@ public class BonusTutorial : InAppTutorial
                 Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 3 - currentCount);
                 DevToDev.Analytics.Tutorial(6);
             }
-            if (type == "Time")
-            {
-                int currentCount = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS);
-                currentCount = currentCount > 3 ? 3 : currentCount;
-                Inventory.Instance.AddItem(Inventory.TIME_BONUS, 3 - currentCount);
-                DevToDev.Analytics.Tutorial(5);
-            }
         }
         else if (other.gameObject.CompareTag("Player") && currentLevel == "Level3" && PlayerPrefs.GetInt("Level4") == 1)
         {
@@ -136,12 +126,6 @@ public class BonusTutorial : InAppTutorial
             {
                 Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
                 Inventory.Instance.UseBonus(Inventory.SPEED_BONUS);
-                backpackLight.SetActive(false);
-            }
-            if (type == "Time")
-            {
-                Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
-                Inventory.Instance.UseBonus(Inventory.TIME_BONUS);
                 backpackLight.SetActive(false);
             }
         }

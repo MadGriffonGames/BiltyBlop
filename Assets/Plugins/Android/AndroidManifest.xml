@@ -36,6 +36,6 @@
             <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="false" />
         </activity>
         
-      	<meta-data android:name="PUSH_SENDER_ID" android:value=" 891890779411"/>
+      	<meta-data android:name="PUSH_SENDER_ID" android:value="\ 891890779411"/>
 	</application>
 </manifest>

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -9,16 +11,39 @@ public class MainMenu : MonoBehaviour
     public GameObject actCanvas;
     [SerializeField]
     GameObject betaTestReward;
-    
+    [SerializeField]
+    GameObject availableLootCounter;
+    [SerializeField]
+    GameObject greenCircleAchieve;
+    [SerializeField]
+    GameObject dailyLootCount;
+    [SerializeField]
+    GameObject greenCircleDailyLoot;
+
+    TimeSpan spanCoin;
+    TimeSpan spanCrystal;
+    TimeSpan spanPotion;
+
+    TimeSpan hours24;
+
+    DateTime CoinlastOpenDate;
+    DateTime CrystallastOpenDate;
+    DateTime PotionlastOpenDate;
+
+    public const string dailyLootCounter = "dailyLootCounter";
+    public const string dailyCoins = "dailyCoins";
+    public const string dailyCrystals = "dailyCrystals";
+    public const string dailyPotions = "dailyPotions";
+
     public string sceneName { get; set; }
+    public const string availableLoots = "avaliableLoots";
 
-
-    public void Start()
+    private void Awake()
     {
         if (!PlayerPrefs.HasKey("FirstEnter"))
         {
-            PlayerPrefs.SetInt("FirstEnter", 1); 
-                      
+            PlayerPrefs.SetInt("FirstEnter", 1);
+
             PlayerPrefs.SetInt("SwordDisplayIndex", 0);
             PlayerPrefs.SetInt("SwordAttackStat", 1);
 
@@ -29,7 +54,41 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetString("Throw", "ClassicThrow");
             PlayerPrefs.SetInt("ThrowAttackStat", 1);
             PlayerPrefs.SetFloat("ThrowSpeedStat", 14);
-        }			
+        }
+    }
+
+    public void Start()
+    {
+        greenCircleAchieve.SetActive(false);
+        greenCircleDailyLoot.SetActive(false);
+
+        GeneralDailyCount();
+
+        if (!PlayerPrefs.HasKey(dailyLootCounter))
+            PlayerPrefs.SetInt(dailyLootCounter, 0);
+
+        if (PlayerPrefs.GetInt(dailyLootCounter) != 0)
+        {
+            dailyLootCount.GetComponent<Text>().text = PlayerPrefs.GetInt(dailyLootCounter).ToString();
+            greenCircleDailyLoot.gameObject.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt(dailyLootCounter) == 0 || !PlayerPrefs.HasKey(dailyLootCounter))
+        {
+            dailyLootCount.GetComponent<Text>().text = "";
+            greenCircleDailyLoot.gameObject.SetActive(false);
+        }
+            
+        
+        if (PlayerPrefs.GetInt(availableLoots) != 0)
+        {
+            greenCircleAchieve.gameObject.SetActive(true);
+            availableLootCounter.gameObject.GetComponent<Text>().text = PlayerPrefs.GetInt(availableLoots).ToString();
+        }
+        else if (PlayerPrefs.GetInt(availableLoots) == 0 || !PlayerPrefs.HasKey(availableLoots))
+        {
+            availableLootCounter.gameObject.GetComponent<Text>().text = "";
+            greenCircleAchieve.gameObject.SetActive(false);
+        }     			
 
         SoundManager.PlayMusic("main menu", true);
     }
@@ -42,6 +101,13 @@ public class MainMenu : MonoBehaviour
     public void ToAchievmentMenu()
     {
         GameManager.nextLevelName = "AchievementMenu";
+
+        SceneManager.LoadScene("Loading");
+    }
+
+    public void ToGiftsMenu()
+    {
+        GameManager.nextLevelName = "Gifts";
 
         SceneManager.LoadScene("Loading");
     }
@@ -77,5 +143,47 @@ public class MainMenu : MonoBehaviour
 			PlayerPrefs.SetString ("FirstTimeInGame", "No");
         }
         betaTestReward.SetActive(false);
+    }
+
+    public void CheckCoinLoot()
+    {
+        CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
+        spanCoin = hours24 + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
+        if (spanCoin < TimeSpan.Zero)
+        {
+            if (PlayerPrefs.GetInt(dailyCoins) == 0 || !PlayerPrefs.HasKey(dailyCoins))
+                PlayerPrefs.SetInt(dailyCoins, 1);
+        }
+    }
+
+    public void CheckCrystalLoot()
+    {
+        CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
+        spanCrystal = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
+        if (spanCrystal < TimeSpan.Zero)
+        {
+            if (PlayerPrefs.GetInt(dailyCrystals) == 0 || !PlayerPrefs.HasKey(dailyCrystals))
+                PlayerPrefs.SetInt(dailyCrystals, 1);
+        }
+    }
+
+    public void CheckPotionLoot()
+    {
+        PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
+        spanPotion = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
+        if (spanPotion < TimeSpan.Zero)
+        {
+            if (PlayerPrefs.GetInt(dailyPotions) == 0 || !PlayerPrefs.HasKey(dailyPotions))
+                PlayerPrefs.SetInt(dailyPotions, 1);
+        }
+    }
+
+    void GeneralDailyCount()
+    {
+        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
+        CheckCoinLoot();
+        CheckCrystalLoot();
+        CheckPotionLoot();
+        PlayerPrefs.SetInt(dailyLootCounter, PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyCrystals) + PlayerPrefs.GetInt(dailyPotions));
     }
 }

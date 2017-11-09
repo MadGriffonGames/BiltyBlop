@@ -51,6 +51,7 @@ public class TimeRewindUI : MonoBehaviour
             timer = 7.99f;
             fade.SetActive(true);
             pauseButton.SetActive(false);
+            rewindButton.SetActive(true);
             controls.SetActive(false);            
         }
 
@@ -83,7 +84,7 @@ public class TimeRewindUI : MonoBehaviour
         }
         else
         {
-            //GOTO SHOP TO BUY CRYSTALS, MOTHERFUCKER!!!!!!!
+            UI.Instance.GetComponent<PurchaseManager>().BuyConsumable(1);
         }
     }
 
@@ -130,10 +131,27 @@ public class TimeRewindUI : MonoBehaviour
         gameOverBar.SetActive(true);
         gameOverBar.GetComponent<Animator>().SetBool("animate", true);
 
-        timer = 7.99f;
-        fade.SetActive(true);
-        pauseButton.SetActive(false);
-        controls.SetActive(false);
+        if (!PlayerPrefs.HasKey("RewindTimeTutorial"))
+        {
+            PlayerPrefs.SetInt("RewindTimeTutorial", 1);
+            isTutorial = true;
+
+            timerTxt.gameObject.SetActive(false);
+            fade.SetActive(true);
+            pauseButton.SetActive(false);
+            controls.SetActive(false);
+            rewindButton.SetActive(false);
+            freeButton.SetActive(true);
+        }
+        else
+        {
+            timer = 7.99f;
+            fade.SetActive(true);
+            rewindButton.SetActive(true);
+            freeButton.SetActive(false);
+            pauseButton.SetActive(false);
+            controls.SetActive(false);
+        }
     }
 
     public void Skip()

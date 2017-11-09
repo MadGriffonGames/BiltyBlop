@@ -1,6 +1,6 @@
 Assets/Scenes/Menu/MainMenu.unity
-37eff640-09f0-0429-b307-8e88e5d7d755
-UCf2q6ugjEQdnSOL5AYs08xHPZG9aclF
+
+
 6d78756b-b818-0cdc-a65e-7bcd334318da
 cpNbYkLP6ZhJlEgBUCeARF45zTHSXVsr
 
@@ -9,13 +9,13 @@ cpNbYkLP6ZhJlEgBUCeARF45zTHSXVsr
 
 
 
-1
-1
-False
+2
+0
+True
 False
 True
-
+[devtodev_initialize]
 0
 0
-0
+1
 0

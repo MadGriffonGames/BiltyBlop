@@ -132,7 +132,7 @@ public class Player : Character
 
 	private void Awake()
 	{
-		SetPerkParams ();
+        SetPerkParams ();
         health = PlayerPrefs.GetInt("SkinArmorStat");
         maxHealth = health;
         meleeDamage = PlayerPrefs.GetInt("SwordAttackStat");
@@ -512,7 +512,8 @@ public class Player : Character
                     DevToDev.Analytics.CustomEvent("#DEATH in " + GameManager.currentLvl);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
-                    
+					bonusFX.SetTrigger ("reset");
+					bonusFXObject.SetActive (false);            
                 }
                 yield return null;
             }
@@ -559,7 +560,7 @@ public class Player : Character
     void SetThrowing()
     {
         throwing = Resources.Load<GameObject>("Throwing/ThrowingObject");
-			clipSize = maxClipSize;
+		clipSize = maxClipSize;
 		Sprite[] throwSprites = Resources.LoadAll<Sprite> ("Throw/ThrowSprites");
 		string throwName = PlayerPrefs.GetString ("Throw");
 		for(int i=0; i <= throwSprites.Length; i++)
@@ -735,7 +736,6 @@ public class Player : Character
         if (jumpBonusNum == 0)
         {
             jumpForce = 700;
-			Debug.Log ("reset jumpbonus");
 			bonusFX.SetTrigger ("reset");
 			bonusFXObject.SetActive (false);
         }
@@ -770,7 +770,6 @@ public class Player : Character
             cef.StopBlur();
 			bonusFX.SetTrigger ("reset");
 			bonusFXObject.SetActive (false);
-			Debug.Log (bonusFXObject.activeInHierarchy);
         }
     }
 

@@ -26,7 +26,6 @@ public class ChestUI : RewardedChest
     Quaternion rotationVector;
     Animator lootAnimator;
     bool isOpened;
-    bool isStarsCollected;
 
     private void Start()
     {
@@ -37,8 +36,6 @@ public class ChestUI : RewardedChest
 
         isOpened = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_chest") > 0;
 
-        isStarsCollected = (Player.Instance.stars >= 3) || (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") >= 3);
-
         if (isOpened)
         {
             chestImage.sprite = chestOpen;
@@ -47,19 +44,9 @@ public class ChestUI : RewardedChest
         else
         {
             chestImage.sprite = chestClose;
-            if (isStarsCollected)
-            {
-                lightCircle.gameObject.SetActive(true);
-                isSpined = true;
-                activateButton.SetActive(true);
-            }
-            else
-            {
-                lightCircle.gameObject.SetActive(false);
-                isSpined = false;
-                chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 0.55f);
-                activateButton.SetActive(false);
-            }
+            lightCircle.gameObject.SetActive(true);
+            isSpined = true;
+            activateButton.SetActive(true);
         }
 
         

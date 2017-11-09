@@ -21,8 +21,6 @@ public class InAppTutorial : MonoBehaviour
     [SerializeField]
     public Button[] otherButtons;
     [SerializeField]
-    GameObject controlsUI;
-    [SerializeField]
     protected GameObject inventoryFade;
 
     public bool isActive = false;
@@ -96,13 +94,13 @@ public class InAppTutorial : MonoBehaviour
     protected void EnableControls(bool switcher)
     {
         if (switcher)
-        {          
-            controlsUI.SetActive(true);
+        {
+            UI.Instance.controlsUI.SetActive(true);
         }
         else
         {
             inventoryFade.SetActive(true);
-            controlsUI.SetActive(false);
+            UI.Instance.controlsUI.SetActive(false);
         }
     }
 }

@@ -77,12 +77,12 @@ public class BuyCheckpointsUI : MonoBehaviour
         {
             AdsManager.Instance.isRewardVideoWatched = false;
 
+            this.gameObject.SetActive(false);
+
             Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
             DeathUI.Instance.UpdateFreeCheckpointsCounter();
 
             notPremiumAttemps--;
-
-            this.gameObject.SetActive(false);
         }
     }
 
@@ -164,7 +164,7 @@ public class BuyCheckpointsUI : MonoBehaviour
         }
         else
         {
-            //GOTO SHOP TO BUY CRYSTALS, MOTHERFUCKER!!!!!!!
+            UI.Instance.GetComponent<PurchaseManager>().BuyConsumable(1);
         }
     }
 

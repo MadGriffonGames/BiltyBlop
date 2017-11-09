@@ -33,12 +33,17 @@ public class AdsChest : MonoBehaviour
     public SpriteRenderer loot;
     [SerializeField]
     Sprite openChest;
+    bool isOpened;
+    bool isRewardCollected;
 
     public int[] itemsDropRate;
     public int[] itemsStorage;
 
     public void Start()
     {
+        isOpened = false;
+        isRewardCollected = false;
+
         itemsDropRate = new int[ITEMS_COUNT];
         itemsStorage = new int[100];
 
@@ -52,10 +57,11 @@ public class AdsChest : MonoBehaviour
 
     private void Update()
     {
-        if (AdsManager.Instance.isRewardVideoWatched)
+        if (isOpened && !isRewardCollected && AdsManager.Instance.isRewardVideoWatched)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
             GetComponent<BoxCollider2D>().enabled = false;
+            isRewardCollected = true;
 
             EnableControls(true);
 
@@ -231,6 +237,8 @@ public class AdsChest : MonoBehaviour
     {
         if (other.CompareTag("Sword"))
         {
+            isOpened = true;
+
             GetComponent<SpriteRenderer>().sprite = openChest;
 
             AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);

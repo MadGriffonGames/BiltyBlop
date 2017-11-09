@@ -222,8 +222,6 @@ public class DailyReward : MonoBehaviour
 
     public void OpenChestButton()
     {
-
-
         chestFade.SetActive(true);
 
         if (!isRewardCollected)
@@ -247,7 +245,13 @@ public class DailyReward : MonoBehaviour
 
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
             DevToDev.Analytics.CustomEvent("#CHEST Daily chest activate");
-        }       
+        }
+        else
+        {
+            getRewardButtonImage.sprite = orangeButtonSprite;
+            getRewardButtonText.text = "ok";
+            doubleButton.GetComponent<Button>().interactable = false;
+        }
 
         int i;
 
@@ -342,5 +346,10 @@ public class DailyReward : MonoBehaviour
         AdsManager.Instance.ShowRewardedVideo();
 #endif
         doubleButton.GetComponent<Button>().interactable = false;
+    }
+
+    private void OnEnable()
+    {
+        
     }
 }

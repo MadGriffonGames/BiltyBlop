@@ -18,14 +18,14 @@ public class HedgehogPatrolState : IHedgehogState
     {
         if (!preAttacked)
         {
-            enemy.armature.animation.FadeIn("Pre attack", -1, 1);
+            enemy.armature.animation.FadeIn("Roll", -1, 1);
             preAttacked = true;
         }
         if (preAttacked && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.timeScale = 3f;
             enemy.movementSpeed = 10;
-            enemy.armature.animation.FadeIn("Attack");
+            enemy.armature.animation.FadeIn("Roll_2");
         }
         enemy.Move();
     }

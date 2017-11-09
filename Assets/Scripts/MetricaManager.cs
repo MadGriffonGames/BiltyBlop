@@ -81,10 +81,13 @@ public class MetricaManager : MonoBehaviour
 
     void DevToDevInitialize()
     {
-        string lvlName = SceneManager.GetActiveScene().name;
-        string tmp = "" + lvlName[lvlName.Length - 1];
-        int currentLvl = int.Parse(tmp);
+        string lvlName = GameManager.currentLvl;
+        if (currentLevel.Contains("Level"))
+        {
+            string tmp = "" + lvlName[lvlName.Length - 1];
+            int currentLvl = int.Parse(tmp);
 
-        DevToDev.Analytics.CurrentLevel(currentLvl);
+            DevToDev.Analytics.CurrentLevel(currentLvl);
+        }
     }
 }

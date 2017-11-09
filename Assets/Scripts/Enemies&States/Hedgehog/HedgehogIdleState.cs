@@ -28,7 +28,7 @@ public class HedgehogIdleState : IHedgehogState
     {
         if (!idle)
         {
-            enemy.armature.animation.FadeIn("Idle", -1, 1);
+            enemy.armature.animation.FadeIn("idle", -1, 1);
             idle = true;
         }
 

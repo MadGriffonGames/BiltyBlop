@@ -132,7 +132,7 @@ public class Player : Character
 
 	private void Awake()
 	{
-		SetPerkParams ();
+        SetPerkParams ();
         health = PlayerPrefs.GetInt("SkinArmorStat");
         maxHealth = health;
         meleeDamage = PlayerPrefs.GetInt("SwordAttackStat");

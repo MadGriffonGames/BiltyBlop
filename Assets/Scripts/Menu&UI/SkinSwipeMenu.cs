@@ -31,6 +31,7 @@ public class SkinSwipeMenu : SwipeMenu {
     public override void Update()
     {
         base.Update();
+		Debug.Log (panel.anchoredPosition);
     }
 
     private void SetSkinCards()
@@ -89,11 +90,11 @@ public class SkinSwipeMenu : SwipeMenu {
             {
                 if (SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>().orderNumber == i)
                 {
+					buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
+					buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
                     SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
 					if (PlayerPrefs.GetString(skin.name) == "Unlocked")
                     {
-                        buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
-						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
 						if (PlayerPrefs.GetString ("Skin") == skin.name) 
 						{
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
@@ -106,22 +107,17 @@ public class SkinSwipeMenu : SwipeMenu {
                         buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ApplySkin(skin.orderNumber));
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplySkin(skin.orderNumber));
                     }
+					else
+					{
+						buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
+						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSkinWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(skin.orderNumber)));
+					}
                 }
             }
         }
     }
     public void ApplySkin(int skinOrderNumber) // writing to player prefs current skin
     {
-//        panel.GetChild(skinOrderNumber).GetComponentsInChildren<Text>()[1].text = "EQUIPED";
-//		panel.GetChild(skinOrderNumber).GetComponentsInChildren<Image> () [2].sprite = equipedButton;
-//        for (int i = 0; i < panel.childCount; i++)
-//        {
-//            if (i != skinOrderNumber && !SkinManager.Instance.isSkinLocked(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(i)))
-//            {
-//                panel.GetChild(i).GetComponentsInChildren<Text>()[1].text = "EQUIP";
-//				panel.GetChild(i).GetComponentsInChildren<Image> () [2].sprite = equipButton;
-//            }
-//        }
 		base.OnButtonClickLerp(skinOrderNumber);
 		SkinManager.Instance.ApplySkin(SkinManager.Instance.NameOfSkinPrefabBySkinOrder(skinOrderNumber));
 		UpdateSkinCards();

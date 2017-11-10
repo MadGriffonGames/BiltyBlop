@@ -26,6 +26,7 @@ public class ChestUI : RewardedChest
     Quaternion rotationVector;
     Animator lootAnimator;
     bool isOpened;
+    public bool isRewardCollected;
 
     private void Start()
     {
@@ -49,7 +50,7 @@ public class ChestUI : RewardedChest
             activateButton.SetActive(true);
         }
 
-        
+        isRewardCollected = false;
     }
 
     private void Update()
@@ -69,6 +70,8 @@ public class ChestUI : RewardedChest
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_chest", 1);
             }
             GiveLoot();
+
+            isRewardCollected = true;
 
             AppMetrica.Instance.ReportEvent("#CHEST 3Stars chest activate");
             DevToDev.Analytics.CustomEvent("#CHEST 3Stars chest activate");

@@ -41,41 +41,12 @@ namespace com.devtodev {
 		private bool pushEnabled = true;
 		private bool logEnabled = false;
 
-        public void PushReceived(IDictionary<string, string> pushAdditionalData)
-        {
-            //pushAdditionalData - push-notification data that you send to your app
-        }
-
-        public void PushOpened(DevToDev.PushMessage pushMessage, DevToDev.ActionButton actionButton)
-        {
-            //pushMessage - DevToDev.PushMessage. Represents toast notification message
-            //actionButton - DevToDev.ActionButton. Represents toast button that was clicked. Could be null if toast body was clicked
-        }
-
-        public void PushTokenFailed(string error)
-        {
-            //handle push-notifications error here
-        }
-
-        public void PushTokenReceived(string pushToken)
-        {
-            //pushToken - your push token
-        }
-
-        void Awake() {
+		void Awake() {
 			DontDestroyOnLoad(this);
-            DevToDev.Analytics.SetActiveLog(true);
-        }
+		}
 
 		void Start() {
-            DevToDev.PushManager.PushReceived = PushReceived;
-            DevToDev.PushManager.PushOpened = PushOpened;
-            DevToDev.PushManager.PushTokenFailed = PushTokenFailed;
-            DevToDev.PushManager.PushTokenReceived = PushTokenReceived;
-
-            DevToDev.PushManager.PushNotificationsEnabled = true;
-
-            if (logEnabled) {
+			if (logEnabled) {
 				Analytics.SetActiveLog(true);
 			}
 #if UNITY_ANDROID
@@ -99,7 +70,7 @@ namespace com.devtodev {
 #else 
 			return;
 #endif
-            if (pushEnabled) {
+			if (pushEnabled) {
 		      PushManager.PushReceived = delegate(IDictionary<string, string> pushAdditionalData) {
 		            if (pushListeners != null && onPushReceived != null) {
 #if !UNITY_METRO || UNITY_EDITOR

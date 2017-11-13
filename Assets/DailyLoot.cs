@@ -102,10 +102,8 @@ public class DailyLoot : MonoBehaviour {
     public const string dailyCrystals = "dailyCrystals";
     public const string dailyPotions = "dailyPotions";
 
-
-
-    // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         //coinDailyRewardWindow.gameObject.SetActive(false);
         //crystalDailyRewardWindow.gameObject.SetActive(false);
         //potionDailyRewardWindow.gameObject.SetActive(false);
@@ -114,10 +112,10 @@ public class DailyLoot : MonoBehaviour {
         CrystalStart();
         PotionStart();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (AdsManager.Instance.isRewardVideoWatched && (coinVideo == true))
+
+	void Update ()
+    {
+        if (AdsManager.Instance.isRewardVideoWatched && coinVideo)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
             GiveCoinReward(40);
@@ -125,7 +123,7 @@ public class DailyLoot : MonoBehaviour {
             ShowCoinLoot();
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched && (crystalVideo == true))
+        if (AdsManager.Instance.isRewardVideoWatched && crystalVideo )
         {
             AdsManager.Instance.isRewardVideoWatched = false;
             GiveCrystalReward(5);
@@ -133,7 +131,7 @@ public class DailyLoot : MonoBehaviour {
             ShowCrystalLoot();
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched && (potionVideo == true))
+        if (AdsManager.Instance.isRewardVideoWatched && potionVideo)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
             GivePotionReward(1);
@@ -296,9 +294,12 @@ public class DailyLoot : MonoBehaviour {
 
     public void RewardedCoinVideoButton()
     {
+        Debug.Log(coinVideo);
         coinVideo = true;
+        Debug.Log(coinVideo);
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
+        
 #elif UNITY_ANDROID || UNITY_IOS
         AdsManager.Instance.ShowRewardedVideo();
 #endif

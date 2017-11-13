@@ -49,6 +49,7 @@ public class TimeRewindUI : MonoBehaviour
         else
         {
             timer = 7.99f;
+            timerTxt.gameObject.SetActive(false);
             fade.SetActive(true);
             pauseButton.SetActive(false);
             rewindButton.SetActive(true);
@@ -146,6 +147,7 @@ public class TimeRewindUI : MonoBehaviour
         else
         {
             timer = 7.99f;
+            timerTxt.gameObject.SetActive(false);
             fade.SetActive(true);
             rewindButton.SetActive(true);
             freeButton.SetActive(false);

@@ -45,8 +45,38 @@ namespace com.devtodev {
 			DontDestroyOnLoad(this);
 		}
 
-		void Start() {
-			if (logEnabled) {
+        public void PushReceived(IDictionary<string, string> pushAdditionalData)
+        {
+            //pushAdditionalData - push-notification data that you send to your app
+        }
+
+        public void PushOpened(DevToDev.PushMessage pushMessage, DevToDev.ActionButton actionButton)
+        {
+            //pushMessage - DevToDev.PushMessage. Represents toast notification message
+            //actionButton - DevToDev.ActionButton. Represents toast button that was clicked.
+            //               Could be null if toast body was clicked
+        }
+
+        public void PushTokenFailed(string error)
+        {
+            //handle push-notifications error here
+        }
+
+        public void PushTokenReceived(string pushToken)
+        {
+            //pushToken - your push token
+        }
+
+        void Start() {
+
+            DevToDev.PushManager.PushReceived = PushReceived;
+            DevToDev.PushManager.PushOpened = PushOpened;
+            DevToDev.PushManager.PushTokenFailed = PushTokenFailed;
+            DevToDev.PushManager.PushTokenReceived = PushTokenReceived;
+
+            DevToDev.PushManager.PushNotificationsEnabled = true;
+
+            if (logEnabled) {
 				Analytics.SetActiveLog(true);
 			}
 #if UNITY_ANDROID

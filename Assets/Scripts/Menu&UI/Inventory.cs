@@ -193,7 +193,7 @@ public class Inventory : MonoBehaviour
 
         RemoveItem(AMMO);
 
-        SendUseMetric(HEAL);
+        SendUseMetric(AMMO);
     }
 
     public void UseBonus(string bonusType)

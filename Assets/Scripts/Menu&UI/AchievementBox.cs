@@ -305,12 +305,12 @@ public class AchievementBox : MonoBehaviour {
 
         else if (lootType == HEAL || lootType == DAMAGE_BONUS || lootType == SPEED_BONUS || lootType == TIME_BONUS || lootType == IMMORTAL_BONUS || lootType == AMMO)
         {
-            StartCoroutine(ShowItemLoot(1));
+            StartCoroutine(ShowItemLoot(0));
         }
 
         else if (lootType == "ClassicThrow" || lootType == "HammerThrow" || lootType == "IcecreamThrow" || lootType == "MagicThrow" || lootType == "MeatThrow" || lootType == "PizzaThrow" || lootType == "RavenThrow" || lootType == "SheepThrow" || lootType == "Sword1Throw" || lootType == "Sword2Throw" || lootType == "Sword3Throw" || lootType == "Sword4Throw")
         {
-            StartCoroutine(ShowThrowLoot(1));
+            StartCoroutine(ShowThrowLoot(0));
         }
 
         else if (lootType == "BarbarianSword" || lootType == "Black_ninjaSword" || lootType == "ClassicSword" || lootType == "JonSnowSword" || lootType == "KingSword")

@@ -33,6 +33,9 @@ public class AchievementManager : MonoBehaviour {
     int[] millionareTargetValue;
     int[] millionareReward;
 
+    int[] graverTargetValue;
+    int[] graverReward;
+
     string[] tripleCoins;
     string[] tripleCrystals;
     string[] items;
@@ -41,6 +44,7 @@ public class AchievementManager : MonoBehaviour {
     string[] differentItems2;
     string[] treasureHunterRewardType;
     string[] starWalkerRewardType;
+    string[] graverRewardType;
 
     public const string HEAL = "HealthPot";
     public const string DAMAGE_BONUS = "DamageBonus";
@@ -52,7 +56,7 @@ public class AchievementManager : MonoBehaviour {
 
     public Achieve mobKiller;
     public Achieve treasureHunter;
-    public Achieve idiot;
+    public Achieve selfDestructor;
     public LevelAchieve swimmer;
     public LevelAchieve torchCollector;
     public Achieve torchCollector3;
@@ -61,6 +65,7 @@ public class AchievementManager : MonoBehaviour {
     public LevelAchieve spiderKiller;
     public Achieve starWalker;
     public Achieve millionare;
+    public Achieve graver;
     public LevelAchieve firstBoss;
     int[] mobReward;
 
@@ -91,9 +96,10 @@ public class AchievementManager : MonoBehaviour {
         //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
         items = new string[] { HEAL, HEAL, HEAL };
-
-
-
+        
+        graverTargetValue = new int[] {5, 25, 50 };
+        graverReward = new int[] { 10, 50, 100 };
+        graverRewardType = new string[] { "Coins", "Crystals", "MeatThrow" };
 
         mobKillerReward = new int[] { 1, 3, 1 };
         mobKillerTargetValue = new int[] { 25, 250, 1000 };
@@ -110,8 +116,8 @@ public class AchievementManager : MonoBehaviour {
 
         treasureHunterValue = new int[] { 10, 25, 50 };
 
-        idiotReward = new int[] { -5, -10, -15 };
-        idiotTargerValue = new int[] { 1, 5, 10 };
+        idiotReward = new int[] { 100, 5, 1 };
+        idiotTargerValue = new int[] { 10, 20, 30 };
 
         torchCollectorReward = new int[] { 100, 150, 250 };
         torchCollectorTargetValue = new int[] { 10, 25, 50 };
@@ -146,6 +152,8 @@ public class AchievementManager : MonoBehaviour {
         spiderKiller = new LevelAchieve("Spider Boss killer", "Crystals", 1, 6);
         starWalker = new Achieve("StarWalker", tripleCoins, starWalkerTargetValue, starWalkerReward);
         firstBoss = new LevelAchieve("Dragon Killer", "Crystals", 1, 3);
+        graver = new Achieve("Graver", graverRewardType, graverTargetValue, graverReward);
+        selfDestructor = new Achieve("SelfDestructor", graverRewardType, idiotTargerValue, idiotReward);
     }
 
     public void CheckAchieve(Achieve achieve)

@@ -21,6 +21,21 @@ public class MainMenu : MonoBehaviour
     GameObject greenCircleDailyLoot;
 
     [SerializeField]
+    bool changeCoinDate;
+    [SerializeField]
+    bool changeCrystalDate;
+    [SerializeField]
+    bool changePotionDate;
+
+    [SerializeField]
+    GameObject fadeButton;
+
+
+    [SerializeField]
+    GameObject lootVolume;
+
+
+    [SerializeField]
     GameObject fade;
 
     [SerializeField]
@@ -65,6 +80,24 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        if (changeCoinDate)
+        {
+            PlayerPrefs.SetString("CoinLastOpenDate", "7/4/2016 8:30:52 AM");
+            CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
+        }
+
+        if (changeCrystalDate)
+        {
+            PlayerPrefs.SetString("CrystalLastOpenDate", "7/4/2016 8:30:52 AM");
+            CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
+        }
+
+        if (changePotionDate)
+        {
+            PlayerPrefs.SetString("PotionLastOpenDate", "7/4/2016 8:30:52 AM");
+            PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
+        }
+
         greenCircleAchieve.SetActive(false);
         greenCircleDailyLoot.SetActive(false);
 
@@ -163,9 +196,14 @@ public class MainMenu : MonoBehaviour
     {
         CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
         spanCoin = hours24 + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
+        Debug.Log("Here");
+        Debug.Log(spanCoin);
+        Debug.Log(TimeSpan.Zero);
         if (spanCoin < TimeSpan.Zero)
         {
+            Debug.Log("Herere");
             if (PlayerPrefs.GetInt(dailyCoins) == 0 || !PlayerPrefs.HasKey(dailyCoins))
+                Debug.Log("Coins gave 1");
                 PlayerPrefs.SetInt(dailyCoins, 1);
         }
     }

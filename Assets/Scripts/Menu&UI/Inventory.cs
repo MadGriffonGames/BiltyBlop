@@ -198,6 +198,7 @@ public class Inventory : MonoBehaviour
 
     public void UseBonus(string bonusType)
     {
+        AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.potioner);
         if (bonusType == IMMORTAL_BONUS)
         {
             Player.Instance.ExecBonusImmortal(IMMORTAL_DURATION);

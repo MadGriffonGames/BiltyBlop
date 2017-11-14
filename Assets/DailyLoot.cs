@@ -27,6 +27,21 @@ public class DailyLoot : MonoBehaviour
     [SerializeField]
     Sprite potion;
 
+    [SerializeField]
+    Sprite damageBonus;
+
+    [SerializeField]
+    Sprite speedBonus;
+
+    [SerializeField]
+    Sprite timeBonus;
+
+    [SerializeField]
+    Sprite immortalBonus;
+
+    [SerializeField]
+    Sprite heal;
+
     DateTime coinLastOpenDate;
     DateTime clipsCountLastOpenDate;
     DateTime potionLastOpenDate;
@@ -92,8 +107,21 @@ public class DailyLoot : MonoBehaviour
 
     void Start ()
     {
+        if (!PlayerPrefs.HasKey("CoinLastOpenDate"))
+        {
+            PlayerPrefs.SetString("CoinLastOpenDate", "7/4/2016 8:30:52 AM");
+        }
+        if (!PlayerPrefs.HasKey("ClipsCountLastOpenDate"))
+        {
+            PlayerPrefs.SetString("ClipsCountLastOpenDate", "7/4/2016 8:30:52 AM");
+        }
+        if (!PlayerPrefs.HasKey("PotionLastOpenDate"))
+        {
+            PlayerPrefs.SetString("PotionLastOpenDate", "7/4/2016 8:30:52 AM");
+        }
+
         hours12 = new TimeSpan(12,0,0);
-        itemArray = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO };
+        itemArray = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS };
         CoinStart();
         ClipsCountStart();
         PotionStart();
@@ -106,7 +134,6 @@ public class DailyLoot : MonoBehaviour
             AdsManager.Instance.isRewardVideoWatched = false;
             GiveCoinReward(50);
             coinVideo = false;
-            ShowCoinLoot();
         }
 
         if (AdsManager.Instance.isRewardVideoWatched && clipsCountVideo)
@@ -114,7 +141,6 @@ public class DailyLoot : MonoBehaviour
             AdsManager.Instance.isRewardVideoWatched = false;
             GiveClipsCountReward(1);
             clipsCountVideo = false;
-            ShowClipsCountLoot();
         }
 
         if (AdsManager.Instance.isRewardVideoWatched && potionVideo)
@@ -122,7 +148,6 @@ public class DailyLoot : MonoBehaviour
             AdsManager.Instance.isRewardVideoWatched = false;
             GivePotionReward(1);
             clipsCountVideo = false;
-            ShowPotionLoot();
         }
 
         if (isTimerTickCoin)
@@ -144,7 +169,7 @@ public class DailyLoot : MonoBehaviour
                 ActivateClipsCountLoot();
             }
         }
-
+        
 
         if (isTimerTickPotion)
         {
@@ -183,7 +208,7 @@ public class DailyLoot : MonoBehaviour
 
     public string PotionRandomizer()
     {
-        int tmp = UnityEngine.Random.Range(0, 6);
+        int tmp = UnityEngine.Random.Range(0, 5);
         return itemArray[tmp];
     }
 
@@ -200,9 +225,6 @@ public class DailyLoot : MonoBehaviour
                 greenCircle.SetActive(false);
             }
             spanCoin = coinLastOpenDate - NetworkTime.GetNetworkTime();
-            isTimerTickCoin = true;
-            coinTimer.gameObject.SetActive(true);
-            coinButton.GetComponent<Button>().interactable = false;
             PlayerPrefs.SetString("CoinLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             coinLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
 
@@ -213,7 +235,7 @@ public class DailyLoot : MonoBehaviour
     public void OpenClipsCountButton()
     {
         DateTime now = NetworkTime.GetNetworkTime();
-        if (now - coinLastOpenDate > hours12)
+        if (now - clipsCountLastOpenDate > hours12)
         {
             PlayerPrefs.SetInt(dailyClipsCount, 0);
             int tmp = PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions);
@@ -223,9 +245,6 @@ public class DailyLoot : MonoBehaviour
                 greenCircle.SetActive(false);
             }
             spanClipsCount = clipsCountLastOpenDate - NetworkTime.GetNetworkTime();
-            isTimerTickClipsCount = true;
-            clipsCountTimer.gameObject.SetActive(true);
-            clipsCountButton.GetComponent<Button>().interactable = false;
             PlayerPrefs.SetString("ClipsCountLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             clipsCountLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
@@ -246,9 +265,6 @@ public class DailyLoot : MonoBehaviour
                 greenCircle.SetActive(false);
             }
             spanPotion = potionLastOpenDate - NetworkTime.GetNetworkTime();
-            isTimerTickPotion = true;
-            potionTimer.gameObject.SetActive(true);
-            potionButton.GetComponent<Button>().interactable = false;
             PlayerPrefs.SetString("PotionLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             potionLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
@@ -259,17 +275,29 @@ public class DailyLoot : MonoBehaviour
     void GiveCoinReward(int lootVol)
     {
         GameManager.AddCoins(lootVol);
+        ShowCoinLoot();
+        isTimerTickCoin = true;
+        coinTimer.gameObject.SetActive(true);
+        coinButton.GetComponent<Button>().interactable = false;
     }
 
     void GiveClipsCountReward(int lootVol)
     {
         Inventory.Instance.AddItem(AMMO, lootVol);
+        ShowClipsCountLoot();
+        isTimerTickClipsCount = true;
+        clipsCountTimer.gameObject.SetActive(true);
+        clipsCountButton.GetComponent<Button>().interactable = false;
     }
 
     void GivePotionReward(int lootVol)
     {
         string temp = PotionRandomizer();
         Inventory.Instance.AddItem(temp, lootVol);
+        ShowPotionLoot(temp);
+        isTimerTickPotion = true;
+        potionTimer.gameObject.SetActive(true);
+        potionButton.GetComponent<Button>().interactable = false;
     }
 
     public void RewardedCoinVideoButton()
@@ -378,11 +406,20 @@ public class DailyLoot : MonoBehaviour
         fadeButton.SetActive(true);
     }
 
-    void ShowPotionLoot()
+    void ShowPotionLoot(string potionName)
     {
         lootVolume.GetComponent<Text>().text = clipsCountDescription;
         rewardFade.gameObject.SetActive(true);
-        loot.gameObject.GetComponent<Image>().sprite = potion;
+        if (potionName == HEAL)
+            loot.gameObject.GetComponent<Image>().sprite = heal;
+        if (potionName == DAMAGE_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = damageBonus;
+        if (potionName == SPEED_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = speedBonus;
+        if (potionName == TIME_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = timeBonus;
+        if (potionName == IMMORTAL_BONUS)
+            loot.gameObject.GetComponent<Image>().sprite = immortalBonus;
         loot.gameObject.SetActive(true);
         fadeButton.SetActive(true);
     }

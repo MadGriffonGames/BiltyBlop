@@ -101,7 +101,6 @@ public class AchievementManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
         if (!PlayerPrefs.HasKey(availableLoots))
             PlayerPrefs.SetInt(availableLoots, 0);
         //ResetStat("Mob killer test", "mobKillerPrefTest");
@@ -142,6 +141,9 @@ public class AchievementManager : MonoBehaviour {
         millionareTargetValue = new int[] { 1000, 10000, 15000 };
         millionareReward = new int[] { 100, 150, 200 };
 
+        potionerTargetValue = new int[] { 10, 25, 50};
+        potionerReward = new int[] { 100, 2, 1 };
+        potionerRewardType = new string[] { "Coins", "Crystals", HEAL};
 
         PlayerPrefs.SetString("Black_ninja", "Locked");
         PlayerPrefs.SetString("Sword3Throw", "Locked");
@@ -165,6 +167,7 @@ public class AchievementManager : MonoBehaviour {
         firstBoss = new LevelAchieve("Dragon Killer", "Crystals", 1, 3);
         graver = new Achieve("Graver", graverRewardType, graverTargetValue, graverReward);
         selfDestructor = new Achieve("SelfDestructor", graverRewardType, idiotTargerValue, idiotReward);
+        potioner = new Achieve("Potioner", potionerRewardType, potionerTargetValue, potionerReward);
     }
 
     public void CheckAchieve(Achieve achieve)

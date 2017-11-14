@@ -123,7 +123,7 @@ public class DailyLoot : MonoBehaviour {
             ShowCoinLoot();
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched && crystalVideo )
+        if (AdsManager.Instance.isRewardVideoWatched && crystalVideo)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
             GiveCrystalReward(5);
@@ -141,7 +141,7 @@ public class DailyLoot : MonoBehaviour {
 
         if (isTimerTickCoin)
         {
-            spanCoin = hours24 + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
+            spanCoin = hours24 + (CoinlastOpenDate - DateTime.Now);
             coinTimer.text = spanCoin.ToString().Substring(0, 8);
             if (spanCoin <= TimeSpan.Zero)
             {
@@ -151,7 +151,7 @@ public class DailyLoot : MonoBehaviour {
 
         if (isTimerTickCrystal)
         {
-            spanCrystal = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
+            spanCrystal = hours24 + (CrystallastOpenDate - DateTime.Now);
             crystalTimer.text = spanCrystal.ToString().Substring(0, 8);
             if (spanCrystal <= TimeSpan.Zero)
             {
@@ -162,7 +162,7 @@ public class DailyLoot : MonoBehaviour {
 
         if (isTimerTickPotion)
         {
-            spanPotion = hours24 + (PotionlastOpenDate - NetworkTime.GetNetworkTime());
+            spanPotion = hours24 + (PotionlastOpenDate - DateTime.Now);
             potionTimer.text = spanPotion.ToString().Substring(0, 8);
             if (spanPotion <= TimeSpan.Zero)
             {
@@ -239,10 +239,6 @@ public class DailyLoot : MonoBehaviour {
             crystalTimer.gameObject.SetActive(true);
             crystalButton.GetComponent<Button>().interactable = false;
             PlayerPrefs.SetString("CrystalLastOpenDate", NetworkTime.GetNetworkTime().ToString());
-            Debug.Log(DateTime.Parse(NetworkTime.GetNetworkTime().ToString()));
-            Debug.Log(DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate")));
-            Debug.Log(DateTime.Now);
-            Debug.Log(hours24);
             CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
         }
@@ -267,7 +263,6 @@ public class DailyLoot : MonoBehaviour {
             potionButton.GetComponent<Button>().interactable = false;
             PlayerPrefs.SetString("PotionLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
-
             AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
             DevToDev.Analytics.CustomEvent("#CHEST Daily chest activate");
         }
@@ -276,27 +271,35 @@ public class DailyLoot : MonoBehaviour {
     void GiveCoinReward(int lootVol)
     {
         GameManager.AddCoins(lootVol);
+        //PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + lootVol);
     }
 
     void GiveCrystalReward(int lootVol)
     {
         GameManager.AddCrystals(lootVol);
+        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + lootVol);
     }
 
     void GivePotionReward(int lootVol)
     {
         string temp = PotionRandomizer();
-        Debug.Log(temp);
-        Debug.Log(PlayerPrefs.GetInt(temp + "Count"));
         Inventory.Instance.AddItem(temp, lootVol);
-        Debug.Log(PlayerPrefs.GetInt(temp + "Count"));
+        //if (!PlayerPrefs.HasKey(temp + "Count"))
+        //{
+        //    PlayerPrefs.SetInt(temp + "Count", lootVol);
+        //    //Inventory.Instance.UpdateItemValue(temp);
+        //}
+        //else
+        //{
+        //    PlayerPrefs.SetInt(temp + "Count", PlayerPrefs.GetInt(temp + "Count") + lootVol);
+        //    //Inventory.Instance.UpdateItemValue(temp);
+        //}
+        //Inventory.Instance.AddItem(temp, lootVol);
     }
 
     public void RewardedCoinVideoButton()
     {
-        Debug.Log(coinVideo);
         coinVideo = true;
-        Debug.Log(coinVideo);
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
         
@@ -335,7 +338,6 @@ public class DailyLoot : MonoBehaviour {
         //}
         isTimerTickCoin = false;
         hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
-
         CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
 
         is24hoursPastCoin = NetworkTime.Check24hours(CoinlastOpenDate);
@@ -430,7 +432,6 @@ public class DailyLoot : MonoBehaviour {
 
     public void FadeOut()
     {
-        Debug.Log("Fade out");
         fadeButton.SetActive(false);
         rewardFade.SetActive(false);
         loot.SetActive(false);

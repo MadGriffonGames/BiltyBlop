@@ -196,14 +196,9 @@ public class MainMenu : MonoBehaviour
     {
         CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
         spanCoin = hours24 + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
-        Debug.Log("Here");
-        Debug.Log(spanCoin);
-        Debug.Log(TimeSpan.Zero);
         if (spanCoin < TimeSpan.Zero)
         {
-            Debug.Log("Herere");
             if (PlayerPrefs.GetInt(dailyCoins) == 0 || !PlayerPrefs.HasKey(dailyCoins))
-                Debug.Log("Coins gave 1");
                 PlayerPrefs.SetInt(dailyCoins, 1);
         }
     }

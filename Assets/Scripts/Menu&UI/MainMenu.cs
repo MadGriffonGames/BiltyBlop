@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     bool changeCoinDate;
     [SerializeField]
-    bool changeCrystalDate;
+    bool changeClipsCountDate;
     [SerializeField]
     bool changePotionDate;
 
@@ -42,18 +42,18 @@ public class MainMenu : MonoBehaviour
     GameObject giftsPanel;
 
     TimeSpan spanCoin;
-    TimeSpan spanCrystal;
+    TimeSpan spanClipsCount;
     TimeSpan spanPotion;
 
     TimeSpan hours24;
 
     DateTime CoinlastOpenDate;
-    DateTime CrystallastOpenDate;
+    DateTime ClipsCountlastOpenDate;
     DateTime PotionlastOpenDate;
 
     public const string dailyLootCounter = "dailyLootCounter";
     public const string dailyCoins = "dailyCoins";
-    public const string dailyCrystals = "dailyCrystals";
+    public const string dailyClipsCount = "dailyClipsCount";
     public const string dailyPotions = "dailyPotions";
 
     public string sceneName { get; set; }
@@ -86,10 +86,10 @@ public class MainMenu : MonoBehaviour
             CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
         }
 
-        if (changeCrystalDate)
+        if (changeClipsCountDate)
         {
-            PlayerPrefs.SetString("CrystalLastOpenDate", "7/4/2016 8:30:52 AM");
-            CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
+            PlayerPrefs.SetString("ClipsCountLastOpenDate", "7/4/2016 8:30:52 AM");
+            ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
         }
 
         if (changePotionDate)
@@ -203,21 +203,21 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void CheckCrystalLoot()
+    public void CheckClipsCountLoot()
     {
-        CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
-        spanCrystal = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
-        if (spanCrystal < TimeSpan.Zero)
+        ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
+        spanClipsCount = hours24 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
+        if (spanClipsCount < TimeSpan.Zero)
         {
-            if (PlayerPrefs.GetInt(dailyCrystals) == 0 || !PlayerPrefs.HasKey(dailyCrystals))
-                PlayerPrefs.SetInt(dailyCrystals, 1);
+            if (PlayerPrefs.GetInt(dailyClipsCount) == 0 || !PlayerPrefs.HasKey(dailyClipsCount))
+                PlayerPrefs.SetInt(dailyClipsCount, 1);
         }
     }
 
     public void CheckPotionLoot()
     {
         PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
-        spanPotion = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
+        spanPotion = hours24 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
         if (spanPotion < TimeSpan.Zero)
         {
             if (PlayerPrefs.GetInt(dailyPotions) == 0 || !PlayerPrefs.HasKey(dailyPotions))
@@ -229,8 +229,8 @@ public class MainMenu : MonoBehaviour
     {
         hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
         CheckCoinLoot();
-        CheckCrystalLoot();
+        CheckClipsCountLoot();
         CheckPotionLoot();
-        PlayerPrefs.SetInt(dailyLootCounter, PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyCrystals) + PlayerPrefs.GetInt(dailyPotions));
+        PlayerPrefs.SetInt(dailyLootCounter, PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions));
     }
 }

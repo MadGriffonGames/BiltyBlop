@@ -88,8 +88,11 @@ public class DailyLoot : MonoBehaviour
     public const string dailyClipsCount = "dailyClipsCount";
     public const string dailyPotions = "dailyPotions";
 
+    TimeSpan hours12;
+
     void Start ()
     {
+        hours12 = new TimeSpan(12,0,0);
         itemArray = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO };
         CoinStart();
         ClipsCountStart();
@@ -124,7 +127,7 @@ public class DailyLoot : MonoBehaviour
 
         if (isTimerTickCoin)
         {
-            spanCoin = hours24 + (coinLastOpenDate - DateTime.Now);
+            spanCoin = hours12 + (coinLastOpenDate - DateTime.Now);
             coinTimer.text = spanCoin.ToString().Substring(0, 8);
             if (spanCoin <= TimeSpan.Zero)
             {
@@ -134,7 +137,7 @@ public class DailyLoot : MonoBehaviour
 
         if (isTimerTickClipsCount)
         {
-            spanClipsCount = hours24 + (clipsCountLastOpenDate - DateTime.Now);
+            spanClipsCount = hours12 + (clipsCountLastOpenDate - DateTime.Now);
             clipsCountTimer.text = spanClipsCount.ToString().Substring(0, 8);
             if (spanClipsCount <= TimeSpan.Zero)
             {
@@ -186,7 +189,8 @@ public class DailyLoot : MonoBehaviour
 
     public void OpenCoinButton()
     {
-        if (NetworkTime.Check24hours(coinLastOpenDate))
+        DateTime now = NetworkTime.GetNetworkTime();
+        if (now - coinLastOpenDate > hours12)
         {
             PlayerPrefs.SetInt(dailyCoins, 0);
             int tmp = PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions);
@@ -208,7 +212,8 @@ public class DailyLoot : MonoBehaviour
 
     public void OpenClipsCountButton()
     {
-        if (NetworkTime.Check24hours(clipsCountLastOpenDate))
+        DateTime now = NetworkTime.GetNetworkTime();
+        if (now - coinLastOpenDate > hours12)
         {
             PlayerPrefs.SetInt(dailyClipsCount, 0);
             int tmp = PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions);

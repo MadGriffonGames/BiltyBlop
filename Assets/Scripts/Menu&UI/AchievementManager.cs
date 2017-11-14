@@ -6,17 +6,28 @@ using UnityEngine;
 
 public class AchievementManager : MonoBehaviour {
 
+    public const string HEAL = "HealthPot";
+    public const string DAMAGE_BONUS = "DamageBonus";
+    public const string SPEED_BONUS = "SpeedBonus";
+    public const string TIME_BONUS = "TimeBonus";
+    public const string IMMORTAL_BONUS = "ImmortalBonus";
+    public const string AMMO = "ClipsCount";
+    public const string availableLoots = "avaliableLoots";
+
     int killCounterTyplak;
     GameObject achievementUI;
-
-
+    
     string[] itemsNames;
+
+    //------------achievements data---------------
 
     int[] mobKillerReward;
     int[] mobKillerTargetValue;
+    string[] mobKillerRewardType;
 
     int[] treasureHunterReward;
     int[] treasureHunterValue;
+    string[] treasureHunterRewardType;
 
     int[] idiotReward;
     int[] idiotTargerValue;
@@ -26,48 +37,48 @@ public class AchievementManager : MonoBehaviour {
 
     int[] secretRoomerReward;
     int[] secretRoomerTargetValue;
+    string[] secretRoomRewardType;
 
     int[] starWalkerReward;
     int[] starWalkerTargetValue;
+    string[] starWalkerRewardType;
 
     int[] millionareTargetValue;
     int[] millionareReward;
 
     int[] graverTargetValue;
     int[] graverReward;
+    string[] graverRewardType;
+
+    int[] potionerReward;
+    int[] potionerTargetValue;
+    string[] potionerRewardType;
+
+
+    //---------other types of loot---------
+
 
     string[] tripleCoins;
     string[] tripleCrystals;
     string[] items;
-    string[] mobKillerRewardType;
-    string[] secretRoomRewardType;
     string[] differentItems2;
-    string[] treasureHunterRewardType;
-    string[] starWalkerRewardType;
-    string[] graverRewardType;
 
-    public const string HEAL = "HealthPot";
-    public const string DAMAGE_BONUS = "DamageBonus";
-    public const string SPEED_BONUS = "SpeedBonus";
-    public const string TIME_BONUS = "TimeBonus";
-    public const string IMMORTAL_BONUS = "ImmortalBonus";
-    public const string AMMO = "ClipsCount";
-    public const string availableLoots = "avaliableLoots";
+    //--------achievements---------------
 
     public Achieve mobKiller;
     public Achieve treasureHunter;
     public Achieve selfDestructor;
-    public LevelAchieve swimmer;
-    public LevelAchieve torchCollector;
     public Achieve torchCollector3;
-    public LevelAchieve firstBuy;
     public Achieve secretRoomer;
-    public LevelAchieve spiderKiller;
     public Achieve starWalker;
     public Achieve millionare;
     public Achieve graver;
+    public Achieve potioner;
+    public LevelAchieve swimmer;
+    public LevelAchieve torchCollector;
+    public LevelAchieve firstBuy;
+    public LevelAchieve spiderKiller;
     public LevelAchieve firstBoss;
-    int[] mobReward;
 
 
     private static AchievementManager instance;

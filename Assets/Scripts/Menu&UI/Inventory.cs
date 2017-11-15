@@ -88,20 +88,6 @@ public class Inventory : MonoBehaviour
             }
     }
 
-    //public bool CanAddItem(string itemName, int itemCount)
-    //{
-    //    if (!PlayerPrefs.HasKey(itemName + COUNT))
-    //    {
-    //        PlayerPrefs.SetInt(itemName + COUNT, 0);
-    //        return true;
-    //    }
-    //    else if (PlayerPrefs.GetInt(itemName + COUNT) + itemCount <= PlayerPrefs.GetInt(MAX + itemName))
-    //    {
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
     public void AddItem(string itemName, int itemCount) 
     {
         if (!PlayerPrefs.HasKey(itemName + COUNT))

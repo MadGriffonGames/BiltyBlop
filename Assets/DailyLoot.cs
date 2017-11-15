@@ -132,6 +132,9 @@ public class DailyLoot : MonoBehaviour
         if (AdsManager.Instance.isRewardVideoWatched && coinVideo)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
+            PlayerPrefs.SetInt(dailyCoins, 0);
+            UpdateIndicator();
+
             GiveCoinReward(50);
             coinVideo = false;
         }
@@ -139,6 +142,9 @@ public class DailyLoot : MonoBehaviour
         if (AdsManager.Instance.isRewardVideoWatched && clipsCountVideo)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
+            PlayerPrefs.SetInt(dailyClipsCount, 0);
+            UpdateIndicator();
+
             GiveClipsCountReward(1);
             clipsCountVideo = false;
         }
@@ -146,6 +152,9 @@ public class DailyLoot : MonoBehaviour
         if (AdsManager.Instance.isRewardVideoWatched && potionVideo)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
+            PlayerPrefs.SetInt(dailyPotions, 0);
+            UpdateIndicator();
+
             GivePotionReward(1);
             clipsCountVideo = false;
         }
@@ -217,13 +226,6 @@ public class DailyLoot : MonoBehaviour
         DateTime now = NetworkTime.GetNetworkTime();
         if (now - coinLastOpenDate > hours12)
         {
-            PlayerPrefs.SetInt(dailyCoins, 0);
-            int tmp = PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions);
-            greenCircleCounter.GetComponent<Text>().text = tmp.ToString();
-            if (tmp == 0)
-            {
-                greenCircle.SetActive(false);
-            }
             spanCoin = coinLastOpenDate - NetworkTime.GetNetworkTime();
             PlayerPrefs.SetString("CoinLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             coinLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
@@ -237,13 +239,6 @@ public class DailyLoot : MonoBehaviour
         DateTime now = NetworkTime.GetNetworkTime();
         if (now - clipsCountLastOpenDate > hours12)
         {
-            PlayerPrefs.SetInt(dailyClipsCount, 0);
-            int tmp = PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions);
-            greenCircleCounter.GetComponent<Text>().text = tmp.ToString();
-            if (tmp == 0)
-            {
-                greenCircle.SetActive(false);
-            }
             spanClipsCount = clipsCountLastOpenDate - NetworkTime.GetNetworkTime();
             PlayerPrefs.SetString("ClipsCountLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             clipsCountLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
@@ -257,13 +252,6 @@ public class DailyLoot : MonoBehaviour
     {
         if (NetworkTime.Check24hours(potionLastOpenDate))
         {
-            PlayerPrefs.SetInt(dailyPotions, 0);
-            int tmp = PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions);
-            greenCircleCounter.GetComponent<Text>().text = tmp.ToString();
-            if (tmp == 0)
-            {
-                greenCircle.SetActive(false);
-            }
             spanPotion = potionLastOpenDate - NetworkTime.GetNetworkTime();
             PlayerPrefs.SetString("PotionLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             potionLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
@@ -429,6 +417,16 @@ public class DailyLoot : MonoBehaviour
         fadeButton.SetActive(false);
         rewardFade.SetActive(false);
         loot.SetActive(false);
+    }
+
+    void UpdateIndicator()
+    {
+        int tmp = PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions);
+        greenCircleCounter.GetComponent<Text>().text = tmp.ToString();
+        if (tmp == 0)
+        {
+            greenCircle.SetActive(false);
+        }
     }
 
 }

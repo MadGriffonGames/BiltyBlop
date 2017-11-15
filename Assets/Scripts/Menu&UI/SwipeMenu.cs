@@ -117,6 +117,4 @@ public class SwipeMenu : MonoBehaviour
 			tapping = true;
 		}
 	}
-
-
 }

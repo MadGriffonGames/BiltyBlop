@@ -19,6 +19,12 @@ public class MainMenu : MonoBehaviour
     GameObject dailyLootCount;
     [SerializeField]
     GameObject greenCircleDailyLoot;
+    [SerializeField]
+    GameObject noAdsButton;
+    [SerializeField]
+    GameObject packButton;
+    [SerializeField]
+    GameObject packWindow;
 
     [SerializeField]
     bool changeCoinDate;
@@ -30,10 +36,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     GameObject fadeButton;
 
-
     [SerializeField]
     GameObject lootVolume;
-
 
     [SerializeField]
     GameObject fade;
@@ -46,6 +50,7 @@ public class MainMenu : MonoBehaviour
     TimeSpan spanPotion;
 
     TimeSpan hours24;
+    TimeSpan hours12;
 
     DateTime CoinlastOpenDate;
     DateTime ClipsCountlastOpenDate;
@@ -75,7 +80,24 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetString("Throw", "ClassicThrow");
             PlayerPrefs.SetInt("ThrowAttackStat", 1);
             PlayerPrefs.SetFloat("ThrowSpeedStat", 14);
+
+            changeClipsCountDate = true;
+            changeCoinDate = true;
+            changePotionDate = true;
         }
+        else
+        {
+            changeClipsCountDate = false;
+            changeCoinDate = false;
+            changePotionDate = false;
+        }
+
+        if (PlayerPrefs.GetInt("NoAds") == 1)
+        {
+            noAdsButton.SetActive(false);
+        }
+
+        hours12 = new TimeSpan(12, 0, 0);
     }
 
     public void Start()
@@ -127,7 +149,7 @@ public class MainMenu : MonoBehaviour
         {
             availableLootCounter.gameObject.GetComponent<Text>().text = "";
             greenCircleAchieve.gameObject.SetActive(false);
-        }     			
+        }
 
         SoundManager.PlayMusic("main menu", true);
     }
@@ -148,9 +170,6 @@ public class MainMenu : MonoBehaviour
     {
         fade.gameObject.SetActive(true);
         giftsPanel.gameObject.SetActive(true);
-        //GameManager.nextLevelName = "Gifts";
-
-        //SceneManager.LoadScene("Loading");
     }
 
     public void PlayUISound(string sound)
@@ -195,7 +214,7 @@ public class MainMenu : MonoBehaviour
     public void CheckCoinLoot()
     {
         CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
-        spanCoin = hours24 + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
+        spanCoin = hours12 + (CoinlastOpenDate - NetworkTime.GetNetworkTime());
         if (spanCoin < TimeSpan.Zero)
         {
             if (PlayerPrefs.GetInt(dailyCoins) == 0 || !PlayerPrefs.HasKey(dailyCoins))
@@ -206,7 +225,10 @@ public class MainMenu : MonoBehaviour
     public void CheckClipsCountLoot()
     {
         ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
-        spanClipsCount = hours24 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
+        spanClipsCount = hours12 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
+
+        Debug.Log(ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
+        Debug.Log(spanClipsCount);
         if (spanClipsCount < TimeSpan.Zero)
         {
             if (PlayerPrefs.GetInt(dailyClipsCount) == 0 || !PlayerPrefs.HasKey(dailyClipsCount))
@@ -227,10 +249,17 @@ public class MainMenu : MonoBehaviour
 
     void GeneralDailyCount()
     {
-        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
+        hours24 = new TimeSpan(24, 0 , 0);
         CheckCoinLoot();
         CheckClipsCountLoot();
         CheckPotionLoot();
         PlayerPrefs.SetInt(dailyLootCounter, PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions));
     }
+
+    public void OpenPackWindow()
+    {
+        fade.SetActive(true);
+        packWindow.SetActive(true);
+    }
+
 }

@@ -43,7 +43,34 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     private void PurchaseManager_OnPurchaseNonConsumable(PurchaseEventArgs args)
     {
         Debug.Log("Purchased: " + args.purchasedProduct.definition.id + " - NonConsumable");
-        PlayerPrefs.SetInt("NoAds", 1);
+
+        switch (args.purchasedProduct.definition.id)
+        {
+            case "noads":
+                PlayerPrefs.SetInt("NoAds", 1);
+                break;
+
+            case "starter_pack":
+                PlayerPrefs.SetInt("NoAds", 1);
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
+                PlayerPrefs.SetString("Sword", "");
+                PlayerPrefs.SetInt("SwordDisplayIndex", PlayerPrefs.GetInt("Crystals") + 60);
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
+                PlayerPrefs.SetString("BarbarianSword", "Unlocked");
+
+                Inventory.Instance.AddItem(Inventory.HEAL, 1);
+                Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 1);
+                Inventory.Instance.AddItem(Inventory.IMMORTAL_BONUS, 1);
+                Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
+                Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
+                Inventory.Instance.AddItem(Inventory.AMMO, 3);
+
+
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void PurchaseManager_OnPurchaseConsumable(PurchaseEventArgs args)

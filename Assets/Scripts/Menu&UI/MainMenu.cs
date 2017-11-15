@@ -66,6 +66,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("FirstEnter"))
         {
             PlayerPrefs.SetInt("FirstEnter", 1);
@@ -85,12 +86,12 @@ public class MainMenu : MonoBehaviour
             changeCoinDate = true;
             changePotionDate = true;
         }
-        else
-        {
-            changeClipsCountDate = false;
-            changeCoinDate = false;
-            changePotionDate = false;
-        }
+        //else
+        //{
+        //    changeClipsCountDate = false;
+        //    changeCoinDate = false;
+        //    changePotionDate = false;
+        //}
 
         if (PlayerPrefs.GetInt("NoAds") == 1)
         {

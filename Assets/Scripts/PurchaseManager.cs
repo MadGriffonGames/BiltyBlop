@@ -132,6 +132,9 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         if (IsInitialized())
         {
+            AppMetrica.Instance.ReportEvent("#PACK checked");
+            DevToDev.Analytics.CustomEvent("#PACK checked");
+
             Product product = m_StoreController.products.WithID(productId);
 
             if (product != null && product.availableToPurchase)

@@ -31,6 +31,7 @@
 
 # Facebook
 -keep class com.facebook.ads.** { *; }
+-keep calss com.facebook.unity.FB.** { *; }
 -keeppackagenames com.facebook.*
 -dontwarn com.facebook.ads.**
 

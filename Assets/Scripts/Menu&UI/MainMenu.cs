@@ -20,19 +20,40 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     GameObject greenCircleDailyLoot;
 
+    [SerializeField]
+    bool changeCoinDate;
+    [SerializeField]
+    bool changeClipsCountDate;
+    [SerializeField]
+    bool changePotionDate;
+
+    [SerializeField]
+    GameObject fadeButton;
+
+
+    [SerializeField]
+    GameObject lootVolume;
+
+
+    [SerializeField]
+    GameObject fade;
+
+    [SerializeField]
+    GameObject giftsPanel;
+
     TimeSpan spanCoin;
-    TimeSpan spanCrystal;
+    TimeSpan spanClipsCount;
     TimeSpan spanPotion;
 
     TimeSpan hours24;
 
     DateTime CoinlastOpenDate;
-    DateTime CrystallastOpenDate;
+    DateTime ClipsCountlastOpenDate;
     DateTime PotionlastOpenDate;
 
     public const string dailyLootCounter = "dailyLootCounter";
     public const string dailyCoins = "dailyCoins";
-    public const string dailyCrystals = "dailyCrystals";
+    public const string dailyClipsCount = "dailyClipsCount";
     public const string dailyPotions = "dailyPotions";
 
     public string sceneName { get; set; }
@@ -59,6 +80,24 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        if (changeCoinDate)
+        {
+            PlayerPrefs.SetString("CoinLastOpenDate", "7/4/2016 8:30:52 AM");
+            CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
+        }
+
+        if (changeClipsCountDate)
+        {
+            PlayerPrefs.SetString("ClipsCountLastOpenDate", "7/4/2016 8:30:52 AM");
+            ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
+        }
+
+        if (changePotionDate)
+        {
+            PlayerPrefs.SetString("PotionLastOpenDate", "7/4/2016 8:30:52 AM");
+            PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
+        }
+
         greenCircleAchieve.SetActive(false);
         greenCircleDailyLoot.SetActive(false);
 
@@ -107,9 +146,11 @@ public class MainMenu : MonoBehaviour
 
     public void ToGiftsMenu()
     {
-        GameManager.nextLevelName = "Gifts";
+        fade.gameObject.SetActive(true);
+        giftsPanel.gameObject.SetActive(true);
+        //GameManager.nextLevelName = "Gifts";
 
-        SceneManager.LoadScene("Loading");
+        //SceneManager.LoadScene("Loading");
     }
 
     public void PlayUISound(string sound)
@@ -122,6 +163,12 @@ public class MainMenu : MonoBehaviour
         GameManager.nextLevelName = "Shop";
 
         SceneManager.LoadScene("Loading");
+    }
+
+    public void GiftClose()
+    {
+        fade.gameObject.SetActive(false);
+        giftsPanel.gameObject.SetActive(false);
     }
 
     public void RateUs()
@@ -156,21 +203,21 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void CheckCrystalLoot()
+    public void CheckClipsCountLoot()
     {
-        CrystallastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CrystalLastOpenDate"));
-        spanCrystal = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
-        if (spanCrystal < TimeSpan.Zero)
+        ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
+        spanClipsCount = hours24 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
+        if (spanClipsCount < TimeSpan.Zero)
         {
-            if (PlayerPrefs.GetInt(dailyCrystals) == 0 || !PlayerPrefs.HasKey(dailyCrystals))
-                PlayerPrefs.SetInt(dailyCrystals, 1);
+            if (PlayerPrefs.GetInt(dailyClipsCount) == 0 || !PlayerPrefs.HasKey(dailyClipsCount))
+                PlayerPrefs.SetInt(dailyClipsCount, 1);
         }
     }
 
     public void CheckPotionLoot()
     {
         PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
-        spanPotion = hours24 + (CrystallastOpenDate - NetworkTime.GetNetworkTime());
+        spanPotion = hours24 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
         if (spanPotion < TimeSpan.Zero)
         {
             if (PlayerPrefs.GetInt(dailyPotions) == 0 || !PlayerPrefs.HasKey(dailyPotions))
@@ -182,8 +229,8 @@ public class MainMenu : MonoBehaviour
     {
         hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
         CheckCoinLoot();
-        CheckCrystalLoot();
+        CheckClipsCountLoot();
         CheckPotionLoot();
-        PlayerPrefs.SetInt(dailyLootCounter, PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyCrystals) + PlayerPrefs.GetInt(dailyPotions));
+        PlayerPrefs.SetInt(dailyLootCounter, PlayerPrefs.GetInt(dailyCoins) + PlayerPrefs.GetInt(dailyClipsCount) + PlayerPrefs.GetInt(dailyPotions));
     }
 }

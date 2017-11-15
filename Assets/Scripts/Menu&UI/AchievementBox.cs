@@ -201,8 +201,6 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 0)         // Get button has never been pressed
         {
-            Debug.Log(achievementName);
-            Debug.Log("never pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[0];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue0");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue0"));
@@ -218,8 +216,6 @@ public class AchievementBox : MonoBehaviour {
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 2)         // Get butten has been pressed twice
         {
-            Debug.Log(achievementName);
-            Debug.Log("twice pressed");
             description.gameObject.GetComponent<Text>().text = descriptionText[2];
             text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue2");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
@@ -243,10 +239,6 @@ public class AchievementBox : MonoBehaviour {
 
         if (currentValue < targetValue1 && currentValue >= targetValue0)
         {
-            if (achievementName == "Treasure Hunter")
-            {
-                Debug.Log("inProgress");
-            }
             inProgress.gameObject.SetActive(true);
         }
 
@@ -292,7 +284,6 @@ public class AchievementBox : MonoBehaviour {
         getBtn.gameObject.SetActive(false);
         rewardFade.SetActive(true);
         string lootType = PlayerPrefs.GetString(achievementName + "rewardType0");
-        Debug.Log(lootType);
         if (PlayerPrefs.GetString(achievementName + "rewardType0") == "Coins")
         {
             StartCoroutine(ShowCoinLoot(0));
@@ -305,17 +296,16 @@ public class AchievementBox : MonoBehaviour {
 
         else if (lootType == HEAL || lootType == DAMAGE_BONUS || lootType == SPEED_BONUS || lootType == TIME_BONUS || lootType == IMMORTAL_BONUS || lootType == AMMO)
         {
-            StartCoroutine(ShowItemLoot(1));
+            StartCoroutine(ShowItemLoot(0));
         }
 
         else if (lootType == "ClassicThrow" || lootType == "HammerThrow" || lootType == "IcecreamThrow" || lootType == "MagicThrow" || lootType == "MeatThrow" || lootType == "PizzaThrow" || lootType == "RavenThrow" || lootType == "SheepThrow" || lootType == "Sword1Throw" || lootType == "Sword2Throw" || lootType == "Sword3Throw" || lootType == "Sword4Throw")
         {
-            StartCoroutine(ShowThrowLoot(1));
+            StartCoroutine(ShowThrowLoot(0));
         }
 
         else if (lootType == "BarbarianSword" || lootType == "Black_ninjaSword" || lootType == "ClassicSword" || lootType == "JonSnowSword" || lootType == "KingSword")
         {
-            Debug.Log("Coinssss");
             StartCoroutine(ShowSwordLoot(0));
         }
 
@@ -456,7 +446,6 @@ public class AchievementBox : MonoBehaviour {
 
     public void FadeOut()
     {
-        Debug.Log("Fade out");
         fadeButton.SetActive(false);
         rewardFade.SetActive(false);
         loot.SetActive(false);
@@ -465,7 +454,6 @@ public class AchievementBox : MonoBehaviour {
 
     IEnumerator ShowCoinLoot(int level)
     {
-        Debug.Log(PlayerPrefs.GetInt(achievementName + level.ToString()));
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + level.ToString()).ToString();
         rewardFade.gameObject.SetActive(true);
         loot.gameObject.GetComponent<Image>().sprite = coins;
@@ -476,7 +464,6 @@ public class AchievementBox : MonoBehaviour {
 
     IEnumerator ShowCrystalLoot(int level)
     {
-        Debug.Log(PlayerPrefs.GetInt(achievementName + level.ToString()));
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + level.ToString()).ToString();
         rewardFade.gameObject.SetActive(true);
         loot.gameObject.GetComponent<Image>().sprite = crystals;
@@ -488,7 +475,6 @@ public class AchievementBox : MonoBehaviour {
 
     IEnumerator ShowItemLoot(int level)
     {
-        Debug.Log(PlayerPrefs.GetInt(achievementName + level.ToString()));
         lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + level.ToString()).ToString();
         rewardFade.gameObject.SetActive(true);
         string lootType = PlayerPrefs.GetString(achievementName + "rewardType" + level.ToString());
@@ -615,7 +601,6 @@ public class AchievementBox : MonoBehaviour {
 
         if (lootType == "Black_ninjaSword")
         {
-            Debug.Log("take ninja sword");
             PlayerPrefs.SetString("Black_ninjaSword", "Unlocked");
             swordLoot.gameObject.GetComponent<Image>().sprite = black_ninjaSword;
             swordLootVolume.GetComponent<Text>().text = "Unlocked";

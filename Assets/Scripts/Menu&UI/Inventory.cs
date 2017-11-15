@@ -194,11 +194,12 @@ public class Inventory : MonoBehaviour
 
         RemoveItem(AMMO);
 
-        SendUseMetric(HEAL);
+        SendUseMetric(AMMO);
     }
 
     public void UseBonus(string bonusType)
     {
+        AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.potioner);
         if (bonusType == IMMORTAL_BONUS)
         {
             Player.Instance.ExecBonusImmortal(IMMORTAL_DURATION);

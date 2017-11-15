@@ -6,17 +6,28 @@ using UnityEngine;
 
 public class AchievementManager : MonoBehaviour {
 
+    public const string HEAL = "HealthPot";
+    public const string DAMAGE_BONUS = "DamageBonus";
+    public const string SPEED_BONUS = "SpeedBonus";
+    public const string TIME_BONUS = "TimeBonus";
+    public const string IMMORTAL_BONUS = "ImmortalBonus";
+    public const string AMMO = "ClipsCount";
+    public const string availableLoots = "avaliableLoots";
+
     int killCounterTyplak;
     GameObject achievementUI;
-
-
+    
     string[] itemsNames;
+
+    //------------achievements data---------------
 
     int[] mobKillerReward;
     int[] mobKillerTargetValue;
+    string[] mobKillerRewardType;
 
     int[] treasureHunterReward;
     int[] treasureHunterValue;
+    string[] treasureHunterRewardType;
 
     int[] idiotReward;
     int[] idiotTargerValue;
@@ -26,43 +37,48 @@ public class AchievementManager : MonoBehaviour {
 
     int[] secretRoomerReward;
     int[] secretRoomerTargetValue;
+    string[] secretRoomRewardType;
 
     int[] starWalkerReward;
     int[] starWalkerTargetValue;
+    string[] starWalkerRewardType;
 
     int[] millionareTargetValue;
     int[] millionareReward;
 
+    int[] graverTargetValue;
+    int[] graverReward;
+    string[] graverRewardType;
+
+    int[] potionerReward;
+    int[] potionerTargetValue;
+    string[] potionerRewardType;
+
+
+    //---------other types of loot---------
+
+
     string[] tripleCoins;
     string[] tripleCrystals;
     string[] items;
-    string[] mobKillerRewardType;
-    string[] secretRoomRewardType;
     string[] differentItems2;
-    string[] treasureHunterRewardType;
-    string[] starWalkerRewardType;
 
-    public const string HEAL = "HealthPot";
-    public const string DAMAGE_BONUS = "DamageBonus";
-    public const string SPEED_BONUS = "SpeedBonus";
-    public const string TIME_BONUS = "TimeBonus";
-    public const string IMMORTAL_BONUS = "ImmortalBonus";
-    public const string AMMO = "ClipsCount";
-    public const string availableLoots = "avaliableLoots";
+    //--------achievements---------------
 
     public Achieve mobKiller;
     public Achieve treasureHunter;
-    public Achieve idiot;
-    public LevelAchieve swimmer;
-    public LevelAchieve torchCollector;
+    public Achieve selfDestructor;
     public Achieve torchCollector3;
-    public LevelAchieve firstBuy;
     public Achieve secretRoomer;
-    public LevelAchieve spiderKiller;
     public Achieve starWalker;
     public Achieve millionare;
+    public Achieve graver;
+    public Achieve potioner;
+    public LevelAchieve swimmer;
+    public LevelAchieve torchCollector;
+    public LevelAchieve firstBuy;
+    public LevelAchieve spiderKiller;
     public LevelAchieve firstBoss;
-    int[] mobReward;
 
 
     private static AchievementManager instance;
@@ -85,15 +101,15 @@ public class AchievementManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
         if (!PlayerPrefs.HasKey(availableLoots))
             PlayerPrefs.SetInt(availableLoots, 0);
         //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
         items = new string[] { HEAL, HEAL, HEAL };
-
-
-
+        
+        graverTargetValue = new int[] {5, 25, 50 };
+        graverReward = new int[] { 10, 50, 100 };
+        graverRewardType = new string[] { "Coins", "Crystals", "MeatThrow" };
 
         mobKillerReward = new int[] { 1, 3, 1 };
         mobKillerTargetValue = new int[] { 25, 250, 1000 };
@@ -110,8 +126,8 @@ public class AchievementManager : MonoBehaviour {
 
         treasureHunterValue = new int[] { 10, 25, 50 };
 
-        idiotReward = new int[] { -5, -10, -15 };
-        idiotTargerValue = new int[] { 1, 5, 10 };
+        idiotReward = new int[] { 100, 5, 1 };
+        idiotTargerValue = new int[] { 10, 20, 30 };
 
         torchCollectorReward = new int[] { 100, 150, 250 };
         torchCollectorTargetValue = new int[] { 10, 25, 50 };
@@ -125,6 +141,9 @@ public class AchievementManager : MonoBehaviour {
         millionareTargetValue = new int[] { 1000, 10000, 15000 };
         millionareReward = new int[] { 100, 150, 200 };
 
+        potionerTargetValue = new int[] { 10, 25, 50};
+        potionerReward = new int[] { 100, 2, 1 };
+        potionerRewardType = new string[] { "Coins", "Crystals", HEAL};
 
         PlayerPrefs.SetString("Black_ninja", "Locked");
         PlayerPrefs.SetString("Sword3Throw", "Locked");
@@ -146,6 +165,9 @@ public class AchievementManager : MonoBehaviour {
         spiderKiller = new LevelAchieve("Spider Boss killer", "Crystals", 1, 6);
         starWalker = new Achieve("StarWalker", tripleCoins, starWalkerTargetValue, starWalkerReward);
         firstBoss = new LevelAchieve("Dragon Killer", "Crystals", 1, 3);
+        graver = new Achieve("Graver", graverRewardType, graverTargetValue, graverReward);
+        selfDestructor = new Achieve("SelfDestructor", graverRewardType, idiotTargerValue, idiotReward);
+        potioner = new Achieve("Potioner", potionerRewardType, potionerTargetValue, potionerReward);
     }
 
     public void CheckAchieve(Achieve achieve)

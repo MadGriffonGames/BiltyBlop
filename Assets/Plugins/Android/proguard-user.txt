@@ -28,6 +28,7 @@
 -dontwarn com.applovin.**
 
 # Facebook
+-keep class com.facebook.** { *; }
 -keep class com.facebook.ads.** { *; }
 -keeppackagenames com.facebook.*
 -dontwarn com.facebook.ads.**

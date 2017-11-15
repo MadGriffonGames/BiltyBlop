@@ -20,8 +20,8 @@ namespace com.devtodev {
 		public string onPushReceived;
 		public string onPushOpened;
 
-		private string iosKey = "";
-		private string iosSecret = "";
+		private string iosKey = "37eff640-09f0-0429-b307-8e88e5d7d755";
+		private string iosSecret = "UCf2q6ugjEQdnSOL5AYs08xHPZG9aclF";
 		
 		private string androidKey = "6d78756b-b818-0cdc-a65e-7bcd334318da";
 		private string androidSecret = "cpNbYkLP6ZhJlEgBUCeARF45zTHSXVsr";
@@ -45,8 +45,38 @@ namespace com.devtodev {
 			DontDestroyOnLoad(this);
 		}
 
-		void Start() {
-			if (logEnabled) {
+        public void PushReceived(IDictionary<string, string> pushAdditionalData)
+        {
+            //pushAdditionalData - push-notification data that you send to your app
+        }
+
+        public void PushOpened(DevToDev.PushMessage pushMessage, DevToDev.ActionButton actionButton)
+        {
+            //pushMessage - DevToDev.PushMessage. Represents toast notification message
+            //actionButton - DevToDev.ActionButton. Represents toast button that was clicked.
+            //               Could be null if toast body was clicked
+        }
+
+        public void PushTokenFailed(string error)
+        {
+            //handle push-notifications error here
+        }
+
+        public void PushTokenReceived(string pushToken)
+        {
+            //pushToken - your push token
+        }
+
+        void Start() {
+
+            DevToDev.PushManager.PushReceived = PushReceived;
+            DevToDev.PushManager.PushOpened = PushOpened;
+            DevToDev.PushManager.PushTokenFailed = PushTokenFailed;
+            DevToDev.PushManager.PushTokenReceived = PushTokenReceived;
+
+            DevToDev.PushManager.PushNotificationsEnabled = true;
+
+            if (logEnabled) {
 				Analytics.SetActiveLog(true);
 			}
 #if UNITY_ANDROID

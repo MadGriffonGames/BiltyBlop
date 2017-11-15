@@ -37,7 +37,7 @@ public class RuneStone : InteractiveObject
 
             SendMetrics();
 
-            if (SceneManager.GetActiveScene().name == "Level3")
+            if (SceneManager.GetActiveScene().name == "Level6")
             {
                 DevToDev.Analytics.Tutorial(-2);
             }

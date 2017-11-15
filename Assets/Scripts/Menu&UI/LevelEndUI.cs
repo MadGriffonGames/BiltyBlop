@@ -17,6 +17,8 @@ public class LevelEndUI : MonoBehaviour
     GameObject controlsUI;
     [SerializeField]
     GameObject pauseUI;
+    [SerializeField]
+    ChestUI chest;
 
     void Start ()
     {
@@ -38,7 +40,6 @@ public class LevelEndUI : MonoBehaviour
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
         }
-        
     }
 
     public void Menu()
@@ -48,10 +49,20 @@ public class LevelEndUI : MonoBehaviour
 
     public void Continue()
     {
-
+        if (!chest.isRewardCollected)
+        {
+            string tmp = "" + GameManager.currentLvl[GameManager.currentLvl.Length - 1];
+            int currentLvl = int.Parse(tmp);
+            if (currentLvl > 3)
+            {
+                AdsManager.Instance.ShowAdsAtLevelEnd();
+            }
+        }
+        else
+        {
 #if UNITY_EDITOR
-        AdsManager.Instance.isInterstitialClosed = true;
-        AdsManager.Instance.fromShowfunction = true;
+            AdsManager.Instance.isInterstitialClosed = true;
+            AdsManager.Instance.fromShowfunction = true;
 
 #elif UNITY_ANDROID
         //AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
@@ -62,6 +73,10 @@ public class LevelEndUI : MonoBehaviour
         SceneManager.LoadScene("Loading");
 
 #endif
+        }
+
+
+
 
     }
 

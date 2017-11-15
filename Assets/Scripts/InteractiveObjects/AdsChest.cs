@@ -57,16 +57,24 @@ public class AdsChest : MonoBehaviour
 
     private void Update()
     {
-        if (isOpened && !isRewardCollected && AdsManager.Instance.isRewardVideoWatched)
+        if (isOpened && !isRewardCollected)
         {
-            AdsManager.Instance.isRewardVideoWatched = false;
-            GetComponent<BoxCollider2D>().enabled = false;
-            isRewardCollected = true;
-
             EnableControls(true);
 
-            Randomize();
-            loot.gameObject.SetActive(true);          
+            if (AdsManager.Instance.isRewardVideoWatched)
+            {
+                AdsManager.Instance.isRewardVideoWatched = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+                isRewardCollected = true;
+
+                Randomize();
+                GetComponent<SpriteRenderer>().sprite = openChest;
+                loot.gameObject.SetActive(true);
+            }
+            if (!isRewardCollected)
+            {
+                isOpened = false;
+            }    
         }
     }
 
@@ -238,8 +246,6 @@ public class AdsChest : MonoBehaviour
         if (other.CompareTag("Sword"))
         {
             isOpened = true;
-
-            GetComponent<SpriteRenderer>().sprite = openChest;
 
             AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
             DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);

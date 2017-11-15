@@ -63,6 +63,7 @@ public class DailyReward : MonoBehaviour
     int rewardDay;
     bool is24hoursPast;
     bool isTimerTick;
+    bool isRewardedVideoWatched;
     DateTime lastOpenDate;
     TimeSpan span;
     TimeSpan hours24;
@@ -167,6 +168,8 @@ public class DailyReward : MonoBehaviour
             ActivateChest();
             isRewardCollected = false;
         }
+
+        isRewardedVideoWatched = false;
     }
 
     public void TMP()
@@ -201,7 +204,7 @@ public class DailyReward : MonoBehaviour
             }
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched)
+        if (AdsManager.Instance.isRewardVideoWatched && isRewardedVideoWatched)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
 
@@ -340,16 +343,13 @@ public class DailyReward : MonoBehaviour
         AppMetrica.Instance.ReportEvent("#REWARDx2_BUTTON pressed");
         DevToDev.Analytics.CustomEvent("#REWARDx2_BUTTON pressed");
 
+        isRewardedVideoWatched = true;
+
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
         AdsManager.Instance.ShowRewardedVideo();
 #endif
         doubleButton.GetComponent<Button>().interactable = false;
-    }
-
-    private void OnEnable()
-    {
-        
     }
 }

@@ -227,8 +227,6 @@ public class MainMenu : MonoBehaviour
         ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
         spanClipsCount = hours12 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
 
-        Debug.Log(ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
-        Debug.Log(spanClipsCount);
         if (spanClipsCount < TimeSpan.Zero)
         {
             if (PlayerPrefs.GetInt(dailyClipsCount) == 0 || !PlayerPrefs.HasKey(dailyClipsCount))
@@ -260,6 +258,9 @@ public class MainMenu : MonoBehaviour
     {
         fade.SetActive(true);
         packWindow.SetActive(true);
+
+        AppMetrica.Instance.ReportEvent("#STARTER_PACK shown");
+        DevToDev.Analytics.CustomEvent("#STARTER_PACK shown");
     }
 
 }

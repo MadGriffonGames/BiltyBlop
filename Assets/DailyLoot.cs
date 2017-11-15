@@ -230,7 +230,8 @@ public class DailyLoot : MonoBehaviour
             PlayerPrefs.SetString("CoinLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             coinLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
 
-            AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
+            AppMetrica.Instance.ReportEvent("#GIFTS coins");
+            DevToDev.Analytics.CustomEvent("#GIFTS coins");
         }
     }
 
@@ -242,7 +243,9 @@ public class DailyLoot : MonoBehaviour
             spanClipsCount = clipsCountLastOpenDate - NetworkTime.GetNetworkTime();
             PlayerPrefs.SetString("ClipsCountLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             clipsCountLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
-            AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
+
+            AppMetrica.Instance.ReportEvent("#GIFTS ammo");
+            DevToDev.Analytics.CustomEvent("#GIFTS ammo");
         }
     }
 
@@ -255,7 +258,8 @@ public class DailyLoot : MonoBehaviour
             spanPotion = potionLastOpenDate - NetworkTime.GetNetworkTime();
             PlayerPrefs.SetString("PotionLastOpenDate", NetworkTime.GetNetworkTime().ToString());
             potionLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
-            AppMetrica.Instance.ReportEvent("#CHEST Daily chest activate");
+
+            AppMetrica.Instance.ReportEvent("#GIFTS potion");
             DevToDev.Analytics.CustomEvent("#CHEST Daily chest activate");
         }
     }

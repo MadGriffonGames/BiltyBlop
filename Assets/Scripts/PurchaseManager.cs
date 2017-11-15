@@ -51,6 +51,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 break;
 
             case "starter_pack":
+                PlayerPrefs.SetInt("StarterPackBought", 1);
+
                 PlayerPrefs.SetInt("NoAds", 1);
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
                 PlayerPrefs.SetString("Sword", "");

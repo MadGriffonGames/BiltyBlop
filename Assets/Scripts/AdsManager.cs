@@ -27,10 +27,10 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     bool isLvlEnd;
 
     public bool fromShowfunction = false;
-
     public bool isInterstitialClosed = false;
-
     public bool isRewardVideoWatched = false;
+    public bool isRewardedVideoFailed = false;
+    public bool isRewardedVideoShown = false;
 
     string appKey;
 
@@ -167,12 +167,12 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     public void onRewardedVideoFailedToLoad()
     {
-        print("Video failed");
+        isRewardedVideoFailed = true;
     }
 
     public void onRewardedVideoShown()
     {
-        print("Video shown");
+        isRewardedVideoShown = true;
     }
 
     public void onRewardedVideoClosed(bool var)

@@ -3,7 +3,8 @@ using Facebook.Unity;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class FacebookManager : MonoBehaviour {
+public class FacebookManager : MonoBehaviour
+{
 
     public Text userIdText;
 

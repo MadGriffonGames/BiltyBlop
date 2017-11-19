@@ -10,9 +10,11 @@ public class Settings : MonoBehaviour
     GameObject musicButton;
     [SerializeField]
     GameObject fxButton;
-    [SerializeField]
-    GameObject settingsBar;
     Animator MyAnimator;
+    [SerializeField]
+    GameObject settingsWindow;
+    [SerializeField]
+    GameObject fade;
     
     bool hide = true;
 
@@ -21,23 +23,34 @@ public class Settings : MonoBehaviour
         MyAnimator = GetComponent<Animator>();
         musicButton.gameObject.SetActive(false);
         fxButton.gameObject.SetActive(false);
-        settingsBar.gameObject.SetActive(false);
     }
 
     public void ShowButtons()
     {
-        hide = !hide;
-        if (!hide)
-        {
+            fade.gameObject.SetActive(true);
+            settingsWindow.gameObject.SetActive(true);
             musicButton.gameObject.SetActive(true);
             fxButton.gameObject.SetActive(true);
-            settingsBar.gameObject.SetActive(true);
-        }
-        else
-        {
-            musicButton.gameObject.SetActive(false);
-            fxButton.gameObject.SetActive(false);
-            settingsBar.gameObject.SetActive(false);
-        }
+        //hide = !hide;
+        //if (!hide)
+        //{
+        //    musicButton.gameObject.SetActive(true);
+        //    fxButton.gameObject.SetActive(true);
+        //    settingsBar.gameObject.SetActive(true);
+        //}
+        //else
+        //{
+        //    musicButton.gameObject.SetActive(false);
+        //    fxButton.gameObject.SetActive(false);
+        //    settingsBar.gameObject.SetActive(false);
+        //}
+    }
+
+    public void HideButtons()
+    {
+        fade.gameObject.SetActive(false);
+        settingsWindow.gameObject.SetActive(false);
+        musicButton.gameObject.SetActive(false);
+        fxButton.gameObject.SetActive(false);
     }
 }

@@ -7,6 +7,17 @@ using UnityEngine.Purchasing;
 
 public class PurchaseManager : MonoBehaviour, IStoreListener
 {
+    private static PurchaseManager instance;
+    public static PurchaseManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = GameObject.FindObjectOfType<PurchaseManager>();
+            return instance;
+        }
+    }
+
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
     private int currentProductIndex;
@@ -32,6 +43,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     private void Awake()
     {
         InitializePurchasing();
+        DontDestroyOnLoad(this);
     }
 
     private void Start()
@@ -55,9 +67,6 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
                 PlayerPrefs.SetInt("NoAds", 1);
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
-                PlayerPrefs.SetString("Sword", "");
-                PlayerPrefs.SetInt("SwordDisplayIndex", PlayerPrefs.GetInt("Crystals") + 60);
-                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
                 PlayerPrefs.SetString("BarbarianSword", "Unlocked");
 
                 Inventory.Instance.AddItem(Inventory.HEAL, 1);
@@ -66,8 +75,28 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
                 Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
                 Inventory.Instance.AddItem(Inventory.AMMO, 3);
+                break;
 
+            case "pack1_noads":
+                PlayerPrefs.SetInt("Pack1Bought", 1);
 
+                PlayerPrefs.SetInt("NoAds", 1);
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
+                PlayerPrefs.SetString("PizzaThrow", "Unlocked");
+                PlayerPrefs.SetInt("Greedy", 3);
+                PlayerPrefs.SetFloat("Greedy3", 1.5f);
+                PlayerPrefs.SetInt("FreeRevives", 20);
+                break;
+
+            case "pack1":
+                PlayerPrefs.SetInt("Pack1_NoAdsBought", 1);
+               
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
+                PlayerPrefs.SetString("Black_ninja", "Unlocked");
+                PlayerPrefs.SetString("PizzaThrow", "Unlocked");
+                PlayerPrefs.SetInt("Greedy", 3);
+                PlayerPrefs.SetFloat("Greedy3", 1.5f);
+                PlayerPrefs.SetInt("FreeRevives", 20);
                 break;
 
             default:
@@ -84,6 +113,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 			case "15_crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
                 break;
+
 			case "kidarian.15_crystals":
 				PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
 				break;
@@ -161,9 +191,6 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         if (IsInitialized())
         {
-            AppMetrica.Instance.ReportEvent("#PACK checked");
-            DevToDev.Analytics.CustomEvent("#PACK checked");
-
             Product product = m_StoreController.products.WithID(productId);
 
             if (product != null && product.availableToPurchase)

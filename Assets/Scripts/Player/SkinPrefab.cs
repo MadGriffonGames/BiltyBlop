@@ -29,8 +29,11 @@ public class SkinPrefab : MonoBehaviour
 
     public void SetPlayerPrefsParams()
     {
-		if (!PlayerPrefs.HasKey (gameObject.name)) {
-			if (isLocked) {
+		if (!PlayerPrefs.HasKey (gameObject.name))
+        {
+            Debug.Log(gameObject.name);
+            Debug.Log(isLocked);
+            if (isLocked) {
 				PlayerPrefs.SetString (gameObject.name, LOCKED);
 			} else
 				PlayerPrefs.SetString (gameObject.name, UNLOCKED);

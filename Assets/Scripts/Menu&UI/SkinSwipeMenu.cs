@@ -51,9 +51,12 @@ public class SkinSwipeMenu : SwipeMenu {
                     skinCardObj.transform.localScale = new Vector3(1, 1, 1);
                     skinCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = skin.shopName;
                     skinCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = skin.skinSprite;
-
+                    
 					if (PlayerPrefs.GetString(skin.name) == "Unlocked")
                     {
+                        Debug.Log(skin.name);
+                        Debug.Log(PlayerPrefs.GetString("Black_ninja"));
+
 						if (PlayerPrefs.GetString ("Skin") == skin.name) 
 						{
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";

@@ -164,7 +164,7 @@ public class BuyCheckpointsUI : MonoBehaviour
         }
         else
         {
-            UI.Instance.GetComponent<PurchaseManager>().BuyConsumable(1);
+            PurchaseManager.Instance.BuyConsumable(1);
         }
     }
 

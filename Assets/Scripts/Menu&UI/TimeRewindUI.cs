@@ -81,7 +81,7 @@ public class TimeRewindUI : MonoBehaviour
         }
         else
         {
-            UI.Instance.GetComponent<PurchaseManager>().BuyConsumable(1);
+            PurchaseManager.Instance.BuyConsumable(1);
         }
     }
 
@@ -128,20 +128,10 @@ public class TimeRewindUI : MonoBehaviour
         gameOverBar.SetActive(true);
         gameOverBar.GetComponent<Animator>().SetBool("animate", true);
 
-        if (!PlayerPrefs.HasKey("RewindTimeTutorial"))
+        if (PlayerPrefs.HasKey("RewindTimeTutorial"))
         {
-            PlayerPrefs.SetInt("RewindTimeTutorial", 1);
-            isTutorial = true;
+            isTutorial = false;
 
-            timerTxt.gameObject.SetActive(false);
-            fade.SetActive(true);
-            pauseButton.SetActive(false);
-            controls.SetActive(false);
-            rewindButton.SetActive(false);
-            freeButton.SetActive(true);
-        }
-        else
-        {
             timer = 7.99f;
             timerTxt.gameObject.SetActive(true);
             fade.SetActive(true);

@@ -274,7 +274,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetFirstReward()
     {
-        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1); // декремент индикации
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue1 = PlayerPrefs.GetInt(achievementName + "targetValue1");
         UpdateValue(1);
@@ -329,7 +329,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetSecondReward()
     {
-        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1); // декремент индикации
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue2 = PlayerPrefs.GetInt(achievementName + "targetValue2");
         UpdateValue(2);
@@ -383,7 +383,7 @@ public class AchievementBox : MonoBehaviour {
 
     public void GetThirdReward()
     {
-        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
+        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1); // декремент индикации
         PlayerPrefs.SetInt(achievementName + btn, 3);
         getBtn2.gameObject.SetActive(false);
         doneImg.gameObject.SetActive(true);

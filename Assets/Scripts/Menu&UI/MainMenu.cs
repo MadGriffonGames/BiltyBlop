@@ -66,31 +66,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        if (!PlayerPrefs.HasKey("FirstEnter"))
-        {
-            PlayerPrefs.SetInt("FirstEnter", 1);
-
-            PlayerPrefs.SetInt("SwordDisplayIndex", 0);
-            PlayerPrefs.SetInt("SwordAttackStat", 1);
-
-            PlayerPrefs.SetInt("SkinDisplayIndex", 0);
-            PlayerPrefs.SetInt("SkinArmorStat", 3);
-            PlayerPrefs.SetString("Skin", "Classic");
-
-            PlayerPrefs.SetString("Throw", "ClassicThrow");
-            PlayerPrefs.SetInt("ThrowAttackStat", 1);
-            PlayerPrefs.SetFloat("ThrowSpeedStat", 14);
-
-            changeClipsCountDate = true;
-            changeCoinDate = true;
-            changePotionDate = true;
-        }
-        else
-        {
-            changeClipsCountDate = false;
-            changeCoinDate = false;
-            changePotionDate = false;
-        }
+        FirstAppEnter();
 
         if (PlayerPrefs.GetInt("NoAds") == 1)
         {
@@ -102,23 +78,7 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
-        if (changeCoinDate)
-        {
-            PlayerPrefs.SetString("CoinLastOpenDate", "7/4/2016 8:30:52 AM");
-            CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
-        }
-
-        if (changeClipsCountDate)
-        {
-            PlayerPrefs.SetString("ClipsCountLastOpenDate", "7/4/2016 8:30:52 AM");
-            ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
-        }
-
-        if (changePotionDate)
-        {
-            PlayerPrefs.SetString("PotionLastOpenDate", "7/4/2016 8:30:52 AM");
-            PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
-        }
+        ChangeDatesOfGifts();
 
         greenCircleAchieve.SetActive(false);
         greenCircleDailyLoot.SetActive(false);
@@ -227,8 +187,6 @@ public class MainMenu : MonoBehaviour
         ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
         spanClipsCount = hours12 + (ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
 
-        Debug.Log(ClipsCountlastOpenDate - NetworkTime.GetNetworkTime());
-        Debug.Log(spanClipsCount);
         if (spanClipsCount < TimeSpan.Zero)
         {
             if (PlayerPrefs.GetInt(dailyClipsCount) == 0 || !PlayerPrefs.HasKey(dailyClipsCount))
@@ -260,6 +218,60 @@ public class MainMenu : MonoBehaviour
     {
         fade.SetActive(true);
         packWindow.SetActive(true);
+
+        AppMetrica.Instance.ReportEvent("#STARTER_PACK shown");
+        DevToDev.Analytics.CustomEvent("#STARTER_PACK shown");
     }
 
+    void ChangeDatesOfGifts()
+    {
+        if (changeCoinDate)
+        {
+            PlayerPrefs.SetString("CoinLastOpenDate", "7/4/2016 8:30:52 AM");
+            CoinlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
+        }
+
+        if (changeClipsCountDate)
+        {
+            PlayerPrefs.SetString("ClipsCountLastOpenDate", "7/4/2016 8:30:52 AM");
+            ClipsCountlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
+        }
+
+        if (changePotionDate)
+        {
+            PlayerPrefs.SetString("PotionLastOpenDate", "7/4/2016 8:30:52 AM");
+            PotionlastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
+        }
+    }
+
+    void FirstAppEnter()
+    {
+        if (!PlayerPrefs.HasKey("FirstEnter"))
+        {
+            PlayerPrefs.SetInt("FirstEnter", 1);
+
+            PlayerPrefs.SetInt("SwordDisplayIndex", 0);
+            PlayerPrefs.SetInt("SwordAttackStat", 1);
+
+            PlayerPrefs.SetInt("SkinDisplayIndex", 0);
+            PlayerPrefs.SetInt("SkinArmorStat", 3);
+            PlayerPrefs.SetString("Skin", "Classic");
+
+            PlayerPrefs.SetString("Throw", "ClassicThrow");
+            PlayerPrefs.SetInt("ThrowAttackStat", 1);
+            PlayerPrefs.SetFloat("ThrowSpeedStat", 14);
+
+            changeClipsCountDate = true;
+            changeCoinDate = true;
+            changePotionDate = true;
+
+            noAdsButton.SetActive(false);
+        }
+        else
+        {
+            changeClipsCountDate = false;
+            changeCoinDate = false;
+            changePotionDate = false;
+        }
+    }
 }

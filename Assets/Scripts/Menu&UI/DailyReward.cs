@@ -20,6 +20,8 @@ public class DailyReward : MonoBehaviour
     GameObject doubleButton;
     [SerializeField]
     Text rewardText;
+    [SerializeField]
+    GameObject CloseButton;
 
     [SerializeField]
     DailyRewardSlot[] dailySlots;
@@ -45,14 +47,7 @@ public class DailyReward : MonoBehaviour
     [SerializeField]
     GameObject freeText;
     [SerializeField]
-    Image getRewardButtonImage;
-    [SerializeField]
-    Text getRewardButtonText;
-    [SerializeField]
-    Sprite orangeButtonSprite;
-    [SerializeField]
-    Sprite greenButtonSprite;
-
+    GameObject getRewardButton;
 
     Image chestImage;
     bool isSpined = false;
@@ -159,8 +154,6 @@ public class DailyReward : MonoBehaviour
             span = lastOpenDate - NetworkTime.GetNetworkTime();
             isTimerTick = true;
             timer.gameObject.SetActive(true);
-            getRewardButtonImage.sprite = orangeButtonSprite;
-            getRewardButtonText.text = "ok";
             isRewardCollected = true;
         }
         else
@@ -232,8 +225,9 @@ public class DailyReward : MonoBehaviour
             rewardDay++;
             PlayerPrefs.SetInt("RewardDay", rewardDay);
 
-            getRewardButtonImage.sprite = greenButtonSprite;
-            getRewardButtonText.text = "get";
+            getRewardButton.SetActive(true);
+            Debug.Log(getRewardButton.activeInHierarchy);
+            CloseButton.SetActive(false);
             doubleButton.GetComponent<Button>().interactable = true;
 
             chestImage.sprite = chestOpen;
@@ -251,8 +245,9 @@ public class DailyReward : MonoBehaviour
         }
         else
         {
-            getRewardButtonImage.sprite = orangeButtonSprite;
-            getRewardButtonText.text = "ok";
+            Debug.Log(1);
+            getRewardButton.SetActive(false);
+            CloseButton.SetActive(true);
             doubleButton.GetComponent<Button>().interactable = false;
         }
 

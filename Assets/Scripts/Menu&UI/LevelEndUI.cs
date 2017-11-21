@@ -35,7 +35,7 @@ public class LevelEndUI : MonoBehaviour
 
     private void Update()
     {
-        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
+        if (AdsManager.Instance.isInterstitialClosed)
         {
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
@@ -51,33 +51,36 @@ public class LevelEndUI : MonoBehaviour
     {
         if (!chest.isRewardCollected)
         {
+            Debug.Log(1);
             string tmp = "" + GameManager.currentLvl[GameManager.currentLvl.Length - 1];
             int currentLvl = int.Parse(tmp);
             if (currentLvl > 3)
             {
-                AdsManager.Instance.ShowAdsAtLevelEnd();
+                Debug.Log(2);
+#if UNITY_EDITOR
+                AdsManager.Instance.isInterstitialClosed = true;
+
+#elif UNITY_ANDROID
+                AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+                //SceneManager.LoadScene("Loading");
+
+#elif UNITY_IOS
+                AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
+                //SceneManager.LoadScene("Loading");
+
+#endif
+            }
+            else
+            {
+                Debug.Log(3);
+                SceneManager.LoadScene("Loading");
             }
         }
         else
         {
-#if UNITY_EDITOR
-            AdsManager.Instance.isInterstitialClosed = true;
-            AdsManager.Instance.fromShowfunction = true;
-
-#elif UNITY_ANDROID
-        //AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
-        SceneManager.LoadScene("Loading");
-
-#elif UNITY_IOS
-        //AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
-        SceneManager.LoadScene("Loading");
-
-#endif
+            Debug.Log(4);
+            SceneManager.LoadScene("Loading");
         }
-
-
-
-
     }
 
     public void Restart()

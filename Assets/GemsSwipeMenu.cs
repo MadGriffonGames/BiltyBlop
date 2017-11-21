@@ -16,8 +16,11 @@ public class GemsSwipeMenu : SwipeMenu
 	[SerializeField]
 	GameObject buyGemWindow;
 
+	private int[] listeners;
+
 	public override void Start()
 	{
+		listeners = new int[] {2,4,3,0,1};    // соответствие карточек и их порядка в PurchaseManager
 		buttons = new GameObject[panel.transform.childCount];
 		distance = new float[buttons.Length];
 		for (int i = 0; i < buttons.Length; i++) 
@@ -37,10 +40,22 @@ public class GemsSwipeMenu : SwipeMenu
 		{
 			GameObject newItem = buttons [i];
 			newItem.transform.SetParent (panel, true);
-
 			newItem.transform.localPosition = new Vector3(i * DISTANCE, 0, 0);
 			newItem.transform.localScale = new Vector3 (1, 1, 1);
 		}
+		PurchaseManager purchaseManager = this.gameObject.GetComponent<PurchaseManager> ();
+
+		buttons[0].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [0]));
+		buttons[1].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [1]));
+		buttons[2].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [2]));
+		buttons[3].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [3]));
+		buttons[4].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [4]));
+
+		buttons[0].GetComponentInChildren<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [0]));
+		buttons[1].GetComponentInChildren<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [1]));
+		buttons[2].GetComponentInChildren<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [2]));
+		buttons[3].GetComponentInChildren<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [3]));
+		buttons[4].GetComponentInChildren<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [4]));
 	}
 
 	public override void Update()

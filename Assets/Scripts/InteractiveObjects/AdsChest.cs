@@ -39,6 +39,8 @@ public class AdsChest : MonoBehaviour
     public int[] itemsDropRate;
     public int[] itemsStorage;
 
+    float memTimeScale;
+
     public void Start()
     {
         isOpened = false;
@@ -57,10 +59,8 @@ public class AdsChest : MonoBehaviour
 
     private void Update()
     {
-        if (isOpened && !isRewardCollected)
+        if (AdsManager.Instance.isRewardedVideoShown && isOpened && !isRewardCollected)
         {
-            EnableControls(true);
-
             if (AdsManager.Instance.isRewardVideoWatched)
             {
                 AdsManager.Instance.isRewardVideoWatched = false;
@@ -70,11 +70,17 @@ public class AdsChest : MonoBehaviour
                 Randomize();
                 GetComponent<SpriteRenderer>().sprite = openChest;
                 loot.gameObject.SetActive(true);
+
+                AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+                DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
             }
-            if (!isRewardCollected)
+        }
+        else
+        {
+            if (!UI.Instance.controlsUI.activeInHierarchy)
             {
-                isOpened = false;
-            }    
+                EnableControls(true);
+            }
         }
     }
 
@@ -246,9 +252,6 @@ public class AdsChest : MonoBehaviour
         if (other.CompareTag("Sword"))
         {
             isOpened = true;
-
-            AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
-            DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
 
             EnableControls(false);
             Player.Instance.mobileInput = 0;

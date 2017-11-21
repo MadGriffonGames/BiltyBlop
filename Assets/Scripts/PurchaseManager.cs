@@ -56,10 +56,13 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         Debug.Log("Purchased: " + args.purchasedProduct.definition.id + " - NonConsumable");
 
-        switch (args.purchasedProduct.definition.id)
+        string productId = args.purchasedProduct.definition.id;
+
+        switch (productId)
         {
             case "noads":
                 PlayerPrefs.SetInt("NoAds", 1);
+                DevToDev.Analytics.InAppPurchase(productId, "Pack", 1, 79, "rub");
                 break;
 
             case "starter_pack":
@@ -75,6 +78,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 Inventory.Instance.AddItem(Inventory.SPEED_BONUS, 1);
                 Inventory.Instance.AddItem(Inventory.TIME_BONUS, 1);
                 Inventory.Instance.AddItem(Inventory.AMMO, 3);
+                DevToDev.Analytics.InAppPurchase(productId, "Pack", 1, 229, "rub");
                 break;
 
             case "pack1_noads":
@@ -86,6 +90,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 PlayerPrefs.SetInt("Greedy", 3);
                 PlayerPrefs.SetFloat("Greedy3", 1.5f);
                 PlayerPrefs.SetInt("FreeRevives", 20);
+                DevToDev.Analytics.InAppPurchase(productId, "Pack", 1, 349, "rub");
                 break;
 
             case "pack1":
@@ -97,6 +102,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 PlayerPrefs.SetInt("Greedy", 3);
                 PlayerPrefs.SetFloat("Greedy3", 1.5f);
                 PlayerPrefs.SetInt("FreeRevives", 20);
+                DevToDev.Analytics.InAppPurchase(productId, "Pack", 1, 349, "rub");
                 break;
 
             default:
@@ -108,30 +114,38 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         Debug.Log("Purchased: " + args.purchasedProduct.definition.id + " - Consumable");
 
-        switch (args.purchasedProduct.definition.id)
+        string productId = args.purchasedProduct.definition.id;
+
+        switch (productId)
         {
 			case "15_crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
+                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 15, 50, "rub");
                 break;
 
 			case "kidarian.15_crystals":
 				PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
-				break;
+                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 15, 50, "rub");
+                break;
 
             case "100__crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 100);
+                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 100, 229, "rub");
                 break;
 
             case "200_crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 200);
+                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 200, 379, "rub");
                 break;
 
             case "500_crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 500);
+                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 500, 749, "rub");
                 break;
 
             case "1500_crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 1500);
+                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 1500, 1490, "rub");
                 break;
 
             default:

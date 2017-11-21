@@ -23,7 +23,7 @@ public class TimeRewindUI : MonoBehaviour
     [SerializeField]
     GameObject gameOverBar;
     float timer;
-    bool isTutorial = false;
+    bool isReviveFree = false;
 
     void Start ()
     {
@@ -34,10 +34,10 @@ public class TimeRewindUI : MonoBehaviour
             TutorialUI.Instance.txt.text = "";
         }
 
-        if (!PlayerPrefs.HasKey("RewindTimeTutorial"))
+        if (!PlayerPrefs.HasKey("RewindTimeTutorial") || PlayerPrefs.GetInt("FreeRevives") > 0)
         {
             PlayerPrefs.SetInt("RewindTimeTutorial", 1);
-            isTutorial = true;
+            isReviveFree = true;
 
             timerTxt.gameObject.SetActive(false);
             fade.SetActive(true);
@@ -58,8 +58,6 @@ public class TimeRewindUI : MonoBehaviour
 
 	void Update ()
     {
-        if (!isTutorial)
-        {
             timer -= Time.deltaTime;
             timerTxt.text = timer.ToString()[0].ToString();
             if (timer <= 1)
@@ -67,22 +65,30 @@ public class TimeRewindUI : MonoBehaviour
                 UI.Instance.DeathUI.SetActive(true);
                 this.gameObject.SetActive(false);
             }
-        }
 	}
 
     public void BuyRewindTime()
     {
-        if (PlayerPrefs.GetInt("Crystals") >= CRYSTAL_PRICE)
+        if (PlayerPrefs.GetInt("FreeRevives") <= 0)
         {
-            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - CRYSTAL_PRICE);
-            GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
+            if (PlayerPrefs.GetInt("Crystals") >= CRYSTAL_PRICE)
+            {
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - CRYSTAL_PRICE);
+                GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
 
-            RewindTime();
+                RewindTime();
+            }
+            else
+            {
+                PurchaseManager.Instance.BuyConsumable(1);
+            }
         }
         else
         {
-            PurchaseManager.Instance.BuyConsumable(1);
+            PlayerPrefs.SetInt("FreeRevives", PlayerPrefs.GetInt("FreeRevives") - 1);
+            RewindTime();
         }
+
     }
 
     public void RewindTime()
@@ -128,17 +134,18 @@ public class TimeRewindUI : MonoBehaviour
         gameOverBar.SetActive(true);
         gameOverBar.GetComponent<Animator>().SetBool("animate", true);
 
-        if (PlayerPrefs.HasKey("RewindTimeTutorial"))
-        {
-            isTutorial = false;
+        fade.SetActive(true);
+        pauseButton.SetActive(false);
+        controls.SetActive(false);
+        timer = 7.99f;
+        timerTxt.gameObject.SetActive(true);
 
-            timer = 7.99f;
-            timerTxt.gameObject.SetActive(true);
-            fade.SetActive(true);
+        if (PlayerPrefs.HasKey("RewindTimeTutorial") && PlayerPrefs.GetInt("FreeRevives") <= 0)
+        {
+            isReviveFree = false;
+
             rewindButton.SetActive(true);
             freeButton.SetActive(false);
-            pauseButton.SetActive(false);
-            controls.SetActive(false);
         }
     }
 

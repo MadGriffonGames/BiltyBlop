@@ -24,7 +24,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     GameObject packButton;
     [SerializeField]
-    GameObject packWindow;
+    GameObject starterPackWindow;
+    [SerializeField]
+    GameObject pack1Window;
+    [SerializeField]
+    GameObject pack1_noadsWindow;
+    [SerializeField]
+    Text packTitle;
 
     [SerializeField]
     bool changeCoinDate;
@@ -71,6 +77,11 @@ public class MainMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("NoAds") == 1)
         {
             noAdsButton.SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt("StarterPackBought") == 1)
+        {
+            packTitle.text = "SOME_TXT";
         }
 
         hours12 = new TimeSpan(12, 0, 0);
@@ -217,7 +228,23 @@ public class MainMenu : MonoBehaviour
     public void OpenPackWindow()
     {
         fade.SetActive(true);
-        packWindow.SetActive(true);
+
+        if (PlayerPrefs.GetInt("StarterPackBought") == 0)
+        {
+            starterPackWindow.SetActive(true);
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("NoAds") == 0)
+            {
+                pack1_noadsWindow.SetActive(true);
+            }
+            else
+            {
+                pack1Window.SetActive(true);
+            }
+        }
+        
 
         AppMetrica.Instance.ReportEvent("#STARTER_PACK shown");
         DevToDev.Analytics.CustomEvent("#STARTER_PACK shown");

@@ -183,7 +183,7 @@ public class AchievementManager : MonoBehaviour {
                     PlayerPrefs.SetInt(achieveName, PlayerPrefs.GetInt(achieveName) + 1);
                     if (PlayerPrefs.GetInt(achieveName) == achieve.targetValueArray[achieve.weight])
                     {
-                        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) + 1);
+                        PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) + 1);   // инкрементирование индикации
                         achieve.weight++;
                         PlayerPrefs.SetInt(achieveName + "weight", achieve.weight);
                         achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieveName);
@@ -216,7 +216,7 @@ public class AchievementManager : MonoBehaviour {
         PlayerPrefs.SetInt(levelAchieve.achieveName, PlayerPrefs.GetInt(levelAchieve.achieveName) + 1);
         if (PlayerPrefs.GetInt(levelAchieve.achieveName) == levelAchieve.targetValue)
         {
-            PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) + 1);
+            PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) + 1);   // инкрементирование индикации
             achievementUI.GetComponent<AchievementUI>().AchievementAppear(levelAchieve.achieveName);
             StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
             Destroy(levelAchieve);

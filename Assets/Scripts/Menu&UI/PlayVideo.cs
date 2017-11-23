@@ -25,7 +25,9 @@ public class PlayVideo : MonoBehaviour
             sceneui.SetActive(false);
         }
         videoPlayer.Play();
+		#if UNITY_IOS
         SoundManager.MuteMusic(true);
+		#endif
         if (!PlayerPrefs.HasKey(movieName))
         {
             skipButton.SetActive(false);

@@ -48,7 +48,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     appKey = "e98a9abebc918269e0b487f18fd271b1313447f412d4561e";
 
 #elif UNITY_IOS
-    appKey = "027fffae726e025f6f6e311d8e8370af0bac2f6ce6630a81";
+		appKey = "c9868b381a1331f2a7d3d5b4dd9bc721f403735f82deebff";
 
 #endif
 

@@ -20,8 +20,8 @@ namespace com.devtodev {
 		public string onPushReceived;
 		public string onPushOpened;
 
-		private string iosKey = "";
-		private string iosSecret = "";
+		private string iosKey = "37eff640-09f0-0429-b307-8e88e5d7d755";
+		private string iosSecret = "UCf2q6ugjEQdnSOL5AYs08xHPZG9aclF";
 		
 		private string androidKey = "6d78756b-b818-0cdc-a65e-7bcd334318da";
 		private string androidSecret = "cpNbYkLP6ZhJlEgBUCeARF45zTHSXVsr";

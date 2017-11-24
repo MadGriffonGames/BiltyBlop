@@ -12,9 +12,18 @@ using System.Reflection;
 
 namespace com.devtodev {
 	
-	public class DevToDevIntegration : MonoBehaviour  {
+	public class DevToDevIntegration : MonoBehaviour
+    {
+        private static DevToDevIntegration instance;
+        public static DevToDevIntegration Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
-		public MonoBehaviour pushListeners;
+        public MonoBehaviour pushListeners;
 		public string onTokenReceived;
 		public string onTokenFailed;
 		public string onPushReceived;
@@ -41,8 +50,17 @@ namespace com.devtodev {
 		private bool pushEnabled = true;
 		private bool logEnabled = false;
 
-		void Awake() {
-			DontDestroyOnLoad(this);
+		void Awake()
+        {
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = GetComponent<DevToDevIntegration>();
+                DontDestroyOnLoad(this);
+            }
 		}
 
         public void PushReceived(IDictionary<string, string> pushAdditionalData)

@@ -303,9 +303,11 @@ public class MainMenu : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("StarterPackOpenDate"))
         {
+            TimeSpan hours48 = new TimeSpan(48, 0, 0);
+
             DateTime lastOpenDate = new DateTime();
             lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("StarterPackOpenDate"));
-            if (lastOpenDate - DateTime.Now <= TimeSpan.Zero)
+            if ((hours48 + (lastOpenDate - DateTime.Now)) <= TimeSpan.Zero)
             {
                 PlayerPrefs.SetInt("StarterPackBought", 1);
                 PlayerPrefs.DeleteKey("StarterPackOpenDate");

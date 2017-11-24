@@ -88,7 +88,7 @@ public class Shaman : MovingRangedEnemy
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("enemyher loud");
-                Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                //Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);

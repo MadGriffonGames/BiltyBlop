@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
@@ -15,17 +16,24 @@ public class LocalizationManager : MonoBehaviour
             return instance;
         }
     }
-
     string pathToJson;
-    string language = "RU";
+    string language;
     string jsonString;
+    public Dictionary<string, string> translation;
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        if (language != null)
+        {
+            DontDestroyOnLoad(this);
 
-        pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
-        jsonString = File.ReadAllText(pathToJson);
+            translation = new Dictionary<string, string>();
+            pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
+            jsonString = File.ReadAllText(pathToJson);
+
+            translation = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
+        }
+        
     }
 
     void Start ()

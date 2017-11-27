@@ -627,6 +627,7 @@ public class Player : Character
             {
                 throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-1.5f, 0.1f, -5);
                 throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 90);
+				throwingClip [throwingIterator].transform.localScale = new Vector3 (throwingClip [throwingIterator].transform.localScale.x * -1, throwingClip [throwingIterator].transform.localScale.y, throwingClip [throwingIterator].transform.localScale.z);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
             }
 

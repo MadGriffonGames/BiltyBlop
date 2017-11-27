@@ -70,8 +70,8 @@ public class SwordsSwipeMenu : SwipeMenu {
 					}
 					else
 					{
-						swordCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(sword.orderNumber))); // wdfsdf
-						swordCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSkinPrefabBySkinOrder(sword.orderNumber)));
+						swordCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSwordPrefabBySwordOrder(sword.orderNumber))); // wdfsdf
+						swordCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSwordPrefabBySwordOrder(sword.orderNumber)));
 					}
 					swordCardObj.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
 
@@ -85,6 +85,7 @@ public class SwordsSwipeMenu : SwipeMenu {
 
 	public void ShowUnlockSwordWindow(int swordNumber)
 	{
+		Debug.Log (swordNumber);
 		base.OnButtonClickLerp (SkinManager.Instance.swordPrefabs[swordNumber].GetComponent<SwordPrefab>().orderNumber);
 		unlockSwordWindow.gameObject.SetActive(true);
 		fade.gameObject.SetActive(true);

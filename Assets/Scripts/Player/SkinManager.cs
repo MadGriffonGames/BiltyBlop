@@ -248,6 +248,18 @@ public class SkinManager : MonoBehaviour
         return 0;
     }
 
+	public int NumberOfSwordPrefabBySwordOrder(int orderNumber)
+	{
+		for (int i = 0; i < skinPrefabs.Length; i++)
+		{
+			if (swordPrefabs[i].GetComponent<SwordPrefab>().orderNumber == orderNumber)
+			{
+				return i;
+			}
+		}
+		return 0;
+	}
+
 	public int NumberOfThrowPrefabByOrder(int orderNumber)
 	{
 		for (int i = 0; i < throwPrefabs.Length; i++)

@@ -38,9 +38,9 @@ public class FacebookManager : MonoBehaviour
 
     public void Share()
     {
-        FB.ShareLink(contentTitle:"Test Title", 
-            contentURL: new System.Uri("kek"), 
-            contentDescription: "Test post description", 
+        FB.ShareLink(contentTitle:"Look, this game is awesome!", 
+            contentURL: new System.Uri("https://play.google.com/store/apps/details?id=com.hardslime.kidarian"), 
+            contentDescription: "This is the best game I've ever seen!", 
             callback: OnShare);
     }
 

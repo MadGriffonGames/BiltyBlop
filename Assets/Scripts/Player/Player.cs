@@ -512,7 +512,8 @@ public class Player : Character
                     DevToDev.Analytics.CustomEvent("#DEATH in " + GameManager.currentLvl);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
-                    
+					bonusFX.SetTrigger ("reset");
+					bonusFXObject.SetActive (false);            
                 }
                 yield return null;
             }
@@ -559,7 +560,7 @@ public class Player : Character
     void SetThrowing()
     {
         throwing = Resources.Load<GameObject>("Throwing/ThrowingObject");
-			clipSize = maxClipSize;
+		clipSize = maxClipSize;
 		Sprite[] throwSprites = Resources.LoadAll<Sprite> ("Throw/ThrowSprites");
 		string throwName = PlayerPrefs.GetString ("Throw");
 		for(int i=0; i <= throwSprites.Length; i++)
@@ -626,6 +627,7 @@ public class Player : Character
             {
                 throwingClip[throwingIterator].transform.position = this.transform.position + new Vector3(-1.5f, 0.1f, -5);
                 throwingClip[throwingIterator].transform.rotation = Quaternion.Euler(0, 0, 90);
+				throwingClip [throwingIterator].transform.localScale = new Vector3 (throwingClip [throwingIterator].transform.localScale.x * -1, throwingClip [throwingIterator].transform.localScale.y, throwingClip [throwingIterator].transform.localScale.z);
                 throwingClip[throwingIterator].GetComponent<Throwing>().Initialize(Vector2.left);
             }
 

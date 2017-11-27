@@ -12,8 +12,6 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         get
         {
-            if (instance == null)
-                instance = GameObject.FindObjectOfType<PurchaseManager>();
             return instance;
         }
     }
@@ -42,8 +40,16 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     private void Awake()
     {
-        InitializePurchasing();
-        DontDestroyOnLoad(this);
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = GetComponent<PurchaseManager>();
+            InitializePurchasing();
+            DontDestroyOnLoad(this);
+        }
     }
 
     private void Start()

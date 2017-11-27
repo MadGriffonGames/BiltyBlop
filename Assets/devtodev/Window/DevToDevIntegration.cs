@@ -12,16 +12,25 @@ using System.Reflection;
 
 namespace com.devtodev {
 	
-	public class DevToDevIntegration : MonoBehaviour  {
+	public class DevToDevIntegration : MonoBehaviour
+    {
+        private static DevToDevIntegration instance;
+        public static DevToDevIntegration Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
-		public MonoBehaviour pushListeners;
+        public MonoBehaviour pushListeners;
 		public string onTokenReceived;
 		public string onTokenFailed;
 		public string onPushReceived;
 		public string onPushOpened;
 
-		private string iosKey = "";
-		private string iosSecret = "";
+		private string iosKey = "37eff640-09f0-0429-b307-8e88e5d7d755";
+		private string iosSecret = "UCf2q6ugjEQdnSOL5AYs08xHPZG9aclF";
 		
 		private string androidKey = "6d78756b-b818-0cdc-a65e-7bcd334318da";
 		private string androidSecret = "cpNbYkLP6ZhJlEgBUCeARF45zTHSXVsr";
@@ -41,8 +50,17 @@ namespace com.devtodev {
 		private bool pushEnabled = true;
 		private bool logEnabled = false;
 
-		void Awake() {
-			DontDestroyOnLoad(this);
+		void Awake()
+        {
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = GetComponent<DevToDevIntegration>();
+                DontDestroyOnLoad(this);
+            }
 		}
 
         public void PushReceived(IDictionary<string, string> pushAdditionalData)

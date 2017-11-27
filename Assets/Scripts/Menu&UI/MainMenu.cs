@@ -74,14 +74,11 @@ public class MainMenu : MonoBehaviour
     {
         FirstAppEnter();
 
+        CheckStarterPack();
+
         if (PlayerPrefs.GetInt("NoAds") == 1)
         {
             noAdsButton.SetActive(false);
-        }
-
-        if (PlayerPrefs.GetInt("StarterPackBought") == 1)
-        {
-            packTitle.text = "SOME_TXT";
         }
 
         hours12 = new TimeSpan(12, 0, 0);
@@ -299,6 +296,27 @@ public class MainMenu : MonoBehaviour
             changeClipsCountDate = false;
             changeCoinDate = false;
             changePotionDate = false;
+        }
+    }
+
+    void CheckStarterPack()
+    {
+        if (PlayerPrefs.HasKey("StarterPackOpenDate"))
+        {
+            TimeSpan hours48 = new TimeSpan(48, 0, 0);
+
+            DateTime lastOpenDate = new DateTime();
+            lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("StarterPackOpenDate"));
+            if ((hours48 + (lastOpenDate - DateTime.Now)) <= TimeSpan.Zero)
+            {
+                PlayerPrefs.SetInt("StarterPackBought", 1);
+                PlayerPrefs.DeleteKey("StarterPackOpenDate");
+            }
+        }
+
+        if (PlayerPrefs.GetInt("StarterPackBought") == 1)
+        {
+            packTitle.text = "Hero's choise";
         }
     }
 }

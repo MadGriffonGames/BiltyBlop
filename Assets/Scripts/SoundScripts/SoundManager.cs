@@ -228,7 +228,7 @@ public class SoundManager : MonoBehaviour
 
 	public static void PlayRandomMusic(string name, bool loop)
 	{
-		int number = UnityEngine.Random.Range(1, 3);
+		int number = UnityEngine.Random.Range(1, 6);
 		Instance.PlayMusicInternal(name+"_"+number.ToString(), loop);
 	}
 

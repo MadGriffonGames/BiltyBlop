@@ -55,9 +55,6 @@ public class SkinSwipeMenu : SwipeMenu {
                     
 					if (PlayerPrefs.GetString(skin.name) == "Unlocked")
                     {
-                        Debug.Log(skin.name);
-                        Debug.Log(PlayerPrefs.GetString("Black_ninja"));
-
 						if (PlayerPrefs.GetString ("Skin") == skin.name) 
 						{
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";

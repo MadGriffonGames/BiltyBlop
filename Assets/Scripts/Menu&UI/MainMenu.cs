@@ -299,6 +299,11 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void RemoveAdsButton()
+    {
+        PurchaseManager.Instance.BuyNonConsumable(0);
+    }
+
     void CheckStarterPack()
     {
         if (PlayerPrefs.HasKey("StarterPackOpenDate"))

@@ -120,7 +120,7 @@ public class DailyReward : MonoBehaviour
         }
 
         isTimerTick = false;
-        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);// 24hours in timespan format
+        hours24 = new TimeSpan(24, 0, 0);// 24hours in timespan format
 
         chestImage = chest.GetComponent<Image>();
 
@@ -226,7 +226,6 @@ public class DailyReward : MonoBehaviour
             PlayerPrefs.SetInt("RewardDay", rewardDay);
 
             getRewardButton.SetActive(true);
-            Debug.Log(getRewardButton.activeInHierarchy);
             CloseButton.SetActive(false);
             doubleButton.GetComponent<Button>().interactable = true;
 
@@ -245,7 +244,6 @@ public class DailyReward : MonoBehaviour
         }
         else
         {
-            Debug.Log(1);
             getRewardButton.SetActive(false);
             CloseButton.SetActive(true);
             doubleButton.GetComponent<Button>().interactable = false;

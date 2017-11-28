@@ -1,4 +1,5 @@
 -dontwarn com.google.vr.ndk.base.DaydreamApi
+-dontwarn com.devtodev.push.**
 
 -keep class com.devtodev.** { *; }
 

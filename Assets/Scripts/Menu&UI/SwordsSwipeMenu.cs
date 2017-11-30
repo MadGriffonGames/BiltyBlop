@@ -27,6 +27,7 @@ public class SwordsSwipeMenu : SwipeMenu {
 		{
 			buttons[i] = panel.GetChild(i).gameObject;
 		}
+
 		buttonDistance = (int)DISTANCE;
 		minButtonsNumber = 1;
 		panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
@@ -85,7 +86,6 @@ public class SwordsSwipeMenu : SwipeMenu {
 
 	public void ShowUnlockSwordWindow(int swordNumber)
 	{
-		Debug.Log (swordNumber);
 		base.OnButtonClickLerp (SkinManager.Instance.swordPrefabs[swordNumber].GetComponent<SwordPrefab>().orderNumber);
 		unlockSwordWindow.gameObject.SetActive(true);
 		fade.gameObject.SetActive(true);

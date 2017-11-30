@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 539d54e41af394b3c87ab7e4a4eccdb7
+timeCreated: 1511881995
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gilroy-BoldItalic
+  fontNames:
+  - Gilroy-BoldItalic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

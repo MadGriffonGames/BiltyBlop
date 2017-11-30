@@ -50,12 +50,12 @@ public class Inventory : MonoBehaviour
         // ADDING ITEMS // 
         itemsNames = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO }; // ADD NEW GOOD TO THE SHOP
 
-		SetStartingParamsForItem(AMMO, "Ammo", 3, 150, 3);
-        SetStartingParamsForItem(HEAL, "Heal Pot", 3, 250, 5);
-        SetStartingParamsForItem(DAMAGE_BONUS, "Damage Pot", 3, 200, 4);
-        SetStartingParamsForItem(SPEED_BONUS, "Speed Pot", 3, 150, 3);
-        SetStartingParamsForItem(TIME_BONUS, "Time Pot", 3, 200, 4);
-        SetStartingParamsForItem(IMMORTAL_BONUS, "Immortal Pot", 3, 300, 6);
+		SetStartingParamsForItem(AMMO, "AMMO", 3, 150, 3);
+        SetStartingParamsForItem(HEAL, "HEAL", 3, 250, 5);
+        SetStartingParamsForItem(DAMAGE_BONUS, "DAMAGE", 3, 200, 4);
+        SetStartingParamsForItem(SPEED_BONUS, "SPEED", 3, 150, 3);
+        SetStartingParamsForItem(TIME_BONUS, "TIME", 3, 200, 4);
+        SetStartingParamsForItem(IMMORTAL_BONUS, "IMMORTAL", 3, 300, 6);
         
         /*
         SetStartingParamsForItem(ITEMCONST, "Shop name", 4,4,5);

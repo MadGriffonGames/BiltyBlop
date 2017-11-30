@@ -122,15 +122,11 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
         string productId = args.purchasedProduct.definition.id;
 
+		#if UNITY_ANDROID || UNITY_EDITOR
         switch (productId)
         {
 			case "15_crystals":
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
-                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 15, 50, "rub");
-                break;
-
-			case "kidarian.15_crystals":
-				PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
                 DevToDev.Analytics.InAppPurchase(productId, "Crystals", 15, 50, "rub");
                 break;
 
@@ -157,6 +153,41 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
             default:
                 break;
         }
+		#elif UNITY_IOS
+
+			switch (productId)
+			{
+				case "com.hardslime.kidarian.15_crystals":
+					PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
+					DevToDev.Analytics.InAppPurchase(productId, "Crystals", 15, 75, "rub");
+					break;
+
+				case "com.hardslime.kidarian.100__crystals":
+					PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 100);
+					DevToDev.Analytics.InAppPurchase(productId, "Crystals", 100, 229, "rub");
+					break;
+
+				case "com.hardslime.kidarian.200_crystals":
+					PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 200);
+					DevToDev.Analytics.InAppPurchase(productId, "Crystals", 200, 379, "rub");
+					break;
+
+				case "com.hardslime.kidarian.500_crystals":
+					PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 500);
+					DevToDev.Analytics.InAppPurchase(productId, "Crystals", 500, 749, "rub");
+					break;
+
+				case "com.hardslime.kidarian.1500_crystals":
+					PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 1500);
+					DevToDev.Analytics.InAppPurchase(productId, "Crystals", 1500, 1490, "rub");
+					break;
+
+				default:
+					break;
+			}
+
+		#endif
+
     }
 
     

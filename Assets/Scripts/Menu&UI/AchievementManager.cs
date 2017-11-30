@@ -133,10 +133,10 @@ public class AchievementManager : MonoBehaviour {
         torchCollectorTargetValue = new int[] { 10, 25, 50 };
 
         secretRoomerReward = new int[] { 150, 3, 8 };
-        secretRoomerTargetValue = new int[] { 5, 10, 15 };
+        secretRoomerTargetValue = new int[] { 5, 25, 35 };
 
         starWalkerReward = new int[] { 150, 200, 250 };
-        starWalkerTargetValue = new int[] { 10, 25, 50 };
+        starWalkerTargetValue = new int[] { 10, 35, 75 };
 
         millionareTargetValue = new int[] { 1000, 10000, 15000 };
         millionareReward = new int[] { 100, 150, 200 };

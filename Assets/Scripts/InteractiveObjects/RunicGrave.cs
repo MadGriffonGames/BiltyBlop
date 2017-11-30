@@ -26,7 +26,7 @@ public class RunicGrave : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.CompareTag("Sword"))
+        if (other.transform.CompareTag("Sword") || other.transform.CompareTag("Spider Wall"))
         {
             if (!Player.Instance.bossFight)
             {

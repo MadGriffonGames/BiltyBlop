@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("Coins"))
         {
-            collectedCoins = 0;//DON'T FORGET SET IT TO ZERO WHEN RELEASE
+            collectedCoins = 0;
             PlayerPrefs.SetInt("Coins", collectedCoins);
             PlayerPrefs.SetInt("Millionare Test", collectedCoins);
         }

@@ -86,6 +86,9 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+
+        PlayerPrefs.SetInt("FromMap", 0);
+
         ChangeDatesOfGifts();
 
         greenCircleAchieve.SetActive(false);
@@ -125,6 +128,7 @@ public class MainMenu : MonoBehaviour
     public void ToActSelect(string sceneName)
     {
         actCanvas.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 
     public void ToAchievmentMenu()

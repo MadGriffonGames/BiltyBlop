@@ -53,48 +53,15 @@ public class RuneStone : InteractiveObject
 
     public void SaveGame()
     {
-        GameManager.nextLevelName = nextLvl;
+        GameManager.nextLevelName = "Map";
 		PlayerPrefs.SetInt("Coins", GameManager.collectedCoins + Mathf.RoundToInt(GameManager.lvlCollectedCoins * (Player.Instance.coinScale - 1)));   // GREEDY PERK
-        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
-        {
-            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.stars)
-            {
-                int previousStarsCount = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects");
-                int delta = Player.Instance.stars - previousStarsCount;
-                PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + (Player.Instance.stars - previousStarsCount)); // minus old stars count, plus new stars count
-                for (int i = 0; i < delta; i++)
-                {
-                    AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
-                }
 
-                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
-            }
-        }
-        else
-        {
+        SaveStarsCount();
 
-            int delta = Player.Instance.stars;
-            for (int i = 0; i < delta; i++)
-            {
-                AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
-            }
+        SetLastUnlockedLevel();
 
-            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
-
-            PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + Player.Instance.stars);
-        }
-
-        
-
-        if (PlayerPrefs.GetInt(nextLvl) == 0)
-        {
-            PlayerPrefs.SetString("LastUnlockedLevel", nextLvl);
-            PlayerPrefs.SetInt(nextLvl, 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt(nextLvl, 1);
-        }
+        PlayerPrefs.SetInt("IsMapChestOpen", 0);
+        PlayerPrefs.SetString("LastCompletedLevel", GameManager.currentLvl);
     }
 
 	IEnumerator WaitForGround()
@@ -123,5 +90,49 @@ public class RuneStone : InteractiveObject
             customEventParams.AddParam(param.Key, param.Value.ToString());
         }
         DevToDev.Analytics.CustomEvent(MetricaManager.Instance.currentLevel + " complete with:", customEventParams);
+    }
+
+    void SaveStarsCount()
+    {
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_collects"))
+        {
+            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects") < Player.Instance.stars)
+            {
+                int previousStarsCount = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_collects");
+                int delta = Player.Instance.stars - previousStarsCount;
+                PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + (Player.Instance.stars - previousStarsCount)); // minus old stars count, plus new stars count
+                for (int i = 0; i < delta; i++)
+                {
+                    AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
+                }
+
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
+            }
+        }
+        else
+        {
+            int delta = Player.Instance.stars;
+            for (int i = 0; i < delta; i++)
+            {
+                AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.starWalker);
+            }
+
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_collects", Player.Instance.stars);
+
+            PlayerPrefs.SetInt("GeneralStarsCount", PlayerPrefs.GetInt("GeneralStarsCount") + Player.Instance.stars);
+        }
+    }
+
+    void SetLastUnlockedLevel()
+    {
+        if (PlayerPrefs.GetInt(nextLvl) == 0)
+        {
+            PlayerPrefs.SetString("LastUnlockedLevel", nextLvl);
+            PlayerPrefs.SetInt(nextLvl, 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(nextLvl, 1);
+        }
     }
 }

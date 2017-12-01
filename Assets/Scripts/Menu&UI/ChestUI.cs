@@ -28,27 +28,22 @@ public class ChestUI : RewardedChest
     bool isOpened;
     public bool isRewardCollected;
 
+    private void Awake()
+    {
+        if (PlayerPrefs.GetInt("Level2") == 0)
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        chestImage = chest.GetComponent<Image>();
+        lootAnimator = loot.gameObject.GetComponent<Animator>();
+    }
+
     private void Start()
     {
         base.Start();
 
-        chestImage = chest.GetComponent<Image>();
-        lootAnimator = loot.gameObject.GetComponent<Animator>();
-
-        isOpened = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "_chest") > 0;
-
-        if (isOpened)
-        {
-            chestImage.sprite = chestOpen;
-            activateButton.SetActive(false);
-        }
-        else
-        {
-            chestImage.sprite = chestClose;
-            lightCircle.gameObject.SetActive(true);
-            isSpined = true;
-            activateButton.SetActive(true);
-        }
+        CheckIsChestOpen();
 
         isRewardCollected = false;
     }
@@ -65,16 +60,15 @@ public class ChestUI : RewardedChest
         if (AdsManager.Instance.isRewardVideoWatched)
         {
             AdsManager.Instance.isRewardVideoWatched = false;
-            if (!PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_chest"))
-            {
-                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "_chest", 1);
-            }
+            PlayerPrefs.SetInt("IsMapChestOpen", 1);
+            chest.GetComponent<Animator>().enabled = false;
+
             GiveLoot();
 
             isRewardCollected = true;
 
-            AppMetrica.Instance.ReportEvent("#CHEST 3Stars chest activate");
-            DevToDev.Analytics.CustomEvent("#CHEST 3Stars chest activate");
+            AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
+            DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
         }
     }
 
@@ -96,5 +90,29 @@ public class ChestUI : RewardedChest
     {
         chestFade.SetActive(false);
         loot.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        CheckIsChestOpen();
+    }
+
+    void CheckIsChestOpen()
+    {
+        isOpened = PlayerPrefs.GetInt("IsMapChestOpen") > 0;
+
+        if (isOpened)
+        {
+            chestImage.sprite = chestOpen;
+            activateButton.SetActive(false);
+            chest.GetComponent<Animator>().enabled = false;
+        }
+        else
+        {
+            chestImage.sprite = chestClose;
+            lightCircle.gameObject.SetActive(true);
+            isSpined = true;
+            activateButton.SetActive(true);
+        }
     }
 }

@@ -322,7 +322,7 @@ public class Player : Character
             myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
             myRigidbody.velocity = new Vector2(0, 0);
         }
-        else if (!OnGround && DoubleJump && canJump && myRigidbody.velocity.y < 6.5f)
+        else if (!OnGround && DoubleJump && canJump && myRigidbody.velocity.y < 6.5f && isDoubleJumpAllowed)
         {
             if (myRigidbody.velocity.y < 0)
             {

@@ -38,6 +38,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     /// </summary>
     public static event OnFailedPurchase PurchaseFailed;
 
+	public string text;
+
     private void Awake()
     {
         if (instance != null)
@@ -54,7 +56,15 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     private void Start()
     {
-        OnPurchaseNonConsumable += PurchaseManager_OnPurchaseNonConsumable;
+		
+		#if UNITY_IOS
+		for (int i = 0; i < ConsumableProducts.Length; i++) 
+		{
+			ConsumableProducts[i] = "com.hardslime.kidarian." + ConsumableProducts[i];
+		}
+		#endif
+
+		OnPurchaseNonConsumable += PurchaseManager_OnPurchaseNonConsumable;
         OnPurchaseConsumable += PurchaseManager_OnPurchaseConsumable;
     }
 
@@ -123,38 +133,40 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         string productId = args.purchasedProduct.definition.id;
 
 		#if UNITY_ANDROID || UNITY_EDITOR
-        switch (productId)
-        {
-			case "15_crystals":
-                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
-                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 15, 50, "rub");
-                break;
+			switch (productId)
+	        {
 
-            case "100__crystals":
-                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 100);
-                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 100, 229, "rub");
-                break;
+				case "15_crystals":
+	                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 15);
+	                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 15, 50, "rub");
+	                break;
 
-            case "200_crystals":
-                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 200);
-                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 200, 379, "rub");
-                break;
+	            case "100__crystals":
+	                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 100);
+	                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 100, 229, "rub");
+	                break;
 
-            case "500_crystals":
-                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 500);
-                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 500, 749, "rub");
-                break;
+	            case "200_crystals":
+	                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 200);
+	                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 200, 379, "rub");
+	                break;
 
-            case "1500_crystals":
-                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 1500);
-                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 1500, 1490, "rub");
-                break;
+	            case "500_crystals":
+	                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 500);
+	                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 500, 749, "rub");
+	                break;
 
-            default:
-                break;
-        }
-		#elif UNITY_IOS
+	            case "1500_crystals":
+	                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 1500);
+	                DevToDev.Analytics.InAppPurchase(productId, "Crystals", 1500, 1490, "rub");
+	                break;
 
+	            default:
+	                break;
+	        }
+		#endif
+		#if UNITY_IOS
+			GameObject.FindGameObjectWithTag ("debugtext").GetComponent<Text> ().text = productId + " ios";
 			switch (productId)
 			{
 				case "com.hardslime.kidarian.15_crystals":
@@ -207,22 +219,31 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     public void InitializePurchasing()
     {
-        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
+		var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.AppleAppStore));
 		foreach (string s in ConsumableProducts) 
 		{
+			#if UNITY_ANDROID || UNITY_EDITOR
 			builder.AddProduct (s, ProductType.Consumable);
+			#endif
+			#if UNITY_IOS
 			builder.AddProduct ("com.hardslime.kidarian." + s, ProductType.Consumable);
+			#endif
 		}
 		foreach (string s in NonConsumableProducts) 
 		{
+			#if UNITY_ANDROID || UNITY_EDITOR
 			builder.AddProduct (s, ProductType.NonConsumable);
+			#endif
+			#if UNITY_IOS
 			builder.AddProduct ("com.hardslime.kidarian." + s, ProductType.NonConsumable);
+			#endif
 		}
         UnityPurchasing.Initialize(this, builder);
     }
 
     private bool IsInitialized()
     {
+		Debug.Log (m_StoreController);
         return m_StoreController != null && m_StoreExtensionProvider != null;
     }
 
@@ -240,12 +261,15 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     void BuyProductID(string productId)
     {
+		GameObject.FindGameObjectWithTag ("debugtext").GetComponent<Text> ().text += "productID=" + productId + " ";
         if (IsInitialized())
         {
+			
             Product product = m_StoreController.products.WithID(productId);
-
+			GameObject.FindGameObjectWithTag ("debugtext").GetComponent<Text> ().text += "  " + product.availableToPurchase;
             if (product != null && product.availableToPurchase)
             {
+				GameObject.FindGameObjectWithTag ("debugtext").GetComponent<Text> ().text += " avaliableToPurchase ";
                 Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
                 m_StoreController.InitiatePurchase(product);
             }
@@ -284,7 +308,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     protected virtual void OnSuccessC(PurchaseEventArgs args)
     {
         if (OnPurchaseConsumable != null) OnPurchaseConsumable(args);
-        Debug.Log(ConsumableProducts[currentProductIndex] + " Buyed!");
+		Debug.Log(ConsumableProducts[currentProductIndex] + " Buyed! " + currentProductIndex);
     }
     public delegate void OnSuccessNonConsumable(PurchaseEventArgs args);
     protected virtual void OnSuccessNC(PurchaseEventArgs args)

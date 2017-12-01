@@ -43,19 +43,19 @@ public class GemsSwipeMenu : SwipeMenu
 			newItem.transform.localPosition = new Vector3(i * DISTANCE, 0, 0);
 			newItem.transform.localScale = new Vector3 (1, 1, 1);
 		}
-		PurchaseManager purchaseManager = PurchaseManager.Instance;
+		//PurchaseManager purchaseManager = PurchaseManager.Instance;
 
-		buttons[0].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [0]));
-		buttons[1].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [1]));
-		buttons[2].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [2]));
-		buttons[3].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [3]));
-		buttons[4].GetComponent<Button> ().onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [4]));
+		buttons[0].GetComponent<Button> ().onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [0]));
+		buttons[1].GetComponent<Button> ().onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [1]));
+		buttons[2].GetComponent<Button> ().onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [2]));
+		buttons[3].GetComponent<Button> ().onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [3]));
+		buttons[4].GetComponent<Button> ().onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [4]));
 
-		buttons[0].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [0]));
-		buttons[1].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [1]));
-		buttons[2].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [2]));
-		buttons[3].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [3]));
-		buttons[4].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => purchaseManager.BuyConsumable(listeners [4]));
+		buttons[0].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [0]));
+		buttons[1].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [1]));
+		buttons[2].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [2]));
+		buttons[3].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [3]));
+		buttons[4].GetComponentsInChildren<Button> ()[1].onClick.AddListener (() => PurchaseManager.Instance.BuyConsumable(listeners [4]));
 	}
 
 	public override void Update()

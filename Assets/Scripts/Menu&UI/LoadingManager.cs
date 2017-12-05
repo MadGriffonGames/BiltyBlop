@@ -16,16 +16,18 @@ public class LoadingManager : MonoBehaviour
     {
 		switch (GameManager.nextLevelName) 
 		{
-		case "MainMenu":
-			levelText.text = "MAIN MENU";
-			break;
+		//case "MainMenu":
+		//	levelText.text = "MAIN MENU";
+		//	break;
 
-		case "Shop":
-			levelText.text = "SHOP";
-			break;
-		case "AchievementMenu":
-			levelText.text = "ACHIEVEMENTS";
-			break;
+		//case "Shop":
+		//	levelText.text = "SHOP";
+		//	break;
+
+		//case "AchievementMenu":
+		//	levelText.text = "ACHIEVEMENTS";
+		//	break;
+
 		default:
 			if (GameManager.nextLevelName.Contains ("Level")) 
 			{

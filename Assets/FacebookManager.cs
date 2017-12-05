@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class FacebookManager : MonoBehaviour
 {
-
+    string shareURL;
     public Text userIdText;
 
     private void Awake()
@@ -18,6 +18,12 @@ public class FacebookManager : MonoBehaviour
         {
             FB.ActivateApp();
         }
+#if UNITY_ANDROID
+        shareURL = "https://play.google.com/store/apps/details?id=com.hardslime.kidarian";
+
+#elif UNITY_IOS
+        shareURL = "www.kek.com";
+#endif
     }
 
     public void LogIn()
@@ -39,7 +45,7 @@ public class FacebookManager : MonoBehaviour
     public void Share()
     {
         FB.ShareLink(contentTitle:"Look, this game is awesome!", 
-            contentURL: new System.Uri("https://play.google.com/store/apps/details?id=com.hardslime.kidarian"), 
+            contentURL: new System.Uri(shareURL), 
             contentDescription: "This is the best game I've ever seen!", 
             callback: OnShare);
     }

@@ -116,8 +116,11 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 #if !UNITY_IOS
                 if (GameObject.Find("NetworkWarning(Clone)") == null)//if there is no active warnings in scene
                 {
-                    warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
-                    warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
+                    GameObject ui;
+                    ui = GameObject.FindGameObjectWithTag("UI").gameObject;
+
+                    warning = Instantiate(networkWarningPrefab, ui.transform);
+                    warning.GetComponent<RectTransform>().localScale = new Vector2(2, 2);
                 }
 #endif
             }

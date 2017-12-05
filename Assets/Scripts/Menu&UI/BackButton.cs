@@ -7,7 +7,14 @@ public class BackButton : MonoBehaviour
 {
     public void ButtonBack()
     {
-        GameManager.nextLevelName = "MainMenu";
+        if (PlayerPrefs.GetInt("FromMap") > 0)
+        {
+            GameManager.nextLevelName = "Map";
+        }
+        else
+        {
+            GameManager.nextLevelName = "MainMenu";
+        }
         SceneManager.LoadScene("Loading");
     }
 }

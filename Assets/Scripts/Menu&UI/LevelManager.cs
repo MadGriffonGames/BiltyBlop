@@ -26,6 +26,8 @@ public class LevelManager : MonoBehaviour
     public GameObject mainMenuCanvas;
     [SerializeField]
     public GameObject lvlSelectCanvas;
+    [SerializeField]
+    GameObject mainMenu;
 
     public int groupCount;
     private int groupIndex;
@@ -71,6 +73,11 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
+        if (true)
+        {
+
+        }
+
         GameManager.nextLevelName = "Level" + levelName;
         SceneManager.LoadScene("Loading");
     }
@@ -93,19 +100,19 @@ public class LevelManager : MonoBehaviour
 
     public void Back()
     {
-        bool flag = false;
+        bool mapIsActive = false;
         int mapNum = 0;
 
         for (int i = 0; i < maps.Length; i++)
         {
             if (maps[i].gameObject.activeInHierarchy)
             {
-                flag = true;
+                mapIsActive = true;
                 mapNum = i;
             }
             
         }
-        if (flag)
+        if (mapIsActive)
         {
             maps[mapNum].gameObject.SetActive(false);
             actsSpacer.SetActive(true);
@@ -114,6 +121,7 @@ public class LevelManager : MonoBehaviour
         {
             lvlSelectCanvas.SetActive(false);
             mainMenuCanvas.SetActive(true);
+            mainMenu.SetActive(true);
         }
     }
 }

@@ -82,10 +82,16 @@ public class MetricaManager : MonoBehaviour
     void DevToDevInitialize()
     {
         string lvlName = GameManager.currentLvl;
-        if (currentLevel.Contains("Level"))
+        if (GameManager.currentLvl.Contains("Level"))
         {
             string tmp = "" + lvlName[lvlName.Length - 1];
             int currentLvl = int.Parse(tmp);
+
+            tmp = "" + lvlName[lvlName.Length - 2];
+            if (char.IsDigit(tmp[0]))
+            {
+                currentLvl += int.Parse(tmp) * 10;
+            }
 
             DevToDev.Analytics.CurrentLevel(currentLvl);
         }

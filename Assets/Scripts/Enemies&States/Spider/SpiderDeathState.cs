@@ -20,6 +20,7 @@ class SpiderDeathState : MonoBehaviour, ISpiderState
         if (!deadAnimated)
         {
             enemy.armature.animation.FadeIn("deathworm", -1, 1);
+            Player.Instance.stars = 3;
             enemy.levelEnd.SetActive(true);
             Destroy(enemy.enemyDamageRoll);
             Destroy(enemy.enemyDamageStone);

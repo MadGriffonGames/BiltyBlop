@@ -49,38 +49,7 @@ public class LevelEndUI : MonoBehaviour
 
     public void Continue()
     {
-        if (!chest.isRewardCollected)
-        {
-            Debug.Log(1);
-            string tmp = "" + GameManager.currentLvl[GameManager.currentLvl.Length - 1];
-            int currentLvl = int.Parse(tmp);
-            if (currentLvl > 3)
-            {
-                Debug.Log(2);
-#if UNITY_EDITOR
-                AdsManager.Instance.isInterstitialClosed = true;
-
-#elif UNITY_ANDROID
-                AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
-                //SceneManager.LoadScene("Loading");
-
-#elif UNITY_IOS
-                AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
-                //SceneManager.LoadScene("Loading");
-
-#endif
-            }
-            else
-            {
-                Debug.Log(3);
-                SceneManager.LoadScene("Loading");
-            }
-        }
-        else
-        {
-            Debug.Log(4);
-            SceneManager.LoadScene("Loading");
-        }
+        SceneManager.LoadScene("Loading");
     }
 
     public void Restart()

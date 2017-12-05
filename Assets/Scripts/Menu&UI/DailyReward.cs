@@ -147,6 +147,7 @@ public class DailyReward : MonoBehaviour
 
         if (!is24hoursPast)
         {
+            chest.GetComponent<Animator>().enabled = false;
             doubleButton.GetComponent<Button>().interactable = false;
             chestImage.sprite = chestClose;
             lightCircle.gameObject.SetActive(false);
@@ -218,6 +219,8 @@ public class DailyReward : MonoBehaviour
 
     public void OpenChestButton()
     {
+        chest.GetComponent<Animator>().enabled = false;
+
         chestFade.SetActive(true);
 
         if (!isRewardCollected)
@@ -278,6 +281,7 @@ public class DailyReward : MonoBehaviour
 
     void ActivateChest()
     {
+        chest.GetComponent<Animator>().enabled = true;
         chestImage.sprite = chestClose;
         chestImage.color = new Color(chestImage.color.r, chestImage.color.g, chestImage.color.b, 1);
         lightCircle.gameObject.SetActive(true);

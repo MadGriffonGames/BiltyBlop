@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class AchievementManager : MonoBehaviour {
-
+public class AchievementManager : MonoBehaviour
+{
     public const string HEAL = "HealthPot";
     public const string DAMAGE_BONUS = "DamageBonus";
     public const string SPEED_BONUS = "SpeedBonus";
@@ -79,6 +79,7 @@ public class AchievementManager : MonoBehaviour {
     public LevelAchieve firstBuy;
     public LevelAchieve spiderKiller;
     public LevelAchieve firstBoss;
+    public LevelAchieve tutorialAchieve;
 
 
     private static AchievementManager instance;
@@ -99,8 +100,8 @@ public class AchievementManager : MonoBehaviour {
         itemsNames = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO };
     }
 
-    // Use this for initialization
-    void Start() {
+    void Start()
+    {
         if (!PlayerPrefs.HasKey(availableLoots))
             PlayerPrefs.SetInt(availableLoots, 0);
         //ResetStat("Mob killer test", "mobKillerPrefTest");
@@ -168,6 +169,7 @@ public class AchievementManager : MonoBehaviour {
         graver = new Achieve("Graver", graverRewardType, graverTargetValue, graverReward);
         selfDestructor = new Achieve("SelfDestructor", graverRewardType, idiotTargerValue, idiotReward);
         potioner = new Achieve("Potioner", potionerRewardType, potionerTargetValue, potionerReward);
+        tutorialAchieve = new LevelAchieve("TutorialAchieve", "Crystals", 1, 5);
     }
 
     public void CheckAchieve(Achieve achieve)

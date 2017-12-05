@@ -17,7 +17,6 @@ public class LevelButton : MonoBehaviour
     private void Start()
     {
         SetButton();
-
         
         if (unlocked == 0)
         {

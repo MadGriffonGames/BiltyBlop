@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     GameObject betaTestReward;
     [SerializeField]
-    GameObject availableLootCounter;
+    GameObject availableAchievementsCounter;
     [SerializeField]
     GameObject greenCircleAchieve;
     [SerializeField]
@@ -68,7 +68,7 @@ public class MainMenu : MonoBehaviour
     public const string dailyPotions = "dailyPotions";
 
     public string sceneName { get; set; }
-    public const string availableLoots = "avaliableLoots";
+    public const string availableAchievements = "avaliableLoots";
 
     private void Awake()
     {
@@ -86,8 +86,9 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        PlayerPrefs.SetInt("NoAds", 1);
 
-        PlayerPrefs.SetInt("FromMap", 0);
+        SetMap();
 
         ChangeDatesOfGifts();
 
@@ -95,32 +96,8 @@ public class MainMenu : MonoBehaviour
         greenCircleDailyLoot.SetActive(false);
 
         GeneralDailyCount();
-
-        if (!PlayerPrefs.HasKey(dailyLootCounter))
-            PlayerPrefs.SetInt(dailyLootCounter, 0);
-
-        if (PlayerPrefs.GetInt(dailyLootCounter) != 0)
-        {
-            dailyLootCount.GetComponent<Text>().text = PlayerPrefs.GetInt(dailyLootCounter).ToString();
-            greenCircleDailyLoot.gameObject.SetActive(true);
-        }
-        else if (PlayerPrefs.GetInt(dailyLootCounter) == 0 || !PlayerPrefs.HasKey(dailyLootCounter))
-        {
-            dailyLootCount.GetComponent<Text>().text = "";
-            greenCircleDailyLoot.gameObject.SetActive(false);
-        }
-            
-        
-        if (PlayerPrefs.GetInt(availableLoots) != 0)
-        {
-            greenCircleAchieve.gameObject.SetActive(true);
-            availableLootCounter.gameObject.GetComponent<Text>().text = PlayerPrefs.GetInt(availableLoots).ToString();
-        }
-        else if (PlayerPrefs.GetInt(availableLoots) == 0 || !PlayerPrefs.HasKey(availableLoots))
-        {
-            availableLootCounter.gameObject.GetComponent<Text>().text = "";
-            greenCircleAchieve.gameObject.SetActive(false);
-        }
+        SetGiftsIndication();
+        SetAchievementsIndication();
 
         SoundManager.PlayMusic("main menu", true);
     }
@@ -327,5 +304,42 @@ public class MainMenu : MonoBehaviour
         {
             packTitle.text = "Hero's choise";
         }
+    }
+
+    void SetGiftsIndication()
+    {
+        if (!PlayerPrefs.HasKey(dailyLootCounter))
+            PlayerPrefs.SetInt(dailyLootCounter, 0);
+
+        if (PlayerPrefs.GetInt(dailyLootCounter) != 0)
+        {
+            dailyLootCount.GetComponent<Text>().text = PlayerPrefs.GetInt(dailyLootCounter).ToString();
+            greenCircleDailyLoot.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt(dailyLootCounter) == 0 || !PlayerPrefs.HasKey(dailyLootCounter))
+        {
+            dailyLootCount.GetComponent<Text>().text = "";
+            greenCircleDailyLoot.SetActive(false);
+        }
+    }
+
+    void SetAchievementsIndication()
+    {
+        if (PlayerPrefs.GetInt(availableAchievements) != 0)
+        {
+            greenCircleAchieve.SetActive(true);
+            availableAchievementsCounter.GetComponent<Text>().text = PlayerPrefs.GetInt(availableAchievements).ToString();
+        }
+        else if (PlayerPrefs.GetInt(availableAchievements) == 0 || !PlayerPrefs.HasKey(availableAchievements))
+        {
+            availableAchievementsCounter.GetComponent<Text>().text = "";
+            greenCircleAchieve.SetActive(false);
+        }
+    }
+
+    void SetMap()
+    {
+        PlayerPrefs.SetInt("TutorialMode", 0);
+        PlayerPrefs.SetInt("FromMap", 0);
     }
 }

@@ -5,12 +5,11 @@ using System.Text;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class AchievementSpacer : MonoBehaviour {
-
+public class AchievementSpacer : MonoBehaviour
+{
     [SerializeField]
     public GameObject achievementBox;
 
-	// Use this for initialization
 	void Start () {
 		
 	}

@@ -102,6 +102,10 @@ public class AchievementManager : MonoBehaviour
 
     void Start()
     {
+
+        if (SceneManager.GetActiveScene().name == "AchievementMenu" || SceneManager.GetActiveScene().name == "Map" || SceneManager.GetActiveScene().name == "Shop")
+            SoundManager.PlayMusic("main menu", true);
+
         if (!PlayerPrefs.HasKey(availableLoots))
             PlayerPrefs.SetInt(availableLoots, 0);
         //ResetStat("Mob killer test", "mobKillerPrefTest");

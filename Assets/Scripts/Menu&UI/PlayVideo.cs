@@ -51,6 +51,6 @@ public class PlayVideo : MonoBehaviour
 		{
 			sceneui.SetActive (true);			
 		}
-		SoundManager.MuteMusic (false);
+		//SoundManager.MuteMusic (false);
 	}
 }

@@ -41,13 +41,10 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField]
     GameObject fadeButton;
-
     [SerializeField]
     GameObject lootVolume;
-
     [SerializeField]
     GameObject fade;
-
     [SerializeField]
     GameObject giftsPanel;
 
@@ -86,6 +83,8 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        //PlayerPrefs.DeleteAll();
+
         PlayerPrefs.SetInt("NoAds", 1);
 
         SetMap();

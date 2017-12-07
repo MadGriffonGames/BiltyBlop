@@ -10,10 +10,36 @@ public class ShopTutorial : MonoBehaviour {
 	[SerializeField]
 	GameObject leftSideWindow;
 
+	// PANELS
 	[SerializeField]
 	GameObject skinsPanel;
 	[SerializeField]
+	GameObject swordsPanel;
+	[SerializeField]
+	GameObject itemsPanel;
+	[SerializeField]
+	GameObject perkPanel;
+	[SerializeField]
+	GameObject throwPanel;
+	[SerializeField]
+	GameObject gemsPanel;
+
+	// SWIPE MENUES;
+	[SerializeField]
 	SkinSwipeMenu skinSwipeMenu;
+	[SerializeField]
+	SwordsSwipeMenu swordSwipeMenu;
+	[SerializeField]
+	ItemsSwipeMenu itemSwipeMenu;
+	[SerializeField]
+	ThrowingSwipeMenu throwSwipeMenu;
+	[SerializeField]
+	PerksSwipeMenu perkSwipeMenu;
+	[SerializeField]
+	GemsSwipeMenu gemSwipeMenu;
+
+
+
 	[SerializeField]
 	ShopController shopController;
 
@@ -42,6 +68,8 @@ public class ShopTutorial : MonoBehaviour {
 
 	void Start () 
 	{
+		shopController.ActivateShops ();
+		shopController.ActivateShop (0);
 		Tutorial ();
 	}
 
@@ -146,23 +174,62 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipSwords());
 		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "This is swords";
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 0);
+		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		tmpCard = swordsPanel.transform.GetChild (1).gameObject;
+		tmpCard.GetComponentsInChildren<Button> () [0].onClick.RemoveAllListeners ();
+		tmpCard.GetComponentsInChildren<Button> () [1].onClick.RemoveAllListeners ();
+		ToFrontPlan (swordsPanel, tmpCard);
+
+		arrow.gameObject.SetActive (false);
 	}
 
 	public void SkipSwords()
 	{
 		leftSideWindow.SetActive (false);
 		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "Now Swords";
+		mainWindow.GetComponentsInChildren<Text>()[0].text = "Now Items!";
 		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipItemsPreview ());
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
+		ToBasePlan (swordsPanel, tmpCard);
+		swordSwipeMenu.UpdateSwordCards ();
 
 		currentShop++;
 		SetArrowPosition ();
 		arrow.gameObject.SetActive (true);
 	}
 	public void SkipItemsPreview()
+	{
+		shopController.ActivateShop (currentShop);
+		mainWindow.SetActive (false);
+		leftSideWindow.SetActive (true);
+		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipItems());
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "This is Items";
+		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		tmpCard = itemsPanel.transform.GetChild (1).gameObject;
+		tmpCard.GetComponentsInChildren<Button> () [0].onClick.RemoveAllListeners ();
+		tmpCard.GetComponentsInChildren<Button> () [1].onClick.RemoveAllListeners ();
+		ToFrontPlan (itemsPanel, tmpCard);
+
+		arrow.gameObject.SetActive (false);
+	}
+	public void SkipItems()
+	{
+		leftSideWindow.SetActive (false);
+		mainWindow.SetActive (true);
+		mainWindow.GetComponentsInChildren<Text>()[0].text = "Now Perks!";
+		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipPerkPreview());
+		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
+		ToBasePlan (itemsPanel, tmpCard);
+		itemSwipeMenu.SetItemCards ();
+
+		currentShop++;
+		SetArrowPosition ();
+		arrow.gameObject.SetActive (true);
+	}
+	public void SkipPerkPreview()
 	{
 		CloseTutorial ();
 	}

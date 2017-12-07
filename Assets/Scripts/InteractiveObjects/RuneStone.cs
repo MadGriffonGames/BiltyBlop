@@ -60,6 +60,8 @@ public class RuneStone : InteractiveObject
 
         SetLastUnlockedLevel();
 
+        //SetTutorialMode();
+
         PlayerPrefs.SetInt("IsMapChestOpen", 0);
         PlayerPrefs.SetString("LastCompletedLevel", GameManager.currentLvl);
     }
@@ -133,6 +135,17 @@ public class RuneStone : InteractiveObject
         else
         {
             PlayerPrefs.SetInt(nextLvl, 1);
+        }
+    }
+
+    void SetTutorialMode()
+    {
+        if (GameManager.currentLvl == "Level1" || GameManager.currentLvl == "Level2" || GameManager.currentLvl == "Level3")
+        {
+            if (PlayerPrefs.GetInt(SceneTutorial.CHEST_TUTORIAL_COMPLETE) == 0 || PlayerPrefs.GetInt(SceneTutorial.ACHIEVEMENT_TUTORIAL_COMPLETE) == 0 || PlayerPrefs.GetInt(SceneTutorial.SHOP_TUTORIAL_COMPLETE) == 0)
+            {
+                PlayerPrefs.SetInt("TutorialMode", 1);
+            }
         }
     }
 }

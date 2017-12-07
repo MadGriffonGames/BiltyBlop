@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -7,10 +8,16 @@ public class Map : MonoBehaviour
 {
     [SerializeField]
     GameObject[] maps;
+    [SerializeField]
+    GameObject availableAchievementsCounter;
+    [SerializeField]
+    GameObject greenCircleAchieve;
+    public const string availableAchievements = "avaliableLoots";
 
     private void Start()
     {
         SetMap();
+        SetAchievementsIndication();
     }
 
     public void ChangeScene(string sceneName)
@@ -50,6 +57,20 @@ public class Map : MonoBehaviour
         else if (lastCompletedLvl < 30)
         {
             maps[2].SetActive(true);
+        }
+    }
+
+    public void SetAchievementsIndication()
+    {
+        if (PlayerPrefs.GetInt(availableAchievements) != 0)
+        {
+            greenCircleAchieve.SetActive(true);
+            availableAchievementsCounter.GetComponent<Text>().text = PlayerPrefs.GetInt(availableAchievements).ToString();
+        }
+        else if (PlayerPrefs.GetInt(availableAchievements) == 0 || !PlayerPrefs.HasKey(availableAchievements))
+        {
+            availableAchievementsCounter.GetComponent<Text>().text = "";
+            greenCircleAchieve.SetActive(false);
         }
     }
 }

@@ -67,6 +67,12 @@ public class ChestUI : RewardedChest
 
             isRewardCollected = true;
 
+            if (PlayerPrefs.GetInt("TutorialMode") > 0)
+            {
+                GetComponent<ChestTutorial>().DisableTutorial();
+                PlayerPrefs.SetInt(SceneTutorial.CHEST_TUTORIAL_COMPLETE, 1);
+            }
+
             AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
             DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
         }

@@ -14,128 +14,86 @@ public class AchievementBoxOneLevel : MonoBehaviour
 
     [SerializeField]
     GameObject getBtn;
-
-
     [SerializeField]
     GameObject text;
-
     [SerializeField]
     GameObject inProgress;
     [SerializeField]
     GameObject doneImg;
-
-
     [SerializeField]
     GameObject gold;
-
     [SerializeField]
     RectTransform status;
-
     [SerializeField]
     GameObject description;
-
     [SerializeField]
     string descriptionText;
-
     [SerializeField]
     GameObject lootVolume;
-
     [SerializeField]
     GameObject fadeButton;
-
     [SerializeField]
     GameObject rewardFade;
-
     [SerializeField]
     GameObject loot;
-
     [SerializeField]
     Sprite coins;
-
     [SerializeField]
     Sprite crystals;
-
     [SerializeField]
     Sprite healthPot;
-
     [SerializeField]
     Sprite DamageBonus;
-
     [SerializeField]
     Sprite SpeedBonus;
-
     [SerializeField]
     Sprite TimeBonus;
-
     [SerializeField]
     Sprite ImmortalBonus;
-
     [SerializeField]
     Sprite ClipsCount;
-
     [SerializeField]
     Sprite classicThrow;
-
     [SerializeField]
     Sprite hammerThrow;
-
     [SerializeField]
     Sprite iceCreamThrow;
-
     [SerializeField]
     Sprite magicThrow;
-
     [SerializeField]
     Sprite meatThrow;
-
     [SerializeField]
     Sprite pizzaThrow;
-
     [SerializeField]
     Sprite ravenThrow;
-
     [SerializeField]
     Sprite sheepThrow;
-
     [SerializeField]
     Sprite sword1Throw;
-
     [SerializeField]
     Sprite sword2Throw;
-
     [SerializeField]
     Sprite sword3Throw;
-
     [SerializeField]
     Sprite sword4Throw;
-
     [SerializeField]
     Sprite barbarianSword;
-
     [SerializeField]
     Sprite black_ninjaSword;
-
     [SerializeField]
     Sprite classicSword;
-
     [SerializeField]
     Sprite jonSnowSword;
-
     [SerializeField]
     Sprite kingSword;
-
     [SerializeField]
     Sprite barbarian;
-
     [SerializeField]
     Sprite black_ninja;
-
     [SerializeField]
     Sprite classic;
-
     [SerializeField]
     Sprite jonSnow;
-
     [SerializeField]
     Sprite king;
 
@@ -151,13 +109,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
     const string btn = "btn";
     const string medal = "medal";
 
-    // Use this for initialization
     void Start()
     {
-        //PlayerPrefs.SetInt(achievementName + medal, 0);
-        //PlayerPrefs.SetInt(achievementName + btn, 0);
-
-
         UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue"));
         if (!PlayerPrefs.HasKey(achievementName + btn))
             PlayerPrefs.SetInt(achievementName + btn, 0);
@@ -172,16 +125,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
 
         description.gameObject.GetComponent<Text>().text = descriptionText;
 
-
         GetInfo();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     void GetInfo()
     {
@@ -215,6 +160,12 @@ public class AchievementBoxOneLevel : MonoBehaviour
 
     public void GetReward()
     {
+        if (PlayerPrefs.GetInt("TutorialMode") > 0)
+        {
+            GetComponent<AchievmentTutorial>().DisableTutorial();
+            PlayerPrefs.SetInt(SceneTutorial.ACHIEVEMENT_TUTORIAL_COMPLETE, 1);
+        }
+
         PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);
         int currentValue = PlayerPrefs.GetInt(achievementName);
         int targetValue = PlayerPrefs.GetInt(achievementName + "targetValue");
@@ -322,7 +273,6 @@ public class AchievementBoxOneLevel : MonoBehaviour
 
     IEnumerator ShowThrowLoot()
     {
-        //lootVolume.GetComponent<Text>().text = PlayerPrefs.GetInt(achievementName + "reward").ToString();
         rewardFade.gameObject.SetActive(true);
         string lootType = PlayerPrefs.GetString(achievementName + "rewardType");
 

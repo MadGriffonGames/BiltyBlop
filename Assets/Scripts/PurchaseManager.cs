@@ -261,12 +261,10 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     void BuyProductID(string productId)
     {
-		GameObject.FindGameObjectWithTag ("debugtext").GetComponent<Text> ().text += "productID=" + productId + " ";
         if (IsInitialized())
         {
 			
             Product product = m_StoreController.products.WithID(productId);
-			GameObject.FindGameObjectWithTag ("debugtext").GetComponent<Text> ().text += "  " + product.availableToPurchase;
             if (product != null && product.availableToPurchase)
             {
 				GameObject.FindGameObjectWithTag ("debugtext").GetComponent<Text> ().text += " avaliableToPurchase ";

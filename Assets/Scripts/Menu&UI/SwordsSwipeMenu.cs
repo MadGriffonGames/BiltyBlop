@@ -37,7 +37,7 @@ public class SwordsSwipeMenu : SwipeMenu {
 		base.Update ();	
 	}
 
-	void SetSwordCards()
+	public void SetSwordCards()
 	{
 		for (int i = 0; i < SkinManager.Instance.swordPrefabs.Length; i++)
 		{

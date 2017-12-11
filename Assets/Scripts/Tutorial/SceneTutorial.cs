@@ -29,7 +29,7 @@ public class SceneTutorial : MonoBehaviour
     string targetLevelName;
 
     public const string CHEST_TUTORIAL_COMPLETE = "ChestTutorialComplete";
-    public const string SHOP_TUTORIAL_COMPLETE = "";
+    public const string SHOP_TUTORIAL_COMPLETE = "ShopTutorialComplete";
     public const string ACHIEVEMENT_TUTORIAL_COMPLETE = "AchievementTutorialComplete";
 
     protected void Awake()

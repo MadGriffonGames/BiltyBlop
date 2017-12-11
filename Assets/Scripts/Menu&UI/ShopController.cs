@@ -61,13 +61,6 @@ public class ShopController : MonoBehaviour {
 		THR.text = Inventory.Instance.GetItemCount ("ClipsCount").ToString();
 	}
 
-	public void ActivateShops()
-	{
-		for (int i = 0; i < shops.Length; i++) {
-			ActivateShop (i);
-		}
-	}
-
     public void ActivateShop(int number)
     {
 		

@@ -85,8 +85,6 @@ public class MainMenu : MonoBehaviour
     {
         //PlayerPrefs.DeleteAll();
 
-        PlayerPrefs.SetInt("NoAds", 1);
-
         SetMap();
 
         ChangeDatesOfGifts();

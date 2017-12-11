@@ -68,7 +68,7 @@ public class TimeTutorial : InAppTutorial
             int currentCount = Inventory.Instance.GetItemCount(Inventory.TIME_BONUS);
             currentCount = currentCount > 3 ? 3 : currentCount;
             Inventory.Instance.AddItem(Inventory.TIME_BONUS, 3 - currentCount);
-            DevToDev.Analytics.Tutorial(5);
+            DevToDev.Analytics.Tutorial(9);
         }
         else if (PlayerPrefs.GetInt("Level7") > 0)
         {

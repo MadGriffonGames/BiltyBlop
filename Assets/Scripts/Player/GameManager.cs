@@ -98,11 +98,13 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetString("Skin", "Classic");
         }       
         
-        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10"))
+        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10") && (SceneManager.GetActiveScene().name != "Map") && (SceneManager.GetActiveScene().name != "AchievementMenu") && (SceneManager.GetActiveScene().name != "Shop") && (SceneManager.GetActiveScene().name != "Level1"))
             SoundManager.PlayRandomMusic ("kid_music", true);
         if (SceneManager.GetActiveScene().name == "Level6")
             SoundManager.PlaySoundLooped("rain sfx");
 
+        if (SceneManager.GetActiveScene().name == "Level1")
+            SoundManager.PlayMusic("kid_music_1", true);
         lvlCollectedCoins = 0;
     }
 

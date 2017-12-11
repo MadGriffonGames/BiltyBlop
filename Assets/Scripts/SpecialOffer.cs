@@ -15,10 +15,15 @@ public class SpecialOffer : MonoBehaviour
         string nextLevel = "Level" + (4 + 1).ToString();
         string targetLevelPlusTwo = "Level" + (4 + 2).ToString();
 
-        if (PlayerPrefs.GetString("LastCompletedLevel") == targetLevelName && PlayerPrefs.GetInt(nextLevel) == 1 && PlayerPrefs.GetInt(targetLevelPlusTwo) == 0)
+        if (PlayerPrefs.GetInt("IsSpecialOfferShown") == 0)
         {
-            starterPackWindow.SetActive(true);
-            fade.SetActive(true);
+            if (PlayerPrefs.GetString("LastCompletedLevel") == targetLevelName && PlayerPrefs.GetInt(nextLevel) == 1 && PlayerPrefs.GetInt(targetLevelPlusTwo) == 0)
+            {
+                starterPackWindow.SetActive(true);
+                fade.SetActive(true);
+                PlayerPrefs.SetInt("IsSpecialOfferShown", 1);
+            }
         }
+        
     }
 }

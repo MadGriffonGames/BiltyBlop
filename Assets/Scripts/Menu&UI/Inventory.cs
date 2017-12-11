@@ -67,25 +67,30 @@ public class Inventory : MonoBehaviour
     {
             if (moneyType == "Coins")
             {
-			if (PlayerPrefs.GetInt("Coins") >= price * itemCount)
-                {
-				PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price * itemCount);
-                    AddItem(itemName, itemCount);
+				if (PlayerPrefs.GetInt("Coins") >= price * itemCount)
+	                {
+					PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price * itemCount);
+	                    AddItem(itemName, itemCount);
 
-                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
-                }
+	                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
+	                }
             }
             if (moneyType == "Crystals")
             {
-			if (PlayerPrefs.GetInt("Crystals") >= price * itemCount)
-                {
-				PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price * itemCount);
-                    AddItem(itemName, itemCount);
+				if (PlayerPrefs.GetInt("Crystals") >= price * itemCount)
+	                {
+					PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price * itemCount);
+	                    AddItem(itemName, itemCount);
 
-                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
-                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought before " + MetricaManager.Instance.lastUnlockedLevel);
-                }
+	                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
+	                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought before " + MetricaManager.Instance.lastUnlockedLevel);
+	                }
             }
+			if (moneyType == "Free") 
+			{
+				AddItem(itemName, itemCount);
+			}
+
     }
 
     public void AddItem(string itemName, int itemCount) 

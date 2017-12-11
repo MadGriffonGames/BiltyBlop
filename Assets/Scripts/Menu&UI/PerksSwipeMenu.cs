@@ -77,7 +77,7 @@ public class PerksSwipeMenu : SwipeMenu {
         }
     }
 
-    private void SetPerkCards()
+    public void SetPerkCards()
     {
         perkPrefabs = Resources.LoadAll<GameObject>(PREFABS_FOLDER);
         for (int i = 0; i < perkPrefabs.Length; i++)

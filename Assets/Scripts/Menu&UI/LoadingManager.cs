@@ -33,7 +33,7 @@ public class LoadingManager : MonoBehaviour
 			{
 				if (GameManager.nextLevelName.Length == 6) 
 				{
-					levelText.text = "LEVEL " + GameManager.nextLevelName [5].ToString (); 
+					levelText.text = "LEVEL " + GameManager.nextLevelName [5].ToString ();
 				}
 				if (GameManager.nextLevelName.Length == 7) 
 				{

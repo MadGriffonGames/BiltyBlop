@@ -7,13 +7,16 @@ public class Translator : MonoBehaviour
 {
     Text textField;
 
-    private void Start()
+    private void Awake()
     {
         //textField = GetComponent<Text>();
 
-        //if (textField != null && LocalizationManager.Instance.translation.ContainsKey(textField.text))
+        //if (textField != null)
         //{
-        //    textField.text = LocalizationManager.Instance.translation[textField.text];
+        //    if (LocalizationManager.Instance.translation.ContainsKey(textField.text))
+        //    {
+        //        textField.text = LocalizationManager.Instance.translation[textField.text];
+        //    }
         //}
     }
 }

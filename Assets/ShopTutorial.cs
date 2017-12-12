@@ -400,5 +400,6 @@ public class ShopTutorial : MonoBehaviour {
 	{
 		this.gameObject.SetActive (false);
 		PlayerPrefs.SetInt ("ShopTutorialComplete", 1);
-	}
+        DevToDev.Analytics.Tutorial(5);
+    }
 }

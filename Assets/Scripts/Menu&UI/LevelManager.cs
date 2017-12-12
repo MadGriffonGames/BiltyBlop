@@ -43,17 +43,6 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("Level1", 1);
     }
 
-    private void Update()
-    {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                Back();
-            }
-        }
-    }
-
     void SetButtons()
     {
         foreach (var level in levelList)

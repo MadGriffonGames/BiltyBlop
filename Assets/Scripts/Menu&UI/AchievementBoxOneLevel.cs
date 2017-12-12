@@ -164,6 +164,7 @@ public class AchievementBoxOneLevel : MonoBehaviour
         {
             GetComponent<AchievmentTutorial>().DisableTutorial();
             PlayerPrefs.SetInt(SceneTutorial.ACHIEVEMENT_TUTORIAL_COMPLETE, 1);
+            DevToDev.Analytics.Tutorial(7);
         }
 
         PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) - 1);

@@ -85,8 +85,6 @@ public class MainMenu : MonoBehaviour
     {
         //PlayerPrefs.DeleteAll();
 
-        PlayerPrefs.SetInt("NoAds", 1);
-
         SetMap();
 
         ChangeDatesOfGifts();
@@ -338,6 +336,7 @@ public class MainMenu : MonoBehaviour
 
     void SetMap()
     {
+        PlayerPrefs.SetString("LastCompletedLevel", "");
         PlayerPrefs.SetInt("TutorialMode", 0);
         PlayerPrefs.SetInt("FromMap", 0);
     }

@@ -21,16 +21,28 @@ public class LevelButton : MonoBehaviour
         if (unlocked == 0)
         {
             Lock.SetActive(true);
-            
         }
         else
         {
-            Lock.SetActive(false);
+            if (IsItLastUnlockedLevel("Level" + levelText))
+            {
+                int tmp = int.Parse(levelText) - 1;
+                if (PlayerPrefs.GetString("LastCompletedLevel") == "Level" + tmp.ToString())
+                {
+                    Lock.SetActive(true);
+                    Lock.GetComponent<Animator>().enabled = true;
+                }
+            }
+            else
+            {
+                Lock.SetActive(false);
+            }
             if (PlayerPrefs.HasKey("Level" + levelText + "_collects"))
             {
                 ShowStars(PlayerPrefs.GetInt("Level" + levelText + "_collects"));
             }
         }
+
     }
 
     void SetButton()
@@ -65,4 +77,10 @@ public class LevelButton : MonoBehaviour
             stars[i].SetActive(false);
         }
     }
+
+    bool IsItLastUnlockedLevel(string levelName)
+    {
+        return PlayerPrefs.GetString("LastUnlockedLevel") == levelName;
+    }
+
 }

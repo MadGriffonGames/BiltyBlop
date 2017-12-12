@@ -9,6 +9,8 @@ public class Maneken : MonoBehaviour
     private GameObject particle;
     [SerializeField]
     string damageType;
+    [SerializeField]
+    GameObject manekenCollider;
 
     [SerializeField]
     int health;
@@ -95,6 +97,7 @@ public class Maneken : MonoBehaviour
         SetHealthbar();
         if (IsDead)
         {
+            manekenCollider.gameObject.SetActive(false);
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0.8f, 0, -3), Quaternion.identity);
             SoundManager.PlaySound("wooden_box1");
 

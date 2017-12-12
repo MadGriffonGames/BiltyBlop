@@ -97,6 +97,12 @@ public class DailyLoot : MonoBehaviour
     GameObject loot;
     [SerializeField]
     GameObject fadeButton;
+    [SerializeField]
+    Sprite freeButton;
+    [SerializeField]
+    Image[] buttonsImages;
+    [SerializeField]
+    Text[] freeText;
 
     public const string dailyLootCounter = "dailyLootCounter";
     public const string dailyCoins = "dailyCoins";
@@ -125,6 +131,7 @@ public class DailyLoot : MonoBehaviour
         CoinStart();
         ClipsCountStart();
         PotionStart();
+        SetGiftButtons();
     }
 
 	void Update ()
@@ -433,4 +440,15 @@ public class DailyLoot : MonoBehaviour
         }
     }
 
+    void SetGiftButtons()
+    {
+        if (PlayerPrefs.GetInt("NoAds") > 0)
+        {
+            for (int i = 0; i < buttonsImages.Length; i++)
+            {
+                buttonsImages[i].sprite = freeButton;
+                freeText[i].gameObject.SetActive(true);
+            }
+        }
+    }
 }

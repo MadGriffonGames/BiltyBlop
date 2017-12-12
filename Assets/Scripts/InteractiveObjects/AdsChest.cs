@@ -59,7 +59,7 @@ public class AdsChest : MonoBehaviour
 
     private void Update()
     {
-        if (AdsManager.Instance.isRewardedVideoShown && isOpened && !isRewardCollected)
+        if (isOpened && !isRewardCollected)
         {
             if (AdsManager.Instance.isRewardVideoWatched)
             {

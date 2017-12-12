@@ -12,6 +12,10 @@ public class PackWindow : MonoBehaviour
     int productId;
     [SerializeField]
     Text timerText;
+    [SerializeField]
+    GameObject fade;
+    [SerializeField]
+    GameObject packSign;
 
     TimeSpan timer; 
     TimeSpan hours48;
@@ -38,6 +42,8 @@ public class PackWindow : MonoBehaviour
     public void BuyPack(int packId)
     {
         PurchaseManager.Instance.BuyNonConsumable(packId);
+        fade.SetActive(false);
+        packSign.SetActive(false);
         this.gameObject.SetActive(false);
     }
 

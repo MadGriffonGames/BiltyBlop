@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
         boostersCount = new Dictionary<string, int>();
 
         // ADDING ITEMS // 
-        itemsNames = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO }; // ADD NEW GOOD TO THE SHOP
+		itemsNames = new string[] { HEAL, AMMO, IMMORTAL_BONUS, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS}; // ADD NEW GOOD TO THE SHOP
 
 		SetStartingParamsForItem(AMMO, "AMMO", 3, 150, 3);
         SetStartingParamsForItem(HEAL, "HEAL", 3, 250, 5);

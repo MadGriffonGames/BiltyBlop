@@ -32,7 +32,6 @@ public class LocalizationManager : MonoBehaviour
         //    translation = new Dictionary<string, KeyValuePair<string, int>>();
         //    pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
         //    jsonString = File.ReadAllText(pathToJson);
-
         //    translation = JsonConvert.DeserializeObject<Dictionary<string, KeyValuePair<string, int>>>(jsonString);
         //}
     }

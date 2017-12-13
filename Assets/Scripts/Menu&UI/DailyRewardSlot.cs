@@ -55,7 +55,8 @@ public class DailyRewardSlot : MonoBehaviour
 
     public void SetReward()
     {
-        dayText.text = "Day" + dayNum.ToString();
+        dayText.text = "day" + " " + dayNum.ToString();
+        LocalizationManager.Instance.UpdateLocaliztion(dayText);
 
         if (dayNum == PlayerPrefs.GetInt("RewardDay"))
         {

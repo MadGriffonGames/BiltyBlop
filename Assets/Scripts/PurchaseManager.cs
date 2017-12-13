@@ -332,6 +332,16 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
         m_StoreController = controller;
         m_StoreExtensionProvider = extensions;
+		#if UNITY_IOS
+		extensions.GetExtension<IAppleExtensions> ().RestoreTransactions (result => {
+			if (result) {
+				// This does not mean anything was restored,
+				// merely that the restoration process succeeded.
+			} else {
+				// Restoration failed.
+			}
+		});
+		#endif
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)

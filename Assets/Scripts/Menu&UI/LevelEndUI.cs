@@ -49,6 +49,10 @@ public class LevelEndUI : MonoBehaviour
 
     public void Continue()
     {
+        if (GameManager.currentLvl == "Level20")
+        {
+            GameManager.nextLevelName = "MainMenu";
+        }
         SceneManager.LoadScene("Loading");
     }
 

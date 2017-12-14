@@ -1,16 +1,166 @@
 ﻿{
 	"play": {
-	"PLAY" : 1
+	"text": "PLAY",
+	"fontSize": 0
 	},
 	
 	"day 1": {
-	"DAY 1" : 2
-	},
-	"starter pack": {
-	"STARTER PACK" : 3
+	"text": "DAY 1", 
+	"fontSize": 0
 	},
 	
-	"to double bonus:": {
-	"TO DOUBLE BONUS:" : 4
-	}
+	"day 2": {
+	"text": "DAY 2", 
+	"fontSize": 0
+	},
+	
+	"day 3": {
+	"text": "DAY 3", 
+	"fontSize": 0
+	},
+	
+	"day 4": {
+	"text": "DAY 4", 
+	"fontSize": 0
+	},
+	
+	"day 5": {
+	"text": "DAY 5", 
+	"fontSize": 0
+	},
+	
+	"day 6": {
+	"text": "DAY 6", 
+	"fontSize": 0
+	},
+	
+	"day 7": {
+	"text": "DAY 7", 
+	"fontSize": 0
+	},
+	
+	"day 8": {
+	"text": "DAY 8", 
+	"fontSize": 0
+	},
+	
+	"day 9": {
+	"text": "DAY 9", 
+	"fontSize": 0
+	},
+	
+	"day 10": {
+	"text": "DAY 10", 
+	"fontSize": 0
+	},
+	
+	"starter pack": {
+	"text": "STARTER PACK", 
+	"fontSize": 0
+	},
+	
+	"hero's choice": {
+	"text": "HERO'S CHOICE", 
+	"fontSize": 0
+	},
+	
+	"get": {
+	"text": "GET", 
+	"fontSize": 0
+	},
+	
+	"to double bonus": {
+	"text": "TO DOUBLE BONUS", 
+	"fontSize": 0
+	},
+	
+	"today bonus": {
+	"text": "TODAY BONUS", 
+	"fontSize": 0
+	},
+	
+	"daily reward": {
+	"text": "DAILY REWARD", 
+	"fontSize": 0
+	},
+	
+	"gifts": {
+	"text": "GIFTS", 
+	"fontSize": 0
+	},
+	
+	"50 coins": {
+	"text": "50 COINS", 
+	"fontSize": 0
+	},
+	
+	"1 ammo": {
+	"text": "1 AMMO", 
+	"fontSize": 0
+	},
+	
+	"random potion": {
+	"text": "RANDOM POTION", 
+	"fontSize": 0
+	},
+	
+	"buy": {
+	"text": "BUY", 
+	"fontSize": 0
+	},
+	
+	"potions\npack": {
+	"text": "POTIONS\nPACK", 
+	"fontSize": 0
+	},
+	
+	"ancient\naxe": {
+	"text": "ANCIENT\nAXE", 
+	"fontSize": 0
+	},
+	
+	"no ads": {
+	"text": "NO ADS", 
+	"fontSize": 0
+	},
+	
+	"3 ammo\nquiver": {
+	"text": "3 AMMO\nQUIVER", 
+	"fontSize": 0
+	},
+	
+	"60\ncrystals": {
+	"text": "60\nCRYSTALS", 
+	"fontSize": 0
+	},
+	
+	"20 free\nrevives": {
+	"text": "20 FREE\nREVIVES", 
+	"fontSize": 0
+	},
+	
+	"throwing\npizza": {
+	"text": "THROWING\nPIZZA", 
+	"fontSize": 0
+	},
+	
+	"greedy\nperk": {
+	"text": "GREEDY\nPERK", 
+	"fontSize": 0
+	},
+	
+	"ninjarian\nskin": {
+	"text": "NINJARIAN\nSKIN", 
+	"fontSize": 0
+	},
+	
+	"remove ads": {
+	"text": "REMOVE ADS", 
+	"fontSize": 0
+	},
+	
+	"select episode": {
+	"text": "SELECT EPISODE", 
+	"fontSize": 0
+	},
 }

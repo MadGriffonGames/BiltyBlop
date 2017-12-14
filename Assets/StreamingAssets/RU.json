@@ -1,6 +1,21 @@
 ﻿{
-	"play": {"ИГРАТЬ" : 1},
-	"day 1": {"ДЕНЬ 1" : 2},
-	"starter pack": {"СТАРТЕР ПАК" : 3},
-	"to double bonus": {"УДВОЙ БОНУС" : 55}
+	"play": {
+	"text": "ИГРАТЬ",
+	"fontSize": 0
+	},
+	
+	"day 1": {
+	"text": "ДЕНЬ 1", 
+	"fontSize": 0
+	},
+	
+	"starter pack": {
+	"text": "СТАРТЕР ПАК", 
+	"fontSize": 0
+	},
+	
+	"hero's choise": {
+	"text": "ВЫБОР ГЕРОЯ", 
+	"fontSize": 0
+	},
 }

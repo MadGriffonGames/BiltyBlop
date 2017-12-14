@@ -12,7 +12,7 @@ public class Translator : MonoBehaviour
 #if UNITY_EDITOR
         textField = GetComponent<Text>();
 
-        //LocalizationManager.Instance.UpdateLocaliztion(textField);
+        LocalizationManager.Instance.UpdateLocaliztion(textField);
 #endif
     }
 

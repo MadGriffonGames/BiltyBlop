@@ -223,8 +223,11 @@ public class AchievementManager : MonoBehaviour
         if (PlayerPrefs.GetInt(levelAchieve.achieveName) == levelAchieve.targetValue)
         {
             PlayerPrefs.SetInt(availableLoots, PlayerPrefs.GetInt(availableLoots) + 1);   // инкрементирование индикации
-            achievementUI.GetComponent<AchievementUI>().AchievementAppear(levelAchieve.achieveName);
-            StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+            if (achievementUI)
+            {
+                achievementUI.GetComponent<AchievementUI>().AchievementAppear(levelAchieve.achieveName);
+                StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+            }
             Destroy(levelAchieve);
         }
 

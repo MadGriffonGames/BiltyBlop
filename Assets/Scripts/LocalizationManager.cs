@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using SimpleJSON;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
@@ -17,32 +19,39 @@ public class LocalizationManager : MonoBehaviour
         }
     }
     string pathToJson;
-    string language;
+    string language = "EN";
     string jsonString;
-    public Dictionary<string, string> translation;
+    public Dictionary<string, KeyValuePair<string, int>> translation;
 
     private void Awake()
     {
-        if (language != null)
-        {
-            DontDestroyOnLoad(this);
+        //if (language != null)
+        //{
+        //    DontDestroyOnLoad(this);
 
-            translation = new Dictionary<string, string>();
-            pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
-            jsonString = File.ReadAllText(pathToJson);
-
-            translation = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
-        }
-        
+        //    translation = new Dictionary<string, KeyValuePair<string, int>>();
+        //    pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
+        //    jsonString = File.ReadAllText(pathToJson);
+        //    translation = JsonConvert.DeserializeObject<Dictionary<string, KeyValuePair<string, int>>>(jsonString);
+        //}
     }
 
-    void Start ()
+    public void UpdateLocaliztion(Text textField)
     {
-		
-	}
-	
-	void Update ()
-    {
-		
-	}
+        //if (textField != null)
+        //{
+        //    if (translation.ContainsKey(textField.text))
+        //    {
+        //        string translatedText = translation[textField.text].Key;
+        //        Debug.Log(translation[textField.text].GetType());
+        //        Debug.Log(translation[textField.text]);
+        //        Debug.Log(translatedText);
+        //        textField.text = translatedText;
+        //        if (true)
+        //        {
+
+        //        }
+        //    }
+        //}
+    }
 }

@@ -12,6 +12,10 @@ public class PackWindow : MonoBehaviour
     int productId;
     [SerializeField]
     Text timerText;
+    [SerializeField]
+    GameObject fade;
+    [SerializeField]
+    GameObject packSign;
 
     TimeSpan timer; 
     TimeSpan hours48;
@@ -35,10 +39,18 @@ public class PackWindow : MonoBehaviour
         }
     }
 
+    public void BuyPack(int packId)
+    {
+        PurchaseManager.Instance.BuyNonConsumable(packId);
+        fade.SetActive(false);
+        packSign.SetActive(false);
+        this.gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
         buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(() => PurchaseManager.Instance.BuyNonConsumable(productId));
+        buyButton.onClick.AddListener(() => BuyPack(productId));
         if (timerText != null)
         {
             if (!PlayerPrefs.HasKey("StarterPackOpenDate"))

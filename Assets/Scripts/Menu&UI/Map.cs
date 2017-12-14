@@ -60,7 +60,7 @@ public class Map : MonoBehaviour
         }
     }
 
-    void SetAchievementsIndication()
+    public void SetAchievementsIndication()
     {
         if (PlayerPrefs.GetInt(availableAchievements) != 0)
         {

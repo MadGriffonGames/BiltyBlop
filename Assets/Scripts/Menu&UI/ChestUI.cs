@@ -62,14 +62,17 @@ public class ChestUI : RewardedChest
             AdsManager.Instance.isRewardVideoWatched = false;
             PlayerPrefs.SetInt("IsMapChestOpen", 1);
             chest.GetComponent<Animator>().enabled = false;
+            chest.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             GiveLoot();
 
             isRewardCollected = true;
 
-            if (PlayerPrefs.GetInt("TutorialMode") == 1)
+            if (PlayerPrefs.GetInt("TutorialMode") > 0)
             {
                 GetComponent<ChestTutorial>().DisableTutorial();
+                PlayerPrefs.SetInt(SceneTutorial.CHEST_TUTORIAL_COMPLETE, 1);
+                DevToDev.Analytics.Tutorial(3);
             }
 
             AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
@@ -111,6 +114,7 @@ public class ChestUI : RewardedChest
             chestImage.sprite = chestOpen;
             activateButton.SetActive(false);
             chest.GetComponent<Animator>().enabled = false;
+            chest.transform.rotation = Quaternion.Euler(0,0,0);
         }
         else
         {

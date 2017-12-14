@@ -9,11 +9,11 @@ public class Translator : MonoBehaviour
 
     private void Start()
     {
-        //textField = GetComponent<Text>();
+#if UNITY_EDITOR
+        textField = GetComponent<Text>();
 
-        //if (textField != null && LocalizationManager.Instance.translation.ContainsKey(textField.text))
-        //{
-        //    textField.text = LocalizationManager.Instance.translation[textField.text];
-        //}
+        //LocalizationManager.Instance.UpdateLocaliztion(textField);
+#endif
     }
+
 }

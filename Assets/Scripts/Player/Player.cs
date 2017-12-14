@@ -171,10 +171,6 @@ public class Player : Character
         {
             isDoubleJumpAllowed = PlayerPrefs.GetInt("Level11") > 0;
         }
-        else
-        {
-            isDoubleJumpAllowed = true;
-        }
 
         if (timeControllerPrefab != null)
         {
@@ -333,7 +329,7 @@ public class Player : Character
             canJump = false;
             DoubleJump = false;
         }
-	}
+    }
 
 	private void HandleInput()
 	{

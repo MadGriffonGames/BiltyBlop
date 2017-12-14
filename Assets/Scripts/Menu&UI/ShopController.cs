@@ -63,6 +63,7 @@ public class ShopController : MonoBehaviour {
 
     public void ActivateShop(int number)
     {
+		
         for (int i = 0; i < shops.Length; i++)
         {
 			if (number == i) {

@@ -68,7 +68,7 @@ public class DamageTutorial : InAppTutorial
             int currentCount = Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS);
             currentCount = currentCount > 3 ? 3 : currentCount;
             Inventory.Instance.AddItem(Inventory.DAMAGE_BONUS, 3 - currentCount);
-            DevToDev.Analytics.Tutorial(3);
+            DevToDev.Analytics.Tutorial(8);
         }
         else if (PlayerPrefs.GetInt("Level5") > 0)
         {

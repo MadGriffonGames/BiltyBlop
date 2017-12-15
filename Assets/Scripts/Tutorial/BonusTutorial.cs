@@ -68,6 +68,7 @@ public class BonusTutorial : InAppTutorial
 
 			TutorialUI.Instance.txt.fontSize = fontSize;
 			TutorialUI.Instance.txt.text = textInventory;
+            LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
 			ActivateTutorial();
             if (type == "Immortal")
             {
@@ -105,6 +106,7 @@ public class BonusTutorial : InAppTutorial
 
             TutorialUI.Instance.txt.fontSize = fontSize;
             TutorialUI.Instance.txt.text = textInventory;
+            LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
             ActivateTutorial();
 
             if (type == "Speed")

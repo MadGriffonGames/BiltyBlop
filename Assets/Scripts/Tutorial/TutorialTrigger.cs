@@ -81,6 +81,7 @@ public class TutorialTrigger : MonoBehaviour
             TutorialUI.Instance.txt.fontSize = fontSize;
             TutorialUI.Instance.txt.text = text;
         }
+        LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
         if (TutorialUI.Instance.textBar.color.a >= 1)
         {
             show = false;

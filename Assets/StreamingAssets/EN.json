@@ -163,4 +163,69 @@
 	"text": "SELECT EPISODE", 
 	"fontSize": 0
 	},
+	
+	"destroy these boxes": {
+	"text": "DESTROY THESE BOXES USING YOUR SWORD", 
+	"fontSize": 0
+	},
+	
+	"this key will open an ancient door": {
+	"text": "THIS KEY WILL OPEN AN ANCIENT DOOR", 
+	"fontSize": 0
+	},
+	
+	"here is your first enemy. hit him": {
+	"text": "HERE IS YOUR FIRST ENEMY. HIT HIM", 
+	"fontSize": 0
+	},
+	
+	"you found a treasure chest! try to open it": {
+	"text": "YOU FOUND A TREASURE CHEST! TRY TO OPEN IT", 
+	"fontSize": 0
+	},
+	
+	"greetings young warrior! i will teach you on your journey": {
+	"text": "GREETINGS YOUNG WARRIOR! I WILL TEACH YOU IN YOUR JOURNEY", 
+	"fontSize": 0
+	},
+	
+	"every level contains 3 stars. collect them all!": {
+	"text": "EVERY LEVEL CONTAINS 3 STARS. COLLECT THEM ALL!", 
+	"fontSize": 0
+	},
+	
+	"jump on this mushroom": {
+	"text": "JUMP ON THIS MUSHROOM", 
+	"fontSize": 0
+	},
+	
+	"destroy him using throwing weapon": {
+	"text": "DESTROY HIM USING THROWING WEAPON", 
+	"fontSize": 0
+	},
+	
+	"destroy this maneken using your sword": {
+	"text": "DESTROY THIS MANIQUEN USING YOUR SWORD", 
+	"fontSize": 0
+	},
+	
+	"you got your first item! tap to backpack to open it": {
+	"text": "YOU GOT YOUR FIRST ITEM! TAP TO BACKPACK TO OPEN IT", 
+	"fontSize": 0
+	},
+	
+	"this potion restores one health point. tap to use it": {
+	"text": "THIS POTION RESTORES ONE HEALTH POINT. TAP TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"now you can use throwing weapon! open your backpack to get ammo": {
+	"text": "NOW YOU CAN USE THROWING WEAPON! OPEN YOUR BACKPACK TO GET AMMO", 
+	"fontSize": 0
+	},
+	
+	"this item restores your throwing weapons stock to max": {
+	"text": "THIS ITEM RESTORES YOUR THROWING WEAPONS STOCK TO MAX", 
+	"fontSize": 0
+	},
 }

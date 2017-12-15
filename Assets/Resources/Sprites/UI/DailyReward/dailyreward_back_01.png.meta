@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 293cd3275d25d3c48b10c4e15edcf1ce
-timeCreated: 1510747359
+guid: 4c2698b5a6e8fe244bffd5fceb7e5b1f
+timeCreated: 1513257691
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -75,32 +75,23 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: iPhone
-    maxTextureSize: 256
+    maxTextureSize: 1024
     resizeAlgorithm: 0
-    textureFormat: 55
+    textureFormat: 56
     textureCompression: 1
-    compressionQuality: 50
+    compressionQuality: 0
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
   - buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 56
     textureCompression: 1
-    compressionQuality: 50
+    compressionQuality: 0
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
   spriteSheet:
     serializedVersion: 2
     sprites: []

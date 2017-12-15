@@ -8,50 +8,61 @@ using UnityEngine;
 
 public class LocalizationManager : MonoBehaviour
 {
+    public struct LocalizedString
+    {
+        public string text;
+        public int fontSize;
+    }
+
     private static LocalizationManager instance;
     public static LocalizationManager Instance
     {
         get
         {
-            if (instance == null)
-                instance = GameObject.FindObjectOfType<LocalizationManager>();
             return instance;
         }
     }
     string pathToJson;
     string language = "EN";
     string jsonString;
-    public Dictionary<string, KeyValuePair<string, int>> translation;
+    public Dictionary<string, LocalizedString> translation;
 
     private void Awake()
     {
-        //if (language != null)
-        //{
-        //    DontDestroyOnLoad(this);
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
 
-        //    translation = new Dictionary<string, KeyValuePair<string, int>>();
-        //    pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
-        //    jsonString = File.ReadAllText(pathToJson);
-        //    translation = JsonConvert.DeserializeObject<Dictionary<string, KeyValuePair<string, int>>>(jsonString);
-        //}
+        instance = GetComponent<LocalizationManager>();
+
+        DontDestroyOnLoad(this);
+
+        if (language != null)
+        {
+            translation = new Dictionary<string, LocalizedString>();
+            pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
+            jsonString = File.ReadAllText(pathToJson);
+            translation = JsonConvert.DeserializeObject<Dictionary<string, LocalizedString>>(jsonString);
+        }
     }
 
     public void UpdateLocaliztion(Text textField)
     {
-        //if (textField != null)
-        //{
-        //    if (translation.ContainsKey(textField.text))
-        //    {
-        //        string translatedText = translation[textField.text].Key;
-        //        Debug.Log(translation[textField.text].GetType());
-        //        Debug.Log(translation[textField.text]);
-        //        Debug.Log(translatedText);
-        //        textField.text = translatedText;
-        //        if (true)
-        //        {
-
-        //        }
-        //    }
-        //}
+        if (textField != null)
+        {
+            if (translation.ContainsKey(textField.text))
+            {
+                if (translation[textField.text].fontSize > 0)
+                {
+                    textField.fontSize = translation[textField.text].fontSize;
+                }
+                textField.text = translation[textField.text].text;
+            }
+            else
+            {
+                Debug.Log("Can't find key: " + textField.text);
+            }
+        }
     }
 }

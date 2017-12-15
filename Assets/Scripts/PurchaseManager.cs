@@ -25,6 +25,9 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     [Tooltip("Многоразовые товары. Больше подходит для покупки игровой валюты и т.п.")]
     public string[] ConsumableProducts;
 
+	[SerializeField]
+	GameObject ninjaSkin;
+
     /// <summary>
     /// Событие, которое запускается при удачной покупке многоразового товара.
     /// </summary>
@@ -117,6 +120,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
                 PlayerPrefs.SetString("Black_ninja", "Unlocked");
+			Debug.Log(PlayerPrefs.GetString("Black_ninja"));
+				ninjaSkin.GetComponent<SkinPrefab>().UnlockSkin();
                 PlayerPrefs.SetString("PizzaThrow", "Unlocked");
                 PlayerPrefs.SetInt("Greedy", 3);
                 PlayerPrefs.SetFloat("Greedy3", 1.5f);
@@ -333,7 +338,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         m_StoreController = controller;
         m_StoreExtensionProvider = extensions;
 		#if UNITY_IOS
-		extensions.GetExtension<IAppleExtensions> ().RestoreTransactions (result => {
+		extensions.GetExtension<IAppleExtensions> ().RestoreTransactions (result => 
+			{
 			if (result) {
 				// This does not mean anything was restored,
 				// merely that the restoration process succeeded.
@@ -343,6 +349,41 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 		});
 		#endif
     }
+
+	public void RestorePurchases()
+	{
+		// If Purchasing has not yet been set up ...
+		if (!IsInitialized())
+		{
+			// ... report the situation and stop restoring. Consider either waiting longer, or retrying initialization.
+			Debug.Log("RestorePurchases FAIL. Not initialized.");
+			return;
+		}
+
+		// If we are running on an Apple device ... 
+		if (Application.platform == RuntimePlatform.IPhonePlayer || 
+			Application.platform == RuntimePlatform.OSXPlayer)
+		{
+			// ... begin restoring purchases
+			Debug.Log("RestorePurchases started ...");
+
+			// Fetch the Apple store-specific subsystem.
+			var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
+			// Begin the asynchronous process of restoring purchases. Expect a confirmation response in 
+			// the Action<bool> below, and ProcessPurchase if there are previously purchased products to restore.
+			apple.RestoreTransactions((result) => {
+				// The first phase of restoration. If no more responses are received on ProcessPurchase then 
+				// no purchases are available to be restored.
+				Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
+			});
+		}
+		// Otherwise ...
+		else
+		{
+			// We are not running on an Apple device. No work is necessary to restore purchases.
+			Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
+		}
+	}
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {

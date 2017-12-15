@@ -29,12 +29,16 @@ public class SkinPrefab : MonoBehaviour
 
     public void SetPlayerPrefsParams()
     {
-		if (!PlayerPrefs.HasKey (gameObject.name))
-        {
-            if (isLocked) {
+		if (!PlayerPrefs.HasKey (gameObject.name)) {
+			if (isLocked) {
+				Debug.Log (gameObject.name);
 				PlayerPrefs.SetString (gameObject.name, LOCKED);
 			} else
 				PlayerPrefs.SetString (gameObject.name, UNLOCKED);
+		} else 
+		{
+			if (PlayerPrefs.GetString (gameObject.name) == UNLOCKED)
+				UnlockSkin ();	
 		}
 		
         if (!PlayerPrefs.HasKey(gameObject.name + CRYSTAL_COST))

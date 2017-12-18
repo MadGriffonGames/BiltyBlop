@@ -48,6 +48,9 @@ public class DailyReward : MonoBehaviour
     GameObject freeText;
     [SerializeField]
     GameObject getRewardButton;
+    bool musicWasPlaying;
+
+
 
     Image chestImage;
     bool isSpined = false;
@@ -200,9 +203,16 @@ public class DailyReward : MonoBehaviour
 
         if (AdsManager.Instance.isRewardVideoWatched && isRewardedVideoWatched)
         {
+            if (musicWasPlaying)
+            {
+                musicWasPlaying = false;
+                PlayerPrefs.SetInt("MusicIsOn", 1);
+                SoundManager.MuteMusic(false);
+            }
             AdsManager.Instance.isRewardVideoWatched = false;
 
             rewardText.text = (int.Parse(rewardText.text)*2).ToString();
+
             myReward.GiveReward();
         }
     }
@@ -341,10 +351,17 @@ public class DailyReward : MonoBehaviour
         DevToDev.Analytics.CustomEvent("#REWARDx2_BUTTON pressed");
 
         isRewardedVideoWatched = true;
+        if (PlayerPrefs.GetInt("MusicIsOn") == 1)
+        {
+            musicWasPlaying = true;
+            PlayerPrefs.SetInt("MusicIsOn", 0);
+            SoundManager.MuteMusic(true);
+        }
 
 #if UNITY_EDITOR
         AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
+
         AdsManager.Instance.ShowRewardedVideo();
 #endif
         doubleButton.GetComponent<Button>().interactable = false;

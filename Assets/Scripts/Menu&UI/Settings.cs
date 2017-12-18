@@ -15,6 +15,8 @@ public class Settings : MonoBehaviour
     GameObject settingsWindow;
     [SerializeField]
     GameObject fade;
+	[SerializeField]
+	GameObject restorePurchasesButton;
     
     bool hide = true;
 
@@ -23,6 +25,8 @@ public class Settings : MonoBehaviour
         MyAnimator = GetComponent<Animator>();
         musicButton.gameObject.SetActive(false);
         fxButton.gameObject.SetActive(false);
+		if (SceneManager.GetActiveScene().name == "MainMenu")
+		restorePurchasesButton.SetActive (false);
     }
 
     public void ShowButtons()
@@ -31,6 +35,8 @@ public class Settings : MonoBehaviour
             settingsWindow.gameObject.SetActive(true);
             musicButton.gameObject.SetActive(true);
             fxButton.gameObject.SetActive(true);
+		if (SceneManager.GetActiveScene().name == "MainMenu")
+		restorePurchasesButton.SetActive (true);
         //hide = !hide;
         //if (!hide)
         //{

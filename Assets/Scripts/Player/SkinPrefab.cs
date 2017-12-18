@@ -8,6 +8,7 @@ public class SkinPrefab : MonoBehaviour
 
     public string shopName;
     public bool isLocked;  // true = skin locked; false = skin unlocked;
+	public bool isAvaliableInShop; // thrue - avaliable; false - NOT avaliable;
     public int orderNumber;
     public Sprite skinSprite;
 
@@ -19,11 +20,14 @@ public class SkinPrefab : MonoBehaviour
 
     private const string LOCKED = "Locked";
     private const string UNLOCKED = "Unlocked";
+	private const string AVALIABLE = "Avaliable";
+	private const string NOT_AVALIABLE = "NotAvaliable";
     private const string CRYSTAL_COST = "CrystalCost";
     private const string COIN_COST = "CoinCost";
     private const string ARMOR = "ArmorStat";
     private const string ATTACK = "AttackStat";
 	private const string DISPLAY_INDEX = "DisplayIndex";
+	private const string IS_AVALIABLE_IN_SHOP = "IsAvaliableInShop";
 
     private const string SPRITE_FOLDER = "Skins/SkinSprites/";
 
@@ -31,14 +35,20 @@ public class SkinPrefab : MonoBehaviour
     {
 		if (!PlayerPrefs.HasKey (gameObject.name)) {
 			if (isLocked) {
-				Debug.Log (gameObject.name);
 				PlayerPrefs.SetString (gameObject.name, LOCKED);
 			} else
 				PlayerPrefs.SetString (gameObject.name, UNLOCKED);
+		}
+
+		if (!PlayerPrefs.HasKey (gameObject.name + IS_AVALIABLE_IN_SHOP)) {
+			if (isAvaliableInShop) {
+				PlayerPrefs.SetString (gameObject.name + IS_AVALIABLE_IN_SHOP, AVALIABLE);
+			} else
+				PlayerPrefs.SetString (gameObject.name + IS_AVALIABLE_IN_SHOP, NOT_AVALIABLE);
 		} else 
 		{
-			if (PlayerPrefs.GetString (gameObject.name) == UNLOCKED)
-				UnlockSkin ();	
+			if (PlayerPrefs.GetString (gameObject.name + IS_AVALIABLE_IN_SHOP) == AVALIABLE)
+				isAvaliableInShop = true;
 		}
 		
         if (!PlayerPrefs.HasKey(gameObject.name + CRYSTAL_COST))
@@ -63,6 +73,7 @@ public class SkinPrefab : MonoBehaviour
     public void UnlockSkin()
     {
         PlayerPrefs.SetString(gameObject.name, UNLOCKED);
+		PlayerPrefs.SetString(gameObject.name + isAvaliableInShop, AVALIABLE);
         isLocked = false;
     }
 	public int GetSkinIndex()

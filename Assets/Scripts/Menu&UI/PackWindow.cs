@@ -42,10 +42,41 @@ public class PackWindow : MonoBehaviour
     public void BuyPack(int packId)
     {
         PurchaseManager.Instance.BuyNonConsumable(packId);
+        
+        switch (packId)
+        {
+            case 1:
+                if (PlayerPrefs.GetInt("StarterPackBought") > 0)
+                {
+                    DisablePackWindow();
+                }
+                break;
+
+            case 2:
+                if (PlayerPrefs.GetInt("Pack1_NoAdsBought") > 0)
+                {
+                    DisablePackWindow();
+                }
+                break;
+
+            case 3:
+                if (PlayerPrefs.GetInt("Pack1Bought") > 0)
+                {
+                    DisablePackWindow();
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void DisablePackWindow()
+    {
         fade.SetActive(false);
         packSign.SetActive(false);
         this.gameObject.SetActive(false);
-    }
+    } 
 
     private void OnEnable()
     {

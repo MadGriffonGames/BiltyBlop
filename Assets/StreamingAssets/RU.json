@@ -1,4 +1,6 @@
 ﻿{
+// MAIN MENU
+	
 	"play": {
 	"text": "ИГРАТЬ",
 	"fontSize": 0
@@ -9,13 +11,326 @@
 	"fontSize": 0
 	},
 	
+	"day 2": {
+	"text": "ДЕНЬ 2", 
+	"fontSize": 0
+	},
+	
+	"day 3": {
+	"text": "ДЕНЬ 3", 
+	"fontSize": 0
+	},
+	
+	"day 4": {
+	"text": "ДЕНЬ 4", 
+	"fontSize": 0
+	},
+	
+	"day 5": {
+	"text": "ДЕНЬ 5", 
+	"fontSize": 0
+	},
+	
+	"day 6": {
+	"text": "ДЕНЬ 6", 
+	"fontSize": 0
+	},
+	
+	"day 7": {
+	"text": "ДЕНЬ 7", 
+	"fontSize": 0
+	},
+	
+	"day 8": {
+	"text": "ДЕНЬ 8", 
+	"fontSize": 0
+	},
+	
+	"day 9": {
+	"text": "ДЕНЬ 9", 
+	"fontSize": 0
+	},
+	
+	"day 10": {
+	"text": "ДЕНЬ 10", 
+	"fontSize": 0
+	},
+	
 	"starter pack": {
 	"text": "СТАРТЕР ПАК", 
 	"fontSize": 0
 	},
 	
-	"hero's choise": {
+	"hero's choice": {
 	"text": "ВЫБОР ГЕРОЯ", 
+	"fontSize": 0
+	},
+	
+	"get": {
+	"text": "ЗАБРАТЬ", 
+	"fontSize": 0
+	},
+	
+	"to double bonus": {
+	"text": "УДВОЙ БОНУС", 
+	"fontSize": 0
+	},
+	
+	"today bonus": {
+	"text": "БОНУС НА СЕГОДНЯ", 
+	"fontSize": 0
+	},
+	
+	"daily reward": {
+	"text": "ЕЖЕДНЕВНАЯ НАГРАДА", 
+	"fontSize": 0
+	},
+	
+	"gifts": {
+	"text": "ПОДАРКИ", 
+	"fontSize": 0
+	},
+	
+	"50 coins": {
+	"text": "50 МОНЕТ", 
+	"fontSize": 0
+	},
+	
+	"1 ammo": {
+	"text": "1 КОЛЧАН", 
+	"fontSize": 0
+	},
+	
+	"random potion": {
+	"text": "СЛУЧАЙНОЕ ЗЕЛЬЕ", 
+	"fontSize": 0
+	},
+	
+	"buy": {
+	"text": "КУПИТЬ", 
+	"fontSize": 0
+	},
+	
+	"potions\npack": {
+	"text": "ПАК\nЗЕЛИЙ", 
+	"fontSize": 0
+	},
+	
+	"ancient\naxe": {
+	"text": "ДРЕВНИЙ\nТОПОР", 
+	"fontSize": 0
+	},
+	
+	"no ads": {
+	"text": "ОТКЛЮЧЕНИЕ\nРЕКЛАМЫ", 
+	"fontSize": 0
+	},
+	
+	"3 ammo\nquiver": {
+	"text": "3\nКОЛЧАНА", 
+	"fontSize": 0
+	},
+	
+	"60\ncrystals": {
+	"text": "60\nКРИСТАЛОВ", 
+	"fontSize": 0
+	},
+	
+	"20 free\nrevives": {
+	"text": "20\nБЕСПЛАТНЫХ\nВОСКРЕШЕНИЙ", 
+	"fontSize": 0
+	},
+	
+	"throwing\npizza": {
+	"text": "МЕТАТЕЛЬНАЯ\nПИЦЦА", 
+	"fontSize": 0
+	},
+	
+	"greedy\nperk": {
+	"text": "ПЕРК\nЖАДНОСТЬ", 
+	"fontSize": 0
+	},
+	
+	"ninjarian\nskin": {
+	"text": "NINJARIAN\nСКИН", 
+	"fontSize": 0
+	},
+	
+	"remove ads": {
+	"text": "УБРАТЬ РЕКЛАМУ", 
+	"fontSize": 0
+	},
+	
+	"select episode": {
+	"text": "ВЫБОР ЭПИЗОДА", 
+	"fontSize": 0
+	},
+	
+	//Level 1
+	
+	"destroy these boxes": {
+	"text": "СЛОМАЙ ЯЩИКИ УДАРИВ ПО НИМ", 
+	"fontSize": 0
+	},
+	
+	"this key will open an ancient door": {
+	"text": "ЭТОТ КЛЮЧ ОТКРЫВАЕТ ДРЕВНЮЮ ДВЕРЬ", 
+	"fontSize": 0
+	},
+	
+	"here is your first enemy. hit him": {
+	"text": "А ВОТ И ТВОЙ ПЕРВЫЙ ВРАГ! УДАРЬ ЕГО", 
+	"fontSize": 0
+	},
+	
+	"you found a treasure chest! try to open it": {
+	"text": "ТЫ НАШЕЛ СУНДУК С СКОРОВИЩАМИ! ОТКРОЙ ЕГО", 
+	"fontSize": 0
+	},
+	
+	"greetings young warrior! i will teach you on your journey": {
+	"text": "ПРИВЕТСТВУЮ, ЮНЫЙ ВОИН! Я БУДУ ОБУЧАТЬ ТЕБЯ", 
+	"fontSize": 0
+	},
+	
+	"every level contains 3 stars. collect them all!": {
+	"text": "НА КАЖДОМ УРОВНЕ ЕСТЬ 3 ЗВЕЗДЫ. СОБЕРИ ИХ ВСЕ!", 
+	"fontSize": 0
+	},
+	
+	"jump on this mushroom": {
+	"text": "ПРЫГАЙ НА ЭТОТ ГРИБ", 
+	"fontSize": 0
+	},
+	
+	"destroy him using throwing weapon": {
+	"text": "СЛОМАЙ МАНЕКЕН, ИСПОЛЬЗУЯ МЕТАТЕЛЬНОЕ ОРУЖИЕ", 
+	"fontSize": 0
+	},
+	
+	"destroy this maneken using your sword": {
+	"text": "СЛОМАЙ МАНЕКЕН С ПОМОЩЬЮ МЕЧА", 
+	"fontSize": 0
+	},
+	
+	"you got your first item! tap to backpack to open it": {
+	"text": "ТЫ НАШЕЛ ЗЕЛЬЕ! НАЖМИ НА РЮКЗАК, ЧТОБЫ ОТКРЫТЬ ЕГО", 
+	"fontSize": 0
+	},
+	
+	"this potion restores one health point. tap to use it": {
+	"text": "ЭТО ЗЕЛЬЕ ВОССТАНАВЛИВАЕТ ОДИН ПУНКТ ЗДОРОВЬЯ. НАЖМИ НА НЕГО, ЧТОБЫ ИСПОЛЬЗОВАТЬ", 
+	"fontSize": 0
+	},
+	
+	"now you can use throwing weapon! open your backpack to get ammo": {
+	"text": "ТЕПЕРЬ ПОПРОБУЕМ МЕТАТЕЛЬНОЕ ОРУЖИЕ! НАЖМИ НА РЮКЗАК, ЧТОБЫ ОТКРЫТЬ ЕГО", 
+	"fontSize": 0
+	},
+	
+	"this item restores your throwing weapons stock to max": {
+	"text": "ЭТОТ ПРЕДМЕТ ПОЛНОСТЬЮ ВОССТАНАВЛИВАЕТ ЗАПАС МЕТАТЕЛЬНОГО ОРУЖИЯ", 
+	"fontSize": 0
+	},
+	
+	//Level 2
+	
+	"beware this flower! he shoots you with a poisoned seed": {
+	"text": "БЕРЕГИСЬ ЭТОГО ЦВЕТКА! ОН ПЛЮЕТСЯ ОТРАВОЙ", 
+	"fontSize": 0
+	},
+	
+	"look at your head! this means that there is a secret nearby": {
+	"text": "ПОСМОТРИ НА СВОЮ ГОЛОВУ! ЭТО ЗНАЧИТ, ЧТО ГДЕ-ТО НЕПОДАЛЕКУ ЕСТЬ СЕКРЕТ", 
+	"fontSize": 0
+	},
+	
+	"try to run through this wall": {
+	"text": "ПОПРОБУЙ ПРОБЕЖАТЬ ЧЕРЕЗ ЭТУ СТЕНУ", 
+	"fontSize": 0
+	},
+	
+	"this potion gives you immortal for a short time! open your backpack to use it": {
+	"text": "ЭТО ЗЕЛЬЕ ДАСТ ТЕБЕ БЕССМЕРТИЕ НА НЕБОЛЬШОЕ ВРЕМЯ. ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 0
+	},
+	
+	"tap to potions button, then tap to potion to use it": {
+	"text": "НАЖМИ НА КНОПКУ ВЫБОРА ЗЕЛЬЯ, ЗАТЕМ НА САМО ЗЕЛЬЕ", 
+	"fontSize": 0
+	},
+	
+	"jump over these blades as they don't move!": {
+	"text": "ПЕРЕПРЫГНИ ЧЕРЕЗ ЭТИ ПИЛЫ, ПОКА ОНИ НЕ ДВИГАЮТСЯ", 
+	"fontSize": 0
+	},
+	
+	"runs beneath these saws until they move!": {
+	"text": "ПРОБЕГИ ПОД ЭТИМИ ПИЛАМИБ ПОКА ОНИ НЕ ДВИГАЮТСЯ", 
+	"fontSize": 0
+	},
+	
+	//Level 3
+	
+	"this is double speed potion! open your backpack to use it": {
+	"text": "ЭТО ЗЕЛЬЕ СКОРОСТИ! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 0
+	},
+	
+	"tap to potions button, then tap to potion, to use it": {
+	"text": "НАЖМИ НА КНОПКУ ВЫБОРА ЗЕЛЬЯ, ЗАТЕМ НА САМО ЗЕЛЬЕ", 
+	"fontSize": 0
+	},
+	
+	//Level 4
+	
+	"you have double damage potion! open your backpack to use it": {
+	"text": "ТЫ НАШЕЛ ЗЕЛЬЕ ДВОЙНОГО УРОНА! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 0
+	},
+	
+	//Level 5
+	
+	"these magic boots gives you super jump": {
+	"text": "ЭТИ МАГИЧЕСКИЕ БОТИНКИ ДЕЮТ ВОЗМОЖНОСТЬ ПРЫГАТЬ ВЫШЕ", 
+	"fontSize": 0
+	},
+	
+	//Level 6
+	
+	"this potion gives you slow-motion effect! open your backpack to use it": {
+	"text": "ЭТО ЗЕЛЬЕ ЗАМЕДЛЕНИЯ ВРЕМЕНИ! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 0
+	},
+	
+	//Map
+	
+	"it's time for shopping! tap on this button to go to the shop": {
+	"text": "САМОЕ ВРЕМЯ ДЛЯ ШОПИНГА! НАЖМИ НА ЭТУ КНОПКУ, ЧТОБЫ ПЕРЕЙТИ В МАГАЗИН", 
+	"fontSize": 0
+	},
+	
+	"looks like you have new achievement! tap on this button to get your reward": {
+	"text": "КАЖЕТСЯ ТЫ ПОЛУЧИЛ НОВОЕ ДОСТИЖЕНИЕ! НАЖМИ НА ЭТУ КНОПКУ ЧТОБЫ ЗАБРАТЬ НАГРАДУ", 
+	"fontSize": 0
+	},
+	
+	"look at this chest! tap on it to get your reward": {
+	"text": "НАЖМИ НА СУНДУК ЧТОБЫ ЗАБРАТЬ НАГРАДУ ЗА УРОВЕНЬ", 
+	"fontSize": 0
+	},
+	
+	//Achievements
+	
+	"tap on this button to get reward": {
+	"text": "НАЖМИ НА ЭТУ КНОПКУ ЧТОБЫ ПОЛУЧИТЬ НАГРАДУ", 
+	"fontSize": 0
+	},
+	
+	//Level 11
+	
+	"congratulations! now you can use double jump!": {
+	"text": "ПОЗДРАВЛЯЮ! ТЕПЕРЬ У ТЕБЯ ЕСТЬ ДВОЙНОЙ ПРЫЖОК", 
 	"fontSize": 0
 	},
 }

@@ -19,6 +19,7 @@ public class TutorialTrigger : MonoBehaviour
     bool active = true;
     bool hide = false;
     bool show = false;
+    bool isLocalized;
 
     private void Start()
     {
@@ -27,6 +28,8 @@ public class TutorialTrigger : MonoBehaviour
         {
             arrow.SetActive(false);
         }
+
+        isLocalized = false;
     }
 
     private void Update()
@@ -81,7 +84,13 @@ public class TutorialTrigger : MonoBehaviour
             TutorialUI.Instance.txt.fontSize = fontSize;
             TutorialUI.Instance.txt.text = text;
         }
-        LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
+
+        if (!isLocalized)
+        {
+            LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
+            isLocalized = true;
+        }
+        
         if (TutorialUI.Instance.textBar.color.a >= 1)
         {
             show = false;

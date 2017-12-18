@@ -150,9 +150,6 @@ public class AchievementManager : MonoBehaviour
         potionerReward = new int[] { 100, 2, 1 };
         potionerRewardType = new string[] { "Coins", "Crystals", HEAL};
 
-        PlayerPrefs.SetString("Black_ninja", "Locked");
-        PlayerPrefs.SetString("Sword3Throw", "Locked");
-
         //ResetStat("Mob killer");
         //ResetStat("Diver");
         //ResetStat("Secret Rush test");

@@ -204,6 +204,9 @@ public class DailyRewardSlot : MonoBehaviour
                     {
                         DailyReward.isRewardCollected = true;
 
+                        PlayerPrefs.SetString("Buildarian", "Unlocked");
+                        PlayerPrefs.SetString("BuildarianIsAvaliableInShop", "Avaliable");
+
                         PlayerPrefs.SetInt("RewardDay", 0);
                     }
                     break;

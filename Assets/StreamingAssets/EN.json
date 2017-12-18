@@ -1,4 +1,6 @@
 ﻿{
+	// MAIN MENU
+	
 	"play": {
 	"text": "PLAY",
 	"fontSize": 0
@@ -164,6 +166,8 @@
 	"fontSize": 0
 	},
 	
+	//Level 1
+	
 	"destroy these boxes": {
 	"text": "DESTROY THESE BOXES USING YOUR SWORD", 
 	"fontSize": 0
@@ -226,6 +230,107 @@
 	
 	"this item restores your throwing weapons stock to max": {
 	"text": "THIS ITEM RESTORES YOUR THROWING WEAPONS STOCK TO MAX", 
+	"fontSize": 0
+	},
+	
+	//Level 2
+	
+	"beware this flower! he shoots you with a poisoned seed": {
+	"text": "BEWARE THIS FLOWER! HE SHOOTS YOU WITH A POISONED SEED", 
+	"fontSize": 0
+	},
+	
+	"look at your head! this means that there is a secret nearby": {
+	"text": "LOOK AT YOUR HEAD! THIS MEANS THAT THERE IS A SECRET NEARBY", 
+	"fontSize": 0
+	},
+	
+	"try to run through this wall": {
+	"text": "TRY TO RUN THROGH THIS WALL", 
+	"fontSize": 0
+	},
+	
+	"this potion gives you immortal for a short time! open your backpack to use it": {
+	"text": "THIS POTION GIVES YOU IMMORTAL FOR A SHORT TIME! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"tap to potions button, then tap to potion to use it": {
+	"text": "TAP TO POTIONS BUTTON, THEN TAP TO POTION TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"jump over these blades as they don't move!": {
+	"text": "JUMP OVER THESE BLADES AS THEY DON'T MOVE!", 
+	"fontSize": 0
+	},
+	
+	"runs beneath these saws until they move!": {
+	"text": "RUNS BENEATH THESE SAWS UNITL THEY MOVE", 
+	"fontSize": 0
+	},
+	
+	//Level 3
+	
+	"this is double speed potion! open your backpack to use it": {
+	"text": "THIS IS DOUBLE SPEED POTION! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"tap to potions button, then tap to potion, to use it": {
+	"text": "TAP TO POTIONS BUTTON, THEN TAP TO POTION TO USE IT", 
+	"fontSize": 0
+	},
+	
+	//Level 4
+	
+	"you have double damage potion! open your backpack to use it": {
+	"text": "YOU HAVE DOUBLE DAMAGE POTION! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	//Level 5
+	
+	"these magic boots gives you super jump": {
+	"text": "THESE MAGIC BOOTS GIVES YOU SUPER JUMP", 
+	"fontSize": 0
+	},
+	
+	//Level 6
+	
+	"this potion gives you slow-motion effect! open your backpack to use it": {
+	"text": "THIS POTION GIVES YOU SLOW-MOTION EFFECT! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	//Map
+	
+	"it's time for shopping! tap on this button to go to the shop": {
+	"text": "IT'S TIME FOR SHOPPING! TAP ON THIS BUTTON TO GO TO THE SHOP", 
+	"fontSize": 0
+	},
+	
+	"looks like you have new achievement! tap on this button to get your reward": {
+	"text": "LOOKS LIKE YOU HAVE NEW ACHIEVEMENT! TAP ON THIS BUTTON TO GET YOUR REWARD", 
+	"fontSize": 0
+	},
+	
+	"look at this chest! tap on it to get your reward": {
+	"text": "LOOK AT THIS CHEST! TAP ON IT TO GET YOUR REWARD", 
+	"fontSize": 0
+	},
+	
+	//Achievements
+	
+	"tap on this button to get reward": {
+	"text": "TAP ON THIS BUTTON TO GET REWARD", 
+	"fontSize": 0
+	},
+	
+	//Level 11
+	
+	"congratulations! now you can use double jump!": {
+	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
 	"fontSize": 0
 	},
 }

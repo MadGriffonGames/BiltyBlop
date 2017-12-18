@@ -97,7 +97,10 @@ public class Maneken : MonoBehaviour
         SetHealthbar();
         if (IsDead)
         {
-            manekenCollider.gameObject.SetActive(false);
+            if (manekenCollider)
+            {
+                manekenCollider.SetActive(false);
+            }
             Instantiate(particle, this.gameObject.transform.position + new Vector3(0.8f, 0, -3), Quaternion.identity);
             SoundManager.PlaySound("wooden_box1");
 

@@ -48,7 +48,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         }
         else
         {
-			#if UNITY_IOS
+            #if UNITY_IOS
 			for (int i = 0; i < ConsumableProducts.Length; i++) 
 			{
 				ConsumableProducts[i] = "com.hardslime.kidarian." + ConsumableProducts[i];
@@ -101,7 +101,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 break;
 
             case "pack1_noads":
-                PlayerPrefs.SetInt("Pack1Bought", 1);
+                PlayerPrefs.SetInt("Pack1_NoAdsBought", 1);
 
                 PlayerPrefs.SetInt("NoAds", 1);
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
@@ -113,7 +113,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 break;
 
             case "pack1":
-                PlayerPrefs.SetInt("Pack1_NoAdsBought", 1);
+                PlayerPrefs.SetInt("Pack1Bought", 1);
                
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 60);
                 PlayerPrefs.SetString("Black_ninja", "Unlocked");
@@ -276,8 +276,12 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     public void InitializePurchasing()
     {
-		var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.AppleAppStore));
-		foreach (string s in ConsumableProducts) 
+#if UNITY_IOS
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.AppleAppStore));
+#elif UNITY_ANDROID || UNITY_EDITOR
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
+#endif
+        foreach (string s in ConsumableProducts) 
 		{
 			builder.AddProduct (s, ProductType.Consumable);
 		}

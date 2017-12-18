@@ -1,16 +1,336 @@
 ﻿{
+	// MAIN MENU
+	
 	"play": {
-	"PLAY" : 1
+	"text": "PLAY",
+	"fontSize": 0
 	},
 	
 	"day 1": {
-	"DAY 1" : 2
-	},
-	"starter pack": {
-	"STARTER PACK" : 3
+	"text": "DAY 1", 
+	"fontSize": 0
 	},
 	
-	"to double bonus:": {
-	"TO DOUBLE BONUS:" : 4
-	}
+	"day 2": {
+	"text": "DAY 2", 
+	"fontSize": 0
+	},
+	
+	"day 3": {
+	"text": "DAY 3", 
+	"fontSize": 0
+	},
+	
+	"day 4": {
+	"text": "DAY 4", 
+	"fontSize": 0
+	},
+	
+	"day 5": {
+	"text": "DAY 5", 
+	"fontSize": 0
+	},
+	
+	"day 6": {
+	"text": "DAY 6", 
+	"fontSize": 0
+	},
+	
+	"day 7": {
+	"text": "DAY 7", 
+	"fontSize": 0
+	},
+	
+	"day 8": {
+	"text": "DAY 8", 
+	"fontSize": 0
+	},
+	
+	"day 9": {
+	"text": "DAY 9", 
+	"fontSize": 0
+	},
+	
+	"day 10": {
+	"text": "DAY 10", 
+	"fontSize": 0
+	},
+	
+	"starter pack": {
+	"text": "STARTER PACK", 
+	"fontSize": 0
+	},
+	
+	"hero's choice": {
+	"text": "HERO'S CHOICE", 
+	"fontSize": 0
+	},
+	
+	"get": {
+	"text": "GET", 
+	"fontSize": 0
+	},
+	
+	"to double bonus": {
+	"text": "TO DOUBLE BONUS", 
+	"fontSize": 0
+	},
+	
+	"today bonus": {
+	"text": "TODAY BONUS", 
+	"fontSize": 0
+	},
+	
+	"daily reward": {
+	"text": "DAILY REWARD", 
+	"fontSize": 0
+	},
+	
+	"gifts": {
+	"text": "GIFTS", 
+	"fontSize": 0
+	},
+	
+	"50 coins": {
+	"text": "50 COINS", 
+	"fontSize": 0
+	},
+	
+	"1 ammo": {
+	"text": "1 AMMO", 
+	"fontSize": 0
+	},
+	
+	"random potion": {
+	"text": "RANDOM POTION", 
+	"fontSize": 0
+	},
+	
+	"buy": {
+	"text": "BUY", 
+	"fontSize": 0
+	},
+	
+	"potions\npack": {
+	"text": "POTIONS\nPACK", 
+	"fontSize": 0
+	},
+	
+	"ancient\naxe": {
+	"text": "ANCIENT\nAXE", 
+	"fontSize": 0
+	},
+	
+	"no ads": {
+	"text": "NO ADS", 
+	"fontSize": 0
+	},
+	
+	"3 ammo\nquiver": {
+	"text": "3 AMMO\nQUIVER", 
+	"fontSize": 0
+	},
+	
+	"60\ncrystals": {
+	"text": "60\nCRYSTALS", 
+	"fontSize": 0
+	},
+	
+	"20 free\nrevives": {
+	"text": "20 FREE\nREVIVES", 
+	"fontSize": 0
+	},
+	
+	"throwing\npizza": {
+	"text": "THROWING\nPIZZA", 
+	"fontSize": 0
+	},
+	
+	"greedy\nperk": {
+	"text": "GREEDY\nPERK", 
+	"fontSize": 0
+	},
+	
+	"ninjarian\nskin": {
+	"text": "NINJARIAN\nSKIN", 
+	"fontSize": 0
+	},
+	
+	"remove ads": {
+	"text": "REMOVE ADS", 
+	"fontSize": 0
+	},
+	
+	"select episode": {
+	"text": "SELECT EPISODE", 
+	"fontSize": 0
+	},
+	
+	//Level 1
+	
+	"destroy these boxes": {
+	"text": "DESTROY THESE BOXES USING YOUR SWORD", 
+	"fontSize": 0
+	},
+	
+	"this key will open an ancient door": {
+	"text": "THIS KEY WILL OPEN AN ANCIENT DOOR", 
+	"fontSize": 0
+	},
+	
+	"here is your first enemy. hit him": {
+	"text": "HERE IS YOUR FIRST ENEMY. HIT HIM", 
+	"fontSize": 0
+	},
+	
+	"you found a treasure chest! try to open it": {
+	"text": "YOU FOUND A TREASURE CHEST! TRY TO OPEN IT", 
+	"fontSize": 0
+	},
+	
+	"greetings young warrior! i will teach you on your journey": {
+	"text": "GREETINGS YOUNG WARRIOR! I WILL TEACH YOU IN YOUR JOURNEY", 
+	"fontSize": 0
+	},
+	
+	"every level contains 3 stars. collect them all!": {
+	"text": "EVERY LEVEL CONTAINS 3 STARS. COLLECT THEM ALL!", 
+	"fontSize": 0
+	},
+	
+	"jump on this mushroom": {
+	"text": "JUMP ON THIS MUSHROOM", 
+	"fontSize": 0
+	},
+	
+	"destroy him using throwing weapon": {
+	"text": "DESTROY HIM USING THROWING WEAPON", 
+	"fontSize": 0
+	},
+	
+	"destroy this maneken using your sword": {
+	"text": "DESTROY THIS MANIQUEN USING YOUR SWORD", 
+	"fontSize": 0
+	},
+	
+	"you got your first item! tap to backpack to open it": {
+	"text": "YOU GOT YOUR FIRST ITEM! TAP TO BACKPACK TO OPEN IT", 
+	"fontSize": 0
+	},
+	
+	"this potion restores one health point. tap to use it": {
+	"text": "THIS POTION RESTORES ONE HEALTH POINT. TAP TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"now you can use throwing weapon! open your backpack to get ammo": {
+	"text": "NOW YOU CAN USE THROWING WEAPON! OPEN YOUR BACKPACK TO GET AMMO", 
+	"fontSize": 0
+	},
+	
+	"this item restores your throwing weapons stock to max": {
+	"text": "THIS ITEM RESTORES YOUR THROWING WEAPONS STOCK TO MAX", 
+	"fontSize": 0
+	},
+	
+	//Level 2
+	
+	"beware this flower! he shoots you with a poisoned seed": {
+	"text": "BEWARE THIS FLOWER! HE SHOOTS YOU WITH A POISONED SEED", 
+	"fontSize": 0
+	},
+	
+	"look at your head! this means that there is a secret nearby": {
+	"text": "LOOK AT YOUR HEAD! THIS MEANS THAT THERE IS A SECRET NEARBY", 
+	"fontSize": 0
+	},
+	
+	"try to run through this wall": {
+	"text": "TRY TO RUN THROGH THIS WALL", 
+	"fontSize": 0
+	},
+	
+	"this potion gives you immortal for a short time! open your backpack to use it": {
+	"text": "THIS POTION GIVES YOU IMMORTAL FOR A SHORT TIME! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"tap to potions button, then tap to potion to use it": {
+	"text": "TAP TO POTIONS BUTTON, THEN TAP TO POTION TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"jump over these blades as they don't move!": {
+	"text": "JUMP OVER THESE BLADES AS THEY DON'T MOVE!", 
+	"fontSize": 0
+	},
+	
+	"runs beneath these saws until they move!": {
+	"text": "RUNS BENEATH THESE SAWS UNITL THEY MOVE", 
+	"fontSize": 0
+	},
+	
+	//Level 3
+	
+	"this is double speed potion! open your backpack to use it": {
+	"text": "THIS IS DOUBLE SPEED POTION! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	"tap to potions button, then tap to potion, to use it": {
+	"text": "TAP TO POTIONS BUTTON, THEN TAP TO POTION TO USE IT", 
+	"fontSize": 0
+	},
+	
+	//Level 4
+	
+	"you have double damage potion! open your backpack to use it": {
+	"text": "YOU HAVE DOUBLE DAMAGE POTION! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	//Level 5
+	
+	"these magic boots gives you super jump": {
+	"text": "THESE MAGIC BOOTS GIVES YOU SUPER JUMP", 
+	"fontSize": 0
+	},
+	
+	//Level 6
+	
+	"this potion gives you slow-motion effect! open your backpack to use it": {
+	"text": "THIS POTION GIVES YOU SLOW-MOTION EFFECT! OPEN YOUR BACKPACK TO USE IT", 
+	"fontSize": 0
+	},
+	
+	//Map
+	
+	"it's time for shopping! tap on this button to go to the shop": {
+	"text": "IT'S TIME FOR SHOPPING! TAP ON THIS BUTTON TO GO TO THE SHOP", 
+	"fontSize": 0
+	},
+	
+	"looks like you have new achievement! tap on this button to get your reward": {
+	"text": "LOOKS LIKE YOU HAVE NEW ACHIEVEMENT! TAP ON THIS BUTTON TO GET YOUR REWARD", 
+	"fontSize": 0
+	},
+	
+	"look at this chest! tap on it to get your reward": {
+	"text": "LOOK AT THIS CHEST! TAP ON IT TO GET YOUR REWARD", 
+	"fontSize": 0
+	},
+	
+	//Achievements
+	
+	"tap on this button to get reward": {
+	"text": "TAP ON THIS BUTTON TO GET REWARD", 
+	"fontSize": 0
+	},
+	
+	//Level 11
+	
+	"congratulations! now you can use double jump!": {
+	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
+	"fontSize": 0
+	},
 }

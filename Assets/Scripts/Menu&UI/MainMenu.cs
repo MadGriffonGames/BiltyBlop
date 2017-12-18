@@ -299,7 +299,12 @@ public class MainMenu : MonoBehaviour
 
         if (PlayerPrefs.GetInt("StarterPackBought") == 1)
         {
-            packTitle.text = "Hero's choise";
+            packTitle.text = "hero's choice";
+            LocalizationManager.Instance.UpdateLocaliztion(packTitle);
+        }
+        if (PlayerPrefs.GetInt("Pack1Bought") == 1 || PlayerPrefs.GetInt("Pack1_NoAdsBought") == 1)
+        {
+            packTitle.transform.parent.gameObject.SetActive(false);
         }
     }
 

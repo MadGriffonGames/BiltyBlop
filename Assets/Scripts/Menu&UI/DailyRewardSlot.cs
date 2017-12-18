@@ -56,7 +56,7 @@ public class DailyRewardSlot : MonoBehaviour
     public void SetReward()
     {
         dayText.text = "day" + " " + dayNum.ToString();
-        //LocalizationManager.Instance.UpdateLocaliztion(dayText);
+        LocalizationManager.Instance.UpdateLocaliztion(dayText);
 
         if (dayNum == PlayerPrefs.GetInt("RewardDay"))
         {
@@ -203,6 +203,9 @@ public class DailyRewardSlot : MonoBehaviour
                     if (!DailyReward.isRewardCollected)
                     {
                         DailyReward.isRewardCollected = true;
+
+                        PlayerPrefs.SetString("Buildarian", "Unlocked");
+                        PlayerPrefs.SetString("BuildarianIsAvaliableInShop", "Avaliable");
 
                         PlayerPrefs.SetInt("RewardDay", 0);
                     }

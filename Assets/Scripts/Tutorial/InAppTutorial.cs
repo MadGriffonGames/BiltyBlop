@@ -34,6 +34,7 @@ public class InAppTutorial : MonoBehaviour
             light.SetActive(true);
             backpackLight.SetActive(false);
             TutorialUI.Instance.txt.text = textInApp;
+            LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
         }
         if (isTextChanged && !InventoryUI.isOpen && isActive)
         {
@@ -55,6 +56,7 @@ public class InAppTutorial : MonoBehaviour
 
             TutorialUI.Instance.txt.fontSize = fontSize;
             TutorialUI.Instance.txt.text = textInventory;
+            LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
             ActivateTutorial();
         }
     }

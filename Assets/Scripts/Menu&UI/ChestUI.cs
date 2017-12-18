@@ -26,6 +26,7 @@ public class ChestUI : RewardedChest
     Quaternion rotationVector;
     Animator lootAnimator;
     bool isOpened;
+    bool musicWasPlaying;
     public bool isRewardCollected;
 
     private void Awake()
@@ -67,6 +68,12 @@ public class ChestUI : RewardedChest
             GiveLoot();
 
             isRewardCollected = true;
+            if (musicWasPlaying)
+            {
+                musicWasPlaying = false;
+                PlayerPrefs.SetInt("MusicIsOn", 1);
+                SoundManager.MuteMusic(false);
+            }
 
             if (PlayerPrefs.GetInt("TutorialMode") > 0)
             {
@@ -83,6 +90,12 @@ public class ChestUI : RewardedChest
     public void OpenChestButton()
     {
         AdsManager.Instance.ShowRewardedVideo();
+        if (PlayerPrefs.GetInt("MusicIsOn") == 1)
+        {
+            musicWasPlaying = true;
+            PlayerPrefs.SetInt("MusicIsOn", 0);
+            SoundManager.MuteMusic(true);
+        }
     }
 
     public void GiveLoot()

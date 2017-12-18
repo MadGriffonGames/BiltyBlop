@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using AppodealAds.Unity.Api;
+using AppodealAds.Unity.Common;
 
 public class AdsChest : MonoBehaviour
 {
@@ -27,6 +29,8 @@ public class AdsChest : MonoBehaviour
     public const int SPEED_NUM = 4;
     public const int TIME_NUM = 5;
 
+    float currentTime;
+
     [SerializeField]
     Sprite[] lootArray;
     [SerializeField]
@@ -35,6 +39,7 @@ public class AdsChest : MonoBehaviour
     Sprite openChest;
     bool isOpened;
     bool isRewardCollected;
+    bool musicWasPlaying;
 
     public int[] itemsDropRate;
     public int[] itemsStorage;
@@ -73,6 +78,13 @@ public class AdsChest : MonoBehaviour
 
                 AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
                 DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+                //Time.timeScale = currentTime;
+                if (musicWasPlaying)
+                {
+                    musicWasPlaying = false;
+                    PlayerPrefs.SetInt("MusicIsOn", 1);
+                    SoundManager.MuteMusic(false);
+                }
             }
         }
         else
@@ -251,13 +263,26 @@ public class AdsChest : MonoBehaviour
     {
         if (other.CompareTag("Sword"))
         {
-            isOpened = true;
+#if UNITY_ANDROID || UNITY_IOS
+            if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO))
+            {
+                isOpened = true;
+                EnableControls(false);
+                Player.Instance.mobileInput = 0;
+                Player.Instance.ChangeState(new PlayerIdleState());
+                //currentTime = Time.timeScale; //--------------------------разлочим чуть позже
+                //StartCoroutine(StopTime());
+            }
 
-            EnableControls(false);
-            Player.Instance.mobileInput = 0;
-
+            if (PlayerPrefs.GetInt("MusicIsOn") == 1)
+            {
+                musicWasPlaying = true;
+                PlayerPrefs.SetInt("MusicIsOn", 0);
+                SoundManager.MuteMusic(true);
+            }
+#endif
 #if UNITY_EDITOR
-            AdsManager.Instance.isRewardVideoWatched = true;
+                AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
             AdsManager.Instance.ShowRewardedVideo();
 #endif
@@ -274,5 +299,11 @@ public class AdsChest : MonoBehaviour
         {
             UI.Instance.controlsUI.SetActive(false);
         }
+    }
+
+    IEnumerator StopTime()
+    {
+        yield return new WaitForSeconds(1);
+        Time.timeScale = 0;
     }
 }

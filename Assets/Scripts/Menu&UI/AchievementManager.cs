@@ -80,6 +80,7 @@ public class AchievementManager : MonoBehaviour
     public LevelAchieve spiderKiller;
     public LevelAchieve firstBoss;
     public LevelAchieve tutorialAchieve;
+    public LevelAchieve tenDaysReward;
 
 
     private static AchievementManager instance;
@@ -117,7 +118,7 @@ public class AchievementManager : MonoBehaviour
         graverRewardType = new string[] { "Coins", "Crystals", "MeatThrow" };
 
         mobKillerReward = new int[] { 1, 3, 1 };
-        mobKillerTargetValue = new int[] { 25, 250, 1000 };
+        mobKillerTargetValue = new int[] { 25, 300, 1000 };
         mobKillerRewardType = new string[] { DAMAGE_BONUS, AMMO, "JonSnowSword" };
 
         tripleCoins = new string[] { "Coins", "Coins", "Coins" };
@@ -129,7 +130,7 @@ public class AchievementManager : MonoBehaviour
 
         treasureHunterReward = new int[] { 150, 3, 8 };
 
-        treasureHunterValue = new int[] { 10, 25, 50 };
+        treasureHunterValue = new int[] { 10, 35, 70 };
 
         idiotReward = new int[] { 100, 5, 1 };
         idiotTargerValue = new int[] { 10, 20, 30 };
@@ -138,10 +139,10 @@ public class AchievementManager : MonoBehaviour
         torchCollectorTargetValue = new int[] { 10, 25, 50 };
 
         secretRoomerReward = new int[] { 150, 3, 8 };
-        secretRoomerTargetValue = new int[] { 5, 25, 35 };
+        secretRoomerTargetValue = new int[] { 5, 35, 50 };
 
         starWalkerReward = new int[] { 150, 200, 250 };
-        starWalkerTargetValue = new int[] { 10, 35, 75 };
+        starWalkerTargetValue = new int[] { 10, 45, 90 };
 
         millionareTargetValue = new int[] { 1000, 10000, 15000 };
         millionareReward = new int[] { 100, 150, 200 };
@@ -174,6 +175,7 @@ public class AchievementManager : MonoBehaviour
         selfDestructor = new Achieve("SelfDestructor", graverRewardType, idiotTargerValue, idiotReward);
         potioner = new Achieve("Potioner", potionerRewardType, potionerTargetValue, potionerReward);
         tutorialAchieve = new LevelAchieve("TutorialAchieve", "Crystals", 1, 5);
+        tenDaysReward = new LevelAchieve("TenDaysReward", "Crystals", 1, 5);
     }
 
     public void CheckAchieve(Achieve achieve)

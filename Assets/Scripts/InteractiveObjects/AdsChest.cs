@@ -78,7 +78,7 @@ public class AdsChest : MonoBehaviour
 
                 AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
                 DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
-                Time.timeScale = currentTime;
+                //Time.timeScale = currentTime;
                 if (musicWasPlaying)
                 {
                     musicWasPlaying = false;
@@ -270,8 +270,8 @@ public class AdsChest : MonoBehaviour
                 EnableControls(false);
                 Player.Instance.mobileInput = 0;
                 Player.Instance.ChangeState(new PlayerIdleState());
-                currentTime = Time.timeScale;
-                StartCoroutine(StopTime());
+                //currentTime = Time.timeScale; //--------------------------разлочим чуть позже
+                //StartCoroutine(StopTime());
             }
 
             if (PlayerPrefs.GetInt("MusicIsOn") == 1)

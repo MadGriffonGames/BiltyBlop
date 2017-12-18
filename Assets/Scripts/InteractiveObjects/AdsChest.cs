@@ -79,6 +79,8 @@ public class AdsChest : MonoBehaviour
                 AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
                 DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
                 Time.timeScale = currentTime;
+                Player.Instance.mobileInput = 0;
+                Player.Instance.ChangeState(new PlayerIdleState());
                 if (musicWasPlaying)
                 {
                     musicWasPlaying = false;

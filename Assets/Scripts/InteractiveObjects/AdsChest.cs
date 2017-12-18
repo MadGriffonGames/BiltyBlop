@@ -78,7 +78,7 @@ public class AdsChest : MonoBehaviour
 
                 AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
                 DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
-                //Time.timeScale = currentTime;
+                Time.timeScale = currentTime;
                 if (musicWasPlaying)
                 {
                     musicWasPlaying = false;
@@ -263,6 +263,12 @@ public class AdsChest : MonoBehaviour
     {
         if (other.CompareTag("Sword"))
         {
+            if (PlayerPrefs.GetInt("MusicIsOn") == 1)
+            {
+                musicWasPlaying = true;
+                PlayerPrefs.SetInt("MusicIsOn", 0);
+                SoundManager.MuteMusic(true);
+            }
 #if UNITY_ANDROID || UNITY_IOS
             if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO))
             {
@@ -270,16 +276,11 @@ public class AdsChest : MonoBehaviour
                 EnableControls(false);
                 Player.Instance.mobileInput = 0;
                 Player.Instance.ChangeState(new PlayerIdleState());
-                //currentTime = Time.timeScale; //--------------------------разлочим чуть позже
-                //StartCoroutine(StopTime());
+                currentTime = Time.timeScale; //--------------------------разлочим чуть позже
+                StartCoroutine(StopTime());
             }
 
-            if (PlayerPrefs.GetInt("MusicIsOn") == 1)
-            {
-                musicWasPlaying = true;
-                PlayerPrefs.SetInt("MusicIsOn", 0);
-                SoundManager.MuteMusic(true);
-            }
+            
 #endif
 #if UNITY_EDITOR
                 AdsManager.Instance.isRewardVideoWatched = true;

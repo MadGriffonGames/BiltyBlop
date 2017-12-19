@@ -30,7 +30,7 @@ class SpiderShopDaWoopState : ISpiderState
 
         if (isShoped && Time.time - timer > pauseTime && !isLazered)
         {
-            
+            enemy.shoopDaWhoopCollider.SetActive(true);
             enemy.lazer.SetActive(true);
             SoundManager.PlaySound("laserSound");
             isLazered = true;
@@ -38,6 +38,7 @@ class SpiderShopDaWoopState : ISpiderState
 
         if (Time.time - timer > attackTime)
         {
+            enemy.shoopDaWhoopCollider.SetActive(false);
             enemy.lazer.gameObject.SetActive(false);
 
             enemy.ChangeState(new SpiderIdleState());

@@ -322,6 +322,229 @@
 	
 	//Achievements
 	
+	"kill 25 enemies": {
+	"text": "KILL 25 ENEMIES",
+	"fontSize": 0
+	}
+	
+	"kill 300 enemies": {
+	"text": "KILL 300 ENEMIES",
+	"fontSize": 0
+	}
+	
+	"kill 1000 enemies": {
+	"text": "KILL 1000 ENEMIES",
+	"fontSize": 0
+	}
+	
+	"fall in water 5 times in one lvl": {
+	"text": "FALL IN WATER 5 TIMES IN ONE LEVEL",
+	"fontSize": 0
+	}
+	
+	"start achievement tutorial":{
+	"text": "START ACHIEVEMENT TUTORIAL",
+	"fontSize": 0
+	}
+	
+	"open 10 chest":{
+	"text": "OPEN 10 CHESTS",
+	"fontSize": 0
+	}
+	
+	"open 35 chest":{
+	"text": "OPEN 35 CHESTS",
+	"fontSize": 0
+	}
+	
+	"open 70 chest":{
+	"text": "OPEN 70 CHESTS",
+	"fontSize": 0
+	}
+	
+	"find 5 secret rooms":{
+	"text": "FIND 5 SECRET ROOMS",
+	"fontSize":0
+	}
+	
+	"find 35 secret rooms":{
+	"text": "FIND 35 SECRET ROOMS",
+	"fontSize":0
+	}
+	
+	"find 50 secret rooms":{
+	"text": "FIND 50 SECRET ROOMS",
+	"fontSize":0
+	}
+	
+	"kill second boss":{
+	"text": "KILL SECOND BOSS",
+	"fontSize": 0
+	}
+	
+	"find 10 stars":{
+	"text": "FIND 10 STARS",
+	"fontSize":0
+	}
+	
+	"find 45 stars":{
+	"text": "FIND 45 STARS",
+	"fontSize":0
+	}
+	
+	"find 90 stars":{
+	"text": "FIND 90 STARS",
+	"fontSize":0
+	}
+	
+	"kill dragon boss":{
+	"text": "KILL DRAGON BOSS",
+	"fontSize": 0
+	}
+	
+	"make a deal":{
+	"text": "MAKE A DEAL",
+	"fontSize": 0
+	}
+	
+	"destroy 5 graves":{
+	"text": "DESTROY 5 GRAVES",
+	"fontSize":0
+	}
+	
+	"destroy 25 graves":{
+	"text": "DESTROY 25 GRAVES",
+	"fontSize":0
+	}
+	
+	"destroy 50 graves":{
+	"text": "DESTROY 50 GRAVES",
+	"fontSize":0
+	}
+	
+	"die 10 times in one lvl":{
+	"text": "DIE 10 TIMES IN ONE LVL",
+	"fontSize":0
+	}
+	
+	"die 20 times in one lvl":{
+	"text": "DIE 20 TIMES IN ONE LVL",
+	"fontSize":0
+	}
+	
+	"die 30 times in one lvl":{
+	"text": "DIE 30 TIMES IN ONE LVL",
+	"fontSize":0
+	}
+	
+	"use 10 potions":{
+	"text": "USE 10 POTIONS",
+	"fontSize":0
+	}
+	
+	"use 25 potions":{
+	"text": "USE 25 POTIONS",
+	"fontSize":0
+	}
+	
+	"use 50 potions":{
+	"text": "USE 50 POTIONS",
+	"fontSize":0
+	}
+	
+	"extinguish 10 torches":{
+	"text": "EXTINGUISH 10 TORCHES",
+	"fontSize":0
+	}
+	
+	"extinguish 25 torches":{
+	"text": "EXTINGUISH 25 TORCHES",
+	"fontSize":0
+	}
+	
+	"extinguish 50 torches":{
+	"text": "EXTINGUISH 50 TORCHES",
+	"fontSize":0
+	}
+	
+	"take daily reward 10 times":{
+	"text": "TAKE DAILY REWARD 10 TIMES",
+	"fontSize":0
+	}
+	
+	//achievement's names
+	
+	"mob killa":{
+	"text": "MOB KILLA",
+	"fontSize": 0
+	}
+	
+	"diver":{
+	"text": "DIVER",
+	"fontSize": 0
+	}
+	
+	"tutorial achievement":{
+	"text": "TUTORIAL ACHIEVEMENT",
+	"fontSize":0
+	}
+	
+	"treasure hunter":{
+	"text": "TREASURE HUNTER",
+	"fontSize":0
+	}
+	
+	"secret room rush":{
+	"text": "SECRET ROOM RUSH",
+	"fontSize":0
+	}
+	
+	"ice lord":{
+	"text": "ICE LORD",
+	"fontSize":0
+	}
+	
+	"star walker":{
+	"text": "STAR WALKER",
+	"fontSize":0
+	}
+	
+	"dragon bones":{
+	"text": "DRAGON BONES",
+	"fontSize":0
+	}
+	
+	"first buy":{
+	"text": "FIRST BUY",
+	"fontSize":0
+	}
+	
+	"graver":{
+	"text": "GRAVER",
+	"fontSize": 0
+	}
+	
+	"self-destructor":{
+	"text": "SELF-DESTRUCTOR",
+	"fontSize": 0
+	}
+	
+	"potioner":{
+	"text": "POTIONER",
+	"fontSize":0
+	}
+	
+	"torch collector":{
+	"text": "TORCH COLLECTOR",
+	"fontSize": 0
+	}
+	
+	"ten days":{
+	"text": "TEN DAYS"",
+	"fontSize": 0
+	}
+	
+	
 	"tap on this button to get reward": {
 	"text": "TAP ON THIS BUTTON TO GET REWARD", 
 	"fontSize": 0

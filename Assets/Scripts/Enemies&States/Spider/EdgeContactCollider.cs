@@ -11,6 +11,7 @@ public class EdgeContactCollider : MonoBehaviour {
     {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), spider.shoopDaWhoopCollider.GetComponent<Collider2D>(), true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

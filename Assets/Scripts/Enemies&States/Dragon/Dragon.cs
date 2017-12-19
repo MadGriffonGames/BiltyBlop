@@ -47,17 +47,10 @@ public class Dragon : Boss
     [SerializeField]
     public GameObject stun;
     [SerializeField]
-    public GameObject typlak;
-    [SerializeField]
-    public GameObject flower;
-    [SerializeField]
-    public UnityEngine.Transform typlakPosition;
-    [SerializeField]
-    public UnityEngine.Transform flowerPosition;
-    [SerializeField]
     GameObject videoUI;
 	[SerializeField]
 	PlayVideo playVideo;
+    public EnemySpawn enemySpawner;
 
     float angle;
     bool roar = true;
@@ -67,6 +60,7 @@ public class Dragon : Boss
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
+        enemySpawner = GetComponent<EnemySpawn>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
         maxHealth = Health;
         firstHBScaleX = healthbar.localScale.x;
@@ -181,17 +175,5 @@ public class Dragon : Boss
         {
             bossUI.SetActive(false);
         }   
-    }
-
-    public void InstantiateEnemies()
-    {
-        GameObject tmp1 = Instantiate(typlak);
-        tmp1.transform.position = typlak.transform.position;
-
-        GameObject tmp2 = Instantiate(flower);
-        tmp2.transform.position = flower.transform.position;
-
-        tmp1.transform.parent = gameObject.transform.parent;
-        tmp2.transform.parent = gameObject.transform.parent;
     }
 }

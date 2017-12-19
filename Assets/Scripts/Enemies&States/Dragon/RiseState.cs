@@ -22,12 +22,11 @@ public class RiseState : IDragonState
         {
             enemy.armature.animation.FadeIn("RISE", -1, 1);
             enemy.Move(5, 5);
-
-            enemy.InstantiateEnemies();
         }
         if (enemy.armature.animation.lastAnimationName == "RISE" && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.FadeIn("FLY", -1, -1);
+            enemy.enemySpawner.InstantiateEnemies();
         }
         if (enemy.transform.position.y >= enemy.risePoint.transform.position.y)
         {

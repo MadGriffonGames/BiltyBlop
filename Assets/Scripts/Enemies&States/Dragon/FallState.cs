@@ -31,6 +31,7 @@ public class FallState : MonoBehaviour ,IDragonState
             {
                 enemy.transform.rotation = Quaternion.Euler(0, 0, 0);
                 enemy.armature.animation.FadeIn("FALL", -1, 1);
+                enemy.enemySpawner.DestroyEnemies();
             }
             fall = true;
             enemy.Move(5, -7);

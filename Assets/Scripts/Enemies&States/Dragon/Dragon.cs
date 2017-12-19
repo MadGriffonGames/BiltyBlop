@@ -47,6 +47,14 @@ public class Dragon : Boss
     [SerializeField]
     public GameObject stun;
     [SerializeField]
+    public GameObject typlak;
+    [SerializeField]
+    public GameObject flower;
+    [SerializeField]
+    public UnityEngine.Transform typlakPosition;
+    [SerializeField]
+    public UnityEngine.Transform flowerPosition;
+    [SerializeField]
     GameObject videoUI;
 	[SerializeField]
 	PlayVideo playVideo;
@@ -173,5 +181,17 @@ public class Dragon : Boss
         {
             bossUI.SetActive(false);
         }   
+    }
+
+    public void InstantiateEnemies()
+    {
+        GameObject tmp1 = Instantiate(typlak);
+        tmp1.transform.position = typlak.transform.position;
+
+        GameObject tmp2 = Instantiate(flower);
+        tmp2.transform.position = flower.transform.position;
+
+        tmp1.transform.parent = gameObject.transform.parent;
+        tmp2.transform.parent = gameObject.transform.parent;
     }
 }

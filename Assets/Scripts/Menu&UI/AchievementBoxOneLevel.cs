@@ -124,6 +124,7 @@ public class AchievementBoxOneLevel : MonoBehaviour
         }
 
         description.gameObject.GetComponent<Text>().text = descriptionText;
+        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
 
         GetInfo();
     }

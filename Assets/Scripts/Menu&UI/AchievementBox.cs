@@ -281,6 +281,7 @@ public class AchievementBox : MonoBehaviour {
         UpdateValue(1);
         PlayerPrefs.SetInt(achievementName + btn, 1);
         description.gameObject.GetComponent<Text>().text = descriptionText[1];
+        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
         UpdateStatus(currentValue, targetValue1);
         getBtn.gameObject.SetActive(false);
         rewardFade.SetActive(true);
@@ -339,6 +340,7 @@ public class AchievementBox : MonoBehaviour {
         UpdateStatus(currentValue, targetValue2);
         PlayerPrefs.SetInt(achievementName + btn, 2);
         description.gameObject.GetComponent<Text>().text = descriptionText[2];
+        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
         getBtn1.gameObject.SetActive(false);
         if (PlayerPrefs.GetString(achievementName + "rewardType1") == "Coins")
         {
@@ -423,6 +425,7 @@ public class AchievementBox : MonoBehaviour {
 
         UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
         description.gameObject.GetComponent<Text>().text = descriptionText[2];
+        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
         bronze.SetActive(false);
         silver.SetActive(false);
         gold.SetActive(true);

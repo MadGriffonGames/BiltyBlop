@@ -212,4 +212,17 @@ public class GameManager : MonoBehaviour
 			Destroy (enemy.gameObject);
 		}
 	}
+
+    [ContextMenu("DeleteAll")]
+    void DeleteAll()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    [ContextMenu("AddMoney")]
+    void AddMoney()
+    {
+        AddCoins(9999);
+        AddCrystals(9999);
+    }
 }

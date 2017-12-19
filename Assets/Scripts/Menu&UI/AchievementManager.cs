@@ -114,7 +114,7 @@ public class AchievementManager : MonoBehaviour
         items = new string[] { HEAL, HEAL, HEAL };
         
         graverTargetValue = new int[] {5, 25, 50 };
-        graverReward = new int[] { 10, 50, 100 };
+        graverReward = new int[] { 100, 5, 100 };
         graverRewardType = new string[] { "Coins", "Crystals", "MeatThrow" };
 
         mobKillerReward = new int[] { 1, 3, 1 };

@@ -34,6 +34,8 @@ public class Spider : Boss
     public GameObject levelEnd;
     [SerializeField]
     public GameObject stun;
+    [SerializeField]
+    public GameObject shoopDaWhoopCollider;
 
 
     [SerializeField]

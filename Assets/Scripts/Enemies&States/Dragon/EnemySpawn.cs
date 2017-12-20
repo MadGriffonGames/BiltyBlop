@@ -46,7 +46,7 @@ public class EnemySpawn : MonoBehaviour
 
         Vector3 tmp = spawnedEnemy1.transform.localScale;
         tmp.x *= -1;
-        spawnedEnemy1.transform.localScale = tmp;
+        spawnedEnemy2.transform.localScale = tmp;
     }
 
     public void DestroyEnemies()

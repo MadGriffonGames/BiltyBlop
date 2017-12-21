@@ -95,8 +95,6 @@ public class SkinSwipeMenu : SwipeMenu {
 
     public void UpdateSkinCards()
     {
-        Debug.Log(SkinManager.Instance.skinPrefabs.Length);
-
         for (int i = 0; i < SkinManager.Instance.skinPrefabs.Length; i++)
         {
             for (int j = 0; j < SkinManager.Instance.skinPrefabs.Length; j++) 

@@ -88,7 +88,6 @@ public class TutorialTrigger : MonoBehaviour
         if (!isLocalized)
         {
             LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
-            Debug.Log(1);
             isLocalized = true;
         }
         

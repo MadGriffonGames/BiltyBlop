@@ -45,12 +45,12 @@ public class SkinSwipeMenu : SwipeMenu {
         {
             for (int j = 0; j < SkinManager.Instance.skinPrefabs.Length; j++)
             {
-				SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
+                SkinPrefab skin = SkinManager.Instance.skinPrefabs[j].GetComponent<SkinPrefab>();
 				if (skin.orderNumber == i)
                 {
                     GameObject skinCardObj = Instantiate(skinCard, new Vector3(buttonDistance * i, 0, 0),Quaternion.identity) as GameObject;
-                    
-					skin.SetPlayerPrefsParams ();			
+
+                    skin.SetPlayerPrefsParams ();			
                     skinCardObj.transform.SetParent(panel);
                     skinCardObj.transform.localPosition = new Vector3(i * DISTANCE, 0, 0);
                     skinCardObj.transform.localScale = new Vector3(1, 1, 1);
@@ -95,6 +95,8 @@ public class SkinSwipeMenu : SwipeMenu {
 
     public void UpdateSkinCards()
     {
+        Debug.Log(SkinManager.Instance.skinPrefabs.Length);
+
         for (int i = 0; i < SkinManager.Instance.skinPrefabs.Length; i++)
         {
             for (int j = 0; j < SkinManager.Instance.skinPrefabs.Length; j++) 

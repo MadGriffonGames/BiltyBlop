@@ -75,14 +75,16 @@ public class ChestUI : RewardedChest
 
     public void OpenChestButton()
     {
-        AdsManager.Instance.ShowRewardedVideo();
+		if (PlayerPrefs.GetInt("TutorialMode") > 0)
+		{
+			GetComponent<ChestTutorial>().DisableTutorial();
+			PlayerPrefs.SetInt(SceneTutorial.CHEST_TUTORIAL_COMPLETE, 1);
+			DevToDev.Analytics.Tutorial(3);
+		}
 
-        if (PlayerPrefs.GetInt("TutorialMode") > 0)
-        {
-            GetComponent<ChestTutorial>().DisableTutorial();
-            PlayerPrefs.SetInt(SceneTutorial.CHEST_TUTORIAL_COMPLETE, 1);
-            DevToDev.Analytics.Tutorial(3);
-        }
+		AdsManager.Instance.ShowRewardedVideo();
+
+        
     }
 
     public void GiveLoot()

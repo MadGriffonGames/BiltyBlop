@@ -123,8 +123,7 @@ public class Dragon : Boss
 
         if (Health <= 0)
         {
-			playVideo.enabled = true;
-            //videoUI.SetActive(true);
+			levelEnd.SetActive (true);
         }
         yield return null;
     }

@@ -48,6 +48,8 @@ public class Spider : Boss
 
     [SerializeField]
     public GameObject shadow;
+	[SerializeField]
+	PlayVideo playVideo;
     bool isDead = false;
 
 
@@ -138,6 +140,7 @@ public class Spider : Boss
         {
             isDead = true;
             this.ChangeState(new SpiderDeathState());
+			playVideo.enabled = true;
         }
         yield return null;
     }

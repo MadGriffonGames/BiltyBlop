@@ -25,7 +25,17 @@ public class RuneStone : InteractiveObject
         if (timer >= delay)
         {
             Zoom.stopZoom();
-            UI.Instance.LevelEndUI.SetActive(true);
+			timerIsOn = false;
+			timer = 0;
+			if (SceneManager.GetActiveScene().name != "Level10" && SceneManager.GetActiveScene().name != "Level20")
+			{
+				UI.Instance.LevelEndUI.SetActive (true);
+			} 
+			else 
+			{
+				GameObject.FindGameObjectWithTag ("Camera").GetComponentInChildren<PlayVideo> ().executeVideo ();
+			}
+            
         }
     }
 

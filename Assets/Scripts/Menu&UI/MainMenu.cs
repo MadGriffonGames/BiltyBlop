@@ -83,8 +83,6 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
-        //PlayerPrefs.DeleteAll();
-
         SetMap();
 
         ChangeDatesOfGifts();

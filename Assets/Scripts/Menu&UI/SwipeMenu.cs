@@ -99,7 +99,6 @@ public class SwipeMenu : MonoBehaviour
     {
         dragging = false;
     }
-
     
 	public void MoveLeftButton()
 	{

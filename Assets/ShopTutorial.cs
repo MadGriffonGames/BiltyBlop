@@ -314,7 +314,7 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.SetActive (true);
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipGems());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "You can buy anything in this game by Gems!";
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "You can buy everything in this game with Gems!";
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (gemsPanel, 1);
 
@@ -389,7 +389,7 @@ public class ShopTutorial : MonoBehaviour {
 		buyItemMenu.SetActive (false);
 		itemsFade.SetActive (false);
 		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "Conradulations! You get 3 Free Health potions! Good luck! See you soon Warrior!";
+		mainWindow.GetComponentsInChildren<Text>()[0].text = "Congradulations! You get 3 Free Health potions! Good luck! See you soon Warrior!";
 		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentsInChildren<Text>()[1].text = "Close";
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => CloseTutorial());

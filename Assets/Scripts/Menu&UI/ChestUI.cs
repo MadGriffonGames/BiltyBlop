@@ -26,7 +26,6 @@ public class ChestUI : RewardedChest
     Quaternion rotationVector;
     Animator lootAnimator;
     bool isOpened;
-    bool musicWasPlaying;
     public bool isRewardCollected;
 
     private void Awake()
@@ -68,19 +67,6 @@ public class ChestUI : RewardedChest
             GiveLoot();
 
             isRewardCollected = true;
-            if (musicWasPlaying)
-            {
-                musicWasPlaying = false;
-                PlayerPrefs.SetInt("MusicIsOn", 1);
-                SoundManager.MuteMusic(false);
-            }
-
-            if (PlayerPrefs.GetInt("TutorialMode") > 0)
-            {
-                GetComponent<ChestTutorial>().DisableTutorial();
-                PlayerPrefs.SetInt(SceneTutorial.CHEST_TUTORIAL_COMPLETE, 1);
-                DevToDev.Analytics.Tutorial(3);
-            }
 
             AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
             DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
@@ -89,13 +75,16 @@ public class ChestUI : RewardedChest
 
     public void OpenChestButton()
     {
-        AdsManager.Instance.ShowRewardedVideo();
-        if (PlayerPrefs.GetInt("MusicIsOn") == 1)
-        {
-            musicWasPlaying = true;
-            PlayerPrefs.SetInt("MusicIsOn", 0);
-            SoundManager.MuteMusic(true);
-        }
+		if (PlayerPrefs.GetInt("TutorialMode") > 0)
+		{
+			GetComponent<ChestTutorial>().DisableTutorial();
+			PlayerPrefs.SetInt(SceneTutorial.CHEST_TUTORIAL_COMPLETE, 1);
+			DevToDev.Analytics.Tutorial(3);
+		}
+
+		AdsManager.Instance.ShowRewardedVideo();
+
+        
     }
 
     public void GiveLoot()

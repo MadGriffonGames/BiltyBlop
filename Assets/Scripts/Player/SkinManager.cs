@@ -34,13 +34,11 @@ public class SkinManager : MonoBehaviour
 	private const string THROW_PREFAB_FOLDER = "Throw/";
     public const string firstBuy = "firstBuy";
 
-    private void Start()
+    private void Awake()
     {
         LoadSkinPrefabs();
 		LoadSwordsPrefabs ();
 		LoadThrowPrefabs ();
-        //PlayerPrefs.DeleteAll();
-        //PlayerPrefs.SetInt("Coins", 20000);
     }
 
 	private void LoadThrowPrefabs()

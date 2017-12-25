@@ -50,6 +50,7 @@ public class Dragon : Boss
     GameObject videoUI;
 	[SerializeField]
 	PlayVideo playVideo;
+    public EnemySpawn enemySpawner;
 
     float angle;
     bool roar = true;
@@ -59,6 +60,7 @@ public class Dragon : Boss
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
+        enemySpawner = GetComponent<EnemySpawn>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
         maxHealth = Health;
         firstHBScaleX = healthbar.localScale.x;
@@ -121,8 +123,7 @@ public class Dragon : Boss
 
         if (Health <= 0)
         {
-			playVideo.enabled = true;
-            //videoUI.SetActive(true);
+			levelEnd.SetActive (true);
         }
         yield return null;
     }

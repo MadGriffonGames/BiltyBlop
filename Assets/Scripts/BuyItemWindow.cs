@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuyItemWindow : MonoBehaviour {
-
+public class BuyItemWindow : MonoBehaviour
+{
     [SerializeField]
     Button buyByCrystals;
     [SerializeField]

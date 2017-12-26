@@ -28,6 +28,8 @@ public class AchievementBox : MonoBehaviour {
     GameObject text;
     [SerializeField]
     GameObject levelText;
+    [SerializeField]
+    GameObject stat;
 
 
     [SerializeField]
@@ -202,14 +204,16 @@ public class AchievementBox : MonoBehaviour {
         if (PlayerPrefs.GetInt(achievementName + btn) == 0)         // Get button has never been pressed
         {
             description.gameObject.GetComponent<Text>().text = descriptionText[0];
-            text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue0");
+            LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
+            stat.GetComponent<Text>().text += PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue0");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue0"));
         }
 
         if (PlayerPrefs.GetInt(achievementName + btn) == 1)         // Get button has been pressed once
         {
             description.gameObject.GetComponent<Text>().text = descriptionText[1];
-            text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue1");
+            LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
+            stat.GetComponent<Text>().text += PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue1");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue1"));
             bronze.SetActive(true);
         }
@@ -217,7 +221,8 @@ public class AchievementBox : MonoBehaviour {
         if (PlayerPrefs.GetInt(achievementName + btn) == 2)         // Get butten has been pressed twice
         {
             description.gameObject.GetComponent<Text>().text = descriptionText[2];
-            text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue2");
+            LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
+            stat.GetComponent<Text>().text += PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue2");
             UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
             bronze.SetActive(false);
             silver.SetActive(true);
@@ -229,6 +234,7 @@ public class AchievementBox : MonoBehaviour {
             silver.SetActive(false);
             gold.SetActive(true);
             description.gameObject.GetComponent<Text>().text = descriptionText[2];
+            LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
             doneImg.SetActive(true);
         }
 
@@ -281,7 +287,7 @@ public class AchievementBox : MonoBehaviour {
         UpdateValue(1);
         PlayerPrefs.SetInt(achievementName + btn, 1);
         description.gameObject.GetComponent<Text>().text = descriptionText[1];
-        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
+        LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
         UpdateStatus(currentValue, targetValue1);
         getBtn.gameObject.SetActive(false);
         rewardFade.SetActive(true);
@@ -340,7 +346,7 @@ public class AchievementBox : MonoBehaviour {
         UpdateStatus(currentValue, targetValue2);
         PlayerPrefs.SetInt(achievementName + btn, 2);
         description.gameObject.GetComponent<Text>().text = descriptionText[2];
-        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
+        LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
         getBtn1.gameObject.SetActive(false);
         if (PlayerPrefs.GetString(achievementName + "rewardType1") == "Coins")
         {
@@ -425,7 +431,7 @@ public class AchievementBox : MonoBehaviour {
 
         UpdateStatus(PlayerPrefs.GetInt(achievementName), PlayerPrefs.GetInt(achievementName + "targetValue2"));
         description.gameObject.GetComponent<Text>().text = descriptionText[2];
-        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
+        LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
         bronze.SetActive(false);
         silver.SetActive(false);
         gold.SetActive(true);
@@ -433,8 +439,8 @@ public class AchievementBox : MonoBehaviour {
 
     public void UpdateValue(int level)
     {
-        text.GetComponent<Text>().text = recordName;
-        text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue" + level.ToString());
+        //text.GetComponent<Text>().text = recordName;
+        stat.GetComponent<Text>().text += PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue" + level.ToString());
     }
 
     void UpdateStatus(int currentValue, int currenTargetValue)

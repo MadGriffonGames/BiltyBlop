@@ -539,7 +539,7 @@
 	"fontSize": 0
 	}
 	
-	"ten days":{
+	"ten days":{	
 	"text": "TEN DAYS"",
 	"fontSize": 0
 	}
@@ -548,7 +548,12 @@
 	"tap on this button to get reward": {
 	"text": "TAP ON THIS BUTTON TO GET REWARD", 
 	"fontSize": 0
-	},
+	}
+	
+	"in progress":{
+	"text": "IN PROGRESS",
+	"fontSize":0
+	}
 	
 	//Level 11
 	

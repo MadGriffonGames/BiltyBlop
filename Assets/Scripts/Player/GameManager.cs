@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     bool isLevel;
 
 	void Awake()
-	{
+	{      
         #if UNITY_EDITOR
 			Application.targetFrameRate = 1000;
 #elif UNITY_ANDROID

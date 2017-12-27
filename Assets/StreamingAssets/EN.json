@@ -1,4 +1,4 @@
-﻿{
+{
 	// MAIN MENU
 	
 	"play": {
@@ -111,6 +111,11 @@
 	"fontSize": 0
 	},
 	
+	"buy_main": {
+		"text": "BUY", 
+		"fontSize": 0
+	},
+
 	"potions\npack": {
 	"text": "POTIONS\nPACK", 
 	"fontSize": 0
@@ -325,235 +330,235 @@
 	"kill 25 enemies": {
 	"text": "KILL 25 ENEMIES",
 	"fontSize": 0
-	}
+	},
 	
 	"kill 300 enemies": {
 	"text": "KILL 300 ENEMIES",
 	"fontSize": 0
-	}
+	},
 	
 	"kill 1000 enemies": {
 	"text": "KILL 1000 ENEMIES",
 	"fontSize": 0
-	}
+	},
 	
 	"fall in water 5 times in one lvl": {
 	"text": "FALL IN WATER 5 TIMES IN ONE LEVEL",
 	"fontSize": 0
-	}
+	},
 	
 	"start achievement tutorial":{
 	"text": "START ACHIEVEMENT TUTORIAL",
 	"fontSize": 0
-	}
+	},
 	
 	"open 10 chest":{
 	"text": "OPEN 10 CHESTS",
 	"fontSize": 0
-	}
+	},
 	
 	"open 35 chest":{
 	"text": "OPEN 35 CHESTS",
 	"fontSize": 0
-	}
+	},
 	
 	"open 70 chest":{
 	"text": "OPEN 70 CHESTS",
 	"fontSize": 0
-	}
+	},
 	
 	"find 5 secret rooms":{
 	"text": "FIND 5 SECRET ROOMS",
 	"fontSize":0
-	}
+	},
 	
 	"find 35 secret rooms":{
 	"text": "FIND 35 SECRET ROOMS",
 	"fontSize":0
-	}
+	},
 	
 	"find 50 secret rooms":{
 	"text": "FIND 50 SECRET ROOMS",
 	"fontSize":0
-	}
+	},
 	
 	"kill second boss":{
 	"text": "KILL SECOND BOSS",
 	"fontSize": 0
-	}
+	},
 	
 	"find 10 stars":{
 	"text": "FIND 10 STARS",
 	"fontSize":0
-	}
+	},
 	
 	"find 45 stars":{
 	"text": "FIND 45 STARS",
 	"fontSize":0
-	}
+	},
 	
 	"find 90 stars":{
 	"text": "FIND 90 STARS",
 	"fontSize":0
-	}
+	},
 	
 	"kill dragon boss":{
 	"text": "KILL DRAGON BOSS",
 	"fontSize": 0
-	}
+	},
 	
 	"make a deal":{
 	"text": "MAKE A DEAL",
 	"fontSize": 0
-	}
+	},
 	
 	"destroy 5 graves":{
 	"text": "DESTROY 5 GRAVES",
 	"fontSize":0
-	}
+	},
 	
 	"destroy 25 graves":{
 	"text": "DESTROY 25 GRAVES",
 	"fontSize":0
-	}
+	},
 	
 	"destroy 50 graves":{
 	"text": "DESTROY 50 GRAVES",
 	"fontSize":0
-	}
+	},
 	
 	"die 10 times in one lvl":{
 	"text": "DIE 10 TIMES IN ONE LVL",
 	"fontSize":0
-	}
+	},
 	
 	"die 20 times in one lvl":{
 	"text": "DIE 20 TIMES IN ONE LVL",
 	"fontSize":0
-	}
+	},
 	
 	"die 30 times in one lvl":{
 	"text": "DIE 30 TIMES IN ONE LVL",
 	"fontSize":0
-	}
+	},
 	
 	"use 10 potions":{
 	"text": "USE 10 POTIONS",
 	"fontSize":0
-	}
+	},
 	
 	"use 25 potions":{
 	"text": "USE 25 POTIONS",
 	"fontSize":0
-	}
+	},
 	
 	"use 50 potions":{
 	"text": "USE 50 POTIONS",
 	"fontSize":0
-	}
+	},
 	
 	"extinguish 10 torches":{
 	"text": "EXTINGUISH 10 TORCHES",
 	"fontSize":0
-	}
+	},
 	
 	"extinguish 25 torches":{
 	"text": "EXTINGUISH 25 TORCHES",
 	"fontSize":0
-	}
+	},
 	
 	"extinguish 50 torches":{
 	"text": "EXTINGUISH 50 TORCHES",
 	"fontSize":0
-	}
+	},
 	
 	"take daily reward 10 times":{
 	"text": "TAKE DAILY REWARD 10 TIMES",
 	"fontSize":0
-	}
+	},
 	
 	//achievement's names
 	
 	"mob killa":{
 	"text": "MOB KILLA",
 	"fontSize": 0
-	}
+	},
 	
 	"diver":{
 	"text": "DIVER",
 	"fontSize": 0
-	}
+	},
 	
 	"tutorial achievement":{
 	"text": "TUTORIAL ACHIEVEMENT",
 	"fontSize":0
-	}
+	},
 	
 	"treasure hunter":{
 	"text": "TREASURE HUNTER",
 	"fontSize":0
-	}
+	},
 	
 	"secret room rush":{
 	"text": "SECRET ROOM RUSH",
 	"fontSize":0
-	}
+	},
 	
 	"ice lord":{
 	"text": "ICE LORD",
 	"fontSize":0
-	}
+	},
 	
 	"star walker":{
 	"text": "STAR WALKER",
 	"fontSize":0
-	}
+	},
 	
 	"dragon bones":{
 	"text": "DRAGON BONES",
 	"fontSize":0
-	}
+	},
 	
 	"first buy":{
 	"text": "FIRST BUY",
 	"fontSize":0
-	}
+	},
 	
 	"graver":{
 	"text": "GRAVER",
 	"fontSize": 0
-	}
+	},
 	
 	"self-destructor":{
 	"text": "SELF-DESTRUCTOR",
 	"fontSize": 0
-	}
+	},
 	
 	"potioner":{
 	"text": "POTIONER",
 	"fontSize":0
-	}
+	},
 	
 	"torch collector":{
 	"text": "TORCH COLLECTOR",
 	"fontSize": 0
-	}
+	},
 	
 	"ten days":{	
-	"text": "TEN DAYS"",
+	"text": "TEN DAYS",
 	"fontSize": 0
-	}
+	},
 	
 	
 	"tap on this button to get reward": {
 	"text": "TAP ON THIS BUTTON TO GET REWARD", 
 	"fontSize": 0
-	}
+	},
 	
 	"in progress":{
 	"text": "IN PROGRESS",
 	"fontSize":0
-	}
+	},
 	
 	//Level 11
 	
@@ -561,4 +566,284 @@
 	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
 	"fontSize": 0
 	},
+
+	//SHOP
+
+	"unlock":{
+	"text": "UNLOCK",
+	"fontSize": 0
+	},
+	"equip":{
+	"text": "EQUIP",
+	"fontSize": 0
+	},
+	"equiped":{
+	"text": "EQUIPED",
+	"fontSize": 0
+	},
+	"locked":{
+	"text": "LOCKED",
+	"fontSize": 0
+	},
+	"upgrade":{
+	"text": "UPGRADE",
+	"fontSize": 0
+	},
+	"upgraded":{
+	"text": "UPGRADED",
+	"fontSize": 0
+	},
+	"next":{
+	"text": "NEXT",
+	"fontSize": 0
+	},
+
+
+
+	"ammo":{
+	"text": "AMMO",
+	"fontSize": 0
+	},
+	"heal":{
+	"text": "HEAL",
+	"fontSize": 0
+	},
+	"damage":{
+	"text": "DAMAGE",
+	"fontSize": 0
+	},
+	"speed":{
+	"text": "SPEED",
+	"fontSize": 0
+	},
+	"time":{
+	"text": "TIME",
+	"fontSize": 0
+	},
+	"immortal":{
+	"text": "IMMORTAL",
+	"fontSize": 0
+	},
+
+
+
+	"barbarian":{
+	"text": "BARBARIAN",
+	"fontSize": 0
+	},
+	"ninjarian":{
+	"text": "NINJARIAN",
+	"fontSize": 0
+	},
+	"buildarian":{
+	"text": "BUILDARIAN",
+	"fontSize": 0
+	},
+	"centurion":{
+	"text": "CENTURION",
+	"fontSize": 0
+	},
+	"classic":{
+	"text": "CLASSIC",
+	"fontSize": 0
+	},
+	"dredarian":{
+	"text": "DREDARIAN",
+	"fontSize": 0
+	},
+	"jonarian":{
+	"text": "JONARIAN",
+	"fontSize": 0
+	},
+	"kingarian":{
+	"text": "KINGARIAN",
+	"fontSize": 0
+	},
+	"knightarian":{
+	"text": "KNIGHTARIAN",
+	"fontSize": 0
+	},
+	"santarian":{
+	"text": "SANTARIAN",
+	"fontSize": 0
+	},
+
+
+	"arakh":{
+	"text": "ARAKH",
+	"fontSize": 0
+	},
+	"ancient axe":{
+	"text": "ANCIENT AXE",
+	"fontSize": 0
+	},
+	"kyoto sword":{
+	"text": "KYOTO SWORD",
+	"fontSize": 0
+	},
+	"candy":{
+	"text": "CANDY",
+	"fontSize": 0
+	},
+	"legacy":{
+	"text": "LEGACY",
+	"fontSize": 0
+	},
+	"gladius":{
+	"text": "GLADIUS",
+	"fontSize": 0
+	},
+	"claw":{
+	"text": "CLAW",
+	"fontSize": 0
+	},
+	"kings hand":{
+	"text": "KINGS HAND",
+	"fontSize": 0
+	},
+	"obsidian":{
+	"text": "OBSIDIAN",
+	"fontSize": 0
+	},
+	"pipe wrench":{
+	"text": "PIPE WRENCH",
+	"fontSize": 0
+	},
+
+
+
+	"classicthr":{
+	"text": "CLASSIC",
+	"fontSize": 0
+	},
+	"hammer":{
+	"text": "HAMMER",
+	"fontSize": 0
+	},
+	"vikings ice":{
+	"text": "VIKINGS ICE",
+	"fontSize": 0
+	},
+	"fireball":{
+	"text": "FIREBALL",
+	"fontSize": 0
+	},
+	"meat leg":{
+	"text": "MEAT LEG",
+	"fontSize": 0
+	},
+	"pizza":{
+	"text": "PIZZA",
+	"fontSize": 0
+	},
+	"raven":{
+	"text": "RAVEN",
+	"fontSize": 0
+	},
+	"sven":{
+	"text": "SVEN",
+	"fontSize": 0
+	},
+	"zippy knife":{
+	"text": "ZIPPY KNIFE",
+	"fontSize": 0
+	},
+	"crooked knife":{
+	"text": "CROOKED KNIFE",
+	"fontSize": 0
+	},
+	"strange knife":{
+	"text": "STRANGE KNIFE",
+	"fontSize": 0
+	},
+	"dagger":{
+	"text": "DAGGER",
+	"fontSize": 0
+	},
+
+
+	"ammo maniac":{
+	"text": "AMMO MANIAC",
+	"fontSize": 0
+	},
+	"you have got {0} slots for throwing weapons":{
+	"text": "You have got {0} slots for throwing weapons",
+	"fontSize": 0
+	},
+	"dodger":{
+	"text": "DODGER",
+	"fontSize": 0
+	},
+	"you have got {0}% chance to dodge enemy attack":{
+	"text": "You have got {0}% chance to dodge enemy attack",
+	"fontSize": 0
+	},
+	"greedy":{
+	"text": "GREEDY",
+	"fontSize": 0
+	},
+	"you get extra x{0} coins per level":{
+	"text": "You get extra x{0} coins per level",
+	"fontSize": 0
+	},
+	"potion maniac":{
+	"text": "POTION MANIAC",
+	"fontSize": 0
+	},
+	"potions works {0} times longer":{
+	"text": "Potions works {0} times longer",
+	"fontSize": 0
+	},
+
+
+
+	"health pot description":{
+	"text": "This pot immediately restores your health",
+	"fontSize": 0
+	},
+	"damage pot description":{
+	"text": "Gives you a 'double damage' for a short time",
+	"fontSize": 0
+	},
+	"speed pot description":{
+	"text": "Increases your speed for a short time",
+	"fontSize": 0
+	},
+	"time pot description":{
+	"text": "This potion makes time go slower",
+	"fontSize": 0
+	},
+	"immortal pot description":{
+	"text": "Gives you a shield that protect you from any damage you can take",
+	"fontSize": 0
+	},
+	"clips description":{
+	"text": "Fully restores all your throwing weapons",
+	"fontSize": 0
+	},
+	"not enough coins":{
+		"text": "Not enough coins!",
+		"fontSize": 0
+	},
+	"not enough crystals":{
+		"text": "Not enough crystals!",
+		"fontSize": 0
+	},
+	"weapon unlocked":{
+		"text": "Weapon unlocked!",
+		"fontSize": 0
+	},
+	"perk upgraded":{
+		"text": "Perk upgraded!",
+		"fontSize": 0
+	},
+	"skin unlocked":{
+		"text": "Skin unlocked!",
+		"fontSize": 0
+	},
+	"sword unlocked":{
+		"text": "Sword unlocked!",
+		"fontSize": 0
+	}
+
 }

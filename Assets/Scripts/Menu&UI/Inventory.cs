@@ -50,12 +50,12 @@ public class Inventory : MonoBehaviour
         // ADDING ITEMS // 
 		itemsNames = new string[] { HEAL, AMMO, IMMORTAL_BONUS, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS}; // ADD NEW GOOD TO THE SHOP
 
-		SetStartingParamsForItem(AMMO, "AMMO", 3, 100, 3);
-        SetStartingParamsForItem(HEAL, "HEAL", 3, 150, 5);
-        SetStartingParamsForItem(DAMAGE_BONUS, "DAMAGE", 3, 130, 4);
-        SetStartingParamsForItem(SPEED_BONUS, "SPEED", 3, 100, 3);
-        SetStartingParamsForItem(TIME_BONUS, "TIME", 3, 130, 4);
-        SetStartingParamsForItem(IMMORTAL_BONUS, "IMMORTAL", 3, 190, 6);
+		SetStartingParamsForItem(AMMO, "ammo", 3, 100, 3);
+        SetStartingParamsForItem(HEAL, "heal", 3, 150, 5);
+        SetStartingParamsForItem(DAMAGE_BONUS, "damage", 3, 130, 4);
+        SetStartingParamsForItem(SPEED_BONUS, "speed", 3, 100, 3);
+        SetStartingParamsForItem(TIME_BONUS, "time", 3, 130, 4);
+        SetStartingParamsForItem(IMMORTAL_BONUS, "immortal", 3, 190, 6);
         
         /*
         SetStartingParamsForItem(ITEMCONST, "Shop name", 4,4,5);
@@ -220,19 +220,19 @@ public class Inventory : MonoBehaviour
 		switch (itemName) 
 		{
 			case "HealthPot":
-				return "This pot immedeately restores your health!";
-		case "DamageBonus":
-			return "Gives you a 'Double damage' bonus for a short time.";
-		case "SpeedBonus":
-			return "Increases your speed for a short time.";
-		case "TimeBonus":
-			return "This potion makes time go slower";
-		case "ImmortalBonus":
-			return "Gives you a shield that protect you from any damage you can take";
-		case "ClipsCount":
-			return "Fully restores all your throwing weapons";
-		default:
-			return "NO DESCRIPTION";
+				return "health pot description";
+			case "DamageBonus":
+				return "damage pot description";
+			case "SpeedBonus":
+				return "speed pot description";
+			case "TimeBonus":
+				return "time pot description";
+			case "ImmortalBonus":
+				return "immortal pot description";
+			case "ClipsCount":
+				return "clips description";
+			default:
+				return "NO DESCRIPTION";
 		}
 		return "";
 	}

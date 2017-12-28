@@ -59,12 +59,13 @@ public class SwordsSwipeMenu : SwipeMenu {
 					{
 						if (PlayerPrefs.GetString ("Sword") == sword.name)
 						{
-							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
+							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
 						} 
 						else  
 						{
-							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIP";
+							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 						}
+						LocalizationManager.Instance.UpdateLocaliztion (swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
 						swordCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
 						swordCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySword (sword.orderNumber));
 						swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySword (sword.orderNumber));
@@ -117,12 +118,13 @@ public class SwordsSwipeMenu : SwipeMenu {
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
 						if (PlayerPrefs.GetString ("Sword") == sword.name) 
 						{
-							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
+							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
 						} 
 						else 
 						{
-							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIP";
+							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 						}
+						LocalizationManager.Instance.UpdateLocaliztion (buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
 						buttons [i].gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ApplySword(sword.orderNumber));
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplySword(sword.orderNumber));

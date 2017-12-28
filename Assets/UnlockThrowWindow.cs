@@ -48,6 +48,7 @@ public class UnlockThrowWindow : MonoBehaviour {
 		ThrowPrefab throwScript = SkinManager.Instance.throwPrefabs[throwNumber].gameObject.GetComponent<ThrowPrefab>();
 
 		throwName.GetComponent<Text>().text = throwScript.shopName;
+		LocalizationManager.Instance.UpdateLocaliztion (throwName.GetComponent<Text>());
 		chosenThrowName = throwScript.name;
 		statsPanel.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(throwScript.attackStat);
 		//statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(sword.armorStat);
@@ -108,12 +109,12 @@ public class UnlockThrowWindow : MonoBehaviour {
 				HideButtons();
 				closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
 				closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockThrowWindow());
-				ShowErrorWindow("WEAPON UNLOCKED");
+				ShowErrorWindow("weapon unlocked");
 				ApplyThrow (chosenThrowName);
 			}
 			else
 			{
-				ShowErrorWindow("NOT ENOUGH CRYSTALS");
+				ShowErrorWindow("not enough crystals");
 			}
 		}
 		else
@@ -131,12 +132,12 @@ public class UnlockThrowWindow : MonoBehaviour {
 				HideButtons();
 				closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
 				closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockThrowWindow());
-				ShowErrorWindow("WEAPON UNLOCKED");
+				ShowErrorWindow("weapon unlocked");
 				ApplyThrow (chosenThrowName);
 			}
 			else
 			{
-				ShowErrorWindow("NOT ENOUGH COINS");
+				ShowErrorWindow("not enough coins");
 			}
 		}
 		else
@@ -159,6 +160,7 @@ public class UnlockThrowWindow : MonoBehaviour {
 		closeErrorWindowButton.gameObject.SetActive(true);
 		errorWindow.gameObject.SetActive(true);
 		errorWindow.GetComponentInChildren<Text>().text = text;
+		LocalizationManager.Instance.UpdateLocaliztion (errorWindow.GetComponentInChildren<Text>());
 	}
 
 	private void HideButtons()

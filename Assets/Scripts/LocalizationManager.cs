@@ -38,31 +38,31 @@ public class LocalizationManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
 
-        //if (language != null)
-        //{
-        //    translation = new Dictionary<string, LocalizedString>();
-        //    pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
-        //    jsonString = File.ReadAllText(pathToJson);
-        //    translation = JsonConvert.DeserializeObject<Dictionary<string, LocalizedString>>(jsonString);
-        //}
+        if (language != null)
+        {
+            translation = new Dictionary<string, LocalizedString>();
+            pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
+            jsonString = File.ReadAllText(pathToJson);
+            translation = JsonConvert.DeserializeObject<Dictionary<string, LocalizedString>>(jsonString);
+        }
     }
 
     public void UpdateLocaliztion(Text textField)
     {
-    //    if (textField != null)
-    //    {
-    //        if (translation.ContainsKey(textField.text))
-    //        {
-    //            if (translation[textField.text].fontSize > 0)
-    //            {
-    //                textField.fontSize = translation[textField.text].fontSize;
-    //            }
-    //            textField.text = translation[textField.text].text;
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Can't find key: " + textField.text);
-    //        }
-    //    }
+        if (textField != null)
+        {
+            if (translation.ContainsKey(textField.text))
+            {
+                if (translation[textField.text].fontSize > 0)
+                {
+                    textField.fontSize = translation[textField.text].fontSize;
+                }
+                textField.text = translation[textField.text].text;
+            }
+            else
+            {
+                Debug.Log("Can't find key: " + textField.text);
+            }
+        }
     }
 }

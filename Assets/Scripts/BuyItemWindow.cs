@@ -30,6 +30,8 @@ public class BuyItemWindow : MonoBehaviour
         }
         GetComponentsInChildren<Text>()[0].text = Inventory.Instance.GetItemShopName(itemName);
 		GetComponentsInChildren<Text>()[1].text = Inventory.Instance.DescriptionOfItem(itemName);
+		LocalizationManager.Instance.UpdateLocaliztion (GetComponentsInChildren<Text>()[0]);
+		LocalizationManager.Instance.UpdateLocaliztion (GetComponentsInChildren<Text>()[1]);
         GetComponentsInChildren<Image>()[2].sprite = Resources.Load<Sprite>(itemsFolder + itemName);
 
         buyByCoins.GetComponent<Button>().onClick.RemoveAllListeners();

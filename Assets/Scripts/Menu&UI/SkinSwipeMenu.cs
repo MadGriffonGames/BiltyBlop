@@ -62,10 +62,11 @@ public class SkinSwipeMenu : SwipeMenu {
 
 						if (PlayerPrefs.GetString (skin.name) == "Unlocked") {
 							if (PlayerPrefs.GetString ("Skin") == skin.name) {
-								skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
+								skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
 							} else {
-								skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIP";
+								skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 							}
+
 							skinCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySkin (skin.orderNumber));
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySkin (skin.orderNumber));
@@ -75,13 +76,14 @@ public class SkinSwipeMenu : SwipeMenu {
 						}
 					} else 
 					{
-						skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "LOCKED";
+						skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "locked";
 						skinCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
 						skinCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
 						skinCardObj.gameObject.GetComponentsInChildren<Image> () [0].color = new Color32 (206,206,206,255);
 						skinCardObj.gameObject.GetComponentsInChildren<Image> () [1].color = new Color32 (180,180,180,255);
 						skinCardObj.gameObject.GetComponentsInChildren<Image> () [2].color = new Color32 (180,180,180,255);
 					}
+					LocalizationManager.Instance.UpdateLocaliztion (skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
 					skinCardObj.GetComponentInChildren<SkinStatsPanel> ().SetDefendIndicators (skin.armorStat);
 
 
@@ -107,9 +109,9 @@ public class SkinSwipeMenu : SwipeMenu {
 					if (skin.isAvaliableInShop) {
 						if (PlayerPrefs.GetString (skin.name) == "Unlocked") {
 							if (PlayerPrefs.GetString ("Skin") == skin.name) {
-								buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIPED";
+								buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
 							} else {
-								buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "EQUIP";
+								buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 							}
 							buttons [i].gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySkin (skin.orderNumber));
@@ -120,13 +122,14 @@ public class SkinSwipeMenu : SwipeMenu {
 						}
 					} else 
 					{
-						buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "LOCKED";
+						buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "locked";
 						buttons [i].gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
 						buttons [i].gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
 						buttons [i].gameObject.GetComponentsInChildren<Image> () [0].color = new Color32 (206,206,206,255);
 						buttons [i].gameObject.GetComponentsInChildren<Image> () [1].color = new Color32 (180,180,180,255);
 						buttons [i].gameObject.GetComponentsInChildren<Image> () [2].color = new Color32 (180,180,180,255);
 					}
+					LocalizationManager.Instance.UpdateLocaliztion (buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
                 }
             }
         }

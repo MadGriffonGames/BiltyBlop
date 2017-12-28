@@ -54,8 +54,7 @@ public class UnlockPerkWindow : MonoBehaviour {
         // perkNumber - number of chosen perk in perkPrefabs[]
 
 		if (perkLvl < 3) {
-			perkName.GetComponent<Text> ().text = perk.shopName + " (" + (perkLvl + 1).ToString () + ")";
-			perkDescription.GetComponent<Text> ().text = string.Format (perk.description, perk.upgradeScales [perkLvl]);
+			
 			int perkCoinCost = perk.upgradeCoinCost [perkLvl];
 			int perkCrystalCost = perk.upgradeCrystalCost [perkLvl];
 			if (perkCoinCost == 0 && perkCrystalCost != 0) {
@@ -88,11 +87,15 @@ public class UnlockPerkWindow : MonoBehaviour {
 				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.RemoveAllListeners ();
 				buyCoinsButton.gameObject.GetComponent<Button> ().onClick.AddListener (() => UpgradePerkByCoins (perkNumber));
 			}
-		} else 
-		{
-			perkName.GetComponent<Text> ().text = perk.shopName + " (" + perkLvl.ToString () + ")";
-			perkDescription.GetComponent<Text> ().text = string.Format (perk.description, perk.upgradeScales [2]);
-		}
+		} 
+		perkName.GetComponent<Text> ().text = perk.shopName;
+		LocalizationManager.Instance.UpdateLocaliztion (perkName.GetComponent<Text> ());
+		perkName.GetComponent<Text> ().text += " (" + (perkLvl + 1).ToString () + ")";
+
+		perkDescription.GetComponent<Text> ().text = perk.description;
+		LocalizationManager.Instance.UpdateLocaliztion (perkDescription.GetComponent<Text> ());
+		perkDescription.GetComponent<Text> ().text = string.Format (perkDescription.GetComponent<Text> ().text, perk.upgradeScales [perkLvl]);
+
     }
 
 	public void SetWindowWithPerkStats(int perkOrderNumber)
@@ -113,6 +116,15 @@ public class UnlockPerkWindow : MonoBehaviour {
 		perkName.GetComponent<Text>().text = perk.shopName + " (" + perkLvl.ToString() +")";
 		perkDescription.GetComponent<Text>().text = string.Format(perk.description, perk.upgradeScales[perkLvl - 1]);
 
+		// localization
+		perkName.GetComponent<Text> ().text = perk.shopName;
+		LocalizationManager.Instance.UpdateLocaliztion (perkName.GetComponent<Text> ());
+		perkName.GetComponent<Text> ().text += " (" + (perkLvl + 1).ToString () + ")";
+
+		perkDescription.GetComponent<Text> ().text = perk.description;
+		LocalizationManager.Instance.UpdateLocaliztion (perkDescription.GetComponent<Text> ());
+		perkDescription.GetComponent<Text> ().text = string.Format (perkDescription.GetComponent<Text> ().text, perk.upgradeScales [perkLvl]);
+
 		buyCoinsButton.gameObject.SetActive (false);
 		buyCrystalsButton.gameObject.SetActive (false);
 
@@ -125,23 +137,13 @@ public class UnlockPerkWindow : MonoBehaviour {
         {
             // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
 			perkLvl++;
-            fade.gameObject.SetActive(true);
-            closeErrorWindowButton.gameObject.SetActive(true);
-            errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
+			ShowErrorWindow( "perk upgraded");
             AppMetrica.Instance.ReportEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
             DevToDev.Analytics.CustomEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
         }
         else
         {
-			if (PerksSwipeMenu.Instance.perkPrefabs[perkNumber])
-			{
-				
-			}
-            fade.gameObject.SetActive(true);
-            closeErrorWindowButton.gameObject.SetActive(true);
-            errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "NOT ENOUGH CRYSTALS";
+			ShowErrorWindow("not enough crystals");
         }
     }
     public void UpgradePerkByCoins(int perkNumber)
@@ -150,21 +152,23 @@ public class UnlockPerkWindow : MonoBehaviour {
         {
             // ПРОИСХОДИТ АНИМАЦИЯ РАЗЛОКА ПЕРКА
 			perkLvl ++;
-            fade.gameObject.SetActive(true);
-            closeErrorWindowButton.gameObject.SetActive(true);
-            errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "PERK UPGRADED";
+			ShowErrorWindow("perk upgraded");
             AppMetrica.Instance.ReportEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
             DevToDev.Analytics.CustomEvent("#PERK_BOUGHT " + PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
         }
         else
         {
-            fade.gameObject.SetActive(true);
-            closeErrorWindowButton.gameObject.SetActive(true);
-            errorWindow.gameObject.SetActive(true);
-            errorWindow.GetComponentInChildren<Text>().text = "NOT ENOUGH COINS";
+			ShowErrorWindow("not enough coins");
         }
     }
+	private void ShowErrorWindow(string text)
+	{
+		fade.gameObject.SetActive(true);
+		closeErrorWindowButton.gameObject.SetActive(true);
+		errorWindow.gameObject.SetActive(true);
+		errorWindow.GetComponentInChildren<Text>().text = text;
+		LocalizationManager.Instance.UpdateLocaliztion (errorWindow.GetComponentInChildren<Text>());
+	}
 
     public void CloseErrorWindow()
     {

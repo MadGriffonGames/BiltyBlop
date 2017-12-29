@@ -76,14 +76,12 @@ public class PauseUI : MonoBehaviour
 
     public void WarnActive()
     {
-        warningFade.SetActive(true);
-        warningSetActive(true);
+
     }
 
     public void WarnOff()
     {
-        warningFade.SetActive(false);
-        warningSetActive(false);
+
     }
 
     public void Quit()

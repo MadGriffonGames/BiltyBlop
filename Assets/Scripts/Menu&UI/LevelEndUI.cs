@@ -19,9 +19,21 @@ public class LevelEndUI : MonoBehaviour
     GameObject pauseUI;
     [SerializeField]
     ChestUI chest;
+    [SerializeField]
+    GameObject videoButton;
+    [SerializeField]
+    GameObject freeButton;
+    bool isButtonPressed;
 
     void Start ()
     {
+        isButtonPressed = false;
+        if (PlayerPrefs.GetInt("NoAds") > 0)
+        {
+            videoButton.SetActive(false);
+            freeButton.SetActive(true);
+        }
+
         controlsUI.SetActive(false);
         pauseUI.SetActive(false);
 
@@ -40,6 +52,16 @@ public class LevelEndUI : MonoBehaviour
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
         }
+
+        if (isButtonPressed && AdsManager.Instance.isRewardVideoWatched)
+        {
+            isButtonPressed = false;
+            AdsManager.Instance.isRewardVideoWatched = false;
+
+            GameManager.AddCoins(int.Parse(coinsText.text));
+            coinsText.text = (int.Parse(coinsText.text) * 2).ToString();
+            videoButton.GetComponent<Button>().interactable = false;
+        }
     }
 
     public void Menu()
@@ -54,6 +76,28 @@ public class LevelEndUI : MonoBehaviour
             GameManager.nextLevelName = "MainMenu";
         }
         SceneManager.LoadScene("Loading");
+    }
+
+    public void DoubleButton()
+    {
+        if (PlayerPrefs.GetInt("NoAds") > 0)
+        {
+            Debug.Log(PlayerPrefs.GetInt("Coins"));
+            GameManager.AddCoins(int.Parse(coinsText.text));
+            Debug.Log(PlayerPrefs.GetInt("Coins"));
+            coinsText.text = (int.Parse(coinsText.text) * 2).ToString();
+            freeButton.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            isButtonPressed = true;
+
+#if UNITY_EDITOR
+            AdsManager.Instance.isRewardVideoWatched = true;
+#elif UNITY_ANDROID || UNITY_IOS
+            AdsManager.Instance.ShowRewardedVideo();
+#endif
+        }
     }
 
     public void Restart()

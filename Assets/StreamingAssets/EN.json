@@ -1,5 +1,37 @@
 {
+	//UI
+	
+	"revive right now :": {
+	"text": "REVIVE RIGHT NOW :",
+	"fontSize": 0
+	},
+	
+	"free death ui": {
+	"text": "FREE",
+	"fontSize": 0
+	},
+	
+	"pause": {
+	"text": "PAUSE",
+	"fontSize": 0
+	},
+	
+	"victory": {
+	"text": "VICTORY",
+	"fontSize": 0
+	},
+	
+	"to 2 bonus": {
+	"text": "TO DOUBLE\nBONUS",
+	"fontSize": 0
+	},
+	
 	// MAIN MENU
+	
+	"free": {
+	"text": "FREE",
+	"fontSize": 0
+	},
 	
 	"play": {
 	"text": "PLAY",
@@ -58,12 +90,32 @@
 	
 	"starter pack": {
 	"text": "STARTER PACK", 
+	"fontSize": 50
+	},
+	
+	"starter pack title": {
+	"text": "STARTER PACK", 
+	"fontSize": 60
+	},
+	
+	"options": {
+	"text": "OPTIONS", 
 	"fontSize": 0
 	},
 	
 	"hero's choice": {
 	"text": "HERO'S CHOICE", 
-	"fontSize": 0
+	"fontSize": 48
+	},
+	
+	"only 48 hours": {
+	"text": "ONLY 48 HOURS", 
+	"fontSize": 43
+	},
+	
+	"hero's choise title": {
+	"text": "HERO'S CHOICE", 
+	"fontSize": 60
 	},
 	
 	"get": {
@@ -83,7 +135,7 @@
 	
 	"daily reward": {
 	"text": "DAILY REWARD", 
-	"fontSize": 0
+	"fontSize": 55
 	},
 	
 	"gifts": {
@@ -102,7 +154,7 @@
 	},
 	
 	"random potion": {
-	"text": "RANDOM POTION", 
+	"text": "1 POTION", 
 	"fontSize": 0
 	},
 	
@@ -113,52 +165,52 @@
 	
 	"buy_main": {
 		"text": "BUY", 
-		"fontSize": 0
+		"fontSize": 75
 	},
 
 	"potions\npack": {
 	"text": "POTIONS\nPACK", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"ancient\naxe": {
 	"text": "ANCIENT\nAXE", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"no ads": {
 	"text": "NO ADS", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"3 ammo\nquiver": {
 	"text": "3 AMMO\nQUIVER", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"60\ncrystals": {
 	"text": "60\nCRYSTALS", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"20 free\nrevives": {
 	"text": "20 FREE\nREVIVES", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"throwing\npizza": {
 	"text": "THROWING\nPIZZA", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"greedy\nperk": {
 	"text": "GREEDY\nPERK", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"ninjarian\nskin": {
 	"text": "NINJARIAN\nSKIN", 
-	"fontSize": 0
+	"fontSize": 33
 	},
 	
 	"remove ads": {
@@ -168,6 +220,36 @@
 	
 	"select episode": {
 	"text": "SELECT EPISODE", 
+	"fontSize": 0
+	},
+	
+	"village": {
+	"text": "VILLAGE", 
+	"fontSize": 0
+	},
+	
+	"ice land": {
+	"text": "ICE LAND", 
+	"fontSize": 0
+	},
+	
+	"lava land": {
+	"text": "LAVA\nLAND", 
+	"fontSize": 0
+	},
+	
+	"coming\nsoon": {
+	"text": "COMING\nSOON", 
+	"fontSize": 0
+	},
+	
+	"to unlock": {
+	"text": "TO UNLOCK", 
+	"fontSize": 0
+	},
+	
+	"complete\nlevel 10\nto unlock": {
+	"text": "COMPLETE\nLEVEL 10\nTO UNLOCK", 
 	"fontSize": 0
 	},
 	

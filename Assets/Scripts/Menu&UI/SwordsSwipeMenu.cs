@@ -66,12 +66,16 @@ public class SwordsSwipeMenu : SwipeMenu {
 							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 						}
 						LocalizationManager.Instance.UpdateLocaliztion (swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
-						swordCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
+						swordCardObj.gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
 						swordCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySword (sword.orderNumber));
 						swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySword (sword.orderNumber));
+						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
+						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (true);
 					}
 					else
 					{
+						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (sword.coinCost);
+						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
 						swordCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSwordPrefabBySwordOrder(sword.orderNumber))); // wdfsdf
 						swordCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSwordPrefabBySwordOrder(sword.orderNumber)));
 					}
@@ -125,9 +129,11 @@ public class SwordsSwipeMenu : SwipeMenu {
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 						}
 						LocalizationManager.Instance.UpdateLocaliztion (buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
-						buttons [i].gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
+						buttons [i].gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ApplySword(sword.orderNumber));
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplySword(sword.orderNumber));
+						buttons [i].GetComponent<SkinStatsPanel> ().TurnOffCoinCost ();
+						buttons [i].GetComponent<SkinStatsPanel> ().ActivateCheck (true);
 					}
 				}
 			}

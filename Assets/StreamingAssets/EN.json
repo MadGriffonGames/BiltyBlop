@@ -1,6 +1,11 @@
 {
 	//UI
 	
+	"game over": {
+	"text": "GAME OVER",
+	"fontSize": 0
+	},
+	
 	"revive right now :": {
 	"text": "REVIVE RIGHT NOW :",
 	"fontSize": 0
@@ -27,6 +32,36 @@
 	},
 	
 	// MAIN MENU
+	
+	"restore\npurchases": {
+	"text": "RESTORE\nPURCHASES",
+	"fontSize": 0
+	},
+	
+	"options": {
+	"text": "OPTIONS",
+	"fontSize": 0
+	},
+	
+	"rate us": {
+	"text": "RATE US",
+	"fontSize": 0
+	},
+	
+	"like our game?\nrate it to 5 stars": {
+	"text": "LIKE OUR GAME?\nRATE IT TO 5 STARS",
+	"fontSize": 0
+	},
+	
+	"sure": {
+	"text": "SURE",
+	"fontSize": 0
+	},
+	
+	"no, thanks": {
+	"text": "NO, THANKS",
+	"fontSize": 0
+	},
 	
 	"free": {
 	"text": "FREE",
@@ -257,154 +292,149 @@
 	
 	"destroy these boxes": {
 	"text": "DESTROY THESE BOXES USING YOUR SWORD", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"this key will open an ancient door": {
 	"text": "THIS KEY WILL OPEN AN ANCIENT DOOR", 
-	"fontSize": 0
+	"fontSize": 26
 	},
 	
 	"here is your first enemy. hit him": {
 	"text": "HERE IS YOUR FIRST ENEMY. HIT HIM", 
-	"fontSize": 0
+	"fontSize": 28
 	},
 	
 	"you found a treasure chest! try to open it": {
 	"text": "YOU FOUND A TREASURE CHEST! TRY TO OPEN IT", 
-	"fontSize": 0
+	"fontSize": 24
 	},
 	
 	"greetings young warrior! i will teach you on your journey": {
 	"text": "GREETINGS YOUNG WARRIOR! I WILL TEACH YOU IN YOUR JOURNEY", 
-	"fontSize": 0
+	"fontSize": 19
 	},
 	
 	"every level contains 3 stars. collect them all!": {
-	"text": "EVERY LEVEL CONTAINS 3 STARS. COLLECT THEM ALL!", 
-	"fontSize": 0
+	"text": "EVERY LEVEL CONTAINS\n3 STARS. COLLECT THEM ALL!", 
+	"fontSize": 24
 	},
 	
 	"jump on this mushroom": {
 	"text": "JUMP ON THIS MUSHROOM", 
-	"fontSize": 0
+	"fontSize": 28
 	},
 	
 	"destroy him using throwing weapon": {
 	"text": "DESTROY HIM USING THROWING WEAPON", 
-	"fontSize": 0
+	"fontSize": 26
 	},
 	
 	"destroy this maneken using your sword": {
 	"text": "DESTROY THIS MANIQUEN USING YOUR SWORD", 
-	"fontSize": 0
+	"fontSize": 24
 	},
 	
 	"you got your first item! tap to backpack to open it": {
 	"text": "YOU GOT YOUR FIRST ITEM! TAP TO BACKPACK TO OPEN IT", 
-	"fontSize": 0
+	"fontSize": 21
 	},
 	
 	"this potion restores one health point. tap to use it": {
 	"text": "THIS POTION RESTORES ONE HEALTH POINT. TAP TO USE IT", 
-	"fontSize": 0
+	"fontSize": 21
 	},
 	
 	"now you can use throwing weapon! open your backpack to get ammo": {
 	"text": "NOW YOU CAN USE THROWING WEAPON! OPEN YOUR BACKPACK TO GET AMMO", 
-	"fontSize": 0
+	"fontSize": 19
 	},
 	
 	"this item restores your throwing weapons stock to max": {
 	"text": "THIS ITEM RESTORES YOUR THROWING WEAPONS STOCK TO MAX", 
-	"fontSize": 0
+	"fontSize": 21
 	},
 	
 	//Level 2
 	
-	"beware this flower! he shoots you with a poisoned seed": {
-	"text": "BEWARE THIS FLOWER! HE SHOOTS YOU WITH A POISONED SEED", 
-	"fontSize": 0
-	},
-	
 	"look at your head! this means that there is a secret nearby": {
 	"text": "LOOK AT YOUR HEAD! THIS MEANS THAT THERE IS A SECRET NEARBY", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	"try to run through this wall": {
-	"text": "TRY TO RUN THROGH THIS WALL", 
-	"fontSize": 0
+	"text": "TRY TO RUN THROUGH THIS WALL", 
+	"fontSize": 28
 	},
 	
 	"this potion gives you immortal for a short time! open your backpack to use it": {
 	"text": "THIS POTION GIVES YOU IMMORTAL FOR A SHORT TIME! OPEN YOUR BACKPACK TO USE IT", 
-	"fontSize": 0
+	"fontSize": 19
 	},
 	
 	"tap to potions button, then tap to potion to use it": {
 	"text": "TAP TO POTIONS BUTTON, THEN TAP TO POTION TO USE IT", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"jump over these blades as they don't move!": {
 	"text": "JUMP OVER THESE BLADES AS THEY DON'T MOVE!", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"runs beneath these saws until they move!": {
 	"text": "RUNS BENEATH THESE SAWS UNITL THEY MOVE", 
-	"fontSize": 0
+	"fontSize": 26
 	},
 	
 	//Level 3
 	
 	"this is double speed potion! open your backpack to use it": {
 	"text": "THIS IS DOUBLE SPEED POTION! OPEN YOUR BACKPACK TO USE IT", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	"tap to potions button, then tap to potion, to use it": {
 	"text": "TAP TO POTIONS BUTTON, THEN TAP TO POTION TO USE IT", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	//Level 4
 	
 	"you have double damage potion! open your backpack to use it": {
 	"text": "YOU HAVE DOUBLE DAMAGE POTION! OPEN YOUR BACKPACK TO USE IT", 
-	"fontSize": 0
+	"fontSize": 19
 	},
 	
 	//Level 5
 	
 	"these magic boots gives you super jump": {
 	"text": "THESE MAGIC BOOTS GIVES YOU SUPER JUMP", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	//Level 6
 	
 	"this potion gives you slow-motion effect! open your backpack to use it": {
 	"text": "THIS POTION GIVES YOU SLOW-MOTION EFFECT! OPEN YOUR BACKPACK TO USE IT", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	//Map
 	
 	"it's time for shopping! tap on this button to go to the shop": {
 	"text": "IT'S TIME FOR SHOPPING! TAP ON THIS BUTTON TO GO TO THE SHOP", 
-	"fontSize": 0
+	"fontSize": 42
 	},
 	
 	"looks like you have new achievement! tap on this button to get your reward": {
 	"text": "LOOKS LIKE YOU HAVE NEW ACHIEVEMENT! TAP ON THIS BUTTON TO GET YOUR REWARD", 
-	"fontSize": 0
+	"fontSize": 40
 	},
 	
 	"look at this chest! tap on it to get your reward": {
 	"text": "LOOK AT THIS CHEST! TAP ON IT TO GET YOUR REWARD", 
-	"fontSize": 0
+	"fontSize": 42
 	},
 	
 	//Achievements

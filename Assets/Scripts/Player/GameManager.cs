@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     public GameObject metricaManager;
     [SerializeField]
     public GameObject achievementManager;
+    [SerializeField]
+    GameObject localiztionManager;
 
     public static string nextLevelName;
     public static int lvlCollectedCoins;
@@ -68,6 +70,12 @@ public class GameManager : MonoBehaviour
 
         AppMetrica.Instance.ReportEvent("#ENTER in " + currentLvl);
         DevToDev.Analytics.CustomEvent("#ENTER in " + currentLvl);
+#if UNITY_EDITOR
+        if (!FindObjectOfType<LocalizationManager>())
+        {
+            Instantiate(localiztionManager);
+        }
+#endif
     }
 
     void Start () 

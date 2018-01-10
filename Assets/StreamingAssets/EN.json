@@ -429,7 +429,7 @@
 	
 	"looks like you have new achievement! tap on this button to get your reward": {
 	"text": "LOOKS LIKE YOU HAVE NEW ACHIEVEMENT! TAP ON THIS BUTTON TO GET YOUR REWARD", 
-	"fontSize": 40
+	"fontSize": 45
 	},
 	
 	"look at this chest! tap on it to get your reward": {
@@ -676,7 +676,7 @@
 	
 	"congratulations! now you can use double jump!": {
 	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
-	"fontSize": 0
+	"fontSize": 23
 	},
 
 	//SHOP

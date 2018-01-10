@@ -63,10 +63,6 @@ public class DeathUI : MonoBehaviour
             TutorialUI.Instance.txt.text = "";
         }
 
-        if (SceneManager.GetActiveScene().name.Contains("10") || SceneManager.GetActiveScene().name.Contains("20"))
-        {
-            restartButton.SetActive(true);
-        }
         mainMenuButton.SetActive(true);
         if (continueButton != null)
         {
@@ -120,32 +116,39 @@ public class DeathUI : MonoBehaviour
 
     public void Continue()
     {
-        SoundManager.PlayRandomMusic("kid_music", true);
-        if (Player.Instance.freeCheckpoints > 0)
+        if (GameManager.currentLvl == "Level10" || GameManager.currentLvl == "Level20" || GameManager.currentLvl == "Level30")
         {
-            SoundManager.PlayRandomMusic("kid_music", true);
-            gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
-            Player.Instance.freeCheckpoints--;
-
-            Revive();
-
-            foreach (GameObject enemy in GameManager.deadEnemies)
-            {
-                enemy.SetActive(true);
-            }
-            GameManager.deadEnemies.Clear();
-
-            controls.SetActive(true);
-            pauseButton.SetActive(true);
-            fade.SetActive(false);
-            this.gameObject.SetActive(false);
+            Restart();
         }
         else
         {
-            buyCheckpointsUI.SetActive(true);
+            SoundManager.PlayRandomMusic("kid_music", true);
+            if (Player.Instance.freeCheckpoints > 0)
+            {
+                SoundManager.PlayRandomMusic("kid_music", true);
+                gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
+                Player.Instance.freeCheckpoints--;
+
+                Revive();
+
+                foreach (GameObject enemy in GameManager.deadEnemies)
+                {
+                    enemy.SetActive(true);
+                }
+                GameManager.deadEnemies.Clear();
+
+                controls.SetActive(true);
+                pauseButton.SetActive(true);
+                fade.SetActive(false);
+                this.gameObject.SetActive(false);
+            }
+            else
+            {
+                buyCheckpointsUI.SetActive(true);
+            }
+            AppMetrica.Instance.ReportEvent("#CHECKPOINT_USE in " + GameManager.currentLvl);
+            DevToDev.Analytics.CustomEvent("#CHECKPOINT_USE in " + GameManager.currentLvl);
         }
-        AppMetrica.Instance.ReportEvent("#CHECKPOINT_USE in " + GameManager.currentLvl);
-        DevToDev.Analytics.CustomEvent("#CHECKPOINT_USE in " + GameManager.currentLvl);
     }
 
     public void PlayUISound(string sound)

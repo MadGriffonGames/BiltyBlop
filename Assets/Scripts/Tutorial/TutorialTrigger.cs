@@ -19,7 +19,6 @@ public class TutorialTrigger : MonoBehaviour
     bool active = true;
     bool hide = false;
     bool show = false;
-    bool isLocalized;
 
     private void Start()
     {
@@ -28,8 +27,6 @@ public class TutorialTrigger : MonoBehaviour
         {
             arrow.SetActive(false);
         }
-
-        isLocalized = false;
     }
 
     private void Update()
@@ -54,6 +51,10 @@ public class TutorialTrigger : MonoBehaviour
             }
             hide = false;
             show = true;
+
+            TutorialUI.Instance.txt.fontSize = fontSize;
+            TutorialUI.Instance.txt.text = text;
+            LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -79,18 +80,7 @@ public class TutorialTrigger : MonoBehaviour
         TutorialUI.Instance.textBar.gameObject.SetActive(true);
         TutorialUI.Instance.oldmanFace.color += new Color(0, 0, 0, 0.12f);
         TutorialUI.Instance.textBar.color += new Color(0, 0, 0, 0.12f);
-        if (TutorialUI.Instance.textBar.color.a >= 0.2f)
-        {
-            TutorialUI.Instance.txt.fontSize = fontSize;
-            TutorialUI.Instance.txt.text = text;
-        }
 
-        if (!isLocalized)
-        {
-            LocalizationManager.Instance.UpdateLocaliztion(TutorialUI.Instance.txt);
-            isLocalized = true;
-        }
-        
         if (TutorialUI.Instance.textBar.color.a >= 1)
         {
             show = false;

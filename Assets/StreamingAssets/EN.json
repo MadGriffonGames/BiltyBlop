@@ -1,6 +1,11 @@
 {
 	//UI
 	
+	"skip": {
+	"text": "SKIP",
+	"fontSize": 0
+	},
+	
 	"game over": {
 	"text": "GAME OVER",
 	"fontSize": 0

@@ -11,10 +11,13 @@ public class MicroEvent : MonoBehaviour
     [SerializeField]
     GameObject targetEnablingObject;
 
+    bool isActivated = false;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !isActivated)
         {
+            isActivated = true;
             lightningBolt.SetActive(true);
             StartCoroutine(ChangeObjects());
         }

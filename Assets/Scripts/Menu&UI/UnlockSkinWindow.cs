@@ -51,6 +51,7 @@ public class UnlockSkinWindow : MonoBehaviour {
 		KidSkin.Instance.SwordInShop ();
 		skinIndex = SkinManager.Instance.skinPrefabs [skinNumber].GetComponent<SkinPrefab> ().displayIndex;
         skinName.GetComponent<Text>().text = skin.shopName;
+		LocalizationManager.Instance.UpdateLocaliztion (skinName.GetComponent<Text> ());
 		chosenSkinName = skin.name;
         statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(skin.armorStat);
         if (skin.isLocked)
@@ -110,12 +111,12 @@ public class UnlockSkinWindow : MonoBehaviour {
                 closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
                 closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSkinWindow());
 				skinTransform.SetActive (false);
-				ShowErrorWindow("SKIN UNLOCKED");
+				ShowErrorWindow("skin unlocked");
 				ApplySkin (chosenSkinName);
             }
             else
             {
-                ShowErrorWindow("NOT ENOUGH CRYSTALS");
+                ShowErrorWindow("not enough crystals");
 				skinTransform.SetActive (false);
             }
         }
@@ -135,12 +136,12 @@ public class UnlockSkinWindow : MonoBehaviour {
                 closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
                 closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSkinWindow());
 				skinTransform.SetActive (false);
-				ShowErrorWindow("SKIN UNLOCKED");
+				ShowErrorWindow("skin unlocked");
 				ApplySkin (chosenSkinName);
             }
             else
             {
-                ShowErrorWindow("NOT ENOUGH COINS");
+				ShowErrorWindow("not enough coins");
 				skinTransform.SetActive (false);
             }
         }
@@ -164,6 +165,7 @@ public class UnlockSkinWindow : MonoBehaviour {
         closeErrorWindowButton.gameObject.SetActive(true);
         errorWindow.gameObject.SetActive(true);
         errorWindow.GetComponentInChildren<Text>().text = text;
+		LocalizationManager.Instance.UpdateLocaliztion (errorWindow.GetComponentInChildren<Text>());
     }
 
     private void HideButtons()

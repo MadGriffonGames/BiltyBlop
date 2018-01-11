@@ -54,7 +54,7 @@ public class Shaman : MovingRangedEnemy
             timer += Time.deltaTime;
         }
 
-        if (timer >= 3.5f)
+        if (timer >= 2.5f)
         {
             timer = 0;
             isTimerTick = false;

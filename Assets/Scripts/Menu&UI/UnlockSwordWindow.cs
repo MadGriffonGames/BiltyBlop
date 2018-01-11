@@ -52,6 +52,7 @@ public class UnlockSwordWindow : MonoBehaviour {
 
 		swordIndex = SkinManager.Instance.swordPrefabs [swordNumber].GetComponent<SwordPrefab> ().displayIndex;
 		swordName.GetComponent<Text>().text = sword.shopName;
+		LocalizationManager.Instance.UpdateLocaliztion (swordName.GetComponent<Text>());
 		chosenSwordName = sword.name;
 		statsPanel.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
 		//statsPanel.GetComponentInChildren<SkinStatsPanel>().SetDefendIndicators(sword.armorStat);
@@ -113,12 +114,12 @@ public class UnlockSwordWindow : MonoBehaviour {
 				closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
 				closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSwordWindow());
 				swordTransform.SetActive (false);
-				ShowErrorWindow("SWORD UNLOCKED");
+				ShowErrorWindow("sword unlocked");
 				ApplySword (chosenSwordName, swordIndex);
 			}
 			else
 			{
-				ShowErrorWindow("NOT ENOUGH CRYSTALS");
+				ShowErrorWindow("not enough crystals");
 				swordTransform.SetActive (false);
 			}
 		}
@@ -138,12 +139,12 @@ public class UnlockSwordWindow : MonoBehaviour {
 				closeErrorWindowButton.GetComponent<Button>().onClick.RemoveAllListeners();
 				closeErrorWindowButton.GetComponent<Button>().onClick.AddListener(() => CloseUnlockSwordWindow());
 				swordTransform.SetActive (false);
-				ShowErrorWindow("SWORD UNLOCKED");
+				ShowErrorWindow("sword unlocked");
 				ApplySword (chosenSwordName, swordIndex);
 			}
 			else
 			{
-				ShowErrorWindow("NOT ENOUGH COINS");
+				ShowErrorWindow("not enough coins");
 				swordTransform.SetActive (false);
 			}
 		}
@@ -167,6 +168,7 @@ public class UnlockSwordWindow : MonoBehaviour {
 		closeErrorWindowButton.gameObject.SetActive(true);
 		errorWindow.gameObject.SetActive(true);
 		errorWindow.GetComponentInChildren<Text>().text = text;
+		LocalizationManager.Instance.UpdateLocaliztion (errorWindow.GetComponentInChildren<Text>());
 	}
 
 	private void HideButtons()

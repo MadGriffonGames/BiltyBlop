@@ -25,7 +25,8 @@ public class GemsSwipeMenu : SwipeMenu
 		distance = new float[buttons.Length];
 		for (int i = 0; i < buttons.Length; i++) 
 		{
-			buttons [i] = panel.GetChild (i).gameObject;	
+			buttons [i] = panel.GetChild (i).gameObject;
+			LocalizationManager.Instance.UpdateLocaliztion (buttons[i].GetComponentsInChildren<Text>()[2]);
 		}
 		SetGemCards ();
 		minButtonsNumber = 1;

@@ -13,8 +13,16 @@ public class ZoomOutTrigger : MonoBehaviour
     Transform bossCameraTransform;
     [SerializeField]
     GameObject keyUI;
-    [SerializeField]
-    GameObject controllsUI;
+	[SerializeField]
+	GameObject leftArrow;
+	[SerializeField]
+	GameObject rightArrow;
+	[SerializeField]
+	GameObject jumpButton;
+	[SerializeField]
+	GameObject attackButton;
+	[SerializeField]
+	GameObject throwButton;
     [SerializeField]
     GameObject healthUI;
     [SerializeField]
@@ -51,7 +59,7 @@ public class ZoomOutTrigger : MonoBehaviour
     {
         if (zoomOut && mainCamera.orthographicSize < cameraSize)
         {
-            mainCamera.orthographicSize += 0.2f;
+            mainCamera.orthographicSize += 0.1f;
         }
         else if (mainCamera.orthographicSize > cameraSize)
         {
@@ -77,7 +85,13 @@ public class ZoomOutTrigger : MonoBehaviour
     void DisableUIElements()
     {
         keyUI.SetActive(false);
-        controllsUI.SetActive(false);
+
+		leftArrow.GetComponent<Image> ().color = new Color (1, 1, 1, 0);
+		rightArrow.GetComponent<Image> ().color = new Color (1, 1, 1, 0);
+		attackButton.GetComponent<Image> ().color = new Color (1, 1, 1, 0);
+		throwButton.GetComponent<Image> ().color = new Color (1, 1, 1, 0);
+		jumpButton.GetComponent<Image> ().color = new Color (1, 1, 1, 0);
+
         healthUI.SetActive(false);
         moneyUI.SetActive(false);
         throwingUI.SetActive(false);

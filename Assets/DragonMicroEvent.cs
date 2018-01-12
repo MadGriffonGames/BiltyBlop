@@ -36,7 +36,6 @@ public class DragonMicroEvent : MonoBehaviour {
     {
         if (isOldDragon)
         {
-            Debug.Log("Old Dragon");
             if (armature.animation.lastAnimationName == "WEAKNESS_IDLE")
             {
                 armature.animation.FadeIn("WEAKNESS_END", -1, 1);
@@ -44,14 +43,12 @@ public class DragonMicroEvent : MonoBehaviour {
 
             if (armature.animation.lastAnimationName == "WEAKNESS_END" && armature.animation.isCompleted)
             {
-                Debug.Log("Starting to rise");
                 armature.animation.timeScale = 1.5f;
                 armature.animation.FadeIn("RISE", -1, 1);
             }
 
             if (armature.animation.lastAnimationName == "RISE" && armature.animation.isCompleted)
             {
-                Debug.Log("Rised");
                 isUp = true;
                 armature.animation.FadeIn("FLY", -1, -1);
             }

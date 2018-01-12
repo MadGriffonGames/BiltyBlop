@@ -106,18 +106,7 @@ public class FlyingPig : MovingRangedEnemy
     private void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
-        if (other.gameObject.CompareTag("Player"))
-        {
-            isActive = true;
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player") && !isActive)
-        {
-            isActive = true;
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)

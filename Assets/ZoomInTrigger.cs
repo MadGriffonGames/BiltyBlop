@@ -56,11 +56,12 @@ public class ZoomInTrigger : MonoBehaviour
 	{
 		if (zoomOut && mainCamera.orthographicSize > cameraSize)
 		{
-			mainCamera.orthographicSize -= 0.01f;
+			mainCamera.orthographicSize -= 0.05f;
 		}
 		else if (mainCamera.orthographicSize < cameraSize)
 		{
 			enabled = false;
+
 		}
 
 		if (fadingOutUp)
@@ -76,7 +77,7 @@ public class ZoomInTrigger : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 
-		if (other.gameObject.CompareTag("Player"))
+		if (other.gameObject.CompareTag("FlyingDragon"))
 		{
 			fadingOutUp = true;
 			fadingOutDown = true;

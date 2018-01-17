@@ -132,8 +132,8 @@ public class SwordsSwipeMenu : SwipeMenu {
 						buttons [i].gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ApplySword(sword.orderNumber));
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplySword(sword.orderNumber));
-						buttons [i].GetComponent<SkinStatsPanel> ().TurnOffCoinCost ();
-						buttons [i].GetComponent<SkinStatsPanel> ().ActivateCheck (true);
+						buttons [i].GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
+						buttons [i].GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (true);
 					}
 				}
 			}

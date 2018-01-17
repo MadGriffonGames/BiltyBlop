@@ -17,8 +17,6 @@ public class UnlockThrowWindow : MonoBehaviour {
 	[SerializeField]
 	GameObject statsPanel;
 	[SerializeField]
-	GameObject applyButton;
-	[SerializeField]
 	GameObject errorWindow;
 	[SerializeField]
 	GameObject fade;

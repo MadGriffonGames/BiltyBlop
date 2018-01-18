@@ -12,18 +12,16 @@ public class FlyingPig : MovingRangedEnemy
     bool damaged = false;
     [SerializeField]
     GameObject fireball;
+
     Vector3 startPos;
+
     public bool isTimerTick;
     float timer;
     [SerializeField]
     float attackRefreshTime;
-    [HideInInspector]
-    public bool isActive;
 
     void Awake()
     {
-        isActive = false;
-
         armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -103,12 +101,6 @@ public class FlyingPig : MovingRangedEnemy
         currentState.Enter(this);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         currentState.OnCollisionEnter2D(other);
@@ -147,7 +139,6 @@ public class FlyingPig : MovingRangedEnemy
             ChangeState(new FlyingPigPatrolState());
 
             canAttack = true;
-            isActive = false;
 
             fireball.GetComponent<PigFireball>().transform.parent = transform;
             fireball.GetComponent<PigFireball>().transform.localPosition = fireball.GetComponent<PigFireball>().startPosition;

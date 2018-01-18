@@ -11,29 +11,11 @@ public class Troll : MovingMeleeEnemy
     [SerializeField]
     public GameObject blow;
     [SerializeField]
-    public GameObject bomb;
-    [SerializeField]
-    private float shootingRange;
+    GameObject bomb;
     bool damaged = false;
     public bool walk = false;
-    [HideInInspector]
-    public bool canAttack;
-    [HideInInspector]
-    public bool isTimerTick;
-    float timer;
 
-    public bool InShootingRange
-    {
-        get
-        {
-            if (Target != null)//if enemy has a target
-            {
-                //return distance between enemy and target <= meleeRange (true or false)
-                return Vector2.Distance(transform.position, Target.transform.position) <= shootingRange;
-            }
-            return false;
-        }
-    }
+    
 
     void Awake()
     {
@@ -46,10 +28,7 @@ public class Troll : MovingMeleeEnemy
     {
         base.Start();
 
-        canAttack = true;
         isAttacking = false;
-        isTimerTick = false;
-        timer = 0;
         ChangeState(new TrollPatrolState());
     }
 
@@ -58,17 +37,6 @@ public class Troll : MovingMeleeEnemy
         if (!IsDead)
         {           
             LookAtTarget();
-
-            if (isTimerTick)
-            {
-                timer += Time.deltaTime;
-            }
-            if (timer >= 2f)
-            {
-                isTimerTick = false;
-                timer = 0;
-                canAttack = true;
-            }
         }
         if (!TakingDamage && !Attack)
         {

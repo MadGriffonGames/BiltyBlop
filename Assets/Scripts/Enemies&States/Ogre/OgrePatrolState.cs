@@ -34,7 +34,6 @@ public class OgrePatrolState : IOgreState
     {
         if (other.gameObject.CompareTag("Edge"))
         {
-            enemy.Target = null;
             enemy.ChangeDirection();
         }
     }

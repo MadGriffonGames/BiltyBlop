@@ -11,8 +11,6 @@ public class ShieldSkeletonPatrolState : IShieldSkeletonState
     public void Enter(ShieldSkeleton enemy)
     {
         this.enemy = enemy;
-
-        enemy.armature.animation.timeScale = 1f;
     }
 
     public void Execute()
@@ -31,7 +29,6 @@ public class ShieldSkeletonPatrolState : IShieldSkeletonState
     public void Exit()
     {
         enemy.walk = false;
-        enemy.armature.animation.timeScale = 1f;
     }
 
     public void OnCollisionEnter2D(Collision2D other)

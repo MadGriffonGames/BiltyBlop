@@ -13,9 +13,8 @@ public class ShieldSkeletonMeleeState : IShieldSkeletonState
     {
         canExit = true;
         isAttacked = false;
-        this.enemy = enemy;
 
-        enemy.armature.animation.timeScale = 1f;
+        this.enemy = enemy;
     }
 
     public void Execute()
@@ -29,7 +28,7 @@ public class ShieldSkeletonMeleeState : IShieldSkeletonState
 
     public void Exit()
     {
-        enemy.armature.animation.timeScale = 1f;
+
     }
 
     public void OnCollisionEnter2D(Collision2D other)

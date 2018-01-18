@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
 using AppodealAds.Unity.Api;
 using AppodealAds.Unity.Common;
 using UnityEngine;
@@ -34,7 +33,6 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     public bool isRewardedVideoShown = false;
 
     string appKey;
-    string unityGameId;
 
     private void Awake()
     {
@@ -47,17 +45,14 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 #if UNITY_EDITOR
 
 #elif UNITY_ANDROID
-        appKey = "e98a9abebc918269e0b487f18fd271b1313447f412d4561e";
-        unityGameId = "1671703";
+    appKey = "e98a9abebc918269e0b487f18fd271b1313447f412d4561e";
 
 #elif UNITY_IOS
 		appKey = "c9868b381a1331f2a7d3d5b4dd9bc721f403735f82deebff";
-        unityGameId = "1671704";
 
 #endif
 
         Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
-        Advertisement.Initialize(unityGameId);
 
         Appodeal.setInterstitialCallbacks(this);
         Appodeal.setRewardedVideoCallbacks(this);
@@ -97,24 +92,39 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     {
         if (PlayerPrefs.GetInt("NoAds") == 0)
         {
-            int tmp = Random.Range(1, 3);
-            if (tmp == 1)
-            {
-                ShowRewardedVideoUnityAds();
-            }
-            else
-            {
-                Appodeal.show(Appodeal.REWARDED_VIDEO);
-            }
+            Appodeal.show(Appodeal.REWARDED_VIDEO);
         }
         else
         {
             isRewardVideoWatched = true;
         }
 
-        if (CanNotShowRewardedVideo())
+        if (PlayerPrefs.GetInt("NoAds") == 0 && !Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched)
         {
-            InstantiateWarning();
+            if (SceneManager.GetActiveScene().name.Contains("Level"))
+            {
+#if !UNITY_IOS
+                if (GameObject.Find("NetworkWarning(Clone)") == null)//if there is no active warnings in scene
+                {
+                    warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
+                    warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
+                }
+#endif
+            }
+            else
+            {
+#if !UNITY_IOS
+                if (GameObject.Find("NetworkWarning(Clone)") == null)//if there is no active warnings in scene
+                {
+                    GameObject ui;
+                    ui = GameObject.FindGameObjectWithTag("UI").gameObject;
+
+                    warning = Instantiate(networkWarningPrefab, ui.transform);
+                    warning.GetComponent<RectTransform>().localScale = new Vector2(2, 2);
+                }
+#endif
+            }
+            warning.GetComponent<RectTransform>().localPosition = new Vector2();
         }
 
     }
@@ -177,69 +187,4 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     {
         isRewardVideoWatched = true;
     }
-
-    void HandleShowResult(ShowResult result)
-    {
-        if (result == ShowResult.Finished)
-        {
-            Debug.Log("Video completed - Offer a reward to the player");
-
-            isRewardVideoWatched = true;
-        }
-        else if (result == ShowResult.Skipped)
-        {
-            Debug.LogWarning("Video was skipped - Do NOT reward the player");
-
-        }
-        else if (result == ShowResult.Failed)
-        {
-            Debug.LogError("Video failed to show");
-        }
-    }
-
-
-    //other
-
-    void ShowRewardedVideoUnityAds()
-    {
-        ShowOptions options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
-
-        Advertisement.Show("rewardedVideo", options);
-    }
-
-    bool CanNotShowRewardedVideo()
-    {
-        return PlayerPrefs.GetInt("NoAds") == 0 && !Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched;
-    }
-
-    void InstantiateWarning()
-    {
-        if (SceneManager.GetActiveScene().name.Contains("Level"))
-        {
-#if !UNITY_IOS
-            if (GameObject.Find("NetworkWarning(Clone)") == null)//if there is no active warnings in scene
-            {
-                warning = Instantiate(networkWarningPrefab, GameObject.FindObjectOfType<UI>().gameObject.transform);
-                warning.GetComponent<RectTransform>().localScale = new Vector2(1, 1);
-            }
-#endif
-        }
-        else
-        {
-#if !UNITY_IOS
-            if (GameObject.Find("NetworkWarning(Clone)") == null)//if there is no active warnings in scene
-            {
-                GameObject ui;
-                ui = GameObject.FindGameObjectWithTag("UI").gameObject;
-
-                warning = Instantiate(networkWarningPrefab, ui.transform);
-                warning.GetComponent<RectTransform>().localScale = new Vector2(2, 2);
-            }
-#endif
-        }
-        warning.GetComponent<RectTransform>().localPosition = new Vector2();
-    }
-
-
 }

@@ -16,7 +16,8 @@ public class OgreMeleeState : IOgreState
     public void Enter(Ogre enemy)
     {
         this.enemy = enemy;
-        enemy.armature.animation.timeScale = 1.6f;
+        enemy.armature.animation.timeScale = 1.8f;
+
     }
 
     public void Execute()
@@ -25,10 +26,6 @@ public class OgreMeleeState : IOgreState
         if (enemy.Target == null && canExit)
         {
             enemy.ChangeState(new OgrePatrolState());
-        }
-        if (enemy.Target != null && !enemy.canAttack && canExit)
-        {
-            enemy.ChangeState(new OgreIdleState());
         }
     }
 
@@ -50,31 +47,26 @@ public class OgreMeleeState : IOgreState
 
     private void Attack()
     {
-        if (enemy.canAttack)
+        if (!preattack)
         {
-            if (!preattack)
-            {
-                enemy.armature.animation.timeScale = 1.8f;
-                canExit = false;
-                enemy.isAttacking = true;
-                enemy.armature.animation.FadeIn("pre_atk", -1, 1);
-                preattack = true;
-            }
-            if (enemy.armature.animation.lastAnimationName == "pre_atk" && enemy.armature.animation.isCompleted)
-            {
-                enemy.armature.animation.FadeIn("atk", -1, 1);
-                enemy.AttackCollider.enabled = true;
-            }
+            enemy.armature.animation.timeScale = 1.8f;
+            canExit = false;
+            enemy.isAttacking = true;
+            enemy.armature.animation.FadeIn("pre_atk", -1, 1);
+            preattack = true;
+        }
+        if (enemy.armature.animation.lastAnimationName == "pre_atk" && enemy.armature.animation.isCompleted)
+        {
+            enemy.armature.animation.FadeIn("atk", -1, 1);
+            enemy.AttackCollider.enabled = true;
+        }            
 
-            if (enemy.armature.animation.lastAnimationName == "atk" && enemy.armature.animation.isCompleted)
-            {
-                enemy.AttackCollider.enabled = false;
-                enemy.isAttacking = false;
-                enemy.canAttack = false;
-                enemy.isTimerTick = true;
-                preattack = false;
-                canExit = true;
-            }
+        if (enemy.armature.animation.lastAnimationName == "atk" && enemy.armature.animation.isCompleted)
+        {
+            enemy.AttackCollider.enabled = false;
+            enemy.isAttacking = false;
+            preattack = false;
+            canExit = true;
         }
     }
 }

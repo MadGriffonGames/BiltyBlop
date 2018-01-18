@@ -17,9 +17,6 @@ public class UI : MonoBehaviour
     }
 
     [SerializeField]
-    public GameObject[] gameUI;
-
-    [SerializeField]
     public GameObject LevelEndUI;
 
     [SerializeField]
@@ -28,21 +25,10 @@ public class UI : MonoBehaviour
     [SerializeField]
     public GameObject timeRewindUI;
 
-    [SerializeField]
-    public GameObject skipVideoButton;
-
     public GameObject controlsUI;
 
     private void Start()
     {
         controlsUI = GetComponentInChildren<ControlsUI>().gameObject;     
     }
-
-    public void EnableGameUI(bool enable)
-    {
-        for (int i = 0; i < gameUI.Length; i++)
-        {
-            gameUI[i].SetActive(enable);
-        }
-    } 
 }

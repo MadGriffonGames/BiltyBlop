@@ -18,7 +18,7 @@ public class TrollSelfDestroyState : MonoBehaviour, ITrollState
         this.enemy = enemy;
         enemy.armature.armature.animation.timeScale = 1.5f;
         
-        enemy.armature.animation.FadeIn("blow", -1, 2);
+        enemy.armature.animation.FadeIn("blow", -1, 1);
     }
 
     public void Execute()

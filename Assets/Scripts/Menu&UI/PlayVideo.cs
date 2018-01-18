@@ -7,26 +7,24 @@ using UnityEngine.SceneManagement;
 public class PlayVideo : MonoBehaviour
 
 {
+
+	[SerializeField]
 	GameObject[] sceneUI;
+	[SerializeField]
 	GameObject skipButton;
 
     VideoPlayer videoPlayer;
 
-    private void Awake()
-    {
-        sceneUI = UI.Instance.gameUI;
-        skipButton = UI.Instance.skipVideoButton;
-    }
-
-    public void ExecuteVideo ()
+	public void executeVideo ()
 	{
 		videoPlayer = this.gameObject.GetComponent<VideoPlayer>();
 		videoPlayer.isLooping = false;
 		videoPlayer.loopPointReached += EndReached;
 		string movieName = videoPlayer.clip.name;
-
-        UI.Instance.EnableGameUI(false);
-
+		foreach (GameObject sceneui in sceneUI)
+		{
+			sceneui.SetActive(false);
+		}
 		videoPlayer.Play();
 		#if UNITY_IOS
 		SoundManager.MuteMusic(true);
@@ -45,7 +43,7 @@ public class PlayVideo : MonoBehaviour
     {
 #if !UNITY_EDITOR
         if (SceneManager.GetActiveScene ().name == "Level1")
-			ExecuteVideo ();
+			executeVideo ();
 #endif
     }
 
@@ -59,9 +57,10 @@ public class PlayVideo : MonoBehaviour
 	{
 		videoPlayer.Stop ();
 		skipButton.SetActive (false);
-
-        UI.Instance.EnableGameUI(true);
-
+		foreach (GameObject sceneui  in sceneUI) 
+		{
+			sceneui.SetActive (true);			
+		}
 		SoundManager.MuteMusic (false);
 		if (SceneManager.GetActiveScene().name == "Level10" || SceneManager.GetActiveScene().name == "Level20")
 		{

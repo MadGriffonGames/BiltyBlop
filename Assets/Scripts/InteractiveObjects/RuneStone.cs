@@ -33,7 +33,7 @@ public class RuneStone : InteractiveObject
 			} 
 			else 
 			{
-				GameObject.FindGameObjectWithTag ("Camera").GetComponentInChildren<PlayVideo> ().ExecuteVideo ();
+				GameObject.FindGameObjectWithTag ("Camera").GetComponentInChildren<PlayVideo> ().executeVideo ();
 			}
             
         }

@@ -12,19 +12,14 @@ public class TrollPatrolState : ITrollState
     {
         this.enemy = enemy;
         patrolDuration = enemy.patrolDuration;
-        enemy.armature.animation.FadeIn("Run", -1, -1);
-        enemy.movementSpeed = 3;
+
         enemy.armature.animation.timeScale = 1;
     }
 
     public void Execute()
     {
         enemy.LocalMove();
-        if (enemy.InMeleeRange)
-        {
-            enemy.ChangeState(new TrollSelfDestroyState());
-        }
-        if (enemy.Target != null && enemy.canAttack)
+        if (enemy.Target != null)
         {
             enemy.ChangeState(new TrollRangeState());
         }
@@ -39,9 +34,7 @@ public class TrollPatrolState : ITrollState
     {
         if (other.gameObject.CompareTag("Edge"))
         {
-            enemy.Target = null;
             enemy.ChangeDirection();
-            enemy.Target = null;
         }
     }
 }

@@ -17,8 +17,6 @@ public class AchievementBoxOneLevel : MonoBehaviour
     [SerializeField]
     GameObject text;
     [SerializeField]
-    GameObject stat;
-    [SerializeField]
     GameObject inProgress;
     [SerializeField]
     GameObject doneImg;
@@ -118,7 +116,7 @@ public class AchievementBoxOneLevel : MonoBehaviour
             PlayerPrefs.SetInt(achievementName + btn, 0);
         if (PlayerPrefs.GetInt(achievementName + btn) == 0)
         {
-            stat.GetComponent<Text>().text += PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue");
+            text.GetComponent<Text>().text += " " + PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue");
         }
         if (PlayerPrefs.GetInt(achievementName + btn) == 1)
         {
@@ -126,7 +124,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
         }
 
         description.gameObject.GetComponent<Text>().text = descriptionText;
-        LocalizationManager.Instance.UpdateLocaliztion(description.GetComponent<Text>());
+        LocalizationManager.Instance.UpdateLocaliztion(GetComponent<Text>());
+
         GetInfo();
     }
 
@@ -142,7 +141,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
             {
                 gold.SetActive(true);
             }
-        
+
+
         if (currentValue < targetValue)
         {
             inProgress.gameObject.SetActive(true);

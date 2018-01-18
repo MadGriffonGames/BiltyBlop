@@ -22,48 +22,33 @@ public class Player : Character
     [SerializeField]
     private GameObject grave;
 
-    [HideInInspector]
     GameObject throwing;
-    [HideInInspector]
     public GameObject[] throwingClip;
-    [HideInInspector]
     public int clipSize;
-    [HideInInspector]
     public int throwingIterator;
-    [HideInInspector]
+
     public Rigidbody2D myRigidbody;
-    [HideInInspector]
     public MeshRenderer[] meshRenderer;
     [SerializeField]
     public GameObject target;
     [SerializeField]
     GameObject shadow;
-    [HideInInspector]
     public bool bossFight = false;
-    [HideInInspector]
     public bool invertedControls = false;
-    [HideInInspector]
     public IPlayerState currentState;
 
     /*
      * Game Managment vars
      */
-    [HideInInspector]
     public Vector2 startPosition;
-    [HideInInspector]
     public Vector2 checkpointPosition;
-    [HideInInspector]
     public float lightIntencityCP;
-    [HideInInspector]
     public int startCoinCount;
-    [HideInInspector]
     public int lvlCoins;
-    [HideInInspector]
     public int monstersKilled;
     public int stars;
     public float maxHealth;
     Dictionary<int, PlayerTimeState> recording = new Dictionary<int, PlayerTimeState>();
-    [HideInInspector]
     public bool isRewinding = false;
     public int freeCheckpoints;
 
@@ -78,32 +63,19 @@ public class Player : Character
     [SerializeField]
     public GameObject secretIndication;
     bool isDoubleJumpAllowed;
-    [HideInInspector]
     public bool Jump { get; set; }
-    [HideInInspector]
     public bool DoubleJump { get; set; }
-    [HideInInspector]
     public int jumpTaps = 0;
-    [HideInInspector]
     public bool canJump;
-    [HideInInspector]
     public bool Throw { get; set; }
-    [HideInInspector]
     public bool takeHit = false;
-    [HideInInspector]
     public float mobileInput = 0;
-    [HideInInspector]
     private float playerAxis = 0;
-    [HideInInspector]
     public bool GotKey { get; set; }
     public bool immortal = false;
-    [HideInInspector]
     public float immortalTime;
-    [HideInInspector]
     public int meleeDamage;
-    [HideInInspector]
     public int throwDamage;
-    [HideInInspector]
     public override bool IsDead
     {
         get { return health <= 0; }
@@ -131,26 +103,17 @@ public class Player : Character
     /*
      * Bonus vars
      */
-    [HideInInspector]
     public int speedBonusNum = 0;
-    [HideInInspector]
     public int immortalBonusNum = 0;
-    [HideInInspector]
     public int damageBonusNum = 0;
-    [HideInInspector]
     public int jumpBonusNum = 0;
-    [HideInInspector]
     public int timeBonusNum = 0;
-    [HideInInspector]
     public float timeScaler = 1;
-    [HideInInspector]
     public float timeScalerJump = 1;
-    [HideInInspector]
     public float timeScalerMove = 1;
 	[SerializeField]
 	public GameObject bonusFXObject;
-    [HideInInspector]
-    public Animator bonusFX;
+	public Animator bonusFX;
 
     /*
      * Skin Managment
@@ -164,10 +127,8 @@ public class Player : Character
 	 */
 	int dodgeChance; // in %
 	float potionTimeScale;
-    [HideInInspector]
-    public float coinScale;
-    [HideInInspector]
-    public int maxClipSize;
+	public float coinScale;
+	public int maxClipSize;
 
 	private void Awake()
 	{

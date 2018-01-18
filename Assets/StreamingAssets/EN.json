@@ -1,11 +1,6 @@
 {
 	//UI
 	
-	"skip": {
-	"text": "SKIP",
-	"fontSize": 0
-	},
-	
 	"game over": {
 	"text": "GAME OVER",
 	"fontSize": 0
@@ -204,8 +199,8 @@
 	},
 	
 	"buy_main": {
-	"text": "BUY", 
-	"fontSize": 75
+		"text": "BUY", 
+		"fontSize": 75
 	},
 
 	"potions\npack": {
@@ -290,11 +285,6 @@
 	
 	"complete\nlevel 10\nto unlock": {
 	"text": "COMPLETE\nLEVEL 10\nTO UNLOCK", 
-	"fontSize": 0
-	},
-	
-	"complete\nlevel 20\nto unlock": {
-	"text": "COMPLETE\nLEVEL 20\nTO UNLOCK", 
 	"fontSize": 0
 	},
 	
@@ -439,7 +429,7 @@
 	
 	"looks like you have new achievement! tap on this button to get your reward": {
 	"text": "LOOKS LIKE YOU HAVE NEW ACHIEVEMENT! TAP ON THIS BUTTON TO GET YOUR REWARD", 
-	"fontSize": 45
+	"fontSize": 40
 	},
 	
 	"look at this chest! tap on it to get your reward": {
@@ -448,17 +438,6 @@
 	},
 	
 	//Achievements
-	
-	"see achievments menu for details": {
-	"text": "SEE ACHIEVEMENTS MENU FOR DETAILS",
-	"fontSize": 0
-	},
-	
-	"achievements": {
-	"text": "ACHIEVEMENTS",
-	"fontSize": 0
-	},
-	
 	
 	"kill 25 enemies": {
 	"text": "KILL 25 ENEMIES",
@@ -475,7 +454,7 @@
 	"fontSize": 0
 	},
 	
-	"fall in water 5 times": {
+	"fall in water 5 times in one lvl": {
 	"text": "FALL IN WATER 5 TIMES IN ONE LEVEL",
 	"fontSize": 0
 	},
@@ -485,7 +464,7 @@
 	"fontSize": 0
 	},
 	
-	"open 10 chests":{
+	"open 10 chest":{
 	"text": "OPEN 10 CHESTS",
 	"fontSize": 0
 	},
@@ -685,7 +664,7 @@
 	
 	"tap on this button to get reward": {
 	"text": "TAP ON THIS BUTTON TO GET REWARD", 
-	"fontSize": 44
+	"fontSize": 0
 	},
 	
 	"in progress":{
@@ -697,7 +676,7 @@
 	
 	"congratulations! now you can use double jump!": {
 	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
-	"fontSize": 23
+	"fontSize": 0
 	},
 
 	//SHOP

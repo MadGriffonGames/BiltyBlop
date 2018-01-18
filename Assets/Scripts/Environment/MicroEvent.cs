@@ -29,6 +29,4 @@ public class MicroEvent : MonoBehaviour
         targetDisablingObject.SetActive(false);
         targetEnablingObject.SetActive(true);
     }
-
-
 }

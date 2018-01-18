@@ -46,9 +46,9 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField]
     protected float movementSpeed = 3.0f;
-    [HideInInspector]
+
     public bool facingRight;//check direction(true if we look right)
-    [HideInInspector]
+
     public bool Attack { get; set; }
 
     Dictionary<string, GameObject> skins;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class RateUs : MonoBehaviour
@@ -20,28 +21,41 @@ public class RateUs : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.GetInt("Rated") > 0)
+        if (PlayerPrefs.GetInt("Rated") > 0 || PlayerPrefs.GetInt("NoAds") > 0)
         {
-            rateUsWindow.SetActive(false);
-            fade.SetActive(false);
+            EnableRateWindow(false);
         }
         else
         {
-            if (PlayerPrefs.GetInt(IS_RATE_US_WINDOW_APPEARED) > 0)
+            if (SceneManager.GetActiveScene().name == "Map")
             {
-                if (PlayerPrefs.GetInt(APP_ENTER_COUNTER) >= REMIND_LATER_DELAY)
+                if (PlayerPrefs.GetString("LastCompletedLevel") == "Level5" && PlayerPrefs.GetInt("RatedAfetrLevel5") == 0)
                 {
-                    rateUsWindow.SetActive(true);
-                    fade.SetActive(true);
+                    PlayerPrefs.SetInt("RatedAfetrLevel5", 1);
+                    EnableRateWindow(true);
+                }
+                else if (PlayerPrefs.GetString("LastCompletedLevel") == "Level9" && PlayerPrefs.GetInt("RatedAfetrLevel9") == 0)
+                {
+                    PlayerPrefs.SetInt("RatedAfetrLevel9", 1);
+                    EnableRateWindow(true);
                 }
             }
             else
             {
-                if (PlayerPrefs.GetInt(APP_ENTER_COUNTER) >= FIRST_APPEAR_DELAY)
+                if (PlayerPrefs.GetInt(IS_RATE_US_WINDOW_APPEARED) > 0)
                 {
-                    PlayerPrefs.SetInt(IS_RATE_US_WINDOW_APPEARED, 1);
-                    rateUsWindow.SetActive(true);
-                    fade.SetActive(true);
+                    if (PlayerPrefs.GetInt(APP_ENTER_COUNTER) >= REMIND_LATER_DELAY)
+                    {
+                        EnableRateWindow(true);
+                    }
+                }
+                else
+                {
+                    if (PlayerPrefs.GetInt(APP_ENTER_COUNTER) >= FIRST_APPEAR_DELAY)
+                    {
+                        PlayerPrefs.SetInt(IS_RATE_US_WINDOW_APPEARED, 1);
+                        EnableRateWindow(true);
+                    }
                 }
             }
         }
@@ -56,26 +70,29 @@ public class RateUs : MonoBehaviour
 #endif
 
         PlayerPrefs.SetInt("Rated", 1);
-        rateUsWindow.SetActive(false);
-        fade.SetActive(false);
+        EnableRateWindow(false);
     }
 
     public void RemindLaterButton()
     {
         PlayerPrefs.SetInt(APP_ENTER_COUNTER, 0);
-        rateUsWindow.SetActive(false);
-        fade.SetActive(false);
+        EnableRateWindow(false);
     }
 
     public void DontShowAgainButton()
     {
         PlayerPrefs.SetInt("Rated", 1);
-        rateUsWindow.SetActive(false);
-        fade.SetActive(false);
+        EnableRateWindow(false);
     }
 
     public static void IncrementAppEnterCounter()//Used in Awake() in PurchaseManager
     {
         PlayerPrefs.SetInt(APP_ENTER_COUNTER, PlayerPrefs.GetInt(APP_ENTER_COUNTER) + 1);
+    }
+
+    void EnableRateWindow(bool enable)
+    {
+        rateUsWindow.SetActive(enable);
+        fade.SetActive(enable);
     }
 }

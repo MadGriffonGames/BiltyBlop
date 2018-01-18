@@ -233,4 +233,15 @@ public class GameManager : MonoBehaviour
         AddCoins(9999);
         AddCrystals(9999);
     }
+
+    [ContextMenu("HideEnemies")]
+    void HideEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject storage = GameObject.FindGameObjectWithTag("EnemiesStorage");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].transform.parent = storage.transform;
+        }
+    }
 }

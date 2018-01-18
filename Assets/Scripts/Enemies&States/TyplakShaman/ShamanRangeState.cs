@@ -30,6 +30,7 @@ public class ShamanRangeState : IShamanState
         {
             if (!enemy.isIdle)
             {
+                enemy.armature.animation.timeScale = 1f;
                 enemy.armature.animation.FadeIn("Idle", -1, -1);
                 enemy.isIdle = true;
             }
@@ -72,6 +73,7 @@ public class ShamanRangeState : IShamanState
         enemy.isAttacking = false;
         enemy.isIdle = false;
         enemy.timer = 0;
+        enemy.armature.animation.timeScale = 1f;
     }
 
     public void OnCollisionEnter2D(Collision2D other)

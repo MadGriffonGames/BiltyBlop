@@ -17,6 +17,7 @@ public class ActLocker : MonoBehaviour
     GameObject starsPanel;
     [SerializeField]
     GameObject statPanel;
+    const int TOTAL_LEVEL_COUNT = 20;
 
     bool collectStars = false;
     bool completeLevel = false;
@@ -25,7 +26,7 @@ public class ActLocker : MonoBehaviour
 
 	void Start ()
     {
-        for (int i = 0; i < 21; i++)
+        for (int i = 0; i <= TOTAL_LEVEL_COUNT; i++)
         {
             starsCount += PlayerPrefs.GetInt("Level" + i + "_collects");
         }

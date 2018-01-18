@@ -26,6 +26,7 @@ public class ShamanPatrolState : IShamanState
     public void Exit()
     {
         enemy.walk = false;
+        enemy.armature.animation.timeScale = 1f;
     }
 
     public void OnCollisionEnter2D(Collision2D other)

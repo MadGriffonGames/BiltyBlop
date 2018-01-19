@@ -46,8 +46,9 @@ public class AchievementUI : MonoBehaviour
     public void AchievementAppear(string name)
     {
         name = name.ToLower();
-
-        achievementBox.gameObject.GetComponentInChildren<Text>().text = name;
+        Text tmpText = achievementBox.gameObject.GetComponentInChildren<Text>();
+        tmpText.text = name;
+        LocalizationManager.Instance.UpdateLocaliztion(tmpText);
         achievementBox.gameObject.SetActive(true);
         if (PlayerPrefs.GetInt(name) == PlayerPrefs.GetInt(name + "targetValue0"))
         {

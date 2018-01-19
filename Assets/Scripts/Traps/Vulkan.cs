@@ -6,26 +6,18 @@ public class Vulkan : MonoBehaviour
 {
     [SerializeField]
     GameObject fireball;
-
     [SerializeField]
     float startDelay;
-
     [SerializeField]
     public float throwDealy;
-
     [SerializeField]
     Transform instantiaitePoint;
-
     [SerializeField]
     float speed;
-
     [SerializeField]
     float timeToLife;
-
     float timer;
-
     bool canStart = false;
-
     Animator myAnimator;
 
     private void Start()

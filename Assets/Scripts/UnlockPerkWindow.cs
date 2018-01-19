@@ -13,8 +13,6 @@ public class UnlockPerkWindow : MonoBehaviour {
     GameObject buyCrystalsButton;
     [SerializeField]
     GameObject perkName;
-	[SerializeField]
-	GameObject perkDescription;
     [SerializeField]
     GameObject errorWindow;
     [SerializeField]
@@ -92,10 +90,6 @@ public class UnlockPerkWindow : MonoBehaviour {
 		LocalizationManager.Instance.UpdateLocaliztion (perkName.GetComponent<Text> ());
 		perkName.GetComponent<Text> ().text += " (" + (perkLvl + 1).ToString () + ")";
 
-		perkDescription.GetComponent<Text> ().text = perk.description;
-		LocalizationManager.Instance.UpdateLocaliztion (perkDescription.GetComponent<Text> ());
-		perkDescription.GetComponent<Text> ().text = string.Format (perkDescription.GetComponent<Text> ().text, perk.upgradeScales [perkLvl]);
-
     }
 
 	public void SetWindowWithPerkStats(int perkOrderNumber)
@@ -114,16 +108,11 @@ public class UnlockPerkWindow : MonoBehaviour {
 		perkImage.sprite = perk.perkSprite;
 		perkLvl = PlayerPrefs.GetInt (PerksSwipeMenu.Instance.perkPrefabs[perkNumber].name);
 		perkName.GetComponent<Text>().text = perk.shopName + " (" + perkLvl.ToString() +")";
-		perkDescription.GetComponent<Text>().text = string.Format(perk.description, perk.upgradeScales[perkLvl - 1]);
 
 		// localization
 		perkName.GetComponent<Text> ().text = perk.shopName;
 		LocalizationManager.Instance.UpdateLocaliztion (perkName.GetComponent<Text> ());
 		perkName.GetComponent<Text> ().text += " (" + (perkLvl + 1).ToString () + ")";
-
-		perkDescription.GetComponent<Text> ().text = perk.description;
-		LocalizationManager.Instance.UpdateLocaliztion (perkDescription.GetComponent<Text> ());
-		perkDescription.GetComponent<Text> ().text = string.Format (perkDescription.GetComponent<Text> ().text, perk.upgradeScales [perkLvl]);
 
 		buyCoinsButton.gameObject.SetActive (false);
 		buyCrystalsButton.gameObject.SetActive (false);

@@ -54,15 +54,18 @@ public class ItemsSwipeMenu : SwipeMenu {
 
 			newItem.transform.localPosition = new Vector3(i * DISTANCE, 0, 0);
 			newItem.transform.localScale = new Vector3 (1, 1, 1);
-			newItem.GetComponentsInChildren<Text> () [1].text = Inventory.Instance.GetItemShopName (Inventory.Instance.itemsNames [i]); // shopName
-			newItem.GetComponentsInChildren<Text> () [2].text = Inventory.Instance.itemsNames [i];                                     // itemName
+			newItem.GetComponentsInChildren<Text> () [0].text = Inventory.Instance.GetItemShopName (Inventory.Instance.itemsNames [i]); // shopName
+			newItem.GetComponentsInChildren<Text> () [1].text = Inventory.Instance.itemsNames [i];                                     // itemName
 
 			LocalizationManager.Instance.UpdateLocaliztion (newItem.GetComponentsInChildren<Text> () [0]); // shop name
-			LocalizationManager.Instance.UpdateLocaliztion (newItem.GetComponentsInChildren<Text> () [1]); // buy button
+			LocalizationManager.Instance.UpdateLocaliztion (newItem.GetComponentsInChildren<Text> () [2]); // buy button
 
-			newItem.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ActivateBuyItemWindow (newItem.GetComponentsInChildren<Text> () [2].text));
-			newItem.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ActivateBuyItemWindow (newItem.GetComponentsInChildren<Text> () [2].text));
+			newItem.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ActivateBuyItemWindow (newItem.GetComponentsInChildren<Text> () [1].text));
+			newItem.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ActivateBuyItemWindow (newItem.GetComponentsInChildren<Text> () [1].text));
 			newItem.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.itemsNames[i]);
+			newItem.GetComponentsInChildren<Image>()[4].sprite = Resources.Load<Sprite>(itemsFolder + Inventory.Instance.itemsNames[i]);
+			newItem.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (Inventory.Instance.GetCoinCost(Inventory.Instance.itemsNames[i]));
+			newItem.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
 			buttons [i] = newItem;
 		}
 	}

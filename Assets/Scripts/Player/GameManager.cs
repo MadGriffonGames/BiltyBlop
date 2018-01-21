@@ -253,11 +253,11 @@ public class GameManager : MonoBehaviour
         Transform[] groundChildren = ground.GetComponentsInChildren<Transform>();
         foreach (Transform child in groundChildren)
         {
-            if (child.name.Contains("Top"))
-            {
-                child.localPosition += new Vector3(0, -0.3f);
-            }
-            //child.transform.position = new Vector3(Mathf.Round(child.transform.localPosition.x) - 160, Mathf.Round(child.transform.localPosition.y));
+            // (child.name.Contains("Top"))
+            //{
+                //child.localPosition += new Vector3(0, -0.3f);
+            //}
+            child.transform.position = new Vector3(Mathf.Round(child.transform.localPosition.x) - 160, Mathf.Round(child.transform.localPosition.y));
         }
     }
 }

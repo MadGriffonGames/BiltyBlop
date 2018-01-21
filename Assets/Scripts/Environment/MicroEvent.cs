@@ -19,6 +19,7 @@ public class MicroEvent : MonoBehaviour
         {
             isActivated = true;
             lightningBolt.SetActive(true);
+			SoundManager.PlaySound ("lightning_sound1");
             StartCoroutine(ChangeObjects());
         }
     }

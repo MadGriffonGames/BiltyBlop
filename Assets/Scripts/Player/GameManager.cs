@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     public GameObject achievementManager;
     [SerializeField]
     GameObject localiztionManager;
+    [SerializeField]
+    GameObject ground;
 
     public static string nextLevelName;
     public static int lvlCollectedCoins;
@@ -48,10 +50,10 @@ public class GameManager : MonoBehaviour
     public static string currentLvl;
     bool isLevel;
 
-	void Awake()
-	{      
-        #if UNITY_EDITOR
-			Application.targetFrameRate = 1000;
+    void Awake()
+    {
+#if UNITY_EDITOR
+        Application.targetFrameRate = 1000;
 #elif UNITY_ANDROID
         Application.targetFrameRate = 60;
 #elif UNITY_IOS
@@ -78,8 +80,8 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    void Start () 
-	{      
+    void Start()
+    {
         if (!PlayerPrefs.HasKey("NoAds"))
         {
             PlayerPrefs.SetInt("NoAds", 0);
@@ -104,10 +106,10 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Skin"))
         {
             PlayerPrefs.SetString("Skin", "Classic");
-        }       
-        
-        if((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10") && (SceneManager.GetActiveScene().name != "Map") && (SceneManager.GetActiveScene().name != "AchievementMenu") && (SceneManager.GetActiveScene().name != "Shop") && (SceneManager.GetActiveScene().name != "Level1"))
-            SoundManager.PlayRandomMusic ("kid_music", true);
+        }
+
+        if ((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10") && (SceneManager.GetActiveScene().name != "Map") && (SceneManager.GetActiveScene().name != "AchievementMenu") && (SceneManager.GetActiveScene().name != "Shop") && (SceneManager.GetActiveScene().name != "Level1"))
+            SoundManager.PlayRandomMusic("kid_music", true);
         if (SceneManager.GetActiveScene().name == "Level6")
             SoundManager.PlaySoundLooped("rain sfx");
 
@@ -117,7 +119,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Update()
-    {        
+    {
         if (isLevel && UI.Instance.isActiveAndEnabled)
         {
             coinTxt.text = (" " + collectedCoins);
@@ -194,7 +196,7 @@ public class GameManager : MonoBehaviour
                         MetricaManager.Instance.lastUnlockedLevel = "Level" + i;
                     }
                 }
-                
+
             }
             if (PlayerPrefs.GetString("LastUnlockedLevel") != MetricaManager.Instance.lastUnlockedLevel)
             {
@@ -213,13 +215,13 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + value);
     }
 
-	public static void DestroyDeadEnemies()
-	{
-		foreach (GameObject enemy in deadEnemies) 
-		{
-			Destroy (enemy.gameObject);
-		}
-	}
+    public static void DestroyDeadEnemies()
+    {
+        foreach (GameObject enemy in deadEnemies)
+        {
+            Destroy(enemy.gameObject);
+        }
+    }
 
     [ContextMenu("DeleteAll")]
     void DeleteAll()
@@ -242,6 +244,20 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             enemies[i].transform.parent = storage.transform;
+        }
+    }
+
+    [ContextMenu("RoundGround")]
+    void RoundGround()
+    {
+        Transform[] groundChildren = ground.GetComponentsInChildren<Transform>();
+        foreach (Transform child in groundChildren)
+        {
+            // (child.name.Contains("Top"))
+            //{
+                //child.localPosition += new Vector3(0, -0.3f);
+            //}
+            child.transform.position = new Vector3(Mathf.Round(child.transform.localPosition.x) - 160, Mathf.Round(child.transform.localPosition.y));
         }
     }
 }

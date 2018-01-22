@@ -6,18 +6,13 @@ public class HolemMeleeState : IHolemState
 {
     private BossHolem enemy;
 
-    private float attackTimer;
-    private float attackCoolDown = 1.5f;
     private bool canExit = true;
     bool attack = false;
-    float timer;
-    float delay = 0.1f;
     Vector3 targetPos;
 
     public void Enter(BossHolem enemy)
     {
         this.enemy = enemy;
-        enemy.armature.animation.timeScale = 1.6f;
         targetPos = enemy.Target.transform.position;
     }
 
@@ -46,7 +41,9 @@ public class HolemMeleeState : IHolemState
     {
         if (other.gameObject.CompareTag("Edge"))
         {
+            enemy.Target = null;
             enemy.ChangeDirection();
+            enemy.Target = null;
         }
     }
 
@@ -70,6 +67,8 @@ public class HolemMeleeState : IHolemState
     {
         if (!attack)
         {
+
+            enemy.armature.animation.timeScale = 1.5f;
             enemy.armature.animation.FadeIn("Spikes_atk_1", -1, 1);
             enemy.spikes.SetActive(true);
             canExit = false;

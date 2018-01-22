@@ -99,6 +99,7 @@ public class Enemy : MonoBehaviour
 
     public virtual IEnumerator TakeDamage()
     {
+        Debug.Log(2);
         yield return null;
     }
 

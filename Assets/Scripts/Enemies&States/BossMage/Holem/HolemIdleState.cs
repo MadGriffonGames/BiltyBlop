@@ -9,6 +9,7 @@ public class HolemIdleState : IHolemState
     public void Enter(BossHolem enemy)
     {
         this.enemy = enemy;
+        enemy.armature.animation.timeScale = 1;
         enemy.armature.animation.FadeIn("Idle", -1, -1);
     }
 

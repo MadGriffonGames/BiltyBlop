@@ -10,6 +10,8 @@ public class BossHolem : MovingMeleeEnemy
     public GameObject fireball;
     [SerializeField]
     private float shootingRange;
+    [SerializeField]
+    GameObject damageCollider;
     bool damaged = false;
     public bool walk = false;
     [HideInInspector]
@@ -18,7 +20,12 @@ public class BossHolem : MovingMeleeEnemy
     public bool isTimerTick;
     [SerializeField]
     public GameObject spikes;
+    [SerializeField]
+    GameObject environment;
     float timer;
+    bool canMove;
+    public bool isActivated;
+    bool isBorn;
 
     public bool InShootingRange
     {
@@ -44,35 +51,61 @@ public class BossHolem : MovingMeleeEnemy
     {
         base.Start();
 
+        healthBarNew.SetActive(false);
+        damageCollider.SetActive(false);
         canAttack = true;
         isAttacking = false;
         isTimerTick = false;
         timer = 0;
-        ChangeState(new HolemPatrolState());
+        canMove = false;
+        isActivated = false;
     }
 
     void Update()
     {
-        if (!IsDead)
+        if (isActivated && !isBorn)
         {
-            LookAtTarget();
+            armature.animation.FadeIn("born", -1, 1);
+            isBorn = true;
+        }
+        else if (!isActivated)
+        {
+            armature.animation.FadeIn("born", -1, 1);
+        }
+        if (canMove)
+        {
+            if (!IsDead)
+            {
+                LookAtTarget();
 
-            if (isTimerTick)
-            {
-                timer += Time.deltaTime;
+                if (isTimerTick)
+                {
+                    timer += Time.deltaTime;
+                }
+                if (timer >= 0.85f)
+                {
+                    isTimerTick = false;
+                    timer = 0;
+                    canAttack = true;
+                }
             }
-            if (timer >= 2f)
+            if (!TakingDamage && !Attack)
             {
-                isTimerTick = false;
-                timer = 0;
-                canAttack = true;
+                currentState.Execute();
             }
         }
-        if (!TakingDamage && !Attack)
+        else if (armature.animation.lastAnimationName == "born" && armature.animation.isCompleted)
         {
-            currentState.Execute();
+            healthBarNew.SetActive(true);
+            damageCollider.SetActive(true);
+            ChangeState(new HolemPatrolState());
+            canMove = true;
         }
-        Debug.Log(currentState);
+
+        if (IsDead && armature.animation.lastAnimationName == "Die" && armature.animation.isCompleted)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void ChangeState(IHolemState newState)
@@ -87,24 +120,23 @@ public class BossHolem : MovingMeleeEnemy
 
     public override IEnumerator TakeDamage()
     {
-        if (!damaged)
+        if (canMove)
         {
             health -= actualDamage;
 
-            damaged = true;
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
             if (IsDead)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-                SoundManager.PlaySound("enemyher loud");
-               
+
+                armature.animation.FadeIn("Die", -1, 1);
+                canMove = false;
+                environment.SetActive(true);
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.01f);
-        damaged = false;
     }
 
     private void OnEnable()
@@ -132,7 +164,10 @@ public class BossHolem : MovingMeleeEnemy
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        currentState.OnCollisionEnter2D(other);
+        if (currentState != null)
+        {
+            currentState.OnCollisionEnter2D(other);
+        }
         if (other.gameObject.CompareTag("Coin"))
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);

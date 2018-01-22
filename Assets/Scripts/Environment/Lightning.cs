@@ -11,11 +11,17 @@ public class Lightning : MonoBehaviour
 
     public void DisableBolt()
     {
-        bolt.SetActive(false);
+        if (bolt)
+        {
+            bolt.SetActive(false);
+        }
     }
 
     public void ActivatePuf()
     {
-        puf.SetActive(true);
+        if (puf)
+        {
+            puf.SetActive(true);
+        }
     }
 }

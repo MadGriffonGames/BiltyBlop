@@ -13,6 +13,7 @@ public class HolemRangeState : MonoBehaviour, IHolemState
         this.enemy = enemy;
         isPreAttacked = false;
         canExit = false;
+        enemy.armature.armature.animation.timeScale = 1.5f;
     }
 
     public void Execute()

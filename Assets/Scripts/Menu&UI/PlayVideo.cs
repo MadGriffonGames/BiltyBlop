@@ -61,8 +61,9 @@ public class PlayVideo : MonoBehaviour
 		skipButton.SetActive (false);
 
         UI.Instance.EnableGameUI(true);
-
-		SoundManager.MuteMusic (false);
+#if UNITY_IOS
+        SoundManager.MuteMusic(false);
+#endif
 		if (SceneManager.GetActiveScene().name == "Level10" || SceneManager.GetActiveScene().name == "Level20")
 		{
 			UI.Instance.LevelEndUI.SetActive (true);

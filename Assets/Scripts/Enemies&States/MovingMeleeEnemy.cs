@@ -11,7 +11,7 @@ public class MovingMeleeEnemy : Enemy
     private Collider2D attackCollider;
 
     [SerializeField]
-    private float meleeRange;
+    public float meleeRange;
 
     [SerializeField]
     public float patrolDuration;

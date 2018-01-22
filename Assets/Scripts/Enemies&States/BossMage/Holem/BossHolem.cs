@@ -16,6 +16,8 @@ public class BossHolem : MovingMeleeEnemy
     public bool canAttack;
     [HideInInspector]
     public bool isTimerTick;
+    [SerializeField]
+    public GameObject spikes;
     float timer;
 
     public bool InShootingRange
@@ -70,6 +72,7 @@ public class BossHolem : MovingMeleeEnemy
         {
             currentState.Execute();
         }
+        Debug.Log(currentState);
     }
 
     public void ChangeState(IHolemState newState)
@@ -161,5 +164,19 @@ public class BossHolem : MovingMeleeEnemy
         AttackCollider.enabled = true;
         yield return new WaitForSeconds(0.2f);
         AttackCollider.enabled = false;
+    }
+
+    public void ThrowFireball()
+    {
+        if (this.gameObject.transform.localScale.x > 0)
+        {
+            GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(-2.7f, 1.65f, -5), Quaternion.identity);
+            tmp.GetComponent<Seed>().Initialize(Vector2.left);
+        }
+        else
+        {
+            GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(2.7f, 1.65f, -5), Quaternion.Euler(0, 0, 180));
+            tmp.GetComponent<Seed>().Initialize(Vector2.right);
+        }
     }
 }

@@ -51,6 +51,9 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	public int maxHealth;
 
+    [SerializeField]
+    bool boss;
+
     GameObject[] coins;
 
     public bool facingRight;//check direction(true if we look right)
@@ -86,7 +89,11 @@ public class Enemy : MonoBehaviour
         facingRight = false;
         enabled = false;
         armature.enabled = false;
-        armature.armature.cacheFrameRate = 30;
+        if (!boss)
+        {
+            armature.armature.cacheFrameRate = 30;
+        }
+       
 
     }
 

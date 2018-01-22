@@ -29,7 +29,7 @@ public class HolemRangeState : MonoBehaviour, IHolemState
             if (enemy.armature.animation.lastAnimationName == "pre_atk_fireball" && enemy.armature.animation.isCompleted)
             {
                 enemy.armature.animation.FadeIn("atk_fireball", -1, 1);
-                InstantiateFireball();
+                enemy.ThrowFireball();
             }
             if (enemy.armature.animation.lastAnimationName == "atk_fireball" && enemy.armature.animation.isCompleted)
             {
@@ -66,15 +66,6 @@ public class HolemRangeState : MonoBehaviour, IHolemState
             enemy.ChangeDirection();
             enemy.Target = null;
         }
-    }
-
-    void InstantiateFireball()
-    {
-        int direction = enemy.facingRight ? 1 : -1;
-
-        GameObject tmp = Instantiate(enemy.fireball, enemy.transform.position + new Vector3(1 * direction, 1f, 0), Quaternion.identity);
-        tmp.transform.parent = null;
-        tmp.GetComponent<Rigidbody2D>().velocity = new Vector2(5 * direction, 4);
     }
 }
 

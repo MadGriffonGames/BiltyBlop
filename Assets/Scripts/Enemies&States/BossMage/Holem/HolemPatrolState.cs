@@ -24,7 +24,7 @@ public class HolemPatrolState : IHolemState
             {
                 enemy.ChangeState(new HolemMeleeState());
             }
-            if (enemy.InShootingRange)
+            else if (enemy.InShootingRange)
             {
                 enemy.ChangeState(new HolemRangeState());
             }

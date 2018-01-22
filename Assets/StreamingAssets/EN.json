@@ -447,6 +447,88 @@
 	"fontSize": 42
 	},
 	
+	//Shop Tutorial
+
+	"click on skins button to view some variations of kid's appearance with different abilities": {
+	"text": "CLICK ON SKINS BUTTON TO VIEW SOME VARIATIONS OF KID'S APPEARANCE WITH DIFFERENT ABILITIES", 
+	"fontSize": 20
+	},
+	
+	"start shop": {
+	"text": "I'LL TELL YOU ABOUT SHOP AND ALL STUFF IN THIS GAME! FIRST OF ALL - SKINS!", 
+	"fontSize": 20
+	},
+	
+	"each armor gives you different 'health' stat": {
+	"text": "EACH ARMOR GIVES YOU DIFFERENT 'HEALTH' STAT", 
+	"fontSize": 20
+	},
+	
+	"what about swords?": {
+	"text": "WHAT ABOUT SWORDS?", 
+	"fontSize": 20
+	},
+	
+	"Swords vary in their damage!": {
+	"text": "SWORDS RANGE IN THEIR DAMAGE", 
+	"fontSize": 20
+	},
+	
+	"May be some items?": {
+	"text": "MAY BE SOME ITEMS?", 
+	"fontSize": 20
+	},
+	
+	"Potions can give you different advantages for a short time": {
+	"text": "POTIONS CAN GIVE YOU DIFFERENT ADVANTAGES FOR A SHORT TIME", 
+	"fontSize": 20
+	},
+	
+	"Skills and Perks!": {
+	"text": "SKILLS AND PERKS!", 
+	"fontSize": 20
+	},
+	
+	"Perks give a passive advantage throughout the game": {
+	"text": "PERKS GIVE YOU A PASSIVE ADVANTAGES THROUGHOUT THE GAME", 
+	"fontSize": 20
+	},
+	
+	"And now! Throwing weapons!": {
+	"text": "AND NOW... THROWING WEAPONS!", 
+	"fontSize": 20
+	},
+	
+	"Throwing weapons vary in their damage as swords! Beware of Sven!": {
+	"text": "THROWING WEAPONS RANGE IN THEIR DAMAGE AS SWORDS! BEWARE OF SVEN!", 
+	"fontSize": 20
+	},
+	
+	"Geeeeeeems!": {
+	"text": "GEEEEEMS!", 
+	"fontSize": 20
+	},
+	
+	"You can buy everything in this game with Gems!": {
+	"text": "YOU CAN BUY EVERYTHING IN THIS GAME WITH GEMS", 
+	"fontSize": 20
+	},
+	
+	"Lets buy Health Potion!": {
+	"text": "LET'S BUY HEALTH POTION!", 
+	"fontSize": 20
+	},
+	
+	"Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!": {
+	"text": "CONGRATULATIONS! YOU GET 3 FREE HEALTH POTIONS. GOOD LUCK! SEE YOU SOON, WARRIOR!", 
+	"fontSize": 20
+	},
+	
+	"Close": {
+	"text": "CLOSE", 
+	"fontSize": 20
+	},
+	
 	//Achievements
 	
 	"see achievments menu for details": {
@@ -927,55 +1009,28 @@
 	"text": "Potions works {0} times longer",
 	"fontSize": 0
 	},
-
-
-
-	"health pot description":{
-	"text": "This pot immediately restores your health",
-	"fontSize": 0
-	},
-	"damage pot description":{
-	"text": "Gives you a 'double damage' for a short time",
-	"fontSize": 0
-	},
-	"speed pot description":{
-	"text": "Increases your speed for a short time",
-	"fontSize": 0
-	},
-	"time pot description":{
-	"text": "This potion makes time go slower",
-	"fontSize": 0
-	},
-	"immortal pot description":{
-	"text": "Gives you a shield that protect you from any damage you can take",
-	"fontSize": 0
-	},
-	"clips description":{
-	"text": "Fully restores all your throwing weapons",
-	"fontSize": 0
-	},
 	"not enough coins":{
-		"text": "Not enough coins!",
+		"text": "NOT ENOUGH COINS",
 		"fontSize": 0
 	},
 	"not enough crystals":{
-		"text": "Not enough crystals!",
+		"text": "NOT ENOUGH CRYSTALS",
 		"fontSize": 0
 	},
 	"weapon unlocked":{
-		"text": "Weapon unlocked!",
+		"text": "WEAPON UNLOCKED!",
 		"fontSize": 0
 	},
 	"perk upgraded":{
-		"text": "Perk upgraded!",
+		"text": "PERK UPGRADED!",
 		"fontSize": 0
 	},
 	"skin unlocked":{
-		"text": "Skin unlocked!",
+		"text": "SKIN UNLOCKED!",
 		"fontSize": 0
 	},
 	"sword unlocked":{
-		"text": "Sword unlocked!",
+		"text": "SWORD UNLOCKED!",
 		"fontSize": 0
 	}
 

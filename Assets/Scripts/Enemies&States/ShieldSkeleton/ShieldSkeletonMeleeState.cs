@@ -46,7 +46,7 @@ public class ShieldSkeletonMeleeState : IShieldSkeletonState
         if (!isAttacked)
         {
             enemy.armature.animation.FadeIn("hit", -1, 1);
-
+            SoundManager.PlaySound("skeleton_scratch");
             isAttacked = true;
             canExit = false;
         }

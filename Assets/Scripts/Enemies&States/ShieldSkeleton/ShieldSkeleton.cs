@@ -96,7 +96,7 @@ public class ShieldSkeleton : MovingMeleeEnemy
         if (!damaged && posDiference < 0)
         {
             health -= actualDamage;
-
+            SoundManager.PlaySound("skeleton_pain");
             damaged = true;
             MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             StartCoroutine(AnimationDelay());
@@ -107,7 +107,7 @@ public class ShieldSkeleton : MovingMeleeEnemy
             if (IsDead)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-                SoundManager.PlaySound("snowman_death");
+                SoundManager.PlaySound("skeleton_death");
                 //Instantiate(snowmanParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);

@@ -87,4 +87,5 @@ public class Vulkan : MonoBehaviour
 
         myAnimator.SetBool("Throw", false);
     }
+
 }

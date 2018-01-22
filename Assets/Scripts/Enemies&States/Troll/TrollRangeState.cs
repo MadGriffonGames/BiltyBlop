@@ -11,6 +11,7 @@ public class TrollRangeState : ITrollState
         this.enemy = enemy;
         enemy.armature.animation.FadeIn("charge", -1, -1);
         enemy.movementSpeed = 5;
+        SoundManager.PlaySound("troll_sound 1");
     }
 
     public void Execute()

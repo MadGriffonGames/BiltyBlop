@@ -71,7 +71,7 @@ public class FlyingPig : MovingRangedEnemy
         if (!damaged)
         {
             health -= actualDamage;
-
+            SoundManager.PlaySound("pig_pain");
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
@@ -81,7 +81,7 @@ public class FlyingPig : MovingRangedEnemy
             {
                 fireball.SetActive(false);
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-                SoundManager.PlaySound("penguin_death");
+                SoundManager.PlaySound("pig_death");
                 //Instantiate(penguinParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 5);
                 GameManager.deadEnemies.Add(gameObject);

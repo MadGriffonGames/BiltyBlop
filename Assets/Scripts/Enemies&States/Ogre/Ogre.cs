@@ -52,7 +52,7 @@ public class Ogre : MovingMeleeEnemy
         if (!damaged)
         {
             health -= actualDamage;
-
+            SoundManager.PlaySound("ogre_pain");
             damaged = true;
             StartCoroutine(OgreAnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
@@ -61,7 +61,7 @@ public class Ogre : MovingMeleeEnemy
             if (IsDead)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-                SoundManager.PlaySound("enemyher loud");
+                SoundManager.PlaySound("ogre_death");
                 //Instantiate(deathParticles, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(4, 6);
                 GameManager.deadEnemies.Add(gameObject);

@@ -23,7 +23,7 @@ public class LocalizationManager : MonoBehaviour
         }
     }
     string pathToJson;
-    string language = "EN";
+    string language = "RU";
     string jsonString;
     public Dictionary<string, LocalizedString> translation;
 

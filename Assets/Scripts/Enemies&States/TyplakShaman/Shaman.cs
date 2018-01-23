@@ -78,7 +78,8 @@ public class Shaman : MovingRangedEnemy
         if (!damaged)
         {
             health -= actualDamage;
-            SoundManager.PlaySound("shaman_pain");
+            if (health != 0)
+                SoundManager.PlaySound("shaman_pain");
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));

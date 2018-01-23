@@ -68,7 +68,7 @@
 	
 	"get": {
 	"text": "ЗАБРАТЬ", 
-	"fontSize": 0
+	"fontSize": 27
 	},
 	
 	"to double bonus": {
@@ -325,6 +325,257 @@
 	"tap on this button to get reward": {
 	"text": "НАЖМИ НА ЭТУ КНОПКУ ЧТОБЫ ПОЛУЧИТЬ НАГРАДУ", 
 	"fontSize": 0
+	},
+	
+	"see achievments menu for details": {
+	"text": "ОТКРОЙ МЕНЮ ДОСТИЖЕНИЙ ДЛЯ ПОДРОБНОСТЕЙ",
+	"fontSize": 0
+	},
+	
+	"achievements": {
+	"text": "ДОСТИЖЕНИЯ",
+	"fontSize": 0
+	},
+	
+	
+	"kill 25 enemies": {
+	"text": "УБЕЙ 25 ВРАГОВ",
+	"fontSize": 0
+	},
+	
+	"kill 300 enemies": {
+	"text": "УБЕЙ 300 ВРАГОВ",
+	"fontSize": 0
+	},
+	
+	"kill 1000 enemies": {
+	"text": "УБЕЙ 1000 ВРАГОВ",
+	"fontSize": 0
+	},
+	
+	"fall in water 5 times": {
+	"text": "УПАДИ В ВОДУ 5 РАЗ НА УРОВНЕ",
+	"fontSize": 0
+	},
+	
+	"start achievement tutorial":{
+	"text": "НАЧНИ ОБУЧЕНИЕ ДОСТИЖЕНИЯМ",
+	"fontSize": 0
+	},
+	
+	"open 10 chests":{
+	"text": "ОТКРОЙ 10 СУНДУКОВ",
+	"fontSize": 0
+	},
+	
+	"open 35 chest":{
+	"text": "ОТКРОЙ 35 СУНДУКОВ",
+	"fontSize": 0
+	},
+	
+	"open 70 chest":{
+	"text": "ОТКРОЙ 70 СУНДУКОВ",
+	"fontSize": 0
+	},
+	
+	"find 5 secret rooms":{
+	"text": "НАЙДИ 5 СЕКРЕТНЫХ КОМНАТ",
+	"fontSize":0
+	},
+	
+	"find 35 secret rooms":{
+	"text": "НАЙДИ 35 СЕКРЕТНЫХ КОМНАТ",
+	"fontSize":0
+	},
+	
+	"find 50 secret rooms":{
+	"text": "НАЙДИ 50 СЕКРЕТНЫХ КОМНАТ",
+	"fontSize":0
+	},
+	
+	"kill second boss":{
+	"text": "УБЕЙ ВТОРОГО БОССА",
+	"fontSize": 0
+	},
+	
+	"find 10 stars":{
+	"text": "НАЙДИ 10 ЗВЕЗД",
+	"fontSize":0
+	},
+	
+	"find 45 stars":{
+	"text": "НАЙДИ 45 ЗВЕЗД",
+	"fontSize":0
+	},
+	
+	"find 90 stars":{
+	"text": "НАЙДИ 90 ЗВЕЗД",
+	"fontSize":0
+	},
+	
+	"kill dragon boss":{
+	"text": "УБЕЙ ДРАКОНА",
+	"fontSize": 0
+	},
+	
+	"make a deal":{
+	"text": "СДЕЛАЙ ПОКУПКУ В МАГАЗИНЕ",
+	"fontSize": 0
+	},
+	
+	"destroy 5 graves":{
+	"text": "УНИЧТОЖЬ 5 МОГИЛ",
+	"fontSize":0
+	},
+	
+	"destroy 25 graves":{
+	"text": "УНИЧТОЖЬ 25 МОГИЛ",
+	"fontSize":0
+	},
+	
+	"destroy 50 graves":{
+	"text": "УНИЧТОЖЬ 50 МОГИЛ",
+	"fontSize":0
+	},
+	
+	"die 10 times in one lvl":{
+	"text": "УМРИ 10 РАЗ НА УРОВНЕ",
+	"fontSize":0
+	},
+	
+	"die 20 times in one lvl":{
+	"text": "УМРИ 20 РАЗ НА УРОВНЕ",
+	"fontSize":0
+	},
+	
+	"die 30 times in one lvl":{
+	"text": "УМРИ 30 РАЗ НА УРОВНЕ",
+	"fontSize":0
+	},
+	
+	"use 10 potions":{
+	"text": "ИСПОЛЬЗУЙ 10 ЗЕЛИЙ",
+	"fontSize":0
+	},
+	
+	"use 25 potions":{
+	"text": "ИСПОЛЬЗУЙ 25 ЗЕЛИЙ",
+	"fontSize":0
+	},
+	
+	"use 50 potions":{
+	"text": "ИСПОЛЬЗУЙ 50 ЗЕЛИЙ",
+	"fontSize":0
+	},
+	
+	"extinguish 10 torches":{
+	"text": "ПОТУШИ 10 ФАКЕЛОВ",
+	"fontSize":0
+	},
+	
+	"extinguish 25 torches":{
+	"text": "ПОТУШИ 25 ФАКЕЛОВ",
+	"fontSize":0
+	},
+	
+	"extinguish 50 torches":{
+	"text": "ПОТУШИ 50 ФАКЕЛОВ",
+	"fontSize":0
+	},
+	
+	"take daily reward 10 times":{
+	"text": "ЗАБЕРИ ЕЖЕДНЕВНУЮ НАГРАДУ 10 РАЗ",
+	"fontSize":0
+	},
+	
+	//achievement's names
+	
+	"mob killa":{
+	"text": "ВОИН",
+	"fontSize": 18
+	},
+	
+	"diver":{
+	"text": "ДАЙВЕР",
+	"fontSize": 18
+	},
+	
+	"tutorial achievement":{
+	"text": "ОБУЧАЮЩЕЕ ДОСТИЖЕНИЕ",
+	"fontSize": 13
+	},
+	
+	"treasure hunter":{
+	"text": "ОХОТНИК ЗА СОКРОВИЩАМИ",
+	"fontSize": 13
+	},
+	
+	"secret room rush":{
+	"text": "СЫЩИК",
+	"fontSize":18
+	},
+	
+	"ice lord":{
+	"text": "ЛЕДЯНОЙ КОРОЛЬ",
+	"fontSize":17
+	},
+	
+	"star walker":{
+	"text": "ЗВЕЗДНЫЙ ПУТЬ",
+	"fontSize":17
+	},
+	
+	"dragon bones":{
+	"text": "КОСТЬ ДРАКОНА",
+	"fontSize":17
+	},
+	
+	"first buy":{
+	"text": "ПЕРВАЯ ПОКУПКА",
+	"fontSize":16
+	},
+	
+	"graver":{
+	"text": "КРУШИТЕЛЬ МОГИЛ",
+	"fontSize": 16
+	},
+	
+	"self-destructor":{
+	"text": "САМОУБИЙЦА",
+	"fontSize": 18
+	},
+	
+	"potioner":{
+	"text": "ЛЮБИТЕЛЬ ЗЕЛИЙ",
+	"fontSize": 16
+	},
+	
+	"torch collector":{
+	"text": "ПОЖАРНИК",
+	"fontSize": 18
+	},
+	
+	"ten days":{	
+	"text": "ДЕСЯТЬ ДНЕЙ",
+	"fontSize": 17
+	},
+	
+	
+	"tap on this button to get reward": {
+	"text": "НАЖМИ НА КНОПКУ, ЧТОБЫ ПОЛУЧИТЬ НАГРАДУ", 
+	"fontSize": 44
+	},
+	
+	"in progress":{
+	"text": "В ПРОГРЕССЕ",
+	"fontSize":0
+	},
+	
+	//Level 11
+	
+	"congratulations! now you can use double jump!": {
+	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
+	"fontSize": 23
 	},
 	
 	//Level 11

@@ -59,7 +59,8 @@ public class Typlak : MovingMeleeEnemy
         if (!damaged)
         {
             health -= actualDamage;
-
+            if (health != 0)
+                SoundManager.PlaySound("typlak_pain");
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));

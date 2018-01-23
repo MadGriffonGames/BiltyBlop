@@ -96,7 +96,8 @@ public class ShieldSkeleton : MovingMeleeEnemy
         if (!damaged && posDiference < 0)
         {
             health -= actualDamage;
-            SoundManager.PlaySound("skeleton_pain");
+            if (health != 0)
+                SoundManager.PlaySound("skeleton_pain");
             damaged = true;
             MakeFX.Instance.MakeHitFX(gameObject.transform.position + new Vector3(0, 0.3f), new Vector3(1, 1, 1));
             StartCoroutine(AnimationDelay());

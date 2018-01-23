@@ -33,7 +33,6 @@ public class FireballSpawner : MonoBehaviour
                 yield return new WaitForSeconds(throwDealy);
             }
         }
-        
     }
 
     void ThrowFireball(int i)

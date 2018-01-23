@@ -17,18 +17,27 @@ public class MoveCamera : MonoBehaviour
     [SerializeField]
     BossHolem holem;
     bool isActive = false;
-    Vector3 plusVector = new Vector3(0, 0.04f, 0);
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+    Vector3 plusVectorY = new Vector3(0, 0.04f, 0);
+    Vector3 plusVectorX = new Vector3(0.02f, 0, 0);
+
+    // Update is called once per frame
+    void FixedUpdate ()
     {
         if (isActive)
         {
             if (cam.transform.position.y <= targetPoint.position.y)
             {
-                cam.transform.position += plusVector;
+                cam.transform.position += plusVectorY;
             }
-            
+            if (cam.transform.position.x <= targetPoint.position.x)
+            {
+                cam.transform.position += plusVectorX;
+            }
+            else
+            {
+                cam.transform.position -= plusVectorX;
+            }
+
             if (cam.orthographicSize < targetCameraSize)
             {
                 cam.orthographicSize += 0.04f;
@@ -57,7 +66,7 @@ public class MoveCamera : MonoBehaviour
 
     bool isTargetPointReached()
     {
-        return Mathf.Abs(transform.position.y) - Mathf.Abs(transform.position.y) <= 0.1f;
+        return Mathf.Abs(transform.position.y) - Mathf.Abs(transform.position.y) <= 0.05f;
     }
 
     IEnumerator ActivateHolem()

@@ -62,18 +62,17 @@ public class MageFireball : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             this.gameObject.SetActive(false);
             startTransform = startPosition.GetComponent<Transform>();
             this.transform.position = startTransform.transform.position;
-
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

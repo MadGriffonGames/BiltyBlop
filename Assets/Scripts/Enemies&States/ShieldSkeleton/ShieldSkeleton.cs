@@ -110,13 +110,8 @@ public class ShieldSkeleton : MovingMeleeEnemy
             if (IsDead)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-<<<<<<< HEAD
-                SoundManager.PlaySound("snowman_death");
                 Instantiate(deathParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
-=======
                 SoundManager.PlaySound("skeleton_death");
-                //Instantiate(snowmanParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
->>>>>>> origin/DevM
                 SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);

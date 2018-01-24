@@ -78,7 +78,8 @@ public class Shaman : MovingRangedEnemy
         if (!damaged)
         {
             health -= actualDamage;
-            
+            if (health != 0)
+                SoundManager.PlaySound("shaman_pain");
             damaged = true;
             StartCoroutine(AnimationDelay());
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
@@ -87,7 +88,7 @@ public class Shaman : MovingRangedEnemy
             if (IsDead)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-                SoundManager.PlaySound("enemyher loud");
+                SoundManager.PlaySound("shaman_sound");
                 //Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);

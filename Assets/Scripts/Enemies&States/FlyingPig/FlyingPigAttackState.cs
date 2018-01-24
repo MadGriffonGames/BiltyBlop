@@ -19,6 +19,7 @@ public class FlyingPigAttackState : IFlyingPigState
             enemy.canAttack = false;
 
             enemy.armature.animation.FadeIn("atk", -1, 1);
+            SoundManager.PlaySound("vulcan_sound");
             enemy.ThrowFireball();
         }
         else if(enemy.armature.animation.isCompleted)

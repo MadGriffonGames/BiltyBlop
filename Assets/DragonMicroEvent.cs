@@ -9,6 +9,10 @@ public class DragonMicroEvent : MonoBehaviour {
     [SerializeField]
     GameObject lightningBolt;
     [SerializeField]
+    GameObject lighningBolt1;
+    [SerializeField]
+    GameObject lightningBolt2;
+    [SerializeField]
     GameObject changableTargetObject;
     [SerializeField]
     GameObject stopCollider;
@@ -46,6 +50,7 @@ public class DragonMicroEvent : MonoBehaviour {
             {
                 //armature.animation.timeScale = 1.5f;
                 armature.animation.FadeIn("RISE", -1, 1);
+                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x / 73, -1.3f * transform.localPosition.y / 9);
             }
 
             if (armature.animation.lastAnimationName == "RISE" && armature.animation.isCompleted)
@@ -66,6 +71,9 @@ public class DragonMicroEvent : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             lightningBolt.SetActive(true);
+            SoundManager.PlaySound("lightning_sound1");
+            StartCoroutine(ThrowSecondLight());
+            StartCoroutine(ThrowTrhirdLight());
             StartCoroutine(ChangeDisplayIndexes());
             StartCoroutine(StopDisable());
             gameObject.GetComponent<Collider2D>().enabled = false;
@@ -130,6 +138,20 @@ public class DragonMicroEvent : MonoBehaviour {
         //    dragonSlots[j].displayIndex = 2;
         //    Debug.Log(dragonSlots[j].displayIndex);
         //}
+    }
+
+    IEnumerator ThrowSecondLight()
+    {
+        yield return new WaitForSeconds(0.2f);
+        lighningBolt1.SetActive(true);
+        SoundManager.PlaySound("lightning_sound1");
+    }
+
+    IEnumerator ThrowTrhirdLight()
+    {
+        yield return new WaitForSeconds(0.4f);
+        lightningBolt2.SetActive(true);
+        SoundManager.PlaySound("lightning_sound1");
     }
 
 }

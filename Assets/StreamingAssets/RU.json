@@ -106,7 +106,7 @@
 	"fontSize": 0
 	},
 	
-	"buy": {
+	"BUY": {
 	"text": "КУПИТЬ", 
 	"fontSize": 20
 	},
@@ -597,42 +597,48 @@
 	"fontSize": 20
 	},
 	"upgrade":{
-	"text": "УВЕЛИЧИТЬ",
+	"text": "УЛУЧШИТЬ",
 	"fontSize": 0
 	},
 	"upgraded":{
-	"text": "UPGRADED",
+	"text": "УЛУЧШЕНО",
 	"fontSize": 0
 	},
 	"next":{
-	"text": "NEXT",
-	"fontSize": 0
+	"text": "ДАЛЕЕ",
+	"fontSize": 19
+	},
+	
+	
+	"I'll tell you about shop and all staff in this game! First of all - SKINS!":{
+	"text": "Я расскажу тебе о магазине и всех вещах в этой игре! В первую очередь - СКИНЫ!",
+	"fontSize":0
 	},
 
 
 
 	"ammo":{
-	"text": "AMMO",
+	"text": "КОЛЧАН",
 	"fontSize": 0
 	},
 	"heal":{
-	"text": "HEAL",
+	"text": "ЗДОРОВЬЕ",
 	"fontSize": 0
 	},
 	"damage":{
-	"text": "DAMAGE",
+	"text": "УРОН",
 	"fontSize": 0
 	},
 	"speed":{
-	"text": "SPEED",
+	"text": "СКОРОСТЬ",
 	"fontSize": 0
 	},
 	"time":{
-	"text": "TIME",
+	"text": "ВРЕМЯ",
 	"fontSize": 0
 	},
 	"immortal":{
-	"text": "IMMORTAL",
+	"text": "БЕССМЕРТИЕ",
 	"fontSize": 0
 	},
 
@@ -681,128 +687,128 @@
 
 
 	"arakh":{
-	"text": "ARAKH",
+	"text": "АРАКХ",
 	"fontSize": 0
 	},
 	"ancient axe":{
-	"text": "ANCIENT AXE",
-	"fontSize": 0
+	"text": "ДРЕВНИЙ ТОПОР",
+	"fontSize": 20
 	},
 	"kyoto sword":{
-	"text": "KYOTO SWORD",
+	"text": "МЕЧ КИОТО",
 	"fontSize": 0
 	},
 	"candy":{
-	"text": "CANDY",
+	"text": "ЛЕДЕНЕЦ",
 	"fontSize": 0
 	},
 	"legacy":{
-	"text": "LEGACY",
+	"text": "НАСЛЕДИЕ",
 	"fontSize": 0
 	},
 	"gladius":{
-	"text": "GLADIUS",
+	"text": "ГЛАДИЙ",
 	"fontSize": 0
 	},
 	"claw":{
-	"text": "CLAW",
+	"text": "КОГОТЬ",
 	"fontSize": 0
 	},
 	"kings hand":{
-	"text": "KINGS HAND",
-	"fontSize": 0
+	"text": "РУКА КОРОЛЯ",
+	"fontSize": 20
 	},
 	"obsidian":{
-	"text": "OBSIDIAN",
+	"text": "ОБСИДИАН",
 	"fontSize": 0
 	},
 	"pipe wrench":{
-	"text": "PIPE WRENCH",
-	"fontSize": 0
+	"text": "ГАЗОВЫЙ КЛЮЧ",
+	"fontSize": 20
 	},
 
 
 
 	"classicthr":{
-	"text": "CLASSIC",
+	"text": "КЛАССИК",
 	"fontSize": 0
 	},
 	"hammer":{
-	"text": "HAMMER",
+	"text": "МОЛОТ",
 	"fontSize": 0
 	},
 	"vikings ice":{
-	"text": "VIKINGS ICE",
+	"text": "МОРОЖЕНОЕ",
 	"fontSize": 0
 	},
 	"fireball":{
-	"text": "FIREBALL",
+	"text": "ФАЕРБОЛЛ",
 	"fontSize": 0
 	},
 	"meat leg":{
-	"text": "MEAT LEG",
+	"text": "РУЛЬКА",
 	"fontSize": 0
 	},
 	"pizza":{
-	"text": "PIZZA",
+	"text": "ПИЦЦА",
 	"fontSize": 0
 	},
 	"raven":{
-	"text": "RAVEN",
+	"text": "ВОРОН",
 	"fontSize": 0
 	},
 	"sven":{
-	"text": "SVEN",
+	"text": "ОВЦА",
 	"fontSize": 0
 	},
 	"zippy knife":{
-	"text": "ZIPPY KNIFE",
-	"fontSize": 0
+	"text": "БЫСТРЫЙ КЛИНОК",
+	"fontSize": 20
 	},
 	"crooked knife":{
-	"text": "CROOKED KNIFE",
-	"fontSize": 0
+	"text": "КРИВОЙ КЛИНОК",
+	"fontSize": 20
 	},
 	"strange knife":{
-	"text": "STRANGE KNIFE",
-	"fontSize": 0
+	"text": "ТАИНСТВЕННЫЙ КЛИНОК",
+	"fontSize": 17
 	},
 	"dagger":{
-	"text": "DAGGER",
+	"text": "КИНЖАЛ",
 	"fontSize": 0
 	},
 
 
 	"ammo maniac":{
-	"text": "AMMO MANIAC",
+	"text": "МАСТЕР КОЛЧАНА",
 	"fontSize": 0
 	},
 	"you have got {0} slots for throwing weapons":{
-	"text": "You have got {0} slots for throwing weapons",
+	"text": "У вас {0} слотов метательного оружия",
 	"fontSize": 0
 	},
 	"dodger":{
-	"text": "DODGER",
+	"text": "ЛОВКАЧ",
 	"fontSize": 0
 	},
 	"you have got {0}% chance to dodge enemy attack":{
-	"text": "You have got {0}% chance to dodge enemy attack",
+	"text": "У вас {0}% вероятности уклониться от атаки",
 	"fontSize": 0
 	},
 	"greedy":{
-	"text": "GREEDY",
+	"text": "ЖАДИНА",
 	"fontSize": 0
 	},
 	"you get extra x{0} coins per level":{
-	"text": "You get extra x{0} coins per level",
-	"fontSize": 0
+	"text": "Вы получаете в x{0} больше монет за уровень",
+	"fontSize": 10
 	},
 	"potion maniac":{
-	"text": "POTION MANIAC",
+	"text": "МАСТЕР ЗЕЛИЙ",
 	"fontSize": 0
 	},
 	"potions works {0} times longer":{
-	"text": "Potions works {0} times longer",
+	"text": "Зелья действуют  {0} раз дольше",
 	"fontSize": 0
 	},
 
@@ -812,48 +818,48 @@
 	"text": "This pot immediately restores your health",
 	"fontSize": 0
 	},
-	"damage pot description":{
-	"text": "Gives you a 'double damage' for a short time",
+	"урон (описание)":{
+	"text": "Дает двойной урон на короткое время",
 	"fontSize": 0
 	},
-	"speed pot description":{
-	"text": "Increases your speed for a short time",
+	"скорость (описание)":{
+	"text": "Повышает скорость на короткое время",
 	"fontSize": 0
 	},
-	"time pot description":{
-	"text": "This potion makes time go slower",
+	"время (описание)":{
+	"text": "Замедляет ход времени",
 	"fontSize": 0
 	},
 	"immortal pot description":{
-	"text": "Gives you a shield that protect you from any damage you can take",
+	"text": "Дает щит, защищающий от любого урона на короткое время",
 	"fontSize": 0
 	},
 	"clips description":{
-	"text": "Fully restores all your throwing weapons",
+	"text": "Полностью заполняет метательное оружие",
 	"fontSize": 0
 	},
 	"not enough coins":{
-		"text": "Not enough coins!",
-		"fontSize": 0
+		"text": "Недостаточно монет!",
+		"fontSize": 25
 	},
 	"not enough crystals":{
-		"text": "Not enough crystals!",
-		"fontSize": 0
+		"text": "Недостаточно кристаллов!",
+		"fontSize": 23
 	},
 	"weapon unlocked":{
-		"text": "Weapon unlocked!",
+		"text": "Оружие открыто!",
 		"fontSize": 0
 	},
 	"perk upgraded":{
-		"text": "Perk upgraded!",
+		"text": "Перк улучшен!",
 		"fontSize": 0
 	},
 	"skin unlocked":{
-		"text": "Skin unlocked!",
+		"text": "Скин открыт!",
 		"fontSize": 0
 	},
 	"sword unlocked":{
-		"text": "Sword unlocked!",
+		"text": "Меч открыт!",
 		"fontSize": 0
 	},
 

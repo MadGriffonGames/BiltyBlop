@@ -29,9 +29,10 @@ public class SecretRoomTrigger : MonoBehaviour
             secretRoomHalo.SetActive(false);
             Player.Instance.secretIndication.SetActive(false);
             Destroy(this);
+			foreach (GameObject disObject in disabledObjects)
+				disObject.SetActive (true);
         }
-		foreach (GameObject disObject in disabledObjects)
-			disObject.SetActive (true);
+
 			
     }
 

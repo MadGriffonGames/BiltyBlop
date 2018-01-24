@@ -211,6 +211,10 @@ public class Player : Character
             isDoubleJumpAllowed = PlayerPrefs.GetInt("Level11") > 0;
         }
 
+		#if UNITY_EDITOR
+			isDoubleJumpAllowed = true;
+		#endif
+
         if (timeControllerPrefab != null)
         {
             Instantiate(timeControllerPrefab);

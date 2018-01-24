@@ -204,8 +204,8 @@
 	},
 	
 	"buy_main": {
-		"text": "BUY", 
-		"fontSize": 75
+	"text": "BUY", 
+	"fontSize": 75
 	},
 
 	"potions\npack": {
@@ -290,6 +290,11 @@
 	
 	"complete\nlevel 10\nto unlock": {
 	"text": "COMPLETE\nLEVEL 10\nTO UNLOCK", 
+	"fontSize": 0
+	},
+	
+	"complete\nlevel 20\nto unlock": {
+	"text": "COMPLETE\nLEVEL 20\nTO UNLOCK", 
 	"fontSize": 0
 	},
 	

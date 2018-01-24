@@ -9,7 +9,13 @@ public class Ogre : MovingMeleeEnemy
     [SerializeField]
     private GameObject deathParticles;
     bool damaged = false;
+    [HideInInspector]
     public bool walk = false;
+    [HideInInspector]
+    public bool canAttack;
+    [HideInInspector]
+    public bool isTimerTick;
+    float timer;
 
     void Awake()
     {
@@ -23,6 +29,9 @@ public class Ogre : MovingMeleeEnemy
         base.Start();
         isAttacking = false;
         ChangeState(new OgrePatrolState());
+        canAttack = true;
+        isTimerTick = false;
+        timer = 0;
     }
 
     void Update()
@@ -34,6 +43,17 @@ public class Ogre : MovingMeleeEnemy
                 currentState.Execute();
             }
             LookAtTarget();
+
+            if (isTimerTick)
+            {
+                timer += Time.deltaTime;
+            }
+            if (timer >= 0.5f)
+            {
+                isTimerTick = false;
+                timer = 0;
+                canAttack = true;
+            }
         }
     }
 

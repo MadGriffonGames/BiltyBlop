@@ -65,12 +65,17 @@ public class ThrowingSwipeMenu : SwipeMenu {
 						{
 							throwCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 						}
-						throwCardObj.gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
+						throwCardObj.gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
 						throwCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplyThrow (throwScript.orderNumber));
 						throwCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplyThrow (throwScript.orderNumber));
+						throwCardObj.GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
+						throwCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (true);
+
 					}
 					else
 					{
+						throwCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (throwScript.coinCost);
+						throwCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
 						throwCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockThrowWindow(SkinManager.Instance.NumberOfThrowPrefabByOrder(throwScript.orderNumber))); // wdfsdf
 						throwCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockThrowWindow(SkinManager.Instance.NumberOfThrowPrefabByOrder(throwScript.orderNumber)));
 					}
@@ -124,9 +129,11 @@ public class ThrowingSwipeMenu : SwipeMenu {
 						{
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 						}
-						buttons [i].gameObject.GetComponentsInChildren<Image> () [2].sprite = equipButton;
+						buttons [i].gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ApplyThrow(throwScript.orderNumber));
 						buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ApplyThrow(throwScript.orderNumber));
+						buttons [i].GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
+						buttons [i].GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (true);
 					}
 					LocalizationManager.Instance.UpdateLocaliztion (buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ()); // buy button
 				}

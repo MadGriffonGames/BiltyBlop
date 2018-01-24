@@ -8,16 +8,34 @@ public class SkinStatsPanel : MonoBehaviour
 	[SerializeField]
 	Text hpStatText;
 	[SerializeField]
-	Text damageStatText;
+	Text coinCostText;
+	[SerializeField]
+	Text attackStatText;
+	[SerializeField]
+	GameObject coin;
+	[SerializeField]
+	GameObject check;
 
     public void SetDefendIndicators(int stat)
     {      
 		hpStatText.text = stat.ToString();
     }
 
-    public void SetAttackIndicators(int stat)
+    public void SetCoinCost(int stat)
     {
-		damageStatText.text = stat.ToString();
+		coinCostText.text = stat.ToString();
     }
-
+	public void SetAttackIndicators(int stat)
+	{
+		attackStatText.text = stat.ToString();
+	}
+	public void TurnOffCoinCost()
+	{
+		coin.SetActive (false);
+		coinCostText.text = "";
+	}
+	public void ActivateCheck(bool active)
+	{
+		check.SetActive (active);
+	}
 }

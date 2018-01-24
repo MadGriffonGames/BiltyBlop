@@ -108,7 +108,7 @@
 	
 	"buy": {
 	"text": "КУПИТЬ", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	"potions\npack": {
@@ -577,6 +577,289 @@
 	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
 	"fontSize": 23
 	},
+	
+	
+	//Shop
+	"unlock":{
+	"text": "ОТКРЫТЬ",
+	"fontSize": 0
+	},
+	"equip":{
+	"text": "НАДЕТЬ",
+	"fontSize": 0
+	},
+	"equiped":{
+	"text": "НАДЕТО",
+	"fontSize": 20
+	},
+	"locked":{
+	"text": "ЗАКРЫТО",
+	"fontSize": 20
+	},
+	"upgrade":{
+	"text": "УВЕЛИЧИТЬ",
+	"fontSize": 0
+	},
+	"upgraded":{
+	"text": "UPGRADED",
+	"fontSize": 0
+	},
+	"next":{
+	"text": "NEXT",
+	"fontSize": 0
+	},
+
+
+
+	"ammo":{
+	"text": "AMMO",
+	"fontSize": 0
+	},
+	"heal":{
+	"text": "HEAL",
+	"fontSize": 0
+	},
+	"damage":{
+	"text": "DAMAGE",
+	"fontSize": 0
+	},
+	"speed":{
+	"text": "SPEED",
+	"fontSize": 0
+	},
+	"time":{
+	"text": "TIME",
+	"fontSize": 0
+	},
+	"immortal":{
+	"text": "IMMORTAL",
+	"fontSize": 0
+	},
+
+
+
+	"barbarian":{
+	"text": "BARBARIAN",
+	"fontSize": 0
+	},
+	"ninjarian":{
+	"text": "NINJARIAN",
+	"fontSize": 0
+	},
+	"buildarian":{
+	"text": "BUILDARIAN",
+	"fontSize": 0
+	},
+	"centurion":{
+	"text": "CENTURION",
+	"fontSize": 0
+	},
+	"classic":{
+	"text": "CLASSIC",
+	"fontSize": 0
+	},
+	"dredarian":{
+	"text": "DREDARIAN",
+	"fontSize": 0
+	},
+	"jonarian":{
+	"text": "JONARIAN",
+	"fontSize": 0
+	},
+	"kingarian":{
+	"text": "KINGARIAN",
+	"fontSize": 0
+	},
+	"knightarian":{
+	"text": "KNIGHTARIAN",
+	"fontSize": 0
+	},
+	"santarian":{
+	"text": "SANTARIAN",
+	"fontSize": 0
+	},
+
+
+	"arakh":{
+	"text": "ARAKH",
+	"fontSize": 0
+	},
+	"ancient axe":{
+	"text": "ANCIENT AXE",
+	"fontSize": 0
+	},
+	"kyoto sword":{
+	"text": "KYOTO SWORD",
+	"fontSize": 0
+	},
+	"candy":{
+	"text": "CANDY",
+	"fontSize": 0
+	},
+	"legacy":{
+	"text": "LEGACY",
+	"fontSize": 0
+	},
+	"gladius":{
+	"text": "GLADIUS",
+	"fontSize": 0
+	},
+	"claw":{
+	"text": "CLAW",
+	"fontSize": 0
+	},
+	"kings hand":{
+	"text": "KINGS HAND",
+	"fontSize": 0
+	},
+	"obsidian":{
+	"text": "OBSIDIAN",
+	"fontSize": 0
+	},
+	"pipe wrench":{
+	"text": "PIPE WRENCH",
+	"fontSize": 0
+	},
+
+
+
+	"classicthr":{
+	"text": "CLASSIC",
+	"fontSize": 0
+	},
+	"hammer":{
+	"text": "HAMMER",
+	"fontSize": 0
+	},
+	"vikings ice":{
+	"text": "VIKINGS ICE",
+	"fontSize": 0
+	},
+	"fireball":{
+	"text": "FIREBALL",
+	"fontSize": 0
+	},
+	"meat leg":{
+	"text": "MEAT LEG",
+	"fontSize": 0
+	},
+	"pizza":{
+	"text": "PIZZA",
+	"fontSize": 0
+	},
+	"raven":{
+	"text": "RAVEN",
+	"fontSize": 0
+	},
+	"sven":{
+	"text": "SVEN",
+	"fontSize": 0
+	},
+	"zippy knife":{
+	"text": "ZIPPY KNIFE",
+	"fontSize": 0
+	},
+	"crooked knife":{
+	"text": "CROOKED KNIFE",
+	"fontSize": 0
+	},
+	"strange knife":{
+	"text": "STRANGE KNIFE",
+	"fontSize": 0
+	},
+	"dagger":{
+	"text": "DAGGER",
+	"fontSize": 0
+	},
+
+
+	"ammo maniac":{
+	"text": "AMMO MANIAC",
+	"fontSize": 0
+	},
+	"you have got {0} slots for throwing weapons":{
+	"text": "You have got {0} slots for throwing weapons",
+	"fontSize": 0
+	},
+	"dodger":{
+	"text": "DODGER",
+	"fontSize": 0
+	},
+	"you have got {0}% chance to dodge enemy attack":{
+	"text": "You have got {0}% chance to dodge enemy attack",
+	"fontSize": 0
+	},
+	"greedy":{
+	"text": "GREEDY",
+	"fontSize": 0
+	},
+	"you get extra x{0} coins per level":{
+	"text": "You get extra x{0} coins per level",
+	"fontSize": 0
+	},
+	"potion maniac":{
+	"text": "POTION MANIAC",
+	"fontSize": 0
+	},
+	"potions works {0} times longer":{
+	"text": "Potions works {0} times longer",
+	"fontSize": 0
+	},
+
+
+
+	"health pot description":{
+	"text": "This pot immediately restores your health",
+	"fontSize": 0
+	},
+	"damage pot description":{
+	"text": "Gives you a 'double damage' for a short time",
+	"fontSize": 0
+	},
+	"speed pot description":{
+	"text": "Increases your speed for a short time",
+	"fontSize": 0
+	},
+	"time pot description":{
+	"text": "This potion makes time go slower",
+	"fontSize": 0
+	},
+	"immortal pot description":{
+	"text": "Gives you a shield that protect you from any damage you can take",
+	"fontSize": 0
+	},
+	"clips description":{
+	"text": "Fully restores all your throwing weapons",
+	"fontSize": 0
+	},
+	"not enough coins":{
+		"text": "Not enough coins!",
+		"fontSize": 0
+	},
+	"not enough crystals":{
+		"text": "Not enough crystals!",
+		"fontSize": 0
+	},
+	"weapon unlocked":{
+		"text": "Weapon unlocked!",
+		"fontSize": 0
+	},
+	"perk upgraded":{
+		"text": "Perk upgraded!",
+		"fontSize": 0
+	},
+	"skin unlocked":{
+		"text": "Skin unlocked!",
+		"fontSize": 0
+	},
+	"sword unlocked":{
+		"text": "Sword unlocked!",
+		"fontSize": 0
+	},
+
+	
+	
+	
 	
 	//Level 11
 	

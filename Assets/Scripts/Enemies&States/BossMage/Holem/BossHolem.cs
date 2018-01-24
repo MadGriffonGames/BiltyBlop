@@ -22,6 +22,10 @@ public class BossHolem : MovingMeleeEnemy
     public GameObject spikes;
     [SerializeField]
     GameObject environment;
+    [SerializeField]
+    MageBoss mage;
+    [SerializeField]
+    GameObject bossUi;
     float timer;
     bool canMove;
     public bool isActivated;
@@ -134,6 +138,8 @@ public class BossHolem : MovingMeleeEnemy
                 armature.animation.FadeIn("Die", -1, 1);
                 canMove = false;
                 environment.SetActive(true);
+                mage.isActive = true;
+                bossUi.SetActive(true);
             }
             yield return null;
         }

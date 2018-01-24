@@ -82,7 +82,7 @@ public class Ogre : MovingMeleeEnemy
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("enemyher loud");
-                //Instantiate(deathParticles, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                Instantiate(deathParticles, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(4, 6);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);

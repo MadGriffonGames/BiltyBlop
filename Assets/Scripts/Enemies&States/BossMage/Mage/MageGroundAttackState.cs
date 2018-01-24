@@ -19,11 +19,11 @@ public class MageGroundAttackState : IMageBossState
         if (!isAttacked)
         {
             isAttacked = true;
-            enemy.armature.armature.animation.FadeIn("Casting_spell_bang", -1, 1);
+            enemy.armature.armature.animation.FadeIn("ground_attack", -1, 1);
         }
-        if (enemy.armature.animation.lastAnimationName == "Casting_spell_bang" && enemy.armature.animation.isCompleted)
+        if (enemy.armature.animation.lastAnimationName == "ground_attack" && enemy.armature.animation.isCompleted)
         {
-            enemy.SpawnFireballs(false);
+            
         }
     }
 

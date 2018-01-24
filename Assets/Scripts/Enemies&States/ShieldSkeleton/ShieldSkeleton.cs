@@ -7,7 +7,9 @@ public class ShieldSkeleton : MovingMeleeEnemy
 {
     private IShieldSkeletonState currentState;
     [SerializeField]
-    private GameObject snowmanParticle;
+    private GameObject deathParticle;
+    [SerializeField]
+    GameObject shieldFx;
 
     public bool isTimerTick;
     bool damaged = false;
@@ -108,12 +110,16 @@ public class ShieldSkeleton : MovingMeleeEnemy
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("snowman_death");
-                //Instantiate(snowmanParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                Instantiate(deathParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(3, 5);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
             yield return null;
+        }
+        else
+        {
+            shieldFx.SetActive(true);
         }
         damaged = false;
     }

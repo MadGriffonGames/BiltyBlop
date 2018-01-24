@@ -7,23 +7,31 @@ public class MageFireballAttackState : IMageBossState
     private MageBoss enemy;
 
     bool isAttacked;
+    bool isPreattacked;
 
     public void Enter(MageBoss enemy)
     {
         this.enemy = enemy;
         isAttacked = false;
+        isPreattacked = false;
     }
 
     public void Execute()
     {
-        if (!isAttacked)
+        if (!isPreattacked)
+        {
+            isPreattacked = true;
+            enemy.armature.armature.animation.FadeIn("Pre_attack_shoot", -1, 1);
+        }
+        if (!isAttacked && enemy.armature.animation.lastAnimationName == "Pre_attack_shoot" && enemy.armature.animation.isCompleted)
         {
             isAttacked = true;
-            enemy.armature.armature.animation.FadeIn("Casting_spell_bang", -1, 1);
+            enemy.armature.armature.animation.FadeIn("Atk_shoot", -1, 1);
+            enemy.ThrowFireballs();
         }
-        if (enemy.armature.animation.lastAnimationName == "Casting_spell_bang" && enemy.armature.animation.isCompleted)
+        if (enemy.armature.animation.lastAnimationName == "Atk_shoot" && enemy.armature.animation.isCompleted)
         {
-            enemy.SpawnFireballs(false);
+            enemy.ChangeState(new MageIdleState());
         }
     }
 

@@ -11,8 +11,6 @@ public class MageBoss : Boss
     [SerializeField]
     public FireballSpawner fireballSpawner;
     [SerializeField]
-    ShamanFireball fireball;
-    [SerializeField]
     public RectTransform healthbar;
     [SerializeField]
     public GameObject bossUI;
@@ -20,6 +18,10 @@ public class MageBoss : Boss
     GameObject runeStone;
     [SerializeField]
     UnityEngine.Transform[] teleportPoints;
+    [SerializeField]
+    GameObject fireball0;
+    [SerializeField]
+    GameObject fireball1;
     int maxHealth;
     float firstHBScaleX;
     public bool isActive;
@@ -136,6 +138,12 @@ public class MageBoss : Boss
     public void SpawnFireballs(bool reverse)
     {
         StartCoroutine(fireballSpawner.SpawnFireballs(reverse));
+    }
+
+    public void ThrowFireballs()
+    {
+        fireball0.SetActive(true);
+        fireball1.SetActive(true);
     }
 
     public IMageBossState GetRandomState()

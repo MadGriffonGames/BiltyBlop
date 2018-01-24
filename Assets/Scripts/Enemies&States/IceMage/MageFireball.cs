@@ -69,6 +69,7 @@ public class MageFireball : MonoBehaviour
             this.gameObject.SetActive(false);
             startTransform = startPosition.GetComponent<Transform>();
             this.transform.position = startTransform.transform.position;
+
         }
     }
 

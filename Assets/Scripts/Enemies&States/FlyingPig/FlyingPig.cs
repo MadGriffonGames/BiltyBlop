@@ -82,7 +82,7 @@ public class FlyingPig : MovingRangedEnemy
                 fireball.SetActive(false);
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("penguin_death");
-                //Instantiate(penguinParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                Instantiate(deathParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
                 SpawnCoins(2, 5);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);

@@ -32,7 +32,7 @@ public class MagePhaseLocation : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (stop)
+        if (!stop)
         {
             if (platforms.position.y > -13.5f && isPlatformMove)
             {
@@ -116,6 +116,7 @@ public class MagePhaseLocation : MonoBehaviour
     public void OnEnable()
     {
         isCameraMove = true;
+        cam.GetComponent<FollowCamera>().enabled = false;
         isPlatformMove = true;
         isLavaMove = true;
         isMagePlatformMove = true;

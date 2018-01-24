@@ -108,6 +108,8 @@ public class Player : Character
     {
         get { return health <= 0; }
     }
+    [SerializeField]
+    GameObject dodgeFx;
 
     /*
      * Ground Check vars
@@ -414,6 +416,10 @@ public class Player : Character
             if (!AttackCollider.IsTouching(other))
 			    StartCoroutine(TakeDamage());
 		}
+        else
+        {
+            dodgeFx.SetActive(true);
+        }
 
         if (other.gameObject.CompareTag("DeathTrigger"))
         {
@@ -514,7 +520,6 @@ public class Player : Character
 
         if (!isRewinding && !IsDead)
         {
-
             CameraEffect camEffect = Camera.main.GetComponent<CameraEffect>();
             if (!immortal)
             {

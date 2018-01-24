@@ -25,7 +25,6 @@ public class TrollRangeState : MonoBehaviour, ITrollState
                 canExit = false;           
                 enemy.isAttacking = true;
                 enemy.armature.animation.FadeIn("pre_atk", -1, 1);
-                SoundManager.PlaySound("troll_throw");
                 isPreAttacked = true;
             }
             if (enemy.armature.animation.lastAnimationName == "pre_atk" && enemy.armature.animation.isCompleted)

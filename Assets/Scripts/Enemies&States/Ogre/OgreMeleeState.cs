@@ -62,7 +62,6 @@ public class OgreMeleeState : IOgreState
             }
             if (enemy.armature.animation.lastAnimationName == "pre_atk" && enemy.armature.animation.isCompleted)
             {
-                SoundManager.PlaySound("ogre_hit_sound");
                 enemy.armature.animation.FadeIn("atk", -1, 1);
                 enemy.AttackCollider.enabled = true;
             }

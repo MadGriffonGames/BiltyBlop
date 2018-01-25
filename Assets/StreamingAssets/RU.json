@@ -1,9 +1,46 @@
 ﻿{
+//UI
+	
+	"skip": {
+	"text": "ПРОПУСТИТЬ",
+	"fontSize": 0
+	},
+	
+	"game over": {
+	"text": "КОНЕЦ ИГРЫ",
+	"fontSize": 0
+	},
+	
+	"revive right now :": {
+	"text": "ВОСКРЕСНИ ПРЯМО СЕЙЧАС:",
+	"fontSize": 0
+	},
+	
+	"free death ui": {
+	"text": "FREE",
+	"fontSize": 0
+	},
+	
+	"pause": {
+	"text": "ПАУЗА",
+	"fontSize": 0
+	},
+	
+	"victory": {
+	"text": "ПОБЕДА",
+	"fontSize": 0
+	},
+	
+	"to 2 bonus": {
+	"text": "УДВОЙ\nБОНУС",
+	"fontSize": 0
+	},
+
 // MAIN MENU
 	
 	"play": {
 	"text": "ИГРАТЬ",
-	"fontSize": 0
+	"fontSize": 85
 	},
 	
 	"day 1": {
@@ -57,18 +94,18 @@
 	},
 	
 	"starter pack": {
-	"text": "СТАРТЕР ПАК", 
-	"fontSize": 0
+	"text": "НАБОР НОВИЧКА", 
+	"fontSize": 45
 	},
 	
 	"hero's choice": {
 	"text": "ВЫБОР ГЕРОЯ", 
-	"fontSize": 0
+	"fontSize": 45
 	},
 	
 	"get": {
 	"text": "ЗАБРАТЬ", 
-	"fontSize": 27
+	"fontSize": 60
 	},
 	
 	"to double bonus": {
@@ -78,11 +115,11 @@
 	
 	"today bonus": {
 	"text": "БОНУС НА СЕГОДНЯ", 
-	"fontSize": 0
+	"fontSize": 45
 	},
 	
 	"daily reward": {
-	"text": "ЕЖЕДНЕВНАЯ НАГРАДА", 
+	"text": "БОНУСЫ", 
 	"fontSize": 0
 	},
 	
@@ -102,8 +139,8 @@
 	},
 	
 	"random potion": {
-	"text": "СЛУЧАЙНОЕ ЗЕЛЬЕ", 
-	"fontSize": 0
+	"text": "1 ЗЕЛЬЕ", 
+	"fontSize": 20
 	},
 	
 	"BUY": {
@@ -112,53 +149,53 @@
 	},
 	
 	"potions\npack": {
-	"text": "ПАК\nЗЕЛИЙ", 
-	"fontSize": 0
+	"text": "НАБОР\nЗЕЛИЙ", 
+	"fontSize": 25
 	},
 	
 	"ancient\naxe": {
 	"text": "ДРЕВНИЙ\nТОПОР", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"no ads": {
-	"text": "ОТКЛЮЧЕНИЕ\nРЕКЛАМЫ", 
-	"fontSize": 0
+	"text": "НИКАКОЙ\nРЕКЛАМЫ", 
+	"fontSize": 30
 	},
 	
 	"3 ammo\nquiver": {
 	"text": "3\nКОЛЧАНА", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"60\ncrystals": {
 	"text": "60\nКРИСТАЛОВ", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"20 free\nrevives": {
 	"text": "20\nБЕСПЛАТНЫХ\nВОСКРЕШЕНИЙ", 
-	"fontSize": 0
+	"fontSize": 24
 	},
 	
 	"throwing\npizza": {
 	"text": "МЕТАТЕЛЬНАЯ\nПИЦЦА", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"greedy\nperk": {
 	"text": "ПЕРК\nЖАДНОСТЬ", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"ninjarian\nskin": {
 	"text": "NINJARIAN\nСКИН", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"remove ads": {
-	"text": "УБРАТЬ РЕКЛАМУ", 
-	"fontSize": 0
+	"text": "БЕЗ РЕКЛАМЫ", 
+	"fontSize": 45
 	},
 	
 	"select episode": {
@@ -166,71 +203,136 @@
 	"fontSize": 0
 	},
 	
+	"village": {
+	"text": "ДЕРЕВНЯ", 
+	"fontSize": 0
+	},
+	
+	"ice land": {
+	"text": "ЛЕДНИК", 
+	"fontSize": 0
+	},
+	
+	"lava land": {
+	"text": "ПУСТОШЬ", 
+	"fontSize": 38
+	},
+	
+	"coming\nsoon": {
+	"text": "СКОРО", 
+	"fontSize": 0
+	},
+	
+	"to unlock": {
+	"text": "СОБЕРИ", 
+	"fontSize": 0
+	},
+	
+	"complete\nlevel 10\nto unlock": {
+	"text": "ЗАВЕРШИ\nУРОВЕНЬ 10", 
+	"fontSize": 0
+	},
+	
+	"complete\nlevel 20\nto unlock": {
+	"text": "ЗАВЕРШИ\nУРОВЕНЬ 20", 
+	"fontSize": 0
+	},
+	
+	"buy_main": {
+	"text": "КУПИТЬ", 
+	"fontSize": 65
+	},
+	
+	"hero's choise title": {
+	"text": "ВЫБОР ГЕРОЯ", 
+	"fontSize": 65
+	},
+	
+	"starter pack title": {
+	"text": "НАБОР НОВИЧКА", 
+	"fontSize": 50
+	},
+	
+	"only 48 hours": {
+	"text": "ТОЛЬКО 48 ЧАСОВ", 
+	"fontSize": 33
+	},
+	
+	"options": {
+	"text": "ОПЦИИ", 
+	"fontSize": 80
+	},
+	
+	"restore\npurchases": {
+	"text": "ВОССТАНОВИТЬ\nПОКУПКИ", 
+	"fontSize": 40
+	},
+
 	//Level 1
 	
 	"destroy these boxes": {
-	"text": "СЛОМАЙ ЯЩИКИ УДАРИВ ПО НИМ", 
-	"fontSize": 0
+	"text": "СЛОМАЙ ЯЩИКИ, УДАРИВ ПО НИМ", 
+	"fontSize": 25
 	},
 	
 	"this key will open an ancient door": {
 	"text": "ЭТОТ КЛЮЧ ОТКРЫВАЕТ ДРЕВНЮЮ ДВЕРЬ", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"here is your first enemy. hit him": {
 	"text": "А ВОТ И ТВОЙ ПЕРВЫЙ ВРАГ! УДАРЬ ЕГО", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"you found a treasure chest! try to open it": {
 	"text": "ТЫ НАШЕЛ СУНДУК С СКОРОВИЩАМИ! ОТКРОЙ ЕГО", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"greetings young warrior! i will teach you on your journey": {
 	"text": "ПРИВЕТСТВУЮ, ЮНЫЙ ВОИН! Я БУДУ ОБУЧАТЬ ТЕБЯ", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"every level contains 3 stars. collect them all!": {
 	"text": "НА КАЖДОМ УРОВНЕ ЕСТЬ 3 ЗВЕЗДЫ. СОБЕРИ ИХ ВСЕ!", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"jump on this mushroom": {
-	"text": "ПРЫГАЙ НА ЭТОТ ГРИБ", 
-	"fontSize": 0
+	"text": "ПРЫГНИ НА ЭТОТ ГРИБ", 
+	"fontSize": 25
 	},
 	
 	"destroy him using throwing weapon": {
 	"text": "СЛОМАЙ МАНЕКЕН, ИСПОЛЬЗУЯ МЕТАТЕЛЬНОЕ ОРУЖИЕ", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"destroy this maneken using your sword": {
 	"text": "СЛОМАЙ МАНЕКЕН С ПОМОЩЬЮ МЕЧА", 
-	"fontSize": 0
+	"fontSize": 22
 	},
 	
 	"you got your first item! tap to backpack to open it": {
 	"text": "ТЫ НАШЕЛ ЗЕЛЬЕ! НАЖМИ НА РЮКЗАК, ЧТОБЫ ОТКРЫТЬ ЕГО", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	"this potion restores one health point. tap to use it": {
 	"text": "ЭТО ЗЕЛЬЕ ВОССТАНАВЛИВАЕТ ОДИН ПУНКТ ЗДОРОВЬЯ. НАЖМИ НА НЕГО, ЧТОБЫ ИСПОЛЬЗОВАТЬ", 
-	"fontSize": 0
+	"fontSize": 17
 	},
 	
 	"now you can use throwing weapon! open your backpack to get ammo": {
 	"text": "ТЕПЕРЬ ПОПРОБУЕМ МЕТАТЕЛЬНОЕ ОРУЖИЕ! НАЖМИ НА РЮКЗАК, ЧТОБЫ ОТКРЫТЬ ЕГО", 
-	"fontSize": 0
+	"fontSize": 18
 	},
 	
 	"this item restores your throwing weapons stock to max": {
 	"text": "ЭТОТ ПРЕДМЕТ ПОЛНОСТЬЮ ВОССТАНАВЛИВАЕТ ЗАПАС МЕТАТЕЛЬНОГО ОРУЖИЯ", 
-	"fontSize": 0
+	"fontSize": 18
 	},
 	
 	//Level 2
@@ -242,82 +344,82 @@
 	
 	"look at your head! this means that there is a secret nearby": {
 	"text": "ПОСМОТРИ НА СВОЮ ГОЛОВУ! ЭТО ЗНАЧИТ, ЧТО ГДЕ-ТО НЕПОДАЛЕКУ ЕСТЬ СЕКРЕТ", 
-	"fontSize": 0
+	"fontSize": 18
 	},
 	
 	"try to run through this wall": {
 	"text": "ПОПРОБУЙ ПРОБЕЖАТЬ ЧЕРЕЗ ЭТУ СТЕНУ", 
-	"fontSize": 0
+	"fontSize": 25
 	},
 	
 	"this potion gives you immortal for a short time! open your backpack to use it": {
 	"text": "ЭТО ЗЕЛЬЕ ДАСТ ТЕБЕ БЕССМЕРТИЕ НА НЕБОЛЬШОЕ ВРЕМЯ. ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
-	"fontSize": 0
+	"fontSize": 16
 	},
 	
 	"tap to potions button, then tap to potion to use it": {
 	"text": "НАЖМИ НА КНОПКУ ВЫБОРА ЗЕЛЬЯ, ЗАТЕМ НА САМО ЗЕЛЬЕ", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	"jump over these blades as they don't move!": {
 	"text": "ПЕРЕПРЫГНИ ЧЕРЕЗ ЭТИ ПИЛЫ, ПОКА ОНИ НЕ ДВИГАЮТСЯ", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	"runs beneath these saws until they move!": {
-	"text": "ПРОБЕГИ ПОД ЭТИМИ ПИЛАМИБ ПОКА ОНИ НЕ ДВИГАЮТСЯ", 
-	"fontSize": 0
+	"text": "ПРОБЕГИ ПОД ЭТИМИ ПИЛАМИ, ПОКА ОНИ НЕ ДВИГАЮТСЯ", 
+	"fontSize": 20
 	},
 	
 	//Level 3
 	
 	"this is double speed potion! open your backpack to use it": {
 	"text": "ЭТО ЗЕЛЬЕ СКОРОСТИ! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
-	"fontSize": 0
+	"fontSize": 17
 	},
 	
 	"tap to potions button, then tap to potion, to use it": {
 	"text": "НАЖМИ НА КНОПКУ ВЫБОРА ЗЕЛЬЯ, ЗАТЕМ НА САМО ЗЕЛЬЕ", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	//Level 4
 	
 	"you have double damage potion! open your backpack to use it": {
 	"text": "ТЫ НАШЕЛ ЗЕЛЬЕ ДВОЙНОГО УРОНА! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
-	"fontSize": 0
+	"fontSize": 17
 	},
 	
 	//Level 5
 	
 	"these magic boots gives you super jump": {
 	"text": "ЭТИ МАГИЧЕСКИЕ БОТИНКИ ДЕЮТ ВОЗМОЖНОСТЬ ПРЫГАТЬ ВЫШЕ", 
-	"fontSize": 0
+	"fontSize": 19
 	},
 	
 	//Level 6
 	
 	"this potion gives you slow-motion effect! open your backpack to use it": {
 	"text": "ЭТО ЗЕЛЬЕ ЗАМЕДЛЕНИЯ ВРЕМЕНИ! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
-	"fontSize": 0
+	"fontSize": 20
 	},
 	
 	//Map
 	
 	"it's time for shopping! tap on this button to go to the shop": {
 	"text": "САМОЕ ВРЕМЯ ДЛЯ ШОПИНГА! НАЖМИ НА ЭТУ КНОПКУ, ЧТОБЫ ПЕРЕЙТИ В МАГАЗИН", 
-	"fontSize": 0
+	"fontSize": 38
 	},
 	
 	"looks like you have new achievement! tap on this button to get your reward": {
-	"text": "КАЖЕТСЯ ТЫ ПОЛУЧИЛ НОВОЕ ДОСТИЖЕНИЕ! НАЖМИ НА ЭТУ КНОПКУ ЧТОБЫ ЗАБРАТЬ НАГРАДУ", 
-	"fontSize": 0
+	"text": "ТЫ ПОЛУЧИЛ НОВОЕ ДОСТИЖЕНИЕ! НАЖМИ НА ЭТУ КНОПКУ, ЧТОБЫ ЗАБРАТЬ НАГРАДУ", 
+	"fontSize": 35
 	},
 	
 	"look at this chest! tap on it to get your reward": {
-	"text": "НАЖМИ НА СУНДУК ЧТОБЫ ЗАБРАТЬ НАГРАДУ ЗА УРОВЕНЬ", 
-	"fontSize": 0
+	"text": "НАЖМИ НА СУНДУК, ЧТОБЫ ЗАБРАТЬ НАГРАДУ ЗА УРОВЕНЬ", 
+	"fontSize": 40
 	},
 	
 	//Achievements
@@ -569,15 +671,7 @@
 	"in progress":{
 	"text": "В ПРОГРЕССЕ",
 	"fontSize":0
-	},
-	
-	//Level 11
-	
-	"congratulations! now you can use double jump!": {
-	"text": "CONGRATULATIONS! NOW YOU CAN USE DOUBLE JUMP", 
-	"fontSize": 23
-	},
-	
+	},	
 	
 	//Shop
 	"unlock":{
@@ -812,12 +906,6 @@
 	"fontSize": 0
 	},
 
-
-
-	"health pot description":{
-	"text": "This pot immediately restores your health",
-	"fontSize": 0
-	},
 	"урон (описание)":{
 	"text": "Дает двойной урон на короткое время",
 	"fontSize": 0
@@ -863,14 +951,30 @@
 		"fontSize": 0
 	},
 
-	
-	
-	
-	
 	//Level 11
 	
 	"congratulations! now you can use double jump!": {
 	"text": "ПОЗДРАВЛЯЮ! ТЕПЕРЬ У ТЕБЯ ЕСТЬ ДВОЙНОЙ ПРЫЖОК", 
-	"fontSize": 0
+	"fontSize": 22
+	},
+	
+	"rate us": {
+	"text": "ОЦЕНИ НАС",
+	"fontSize": 50
+	},
+	
+	"like our game?\nrate it to 5 stars": {
+	"text": "ПОНРАВИЛАСЬ НАША ИГРА? ПОСТАВЬ НАМ 5 ЗВЕЗД!",
+	"fontSize": 38
+	},
+	
+	"sure": {
+	"text": "КОНЕЧНО",
+	"fontSize": 55
+	},
+	
+	"no, thanks": {
+	"text": "НЕТ, СПАСИБО",
+	"fontSize": 25
 	},
 }

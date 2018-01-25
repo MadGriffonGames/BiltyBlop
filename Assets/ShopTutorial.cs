@@ -80,6 +80,7 @@ public class ShopTutorial : MonoBehaviour
 	void Start () 
 	{
 		shopController.ActivateShop (0);
+        
         if (PlayerPrefs.GetInt ("ShopTutorialComplete") == 0 && PlayerPrefs.GetInt ("TutorialMode") > 0) 
 		{
 			Tutorial ();			

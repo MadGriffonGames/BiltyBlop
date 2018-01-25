@@ -89,14 +89,13 @@ public class Shaman : MovingRangedEnemy
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
                 SoundManager.PlaySound("shaman_sound");
-                //Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, -1f), Quaternion.identity);
+                Instantiate(typlakParticle, gameObject.transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
                 SpawnCoins(2, 4);
                 GameManager.deadEnemies.Add(gameObject);
                 gameObject.SetActive(false);
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.05f);
         damaged = false;
     }
 

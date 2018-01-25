@@ -6,6 +6,31 @@
 	"fontSize": 0
 	},
 	
+	"get more checkpoints": {
+	"text": "GET MORE CHECKPOINTS",
+	"fontSize": 0
+	},
+	
+	"buy_death_ui": {
+	"text": "BUY",
+	"fontSize": 0
+	},
+	
+	"heal_death_ui": {
+	"text": "HEAL",
+	"fontSize": 0
+	},
+	
+	"ammo_death_ui": {
+	"text": "AMMO",
+	"fontSize": 0
+	},
+	
+	"immortal_death_ui": {
+	"text": "IMMORTAL",
+	"fontSize": 0
+	},
+	
 	"game over": {
 	"text": "GAME OVER",
 	"fontSize": 0

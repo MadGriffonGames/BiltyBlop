@@ -412,18 +412,20 @@ public class Player : Character
 
 	public override void OnTriggerEnter2D(Collider2D other)
 	{
-
-		int tmpNumber = UnityEngine.Random.Range (0, 100);   // DODGER PERK DETECTION
-
-  		if (damageSources.Contains(other.tag) && tmpNumber > dodgeChance)
+  		if (damageSources.Contains(other.tag))
 		{
-            if (!AttackCollider.IsTouching(other))
-			    StartCoroutine(TakeDamage());
+            int tmpNumber = UnityEngine.Random.Range(0, 100);   // DODGER PERK DETECTION
+            
+            if (tmpNumber > dodgeChance)
+            {
+                if (!AttackCollider.IsTouching(other))
+                    StartCoroutine(TakeDamage());
+            }
+            else
+            {
+                dodgeFx.SetActive(true);
+            }
 		}
-        else
-        {
-            dodgeFx.SetActive(true);
-        }
 
         if (other.gameObject.CompareTag("DeathTrigger"))
         {

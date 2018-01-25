@@ -6,9 +6,34 @@
 	"fontSize": 0
 	},
 	
+	"get more checkpoints": {
+	"text": "КУПИТЬ БОЛЬШЕ ПОПЫТОК",
+	"fontSize": 30
+	},
+	
+	"buy_death_ui": {
+	"text": "КУПИТЬ",
+	"fontSize": 0
+	},
+	
+	"heal_death_ui": {
+	"text": "ЗДОРОВЬЕ",
+	"fontSize": 0
+	},
+	
+	"ammo_death_ui": {
+	"text": "КОЛЧАН",
+	"fontSize": 0
+	},
+	
+	"immortal_death_ui": {
+	"text": "БЕССМЕРТИЕ",
+	"fontSize": 10
+	},
+	
 	"game over": {
 	"text": "КОНЕЦ ИГРЫ",
-	"fontSize": 0
+	"fontSize": 55
 	},
 	
 	"revive right now :": {
@@ -426,12 +451,12 @@
 	
 	"tap on this button to get reward": {
 	"text": "НАЖМИ НА ЭТУ КНОПКУ ЧТОБЫ ПОЛУЧИТЬ НАГРАДУ", 
-	"fontSize": 0
+	"fontSize": 42
 	},
 	
 	"see achievments menu for details": {
 	"text": "ОТКРОЙ МЕНЮ ДОСТИЖЕНИЙ ДЛЯ ПОДРОБНОСТЕЙ",
-	"fontSize": 0
+	"fontSize": 9
 	},
 	
 	"achievements": {
@@ -704,10 +729,7 @@
 	},
 	
 	
-	"I'll tell you about shop and all staff in this game! First of all - SKINS!":{
-	"text": "Я расскажу тебе о магазине и всех вещах в этой игре! В первую очередь - СКИНЫ!",
-	"fontSize":0
-	},
+	
 
 
 
@@ -878,7 +900,7 @@
 	"fontSize": 0
 	},
 	"you have got {0} slots for throwing weapons":{
-	"text": "У вас {0} слотов метательного оружия",
+	"text": "У тебя {0} слотов метательного оружия",
 	"fontSize": 0
 	},
 	"dodger":{
@@ -886,7 +908,7 @@
 	"fontSize": 0
 	},
 	"you have got {0}% chance to dodge enemy attack":{
-	"text": "У вас {0}% вероятности уклониться от атаки",
+	"text": "У тебя {0}% вероятности уклона от атаки",
 	"fontSize": 0
 	},
 	"greedy":{
@@ -894,7 +916,7 @@
 	"fontSize": 0
 	},
 	"you get extra x{0} coins per level":{
-	"text": "Вы получаете в x{0} больше монет за уровень",
+	"text": "Ты получаешь в x{0} больше монет за уровень",
 	"fontSize": 10
 	},
 	"potion maniac":{
@@ -902,30 +924,10 @@
 	"fontSize": 0
 	},
 	"potions works {0} times longer":{
-	"text": "Зелья действуют  {0} раз дольше",
+	"text": "Зелья действуют {0} раз дольше",
 	"fontSize": 0
 	},
 
-	"урон (описание)":{
-	"text": "Дает двойной урон на короткое время",
-	"fontSize": 0
-	},
-	"скорость (описание)":{
-	"text": "Повышает скорость на короткое время",
-	"fontSize": 0
-	},
-	"время (описание)":{
-	"text": "Замедляет ход времени",
-	"fontSize": 0
-	},
-	"immortal pot description":{
-	"text": "Дает щит, защищающий от любого урона на короткое время",
-	"fontSize": 0
-	},
-	"clips description":{
-	"text": "Полностью заполняет метательное оружие",
-	"fontSize": 0
-	},
 	"not enough coins":{
 		"text": "Недостаточно монет!",
 		"fontSize": 25
@@ -949,6 +951,90 @@
 	"sword unlocked":{
 		"text": "Меч открыт!",
 		"fontSize": 0
+	},
+	
+	
+	
+	//Shop Tutorial
+
+	"click on skins button to view some variations of kid's appearance with different abilities": {
+	"text": "НАЖМИ НА КНОПКУ СКИНОВ, ЧТОБЫ УВИДЕТЬ РАЗЛИЧНЫЕ ВАРИАНТЫ ВНЕШНЕГО ВИДА С РАЗНЫМИ СПОСОБНОСТЯМИ ", 
+	"fontSize": 16
+	},
+	
+	"I'LL TELL YOU ABOUT SHOP AND ALL STUFF IN THIS GAME! FIRST OF ALL - SKINS!":{
+	"text": "Я РАССКАЖУ ТЕБЕ О МАГАЗИНЕ И О ВСЕХ ЕГО ТОВАРАХ! В ПЕРВУЮ ОЧЕРЕДЬ - СКИНЫ!",
+	"fontSize": 20
+	},
+	
+	"each armor gives you different 'health' stat": {
+	"text": "КАЖДАЯ БРОНЯ ДАЕТ ТЕБЕ РАЗНЫЙ УРОВЕНЬ ЗДОРОВЬЯ", 
+	"fontSize": 20
+	},
+	
+	"what about swords?": {
+	"text": "ЧТО НАСЧЕТ МЕЧЕЙ?", 
+	"fontSize": 20
+	},
+	
+	"Swords vary in their damage!": {
+	"text": "МЕЧИ РАЗЛИЧАЮТСЯ СВОИМ НАНОСИМЫМ УРОНОМ", 
+	"fontSize": 20
+	},
+	
+	"May be some items?": {
+	"text": "НЕМНОГО БУСТЕРОВ?", 
+	"fontSize": 20
+	},
+	
+	"Potions can give you different advantages for a short time": {
+	"text": "ЗЕЛЬЯ ДАЮТ ТЕБЕ РАЗНЫЕ СПОСОБНОСТИ НА КОРОТКОЕ ВРЕМЯ", 
+	"fontSize": 18
+	},
+	
+	"Skills and Perks!": {
+	"text": "НАВЫКИ И ПЕРКИ!", 
+	"fontSize": 20
+	},
+	
+	"Perks give a passive advantage throughout the game": {
+	"text": "ПЕРКИ ДАЮТ ПАССИВНЫЙ НАВЫК В ТЕЧЕНИЕ ИГРЫ", 
+	"fontSize": 20
+	},
+	
+	"And now! Throwing weapons!": {
+	"text": "А СЕЙЧАС... МЕТАТЕЛЬНОЕ ОРУЖИЕ!", 
+	"fontSize": 20
+	},
+	
+	"Throwing weapons vary in their damage as swords! Beware of Sven!": {
+	"text": "МЕТАТЕЛЬНОЕ ОРУЖИЕ ИЗМЕРЯЕТСЯ СВОИМ УРОНОМ КАК И МЕЧИ! БЕРЕГИСЬ ОВEЦ!", 
+	"fontSize": 20
+	},
+	
+	"Geeeeeeems!": {
+	"text": "КРИСТАААААЛЛЫ!!", 
+	"fontSize": 20
+	},
+	
+	"You can buy everything in this game with Gems!": {
+	"text": "В ЭТОЙ ИГРЕ ТЫ МОЖЕШЬ КУПИТЬ ВСЕ ЗА КРИСТАЛЛЫ", 
+	"fontSize": 20
+	},
+	
+	"Lets buy Health Potion!": {
+	"text": "ДАВАЙ КУПИМ ЗЕЛЬЕ ЗДОРОВЬЯ!", 
+	"fontSize": 20
+	},
+	
+	"Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!": {
+	"text": "ПОЗДРАВЛЯЮ! ТЫ ПОЛУЧАЕШЬ 3 БЕСПЛАТНЫХ ЗЕЛЬЯ ЗДОРОВЬЯ! ДО НОВЫХ ВСТРЕЧ, ВОИН!", 
+	"fontSize": 20
+	},
+	
+	"Close": {
+	"text": "ЗАКРЫТЬ", 
+	"fontSize": 20
 	},
 
 	//Level 11

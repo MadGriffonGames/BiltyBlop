@@ -34,6 +34,8 @@ public class MageTeleportState : IMageBossState
         if (!isMoving)
         {
             isMoving = true;
+            enemy.mageCollider.enabled = false;
+            enemy.damageCollider.enabled = false;
             enemy.armature.armature.animation.FadeIn("idle_teleport", -1, 1);
         }
         if (enemy.armature.animation.lastAnimationName == "idle_teleport" && enemy.armature.animation.isCompleted)
@@ -55,6 +57,8 @@ public class MageTeleportState : IMageBossState
         }
         if (enemy.armature.animation.lastAnimationName == "appear" && enemy.armature.animation.isCompleted)
         {
+            enemy.mageCollider.enabled = true;
+            enemy.damageCollider.enabled = true;
             enemy.ChangeState(new MageIdleState());
         }
     }

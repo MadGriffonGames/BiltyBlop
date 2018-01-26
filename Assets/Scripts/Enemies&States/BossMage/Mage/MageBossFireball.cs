@@ -62,7 +62,7 @@ public class MageBossFireball : MonoBehaviour
 
     private void Update()
     {
-        this.gameObject.transform.localScale = new Vector2(0.4f, 0.4f);
+        this.gameObject.transform.localScale = new Vector2(0.5f, 0.5f);
         if (!visible)
         {
             FadeIn();
@@ -119,10 +119,9 @@ public class MageBossFireball : MonoBehaviour
                 Vector3 scl = dir > 0 ? scaling : scalingReverse;
                 this.gameObject.transform.localScale += scaling;
             }
-            if (this.gameObject.transform.localScale.x >= 0.4f)
+            if (this.gameObject.transform.localScale.x >= 0.5f)
             {
                 isScaled = true;
-                //this.gameObject.transform.localScale = new Vector2(0.4f * dir, 0.4f);
             }
         }
         if (this.gameObject.GetComponent<SpriteRenderer>().color.a >= 1)
@@ -154,7 +153,7 @@ public class MageBossFireball : MonoBehaviour
             SoundManager.PlaySound("mage_fireball_destroy");
             startTransform = startPosition.GetComponent<Transform>();
             this.transform.position = startTransform.transform.position;
-            this.gameObject.transform.localScale = new Vector2(0.4f * dir, 0.4f);
+            this.gameObject.transform.localScale = new Vector2(0.5f * dir, 0.5f);
             transform.parent = parent;
         }
     }

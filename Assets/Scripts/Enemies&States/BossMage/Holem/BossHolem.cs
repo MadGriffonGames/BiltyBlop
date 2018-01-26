@@ -138,8 +138,7 @@ public class BossHolem : MovingMeleeEnemy
                 armature.animation.FadeIn("Die", -1, 1);
                 canMove = false;
                 environment.SetActive(true);
-                mage.isActive = true;
-                bossUi.SetActive(true);
+                mage.WakeUpMage();
             }
             yield return null;
         }

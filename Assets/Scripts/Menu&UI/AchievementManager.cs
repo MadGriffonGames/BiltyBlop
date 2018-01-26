@@ -109,7 +109,6 @@ public class AchievementManager : MonoBehaviour
 
         if (!PlayerPrefs.HasKey(availableLoots))
             PlayerPrefs.SetInt(availableLoots, 0);
-        //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
         items = new string[] { HEAL, HEAL, HEAL };
         
@@ -151,17 +150,9 @@ public class AchievementManager : MonoBehaviour
         potionerReward = new int[] { 100, 2, 1 };
         potionerRewardType = new string[] { "Coins", "Crystals", HEAL};
 
-        //ResetStat("Mob killer");
-        //ResetStat("Diver");
-        //ResetStat("Secret Rush test");
-        //ResetStat("Spider Boss killer test");
-        //ResetStat("First Buy Test");
-        //ResetStat("StarWalker");
         mobKiller = new Achieve("Mob killer", mobKillerRewardType, mobKillerTargetValue, mobKillerReward);
         treasureHunter = new Achieve("Treasure Hunter", treasureHunterRewardType, treasureHunterValue, treasureHunterReward);
         swimmer = new LevelAchieve("Diver", HEAL, 5, 3);
-        //swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
-        //torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 150);
         torchCollector3 = new Achieve("TorchCollector", tripleCoins, torchCollectorTargetValue, torchCollectorReward);
         secretRoomer = new Achieve("Secret Rush", secretRoomRewardType, secretRoomerTargetValue, secretRoomerReward);
         firstBuy = new LevelAchieve("First Buy", "Crystals", 1, 2);
@@ -177,7 +168,6 @@ public class AchievementManager : MonoBehaviour
 
     public void CheckAchieve(Achieve achieve)
     {
-        string targetValue = "targetValue";
         string achieveName = achieve.achieveName;
         if (achievementUI != null)
         {

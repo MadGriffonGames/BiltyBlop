@@ -70,8 +70,6 @@ public class RuneStone : InteractiveObject
 
         SetLastUnlockedLevel();
 
-        //SetTutorialMode();
-
         PlayerPrefs.SetInt("IsMapChestOpen", 0);
         PlayerPrefs.SetString("LastCompletedLevel", GameManager.currentLvl);
     }
@@ -140,12 +138,8 @@ public class RuneStone : InteractiveObject
         if (PlayerPrefs.GetInt(nextLvl) == 0)
         {
             PlayerPrefs.SetString("LastUnlockedLevel", nextLvl);
-            PlayerPrefs.SetInt(nextLvl, 1);
         }
-        else
-        {
-            PlayerPrefs.SetInt(nextLvl, 1);
-        }
+        PlayerPrefs.SetInt(nextLvl, 1);
     }
 
     void SetTutorialMode()

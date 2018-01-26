@@ -13,15 +13,19 @@ public class MageBoss : Boss
     [SerializeField]
     public RectTransform healthbar;
     [SerializeField]
-    public GameObject bossUI;
-    [SerializeField]
-    GameObject runeStone;
+    public GameObject runeStone;
     [SerializeField]
     UnityEngine.Transform[] teleportPoints;
     [SerializeField]
     GameObject fireball0;
     [SerializeField]
-    GameObject fireball1;
+    public Collider2D damageCollider;
+    [SerializeField]
+    public Collider2D mageCollider;
+    [SerializeField]
+    GameObject bossUi;
+    [SerializeField]
+    Collider2D platformColliderToIgnore;
     int maxHealth;
     float firstHBScaleX;
     public bool isActive;
@@ -30,7 +34,9 @@ public class MageBoss : Boss
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), platformColliderToIgnore, true);
         maxHealth = Health;
         isActive = false;
         firstHBScaleX = healthbar.localScale.x;
@@ -41,14 +47,16 @@ public class MageBoss : Boss
         base.Start();
         currentPoint = 0;
         MyRigidbody = GetComponent<Rigidbody2D>();
-        bossUI.SetActive(true);
         ChangeState(new MageIdleState());
     }
 
     void Update()
     {
         currentState.Execute();
-        LookAtTarget();
+        if (currentState.GetType() != new MageTeleportState().GetType())
+        {
+            LookAtTarget();
+        }
     }
 
     public void ChangeState(IMageBossState newState)
@@ -71,27 +79,16 @@ public class MageBoss : Boss
     {
         CameraEffect.Shake(0.2f, 0.1f);
 
-        int dmg;
-
-        if (damageSource == "Sword")
-        {
-            dmg = Player.Instance.meleeDamage;
-        }
-        else
-        {
-            dmg = Player.Instance.throwDamage;
-        }
+        int dmg = damageSource == "Sword" ? Player.Instance.meleeDamage : dmg = Player.Instance.throwDamage;
 
         for (int i = 1; i <= dmg; i++)
         {
             SetHealthbar();
         }
 
-        health -= dmg;
-
         if (Health <= 0)
         {
-            runeStone.SetActive(true);
+            ChangeState(new MageDeathState());
         }
         yield return null;
     }
@@ -106,7 +103,7 @@ public class MageBoss : Boss
         }
         else
         {
-            bossUI.SetActive(false);
+            bossUi.SetActive(false);
         }
     }
 
@@ -143,7 +140,6 @@ public class MageBoss : Boss
     public void ThrowFireballs()
     {
         fireball0.SetActive(true);
-        fireball1.SetActive(true);
     }
 
     public IMageBossState GetRandomState()
@@ -179,5 +175,17 @@ public class MageBoss : Boss
     bool IsFacingRight()
     {
         return transform.localScale.x > 0;
+    }
+
+    public void WakeUpMage()
+    {
+        StartCoroutine(WakeUp());
+    }
+
+    IEnumerator WakeUp()
+    {
+        yield return new WaitForSeconds(4);
+        isActive = true;
+        bossUi.SetActive(true);
     }
 }

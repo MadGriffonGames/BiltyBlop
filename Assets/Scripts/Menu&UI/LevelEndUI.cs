@@ -71,7 +71,7 @@ public class LevelEndUI : MonoBehaviour
 
     public void Continue()
     {
-        if (GameManager.currentLvl == "Level20")
+        if (GameManager.currentLvl == "Level30")
         {
             GameManager.nextLevelName = "MainMenu";
         }

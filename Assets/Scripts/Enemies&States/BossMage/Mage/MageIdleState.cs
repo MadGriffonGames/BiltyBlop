@@ -7,8 +7,8 @@ public class MageIdleState : IMageBossState
     private MageBoss enemy;
     bool fromTeleport;
     float timer;
-    const float TIMER_TO_TELEPORT = 1f;
-    const float TIMER_TO_ATTACK = 1.5f;
+    const float TIMER_AFTER_TELEPORT = 0.5f;
+    const float TIMER_AFTER_ATTACK = 1f;
 
     public void Enter(MageBoss enemy)
     {
@@ -33,7 +33,7 @@ public class MageIdleState : IMageBossState
             if (fromTeleport)
             {
                 timer += Time.deltaTime;
-                if (timer >= TIMER_TO_ATTACK)
+                if (timer >= TIMER_AFTER_ATTACK)
                 {
                     timer = 0;
                     enemy.ChangeState(enemy.GetRandomState());
@@ -42,7 +42,7 @@ public class MageIdleState : IMageBossState
             else
             {
                 timer += Time.deltaTime;
-                if (timer >= TIMER_TO_TELEPORT)
+                if (timer >= TIMER_AFTER_TELEPORT)
                 {
                     timer = 0;
                     enemy.ChangeState(new MageTeleportState());

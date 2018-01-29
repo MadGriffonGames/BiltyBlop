@@ -26,10 +26,13 @@ public class MageBoss : Boss
     GameObject bossUi;
     [SerializeField]
     Collider2D platformColliderToIgnore;
+    [SerializeField]
+    GameObject[] spikes;
     int maxHealth;
     float firstHBScaleX;
     public bool isActive;
-    int currentPoint;
+    public int currentPoint;
+    
 
     void Awake()
     {
@@ -109,15 +112,8 @@ public class MageBoss : Boss
 
     public Vector3 GetTeleportPoint()
     {
-        int rnd = UnityEngine.Random.Range(0, 6);
-        if (rnd == currentPoint)
-        {
-            currentPoint = (rnd != 0 && rnd != 6) ? (rnd + 1) : 4;
-        }
-        else
-        {
-            currentPoint = rnd;
-        }
+        int rnd = GetRandomPoint();
+        currentPoint = rnd;
         return teleportPoints[currentPoint].position;
     }
 
@@ -187,5 +183,29 @@ public class MageBoss : Boss
         yield return new WaitForSeconds(4);
         isActive = true;
         bossUi.SetActive(true);
+    }
+
+    public void EnableSpikes()
+    {
+        for (int i = 0; i < spikes.Length; i++)
+        {
+            if (i != currentPoint)
+            {
+                spikes[i].SetActive(true);
+            }
+        }
+    }
+
+    int GetRandomPoint()
+    {
+        int rnd = Random.Range(0, 7);
+        if (rnd != currentPoint)
+        {
+            return rnd;
+        }
+        else
+        {
+            return GetRandomPoint();
+        }
     }
 }

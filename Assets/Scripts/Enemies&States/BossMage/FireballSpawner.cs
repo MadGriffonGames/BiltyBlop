@@ -38,6 +38,9 @@ public class FireballSpawner : MonoBehaviour
     void ThrowFireball(int i)
     {
         GameObject tmp = (GameObject)Instantiate(fireball, instantiaitePoints[i].position, Quaternion.Euler(0, 0, 90));
+        Vector3 vct = tmp.transform.localScale;
+        vct *= 1.5f;
+        tmp.transform.localScale = vct;
         tmp.GetComponent<VulkanFireball>().Initialize(Vector2.down, timeToLife, speed);
     }
 }

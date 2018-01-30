@@ -45,11 +45,12 @@ public class MoveCamera : MonoBehaviour
             else if(cam.orthographicSize >= targetCameraSize)
             {
                 cam.orthographicSize = targetCameraSize;
+                
             }
 
             if (cam.orthographicSize == targetCameraSize && isTargetPointReached())
             {
-                this.gameObject.SetActive(false);
+                StartCoroutine(ActivateHolem());
             }
         }
 	}
@@ -59,7 +60,6 @@ public class MoveCamera : MonoBehaviour
         if (other.CompareTag("Player") && !isActive)
         {
             cam.gameObject.GetComponent<FollowCamera>().enabled = false;
-            StartCoroutine(ActivateHolem());
             isActive = true;
         }
     }
@@ -74,5 +74,6 @@ public class MoveCamera : MonoBehaviour
         lightning.SetActive(true);
         yield return new WaitForSeconds(0.8f);
         holem.isActivated = true;
+        this.gameObject.SetActive(false);
     }
 }

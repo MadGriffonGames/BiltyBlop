@@ -23,6 +23,7 @@ public class MageGroundAttackState : IMageBossState
         }
         if (enemy.armature.animation.lastAnimationName == "ground_attack" && enemy.armature.animation.isCompleted)
         {
+            CameraEffect.Shake(0.5f, 0.3f);
             enemy.EnableSpikes();
             enemy.ChangeState(new MageIdleState());
         }

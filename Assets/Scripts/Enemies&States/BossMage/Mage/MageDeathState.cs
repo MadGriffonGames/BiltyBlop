@@ -25,7 +25,7 @@ public class MageDeathState : IMageBossState
         }
         if (enemy.armature.animation.lastAnimationName == "death" && enemy.armature.animation.isCompleted)
         {
-            //enemy.runeStone.SetActive(true);
+            enemy.runeStone.SetActive(true);
         }
     }
 

@@ -1030,7 +1030,7 @@ public class Player : Character
             invertedControls = true;
             CameraEffect.changeColors = true;
             Time.timeScale = 0.75f;
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3.5f);
             invertedControls = false;
             Time.timeScale = 1f;
             CameraEffect.changeColors = false;
@@ -1040,7 +1040,10 @@ public class Player : Character
 
     public void InvertControls()
     {
-        StartCoroutine(Invert());
+        if (!immortal)
+        {
+            StartCoroutine(Invert());
+        }
     }
 }
 

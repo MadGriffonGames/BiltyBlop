@@ -56,7 +56,7 @@ public class MageBoss : Boss
     void Update()
     {
         currentState.Execute();
-        if (currentState.GetType() != new MageTeleportState().GetType())
+        if (currentState.GetType() != new MageTeleportState().GetType() && isActive)
         {
             LookAtTarget();
         }
@@ -80,7 +80,8 @@ public class MageBoss : Boss
 
     public override IEnumerator TakeDamage()
     {
-        CameraEffect.Shake(0.2f, 0.1f);
+        CameraEffect.Shake(0.4f, 0.1f);
+        MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
 
         int dmg = damageSource == "Sword" ? Player.Instance.meleeDamage : dmg = Player.Instance.throwDamage;
 
@@ -187,9 +188,10 @@ public class MageBoss : Boss
 
     public void EnableSpikes()
     {
+        int rnd = GetRandomPoint();
         for (int i = 0; i < spikes.Length; i++)
         {
-            if (i != currentPoint)
+            if (i != currentPoint && i != rnd)
             {
                 spikes[i].SetActive(true);
             }

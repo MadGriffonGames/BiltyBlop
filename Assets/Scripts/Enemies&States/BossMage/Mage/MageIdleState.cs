@@ -8,7 +8,7 @@ public class MageIdleState : IMageBossState
     bool fromTeleport;
     float timer;
     const float TIMER_AFTER_TELEPORT = 0.5f;
-    const float TIMER_AFTER_ATTACK = 1f;
+    const float TIMER_AFTER_ATTACK = 0.5f;
 
     public void Enter(MageBoss enemy)
     {

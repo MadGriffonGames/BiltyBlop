@@ -83,7 +83,8 @@ public class ShopTutorial : MonoBehaviour {
 			Tutorial ();			
 		} else 
 		{
-			this.gameObject.SetActive (false);
+			Tutorial ();
+			//this.gameObject.SetActive (false);
 		}
 	}
 

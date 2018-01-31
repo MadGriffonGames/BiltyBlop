@@ -87,7 +87,8 @@ public class ShopTutorial : MonoBehaviour
 		}
         else 
 		{
-			this.gameObject.SetActive (false);
+			Tutorial ();
+			//this.gameObject.SetActive (false);
 		}
         leftSideWindow.SetActive(true);
         leftSideWindowText = leftSideWindow.GetComponentsInChildren<Text>()[0];

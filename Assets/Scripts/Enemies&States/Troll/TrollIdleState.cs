@@ -16,10 +16,6 @@ public class TrollIdleState : ITrollState
 
     public void Execute()
     {
-        if (enemy.InMeleeRange)
-        {
-            enemy.ChangeState(new TrollSelfDestroyState());
-        }
         if (enemy.Target == null || !enemy.InShootingRange)
         {
             enemy.ChangeState(new TrollPatrolState());

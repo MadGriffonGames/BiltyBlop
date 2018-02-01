@@ -57,7 +57,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 #endif
 
         Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
-        Advertisement.Initialize(unityGameId);
+        //Advertisement.Initialize(unityGameId);
 
         Appodeal.setInterstitialCallbacks(this);
         Appodeal.setRewardedVideoCallbacks(this);
@@ -178,34 +178,34 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
         isRewardVideoWatched = true;
     }
 
-    void HandleShowResult(ShowResult result)
-    {
-        if (result == ShowResult.Finished)
-        {
-            Debug.Log("Video completed - Offer a reward to the player");
+    //void HandleShowResult(ShowResult result)
+    //{
+    //    if (result == ShowResult.Finished)
+    //    {
+    //        Debug.Log("Video completed - Offer a reward to the player");
 
-            isRewardVideoWatched = true;
-        }
-        else if (result == ShowResult.Skipped)
-        {
-            Debug.LogWarning("Video was skipped - Do NOT reward the player");
+    //        isRewardVideoWatched = true;
+    //    }
+    //    else if (result == ShowResult.Skipped)
+    //    {
+    //        Debug.LogWarning("Video was skipped - Do NOT reward the player");
 
-        }
-        else if (result == ShowResult.Failed)
-        {
-            Debug.LogError("Video failed to show");
-        }
-    }
+    //    }
+    //    else if (result == ShowResult.Failed)
+    //    {
+    //        Debug.LogError("Video failed to show");
+    //    }
+    //}
 
 
     //other
 
     void ShowRewardedVideoUnityAds()
     {
-        ShowOptions options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
+        //ShowOptions options = new ShowOptions();
+        //options.resultCallback = HandleShowResult;
 
-        Advertisement.Show("rewardedVideo", options);
+        //Advertisement.Show("rewardedVideo", options);
     }
 
     bool CanNotShowRewardedVideo()

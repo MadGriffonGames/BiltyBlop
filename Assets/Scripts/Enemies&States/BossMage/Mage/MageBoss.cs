@@ -83,7 +83,7 @@ public class MageBoss : Boss
         CameraEffect.Shake(0.2f, 0.1f);
 
         int dmg = damageSource == "Sword" ? Player.Instance.meleeDamage : dmg = Player.Instance.throwDamage;
-
+        SoundManager.PlaySound("mage_boss_pain");
         for (int i = 1; i <= dmg; i++)
         {
             SetHealthbar();
@@ -91,6 +91,7 @@ public class MageBoss : Boss
 
         if (Health <= 0)
         {
+            SoundManager.PlaySound("mage_boss_death");
             ChangeState(new MageDeathState());
         }
         yield return null;
@@ -136,6 +137,7 @@ public class MageBoss : Boss
     public void ThrowFireballs()
     {
         fireball0.SetActive(true);
+        SoundManager.PlaySound("shaman_fire");
     }
 
     public IMageBossState GetRandomState()
@@ -187,8 +189,10 @@ public class MageBoss : Boss
 
     public void EnableSpikes()
     {
+        SoundManager.PlaySound("magic_spikes");
         for (int i = 0; i < spikes.Length; i++)
         {
+
             if (i != currentPoint)
             {
                 spikes[i].SetActive(true);

@@ -18,7 +18,7 @@ public class ShieldSound : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Sword"))
         {
-            SoundManager.PlaySound("metall_shield_sound");
+            //SoundManager.PlaySound("metall_shield_sound");
         }
     }
 }

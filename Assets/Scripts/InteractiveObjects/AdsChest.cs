@@ -279,7 +279,7 @@ public class AdsChest : MonoBehaviour
                 Player.Instance.mobileInput = 0;
                 Player.Instance.ChangeState(new PlayerIdleState());
                 currentTime = Time.timeScale; //--------------------------разлочим чуть позже
-                //StartCoroutine(StopTime());
+                StartCoroutine(StopTime());
             }
 
             

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopTutorial : MonoBehaviour {
+public class ShopTutorial : MonoBehaviour
+{
 
 	[SerializeField]
 	GameObject mainWindow;
@@ -50,8 +51,6 @@ public class ShopTutorial : MonoBehaviour {
 	[SerializeField]
 	GameObject itemsFade;
 
-
-
 	[SerializeField]
 	ShopController shopController;
 
@@ -73,20 +72,30 @@ public class ShopTutorial : MonoBehaviour {
 	[SerializeField]
 	Button[] shopButtons;
 
+    Text leftSideWindowText;
+    Text mainWindowText;
+
 	int currentShop = 0;
 
 	void Start () 
 	{
 		shopController.ActivateShop (0);
-		if (PlayerPrefs.GetInt ("ShopTutorialComplete") == 0 && PlayerPrefs.GetInt ("TutorialMode") > 0) 
+        
+        if (PlayerPrefs.GetInt ("ShopTutorialComplete") == 0 && PlayerPrefs.GetInt ("TutorialMode") > 0) 
 		{
 			Tutorial ();			
-		} else 
+		}
+        else 
 		{
 			Tutorial ();
 			//this.gameObject.SetActive (false);
 		}
-	}
+        leftSideWindow.SetActive(true);
+        leftSideWindowText = leftSideWindow.GetComponentsInChildren<Text>()[0];
+        leftSideWindow.SetActive(false);
+        
+        mainWindowText = mainWindow.GetComponentsInChildren<Text>()[0];   
+    }
 
 	private void SetArrowPosition()
 	{
@@ -132,16 +141,9 @@ public class ShopTutorial : MonoBehaviour {
 		tmpCard.transform.localPosition = new Vector3 (0, 0, 0);
 	}
 
-	private void ToFrontPlan()
-	{
-		
-	}
-
 	private void CardToBasePlan(GameObject parentVar,GameObject targetObj)
 	{
 		Destroy (tmpCard);
-		//targetObj.gameObject.transform.SetParent (parentVar.transform);
-		//targetObj.transform.localScale = new Vector3 (1f, 1f, 1);
 	}
 		
 
@@ -156,7 +158,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.SetActive (true);
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipSkins());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Each armor gives you different 'Health' stat";
+		leftSideWindowText.text = "each armor gives you different 'health' stat";
+        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (skinsPanel, 7);
 
@@ -168,8 +171,9 @@ public class ShopTutorial : MonoBehaviour {
 	{
 		leftSideWindow.SetActive (false);
 		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "What about Swords?";
-		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+		mainWindow.GetComponentsInChildren<Text>()[0].text = "what about swords?";
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
+        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipSwordsPreview ());
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (skinsPanel, tmpCard);
@@ -184,13 +188,13 @@ public class ShopTutorial : MonoBehaviour {
 	// SWORDS PREVIEW
 	public void SkipSwordsPreview()
 	{
-		
 		mainWindow.SetActive (false);
 		leftSideWindow.SetActive (true);
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipSwords());
 		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Swords vary in their damage!";
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
+        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (swordsPanel, 3);
 
 		arrow.gameObject.SetActive (false);
@@ -202,7 +206,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.SetActive (false);
 		mainWindow.SetActive (true);
 		mainWindow.GetComponentsInChildren<Text>()[0].text = "May be some items?";
-		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
+        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipItemsPreview ());
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (swordsPanel, tmpCard);
@@ -217,13 +222,13 @@ public class ShopTutorial : MonoBehaviour {
 	// ITEMS PREVIEW
 	public void SkipItemsPreview()
 	{
-		
 		mainWindow.SetActive (false);
 		leftSideWindow.SetActive (true);
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipItems());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Potions can give you different advantages for a short time.";
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Potions can give you different advantages for a short time";
+        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
+        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (itemsPanel,2);
 
 		arrow.gameObject.SetActive (false);
@@ -235,7 +240,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.SetActive (false);
 		mainWindow.SetActive (true);
 		mainWindow.GetComponentsInChildren<Text>()[0].text = "Skills and Perks!";
-		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
+        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipPerkPreview());
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (itemsPanel, tmpCard);
@@ -255,7 +261,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipPerks());
 		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Perks give a passive advantage throughout the game";
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
+        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (perkPanel,2);
 
 		arrow.gameObject.SetActive (false);
@@ -267,7 +274,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.SetActive (false);
 		mainWindow.SetActive (true);
 		mainWindow.GetComponentsInChildren<Text>()[0].text = "And now! Throwing weapons!";
-		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
+        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipThrowPreview());
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (perkPanel, tmpCard);
@@ -286,7 +294,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipThrow());
 		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Throwing weapons vary in their damage as swords! Beware of Sven!";
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
+        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (throwPanel, 11);
 
 		arrow.gameObject.SetActive (false);
@@ -297,7 +306,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.SetActive (false);
 		mainWindow.SetActive (true);
 		mainWindow.GetComponentsInChildren<Text>()[0].text = "Geeeeeeems!";
-		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
+        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipGemsPreview());
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (throwPanel, tmpCard);
@@ -316,7 +326,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipGems());
 		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "You can buy everything in this game with Gems!";
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
+        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (gemsPanel, 1);
 
 		arrow.gameObject.SetActive (false);
@@ -327,7 +338,8 @@ public class ShopTutorial : MonoBehaviour {
 		leftSideWindow.SetActive (false);
 		mainWindow.SetActive (true);
 		mainWindow.GetComponentsInChildren<Text>()[0].text = "Lets buy Health Potion!";
-		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
+        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => BuyHealtPot());
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (gemsPanel, tmpCard);
@@ -390,10 +402,12 @@ public class ShopTutorial : MonoBehaviour {
 		buyItemMenu.SetActive (false);
 		itemsFade.SetActive (false);
 		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "Congradulations! You get 3 Free Health potions! Good luck! See you soon Warrior!";
-		mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
+		mainWindow.GetComponentsInChildren<Text>()[0].text = "Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!";
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
+        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentsInChildren<Text>()[1].text = "Close";
-		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => CloseTutorial());
+        LocalizationManager.Instance.UpdateLocaliztion(mainWindow.GetComponentsInChildren<Text>()[1]);
+        mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => CloseTutorial());
 
 	}
 

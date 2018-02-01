@@ -9,11 +9,8 @@ public class Translator : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR
         textField = GetComponent<Text>();
-
         LocalizationManager.Instance.UpdateLocaliztion(textField);
-#endif
     }
 
 }

@@ -45,6 +45,10 @@ public class DeathUI : MonoBehaviour
 
     public void Start ()
     {
+        if (IsBossLevel())
+        {
+            freeCheckpoints.SetActive(false);
+        }
         SoundManager.PlayMusic("kid death", false);
         mainCamera = GameObject.FindWithTag("MainCamera");
         pauseButton.SetActive(false);
@@ -116,7 +120,9 @@ public class DeathUI : MonoBehaviour
 
     public void Continue()
     {
-        if (GameManager.currentLvl == "Level10" || GameManager.currentLvl == "Level20" || GameManager.currentLvl == "Level30")
+        FindObjectOfType<Camera>().GetComponent<CameraEffect>().ResetColors();
+
+        if (IsBossLevel())
         {
             Restart();
         }
@@ -236,5 +242,10 @@ public class DeathUI : MonoBehaviour
         GameManager.nextLevelName = "Shop";
 
         SceneManager.LoadScene("Loading");
+    }
+
+    bool IsBossLevel()
+    {
+        return GameManager.currentLvl == "Level10" || GameManager.currentLvl == "Level20" || GameManager.currentLvl == "Level30";
     }
 }

@@ -103,13 +103,11 @@ public class AchievementManager : MonoBehaviour
 
     void Start()
     {
-
         if (SceneManager.GetActiveScene().name == "AchievementMenu" || SceneManager.GetActiveScene().name == "Map" || SceneManager.GetActiveScene().name == "Shop")
             SoundManager.PlayMusic("main menu", true);
 
         if (!PlayerPrefs.HasKey(availableLoots))
             PlayerPrefs.SetInt(availableLoots, 0);
-        //ResetStat("Mob killer test", "mobKillerPrefTest");
         achievementUI = GameObject.FindGameObjectWithTag("Achievement UI");
         items = new string[] { HEAL, HEAL, HEAL };
         
@@ -151,33 +149,24 @@ public class AchievementManager : MonoBehaviour
         potionerReward = new int[] { 100, 2, 1 };
         potionerRewardType = new string[] { "Coins", "Crystals", HEAL};
 
-        //ResetStat("Mob killer");
-        //ResetStat("Diver");
-        //ResetStat("Secret Rush test");
-        //ResetStat("Spider Boss killer test");
-        //ResetStat("First Buy Test");
-        //ResetStat("StarWalker");
-        mobKiller = new Achieve("Mob killer", mobKillerRewardType, mobKillerTargetValue, mobKillerReward);
-        treasureHunter = new Achieve("Treasure Hunter", treasureHunterRewardType, treasureHunterValue, treasureHunterReward);
-        swimmer = new LevelAchieve("Diver", HEAL, 5, 3);
-        //swimmer = new LevelAchieve("Diver", "Crystals", 5, 500);
-        //torchCollector = new LevelAchieve("Torch Collector", "Coins", 1, 150);
-        torchCollector3 = new Achieve("TorchCollector", tripleCoins, torchCollectorTargetValue, torchCollectorReward);
-        secretRoomer = new Achieve("Secret Rush", secretRoomRewardType, secretRoomerTargetValue, secretRoomerReward);
-        firstBuy = new LevelAchieve("First Buy", "Crystals", 1, 2);
-        spiderKiller = new LevelAchieve("Spider Boss killer", "Crystals", 1, 6);
-        starWalker = new Achieve("StarWalker", tripleCoins, starWalkerTargetValue, starWalkerReward);
-        firstBoss = new LevelAchieve("Dragon Killer", "Crystals", 1, 3);
-        graver = new Achieve("Graver", graverRewardType, graverTargetValue, graverReward);
-        selfDestructor = new Achieve("SelfDestructor", graverRewardType, idiotTargerValue, idiotReward);
-        potioner = new Achieve("Potioner", potionerRewardType, potionerTargetValue, potionerReward);
-        tutorialAchieve = new LevelAchieve("TutorialAchieve", "Crystals", 1, 5);
-        tenDaysReward = new LevelAchieve("TenDaysReward", "Crystals", 1, 5);
+		mobKiller = new Achieve("mob killa", mobKillerRewardType, mobKillerTargetValue, mobKillerReward);
+		treasureHunter = new Achieve("treasure hunter", treasureHunterRewardType, treasureHunterValue, treasureHunterReward);
+		swimmer = new LevelAchieve("diver", HEAL, 5, 3);
+		torchCollector3 = new Achieve("torch collector", tripleCoins, torchCollectorTargetValue, torchCollectorReward);
+		secretRoomer = new Achieve("secret room rush", secretRoomRewardType, secretRoomerTargetValue, secretRoomerReward);
+		firstBuy = new LevelAchieve("first buy", "Crystals", 1, 2);
+		spiderKiller = new LevelAchieve("ice lord", "Crystals", 1, 6);
+		starWalker = new Achieve("star walker", tripleCoins, starWalkerTargetValue, starWalkerReward);
+		firstBoss = new LevelAchieve("dragon bones", "Crystals", 1, 3);
+		graver = new Achieve("graver", graverRewardType, graverTargetValue, graverReward);
+		selfDestructor = new Achieve("self-destructor", graverRewardType, idiotTargerValue, idiotReward);
+		potioner = new Achieve("potioner", potionerRewardType, potionerTargetValue, potionerReward);
+		tutorialAchieve = new LevelAchieve("tutorial achievement", "Crystals", 1, 5);
+		tenDaysReward = new LevelAchieve("ten days", "Crystals", 1, 5);
     }
 
     public void CheckAchieve(Achieve achieve)
     {
-        string targetValue = "targetValue";
         string achieveName = achieve.achieveName;
         if (achievementUI != null)
         {

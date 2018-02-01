@@ -71,7 +71,7 @@ public class LevelEndUI : MonoBehaviour
 
     public void Continue()
     {
-        if (GameManager.currentLvl == "Level20")
+        if (GameManager.currentLvl == "Level30")
         {
             GameManager.nextLevelName = "MainMenu";
         }
@@ -82,9 +82,7 @@ public class LevelEndUI : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("NoAds") > 0)
         {
-            Debug.Log(PlayerPrefs.GetInt("Coins"));
             GameManager.AddCoins(int.Parse(coinsText.text));
-            Debug.Log(PlayerPrefs.GetInt("Coins"));
             coinsText.text = (int.Parse(coinsText.text) * 2).ToString();
             freeButton.GetComponent<Button>().interactable = false;
         }

@@ -19,6 +19,7 @@ public class BearTrap : MonoBehaviour
         {
             GetComponent<Collider2D>().enabled = false;
             StartCoroutine(Delay());
+            StartCoroutine(PlayTrapSound());
         }
     }
 
@@ -36,5 +37,11 @@ public class BearTrap : MonoBehaviour
     public void DisableCollider()//call from animator
     {
         damageTrigger.enabled = false;
+    }
+
+    IEnumerator PlayTrapSound()
+    {
+        yield return new WaitForSeconds(0.55f);
+        SoundManager.PlaySound("bear_trap_sound");
     }
 }

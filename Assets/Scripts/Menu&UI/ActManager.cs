@@ -8,7 +8,9 @@ public class ActManager : MonoBehaviour
 	GameObject episode1;
     [SerializeField]
     GameObject episode2;
-	[SerializeField]
+    [SerializeField]
+    GameObject episode3;
+    [SerializeField]
 	GameObject actSpacer;
 
 	public void TurnOnEoisode1(bool turn)
@@ -21,5 +23,11 @@ public class ActManager : MonoBehaviour
     {
         actSpacer.SetActive(!turn);
         episode2.SetActive(turn);
+    }
+
+    public void TurnOnEpisode3(bool turn)
+    {
+        actSpacer.SetActive(!turn);
+        episode3.SetActive(turn);
     }
 }

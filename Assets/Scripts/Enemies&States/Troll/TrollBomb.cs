@@ -23,6 +23,7 @@ public class TrollBomb : MonoBehaviour
             timer = 0;
 
             GameObject tmp = Instantiate(blow, transform.position, Quaternion.identity);
+            SoundManager.PlaySound("troll_bomb");
             tmp.transform.parent = null;
 
             Destroy(this.gameObject);

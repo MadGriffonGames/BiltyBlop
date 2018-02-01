@@ -79,6 +79,7 @@ public class ZoomOutTrigger : MonoBehaviour
             upPanel.SetActive(true);
             downPanel.SetActive(true);
             zoomOut = true;
+            gameObject.GetComponent<Collider2D>().enabled = false;
         }
     }
 

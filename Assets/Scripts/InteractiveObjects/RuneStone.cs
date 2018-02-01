@@ -27,7 +27,7 @@ public class RuneStone : InteractiveObject
             Zoom.stopZoom();
 			timerIsOn = false;
 			timer = 0;
-			if (SceneManager.GetActiveScene().name != "Level10" && SceneManager.GetActiveScene().name != "Level20")
+			if (!IsBossLevel())
 			{
 				UI.Instance.LevelEndUI.SetActive (true);
 			} 
@@ -69,8 +69,6 @@ public class RuneStone : InteractiveObject
         SaveStarsCount();
 
         SetLastUnlockedLevel();
-
-        //SetTutorialMode();
 
         PlayerPrefs.SetInt("IsMapChestOpen", 0);
         PlayerPrefs.SetString("LastCompletedLevel", GameManager.currentLvl);
@@ -140,12 +138,8 @@ public class RuneStone : InteractiveObject
         if (PlayerPrefs.GetInt(nextLvl) == 0)
         {
             PlayerPrefs.SetString("LastUnlockedLevel", nextLvl);
-            PlayerPrefs.SetInt(nextLvl, 1);
         }
-        else
-        {
-            PlayerPrefs.SetInt(nextLvl, 1);
-        }
+        PlayerPrefs.SetInt(nextLvl, 1);
     }
 
     void SetTutorialMode()
@@ -157,5 +151,10 @@ public class RuneStone : InteractiveObject
                 PlayerPrefs.SetInt("TutorialMode", 1);
             }
         }
+    }
+
+    bool IsBossLevel()
+    {
+        return SceneManager.GetActiveScene().name == "Level10" || SceneManager.GetActiveScene().name == "Level20" || SceneManager.GetActiveScene().name == "Level30";
     }
 }

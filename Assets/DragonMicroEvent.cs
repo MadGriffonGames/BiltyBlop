@@ -9,6 +9,10 @@ public class DragonMicroEvent : MonoBehaviour {
     [SerializeField]
     GameObject lightningBolt;
     [SerializeField]
+    GameObject lighningBolt1;
+    [SerializeField]
+    GameObject lightningBolt2;
+    [SerializeField]
     GameObject changableTargetObject;
     [SerializeField]
     GameObject stopCollider;
@@ -18,18 +22,19 @@ public class DragonMicroEvent : MonoBehaviour {
     UnityArmatureComponent armature;
     bool isUp = false;
     bool isStop = true;
+    List<Slot> slots;
 
     private void Awake()
     {
         armature = changableTargetObject.GetComponent<UnityArmatureComponent>();
-
-        dragonSlots = new Slot[8];
+        Physics2D.IgnoreCollision(Player.Instance.GetComponent<CapsuleCollider2D>(), this.GetComponent<Collider2D>(), true);
     }
 
     private void Start()
     {
+        slots = armature.armature.GetSlots();
+        armature.animation.timeScale = 1.3f;
         armature.animation.FadeIn("WEAKNESS_IDLE", -1, -1);
-        SetSlots();
     }
 
     private void Update()
@@ -43,8 +48,9 @@ public class DragonMicroEvent : MonoBehaviour {
 
             if (armature.animation.lastAnimationName == "WEAKNESS_END" && armature.animation.isCompleted)
             {
-                armature.animation.timeScale = 1.5f;
+                //armature.animation.timeScale = 1.5f;
                 armature.animation.FadeIn("RISE", -1, 1);
+                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x / 73, -1.3f * transform.localPosition.y / 9);
             }
 
             if (armature.animation.lastAnimationName == "RISE" && armature.animation.isCompleted)
@@ -65,56 +71,87 @@ public class DragonMicroEvent : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             lightningBolt.SetActive(true);
+            SoundManager.PlaySound("lightning_sound1");
+            StartCoroutine(ThrowSecondLight());
+            StartCoroutine(ThrowTrhirdLight());
             StartCoroutine(ChangeDisplayIndexes());
             StartCoroutine(StopDisable());
+            gameObject.GetComponent<Collider2D>().enabled = false;
         }
     }
 
     IEnumerator StopDisable()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(2.7f);
         stopCollider.SetActive(false);
     }
 
     IEnumerator ChangeDisplayIndexes()
     {
+        foreach (Slot slot in slots)
+        {
+            slot.displayController = "none";
+        }
         yield return new WaitForSeconds(0.2f);
         ChangeIndexes();
         isOldDragon = true;
     }
 
-    void AddSlot(string slotName, ref int i)
+    void AddSlot(Slot slot, ref int i)
     {
-        dragonSlots[i] = changableTargetObject.GetComponent<UnityArmatureComponent>().armature.GetSlot(slotName);
+        dragonSlots[i] = slot;
         i++;
     }
 
-    private void SetSlots()
-    {
-        int i = 0;
-        AddSlot("dragon_0007_", ref i);
-        AddSlot("dragon_0005_", ref i);
-        AddSlot("dragon_0006_", ref i);
-        AddSlot("Body", ref i);
-        AddSlot("dragon_0003", ref i);
-        AddSlot("dragon_0002_", ref i);
-        AddSlot("dragon_0001_", ref i);
-        AddSlot("dragon_0000_", ref i);
+    //private void SetSlots()
+    //{
+
+    //    int i = 0;
+    //    AddSlot(dragon7, ref i);
+    //    AddSlot(dragon5, ref i);
+    //    AddSlot(dragon6, ref i);
+    //    AddSlot(body, ref i);
+    //    AddSlot(dragon3, ref i);
+    //    AddSlot(dragon2, ref i);
+    //    AddSlot(dragon1, ref i);
+    //    AddSlot(dragon0, ref i);
 
 
-        for (int j = 0; j < dragonSlots.Length; j++)
-        {
-            dragonSlots[j].displayIndex = 1;
-        }
+    //    for (int j = 0; j < dragonSlots.Length; j++)
+    //    {
+    //        dragonSlots[j].displayIndex = 1;
+    //    }
 
-    }
+    //}
 
     void ChangeIndexes()
     {
-        for (int j = 0; j < dragonSlots.Length; j++)
+        foreach (Slot slot in slots)
         {
-            dragonSlots[j].displayIndex = 0;
+            Debug.Log(slot.displayIndex);
+            slot.displayIndex = 0;
+            Debug.Log(slot.displayIndex);
         }
+        //for (int j = 0; j < dragonSlots.Length; j++)
+        //{
+        //    Debug.Log(dragonSlots[j].displayIndex);
+        //    dragonSlots[j].displayIndex = 2;
+        //    Debug.Log(dragonSlots[j].displayIndex);
+        //}
+    }
+
+    IEnumerator ThrowSecondLight()
+    {
+        yield return new WaitForSeconds(0.2f);
+        lighningBolt1.SetActive(true);
+        SoundManager.PlaySound("lightning_sound1");
+    }
+
+    IEnumerator ThrowTrhirdLight()
+    {
+        yield return new WaitForSeconds(0.4f);
+        lightningBolt2.SetActive(true);
+        SoundManager.PlaySound("lightning_sound1");
     }
 
 }

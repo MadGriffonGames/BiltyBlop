@@ -11,7 +11,7 @@ public class DragonAppear : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.GetComponent<Rigidbody2D>().velocity = new Vector2(18* transform.localScale.x / 1.9f, 1.1f * transform.localScale.y);
+        this.GetComponent<Rigidbody2D>().velocity = new Vector2(12* transform.localScale.x / 1.9f, 1.1f * transform.localScale.y);
     }
 
     private void OnBecameInvisible()

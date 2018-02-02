@@ -33,7 +33,7 @@ public class UI : MonoBehaviour
 
     public GameObject controlsUI;
 
-    private void Start()
+    private void Awake()
     {
         controlsUI = GetComponentInChildren<ControlsUI>().gameObject;     
     }

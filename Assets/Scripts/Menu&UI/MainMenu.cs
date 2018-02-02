@@ -79,6 +79,7 @@ public class MainMenu : MonoBehaviour
         }
 
         hours12 = new TimeSpan(12, 0, 0);
+        PlayerPrefs.SetInt("Level2",1);
     }
 
     public void Start()

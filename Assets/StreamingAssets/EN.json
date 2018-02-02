@@ -474,85 +474,61 @@
 	
 	//Shop Tutorial
 
-	"click on skins button to view some variations of kid's appearance with different abilities": {
-	"text": "CLICK ON SKINS BUTTON TO VIEW SOME VARIATIONS OF KID'S APPEARANCE WITH DIFFERENT ABILITIES", 
-	"fontSize": 20
+	"customize and upgrade": {
+	"text": "CUSTOMIZE AND UPGRADE!", 
+	"fontSize": 38
 	},
 	
-	"start shop": {
-	"text": "I'LL TELL YOU ABOUT SHOP AND ALL STUFF IN THIS GAME! FIRST OF ALL - SKINS!", 
-	"fontSize": 20
+	"maximum health points": {
+	"text": "MAXIMUM HEALTH POINTS", 
+	"fontSize": 30
 	},
 	
-	"each armor gives you different 'health' stat": {
-	"text": "EACH ARMOR GIVES YOU DIFFERENT 'HEALTH' STAT", 
-	"fontSize": 20
+	"your attack damage": {
+	"text": "YOUR ATTACK DAMAGE", 
+	"fontSize": 35
+	},
+
+	
+	"get more potions": {
+	"text": "GET MORE POTIONS!", 
+	"fontSize": 33
 	},
 	
-	"what about swords?": {
-	"text": "WHAT ABOUT SWORDS?", 
-	"fontSize": 20
+	"get new skills": {
+	"text": "GET NEW SKILLS!", 
+	"fontSize": 35
 	},
 	
-	"Swords vary in their damage!": {
-	"text": "SWORDS RANGE IN THEIR DAMAGE", 
-	"fontSize": 20
+	"throw weapon damage": {
+	"text": "THROW WEAPON DAMAGE", 
+	"fontSize": 35
 	},
 	
-	"May be some items?": {
-	"text": "MAY BE SOME ITEMS?", 
-	"fontSize": 20
+	"earn more crystals": {
+	"text": "EARN MORE CRYSTALS!", 
+	"fontSize":29
 	},
 	
-	"Potions can give you different advantages for a short time": {
-	"text": "POTIONS CAN GIVE YOU DIFFERENT ADVANTAGES FOR A SHORT TIME", 
-	"fontSize": 20
-	},
-	
-	"Skills and Perks!": {
-	"text": "SKILLS AND PERKS!", 
-	"fontSize": 20
-	},
-	
-	"Perks give a passive advantage throughout the game": {
-	"text": "PERKS GIVE YOU A PASSIVE ADVANTAGES THROUGHOUT THE GAME", 
-	"fontSize": 20
-	},
-	
-	"And now! Throwing weapons!": {
-	"text": "AND NOW... THROWING WEAPONS!", 
-	"fontSize": 20
-	},
-	
-	"Throwing weapons vary in their damage as swords! Beware of Sven!": {
-	"text": "THROWING WEAPONS RANGE IN THEIR DAMAGE AS SWORDS! BEWARE OF SVEN!", 
-	"fontSize": 20
-	},
-	
-	"Geeeeeeems!": {
-	"text": "GEEEEEMS!", 
-	"fontSize": 20
-	},
-	
-	"You can buy everything in this game with Gems!": {
-	"text": "YOU CAN BUY EVERYTHING IN THIS GAME WITH GEMS", 
-	"fontSize": 20
-	},
-	
-	"Lets buy Health Potion!": {
-	"text": "LET'S BUY HEALTH POTION!", 
-	"fontSize": 20
+	"now get some potions for free!": {
+	"text": "NOW GET SOME POTIONS FOR FREE!", 
+	"fontSize": 30
 	},
 	
 	"Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!": {
 	"text": "CONGRATULATIONS! YOU GET 3 FREE HEALTH POTIONS. GOOD LUCK! SEE YOU SOON, WARRIOR!", 
-	"fontSize": 20
+	"fontSize": 23
 	},
 	
 	"Close": {
 	"text": "CLOSE", 
 	"fontSize": 20
 	},
+
+	"free shop": {
+		"text": "FREE", 
+		"fontSize": 20
+		},
 	
 	//Achievements
 	

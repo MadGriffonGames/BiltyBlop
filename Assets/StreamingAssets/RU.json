@@ -954,81 +954,57 @@
 	
 	
 	//Shop Tutorial
-
-	"click on skins button to view some variations of kid's appearance with different abilities": {
-	"text": "НАЖМИ НА КНОПКУ СКИНОВ, ЧТОБЫ УВИДЕТЬ РАЗЛИЧНЫЕ ВАРИАНТЫ ВНЕШНЕГО ВИДА С РАЗНЫМИ СПОСОБНОСТЯМИ ", 
-	"fontSize": 16
+	
+	"customize and upgrade":{
+	"text": "КАСТОМИЗАЦИЯ И УЛУЧШЕНИЯ!",
+	"fontSize": 30
 	},
 	
-	"I'LL TELL YOU ABOUT SHOP AND ALL STUFF IN THIS GAME! FIRST OF ALL - SKINS!":{
-	"text": "Я РАССКАЖУ ТЕБЕ О МАГАЗИНЕ И О ВСЕХ ЕГО ТОВАРАХ! В ПЕРВУЮ ОЧЕРЕДЬ - СКИНЫ!",
+	"maximum health points": {
+	"text": "МАКСИМАЛЬНЫЙ УРОВЕНЬ ЗДОРОВЬЯ", 
 	"fontSize": 20
 	},
 	
-	"each armor gives you different 'health' stat": {
-	"text": "КАЖДАЯ БРОНЯ ДАЕТ ТЕБЕ РАЗНЫЙ УРОВЕНЬ ЗДОРОВЬЯ", 
-	"fontSize": 20
+	"your attack damage": {
+	"text": "УРОН ОТ АТАК", 
+	"fontSize": 35
 	},
 	
-	"what about swords?": {
-	"text": "ЧТО НАСЧЕТ МЕЧЕЙ?", 
-	"fontSize": 20
+	
+	"get more potions": {
+	"text": "ПОЛУЧИ БОЛЬШЕ ЗЕЛИЙ!", 
+	"fontSize": 35
+	},
+		
+	"get new skills": {
+	"text": "ПОЛУЧИ НОВЫЕ НАВЫКИ!", 
+	"fontSize": 35
 	},
 	
-	"Swords vary in their damage!": {
-	"text": "МЕЧИ РАЗЛИЧАЮТСЯ СВОИМ НАНОСИМЫМ УРОНОМ", 
-	"fontSize": 20
+	"throw weapon damage": {
+	"text": "УРОН МЕТАТЕЛЬНОГО ОРУЖИЯ", 
+	"fontSize": 22
 	},
 	
-	"May be some items?": {
-	"text": "НЕМНОГО БУСТЕРОВ?", 
-	"fontSize": 20
+	"earn more crystals": {
+	"text": "ПОЛУЧИ БОЛЬШЕ КРИСТАЛЛОВ!", 
+	"fontSize": 25
 	},
 	
-	"Potions can give you different advantages for a short time": {
-	"text": "ЗЕЛЬЯ ДАЮТ ТЕБЕ РАЗНЫЕ СПОСОБНОСТИ НА КОРОТКОЕ ВРЕМЯ", 
-	"fontSize": 18
-	},
-	
-	"Skills and Perks!": {
-	"text": "НАВЫКИ И ПЕРКИ!", 
-	"fontSize": 20
-	},
-	
-	"Perks give a passive advantage throughout the game": {
-	"text": "ПЕРКИ ДАЮТ ПАССИВНЫЙ НАВЫК В ТЕЧЕНИЕ ИГРЫ", 
-	"fontSize": 20
-	},
-	
-	"And now! Throwing weapons!": {
-	"text": "А СЕЙЧАС... МЕТАТЕЛЬНОЕ ОРУЖИЕ!", 
-	"fontSize": 20
-	},
-	
-	"Throwing weapons vary in their damage as swords! Beware of Sven!": {
-	"text": "МЕТАТЕЛЬНОЕ ОРУЖИЕ ИЗМЕРЯЕТСЯ СВОИМ УРОНОМ КАК И МЕЧИ! БЕРЕГИСЬ ОВEЦ!", 
-	"fontSize": 20
-	},
-	
-	"Geeeeeeems!": {
-	"text": "КРИСТАААААЛЛЫ!!", 
-	"fontSize": 20
-	},
-	
-	"You can buy everything in this game with Gems!": {
-	"text": "В ЭТОЙ ИГРЕ ТЫ МОЖЕШЬ КУПИТЬ ВСЕ ЗА КРИСТАЛЛЫ", 
-	"fontSize": 20
-	},
-	
-	"Lets buy Health Potion!": {
-	"text": "ДАВАЙ КУПИМ ЗЕЛЬЕ ЗДОРОВЬЯ!", 
-	"fontSize": 20
+	"now get some potions for free!": {
+	"text": "ЗАБЕРИ БЕСПЛАТНЫЕ ЗЕЛЬЯ!", 
+	"fontSize": 25
 	},
 	
 	"Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!": {
 	"text": "ПОЗДРАВЛЯЮ! ТЫ ПОЛУЧАЕШЬ 3 БЕСПЛАТНЫХ ЗЕЛЬЯ ЗДОРОВЬЯ! ДО НОВЫХ ВСТРЕЧ, ВОИН!", 
 	"fontSize": 20
 	},
+
+	"free shop": {
+		"text": "БЕСПЛАТНО", 
+		"fontSize": 20
+		},
 	
 	"Close": {
 	"text": "ЗАКРЫТЬ", 

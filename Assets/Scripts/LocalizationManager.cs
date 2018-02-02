@@ -23,7 +23,7 @@ public class LocalizationManager : MonoBehaviour
         }
     }
     string pathToJson;
-    string language = "EN";
+    string language = "RU";
     string jsonString;
     public Dictionary<string, LocalizedString> translation;
 
@@ -67,8 +67,10 @@ public class LocalizationManager : MonoBehaviour
             {
                 if (translation[textField.text].fontSize > 0)
                 {
+					
                     textField.fontSize = translation[textField.text].fontSize;
                 }
+				textField.text = translation [textField.text].text;
             }
             else
             {

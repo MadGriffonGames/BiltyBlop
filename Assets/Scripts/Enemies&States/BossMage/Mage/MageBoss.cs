@@ -91,7 +91,6 @@ public class MageBoss : Boss
 
         if (Health <= 0)
         {
-            SoundManager.PlaySound("mage_boss_death");
             ChangeState(new MageDeathState());
         }
         yield return null;

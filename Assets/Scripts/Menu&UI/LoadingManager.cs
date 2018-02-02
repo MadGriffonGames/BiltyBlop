@@ -8,9 +8,12 @@ public class LoadingManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject loadingUI;
+    [SerializeField]
+    RectTransform progressBar;
 	[SerializeField]
 	Text levelText;
     private AsyncOperation async;
+    Vector3 barScale;
 
     IEnumerator Start()
     {
@@ -21,18 +24,23 @@ public class LoadingManager : MonoBehaviour
 			{
 				if (GameManager.nextLevelName.Length == 6) 
 				{
-					levelText.text = "LEVEL " + GameManager.nextLevelName [5].ToString ();
-				}
+					levelText.text = "level";
+                    LocalizationManager.Instance.UpdateLocaliztion(levelText);
+                    levelText.text += " " + GameManager.nextLevelName[5].ToString();
+
+
+                }
 				if (GameManager.nextLevelName.Length == 7) 
 				{
-					levelText.text = "LEVEL " + GameManager.nextLevelName [5].ToString () + GameManager.nextLevelName [6].ToString (); 
+                    levelText.text = "level";
+                    LocalizationManager.Instance.UpdateLocaliztion(levelText);
+                    levelText.text += " " + GameManager.nextLevelName[5].ToString() + GameManager.nextLevelName[6].ToString();
 				}
 			}
 			else
 				levelText.text = "";
 			break;
 		}
-
 
         async = SceneManager.LoadSceneAsync(GameManager.nextLevelName);
 

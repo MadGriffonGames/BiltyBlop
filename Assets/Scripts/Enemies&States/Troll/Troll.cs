@@ -91,7 +91,7 @@ public class Troll : MovingMeleeEnemy
         if (!damaged)
         {
             health -= actualDamage;
-
+            SoundManager.PlaySound("troll_pain");
             damaged = true;
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
@@ -99,7 +99,7 @@ public class Troll : MovingMeleeEnemy
             if (IsDead)
             {
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
-                SoundManager.PlaySound("enemyher loud");
+                SoundManager.PlaySound("troll_death");
 
                 GetComponent<SwordIgnoreCollision>().enabled = true;
 

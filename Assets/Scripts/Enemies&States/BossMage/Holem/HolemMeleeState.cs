@@ -70,7 +70,7 @@ public class HolemMeleeState : IHolemState
 
             enemy.armature.animation.timeScale = 1.5f;
             enemy.armature.animation.FadeIn("Spikes_atk_1", -1, 1);
-            SoundManager.PlaySound("holem_earthroll");
+            SoundManager.PlaySound("holem_spikes");
             enemy.spikes.SetActive(true);
             canExit = false;
             enemy.isAttacking = true;

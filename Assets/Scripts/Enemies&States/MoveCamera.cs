@@ -60,6 +60,7 @@ public class MoveCamera : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isActive)
         {
+            SoundManager.PlayMusic("boss drum", true);
             cam.gameObject.GetComponent<FollowCamera>().enabled = false;
             isActive = true;
         }

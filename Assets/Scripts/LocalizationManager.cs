@@ -23,7 +23,7 @@ public class LocalizationManager : MonoBehaviour
         }
     }
     string pathToJson;
-    string language = "RU";
+    string language;
     string jsonString;
     public Dictionary<string, LocalizedString> translation;
 
@@ -37,6 +37,15 @@ public class LocalizationManager : MonoBehaviour
         instance = GetComponent<LocalizationManager>();
 
         DontDestroyOnLoad(this);
+
+        if (Application.systemLanguage == SystemLanguage.Russian)
+        {
+            language = "RU";
+        }
+        else
+        {
+            language = "EN";
+        }
 
         if (language != null)
         {

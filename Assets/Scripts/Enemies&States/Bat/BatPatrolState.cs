@@ -14,6 +14,7 @@ public class BatPatrolState : IBatState
     public void Execute()
     {
         enemy.nextPos = enemy.pathCordinates[enemy.nextPosNum];
+        enemy.armature.animation.timeScale = 1.6f;
         Move();
     }
 

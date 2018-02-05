@@ -208,7 +208,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     bool CanNotShowRewardedVideo()
     {
-        return PlayerPrefs.GetInt("NoAds") == 0 && !Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched;
+        return PlayerPrefs.GetInt("NoAds") == 0 && Application.internetReachability == NetworkReachability.NotReachable;
     }
 
     void InstantiateWarning()

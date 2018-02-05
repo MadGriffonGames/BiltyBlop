@@ -27,7 +27,7 @@ public class RuneStone : InteractiveObject
             Zoom.stopZoom();
 			timerIsOn = false;
 			timer = 0;
-			if (SceneManager.GetActiveScene().name != "Level10" && SceneManager.GetActiveScene().name != "Level20")
+			if (!IsBossLevel())
 			{
 				UI.Instance.LevelEndUI.SetActive (true);
 			} 
@@ -151,5 +151,10 @@ public class RuneStone : InteractiveObject
                 PlayerPrefs.SetInt("TutorialMode", 1);
             }
         }
+    }
+
+    bool IsBossLevel()
+    {
+        return SceneManager.GetActiveScene().name == "Level10" || SceneManager.GetActiveScene().name == "Level20" || SceneManager.GetActiveScene().name == "Level30";
     }
 }

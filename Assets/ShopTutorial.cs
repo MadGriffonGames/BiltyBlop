@@ -43,7 +43,10 @@ public class ShopTutorial : MonoBehaviour
 	[SerializeField]
 	GameObject buyItemMenu;
 	[SerializeField]
-	GameObject closeByuItemMenuButton;
+	GameObject closeByuItemMenuButton1;
+	[SerializeField]
+	GameObject closeByuItemMenuButton2;
+
 	[SerializeField]
 	GameObject buyByCoinsButton;
 	[SerializeField]
@@ -57,7 +60,9 @@ public class ShopTutorial : MonoBehaviour
 	[SerializeField]
 	Text text;
 	[SerializeField]
-	RectTransform arrow;
+	RectTransform topArrow;
+	[SerializeField]
+	GameObject cardArrow;
 	[SerializeField]
 	RectTransform[] shopButtonsTransform;
 	[SerializeField]
@@ -67,7 +72,11 @@ public class ShopTutorial : MonoBehaviour
 	[SerializeField]
 	GameObject fade;
 
+	[SerializeField]
+	Sprite nextButton;
+
 	GameObject tmpCard;
+	Button tmpButton;
 
 	[SerializeField]
 	Button[] shopButtons;
@@ -75,11 +84,19 @@ public class ShopTutorial : MonoBehaviour
     Text leftSideWindowText;
     Text mainWindowText;
 
+	private static Vector3 arrowPosition1 = new Vector3(13, 112, 0);  // perks arrow
+	private static Vector3 arrowPosition2 = new Vector3(8, -98, 0); // stats arrow
+	private static Vector3 arrowPosition3 = new Vector3(8, 155, 0); // gems arrow
+	private static Vector3 arrowPosition4 = new Vector3(-128, -123, 0);
+
+	private static Vector3 arrowRotation1 = new Vector3(0, 0, 45);
+	private static Vector3 arrowRotation2 = new Vector3(0, 0, 135);
 	int currentShop = 0;
 
 	void Start () 
 	{
-		shopController.ActivateShop (0);
+		topArrow.gameObject.SetActive (false);
+		cardArrow.SetActive (false);
         
         if (PlayerPrefs.GetInt ("ShopTutorialComplete") == 0 && PlayerPrefs.GetInt ("TutorialMode") > 0) 
 		{
@@ -87,6 +104,7 @@ public class ShopTutorial : MonoBehaviour
 		}
         else 
 		{
+			shopController.ActivateShop (0);
 			this.gameObject.SetActive (false);
 		}
         leftSideWindow.SetActive(true);
@@ -98,7 +116,7 @@ public class ShopTutorial : MonoBehaviour
 
 	private void SetArrowPosition()
 	{
-		arrow.position = shopButtonsTransform [currentShop].position;
+		topArrow.position = shopButtonsTransform [currentShop].position;
 	}
 
 	public void MainMenuSkip()
@@ -138,6 +156,10 @@ public class ShopTutorial : MonoBehaviour
 		tmpCard.gameObject.transform.SetParent (frontPlan.transform);
 		tmpCard.transform.localScale = new Vector3 (1.3f, 1.3f, 1);
 		tmpCard.transform.localPosition = new Vector3 (0, 0, 0);
+		tmpButton = tmpCard.GetComponentsInChildren<Button> () [1];
+		tmpButton.gameObject.GetComponent<Image> ().sprite = nextButton;
+		tmpButton.GetComponentInChildren<Text>().text = "next";
+		LocalizationManager.Instance.UpdateLocaliztion (tmpButton.GetComponentInChildren<Text> ());
 	}
 
 	private void CardToBasePlan(GameObject parentVar,GameObject targetObj)
@@ -150,216 +172,138 @@ public class ShopTutorial : MonoBehaviour
 	 * Skip Methods
 	*/
 
-	// MAIN WINDOW
+	// MAIN WINDOW  // setting SKINS
 	public void SkipGreeting()
 	{
+		shopController.ActivateShop (0);
 		mainWindow.SetActive (false);
 		leftSideWindow.SetActive (true);
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipSkins());
-		leftSideWindowText.text = "each armor gives you different 'health' stat";
+
+		leftSideWindowText.text = "maximum health points";
+
         LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
 		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
 		CardToFrontPlan (skinsPanel, 7);
+		tmpButton.onClick.AddListener(() => SkipSkins());
 
-		arrow.gameObject.SetActive (false);
+		tmpCard.GetComponentInChildren<SkinStatsPanel> ().HighliteStat ();
+		cardArrow.SetActive (true);
+		cardArrow.transform.localPosition = arrowPosition2;
+
 	}
 
-	// SKINS WINDOW
+	// SKINS WINDOW // SETTING SWORDS
 	public void SkipSkins()
 	{
-		leftSideWindow.SetActive (false);
-		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "what about swords?";
-        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
-        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipSwordsPreview ());
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (skinsPanel, tmpCard);
 		skinSwipeMenu.UpdateSkinCards ();
-
 		currentShop++;
 		shopController.ActivateShop (currentShop);
-		SetArrowPosition ();
-		arrow.gameObject.SetActive (true);
-	}
 
-	// SWORDS PREVIEW
-	public void SkipSwordsPreview()
-	{
-		mainWindow.SetActive (false);
-		leftSideWindow.SetActive (true);
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipSwords());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Swords vary in their damage!";
-        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
-        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "your attack damage";
+
+		LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
 		CardToFrontPlan (swordsPanel, 3);
+		tmpButton.onClick.AddListener(() => SkipSwords());
 
-		arrow.gameObject.SetActive (false);
+		tmpCard.GetComponentInChildren<SkinStatsPanel> ().HighliteStat ();
+		cardArrow.transform.localPosition = arrowPosition2;
+
 	}
 
-	// SWORDS WINDOW
+	// SWORDS WINDOW // SETTING MAIN
 	public void SkipSwords()
 	{
-		leftSideWindow.SetActive (false);
-		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "May be some items?";
-        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
-        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipItemsPreview ());
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (swordsPanel, tmpCard);
-		swordSwipeMenu.SetSwordCards ();
-
 		currentShop++;
 		shopController.ActivateShop (currentShop);
-		SetArrowPosition ();
-		arrow.gameObject.SetActive (true);
-	}
 
-	// ITEMS PREVIEW
-	public void SkipItemsPreview()
-	{
-		mainWindow.SetActive (false);
-		leftSideWindow.SetActive (true);
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipItems());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Potions can give you different advantages for a short time";
-        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
-        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "get more potions";
+
+		LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
 		CardToFrontPlan (itemsPanel,2);
+		tmpButton.onClick.AddListener(() => SkipItems());
 
-		arrow.gameObject.SetActive (false);
+		tmpCard.GetComponentInChildren<SkinStatsPanel> ().HighliteStat ();
+		cardArrow.transform.localPosition = arrowPosition2;
+
 	}
 
-	// ITEMS WINDOW
+	// ITEMS WINDOW // SETTING Perks
 	public void SkipItems()
 	{
-		leftSideWindow.SetActive (false);
-		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "Skills and Perks!";
-        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
-        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipPerkPreview());
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (itemsPanel, tmpCard);
-		itemSwipeMenu.SetItemCards ();
-
 		currentShop++;
 		shopController.ActivateShop (currentShop);
-		SetArrowPosition ();
-		arrow.gameObject.SetActive (true);
-	}
 
-	// PERKS PREVIEW
-	public void SkipPerkPreview()
-	{
-		mainWindow.SetActive (false);
-		leftSideWindow.SetActive (true);
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipPerks());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Perks give a passive advantage throughout the game";
-        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
-        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "get new skills";
+
+		LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
 		CardToFrontPlan (perkPanel,2);
+		tmpButton.onClick.AddListener(() => SkipPerks());
 
-		arrow.gameObject.SetActive (false);
+		cardArrow.transform.localPosition = arrowPosition1;
+		cardArrow.transform.localRotation = Quaternion.Euler(arrowRotation1);
 	}
 
-	// PERK WINDOW
+
+	// PERK WINDOW // SETTING Throw
 	public void SkipPerks()
 	{
-		leftSideWindow.SetActive (false);
-		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "And now! Throwing weapons!";
-        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
-        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipThrowPreview());
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (perkPanel, tmpCard);
-
 		currentShop++;
 		shopController.ActivateShop (currentShop);
-		SetArrowPosition ();
-		arrow.gameObject.SetActive (true);
-	}
 
-	// THROW PREVIEW
-	public void SkipThrowPreview()
-	{
-		mainWindow.SetActive (false);
-		leftSideWindow.SetActive (true);
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipThrow());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Throwing weapons vary in their damage as swords! Beware of Sven!";
-        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
-        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "throw weapon damage";
+
+		LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
 		CardToFrontPlan (throwPanel, 11);
+		tmpButton.onClick.AddListener(SkipThrow);
 
-		arrow.gameObject.SetActive (false);
+		tmpCard.GetComponentInChildren<SkinStatsPanel> ().HighliteStat ();
+		cardArrow.transform.localPosition = arrowPosition2;
+		cardArrow.transform.localRotation = Quaternion.Euler(arrowRotation2);
+
 	}
 
+	// THROW WINDOW // SETTING GEMS
 	public void SkipThrow()
 	{
-		leftSideWindow.SetActive (false);
-		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "Geeeeeeems!";
-        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
-        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipGemsPreview());
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (throwPanel, tmpCard);
-		throwSwipeMenu.UpdateThrowCards ();
-
 		currentShop++;
 		shopController.ActivateShop (currentShop);
-		SetArrowPosition ();
-		arrow.gameObject.SetActive (true);
-	}
 
-	public void SkipGemsPreview()
-	{
-		mainWindow.SetActive (false);
-		leftSideWindow.SetActive (true);
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => SkipGems());
-		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "You can buy everything in this game with Gems!";
-        LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
-        fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 210);
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "earn more crystals";
+
+		LocalizationManager.Instance.UpdateLocaliztion(leftSideWindowText);
 		CardToFrontPlan (gemsPanel, 1);
+		tmpButton.onClick.AddListener(SkipGems);
 
-		arrow.gameObject.SetActive (false);
+		cardArrow.transform.localPosition = arrowPosition3;
+		cardArrow.transform.localRotation = Quaternion.Euler(arrowRotation1);
 	}
 
+
+	// GEMS WINDOW // setting HP Potion
 	public void SkipGems()
 	{
-		leftSideWindow.SetActive (false);
-		mainWindow.SetActive (true);
-		mainWindow.GetComponentsInChildren<Text>()[0].text = "Lets buy Health Potion!";
-        LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
-        mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		mainWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => BuyHealtPot());
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
 		CardToBasePlan (gemsPanel, tmpCard);
-		
-
 		currentShop = 2;
 		shopController.ActivateShop (currentShop);
-		SetArrowPosition ();
-		arrow.gameObject.SetActive (true);
-	}
-
-	public void BuyHealtPot()
-	{
 		mainWindow.SetActive (false);
-		arrow.gameObject.SetActive (false);
-		//leftSideWindow.SetActive (true);
-		//leftSideWindow.transform.localPosition = new Vector3 (0, 0, 0);
-		//leftSideWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
-		//leftSideWindow.GetComponentInChildren<Button> ().onClick.AddListener (() => Zag());
-		//leftSideWindow.GetComponentsInChildren<Text>()[0].text = "Now buy Health Pot";
-		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 150);
+		topArrow.gameObject.SetActive (false);
+
+		leftSideWindow.SetActive (true);
+		leftSideWindow.transform.localPosition = new Vector3 (85, 0, 0);
+
+		leftSideWindow.GetComponentsInChildren<Text>()[0].text = "now get some potions for free!";
+		fade.GetComponent<Image> ().color = new Color32 (0, 0, 0, 200);
+
+		LocalizationManager.Instance.UpdateLocaliztion (leftSideWindow.GetComponentsInChildren<Text>()[0]);
+		cardArrow.SetActive (true);
+		cardArrow.transform.localPosition = arrowPosition4;
+		cardArrow.transform.localRotation = Quaternion.Euler (arrowRotation2);
+
 		tmpCard = GameObject.Instantiate(itemsPanel.transform.GetChild (0).gameObject) as GameObject;
 		tmpCard.transform.transform.position = itemsPanel.transform.GetChild (0).gameObject.transform.position;
 		tmpCard.gameObject.transform.SetParent (frontPlan.transform);
@@ -370,21 +314,28 @@ public class ShopTutorial : MonoBehaviour
 
 		tmpCard.GetComponentsInChildren<Button> () [0].onClick.AddListener(() => BuyItemWindowMenu());
 		tmpCard.GetComponentsInChildren<Button> () [1].onClick.AddListener(() => BuyItemWindowMenu());
+
+		tmpCard.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text>().text = "free shop";
+		LocalizationManager.Instance.UpdateLocaliztion (tmpCard.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
 	}
 
 	public void BuyItemWindowMenu()
 	{
 		Destroy (tmpCard);
+		cardArrow.SetActive (false);
 		buyItemMenu.transform.SetParent (frontPlan.transform);
 		leftSideWindow.SetActive (false);
-		closeByuItemMenuButton.SetActive (false);
+		closeByuItemMenuButton1.SetActive (false);
+		closeByuItemMenuButton2.SetActive (false);
 
 		buyByCrystalsButton.GetComponent<Button> ().onClick.RemoveAllListeners ();
 		buyByCrystalsButton.GetComponent<Image> ().color = new Color32 (147,147,147,255);
 		buyByCrystalsButton.GetComponentInChildren<Text> ().color = new Color32 (147,147,147,255);
 
 		buyByCoinsButton.GetComponent<Button> ().onClick.RemoveAllListeners ();
-		buyByCoinsButton.GetComponentInChildren<Text>().text = "Free";
+		buyByCoinsButton.GetComponentInChildren<Text>().text = "0";
+		LocalizationManager.Instance.UpdateLocaliztion (buyByCoinsButton.GetComponentInChildren<Text>());
+
 		buyByCoinsButton.GetComponent<Button> ().onClick.AddListener (() => Inventory.Instance.BuyItem("HealthPot", 3, "Free", Inventory.Instance.GetCoinCost("HealthPot")));
 		buyByCoinsButton.GetComponent<Button> ().onClick.AddListener (() => EndOfTutorial());
 
@@ -396,12 +347,17 @@ public class ShopTutorial : MonoBehaviour
 		buyByCrystalsButton.GetComponentInChildren<Text> ().color = new Color32 (255,255,255,255);
 		buyByCoinsButton.GetComponent<Button> ().onClick.RemoveAllListeners ();
 		buyByCrystalsButton.GetComponent<Button> ().onClick.RemoveAllListeners ();
+		closeByuItemMenuButton1.SetActive (true);
+		closeByuItemMenuButton2.SetActive (true);
 
 		buyItemMenu.transform.SetParent (itemSwipeMenu.gameObject.transform);
 		buyItemMenu.SetActive (false);
 		itemsFade.SetActive (false);
 		mainWindow.SetActive (true);
+
+		//mainWindow.GetComponentsInChildren<Text>()[0].text = "Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!";
 		mainWindow.GetComponentsInChildren<Text>()[0].text = "Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!";
+
         LocalizationManager.Instance.UpdateLocaliztion(mainWindowText);
         mainWindow.GetComponentInChildren<Button> ().onClick.RemoveAllListeners ();
 		mainWindow.GetComponentsInChildren<Text>()[1].text = "Close";
@@ -412,8 +368,8 @@ public class ShopTutorial : MonoBehaviour
 
 	public void CloseTutorial()
 	{
-		this.gameObject.SetActive (false);
 		PlayerPrefs.SetInt ("ShopTutorialComplete", 1);
-        DevToDev.Analytics.Tutorial(5);
+		DevToDev.Analytics.Tutorial(5);
+		this.gameObject.SetActive (false);
     }
 }

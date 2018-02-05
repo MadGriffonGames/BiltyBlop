@@ -104,7 +104,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
             }
             else
             {
-                Appodeal.show(Appodeal.REWARDED_VIDEO);
+                ShowRewardedVideoUnityAds();
             }
         }
         else
@@ -183,13 +183,11 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
         if (result == ShowResult.Finished)
         {
             Debug.Log("Video completed - Offer a reward to the player");
-
             isRewardVideoWatched = true;
         }
         else if (result == ShowResult.Skipped)
         {
             Debug.LogWarning("Video was skipped - Do NOT reward the player");
-
         }
         else if (result == ShowResult.Failed)
         {
@@ -210,7 +208,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     bool CanNotShowRewardedVideo()
     {
-        return PlayerPrefs.GetInt("NoAds") == 0 && !Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched;
+        return PlayerPrefs.GetInt("NoAds") == 0 && Application.internetReachability == NetworkReachability.NotReachable;
     }
 
     void InstantiateWarning()

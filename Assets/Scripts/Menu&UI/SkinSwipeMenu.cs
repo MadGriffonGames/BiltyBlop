@@ -89,6 +89,7 @@ public class SkinSwipeMenu : SwipeMenu {
 						skinCardObj.gameObject.GetComponentsInChildren<Image> () [3].color = new Color32 (180,180,180,255);
 					}
 					LocalizationManager.Instance.UpdateLocaliztion (skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
+					LocalizationManager.Instance.UpdateLocaliztion (skinCardObj.gameObject.GetComponentsInChildren<Text>()[0]);
 					skinCardObj.GetComponentInChildren<SkinStatsPanel> ().SetDefendIndicators (skin.armorStat);
 
 

@@ -10,8 +10,8 @@ public class RateUs : MonoBehaviour
     [SerializeField]
     GameObject fade;
 
-    const int FIRST_APPEAR_DELAY = 3;
-    const int REMIND_LATER_DELAY = 2;
+    const int FIRST_APPEAR_DELAY = 5;
+    const int REMIND_LATER_DELAY = 3;
 
     const string IOS_URL = "item-apps://itunes.apple.com/app/idcom.hardslime.kidarian";
     const string ANDROID_URL = "market://details?id=com.hardslime.kidarian";

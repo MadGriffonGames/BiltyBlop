@@ -20,10 +20,6 @@ public class TrollPatrolState : ITrollState
     public void Execute()
     {
         enemy.LocalMove();
-        if (enemy.InMeleeRange)
-        {
-            enemy.ChangeState(new TrollSelfDestroyState());
-        }
         if (enemy.Target != null && enemy.canAttack)
         {
             enemy.ChangeState(new TrollRangeState());

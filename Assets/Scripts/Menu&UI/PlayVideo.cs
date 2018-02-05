@@ -64,7 +64,7 @@ public class PlayVideo : MonoBehaviour
 #if UNITY_IOS
         SoundManager.MuteMusic(false);
 #endif
-		if (SceneManager.GetActiveScene().name == "Level10" || SceneManager.GetActiveScene().name == "Level20")
+		if (SceneManager.GetActiveScene().name == "Level10" || SceneManager.GetActiveScene().name == "Level20" || SceneManager.GetActiveScene().name == "Level30")
 		{
 			UI.Instance.LevelEndUI.SetActive (true);
 		}

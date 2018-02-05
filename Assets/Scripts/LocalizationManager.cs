@@ -23,7 +23,7 @@ public class LocalizationManager : MonoBehaviour
         }
     }
     string pathToJson;
-    string language = "RU";
+    string language;
     string jsonString;
     public Dictionary<string, LocalizedString> translation;
 
@@ -38,12 +38,33 @@ public class LocalizationManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
 
+        if (Application.systemLanguage == SystemLanguage.Russian)
+        {
+            language = "RU";
+        }
+        else
+        {
+            language = "EN";
+        }
+
         if (language != null)
         {
             translation = new Dictionary<string, LocalizedString>();
-            pathToJson = Application.streamingAssetsPath + "/" + language + ".json";
+#if UNITY_EDITOR
+            pathToJson = Application.dataPath + "/StreamingAssets" + "/" + language + ".json";
+			jsonString = File.ReadAllText(pathToJson);
+#elif UNITY_IOS
+            pathToJson = Application.dataPath + "/Raw" + "/" + language + ".json";
             jsonString = File.ReadAllText(pathToJson);
+#elif UNITY_ANDROID
+            pathToJson = "jar:file://" + Application.dataPath + "!/assets/" + language + ".json";
+            WWW www = new WWW(pathToJson);
+            while (!www.isDone) { }
+            jsonString = www.text;
+#endif
             translation = JsonConvert.DeserializeObject<Dictionary<string, LocalizedString>>(jsonString);
+			Debug.Log (translation);
+
         }
     }
 
@@ -55,9 +76,10 @@ public class LocalizationManager : MonoBehaviour
             {
                 if (translation[textField.text].fontSize > 0)
                 {
+					
                     textField.fontSize = translation[textField.text].fontSize;
                 }
-                textField.text = translation[textField.text].text;
+				textField.text = translation [textField.text].text;
             }
             else
             {

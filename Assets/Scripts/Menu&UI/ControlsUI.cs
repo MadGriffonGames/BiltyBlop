@@ -26,6 +26,7 @@ public class ControlsUI : MonoBehaviour
     public void Attack()
     {
         Player.Instance.ButtonAttack();
+        Debug.Log(1);
     }
 
     public void Move(int value)

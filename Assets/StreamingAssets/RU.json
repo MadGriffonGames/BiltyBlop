@@ -61,6 +61,12 @@
 
 // MAIN MENU
 
+	"share":{
+	"text": "ПОДЕЛИТЬСЯ",
+	"fontSize":60
+	},
+
+
 	"loading": {
 	"text": "ЗАГРУЗКА",
 	"fontSize": 0

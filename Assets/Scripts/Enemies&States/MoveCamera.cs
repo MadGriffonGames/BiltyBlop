@@ -19,6 +19,7 @@ public class MoveCamera : MonoBehaviour
     bool isActive = false;
     Vector3 plusVectorY = new Vector3(0, 0.04f, 0);
     Vector3 plusVectorX = new Vector3(0.02f, 0, 0);
+    bool isHolemActive = false;
 
     // Update is called once per frame
     void FixedUpdate ()
@@ -48,7 +49,7 @@ public class MoveCamera : MonoBehaviour
                 
             }
 
-            if (cam.orthographicSize == targetCameraSize && isTargetPointReached())
+            if (cam.orthographicSize == targetCameraSize && isTargetPointReached() && !isHolemActive)
             {
                 StartCoroutine(ActivateHolem());
             }
@@ -71,9 +72,11 @@ public class MoveCamera : MonoBehaviour
 
     IEnumerator ActivateHolem()
     {
+        isHolemActive = true;
         lightning.SetActive(true);
-        SoundManager.PlaySound("lightning_sound1");
+        SoundManager.PlaySound("lightning_sound");
         SoundManager.PlaySound("holem_boss_appearance");
+        Debug.Log("here");
         yield return new WaitForSeconds(0.8f);
         holem.isActivated = true;
         this.gameObject.SetActive(false);

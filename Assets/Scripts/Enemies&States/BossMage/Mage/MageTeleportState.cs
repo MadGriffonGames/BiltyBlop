@@ -41,6 +41,7 @@ public class MageTeleportState : IMageBossState
         if (enemy.armature.animation.lastAnimationName == "idle_teleport" && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.FadeIn("teleport", -1, 1);
+            SoundManager.PlaySound("portal loud");
         }
         if (enemy.armature.animation.lastAnimationName == "teleport" && enemy.armature.animation.isCompleted)
         {

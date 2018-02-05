@@ -55,6 +55,7 @@ public class FireTyplakMeleeState : IFireTyplakState
         if (enemy.armature.animation.lastAnimationName == "red_atk_pre" && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.FadeIn("red_atk", -1, 1);
+            SoundManager.PlaySound("typlak_fire_swosh");
             timer = Time.time;
         }
 

@@ -18,6 +18,7 @@ public class MageDeathState : IMageBossState
     {
         if (!isDead)
         {
+            SoundManager.PlaySound("mage_boss_death");
             isDead = true;
             enemy.mageCollider.enabled = false;
             enemy.damageCollider.enabled = false;

@@ -127,12 +127,13 @@ public class BossHolem : MovingMeleeEnemy
         if (canMove)
         {
             health -= actualDamage;
-
+            SoundManager.PlaySound("holem_takingdamage");
             MakeFX.Instance.MakeHitFX(gameObject.transform.position, new Vector3(1, 1, 1));
             CameraEffect.Shake(0.2f, 0.3f);
             SetHealthbar();
             if (IsDead)
             {
+                SoundManager.PlaySound("stoned3");
                 AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.mobKiller);
 
                 armature.animation.FadeIn("Die", -1, 1);
@@ -208,6 +209,7 @@ public class BossHolem : MovingMeleeEnemy
 
     public void ThrowFireball()
     {
+        SoundManager.PlaySound("vulcan_sound");
         if (this.gameObject.transform.localScale.x > 0)
         {
             GameObject tmp = (GameObject)Instantiate(fireball, transform.position + new Vector3(-2.7f, 1.65f, -5), Quaternion.identity);

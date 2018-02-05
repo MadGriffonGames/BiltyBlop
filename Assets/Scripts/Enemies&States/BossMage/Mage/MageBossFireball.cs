@@ -78,6 +78,8 @@ public class MageBossFireball : MonoBehaviour
             this.transform.position = startTransform.transform.position;
             transform.parent = parent;
             Player.Instance.InvertControls();
+
+            SoundManager.PlaySound("mage_fireball_destroy");
         }
     }
 
@@ -90,6 +92,7 @@ public class MageBossFireball : MonoBehaviour
             this.transform.position = startTransform.transform.position;
             transform.parent = parent;
             Player.Instance.InvertControls();
+            SoundManager.PlaySound("mage_fireball_destroy");
         }
     }
 

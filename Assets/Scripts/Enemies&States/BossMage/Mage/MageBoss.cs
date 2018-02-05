@@ -188,11 +188,8 @@ public class MageBoss : Boss
 
     public void EnableSpikes()
     {
-<<<<<<< HEAD
+
         int rnd = GetRandomPoint();
-=======
-        int rnd = GetRandomPoint();        
->>>>>>> origin/DevA
         for (int i = 0; i < spikes.Length; i++)
         {
             if (i != currentPoint && i != rnd)

@@ -7,6 +7,18 @@ public class FacebookManager : MonoBehaviour
 {
     string shareURL;
     public Text userIdText;
+    [SerializeField]
+    GameObject shareBar;
+    [SerializeField]
+    GameObject fade;
+
+
+    //twitter zone
+    public string twitterNameParameter = "Check this amazing game!";
+    public string twitterDescriptionParam = "";
+    public const string TWITTER_ADDRESS = "http://twitter.com/intent/tweet";
+    private const string TWITTER_LANGUAGE = "en";
+
 
     private void Awake()
     {
@@ -54,13 +66,29 @@ public class FacebookManager : MonoBehaviour
     {
         if (result.Cancelled || !string.IsNullOrEmpty(result.Error))
         {
-            Debug.Log("ShareLing error: " + result.Error);
+            Debug.Log("Sharing error: " + result.Error);
         }
         else if (!string.IsNullOrEmpty(result.PostId))
         {
             Debug.Log(result.PostId);
         }
         else
+        {
             Debug.Log("Share is fine");
+            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 900);
+        }
     }
+
+    public void PressedTwitterButton()
+    {
+        Application.OpenURL(TWITTER_ADDRESS + "?text=" + WWW.EscapeURL(twitterNameParameter + "\n" + twitterDescriptionParam + "\n" + shareURL));
+        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 5);
+    }
+
+    public void PressedShareButton()
+    {
+        fade.SetActive(true);
+        shareBar.SetActive(true);
+    }
+
 }

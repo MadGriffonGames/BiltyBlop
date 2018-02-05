@@ -63,6 +63,12 @@
 	
 	// MAIN MENU
 	
+	"share":{
+	"text": "SHARE",
+	"fontSize":0
+	},
+	
+	
 	"restore\npurchases": {
 	"text": "RESTORE\nPURCHASES",
 	"fontSize": 0

@@ -52,11 +52,11 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        for (int i = 1; i < 21; i++)
+        for (int i = 1; i < 22; i++)
         {
             PlayerPrefs.SetInt("Level" + i.ToString(), 1);
         }
-        PlayerPrefs.SetInt("GeneralStarsCount", 35);
+        AddMoney();
 
 #if UNITY_EDITOR
         Application.targetFrameRate = 1000;

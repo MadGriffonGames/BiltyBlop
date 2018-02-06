@@ -45,7 +45,7 @@ public abstract class Character : MonoBehaviour
     public List<string> damageSources;
 
     [SerializeField]
-    protected float movementSpeed = 3.0f;
+    public float movementSpeed = 3.0f;
     [HideInInspector]
     public bool facingRight;//check direction(true if we look right)
     [HideInInspector]

@@ -77,7 +77,6 @@ public class MoveCamera : MonoBehaviour
         lightning.SetActive(true);
         SoundManager.PlaySound("lightning_sound");
         SoundManager.PlaySound("holem_boss_appearance");
-        Debug.Log("here");
         yield return new WaitForSeconds(0.8f);
         holem.isActivated = true;
         this.gameObject.SetActive(false);

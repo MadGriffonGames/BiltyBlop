@@ -13,7 +13,7 @@ public class SpeedBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            Player.Instance.ExecBonusSpeed(duration);
+            Player.Instance.bonusManager.ExecBonusSpeed(duration);
             MyAnimator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }

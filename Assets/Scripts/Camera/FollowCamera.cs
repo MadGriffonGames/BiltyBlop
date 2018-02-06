@@ -112,7 +112,7 @@ public class FollowCamera : MonoBehaviour
         {
             interpVelocityX = 25;
         }
-        targetPos = transform.position + new Vector3(targetDirection.x * interpVelocityX * Time.deltaTime * Player.Instance.timeScaler, targetDirection.y * interpVelocityY * Time.deltaTime * Player.Instance.timeScaler, 0);
+        targetPos = transform.position + new Vector3(targetDirection.x * interpVelocityX * Time.deltaTime * Player.Instance.bonusManager.timeScaler, targetDirection.y * interpVelocityY * Time.deltaTime * Player.Instance.bonusManager.timeScaler, 0);
         transform.position = Vector2.Lerp(transform.position, targetPos, 0.05f);
         transform.position = new Vector3(transform.position.x, transform.position.y, -20); // костыльный сет Z на позицмию камеры.
     }
@@ -141,7 +141,7 @@ public class FollowCamera : MonoBehaviour
         {
             interpVelocityX = 25;
         }
-        targetPos = transform.position + new Vector3(targetDirection.x * interpVelocityX * Time.deltaTime * Player.Instance.timeScaler, targetDirection.y * interpVelocityY * Time.deltaTime * Player.Instance.timeScaler, 0);
+        targetPos = transform.position + new Vector3(targetDirection.x * interpVelocityX * Time.deltaTime * Player.Instance.bonusManager.timeScaler, targetDirection.y * interpVelocityY * Time.deltaTime * Player.Instance.bonusManager.timeScaler, 0);
         transform.position = Vector2.Lerp(transform.position, targetPos, 0.05f);
         transform.position = new Vector3(transform.position.x, transform.position.y, -20); // костыльный сет Z на позицмию камеры.
     }

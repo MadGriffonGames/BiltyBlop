@@ -13,7 +13,7 @@ public class DamageBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            Player.Instance.ExecBonusDamage(duration);
+            Player.Instance.bonusManager.ExecBonusDamage(duration);
             MyAnimator.SetBool("collected", true);
             SoundManager.PlaySound("key_collect");
         }

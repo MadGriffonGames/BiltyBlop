@@ -13,7 +13,7 @@ public class TimeBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            Player.Instance.ExecBonusTime(duration);
+            Player.Instance.bonusManager.ExecBonusTime(duration);
             MyAnimator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }

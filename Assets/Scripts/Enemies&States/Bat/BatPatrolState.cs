@@ -9,6 +9,7 @@ public class BatPatrolState : IBatState
     public void Enter(Bat enemy)
     {
         this.enemy = enemy;
+        enemy.armature.armature.animation.FadeIn("animtion0",-1,-1);
     }
 
     public void Execute()

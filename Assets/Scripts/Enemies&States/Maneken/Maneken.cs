@@ -51,7 +51,7 @@ public class Maneken : MonoBehaviour
             }
             else
             {
-                if (Player.Instance.damageBonusNum > 0)
+                if (Player.Instance.bonusManager.damageBonusNum > 0)
                 {
                     CheckDamageSource(other.tag);
                     StartCoroutine(TakeDamage());

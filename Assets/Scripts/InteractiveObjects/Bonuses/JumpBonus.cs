@@ -13,7 +13,7 @@ public class JumpBonus : Bonus
     {
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
-            Player.Instance.ExecBonusJump(duration);
+            Player.Instance.bonusManager.ExecBonusJump(duration);
             MyAnimator.SetTrigger("collected");
             SoundManager.PlaySound("key_collect");
         }

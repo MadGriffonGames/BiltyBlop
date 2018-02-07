@@ -93,6 +93,10 @@ public class AdsManager : MonoBehaviour
             interstitial.Show();
             RequestInterstitial();
         }
+        else
+        {
+            RequestInterstitial();
+        }
     }
 
     public void ShowRewardedVideo()

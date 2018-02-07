@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        for (int i = 1; i < 22; i++)
+        for (int i = 1; i < 31; i++)
         {
             PlayerPrefs.SetInt("Level" + i.ToString(), 1);
         }

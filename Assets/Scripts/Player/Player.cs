@@ -351,16 +351,18 @@ public class Player : Character
 	{
   		if (damageSources.Contains(other.tag))
 		{
-            int tmpNumber = UnityEngine.Random.Range(0, 100);   // DODGER PERK DETECTION
-            
-            if (tmpNumber > dodgeChance)
+            if (!immortal)
             {
-                if (!AttackCollider.IsTouching(other))
-                    StartCoroutine(TakeDamage());
-            }
-            else
-            {
-                dodgeFx.SetActive(true);
+                int tmpNumber = UnityEngine.Random.Range(1, 101);   // DODGER PERK DETECTION
+                if (tmpNumber > dodgeChance)
+                {
+                    if (!AttackCollider.IsTouching(other))
+                        StartCoroutine(TakeDamage());
+                }
+                else
+                {
+                    dodgeFx.SetActive(true);
+                }
             }
 		}
 

@@ -69,7 +69,7 @@
 
 	"loading": {
 	"text": "ЗАГРУЗКА",
-	"fontSize": 0
+	"fontSize": 160
 	},
 	
 	"level": {
@@ -433,7 +433,7 @@
 	//Level 5
 	
 	"these magic boots gives you super jump": {
-	"text": "ЭТИ МАГИЧЕСКИЕ БОТИНКИ ДЕЮТ ВОЗМОЖНОСТЬ ПРЫГАТЬ ВЫШЕ", 
+	"text": "ЭТИ МАГИЧЕСКИЕ БОТИНКИ ДАЮТ ВОЗМОЖНОСТЬ ПРЫГАТЬ ВЫШЕ", 
 	"fontSize": 19
 	},
 	

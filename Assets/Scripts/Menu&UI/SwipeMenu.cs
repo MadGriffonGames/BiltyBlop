@@ -34,6 +34,14 @@ public class SwipeMenu : MonoBehaviour
 		rightArrow.onClick.AddListener (() => MoveRightButton());
 	}
 
+	public void UpdateButtons()
+	{
+		leftArrow.onClick.RemoveAllListeners ();
+		rightArrow.onClick.RemoveAllListeners ();
+		leftArrow.onClick.AddListener (() => MoveLeftButton());
+		rightArrow.onClick.AddListener (() => MoveRightButton());
+	}
+
     public virtual void Start()
     {
         int buttonCount = buttons.Length;

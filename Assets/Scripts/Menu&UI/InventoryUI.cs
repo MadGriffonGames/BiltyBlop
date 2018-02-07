@@ -81,7 +81,7 @@ public class InventoryUI : MonoBehaviour
 
     void DisactivateInventory()
     {
-        Time.timeScale = Player.Instance.timeBonusNum > 0 ? 0.5f : 1;
+        Time.timeScale = Player.Instance.bonusManager.timeBonusNum > 0 ? 0.5f : 1;
         backpack.sprite = backpackClose;
         isOpen = !isOpen;
         bonusBar.SetActive(false);
@@ -130,7 +130,7 @@ public class InventoryUI : MonoBehaviour
 
     public void ImmortalButton()
     {
-        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS) > 0 && Player.Instance.immortalBonusNum == 0)
+        if (!Player.Instance.bonusManager.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.IMMORTAL_BONUS) > 0 && Player.Instance.bonusManager.immortalBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.IMMORTAL_BONUS);
@@ -142,7 +142,7 @@ public class InventoryUI : MonoBehaviour
 
     public void DamageButton()
     {
-        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS) > 0 && Player.Instance.damageBonusNum == 0)
+        if (!Player.Instance.bonusManager.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.DAMAGE_BONUS) > 0 && Player.Instance.bonusManager.damageBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.DAMAGE_BONUS);
@@ -154,7 +154,7 @@ public class InventoryUI : MonoBehaviour
 
     public void SpeedButton()
     {
-        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS) > 0 && Player.Instance.speedBonusNum == 0)
+        if (!Player.Instance.bonusManager.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.SPEED_BONUS) > 0 && Player.Instance.bonusManager.speedBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.SPEED_BONUS);
@@ -166,7 +166,7 @@ public class InventoryUI : MonoBehaviour
 
     public void TimeButton()
     {
-        if (!Player.Instance.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.TIME_BONUS) > 0 && Player.Instance.timeBonusNum == 0)
+        if (!Player.Instance.bonusManager.IsBonusUsed() && Inventory.Instance.GetItemCount(Inventory.TIME_BONUS) > 0 && Player.Instance.bonusManager.timeBonusNum == 0)
         {
             SoundManager.PlaySound("key_collect");
             Inventory.Instance.UseBonus(Inventory.TIME_BONUS);

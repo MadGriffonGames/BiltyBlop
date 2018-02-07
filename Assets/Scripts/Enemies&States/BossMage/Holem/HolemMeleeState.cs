@@ -70,6 +70,7 @@ public class HolemMeleeState : IHolemState
 
             enemy.armature.animation.timeScale = 1.5f;
             enemy.armature.animation.FadeIn("Spikes_atk_1", -1, 1);
+            SoundManager.PlaySound("holem_spikes");
             enemy.spikes.SetActive(true);
             canExit = false;
             enemy.isAttacking = true;
@@ -79,6 +80,7 @@ public class HolemMeleeState : IHolemState
         if (enemy.armature.animation.lastAnimationName == "Spikes_atk_1" && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.FadeIn("Spikes_atk_2", -1, 1);
+            SoundManager.PlaySound("holem_earthroll");
         }
         if (enemy.armature.animation.lastAnimationName == "Spikes_atk_2" && enemy.armature.animation.isCompleted)
         {
@@ -96,6 +98,7 @@ public class HolemMeleeState : IHolemState
         if (!attack)
         {
             enemy.armature.animation.FadeIn("attack", -1, 1);
+            SoundManager.PlaySound("holem_swosh");
             enemy.EnableAttackCollider();
             canExit = false;
             enemy.isAttacking = true;

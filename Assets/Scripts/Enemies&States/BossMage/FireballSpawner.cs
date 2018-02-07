@@ -22,6 +22,7 @@ public class FireballSpawner : MonoBehaviour
             for (int i = 0; i < instantiaitePoints.Length; i++)
             {
                 ThrowFireball(i);
+                SoundManager.PlaySound("vulcan_sound");
                 yield return new WaitForSeconds(throwDealy);
             }
         }
@@ -30,6 +31,7 @@ public class FireballSpawner : MonoBehaviour
             for (int i = instantiaitePoints.Length - 1; i >= 0; i--)
             {
                 ThrowFireball(i);
+                SoundManager.PlaySound("vulcan_sound");
                 yield return new WaitForSeconds(throwDealy);
             }
         }

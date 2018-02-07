@@ -56,6 +56,7 @@ public class VulkanFireball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            SoundManager.PlaySound("troll_bomb");
             Blow();
         }
     }
@@ -63,7 +64,6 @@ public class VulkanFireball : MonoBehaviour
     void Blow()
     {
         Vector3 offset = new Vector3(0, 0, 0);
-
         if (transform.rotation.eulerAngles.z <= 270)
         {
             offset = new Vector3(0.4f, 0, 0);

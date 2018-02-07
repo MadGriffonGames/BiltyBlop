@@ -188,12 +188,14 @@ public class MageBoss : Boss
 
     public void EnableSpikes()
     {
+
         int rnd = GetRandomPoint();
         for (int i = 0; i < spikes.Length; i++)
         {
             if (i != currentPoint && i != rnd)
             {
                 spikes[i].SetActive(true);
+                SoundManager.PlaySound("magic_spikes");
             }
         }
     }

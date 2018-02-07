@@ -71,10 +71,8 @@ public class Player : Character
      * Action vars
      */
 
-    const float MOVEMENT_SPEED = 8;
-    const int JUMP_FORCE = 700;
     [SerializeField]
-    private float jumpForce;
+    public float jumpForce;
     [SerializeField]
     public GameObject secretIndication;
     bool isDoubleJumpAllowed;
@@ -110,6 +108,14 @@ public class Player : Character
     }
     [SerializeField]
     GameObject dodgeFx;
+    [HideInInspector]
+    public int attackAnimationCounter;
+    [HideInInspector]
+    public float attackTimer;
+    [HideInInspector]
+    public bool isAttackTimerActive;
+    const float BREAK_COMBO_TIME = 0.75f;
+    
 
     /*
      * Ground Check vars
@@ -133,26 +139,10 @@ public class Player : Character
     /*
      * Bonus vars
      */
-    [HideInInspector]
-    public int speedBonusNum = 0;
-    [HideInInspector]
-    public int immortalBonusNum = 0;
-    [HideInInspector]
-    public int damageBonusNum = 0;
-    [HideInInspector]
-    public int jumpBonusNum = 0;
-    [HideInInspector]
-    public int timeBonusNum = 0;
-    [HideInInspector]
-    public float timeScaler = 1;
-    [HideInInspector]
-    public float timeScalerJump = 1;
-    [HideInInspector]
-    public float timeScalerMove = 1;
 	[SerializeField]
 	public GameObject bonusFXObject;
     [HideInInspector]
-    public Animator bonusFX;
+    public BonusManager bonusManager;
 
     /*
      * Skin Managment
@@ -165,7 +155,8 @@ public class Player : Character
 	 * Perk Managment params
 	 */
 	int dodgeChance; // in %
-	float potionTimeScale;
+    [HideInInspector]
+    public float potionTimeScale;
     [HideInInspector]
     public float coinScale;
     [HideInInspector]
@@ -191,20 +182,17 @@ public class Player : Character
     public override void Start () 
 	{
         base.Start();
-		bonusFX = bonusFXObject.GetComponent<Animator> ();
+		
         if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
         {
             DevToDev.Analytics.Tutorial(-1);
         }
 
-        bonusFX = GetComponentInChildren<Animator>();
+        bonusManager = GetComponent<BonusManager>();
 
         skinSlots = new Slot [9];
-
 		swordIndex = PlayerPrefs.GetInt("SwordDisplayIndex");
 		skinIndex = PlayerPrefs.GetInt ("SkinDisplayIndex");
-		
-
         SetSlots();
         SetIndexes();
 
@@ -230,6 +218,8 @@ public class Player : Character
         checkpointPosition = startPosition;
         lightIntencityCP = FindObjectOfType<Light>().intensity;
 
+        attackAnimationCounter = 0;
+        isAttackTimerActive = false;
         GotKey = false;
         stars = 0;
         lvlCoins = 0;
@@ -261,53 +251,10 @@ public class Player : Character
     void FixedUpdate() 
 	{
         if (!TakingDamage && !IsDead)
-        {           
-            if (Mathf.Abs(mobileInput + playerAxis / 10) <= 1 && playerAxis != 0)
-                mobileInput += playerAxis / 10;
-            else mobileInput = playerAxis;
-            if (!UI.Instance.controlsUI.activeInHierarchy)
-            {
-                mobileInput = 0;
-                playerAxis = 0;
-            }
-
-#if UNITY_EDITOR
-            float horizontal;
-            if (!invertedControls)
-            {
-                horizontal = Input.GetAxis("Horizontal");
-            }
-            else
-            {
-                horizontal = -Input.GetAxis("Horizontal");
-            }
-            HandleMovement(horizontal);
-            Flip(horizontal);
-
-#elif UNITY_ANDROID || UINTY_IOS
-            if (invertedControls)
-	        {
-                HandleMovement(-mobileInput);
-                Flip(-mobileInput);
-	        }
-            else
-            {
-                HandleMovement(mobileInput);
-                Flip(mobileInput);
-            }
-#endif
-            OnGround = IsGrounded();
-
-            if (!Jump && OnGround)
-            {
-                jumpTaps = 0;
-            }
-
-            if ((PlayerPrefs.GetInt("SoundsIsOn") == 0) | (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1)))
-                SoundManager.MakeSteps(false);
-            else if ((PlayerPrefs.GetInt("SoundsIsOn") == 1) | (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround)))
-                SoundManager.MakeSteps(true);
+        {
+            Run();
         }
+
         if (isRewinding)
         {
             if (recording.ContainsKey(TimeController.internalTime))
@@ -320,6 +267,8 @@ public class Player : Character
         {
             currentState.Execute();
         }
+
+        CheckAttackCombo();
     }
 
     public void ChangeState(IPlayerState newState)
@@ -342,13 +291,13 @@ public class Player : Character
 		{
             canJump = true;
 
-            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * bonusManager.timeScalerMove, myRigidbody.velocity.y);
         }
         else
-            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * timeScalerMove, myRigidbody.velocity.y);
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed * bonusManager.timeScalerMove, myRigidbody.velocity.y);
         if (OnGround && Jump &&  Mathf.Abs(myRigidbody.velocity.y) < 0.5 )
         {
-            myRigidbody.AddForce(new Vector2(0, jumpForce * timeScalerJump));
+            myRigidbody.AddForce(new Vector2(0, jumpForce * bonusManager.timeScalerJump));
             myRigidbody.velocity = new Vector2(0, 0);
         }
         else if (!OnGround && DoubleJump && canJump && myRigidbody.velocity.y < 6.5f && isDoubleJumpAllowed)
@@ -357,7 +306,7 @@ public class Player : Character
             {
                 myRigidbody.velocity = new Vector2(0, 0);
             }
-            myRigidbody.AddForce(new Vector2(0, (jumpForce * 0.45f) * timeScalerJump));
+            myRigidbody.AddForce(new Vector2(0, (jumpForce * 0.45f) * bonusManager.timeScalerJump));
             myArmature.animation.FadeIn("double_jump_start", -1, 1);
             canJump = false;
             DoubleJump = false;
@@ -549,7 +498,7 @@ public class Player : Character
                     DevToDev.Analytics.CustomEvent("#DEATH in " + GameManager.currentLvl);
                     ChangeState(new PlayerDeathState());
                     myRigidbody.velocity = Vector2.zero;
-					bonusFX.SetTrigger ("reset");
+                    bonusManager.bonusFX.SetTrigger ("reset");
 					bonusFXObject.SetActive (false);            
                 }
                 yield return null;
@@ -710,172 +659,6 @@ public class Player : Character
     }
 
     /*
-     * Bonus functions
-     */
-
-    public void ExecBonusImmortal(float duration)
-    {
-		bonusFXObject.SetActive (true);
-        StartCoroutine(ImmortalBonus(duration));
-		MakeFX.Instance.MakeImmortalBonus(duration * potionTimeScale);
-		bonusFX.SetTrigger ("immortal");
-    }
-
-    public IEnumerator ImmortalBonus(float duration)
-    {
-        immortalBonusNum++;
-        immortal = true;
-		yield return new WaitForSeconds(duration * potionTimeScale);
-        immortalBonusNum--;
-        if (immortalBonusNum == 0)
-        {
-            immortal = false;
-			bonusFX.SetTrigger ("reset");
-			bonusFXObject.SetActive (false);
-        }
-    }
-
-    public void ExecBonusDamage(float duration)
-    {
-        StartCoroutine(DamageBonus(duration));
-		MakeFX.Instance.MakeDamageBonus(duration * potionTimeScale);
-		bonusFX.SetTrigger ("damage");
-
-    }
-
-    public IEnumerator DamageBonus(float duration)
-    {
-        damageBonusNum++;
-        meleeDamage *= 2;
-		yield return new WaitForSeconds(duration * potionTimeScale);
-        damageBonusNum--;
-        if (damageBonusNum == 0)
-        {
-            meleeDamage /= 2;
-			bonusFX.SetTrigger ("reset");
-			bonusFXObject.SetActive (false);
-        }
-    }
-
-    public void ExecBonusJump(float duration)
-    {
-		bonusFXObject.SetActive (true);
-        StartCoroutine(JumpBonus(duration));
-		MakeFX.Instance.MakeJumpBonus(duration * potionTimeScale);
-		bonusFX.SetTrigger ("jump");
-    }
-
-    public IEnumerator JumpBonus(float duration)
-    {
-        jumpBonusNum++;
-        jumpForce = 1200;
-		yield return new WaitForSeconds(duration * potionTimeScale);
-        jumpBonusNum--;
-        if (jumpBonusNum == 0)
-        {
-            jumpForce = 700;
-			bonusFX.SetTrigger ("reset");
-			bonusFXObject.SetActive (false);
-        }
-    }
-
-    public void ExecBonusSpeed(float duration)
-    {
-		bonusFXObject.SetActive (true);
-        StartCoroutine(SpeedBonus(duration));
-		MakeFX.Instance.MakeSpeedBonus(duration * potionTimeScale);
-		bonusFX.SetTrigger ("speed");
-    }
-
-    public IEnumerator SpeedBonus(float duration)
-    {
-        speedBonusNum++;
-        movementSpeed = 16;
-        myArmature.animation.timeScale = 2;
-        timeScalerMove = 0.7f;
-        Camera cam = Camera.main;
-        CameraEffect cef = cam.GetComponent<CameraEffect>();
-        cef.StartBlur(0.35f);
-		yield return new WaitForSeconds(duration * potionTimeScale);
-        speedBonusNum--;
-
-        if (speedBonusNum == 0)
-        {
-            myRigidbody.gravityScale = 3;
-            movementSpeed = 8;
-            myArmature.animation.timeScale = 1;
-            timeScalerMove = 1;
-            cef.StopBlur();
-			bonusFX.SetTrigger ("reset");
-			bonusFXObject.SetActive (false);
-        }
-    }
-
-    public void ExecBonusTime(float duration)
-    {
-		bonusFXObject.SetActive (true);
-        StartCoroutine(TimeBonus(duration));
-		MakeFX.Instance.MakeTimeBonus(duration * potionTimeScale);
-	    bonusFX.SetTrigger ("time");
-    }
-
-    public IEnumerator TimeBonus(float duration)
-    {
-        timeBonusNum++;
-        timeScaler = 1.6f;
-        timeScalerJump = 3f;
-        timeScalerMove = 1.8f;
-        SoundManager.SetPitch(0.5f);
-        myArmature.animation.timeScale = 2f;
-        Time.timeScale = 0.5f;
-        Time.fixedDeltaTime = 0.01f;
-        myRigidbody.gravityScale = 6;
-		yield return new WaitForSeconds(duration * potionTimeScale);
-        timeBonusNum--;
-
-        if (timeBonusNum == 0)
-        {
-            SoundManager.SetPitch(1f);
-            timeScaler = 1;
-            timeScalerJump = 1;
-            timeScalerMove = 1;
-            myArmature.animation.timeScale = 1;
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f;
-            myRigidbody.gravityScale = 3;
-            bonusFX.SetTrigger("reset");
-			bonusFXObject.SetActive (false);
-        }
-    }
-
-    public void ResetBonusValues()
-    {        
-        SoundManager.SetPitch(1f);
-        timeScaler = 1;
-        timeScalerJump = 1;
-        timeScalerMove = 1;
-        Time.timeScale = 1;
-        myRigidbody.gravityScale = 3;
-        immortal = false;
-        meleeDamage = PlayerPrefs.GetInt("SwordAttackStat"); ;
-        movementSpeed = MOVEMENT_SPEED;
-        jumpForce = JUMP_FORCE;
-        myArmature.animation.timeScale = 1;
-        Time.fixedDeltaTime = 0.02000000f;
-        bonusFX.enabled = false;
-    }
-
-    public bool IsBonusUsed()
-    {
-        int tmp = damageBonusNum + immortalBonusNum + speedBonusNum + timeBonusNum;
-        if (tmp > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    /*
      * Skin Managment
      */
 
@@ -1032,6 +815,69 @@ public class Player : Character
         {
             StartCoroutine(Invert());
         }
+    }
+
+    void CheckAttackCombo()
+    {
+        if (isAttackTimerActive)
+        {
+            attackTimer += Time.fixedDeltaTime;
+        }
+        if (attackTimer >= BREAK_COMBO_TIME)
+        {
+            isAttackTimerActive = false;
+            attackTimer = 0;
+            attackAnimationCounter = 0;
+        }
+    }
+
+    void Run()
+    {
+        if (Mathf.Abs(mobileInput + playerAxis / 10) <= 1 && playerAxis != 0)
+            mobileInput += playerAxis / 10;
+        else mobileInput = playerAxis;
+        if (!UI.Instance.controlsUI.activeInHierarchy)
+        {
+            mobileInput = 0;
+            playerAxis = 0;
+        }
+
+#if UNITY_EDITOR
+        float horizontal;
+        if (!invertedControls)
+        {
+            horizontal = Input.GetAxis("Horizontal");
+        }
+        else
+        {
+            horizontal = -Input.GetAxis("Horizontal");
+        }
+        HandleMovement(horizontal);
+        Flip(horizontal);
+
+#elif UNITY_ANDROID || UINTY_IOS
+            if (invertedControls)
+	        {
+                HandleMovement(-mobileInput);
+                Flip(-mobileInput);
+	        }
+            else
+            {
+                HandleMovement(mobileInput);
+                Flip(mobileInput);
+            }
+#endif
+        OnGround = IsGrounded();
+
+        if (!Jump && OnGround)
+        {
+            jumpTaps = 0;
+        }
+
+        if ((PlayerPrefs.GetInt("SoundsIsOn") == 0) | (!OnGround || (Mathf.Abs(myRigidbody.velocity.x) <= 1)))
+            SoundManager.MakeSteps(false);
+        else if ((PlayerPrefs.GetInt("SoundsIsOn") == 1) | (((myRigidbody.velocity.x >= 1) || (myRigidbody.velocity.x <= -1)) && (OnGround)))
+            SoundManager.MakeSteps(true);
     }
 }
 

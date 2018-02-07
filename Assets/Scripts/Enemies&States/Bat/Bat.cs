@@ -15,7 +15,7 @@ public class Bat : MovingMeleeEnemy
     public UnityEngine.Transform[] pathPoints;
     public Vector3[] pathCordinates;
     public int nextPosNum = 0;
-
+    List<Slot> slots;
     
     void Awake()
     {
@@ -27,8 +27,8 @@ public class Bat : MovingMeleeEnemy
     public override void Start()
     {
         base.Start();
-        armature.animation.timeScale = 2f;
-        ChangeState(new BatPatrolState());
+        slots = armature.armature.GetSlots();
+        SetIndexes();
         pathCordinates = new Vector3[pathPoints.Length];
         int i = 0;
         foreach (var point in pathPoints)
@@ -36,6 +36,7 @@ public class Bat : MovingMeleeEnemy
             pathCordinates[i] = pathPoints[i].localPosition;
             i++;
         }
+        ChangeState(new BatPatrolState());
     }
 
     void Update()
@@ -88,6 +89,16 @@ public class Bat : MovingMeleeEnemy
             ResetCoinPack();
 			Health = maxHealth;
 			SetHealthbar();
+        }
+    }
+
+    public void SetIndexes()
+    {
+        int tmp = health > 1 ? 1 : 0;
+        foreach (Slot slot in slots)
+        {
+            slot.displayIndex = tmp;
+            slot.displayController = "none";
         }
     }
 }

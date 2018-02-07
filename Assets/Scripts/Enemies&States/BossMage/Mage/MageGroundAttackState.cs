@@ -25,6 +25,7 @@ public class MageGroundAttackState : IMageBossState
         {
             CameraEffect.Shake(0.5f, 0.3f);
             enemy.EnableSpikes();
+            SoundManager.PlaySound("magic_spikes");
             enemy.ChangeState(new MageIdleState());
         }
     }

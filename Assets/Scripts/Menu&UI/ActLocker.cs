@@ -30,6 +30,8 @@ public class ActLocker : MonoBehaviour
         {
             starsCount += PlayerPrefs.GetInt("Level" + i + "_collects");
         }
+        //DELETE BEFORE RELEASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        starsCount = 35;
 
         PlayerPrefs.SetInt("GeneralStarsCount", starsCount);
 
@@ -38,14 +40,12 @@ public class ActLocker : MonoBehaviour
         if (unlockStarsCount <= PlayerPrefs.GetInt("GeneralStarsCount"))
         {
             collectStars = true;
-
             starsPanel.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt("Level" + unlockLevel) > 0)
         {
             completeLevel = true;
-
             levelPanel.SetActive(false);
         }
 

@@ -13,6 +13,7 @@ public class ShieldFx : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.PlaySound("metall_shield_sound");
         myAnimator.enabled = true;
     }
 

@@ -61,6 +61,12 @@
 
 // MAIN MENU
 
+	"share":{
+	"text": "ПОДЕЛИТЬСЯ",
+	"fontSize":60
+	},
+
+
 	"loading": {
 	"text": "ЗАГРУЗКА",
 	"fontSize": 0
@@ -904,7 +910,7 @@
 
 
 	"ammo maniac":{
-	"text": "МАСТЕР КОЛЧАНА",
+	"text": "СТРЕЛОК",
 	"fontSize": 0
 	},
 	"you have got {0} slots for throwing weapons":{
@@ -928,7 +934,7 @@
 	"fontSize": 10
 	},
 	"potion maniac":{
-	"text": "МАСТЕР ЗЕЛИЙ",
+	"text": "АЛХИМИК",
 	"fontSize": 0
 	},
 	"potions works {0} times longer":{

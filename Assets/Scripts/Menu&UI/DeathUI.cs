@@ -188,7 +188,7 @@ public class DeathUI : MonoBehaviour
     {
         SoundManager.PlayMusic("kid death", false);
 
-        Player.Instance.ResetBonusValues();
+        Player.Instance.bonusManager.ResetBonusValues();
 
         pauseButton.SetActive(false);
         controls.SetActive(false);

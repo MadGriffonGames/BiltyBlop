@@ -15,7 +15,7 @@ public class ImmortalBonus : Bonus
         if (other.transform.CompareTag("Player") && !other.transform.CompareTag("Sword"))
         {
             MyAnimator.SetTrigger("collected");
-            Player.Instance.ExecBonusImmortal(duration);
+            Player.Instance.bonusManager.ExecBonusImmortal(duration);
             SoundManager.PlaySound("key_collect");
         }
     }

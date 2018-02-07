@@ -193,22 +193,22 @@ public class Inventory : MonoBehaviour
         AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.potioner);
         if (bonusType == IMMORTAL_BONUS)
         {
-            Player.Instance.ExecBonusImmortal(IMMORTAL_DURATION);
+            Player.Instance.bonusManager.ExecBonusImmortal(IMMORTAL_DURATION);
             RemoveItem(IMMORTAL_BONUS);
         }
         if (bonusType == DAMAGE_BONUS)
         {
-            Player.Instance.ExecBonusDamage(DAMAGE_DURATION);
+            Player.Instance.bonusManager.ExecBonusDamage(DAMAGE_DURATION);
             RemoveItem(DAMAGE_BONUS);
         }
         if (bonusType == TIME_BONUS)
         {
-            Player.Instance.ExecBonusTime(TIME_DURATION);
+            Player.Instance.bonusManager.ExecBonusTime(TIME_DURATION);
             RemoveItem(TIME_BONUS);
         }
         if (bonusType == SPEED_BONUS)
         {
-            Player.Instance.ExecBonusSpeed(SPEED_DURATION);
+            Player.Instance.bonusManager.ExecBonusSpeed(SPEED_DURATION);
             RemoveItem(SPEED_BONUS);
         }
 

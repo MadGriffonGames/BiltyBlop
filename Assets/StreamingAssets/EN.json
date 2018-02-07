@@ -63,6 +63,12 @@
 	
 	// MAIN MENU
 	
+	
+	"share":{
+	"text": "SHARE",
+	"fontSize":0
+	},
+	
 	"loading": {
 	"text": "LOADING",
 	"fontSize": 0

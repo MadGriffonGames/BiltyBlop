@@ -25,14 +25,8 @@ public class Booster : InteractiveObject
 			SoundManager.PlaySound ("mushroom jump 2");
             MyAnimator.SetBool("Boost", true);
             Player.Instance.myRigidbody.velocity = new Vector2(Player.Instance.myRigidbody.velocity.x, 0);
-            Player.Instance.myRigidbody.AddForce(new Vector2(0, force * Player.Instance.timeScalerJump));
+            Player.Instance.myRigidbody.AddForce(new Vector2(0, force * Player.Instance.bonusManager.timeScalerJump));
         }
-
-        //if (other.transform.CompareTag("MiniSnowBall"))
-        //{
-        //    SnowballTest.Instance.GetComponent<Rigidbody2D>().velocity = new Vector2(SnowballTest.Instance.GetComponent<Rigidbody2D>().velocity.x, 0);
-        //    SnowballTest.Instance.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, force * 5));
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D other)

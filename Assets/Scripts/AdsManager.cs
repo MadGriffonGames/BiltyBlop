@@ -200,15 +200,18 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     void ShowRewardedVideoUnityAds()
     {
-        ShowOptions options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
+        if (Advertisement.IsReady())
+        {
+            ShowOptions options = new ShowOptions();
+            options.resultCallback = HandleShowResult;
 
-        Advertisement.Show("rewardedVideo", options);
+            Advertisement.Show("rewardedVideo", options);
+        }
     }
 
     bool CanNotShowRewardedVideo()
     {
-        return PlayerPrefs.GetInt("NoAds") == 0 && !Appodeal.isLoaded(Appodeal.REWARDED_VIDEO) && !isRewardVideoWatched;
+        return PlayerPrefs.GetInt("NoAds") == 0 && Application.internetReachability == NetworkReachability.NotReachable;
     }
 
     void InstantiateWarning()

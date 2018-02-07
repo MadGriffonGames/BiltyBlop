@@ -178,6 +178,7 @@
 -keep class com.google.android.gms.common.GooglePlayServicesUtil {*;}
 -keep class com.google.android.gms.ads.identifier.** { *; }
 -keep class com.unity.purchasing.** { *; }
+-keep class com.google.unity.** { *; }
 -dontwarn com.google.android.gms.**
 
 # Legacy

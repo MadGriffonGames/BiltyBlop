@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using GoogleMobileAds.Api;
 using UnityEngine.Advertisements;
 using UnityEngine;
 
@@ -31,8 +31,11 @@ public class AdsManager : MonoBehaviour
     public bool isRewardedVideoFailed = false;
     public bool isRewardedVideoShown = false;
 
+    InterstitialAd interstitial;
+
     string appKey;
     string unityGameId;
+    string adMobAppId;
 
     private void Awake()
     {
@@ -47,23 +50,49 @@ public class AdsManager : MonoBehaviour
 #elif UNITY_ANDROID
         appKey = "e98a9abebc918269e0b487f18fd271b1313447f412d4561e";
         unityGameId = "1671703";
+        adMobAppId = "ca-app-pub-7702587672519508~1294300679";
 
 #elif UNITY_IOS
 		appKey = "c9868b381a1331f2a7d3d5b4dd9bc721f403735f82deebff";
         unityGameId = "1671704";
+        adMobAppId = "";
 
 #endif
 
         Advertisement.Initialize(unityGameId);
+        MobileAds.Initialize(adMobAppId);
+
+        RequestInterstitial();
 
         isInterstitialClosed = false;
         isRewardVideoWatched = false;
     }
 
+    private void RequestInterstitial()
+    {
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+#else
+        string adUnitId = "unexpected_platform";
+#endif
+
+        // Initialize an InterstitialAd.
+        interstitial = new InterstitialAd(adUnitId);
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the interstitial with the request.
+        interstitial.LoadAd(request);
+    }
+
     public void ShowAdsAtLevelEnd()
     {
-        fromShowfunction = true;
-        isInterstitialClosed = true;
+        if (interstitial.IsLoaded())
+        {
+            interstitial.Show();
+            RequestInterstitial();
+        }
     }
 
     public void ShowRewardedVideo()
@@ -90,65 +119,6 @@ public class AdsManager : MonoBehaviour
             InstantiateWarning();
         }
 
-    }
-
-    /*
-     * Interstitial callback handlers
-     */
-
-    public void onInterstitialLoaded(bool var)
-    {
-        print("Interstitial loaded");
-    }
-
-    public void onInterstitialFailedToLoad()
-    {
-        print("Interstitial failed");
-        isInterstitialClosed = true;
-    }
-
-    public void onInterstitialShown()
-    {
-        print("Interstitial opened");
-    }
-
-    public void onInterstitialClosed()
-    {
-        isInterstitialClosed = true;
-    }
-
-    public void onInterstitialClicked()
-    {
-        print("Interstitial clicked");
-    }
-
-    /*
-     * Rewarded video callback handlers
-     */
-
-    public void onRewardedVideoLoaded()
-    {
-        print("Video loaded");
-    }
-
-    public void onRewardedVideoFailedToLoad()
-    {
-        isRewardedVideoFailed = true;
-    }
-
-    public void onRewardedVideoShown()
-    {
-        isRewardedVideoShown = true;
-    }
-
-    public void onRewardedVideoClosed(bool var)
-    {
-        print("Video closed");
-    }
-
-    public void onRewardedVideoFinished(int amount, string name)
-    {
-        isRewardVideoWatched = true;
     }
 
     void HandleShowResult(ShowResult result)

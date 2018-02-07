@@ -102,6 +102,7 @@ public class MainMenu : MonoBehaviour
     {
         actCanvas.SetActive(true);
         this.gameObject.SetActive(false);
+        AdsManager.Instance.ShowAdsAtLevelEnd();
     }
 
     public void ToAchievmentMenu()

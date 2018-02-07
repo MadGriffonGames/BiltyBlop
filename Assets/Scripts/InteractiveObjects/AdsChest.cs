@@ -1,10 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using AppodealAds.Unity.Api;
-using AppodealAds.Unity.Common;
+using UnityEngine.Advertisements;
 
 public class AdsChest : MonoBehaviour
 {
@@ -272,7 +269,7 @@ public class AdsChest : MonoBehaviour
                 SoundManager.MuteMusic(true);
             }
 #if UNITY_ANDROID || UNITY_IOS
-            if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO))
+            if (Advertisement.IsReady())
             {
                 isOpened = true;
                 EnableControls(false);

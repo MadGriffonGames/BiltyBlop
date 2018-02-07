@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
-using AppodealAds.Unity.Api;
-using AppodealAds.Unity.Common;
 using UnityEngine;
 
-public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideoAdListener
+public class AdsManager : MonoBehaviour
 {
     private static AdsManager instance;
     public static AdsManager Instance
@@ -56,11 +54,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
 #endif
 
-        Appodeal.initialize(appKey, Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
         Advertisement.Initialize(unityGameId);
-
-        Appodeal.setInterstitialCallbacks(this);
-        Appodeal.setRewardedVideoCallbacks(this);
 
         isInterstitialClosed = false;
         isRewardVideoWatched = false;
@@ -69,28 +63,7 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
     public void ShowAdsAtLevelEnd()
     {
         fromShowfunction = true;
-        if (Appodeal.isPrecache(Appodeal.INTERSTITIAL))
-        {
-            if (PlayerPrefs.GetInt("NoAds") == 0)
-            {
-                Appodeal.show(Appodeal.INTERSTITIAL);
-            }
-            else
-            {
-                isInterstitialClosed = true;
-            }
-        }
-        else
-        {
-            if (PlayerPrefs.GetInt("NoAds") == 0)
-            {
-                Appodeal.show(Appodeal.INTERSTITIAL);
-            }
-            else
-            {
-                isInterstitialClosed = true;
-            }
-        }
+        isInterstitialClosed = true;
     }
 
     public void ShowRewardedVideo()

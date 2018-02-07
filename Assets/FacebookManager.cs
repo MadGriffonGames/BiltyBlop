@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Facebook.Unity;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Collections;
 
 public class FacebookManager : MonoBehaviour
 {
@@ -11,6 +11,12 @@ public class FacebookManager : MonoBehaviour
     GameObject shareBar;
     [SerializeField]
     GameObject fade;
+    [SerializeField]
+    GameObject rewardFade;
+    [SerializeField]
+    GameObject reward;
+    [SerializeField]
+    GameObject giantButton;
 
 
     //twitter zone
@@ -22,6 +28,8 @@ public class FacebookManager : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.SetInt(("FacebookShare"), 0);
+        PlayerPrefs.SetInt(("TwitterShare"), 0);
         if (!FB.IsInitialized)
         {
             FB.Init();
@@ -75,20 +83,50 @@ public class FacebookManager : MonoBehaviour
         else
         {
             Debug.Log("Share is fine");
-            PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 900);
+            if (!PlayerPrefs.HasKey("FacebookShare"))
+            {
+                PlayerPrefs.SetInt(("FacebookShare"), 0);
+            }
+            PlayerPrefs.SetInt("FacebookShare", PlayerPrefs.GetInt("FacebookShare") + 1);
+            if (PlayerPrefs.GetInt("FacebookShare") == 1)
+                StartCoroutine(GiveReward());
         }
     }
 
     public void PressedTwitterButton()
     {
         Application.OpenURL(TWITTER_ADDRESS + "?text=" + WWW.EscapeURL(twitterNameParameter + "\n" + twitterDescriptionParam + "\n" + shareURL));
-        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 5);
+        if (!PlayerPrefs.HasKey("TwitterShare"))
+        {
+            PlayerPrefs.SetInt(("TwitterShare"), 0);
+        }
+        PlayerPrefs.SetInt(("TwitterShare"), PlayerPrefs.GetInt("TwitterShare") + 1);
+        if (PlayerPrefs.GetInt("TwitterShare") == 1)
+            StartCoroutine(GiveReward());
     }
 
     public void PressedShareButton()
     {
         fade.SetActive(true);
         shareBar.SetActive(true);
+    }
+
+    IEnumerator GiveReward()
+    {
+        reward.SetActive(true);
+        rewardFade.SetActive(true);
+        PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") + 5);
+        yield return new WaitForSeconds(1.2f);
+        giantButton.SetActive(true);
+    }
+
+    public void CloseReward()
+    {
+        rewardFade.SetActive(false);
+        reward.SetActive(false);
+        shareBar.SetActive(false);
+        fade.SetActive(false);
+        giantButton.SetActive(false);
     }
 
 }

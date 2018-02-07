@@ -200,10 +200,13 @@ public class AdsManager : MonoBehaviour, IInterstitialAdListener, IRewardedVideo
 
     void ShowRewardedVideoUnityAds()
     {
-        ShowOptions options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
+        if (Advertisement.IsReady())
+        {
+            ShowOptions options = new ShowOptions();
+            options.resultCallback = HandleShowResult;
 
-        Advertisement.Show("rewardedVideo", options);
+            Advertisement.Show("rewardedVideo", options);
+        }
     }
 
     bool CanNotShowRewardedVideo()

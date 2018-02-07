@@ -105,8 +105,10 @@ public class ShopTutorial : MonoBehaviour
         else 
 		{
 			shopController.ActivateShop (0);
+			skinSwipeMenu.UpdateButtons ();
 			this.gameObject.SetActive (false);
 		}
+
         leftSideWindow.SetActive(true);
         leftSideWindowText = leftSideWindow.GetComponentsInChildren<Text>()[0];
         leftSideWindow.SetActive(false);
@@ -370,6 +372,7 @@ public class ShopTutorial : MonoBehaviour
 	{
 		PlayerPrefs.SetInt ("ShopTutorialComplete", 1);
 		DevToDev.Analytics.Tutorial(5);
+		skinSwipeMenu.UpdateButtons ();
 		this.gameObject.SetActive (false);
     }
 }

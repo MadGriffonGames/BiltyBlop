@@ -108,8 +108,8 @@ public class PerksSwipeMenu : SwipeMenu {
                     {
 						// PERK IS FULLY UPGRADED
                         perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "upgraded";
-						perkCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUpgradePerkWindowWithStats(perk.orderNumber));
-						perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUpgradePerkWindowWithStats(perk.orderNumber));
+						perkCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners ();
+						perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners ();
                     }
                     else
                     {
@@ -162,8 +162,8 @@ public class PerksSwipeMenu : SwipeMenu {
 			if (PlayerPrefs.GetInt(perkPrefabs[i].name) == 3)
 			{
 				buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>().text = "upgraded";
-				buttons [perkOrderNumber].GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ShowUpgradePerkWindowWithStats (perkOrderNumber));
-				buttons [perkOrderNumber].GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ShowUpgradePerkWindowWithStats (perkOrderNumber));
+				buttons [perkOrderNumber].GetComponentsInChildren<Button> () [0].onClick.RemoveAllListeners ();
+				buttons [perkOrderNumber].GetComponentsInChildren<Button> () [1].onClick.RemoveAllListeners ();
 			}
 			else
 			{

@@ -65,7 +65,6 @@ public class SwordsSwipeMenu : SwipeMenu {
 						{
 							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 						}
-						LocalizationManager.Instance.UpdateLocaliztion (swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
 						swordCardObj.gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
 						swordCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySword (sword.orderNumber));
 						swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySword (sword.orderNumber));
@@ -80,7 +79,7 @@ public class SwordsSwipeMenu : SwipeMenu {
 						swordCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSwordPrefabBySwordOrder(sword.orderNumber)));
 					}
 					swordCardObj.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
-
+					LocalizationManager.Instance.UpdateLocaliztion (swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());
 					buttons[i] = swordCardObj;
 					break;
 				}

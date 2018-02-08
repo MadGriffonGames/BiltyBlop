@@ -176,7 +176,7 @@ public class AchievementBox : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        PlayerPrefs.SetInt("graver", 26);
         recordName = text.GetComponent<Text>().text;
 
         //PlayerPrefs.SetInt(achievementName + medal, 0);
@@ -440,6 +440,7 @@ public class AchievementBox : MonoBehaviour {
     public void UpdateValue(int level)
     {
         //text.GetComponent<Text>().text = recordName;
+        stat.GetComponent<Text>().text = "";
         stat.GetComponent<Text>().text += PlayerPrefs.GetInt(achievementName) + "/" + PlayerPrefs.GetInt(achievementName + "targetValue" + level.ToString());
     }
 

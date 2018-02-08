@@ -69,12 +69,12 @@
 
 	"loading": {
 	"text": "ЗАГРУЗКА",
-	"fontSize": 160
+	"fontSize": 200
 	},
 	
 	"level": {
 	"text": "УРОВЕНЬ",
-	"fontSize": 0
+	"fontSize": 170
 	},
 	
 	"play": {
@@ -330,7 +330,7 @@
 	},
 	
 	"you found a treasure chest! try to open it": {
-	"text": "ТЫ НАШЕЛ СУНДУК С СКОРОВИЩАМИ! ОТКРОЙ ЕГО", 
+	"text": "ТЫ НАШЕЛ СУНДУК С СОКРОВИЩАМИ! ОТКРОЙ ЕГО", 
 	"fontSize": 22
 	},
 	

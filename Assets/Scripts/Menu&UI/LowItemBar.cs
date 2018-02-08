@@ -30,7 +30,7 @@ public class LowItemBar : MonoBehaviour
 
     public void UpdateMoneyValues()
     {
-        coinTxt.text = PlayerPrefs.GetInt("Coins").ToString();
+        coinTxt.text = (PlayerPrefs.GetInt("Coins") + GameManager.lvlCollectedCoins).ToString();
         crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
     }
 

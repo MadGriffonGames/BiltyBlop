@@ -65,32 +65,39 @@ public class Inventory : MonoBehaviour
 
     public void BuyItem(string itemName, int itemCount, string moneyType, int price)
     {
-            if (moneyType == "Coins")
+        if (moneyType == "Coins")
+        {
+            if (PlayerPrefs.GetInt("Coins") >= price * itemCount)
             {
-				if (PlayerPrefs.GetInt("Coins") >= price * itemCount)
-	                {
-					PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price * itemCount);
-	                    AddItem(itemName, itemCount);
-
-	                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
-	                }
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - price * itemCount);
+                if (GameManager.currentLvl.Contains("Level"))
+                {
+                    GameManager.collectedCoins = PlayerPrefs.GetInt("Coins");
+                }
+                AddItem(itemName, itemCount);
+                
+                AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
             }
-            if (moneyType == "Crystals")
+        }
+        if (moneyType == "Crystals")
+        {
+            if (PlayerPrefs.GetInt("Crystals") >= price * itemCount)
             {
-				if (PlayerPrefs.GetInt("Crystals") >= price * itemCount)
-	                {
-					PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price * itemCount);
-	                    AddItem(itemName, itemCount);
+                PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - price * itemCount);
+                if (GameManager.currentLvl.Contains("Level"))
+                {
+                    UI.Instance.moneyUi.coinTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
+                }
+                AddItem(itemName, itemCount);
 
-	                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
-	                    AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought before " + MetricaManager.Instance.lastUnlockedLevel);
-	                }
+                AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
+                AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought before " + MetricaManager.Instance.lastUnlockedLevel);
             }
-			if (moneyType == "Free") 
-			{
-				AddItem(itemName, itemCount);
-			}
-
+        }
+        if (moneyType == "Free")
+        {
+            AddItem(itemName, itemCount);
+        }
     }
 
     public void AddItem(string itemName, int itemCount) 

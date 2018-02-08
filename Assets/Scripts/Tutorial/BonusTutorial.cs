@@ -26,7 +26,7 @@ public class BonusTutorial : InAppTutorial
 
     private void Update()
     {
-		if (isCollected && (PlayerPrefs.GetInt("Level3") == 0 || PlayerPrefs.GetInt("Level4") == 0) )
+		if (isCollected && ((PlayerPrefs.GetInt("Level3") == 0 || PlayerPrefs.GetInt("Level4") == 0) || GameManager.developmentBuild))
         {
             base.Update();
             if (!InventoryUI.isBonusBarOpen)
@@ -56,7 +56,7 @@ public class BonusTutorial : InAppTutorial
 
         bonusLight.GetComponent<RectTransform>().transform.localPosition = lightPos;
 
-		if (other.gameObject.CompareTag("Player") && currentLevel == "Level2" && PlayerPrefs.GetInt("Level3") == 0)
+		if (other.gameObject.CompareTag("Player") && currentLevel == "Level2" && (PlayerPrefs.GetInt("Level3") == 0 || GameManager.developmentBuild))
         {           
 
             isActive = true;
@@ -93,7 +93,7 @@ public class BonusTutorial : InAppTutorial
             }
 		}
 
-        if (isCollected && currentLevel == "Level3" && PlayerPrefs.GetInt("Level4") == 0)
+        if (isCollected && currentLevel == "Level3" && (PlayerPrefs.GetInt("Level4") == 0 || GameManager.developmentBuild))
         {
             Player.Instance.mobileInput = 0;
 

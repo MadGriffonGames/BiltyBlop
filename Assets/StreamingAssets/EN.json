@@ -204,6 +204,11 @@
 	"fontSize": 0
 	},
 	
+	"get_daily": {
+	"text": "GET", 
+	"fontSize": 0
+	},
+	
 	"to double bonus": {
 	"text": "TO DOUBLE BONUS", 
 	"fontSize": 0

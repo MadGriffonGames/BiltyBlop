@@ -24,20 +24,19 @@ public class AmmoTutorial : InAppTutorial
 
     private void Update()
     {
-		if (isCollected && (PlayerPrefs.GetInt ("Level2") == 0)) {
-			base.Update ();
+        if (isCollected && (PlayerPrefs.GetInt ("Level2") == 0 || GameManager.developmentBuild))
+        {
+            Debug.Log(1);
+            base.Update ();
 
-			if (InventoryUI.isBonusBarOpen && !isActivated) {
+			if (InventoryUI.isBonusBarOpen && !isActivated)
+            {
 				isActivated = true;
 				light.SetActive (false);
 				bonusLight.SetActive (true);
 			}
-			//if (!InventoryUI.isOpen && bonusLight.activeInHierarchy)
-			//{
-			//    isActivated = false;
-			//    isCollected = false;
-			//}
-		} else if (isCollected && PlayerPrefs.GetInt ("Level2") == 1) 
+		}
+        else if (isCollected && PlayerPrefs.GetInt ("Level2") == 1) 
 		{
 			backpackLight.SetActive (false);
 			DisactivateTutorial ();
@@ -53,7 +52,7 @@ public class AmmoTutorial : InAppTutorial
         int currentCount = Inventory.Instance.GetItemCount (Inventory.AMMO);
         string currentLevel = SceneManager.GetActiveScene().name;
 		isCollected = true;
-		if (other.gameObject.CompareTag ("Player") && currentLevel == "Level1" && PlayerPrefs.GetInt ("Level2") == 0) 
+		if (other.gameObject.CompareTag ("Player") && currentLevel == "Level1" && (PlayerPrefs.GetInt("Level2") == 0 || GameManager.developmentBuild)) 
 		{
 			Player.Instance.mobileInput = 0;
 			inventoryFade.SetActive(true);
@@ -61,7 +60,8 @@ public class AmmoTutorial : InAppTutorial
 			currentCount = currentCount > 3 ? 3 : currentCount;
 			Inventory.Instance.AddItem (Inventory.AMMO, 3 - currentCount);
 			DevToDev.Analytics.Tutorial (2);
-		} else 
+		}
+        else 
 		{
 			Inventory.Instance.AddItem (Inventory.AMMO, 1);
 			Inventory.Instance.UseAmmo ();

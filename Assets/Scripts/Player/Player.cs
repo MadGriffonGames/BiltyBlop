@@ -351,7 +351,7 @@ public class Player : Character
 	{
   		if (damageSources.Contains(other.tag))
 		{
-            if (!immortal)
+            if (!immortal && !IsDead)
             {
                 int tmpNumber = UnityEngine.Random.Range(1, 101);   // DODGER PERK DETECTION
                 if (tmpNumber > dodgeChance)

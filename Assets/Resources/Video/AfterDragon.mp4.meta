@@ -44,8 +44,8 @@ VideoClipImporter:
       aspectRatio: 0
       customWidth: 1280
       customHeight: 720
-      bitrateMode: 1
-      spatialQuality: 1
+      bitrateMode: 2
+      spatialQuality: 2
   output:
     format: 1
     settings:
@@ -55,16 +55,16 @@ VideoClipImporter:
       aspectRatio: 0
       customWidth: 1280
       customHeight: 720
-      bitrateMode: 1
-      spatialQuality: 1
-    encodedWidth: 960
-    encodedHeight: 540
+      bitrateMode: 2
+      spatialQuality: 2
+    encodedWidth: 1280
+    encodedHeight: 720
     encodedStartFrame: 0
     encodedEndFrame: 361
     streamedResource:
       source: library/metadata/c1/c1e648c25abfe411d96ba58fe2c11987.resource
       offset: 0
-      size: 2660049
+      size: 6084587
   userData: 
   assetBundleName: 
   assetBundleVariant: 

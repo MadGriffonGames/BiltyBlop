@@ -147,6 +147,11 @@
 	"fontSize": 32
 	},
 	
+	"get_daily": {
+	"text": "ЗАБРАТЬ", 
+	"fontSize": 60
+	},
+	
 	"to double bonus": {
 	"text": "УДВОЙ БОНУС", 
 	"fontSize": 0

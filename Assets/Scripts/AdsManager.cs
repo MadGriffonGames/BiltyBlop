@@ -25,7 +25,6 @@ public class AdsManager : MonoBehaviour
 
     bool isLvlEnd;
 
-    public bool fromShowfunction = false;
     public bool isInterstitialClosed = false;
     public bool isRewardVideoWatched = false;
     public bool isRewardedVideoFailed = false;
@@ -80,10 +79,18 @@ public class AdsManager : MonoBehaviour
 
         // Initialize an InterstitialAd.
         interstitial = new InterstitialAd(adUnitId);
+        // Called when the ad is closed.
+        interstitial.OnAdClosed += HandleOnAdClosed;
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the interstitial with the request.
         interstitial.LoadAd(request);
+    }
+
+    public void HandleOnAdClosed(object sender, System.EventArgs args)
+    {
+        MonoBehaviour.print("HandleAdClosed event received");
+        isInterstitialClosed = true;
     }
 
     public void ShowAdsAtLevelEnd()
@@ -95,7 +102,7 @@ public class AdsManager : MonoBehaviour
         }
         else
         {
-            RequestInterstitial();
+            isInterstitialClosed = true;
         }
     }
 

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     bool isBirded = false;
 
-
+    public static bool developmentBuild = true;
 
     public static int CollectedCoins
     {
@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Level" + i.ToString(), 1);
         }
-        AddMoney();
 
 #if UNITY_EDITOR
         Application.targetFrameRate = 1000;
@@ -82,6 +81,7 @@ public class GameManager : MonoBehaviour
         if (!FindObjectOfType<LocalizationManager>())
         {
             Instantiate(localiztionManager);
+            AddMoney();
         }
 #endif
     }

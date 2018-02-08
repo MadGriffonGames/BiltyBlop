@@ -26,6 +26,9 @@ public class MageDeathState : IMageBossState
         }
         if (enemy.armature.animation.lastAnimationName == "death" && enemy.armature.animation.isCompleted)
         {
+            Player.Instance.stars = 3;
+            GameManager.CollectedCoins += 500;
+            GameManager.lvlCollectedCoins += 500;
             enemy.runeStone.SetActive(true);
         }
     }

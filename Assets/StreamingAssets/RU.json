@@ -144,7 +144,7 @@
 	
 	"get": {
 	"text": "ЗАБРАТЬ", 
-	"fontSize": 60
+	"fontSize": 32
 	},
 	
 	"to double bonus": {

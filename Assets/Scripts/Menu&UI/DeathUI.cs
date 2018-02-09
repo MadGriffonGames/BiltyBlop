@@ -49,7 +49,6 @@ public class DeathUI : MonoBehaviour
         {
             freeCheckpoints.SetActive(false);
         }
-        SoundManager.PlayMusic("kid death", false);
         mainCamera = GameObject.FindWithTag("MainCamera");
         pauseButton.SetActive(false);
         controls.SetActive(false);
@@ -130,7 +129,6 @@ public class DeathUI : MonoBehaviour
             SoundManager.PlayRandomMusic("kid_music", true);
             if (Player.Instance.freeCheckpoints > 0)
             {
-                SoundManager.PlayRandomMusic("kid_music", true);
                 gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
                 Player.Instance.freeCheckpoints--;
 
@@ -185,8 +183,6 @@ public class DeathUI : MonoBehaviour
 
     private void OnEnable()
     {
-        SoundManager.PlayMusic("kid death", false);
-
         Player.Instance.bonusManager.ResetBonusValues();
 
         pauseButton.SetActive(false);

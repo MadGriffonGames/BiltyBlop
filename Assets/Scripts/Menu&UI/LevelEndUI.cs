@@ -36,7 +36,7 @@ public class LevelEndUI : MonoBehaviour
 
         controlsUI.SetActive(false);
         pauseUI.SetActive(false);
-
+        SoundManager.Instance.currentMusic.Stop();
         SoundManager.PlayMusic("victory sound", false);
         fade.SetActive(true);
 

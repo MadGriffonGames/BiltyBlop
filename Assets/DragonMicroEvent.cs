@@ -44,13 +44,15 @@ public class DragonMicroEvent : MonoBehaviour {
             if (armature.animation.lastAnimationName == "WEAKNESS_IDLE")
             {
                 armature.animation.FadeIn("WEAKNESS_END", -1, 1);
+                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * transform.localPosition.x / 73, 1.5f * transform.localPosition.y);
+
             }
 
             if (armature.animation.lastAnimationName == "WEAKNESS_END" && armature.animation.isCompleted)
             {
                 //armature.animation.timeScale = 1.5f;
                 armature.animation.FadeIn("RISE", -1, 1);
-                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x / 73, -1.3f * transform.localPosition.y / 9);
+                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x / 73, 1.3f * transform.localPosition.y / 2);
             }
 
             if (armature.animation.lastAnimationName == "RISE" && armature.animation.isCompleted)

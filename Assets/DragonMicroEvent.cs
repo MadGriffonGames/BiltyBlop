@@ -4,8 +4,8 @@ using UnityEngine;
 using DragonBones;
 
 
-public class DragonMicroEvent : MonoBehaviour
-{
+public class DragonMicroEvent : MonoBehaviour {
+
     [SerializeField]
     GameObject lightningBolt;
     [SerializeField]
@@ -44,12 +44,15 @@ public class DragonMicroEvent : MonoBehaviour
             if (armature.animation.lastAnimationName == "WEAKNESS_IDLE")
             {
                 armature.animation.FadeIn("WEAKNESS_END", -1, 1);
+                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * transform.localPosition.x / 73, 1.5f * transform.localPosition.y);
+
             }
 
             if (armature.animation.lastAnimationName == "WEAKNESS_END" && armature.animation.isCompleted)
             {
+                //armature.animation.timeScale = 1.5f;
                 armature.animation.FadeIn("RISE", -1, 1);
-                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x / 73, 1.3f * transform.localPosition.y / 9);
+                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x / 73, 1.3f * transform.localPosition.y / 2);
             }
 
             if (armature.animation.lastAnimationName == "RISE" && armature.animation.isCompleted)
@@ -60,7 +63,7 @@ public class DragonMicroEvent : MonoBehaviour
             
             if (isUp)
             {
-                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x/70, 1.3f * transform.localPosition.y/10);
+                changableTargetObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2 * transform.localPosition.x/70, -1.3f * transform.localPosition.y/10);
             }
         }
     }
@@ -102,12 +105,41 @@ public class DragonMicroEvent : MonoBehaviour
         i++;
     }
 
+    //private void SetSlots()
+    //{
+
+    //    int i = 0;
+    //    AddSlot(dragon7, ref i);
+    //    AddSlot(dragon5, ref i);
+    //    AddSlot(dragon6, ref i);
+    //    AddSlot(body, ref i);
+    //    AddSlot(dragon3, ref i);
+    //    AddSlot(dragon2, ref i);
+    //    AddSlot(dragon1, ref i);
+    //    AddSlot(dragon0, ref i);
+
+
+    //    for (int j = 0; j < dragonSlots.Length; j++)
+    //    {
+    //        dragonSlots[j].displayIndex = 1;
+    //    }
+
+    //}
+
     void ChangeIndexes()
     {
         foreach (Slot slot in slots)
         {
+            Debug.Log(slot.displayIndex);
             slot.displayIndex = 0;
+            Debug.Log(slot.displayIndex);
         }
+        //for (int j = 0; j < dragonSlots.Length; j++)
+        //{
+        //    Debug.Log(dragonSlots[j].displayIndex);
+        //    dragonSlots[j].displayIndex = 2;
+        //    Debug.Log(dragonSlots[j].displayIndex);
+        //}
     }
 
     IEnumerator ThrowSecondLight()

@@ -33,6 +33,8 @@ public class TimeRewindUI : MonoBehaviour
             TutorialUI.Instance.textBar.color -= new Color(0, 0, 0, TutorialUI.Instance.textBar.color.a);
             TutorialUI.Instance.txt.text = "";
         }
+        //SoundManager.Instance.currentMusic.Stop();
+        //SoundManager.PlayMusic("kid death", false);
 
         if (!PlayerPrefs.HasKey("RewindTimeTutorial") || PlayerPrefs.GetInt("FreeRevives") > 0)
         {
@@ -75,7 +77,8 @@ public class TimeRewindUI : MonoBehaviour
             {
                 PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - CRYSTAL_PRICE);
                 GameManager.crystalTxt.text = PlayerPrefs.GetInt("Crystals").ToString();
-
+                SoundManager.Instance.currentMusic.Stop();
+                SoundManager.PlayRandomMusic("kid_music", true);
                 RewindTime();
             }
             else
@@ -131,6 +134,8 @@ public class TimeRewindUI : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.Instance.currentMusic.Stop();
+        SoundManager.PlayMusic("kid death", false);
         gameOverBar.SetActive(true);
         gameOverBar.GetComponent<Animator>().SetBool("animate", true);
 

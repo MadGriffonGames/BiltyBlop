@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     public string mainFolder = "GameSound";
 	public string soundFolder = "Sounds";
 	public string musicFolder = "Music";
+    public AudioSource currentMusic;
     bool timerOn;
     static float timer;
 
@@ -277,6 +278,7 @@ public class SoundManager : MonoBehaviour
 		au.clip = clip;
 		au.Play();
 		current = au;
+        currentMusic = au;
 	}
 
    

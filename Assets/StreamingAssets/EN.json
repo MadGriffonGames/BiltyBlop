@@ -68,6 +68,11 @@
 	"text": "SHARE",
 	"fontSize":0
 	},
+
+	"share_title":{
+	"text": "SHARE",
+	"fontSize":0
+	},
 	
 	"loading": {
 	"text": "LOADING",

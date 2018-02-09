@@ -31,6 +31,7 @@ public class AdsManager : MonoBehaviour
     public bool isRewardedVideoShown = false;
 
     InterstitialAd interstitial;
+    private RewardBasedVideoAd adMobRewardedVideo;
 
     string appKey;
     string unityGameId;
@@ -62,15 +63,36 @@ public class AdsManager : MonoBehaviour
         MobileAds.Initialize(adMobAppId);
 
         RequestInterstitial();
+        RequestRewardedVideo();
 
         isInterstitialClosed = false;
         isRewardVideoWatched = false;
     }
 
+    void RequestRewardedVideo()
+    {
+        adMobRewardedVideo = RewardBasedVideoAd.Instance;
+
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-7702587672519508/5527360718";
+#elif UNITY_IPHONE
+            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+#else
+            string adUnitId = "unexpected_platform";
+#endif
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Called when the user should be rewarded for watching a video.
+        adMobRewardedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
+        // Load the rewarded video ad with the request.
+        this.adMobRewardedVideo.LoadAd(request, adUnitId);
+    }
+
     private void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "ca-app-pub-7702587672519508/4784645751";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
@@ -85,12 +107,6 @@ public class AdsManager : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         // Load the interstitial with the request.
         interstitial.LoadAd(request);
-    }
-
-    public void HandleOnAdClosed(object sender, System.EventArgs args)
-    {
-        MonoBehaviour.print("HandleAdClosed event received");
-        isInterstitialClosed = true;
     }
 
     public void ShowAdsAtLevelEnd()
@@ -108,28 +124,49 @@ public class AdsManager : MonoBehaviour
 
     public void ShowRewardedVideo()
     {
-        if (PlayerPrefs.GetInt("NoAds") == 0)
-        {
-            int tmp = Random.Range(1, 3);
-            if (tmp == 1)
-            {
-                ShowRewardedVideoUnityAds();
-            }
-            else
-            {
-                ShowRewardedVideoUnityAds();
-            }
-        }
-        else
-        {
-            isRewardVideoWatched = true;
-        }
-
         if (CanNotShowRewardedVideo())
         {
             InstantiateWarning();
         }
-
+        else
+        {
+            if (PlayerPrefs.GetInt("NoAds") == 0)
+            {
+                int tmp = Random.Range(1, 3);
+                if (tmp == 1)
+                {
+                    if (Advertisement.IsReady())
+                    {
+                        UnityAdsShowRewardedVideo();
+                    }
+                    else
+                    {
+                        if (adMobRewardedVideo.IsLoaded())
+                        {
+                            AdMobShowRewardedVideo();
+                        }
+                    }
+                }
+                else
+                {
+                    if (adMobRewardedVideo.IsLoaded())
+                    {
+                        AdMobShowRewardedVideo();
+                    }
+                    else
+                    {
+                        if (Advertisement.IsReady())
+                        {
+                            UnityAdsShowRewardedVideo();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                isRewardVideoWatched = true;
+            }
+        }
     }
 
     void HandleShowResult(ShowResult result)
@@ -149,18 +186,35 @@ public class AdsManager : MonoBehaviour
         }
     }
 
+    public void HandleOnAdClosed(object sender, System.EventArgs args)
+    {
+        MonoBehaviour.print("HandleAdClosed event received");
+        isInterstitialClosed = true;
+    }
+
+    public void HandleRewardBasedVideoRewarded(object sender, Reward args)
+    {
+        isRewardVideoWatched = true;
+
+        string type = args.Type;
+        double amount = args.Amount;
+        MonoBehaviour.print("HandleRewardBasedVideoRewarded event received for " + amount.ToString() + " " + type);
+    }
 
     //other
 
-    void ShowRewardedVideoUnityAds()
+    void UnityAdsShowRewardedVideo()
     {
-        if (Advertisement.IsReady())
-        {
-            ShowOptions options = new ShowOptions();
-            options.resultCallback = HandleShowResult;
+        ShowOptions options = new ShowOptions();
+        options.resultCallback = HandleShowResult;
 
-            Advertisement.Show("rewardedVideo", options);
-        }
+        Advertisement.Show("rewardedVideo", options);
+    }
+
+    void AdMobShowRewardedVideo()
+    {
+        adMobRewardedVideo.Show();
+        RequestRewardedVideo();
     }
 
     bool CanNotShowRewardedVideo()

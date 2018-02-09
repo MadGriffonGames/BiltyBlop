@@ -58,10 +58,10 @@ public class BonusManager : MonoBehaviour
 
     public void ExecBonusDamage(float duration)
     {
+        bonusFXObject.SetActive(true);
         StartCoroutine(DamageBonus(duration));
         MakeFX.Instance.MakeDamageBonus(duration * Player.Instance.potionTimeScale);
         bonusFX.SetTrigger("damage");
-
     }
 
     public IEnumerator DamageBonus(float duration)

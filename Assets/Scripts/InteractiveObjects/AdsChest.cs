@@ -78,8 +78,10 @@ public class AdsChest : MonoBehaviour
             }
             if (musicWasPlaying)
             {
-                musicWasPlaying = false;
-                PlayerPrefs.SetInt("MusicIsOn", 1);
+                SoundManager.PlayRandomMusic("kid_music", true);
+                //musicWasPlaying = false;
+
+                //PlayerPrefs.SetInt("MusicIsOn", 1);
                 SoundManager.MuteMusic(false);
             }
             Time.timeScale = currentTime;
@@ -265,8 +267,9 @@ public class AdsChest : MonoBehaviour
             if (PlayerPrefs.GetInt("MusicIsOn") == 1)
             {
                 musicWasPlaying = true;
-                PlayerPrefs.SetInt("MusicIsOn", 0);
-                SoundManager.MuteMusic(true);
+                //PlayerPrefs.SetInt("MusicIsOn", 0);
+                //SoundManager.MuteMusic(true);
+                SoundManager.Instance.currentMusic.Stop();
             }
 #if UNITY_ANDROID || UNITY_IOS
             if (Advertisement.IsReady())

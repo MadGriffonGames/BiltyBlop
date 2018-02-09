@@ -27,6 +27,7 @@ public class LevelEndUI : MonoBehaviour
 
     void Start ()
     {
+        SoundManager.Instance.StopSteps();
         isButtonPressed = false;
         if (PlayerPrefs.GetInt("NoAds") > 0)
         {

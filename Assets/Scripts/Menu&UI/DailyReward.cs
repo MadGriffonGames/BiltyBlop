@@ -206,8 +206,9 @@ public class DailyReward : MonoBehaviour
             if (musicWasPlaying)
             {
                 musicWasPlaying = false;
-                PlayerPrefs.SetInt("MusicIsOn", 1);
-                SoundManager.MuteMusic(false);
+                SoundManager.PlayRandomMusic("kid_music", true);
+                //PlayerPrefs.SetInt("MusicIsOn", 1);
+                //SoundManager.MuteMusic(false);
             }
             AdsManager.Instance.isRewardVideoWatched = false;
 
@@ -354,8 +355,9 @@ public class DailyReward : MonoBehaviour
         if (PlayerPrefs.GetInt("MusicIsOn") == 1)
         {
             musicWasPlaying = true;
-            PlayerPrefs.SetInt("MusicIsOn", 0);
-            SoundManager.MuteMusic(true);
+            //PlayerPrefs.SetInt("MusicIsOn", 0);
+            //SoundManager.MuteMusic(true);
+            SoundManager.Instance.currentMusic.Stop();
         }
 
 #if UNITY_EDITOR

@@ -17,6 +17,10 @@ public class FacebookManager : MonoBehaviour
     GameObject reward;
     [SerializeField]
     GameObject giantButton;
+    [SerializeField]
+    GameObject freeGiftFB;
+    [SerializeField]
+    GameObject freeGiftTwit;
 
 
     //twitter zone
@@ -24,6 +28,9 @@ public class FacebookManager : MonoBehaviour
     public string twitterDescriptionParam = "";
     public const string TWITTER_ADDRESS = "http://twitter.com/intent/tweet";
     private const string TWITTER_LANGUAGE = "en";
+
+    private const string FACEBOOK_SHARE = "FacebookShare";
+    private const string TWITTER_SHARE = "TwitterShare";
 
 
     private void Awake()
@@ -42,6 +49,19 @@ public class FacebookManager : MonoBehaviour
 #elif UNITY_IOS
         shareURL = "www.kek.com";
 #endif
+    }
+
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt(FACEBOOK_SHARE) > 0)
+        {
+            freeGiftFB.SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt(TWITTER_SHARE) > 0)
+        {
+            freeGiftTwit.SetActive(false);
+        }
     }
 
     public void LogIn()
@@ -81,26 +101,30 @@ public class FacebookManager : MonoBehaviour
         else
         {
             Debug.Log("Share is fine");
-            if (!PlayerPrefs.HasKey("FacebookShare"))
+            if (!PlayerPrefs.HasKey(FACEBOOK_SHARE))
             {
-                PlayerPrefs.SetInt(("FacebookShare"), 0);
+                PlayerPrefs.SetInt((FACEBOOK_SHARE), 0);
             }
-            PlayerPrefs.SetInt("FacebookShare", PlayerPrefs.GetInt("FacebookShare") + 1);
-           // if (PlayerPrefs.GetInt("FacebookShare") == 1)
+            PlayerPrefs.SetInt(FACEBOOK_SHARE, PlayerPrefs.GetInt(FACEBOOK_SHARE) + 1);
+            if (PlayerPrefs.GetInt(FACEBOOK_SHARE) == 1)
+            {
+                freeGiftFB.SetActive(false);
                 StartCoroutine(GiveReward());
+            }
         }
     }
 
     public void PressedTwitterButton()
     {
         Application.OpenURL(TWITTER_ADDRESS + "?text=" + WWW.EscapeURL(twitterNameParameter + "\n" + twitterDescriptionParam + "\n" + shareURL));
-        if (!PlayerPrefs.HasKey("TwitterShare"))
+        if (!PlayerPrefs.HasKey(TWITTER_SHARE))
         {
-            PlayerPrefs.SetInt(("TwitterShare"), 0);
+            PlayerPrefs.SetInt((TWITTER_SHARE), 0);
         }
-        PlayerPrefs.SetInt(("TwitterShare"), PlayerPrefs.GetInt("TwitterShare") + 1);
-        if (PlayerPrefs.GetInt("TwitterShare") == 1)
+        PlayerPrefs.SetInt((TWITTER_SHARE), PlayerPrefs.GetInt(TWITTER_SHARE) + 1);
+        if (PlayerPrefs.GetInt(TWITTER_SHARE) == 1)
         {
+            freeGiftTwit.SetActive(false);
             StartCoroutine(GiveReward());
         }
     }

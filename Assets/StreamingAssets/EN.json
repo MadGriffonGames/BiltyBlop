@@ -481,6 +481,13 @@
 	"fontSize": 20
 	},
 	
+	//Level 7
+	
+	"hit this lever to open the door": {
+	"text": "HIT THIS LEVER TO OPEN THE DOOR", 
+	"fontSize": 30
+	},
+	
 	//Map
 	
 	"it's time for shopping! tap on this button to go to the shop": {

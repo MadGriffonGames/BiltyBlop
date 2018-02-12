@@ -175,23 +175,14 @@ public class AchievementBox : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
-        PlayerPrefs.SetInt("graver", 26);
+	void Start ()
+    {
         recordName = text.GetComponent<Text>().text;
-
-        //PlayerPrefs.SetInt(achievementName + medal, 0);
-        //PlayerPrefs.SetInt(achievementName + btn, 0);
 
         if (!PlayerPrefs.HasKey(achievementName + btn))
             PlayerPrefs.SetInt(achievementName + btn, 0);
         GetInfo();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 
     void GetInfo()
     {

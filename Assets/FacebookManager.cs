@@ -28,8 +28,6 @@ public class FacebookManager : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.SetInt(("FacebookShare"), 0);
-        PlayerPrefs.SetInt(("TwitterShare"), 0);
         if (!FB.IsInitialized)
         {
             FB.Init();
@@ -88,7 +86,7 @@ public class FacebookManager : MonoBehaviour
                 PlayerPrefs.SetInt(("FacebookShare"), 0);
             }
             PlayerPrefs.SetInt("FacebookShare", PlayerPrefs.GetInt("FacebookShare") + 1);
-            if (PlayerPrefs.GetInt("FacebookShare") == 1)
+           // if (PlayerPrefs.GetInt("FacebookShare") == 1)
                 StartCoroutine(GiveReward());
         }
     }
@@ -102,7 +100,9 @@ public class FacebookManager : MonoBehaviour
         }
         PlayerPrefs.SetInt(("TwitterShare"), PlayerPrefs.GetInt("TwitterShare") + 1);
         if (PlayerPrefs.GetInt("TwitterShare") == 1)
+        {
             StartCoroutine(GiveReward());
+        }
     }
 
     public void PressedShareButton()

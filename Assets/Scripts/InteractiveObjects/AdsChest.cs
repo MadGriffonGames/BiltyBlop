@@ -79,9 +79,7 @@ public class AdsChest : MonoBehaviour
             if (musicWasPlaying)
             {
                 SoundManager.PlayRandomMusic("kid_music", true);
-                //musicWasPlaying = false;
 
-                //PlayerPrefs.SetInt("MusicIsOn", 1);
                 SoundManager.MuteMusic(false);
             }
             Player.Instance.mobileInput = 0;

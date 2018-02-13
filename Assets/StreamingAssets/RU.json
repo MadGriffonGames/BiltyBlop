@@ -62,19 +62,23 @@
 // MAIN MENU
 
 	"share":{
+	"text": "РАССКАЖИ\nО НАС",
+	"fontSize":50
+	},
+
+	"share_title":{
 	"text": "ПОДЕЛИТЬСЯ",
 	"fontSize":60
 	},
 
-
 	"loading": {
 	"text": "ЗАГРУЗКА",
-	"fontSize": 160
+	"fontSize": 200
 	},
 	
 	"level": {
 	"text": "УРОВЕНЬ",
-	"fontSize": 0
+	"fontSize": 170
 	},
 	
 	"play": {
@@ -147,6 +151,11 @@
 	"fontSize": 32
 	},
 	
+	"get_daily": {
+	"text": "ЗАБРАТЬ", 
+	"fontSize": 60
+	},
+	
 	"to double bonus": {
 	"text": "УДВОЙ БОНУС", 
 	"fontSize": 0
@@ -189,47 +198,47 @@
 	
 	"potions\npack": {
 	"text": "НАБОР\nЗЕЛИЙ", 
-	"fontSize": 25
+	"fontSize": 28
 	},
 	
 	"ancient\naxe": {
 	"text": "ДРЕВНИЙ\nТОПОР", 
-	"fontSize": 25
+	"fontSize": 28
 	},
 	
 	"no ads": {
 	"text": "НИКАКОЙ\nРЕКЛАМЫ", 
-	"fontSize": 30
+	"fontSize": 28
 	},
 	
 	"3 ammo\nquiver": {
 	"text": "3\nКОЛЧАНА", 
-	"fontSize": 25
+	"fontSize": 28
 	},
 	
 	"60\ncrystals": {
 	"text": "60\nКРИСТАЛОВ", 
-	"fontSize": 25
+	"fontSize": 28
 	},
 	
 	"20 free\nrevives": {
 	"text": "20\nБЕСПЛАТНЫХ\nВОСКРЕШЕНИЙ", 
-	"fontSize": 24
+	"fontSize": 27
 	},
 	
 	"throwing\npizza": {
 	"text": "МЕТАТЕЛЬНАЯ\nПИЦЦА", 
-	"fontSize": 25
+	"fontSize": 28
 	},
 	
 	"greedy\nperk": {
 	"text": "ПЕРК\nЖАДНОСТЬ", 
-	"fontSize": 25
+	"fontSize": 28
 	},
 	
 	"ninjarian\nskin": {
 	"text": "NINJARIAN\nСКИН", 
-	"fontSize": 25
+	"fontSize": 28
 	},
 	
 	"remove ads": {
@@ -325,7 +334,7 @@
 	},
 	
 	"you found a treasure chest! try to open it": {
-	"text": "ТЫ НАШЕЛ СУНДУК С СКОРОВИЩАМИ! ОТКРОЙ ЕГО", 
+	"text": "ТЫ НАШЕЛ СУНДУК С СОКРОВИЩАМИ! ОТКРОЙ ЕГО", 
 	"fontSize": 22
 	},
 	

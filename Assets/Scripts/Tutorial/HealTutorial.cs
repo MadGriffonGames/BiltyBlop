@@ -15,7 +15,7 @@ public class HealTutorial : InAppTutorial
 
     private void Start()
     {
-        if (PlayerPrefs.GetInt("Level2") != 0)
+        if (PlayerPrefs.GetInt("Level2") != 0 && !GameManager.developmentBuild)
         {
             gameObject.SetActive(false);
         }
@@ -31,7 +31,7 @@ public class HealTutorial : InAppTutorial
         inventoryFade.SetActive(true);
 
         string currentLevel = SceneManager.GetActiveScene().name;
-        if (other.gameObject.CompareTag("Player") && currentLevel == "Level1" && PlayerPrefs.GetInt("Level2") == 0)
+        if (other.gameObject.CompareTag("Player") && currentLevel == "Level1" && (PlayerPrefs.GetInt("Level2") == 0 || GameManager.developmentBuild))
         {
             Player.Instance.Health -= 1;
             HealthUI.Instance.SetHealthbar();

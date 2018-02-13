@@ -45,8 +45,6 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     private void Awake()
     {
-        RateUs.IncrementAppEnterCounter();
-
         if (instance != null)
         {
             Destroy(this.gameObject);
@@ -66,6 +64,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
             instance = GetComponent<PurchaseManager>();
             InitializePurchasing();
             DontDestroyOnLoad(this);
+            RateUs.IncrementAppEnterCounter();
         }
     }
 

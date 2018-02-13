@@ -96,7 +96,7 @@ public class SceneTutorial : MonoBehaviour
         string nextLevel = "Level" + (targetLevelNum + 1).ToString();
         string targetLevelPlusTwo = "Level" + (targetLevelNum + 2).ToString();
 
-        return PlayerPrefs.GetString("LastCompletedLevel") == targetLevelName && PlayerPrefs.GetInt(nextLevel) == 1 && PlayerPrefs.GetInt(targetLevelPlusTwo) == 0;
+        return PlayerPrefs.GetString("LastCompletedLevel") == targetLevelName && PlayerPrefs.GetInt(nextLevel) == 1 && (PlayerPrefs.GetInt(targetLevelPlusTwo) == 0 || GameManager.developmentBuild);
     }
 
     public bool isTutorialAvailable()

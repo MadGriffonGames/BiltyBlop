@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     bool isBirded = false;
 
-
+    public static bool developmentBuild = true;
 
     public static int CollectedCoins
     {
@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Level" + i.ToString(), 1);
         }
-        AddMoney();
 
 #if UNITY_EDITOR
         Application.targetFrameRate = 1000;
@@ -82,6 +81,7 @@ public class GameManager : MonoBehaviour
         if (!FindObjectOfType<LocalizationManager>())
         {
             Instantiate(localiztionManager);
+            AddMoney();
         }
 #endif
     }
@@ -115,7 +115,10 @@ public class GameManager : MonoBehaviour
         }
 
         if ((SceneManager.GetActiveScene().name != "MainMenu") && (SceneManager.GetActiveScene().name != "Level10") && (SceneManager.GetActiveScene().name != "Level20") && (SceneManager.GetActiveScene().name != "Level30") && (SceneManager.GetActiveScene().name != "Map") && (SceneManager.GetActiveScene().name != "AchievementMenu") && (SceneManager.GetActiveScene().name != "Shop") && (SceneManager.GetActiveScene().name != "Level1"))
+        {
             SoundManager.PlayRandomMusic("kid_music", true);
+        }
+            
         if (SceneManager.GetActiveScene().name == "Level6")
             SoundManager.PlaySoundLooped("rain sfx");
 

@@ -13,7 +13,7 @@ VideoClipImporter:
   frameRange: 0
   startFrame: -1
   endFrame: -1
-  frameCount: 511
+  frameCount: 509
   frameRate: 29.970029830932617
   colorSpace: 0
   deinterlace: 0
@@ -27,9 +27,27 @@ VideoClipImporter:
   importAudio: 1
   sourceAudioChannelCount: 0200
   sourceAudioSampleRate: 80bb0000
-  targetSettings: {}
+  targetSettings:
+    0:
+      enableTranscoding: 0
+      codec: 0
+      resizeFormat: 0
+      aspectRatio: 0
+      customWidth: 854
+      customHeight: 480
+      bitrateMode: 2
+      spatialQuality: 2
+    7:
+      enableTranscoding: 1
+      codec: 0
+      resizeFormat: 0
+      aspectRatio: 0
+      customWidth: 854
+      customHeight: 480
+      bitrateMode: 2
+      spatialQuality: 2
   output:
-    format: 1
+    format: 0
     settings:
       enableTranscoding: 0
       codec: 0
@@ -42,7 +60,7 @@ VideoClipImporter:
     encodedWidth: 854
     encodedHeight: 480
     encodedStartFrame: 0
-    encodedEndFrame: 511
+    encodedEndFrame: 509
     streamedResource:
       source: 
       offset: 0

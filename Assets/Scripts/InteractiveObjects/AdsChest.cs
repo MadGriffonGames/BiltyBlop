@@ -82,7 +82,6 @@ public class AdsChest : MonoBehaviour
                 PlayerPrefs.SetInt("MusicIsOn", 1);
                 SoundManager.MuteMusic(false);
             }
-            Time.timeScale = currentTime;
             Player.Instance.mobileInput = 0;
             Player.Instance.ChangeState(new PlayerIdleState());
         }
@@ -276,7 +275,6 @@ public class AdsChest : MonoBehaviour
                 Player.Instance.mobileInput = 0;
                 Player.Instance.ChangeState(new PlayerIdleState());
                 currentTime = Time.timeScale; //--------------------------разлочим чуть позже
-                StartCoroutine(StopTime());
             }
 
             

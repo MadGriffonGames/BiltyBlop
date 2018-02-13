@@ -32,10 +32,12 @@ public class UI : MonoBehaviour
     public GameObject skipVideoButton;
 
     public GameObject controlsUI;
+    public MoneyUI moneyUi;
 
     private void Awake()
     {
-        controlsUI = GetComponentInChildren<ControlsUI>().gameObject;     
+        controlsUI = GetComponentInChildren<ControlsUI>().gameObject;
+        moneyUi = GetComponentInChildren<MoneyUI>();
     }
 
     public void EnableGameUI(bool enable)

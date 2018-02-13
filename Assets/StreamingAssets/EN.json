@@ -68,6 +68,11 @@
 	"text": "SHARE",
 	"fontSize":0
 	},
+
+	"share_title":{
+	"text": "SHARE",
+	"fontSize":0
+	},
 	
 	"loading": {
 	"text": "LOADING",
@@ -200,6 +205,11 @@
 	},
 	
 	"get": {
+	"text": "GET", 
+	"fontSize": 0
+	},
+	
+	"get_daily": {
 	"text": "GET", 
 	"fontSize": 0
 	},

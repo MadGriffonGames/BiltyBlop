@@ -52,7 +52,7 @@ public class TimeTutorial : InAppTutorial
         isCollected = true;
 
         bonusLight.GetComponent<RectTransform>().transform.localPosition = lightPos;
-        if (other.gameObject.CompareTag("Player") && PlayerPrefs.GetInt("Level7") == 0)
+        if (other.gameObject.CompareTag("Player") && (PlayerPrefs.GetInt("Level7") == 0 || GameManager.developmentBuild))
         {
             isActive = true;
 

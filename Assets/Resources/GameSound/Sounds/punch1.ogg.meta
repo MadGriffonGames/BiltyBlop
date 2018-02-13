@@ -3,6 +3,7 @@ guid: 5da9469d91034854aa5e35322dfe7254
 timeCreated: 1500375628
 licenseType: Free
 AudioImporter:
+  externalObjects: {}
   serializedVersion: 6
   defaultSettings:
     loadType: 0
@@ -24,7 +25,7 @@ AudioImporter:
       sampleRateSetting: 0
       sampleRateOverride: 44100
       compressionFormat: 1
-      quality: 0.95
+      quality: 0.5
       conversionMode: 0
   forceToMono: 0
   normalize: 1

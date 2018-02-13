@@ -6,7 +6,7 @@ using UnityEngine;
 public class MoneyUI : MonoBehaviour
 {
     [SerializeField]
-    Text crystalTxt;
+    public Text crystalTxt;
     [SerializeField]
-    Text coinTxt;
+    public Text coinTxt;
 }

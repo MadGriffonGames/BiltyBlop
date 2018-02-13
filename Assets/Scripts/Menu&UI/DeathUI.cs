@@ -49,7 +49,6 @@ public class DeathUI : MonoBehaviour
         {
             freeCheckpoints.SetActive(false);
         }
-        SoundManager.PlayMusic("kid death", false);
         mainCamera = GameObject.FindWithTag("MainCamera");
         pauseButton.SetActive(false);
         controls.SetActive(false);
@@ -89,7 +88,7 @@ public class DeathUI : MonoBehaviour
             controls.SetActive(false);
         }
 
-        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
+        if (AdsManager.Instance.isInterstitialClosed)
         {
 			AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
@@ -104,7 +103,6 @@ public class DeathUI : MonoBehaviour
 
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;
-        AdsManager.Instance.fromShowfunction = true;
 
 #elif UNITY_ANDROID
         AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()
@@ -131,7 +129,6 @@ public class DeathUI : MonoBehaviour
             SoundManager.PlayRandomMusic("kid_music", true);
             if (Player.Instance.freeCheckpoints > 0)
             {
-                SoundManager.PlayRandomMusic("kid_music", true);
                 gameOverBar.GetComponent<Animator>().SetTrigger("disappear");
                 Player.Instance.freeCheckpoints--;
 
@@ -186,8 +183,6 @@ public class DeathUI : MonoBehaviour
 
     private void OnEnable()
     {
-        SoundManager.PlayMusic("kid death", false);
-
         Player.Instance.bonusManager.ResetBonusValues();
 
         pauseButton.SetActive(false);

@@ -23,7 +23,7 @@ public class PauseUI : MonoBehaviour
 
     private void Update()
     {
-        if (AdsManager.Instance.isInterstitialClosed && AdsManager.Instance.fromShowfunction)
+        if (AdsManager.Instance.isInterstitialClosed)
         {
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
@@ -60,7 +60,6 @@ public class PauseUI : MonoBehaviour
 
 #if UNITY_EDITOR
         AdsManager.Instance.isInterstitialClosed = true;
-        AdsManager.Instance.fromShowfunction = true;
 
 #elif UNITY_ANDROID
         AdsManager.Instance.ShowAdsAtLevelEnd();//check if ad was showed in update()

@@ -50,11 +50,6 @@ public class PauseUI : MonoBehaviour
         buttonsSetActive(false);
     }
 
-    public void RWRD()
-    {
-        AdsManager.Instance.ShowRewardedVideo();
-    }
-
     public void Restart()
     {
         Time.timeScale = 1;

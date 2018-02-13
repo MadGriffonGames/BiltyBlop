@@ -45,9 +45,7 @@ public class AdsManager : MonoBehaviour
     void Start ()
     {
 
-#if UNITY_EDITOR
-
-#elif UNITY_ANDROID
+#if UNITY_ANDROID
         appKey = "e98a9abebc918269e0b487f18fd271b1313447f412d4561e";
         unityGameId = "1671703";
         adMobAppId = "ca-app-pub-7702587672519508~1294300679";
@@ -55,7 +53,7 @@ public class AdsManager : MonoBehaviour
 #elif UNITY_IOS
 		appKey = "c9868b381a1331f2a7d3d5b4dd9bc721f403735f82deebff";
         unityGameId = "1671704";
-        adMobAppId = "";
+        adMobAppId = "ca-app-pub-7702587672519508~6806924428";
 
 #endif
 
@@ -76,7 +74,7 @@ public class AdsManager : MonoBehaviour
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-7702587672519508/5527360718";
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            string adUnitId = "ca-app-pub-7702587672519508/4520985510";
 #else
             string adUnitId = "unexpected_platform";
 #endif
@@ -94,7 +92,7 @@ public class AdsManager : MonoBehaviour
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-7702587672519508/4784645751";
 #elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+        string adUnitId = "ca-app-pub-7702587672519508/2187779299";
 #else
         string adUnitId = "unexpected_platform";
 #endif

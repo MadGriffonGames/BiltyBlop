@@ -24,7 +24,7 @@ public class ShieldSkeleton : MovingMeleeEnemy
     void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
-        
+        isSkeleton = true;
 
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
@@ -98,6 +98,7 @@ public class ShieldSkeleton : MovingMeleeEnemy
         if (!damaged && posDiference < 0)
         {
             health -= actualDamage;
+            IndicateDamage();
             if (health != 0)
                 SoundManager.PlaySound("skeleton_pain");
             damaged = true;

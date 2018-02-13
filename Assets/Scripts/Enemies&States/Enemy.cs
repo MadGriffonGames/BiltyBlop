@@ -68,6 +68,8 @@ public class Enemy : MonoBehaviour
 
 	public float firstHBScaleX;
 
+    protected bool isSkeleton = false;
+
     private void Awake()
     {
         armature = GetComponent<UnityArmatureComponent>();
@@ -110,7 +112,10 @@ public class Enemy : MonoBehaviour
         {
             CheckDamageSource(other.tag);
             StartCoroutine(TakeDamage());
-            IndicateDamage();
+            if (!isSkeleton)
+            {
+                IndicateDamage();
+            }
         }
     }
 
@@ -211,7 +216,7 @@ public class Enemy : MonoBehaviour
 		//healthBarNew.transform.localScale = new Vector3(healthBarNew.transform.localScale.x * -1, healthBarNew.transform.localScale.y, healthBarNew.transform.localScale.z);
 	}
 
-    void IndicateDamage()
+    protected void IndicateDamage()
     {
         if (gameObject.activeInHierarchy)
         {

@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
 	public string soundFolder = "Sounds";
 	public string musicFolder = "Music";
     public AudioSource currentMusic;
+    public AudioSource stepsAudio;
     bool timerOn;
     static float timer;
 
@@ -376,7 +377,7 @@ public class SoundManager : MonoBehaviour
         }
 
         GameObject stepsObj = new GameObject("Steps");
-        AudioSource stepsAudio = stepsObj.AddComponent<AudioSource>();
+        stepsAudio = stepsObj.AddComponent<AudioSource>();
         stepsObj.transform.parent = transform;
         stepsAudio.playOnAwake = false;
         stepsAudio.loop = true;
@@ -421,4 +422,11 @@ public class SoundManager : MonoBehaviour
         correctName = wrongName.Remove(wrongName.IndexOf("(") - 1);
         return correctName;
     }
+
+    public void StopSteps()
+    {
+        stepsAudio.Stop();
+    }
+
+
 }

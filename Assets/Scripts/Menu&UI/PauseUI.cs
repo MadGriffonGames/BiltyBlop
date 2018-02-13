@@ -41,6 +41,7 @@ public class PauseUI : MonoBehaviour
     {
         Time.timeScale = 0;
         buttonsSetActive(true);
+        SoundManager.Instance.StopSteps();
     }
 
     public void Continue()

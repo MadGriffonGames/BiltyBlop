@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     bool isBirded = false;
 
-    public static bool developmentBuild = true;
+    public static bool developmentBuild = false;
 
     public static int CollectedCoins
     {
@@ -52,10 +52,10 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        for (int i = 1; i < 31; i++)
-        {
-            PlayerPrefs.SetInt("Level" + i.ToString(), 1);
-        }
+        //for (int i = 1; i < 31; i++)
+        //{
+        //    PlayerPrefs.SetInt("Level" + i.ToString(), 1);
+        //}
 
 #if UNITY_EDITOR
         Application.targetFrameRate = 1000;
@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
         if (!FindObjectOfType<LocalizationManager>())
         {
             Instantiate(localiztionManager);
-            AddMoney();
         }
 #endif
     }

@@ -7,6 +7,8 @@ public class EvilFlower : MeleeEnemy
 {
     private IEvilFlowerState currentState;
     [SerializeField]
+    GameObject slots;
+    [SerializeField]
     private GameObject leafParticle;
 
     [SerializeField]
@@ -29,6 +31,7 @@ public class EvilFlower : MeleeEnemy
         ChangeState(new EvilFlowerIdleState());
 		//SetHealthbar ();
         Physics2D.IgnoreCollision(enemySight.GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
+        //mrs[0].material.SetColor("_Color", new Color(0.75f, 0, 0, 1));
 
         isAttacked = false;
     }

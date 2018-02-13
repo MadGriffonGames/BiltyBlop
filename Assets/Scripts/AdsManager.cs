@@ -124,6 +124,7 @@ public class AdsManager : MonoBehaviour
 
     public void ShowRewardedVideo()
     {
+        Debug.Log(Advertisement.IsReady());
         if (CanNotShowRewardedVideo())
         {
             InstantiateWarning();
@@ -133,8 +134,10 @@ public class AdsManager : MonoBehaviour
             if (PlayerPrefs.GetInt("NoAds") == 0)
             {
                 int tmp = Random.Range(1, 3);
+                Debug.Log(tmp);
                 if (tmp == 1)
                 {
+                    Debug.Log("Unity");
                     if (Advertisement.IsReady())
                     {
                         UnityAdsShowRewardedVideo();
@@ -143,6 +146,7 @@ public class AdsManager : MonoBehaviour
                     {
                         if (adMobRewardedVideo.IsLoaded())
                         {
+                            Debug.Log("AdMob");
                             AdMobShowRewardedVideo();
                         }
                     }
@@ -151,10 +155,12 @@ public class AdsManager : MonoBehaviour
                 {
                     if (adMobRewardedVideo.IsLoaded())
                     {
+                        Debug.Log("AdMob");
                         AdMobShowRewardedVideo();
                     }
                     else
                     {
+                        Debug.Log("Unity");
                         if (Advertisement.IsReady())
                         {
                             UnityAdsShowRewardedVideo();

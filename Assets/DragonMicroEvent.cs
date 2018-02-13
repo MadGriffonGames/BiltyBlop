@@ -130,16 +130,8 @@ public class DragonMicroEvent : MonoBehaviour {
     {
         foreach (Slot slot in slots)
         {
-            Debug.Log(slot.displayIndex);
             slot.displayIndex = 0;
-            Debug.Log(slot.displayIndex);
         }
-        //for (int j = 0; j < dragonSlots.Length; j++)
-        //{
-        //    Debug.Log(dragonSlots[j].displayIndex);
-        //    dragonSlots[j].displayIndex = 2;
-        //    Debug.Log(dragonSlots[j].displayIndex);
-        //}
     }
 
     IEnumerator ThrowSecondLight()

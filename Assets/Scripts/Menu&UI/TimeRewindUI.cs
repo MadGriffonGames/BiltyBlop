@@ -36,6 +36,8 @@ public class TimeRewindUI : MonoBehaviour
         //SoundManager.Instance.currentMusic.Stop();
         //SoundManager.PlayMusic("kid death", false);
 
+        SoundManager.Instance.StopSteps();
+
         if (!PlayerPrefs.HasKey("RewindTimeTutorial") || PlayerPrefs.GetInt("FreeRevives") > 0)
         {
             PlayerPrefs.SetInt("RewindTimeTutorial", 1);
@@ -134,6 +136,7 @@ public class TimeRewindUI : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.Instance.StopSteps();
         SoundManager.Instance.currentMusic.Stop();
         SoundManager.PlayMusic("kid death", false);
         gameOverBar.SetActive(true);

@@ -65,6 +65,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
             InitializePurchasing();
             DontDestroyOnLoad(this);
             RateUs.IncrementAppEnterCounter();
+            GameManager.AddCoins(5000);
+            GameManager.AddCrystals(1000);
         }
     }
 
@@ -289,13 +291,13 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 #endif
         foreach (string s in ConsumableProducts) 
 		{
-			//builder.AddProduct (s, ProductType.Consumable);
+			builder.AddProduct (s, ProductType.Consumable);
 		}
 		foreach (string s in NonConsumableProducts) 
 		{
-			//builder.AddProduct (s, ProductType.NonConsumable);
+			builder.AddProduct (s, ProductType.NonConsumable);
 		}
-        //UnityPurchasing.Initialize(this, builder);
+        UnityPurchasing.Initialize(this, builder);
     }
 
     private bool IsInitialized()

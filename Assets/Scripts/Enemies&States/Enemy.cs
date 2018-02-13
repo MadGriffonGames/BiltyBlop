@@ -31,7 +31,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected int health;
 
-	[SerializeField]
+    public List<MeshRenderer> enemyParts;
+
+    [SerializeField]
 	public GameObject healthBarNew;
 
 	[SerializeField]
@@ -99,7 +101,6 @@ public class Enemy : MonoBehaviour
 
     public virtual IEnumerator TakeDamage()
     {
-        Debug.Log(2);
         yield return null;
     }
 
@@ -109,6 +110,7 @@ public class Enemy : MonoBehaviour
         {
             CheckDamageSource(other.tag);
             StartCoroutine(TakeDamage());
+            IndicateDamage();
         }
     }
 
@@ -208,4 +210,38 @@ public class Enemy : MonoBehaviour
 		hpText.transform.localScale = new Vector3 (hpText.transform.localScale.x *-1 ,hpText.transform.localScale.y, hpText.transform.localScale.z);
 		//healthBarNew.transform.localScale = new Vector3(healthBarNew.transform.localScale.x * -1, healthBarNew.transform.localScale.y, healthBarNew.transform.localScale.z);
 	}
+
+    void IndicateDamage()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            for (int i = 0; i < enemyParts.Count; i++)
+            {
+                StartCoroutine(TurnToRed(enemyParts[i]));
+            }
+        }
+    }
+
+    IEnumerator TurnToRed(MeshRenderer part)
+    {
+        part.material.SetColor("_Color", new Color(1, 0.3f, 0.3f, 1));
+        yield return new WaitForSeconds(0.1f);
+        part.material.SetColor("_Color", new Color(1, 1, 1, 1));
+    }
+
+    [ContextMenu("SetMeshRenderer")]
+    void SetMeshRenderer()
+    {
+        MeshRenderer[] tmp;
+        tmp = GetComponentsInChildren<MeshRenderer>();
+
+        for (int i = 0; i < tmp.Length; i++)
+        {
+            if (tmp[i].gameObject.transform.parent.name == "Slots")
+            {
+                enemyParts.Add(tmp[i]);
+            }
+        }
+        Debug.Log(enemyParts.Count);
+    }
 }

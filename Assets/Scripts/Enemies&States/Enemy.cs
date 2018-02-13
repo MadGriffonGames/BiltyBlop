@@ -213,7 +213,6 @@ public class Enemy : MonoBehaviour
 	{
 		GameObject hpText = healthBarNew.gameObject.GetComponentInChildren<TextMesh> ().gameObject;
 		hpText.transform.localScale = new Vector3 (hpText.transform.localScale.x *-1 ,hpText.transform.localScale.y, hpText.transform.localScale.z);
-		//healthBarNew.transform.localScale = new Vector3(healthBarNew.transform.localScale.x * -1, healthBarNew.transform.localScale.y, healthBarNew.transform.localScale.z);
 	}
 
     protected void IndicateDamage()

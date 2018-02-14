@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject ground;
 
+    public Promocodes promo;
+
     public static string nextLevelName;
     public static int lvlCollectedCoins;
     public static List<GameObject> deadEnemies;
@@ -91,6 +93,9 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("NoAds", 0);
         }
+
+
+        //promo.CreateCodes(Promocodes.CODES_COUNT);
 
         isLevel = currentLvl.Contains("Level") ? true : false;
 

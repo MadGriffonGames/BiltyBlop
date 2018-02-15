@@ -30,10 +30,12 @@ public class ActLocker : MonoBehaviour
         {
             starsCount += PlayerPrefs.GetInt("Level" + i + "_collects");
         }
-        //DELETE BEFORE RELEASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        starsCount = 35;
 
-        PlayerPrefs.SetInt("GeneralStarsCount", starsCount);
+        if (GameManager.developmentBuild)
+        {
+            starsCount = 35;
+            PlayerPrefs.SetInt("GeneralStarsCount", starsCount);
+        }
 
         unlockNumber.text = unlockStarsCount.ToString();
 

@@ -1,0 +1,1072 @@
+{
+	"skip": {
+	"text": "ПРОПУСТИТЬ",
+	"fontSize": 22
+	},
+	
+	"get more checkpoints": {
+	"text": "КУПИТЬ БОЛЬШЕ ПОПЫТОК",
+	"fontSize": 30
+	},
+	
+	"buy_death_ui": {
+	"text": "КУПИТЬ",
+	"fontSize": 0
+	},
+	
+	"heal_death_ui": {
+	"text": "ЗДОРОВЬЕ",
+	"fontSize": 0
+	},
+	
+	"ammo_death_ui": {
+	"text": "КОЛЧАН",
+	"fontSize": 0
+	},
+	
+	"immortal_death_ui": {
+	"text": "БЕССМЕРТИЕ",
+	"fontSize": 10
+	},
+	
+	"game over": {
+	"text": "КОНЕЦ ИГРЫ",
+	"fontSize": 55
+	},
+	
+	"revive right now :": {
+	"text": "ВОСКРЕСНИ ПРЯМО СЕЙЧАС:",
+	"fontSize": 0
+	},
+	
+	"free death ui": {
+	"text": "FREE",
+	"fontSize": 0
+	},
+	
+	"pause": {
+	"text": "ПАУЗА",
+	"fontSize": 0
+	},
+	
+	"victory": {
+	"text": "ПОБЕДА",
+	"fontSize": 0
+	},
+	
+	"to 2 bonus": {
+	"text": "УДВОЙ\nБОНУС",
+	"fontSize": 0
+	},
+
+// MAIN MENU
+
+	"share":{
+	"text": "РАССКАЖИ\nО НАС",
+	"fontSize":50
+	},
+
+	"share_title":{
+	"text": "ПОДЕЛИТЬСЯ",
+	"fontSize":60
+	},
+
+	"loading": {
+	"text": "ЗАГРУЗКА",
+	"fontSize": 200
+	},
+	
+	"level": {
+	"text": "УРОВЕНЬ",
+	"fontSize": 170
+	},
+	
+	"play": {
+	"text": "ИГРАТЬ",
+	"fontSize": 85
+	},
+	
+	"day 1": {
+	"text": "ДЕНЬ 1", 
+	"fontSize": 0
+	},
+	
+	"day 2": {
+	"text": "ДЕНЬ 2", 
+	"fontSize": 0
+	},
+	
+	"day 3": {
+	"text": "ДЕНЬ 3", 
+	"fontSize": 0
+	},
+	
+	"day 4": {
+	"text": "ДЕНЬ 4", 
+	"fontSize": 0
+	},
+	
+	"day 5": {
+	"text": "ДЕНЬ 5", 
+	"fontSize": 0
+	},
+	
+	"day 6": {
+	"text": "ДЕНЬ 6", 
+	"fontSize": 0
+	},
+	
+	"day 7": {
+	"text": "ДЕНЬ 7", 
+	"fontSize": 0
+	},
+	
+	"day 8": {
+	"text": "ДЕНЬ 8", 
+	"fontSize": 0
+	},
+	
+	"day 9": {
+	"text": "ДЕНЬ 9", 
+	"fontSize": 0
+	},
+	
+	"day 10": {
+	"text": "ДЕНЬ 10", 
+	"fontSize": 0
+	},
+	
+	"starter pack": {
+	"text": "НАБОР НОВИЧКА", 
+	"fontSize": 45
+	},
+	
+	"hero's choice": {
+	"text": "ВЫБОР ГЕРОЯ", 
+	"fontSize": 45
+	},
+	
+	"get": {
+	"text": "ЗАБРАТЬ", 
+	"fontSize": 32
+	},
+	
+	"get_daily": {
+	"text": "ЗАБРАТЬ", 
+	"fontSize": 60
+	},
+	
+	"to double bonus": {
+	"text": "УДВОЙ БОНУС", 
+	"fontSize": 0
+	},
+	
+	"today bonus": {
+	"text": "БОНУС НА СЕГОДНЯ", 
+	"fontSize": 45
+	},
+	
+	"daily reward": {
+	"text": "БОНУСЫ", 
+	"fontSize": 0
+	},
+	
+	"gifts": {
+	"text": "ПОДАРКИ", 
+	"fontSize": 0
+	},
+	
+	"50 coins": {
+	"text": "50 МОНЕТ", 
+	"fontSize": 0
+	},
+	
+	"1 ammo": {
+	"text": "1 КОЛЧАН", 
+	"fontSize": 0
+	},
+	
+	"random potion": {
+	"text": "1 ЗЕЛЬЕ", 
+	"fontSize": 20
+	},
+	
+	"BUY": {
+	"text": "КУПИТЬ", 
+	"fontSize": 20
+	},
+	
+	"potions\npack": {
+	"text": "НАБОР\nЗЕЛИЙ", 
+	"fontSize": 28
+	},
+	
+	"ancient\naxe": {
+	"text": "ДРЕВНИЙ\nТОПОР", 
+	"fontSize": 28
+	},
+	
+	"no ads": {
+	"text": "НИКАКОЙ\nРЕКЛАМЫ", 
+	"fontSize": 28
+	},
+	
+	"3 ammo\nquiver": {
+	"text": "3\nКОЛЧАНА", 
+	"fontSize": 28
+	},
+	
+	"60\ncrystals": {
+	"text": "60\nКРИСТАЛОВ", 
+	"fontSize": 28
+	},
+	
+	"20 free\nrevives": {
+	"text": "20\nБЕСПЛАТНЫХ\nВОСКРЕШЕНИЙ", 
+	"fontSize": 27
+	},
+	
+	"throwing\npizza": {
+	"text": "МЕТАТЕЛЬНАЯ\nПИЦЦА", 
+	"fontSize": 28
+	},
+	
+	"greedy\nperk": {
+	"text": "ПЕРК\nЖАДНОСТЬ", 
+	"fontSize": 28
+	},
+	
+	"ninjarian\nskin": {
+	"text": "NINJARIAN\nСКИН", 
+	"fontSize": 28
+	},
+	
+	"remove ads": {
+	"text": "БЕЗ РЕКЛАМЫ", 
+	"fontSize": 45
+	},
+	
+	"select episode": {
+	"text": "ВЫБОР ЭПИЗОДА", 
+	"fontSize": 0
+	},
+	
+	"village": {
+	"text": "ДЕРЕВНЯ", 
+	"fontSize": 0
+	},
+	
+	"ice land": {
+	"text": "ЛЕДНИК", 
+	"fontSize": 0
+	},
+	
+	"lava land": {
+	"text": "ПУСТОШЬ", 
+	"fontSize": 38
+	},
+	
+	"coming\nsoon": {
+	"text": "СКОРО", 
+	"fontSize": 0
+	},
+	
+	"to unlock": {
+	"text": "СОБЕРИ", 
+	"fontSize": 0
+	},
+	
+	"complete\nlevel 10\nto unlock": {
+	"text": "ЗАВЕРШИ\nУРОВЕНЬ 10", 
+	"fontSize": 0
+	},
+	
+	"complete\nlevel 20\nto unlock": {
+	"text": "ЗАВЕРШИ\nУРОВЕНЬ 20", 
+	"fontSize": 0
+	},
+	
+	"buy_main": {
+	"text": "КУПИТЬ", 
+	"fontSize": 65
+	},
+	
+	"hero's choise title": {
+	"text": "ВЫБОР ГЕРОЯ", 
+	"fontSize": 65
+	},
+	
+	"starter pack title": {
+	"text": "НАБОР НОВИЧКА", 
+	"fontSize": 50
+	},
+	
+	"only 48 hours": {
+	"text": "ТОЛЬКО 48 ЧАСОВ", 
+	"fontSize": 33
+	},
+	
+	"options": {
+	"text": "ОПЦИИ", 
+	"fontSize": 80
+	},
+	
+	"restore\npurchases": {
+	"text": "ВОССТАНОВИТЬ\nПОКУПКИ", 
+	"fontSize": 40
+	},
+
+	//Level 1
+	
+	"destroy these boxes": {
+	"text": "СЛОМАЙ ЯЩИКИ, УДАРИВ ПО НИМ", 
+	"fontSize": 25
+	},
+	
+	"this key will open an ancient door": {
+	"text": "ЭТОТ КЛЮЧ ОТКРЫВАЕТ ДРЕВНЮЮ ДВЕРЬ", 
+	"fontSize": 22
+	},
+	
+	"here is your first enemy. hit him": {
+	"text": "А ВОТ И ТВОЙ ПЕРВЫЙ ВРАГ! УДАРЬ ЕГО", 
+	"fontSize": 22
+	},
+	
+	"you found a treasure chest! try to open it": {
+	"text": "ТЫ НАШЕЛ СУНДУК С СОКРОВИЩАМИ! ОТКРОЙ ЕГО", 
+	"fontSize": 22
+	},
+	
+	"greetings young warrior! i will teach you on your journey": {
+	"text": "ПРИВЕТСТВУЮ, ЮНЫЙ ВОИН! Я БУДУ ОБУЧАТЬ ТЕБЯ", 
+	"fontSize": 22
+	},
+	
+	"every level contains 3 stars. collect them all!": {
+	"text": "НА КАЖДОМ УРОВНЕ ЕСТЬ 3 ЗВЕЗДЫ. СОБЕРИ ИХ ВСЕ!", 
+	"fontSize": 22
+	},
+	
+	"jump on this mushroom": {
+	"text": "ПРЫГНИ НА ЭТОТ ГРИБ", 
+	"fontSize": 25
+	},
+	
+	"destroy him using throwing weapon": {
+	"text": "СЛОМАЙ МАНЕКЕН, ИСПОЛЬЗУЯ МЕТАТЕЛЬНОЕ ОРУЖИЕ", 
+	"fontSize": 22
+	},
+	
+	"destroy this maneken using your sword": {
+	"text": "СЛОМАЙ МАНЕКЕН С ПОМОЩЬЮ МЕЧА", 
+	"fontSize": 22
+	},
+	
+	"you got your first item! tap to backpack to open it": {
+	"text": "ТЫ НАШЕЛ ЗЕЛЬЕ! НАЖМИ НА РЮКЗАК, ЧТОБЫ ОТКРЫТЬ ЕГО", 
+	"fontSize": 20
+	},
+	
+	"this potion restores one health point. tap to use it": {
+	"text": "ЭТО ЗЕЛЬЕ ВОССТАНАВЛИВАЕТ ОДИН ПУНКТ ЗДОРОВЬЯ. НАЖМИ НА НЕГО, ЧТОБЫ ИСПОЛЬЗОВАТЬ", 
+	"fontSize": 17
+	},
+	
+	"now you can use throwing weapon! open your backpack to get ammo": {
+	"text": "ТЕПЕРЬ ПОПРОБУЕМ МЕТАТЕЛЬНОЕ ОРУЖИЕ! НАЖМИ НА РЮКЗАК, ЧТОБЫ ОТКРЫТЬ ЕГО", 
+	"fontSize": 18
+	},
+	
+	"this item restores your throwing weapons stock to max": {
+	"text": "ЭТОТ ПРЕДМЕТ ПОЛНОСТЬЮ ВОССТАНАВЛИВАЕТ ЗАПАС МЕТАТЕЛЬНОГО ОРУЖИЯ", 
+	"fontSize": 18
+	},
+	
+	//Level 2
+	
+	"beware this flower! he shoots you with a poisoned seed": {
+	"text": "БЕРЕГИСЬ ЭТОГО ЦВЕТКА! ОН ПЛЮЕТСЯ ОТРАВОЙ", 
+	"fontSize": 0
+	},
+	
+	"look at your head! this means that there is a secret nearby": {
+	"text": "ПОСМОТРИ НА СВОЮ ГОЛОВУ! ЭТО ЗНАЧИТ, ЧТО ГДЕ-ТО НЕПОДАЛЕКУ ЕСТЬ СЕКРЕТ", 
+	"fontSize": 18
+	},
+	
+	"try to run through this wall": {
+	"text": "ПОПРОБУЙ ПРОБЕЖАТЬ ЧЕРЕЗ ЭТУ СТЕНУ", 
+	"fontSize": 25
+	},
+	
+	"this potion gives you immortal for a short time! open your backpack to use it": {
+	"text": "ЭТО ЗЕЛЬЕ ДАСТ ТЕБЕ БЕССМЕРТИЕ НА НЕБОЛЬШОЕ ВРЕМЯ. ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 16
+	},
+	
+	"tap to potions button, then tap to potion to use it": {
+	"text": "НАЖМИ НА КНОПКУ ВЫБОРА ЗЕЛЬЯ, ЗАТЕМ НА САМО ЗЕЛЬЕ", 
+	"fontSize": 20
+	},
+	
+	"jump over these blades as they don't move!": {
+	"text": "ПЕРЕПРЫГНИ ЧЕРЕЗ ЭТИ ПИЛЫ, ПОКА ОНИ НЕ ДВИГАЮТСЯ", 
+	"fontSize": 20
+	},
+	
+	"runs beneath these saws until they move!": {
+	"text": "ПРОБЕГИ ПОД ЭТИМИ ПИЛАМИ, ПОКА ОНИ НЕ ДВИГАЮТСЯ", 
+	"fontSize": 20
+	},
+	
+	//Level 3
+	
+	"this is double speed potion! open your backpack to use it": {
+	"text": "ЭТО ЗЕЛЬЕ СКОРОСТИ! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 17
+	},
+	
+	"tap to potions button, then tap to potion, to use it": {
+	"text": "НАЖМИ НА КНОПКУ ВЫБОРА ЗЕЛЬЯ, ЗАТЕМ НА САМО ЗЕЛЬЕ", 
+	"fontSize": 20
+	},
+	
+	//Level 4
+	
+	"you have double damage potion! open your backpack to use it": {
+	"text": "ТЫ НАШЕЛ ЗЕЛЬЕ ДВОЙНОГО УРОНА! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 17
+	},
+	
+	//Level 5
+	
+	"these magic boots gives you super jump": {
+	"text": "ЭТИ МАГИЧЕСКИЕ БОТИНКИ ДАЮТ ВОЗМОЖНОСТЬ ПРЫГАТЬ ВЫШЕ", 
+	"fontSize": 19
+	},
+	
+	//Level 6
+	
+	"this potion gives you slow-motion effect! open your backpack to use it": {
+	"text": "ЭТО ЗЕЛЬЕ ЗАМЕДЛЕНИЯ ВРЕМЕНИ! ОТКРОЙ РЮКЗАК, ЧТОБЫ ИСПОЛЬЗОВАТЬ ЕГО", 
+	"fontSize": 20
+	},
+	
+	//Level 7
+	
+	"hit this lever to open the door": {
+	"text": "УДАРЬ ПО РЫЧАГУ ЧТОБЫ ОТКРЫТЬ ДВЕРЬ", 
+	"fontSize": 24
+	},
+	
+	//Map
+	
+	"it's time for shopping! tap on this button to go to the shop": {
+	"text": "САМОЕ ВРЕМЯ ДЛЯ ШОПИНГА! НАЖМИ НА ЭТУ КНОПКУ, ЧТОБЫ ПЕРЕЙТИ В МАГАЗИН", 
+	"fontSize": 38
+	},
+	
+	"looks like you have new achievement! tap on this button to get your reward": {
+	"text": "ТЫ ПОЛУЧИЛ НОВОЕ ДОСТИЖЕНИЕ! НАЖМИ НА ЭТУ КНОПКУ, ЧТОБЫ ЗАБРАТЬ НАГРАДУ", 
+	"fontSize": 35
+	},
+	
+	"look at this chest! tap on it to get your reward": {
+	"text": "НАЖМИ НА СУНДУК, ЧТОБЫ ЗАБРАТЬ НАГРАДУ ЗА УРОВЕНЬ", 
+	"fontSize": 40
+	},
+	
+	//Achievements
+	
+	"tap on this button to get reward": {
+	"text": "НАЖМИ НА ЭТУ КНОПКУ ЧТОБЫ ПОЛУЧИТЬ НАГРАДУ", 
+	"fontSize": 42
+	},
+	
+	"see achievments menu for details": {
+	"text": "ОТКРОЙ МЕНЮ ДОСТИЖЕНИЙ ДЛЯ ПОДРОБНОСТЕЙ",
+	"fontSize": 9
+	},
+	
+	"achievements": {
+	"text": "ДОСТИЖЕНИЯ",
+	"fontSize": 0
+	},
+	
+	
+	"kill 25 enemies": {
+	"text": "УБЕЙ 25 ВРАГОВ",
+	"fontSize": 0
+	},
+	
+	"kill 300 enemies": {
+	"text": "УБЕЙ 300 ВРАГОВ",
+	"fontSize": 0
+	},
+	
+	"kill 1000 enemies": {
+	"text": "УБЕЙ 1000 ВРАГОВ",
+	"fontSize": 0
+	},
+	
+	"fall in water 5 times": {
+	"text": "УПАДИ В ВОДУ 5 РАЗ НА УРОВНЕ",
+	"fontSize": 0
+	},
+	
+	"start achievement tutorial":{
+	"text": "НАЧНИ ОБУЧЕНИЕ ДОСТИЖЕНИЯМ",
+	"fontSize": 0
+	},
+	
+	"open 10 chests":{
+	"text": "ОТКРОЙ 10 СУНДУКОВ",
+	"fontSize": 0
+	},
+	
+	"open 35 chests":{
+	"text": "ОТКРОЙ 35 СУНДУКОВ",
+	"fontSize": 0
+	},
+	
+	"open 70 chests":{
+	"text": "ОТКРОЙ 70 СУНДУКОВ",
+	"fontSize": 0
+	},
+	
+	"find 5 secret rooms":{
+	"text": "НАЙДИ 5 СЕКРЕТНЫХ КОМНАТ",
+	"fontSize":0
+	},
+	
+	"find 35 secret rooms":{
+	"text": "НАЙДИ 35 СЕКРЕТНЫХ КОМНАТ",
+	"fontSize":0
+	},
+	
+	"find 50 secret rooms":{
+	"text": "НАЙДИ 50 СЕКРЕТНЫХ КОМНАТ",
+	"fontSize":0
+	},
+	
+	"kill second boss":{
+	"text": "УБЕЙ ВТОРОГО БОССА",
+	"fontSize": 0
+	},
+	
+	"find 10 stars":{
+	"text": "НАЙДИ 10 ЗВЕЗД",
+	"fontSize":0
+	},
+	
+	"find 45 stars":{
+	"text": "НАЙДИ 45 ЗВЕЗД",
+	"fontSize":0
+	},
+	
+	"find 90 stars":{
+	"text": "НАЙДИ 90 ЗВЕЗД",
+	"fontSize":0
+	},
+	
+	"kill dragon boss":{
+	"text": "УБЕЙ ДРАКОНА",
+	"fontSize": 0
+	},
+	
+	"make a deal":{
+	"text": "СДЕЛАЙ ПОКУПКУ В МАГАЗИНЕ",
+	"fontSize": 0
+	},
+	
+	"destroy 5 graves":{
+	"text": "УНИЧТОЖЬ 5 МОГИЛ",
+	"fontSize":0
+	},
+	
+	"destroy 25 graves":{
+	"text": "УНИЧТОЖЬ 25 МОГИЛ",
+	"fontSize":0
+	},
+	
+	"destroy 50 graves":{
+	"text": "УНИЧТОЖЬ 50 МОГИЛ",
+	"fontSize":0
+	},
+	
+	"die 10 times in one lvl":{
+	"text": "УМРИ 10 РАЗ НА УРОВНЕ",
+	"fontSize":0
+	},
+	
+	"die 20 times in one lvl":{
+	"text": "УМРИ 20 РАЗ НА УРОВНЕ",
+	"fontSize":0
+	},
+	
+	"die 30 times in one lvl":{
+	"text": "УМРИ 30 РАЗ НА УРОВНЕ",
+	"fontSize":0
+	},
+	
+	"use 10 potions":{
+	"text": "ИСПОЛЬЗУЙ 10 ЗЕЛИЙ",
+	"fontSize":0
+	},
+	
+	"use 25 potions":{
+	"text": "ИСПОЛЬЗУЙ 25 ЗЕЛИЙ",
+	"fontSize":0
+	},
+	
+	"use 50 potions":{
+	"text": "ИСПОЛЬЗУЙ 50 ЗЕЛИЙ",
+	"fontSize":0
+	},
+	
+	"extinguish 10 torches":{
+	"text": "ПОТУШИ 10 ФАКЕЛОВ",
+	"fontSize":0
+	},
+	
+	"extinguish 25 torches":{
+	"text": "ПОТУШИ 25 ФАКЕЛОВ",
+	"fontSize":0
+	},
+	
+	"extinguish 50 torches":{
+	"text": "ПОТУШИ 50 ФАКЕЛОВ",
+	"fontSize":0
+	},
+	
+	"take daily reward 10 times":{
+	"text": "ЗАБЕРИ ЕЖЕДНЕВНУЮ НАГРАДУ 10 РАЗ",
+	"fontSize":0
+	},
+	
+	//achievement's names
+	
+	"mob killa":{
+	"text": "ВОИН",
+	"fontSize": 18
+	},
+	
+	"diver":{
+	"text": "ДАЙВЕР",
+	"fontSize": 18
+	},
+	
+	"tutorial achievement":{
+	"text": "ОБУЧАЮЩЕЕ ДОСТИЖЕНИЕ",
+	"fontSize": 13
+	},
+	
+	"treasure hunter":{
+	"text": "ОХОТНИК ЗА СОКРОВИЩАМИ",
+	"fontSize": 13
+	},
+	
+	"secret room rush":{
+	"text": "СЫЩИК",
+	"fontSize":18
+	},
+	
+	"ice lord":{
+	"text": "ЛЕДЯНОЙ КОРОЛЬ",
+	"fontSize":17
+	},
+	
+	"star walker":{
+	"text": "ЗВЕЗДНЫЙ ПУТЬ",
+	"fontSize":17
+	},
+	
+	"dragon bones":{
+	"text": "КОСТЬ ДРАКОНА",
+	"fontSize":17
+	},
+	
+	"first buy":{
+	"text": "ПЕРВАЯ ПОКУПКА",
+	"fontSize":16
+	},
+	
+	"graver":{
+	"text": "КРУШИТЕЛЬ МОГИЛ",
+	"fontSize": 16
+	},
+	
+	"self-destructor":{
+	"text": "САМОУБИЙЦА",
+	"fontSize": 18
+	},
+	
+	"potioner":{
+	"text": "ЛЮБИТЕЛЬ ЗЕЛИЙ",
+	"fontSize": 16
+	},
+	
+	"torch collector":{
+	"text": "ПОЖАРНИК",
+	"fontSize": 18
+	},
+	
+	"ten days":{	
+	"text": "ДЕСЯТЬ ДНЕЙ",
+	"fontSize": 17
+	},
+	
+	
+	"tap on this button to get reward": {
+	"text": "НАЖМИ НА КНОПКУ, ЧТОБЫ ПОЛУЧИТЬ НАГРАДУ", 
+	"fontSize": 44
+	},
+	
+	"in progress":{
+	"text": "В ПРОГРЕССЕ",
+	"fontSize":0
+	},	
+	
+	//Shop
+	"unlock":{
+	"text": "ОТКРЫТЬ",
+	"fontSize": 0
+	},
+	"equip":{
+	"text": "НАДЕТЬ",
+	"fontSize": 0
+	},
+	"equiped":{
+	"text": "НАДЕТО",
+	"fontSize": 20
+	},
+	"locked":{
+	"text": "ЗАКРЫТО",
+	"fontSize": 20
+	},
+	"upgrade":{
+	"text": "УЛУЧШИТЬ",
+	"fontSize": 0
+	},
+	"upgraded":{
+	"text": "УЛУЧШЕНО",
+	"fontSize": 0
+	},
+	"next":{
+	"text": "ДАЛЕЕ",
+	"fontSize": 19
+	},
+	
+	
+	
+
+
+
+	"ammo":{
+	"text": "КОЛЧАН",
+	"fontSize": 0
+	},
+	"heal":{
+	"text": "ЗДОРОВЬЕ",
+	"fontSize": 0
+	},
+	"damage":{
+	"text": "УРОН",
+	"fontSize": 0
+	},
+	"speed":{
+	"text": "СКОРОСТЬ",
+	"fontSize": 0
+	},
+	"time":{
+	"text": "ВРЕМЯ",
+	"fontSize": 0
+	},
+	"immortal":{
+	"text": "БЕССМЕРТИЕ",
+	"fontSize": 0
+	},
+
+
+
+	"barbarian":{
+	"text": "BARBARIAN",
+	"fontSize": 0
+	},
+	"ninjarian":{
+	"text": "NINJARIAN",
+	"fontSize": 0
+	},
+	"buildarian":{
+	"text": "BUILDARIAN",
+	"fontSize": 0
+	},
+	"centurion":{
+	"text": "CENTURION",
+	"fontSize": 0
+	},
+	"classic":{
+	"text": "CLASSIC",
+	"fontSize": 0
+	},
+	"dredarian":{
+	"text": "DREDARIAN",
+	"fontSize": 0
+	},
+	"jonarian":{
+	"text": "JONARIAN",
+	"fontSize": 0
+	},
+	"kingarian":{
+	"text": "KINGARIAN",
+	"fontSize": 0
+	},
+	"knightarian":{
+	"text": "KNIGHTARIAN",
+	"fontSize": 0
+	},
+	"santarian":{
+	"text": "SANTARIAN",
+	"fontSize": 0
+	},
+
+
+	"arakh":{
+	"text": "АРАКХ",
+	"fontSize": 0
+	},
+	"ancient axe":{
+	"text": "ДРЕВНИЙ ТОПОР",
+	"fontSize": 20
+	},
+	"kyoto sword":{
+	"text": "МЕЧ КИОТО",
+	"fontSize": 0
+	},
+	"candy":{
+	"text": "ЛЕДЕНЕЦ",
+	"fontSize": 0
+	},
+	"legacy":{
+	"text": "НАСЛЕДИЕ",
+	"fontSize": 0
+	},
+	"gladius":{
+	"text": "ГЛАДИЙ",
+	"fontSize": 0
+	},
+	"claw":{
+	"text": "КОГОТЬ",
+	"fontSize": 0
+	},
+	"kings hand":{
+	"text": "РУКА КОРОЛЯ",
+	"fontSize": 20
+	},
+	"obsidian":{
+	"text": "ОБСИДИАН",
+	"fontSize": 0
+	},
+	"pipe wrench":{
+	"text": "ГАЗОВЫЙ КЛЮЧ",
+	"fontSize": 20
+	},
+
+
+
+	"classicthr":{
+	"text": "КЛАССИК",
+	"fontSize": 0
+	},
+	"hammer":{
+	"text": "МОЛОТ",
+	"fontSize": 0
+	},
+	"vikings ice":{
+	"text": "МОРОЖЕНОЕ",
+	"fontSize": 0
+	},
+	"fireball":{
+	"text": "ФАЕРБОЛЛ",
+	"fontSize": 0
+	},
+	"meat leg":{
+	"text": "РУЛЬКА",
+	"fontSize": 0
+	},
+	"pizza":{
+	"text": "ПИЦЦА",
+	"fontSize": 0
+	},
+	"raven":{
+	"text": "ВОРОН",
+	"fontSize": 0
+	},
+	"sven":{
+	"text": "ОВЦА",
+	"fontSize": 0
+	},
+	"zippy knife":{
+	"text": "БЫСТРЫЙ КЛИНОК",
+	"fontSize": 20
+	},
+	"crooked knife":{
+	"text": "КРИВОЙ КЛИНОК",
+	"fontSize": 20
+	},
+	"strange knife":{
+	"text": "ТАИНСТВЕННЫЙ КЛИНОК",
+	"fontSize": 17
+	},
+	"dagger":{
+	"text": "КИНЖАЛ",
+	"fontSize": 0
+	},
+
+
+	"ammo maniac":{
+	"text": "СТРЕЛОК",
+	"fontSize": 0
+	},
+	"you have got {0} slots for throwing weapons":{
+	"text": "У тебя {0} слотов метательного оружия",
+	"fontSize": 0
+	},
+	"dodger":{
+	"text": "ЛОВКАЧ",
+	"fontSize": 0
+	},
+	"you have got {0}% chance to dodge enemy attack":{
+	"text": "У тебя {0}% вероятности уклона от атаки",
+	"fontSize": 0
+	},
+	"greedy":{
+	"text": "ЖАДИНА",
+	"fontSize": 0
+	},
+	"you get extra x{0} coins per level":{
+	"text": "Ты получаешь в x{0} больше монет за уровень",
+	"fontSize": 10
+	},
+	"potion maniac":{
+	"text": "АЛХИМИК",
+	"fontSize": 0
+	},
+	"potions works {0} times longer":{
+	"text": "Зелья действуют {0} раз дольше",
+	"fontSize": 0
+	},
+
+	"not enough coins":{
+		"text": "Недостаточно монет!",
+		"fontSize": 25
+	},
+	"not enough crystals":{
+		"text": "Недостаточно кристаллов!",
+		"fontSize": 23
+	},
+	"weapon unlocked":{
+		"text": "Оружие открыто!",
+		"fontSize": 0
+	},
+	"perk upgraded":{
+		"text": "Перк улучшен!",
+		"fontSize": 0
+	},
+	"skin unlocked":{
+		"text": "Скин открыт!",
+		"fontSize": 0
+	},
+	"sword unlocked":{
+		"text": "Меч открыт!",
+		"fontSize": 0
+	},
+	
+	
+	
+	//Shop Tutorial
+	
+	"customize and upgrade":{
+	"text": "КАСТОМИЗАЦИЯ И УЛУЧШЕНИЯ!",
+	"fontSize": 30
+	},
+	
+	"maximum health points": {
+	"text": "МАКСИМАЛЬНЫЙ УРОВЕНЬ ЗДОРОВЬЯ", 
+	"fontSize": 20
+	},
+	
+	"your attack damage": {
+	"text": "УРОН ОТ АТАК", 
+	"fontSize": 35
+	},
+	
+	
+	"get more potions": {
+	"text": "ПОЛУЧИ БОЛЬШЕ ЗЕЛИЙ!", 
+	"fontSize": 35
+	},
+		
+	"get new skills": {
+	"text": "ПОЛУЧИ НОВЫЕ НАВЫКИ!", 
+	"fontSize": 35
+	},
+	
+	"throw weapon damage": {
+	"text": "УРОН МЕТАТЕЛЬНОГО ОРУЖИЯ", 
+	"fontSize": 22
+	},
+	
+	"earn more crystals": {
+	"text": "ПОЛУЧИ БОЛЬШЕ КРИСТАЛЛОВ!", 
+	"fontSize": 25
+	},
+	
+	"now get some potions for free!": {
+	"text": "ЗАБЕРИ БЕСПЛАТНЫЕ ЗЕЛЬЯ!", 
+	"fontSize": 25
+	},
+	
+	"Congratulations! You get 3 Free Health potions! Good luck! See you soon Warrior!": {
+	"text": "ПОЗДРАВЛЯЮ! ТЫ ПОЛУЧАЕШЬ 3 БЕСПЛАТНЫХ ЗЕЛЬЯ ЗДОРОВЬЯ! ДО НОВЫХ ВСТРЕЧ, ВОИН!", 
+	"fontSize": 20
+	},
+
+	"free shop": {
+		"text": "БЕСПЛАТНО", 
+		"fontSize": 20
+		},
+	
+	"Close": {
+	"text": "ЗАКРЫТЬ", 
+	"fontSize": 20
+	},
+
+	//Level 11
+	
+	"congratulations! now you can use double jump!": {
+	"text": "ПОЗДРАВЛЯЮ! ТЕПЕРЬ У ТЕБЯ ЕСТЬ ДВОЙНОЙ ПРЫЖОК", 
+	"fontSize": 22
+	},
+	
+	"rate us": {
+	"text": "ОЦЕНИ НАС",
+	"fontSize": 50
+	},
+	
+	"like our game?\nrate it to 5 stars": {
+	"text": "ПОНРАВИЛАСЬ НАША ИГРА? ПОСТАВЬ НАМ 5 ЗВЕЗД!",
+	"fontSize": 38
+	},
+	
+	"sure": {
+	"text": "КОНЕЧНО",
+	"fontSize": 55
+	},
+	
+	"no, thanks": {
+	"text": "НЕТ, СПАСИБО",
+	"fontSize": 25
+	},
+}

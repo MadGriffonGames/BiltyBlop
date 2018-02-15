@@ -3,31 +3,64 @@ using System.Collections;
 
 public class MovingPlatform : MonoBehaviour
 {
-	public GameObject platform;
-	public float moveSpeed;
-	public Transform currentPoint;
-	public Transform[] points;
-	public int pointSelection;
+	private Vector3 posA;
+    private Vector3 nextPos;
+    private Vector3 posB;
+    Rigidbody2D MyRigidbody;
+
+    [SerializeField]
+    private float speed;
+
+    [SerializeField]
+    private Transform platformTransform;
+
+    [SerializeField]
+    private Transform transformPosB;
 
 	void Start ()
     {
-        currentPoint = points[pointSelection];
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
+
+        posA = platformTransform.localPosition;
+        posB = transformPosB.localPosition;
+        nextPos = posB;
+
+        MyRigidbody = GetComponent<Rigidbody2D>();
 	}
 
-	void Update ()
+	void FixedUpdate ()
     {
-		platform.transform.position = Vector3.MoveTowards (platform.transform.position, currentPoint.position, Time.deltaTime * moveSpeed);
-
-		if (platform.transform.position == currentPoint.position) 
-		{
-			pointSelection++;
-
-			if (pointSelection == points.Length) 
-			{
-				pointSelection = 0;				
-			}
-			currentPoint = points [pointSelection];
-		}
-
+        Move();
 	}
+
+    private void Move()
+    {
+        platformTransform.localPosition = Vector3.MoveTowards(platformTransform.localPosition, nextPos, speed*Time.deltaTime);
+        if (Vector3.Distance(platformTransform.localPosition, nextPos) <= 0)
+        {
+            ChangePoint();
+        }
+    }
+
+    private void ChangePoint()
+    {
+        nextPos = nextPos != posA ? posA : posB;//nextPos = posA or posB
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.layer = 9;//9 - is layer called "Platform"
+            other.transform.SetParent(platformTransform);
+			//Player.Instance.target.transform.localPosition -= new Vector3 (0, 2.5f, 0);
+        }
+        
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        other.transform.SetParent(null);
+		//Player.Instance.target.transform.localPosition += new Vector3 (0, 2.5f, 0);
+    }
 }

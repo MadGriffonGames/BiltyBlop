@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CollisionTrigger : MonoBehaviour {
-
-	private BoxCollider2D playerCollider;
+public class CollisionTrigger : MonoBehaviour
+{
 
 	[SerializeField]
 	private BoxCollider2D platformCollider;
@@ -14,7 +13,6 @@ public class CollisionTrigger : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		playerCollider = GameObject.Find ("Player").GetComponent<BoxCollider2D>();
 		Physics2D.IgnoreCollision (platformCollider, platformTrigger, true);
 	}
 	

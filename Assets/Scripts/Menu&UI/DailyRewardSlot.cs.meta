@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4665859857f063c4a8e3beae758fa429
+timeCreated: 1507300369
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - coinSprite: {fileID: 21300000, guid: 5b807b98a8cf46b439fe93a232dfa2d2, type: 3}
+  - crystalSprite: {fileID: 21300000, guid: aba71fe7819d23a4383e5dc35352ca4c, type: 3}
+  - hpSprite: {fileID: 21300000, guid: 212f06f3dfed0d74295ef038e6c2eda2, type: 3}
+  - ammoSprite: {fileID: 21300000, guid: bb70e93c4812e5146a559463bc65d02e, type: 3}
+  - potionsSprite: {fileID: 21300000, guid: c3165de1df52e7241a97a23395032b90, type: 3}
+  - skinSprite: {fileID: 21300000, guid: ed7d13434b820c244ba0d1de337b47ff, type: 3}
+  - misteriousSprite: {fileID: 21300000, guid: c621995714fa4d54a8d3591dc090b086, type: 3}
+  - defaultBack: {fileID: 21300000, guid: e9f4dfa0e5f590540b589b7bcd3480a5, type: 3}
+  - todayBack: {fileID: 21300000, guid: 44c0e005b845abd40a03e8deecaf2fdb, type: 3}
+  - specialBack: {fileID: 21300000, guid: 09297372b8e07ca49b468d1c375d92ec, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

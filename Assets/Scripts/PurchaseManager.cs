@@ -65,8 +65,11 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
             InitializePurchasing();
             DontDestroyOnLoad(this);
             RateUs.IncrementAppEnterCounter();
-            GameManager.AddCoins(5000);
-            GameManager.AddCrystals(1000);
+            if (GameManager.developmentBuild)
+            {
+                GameManager.AddCoins(5000);
+                GameManager.AddCrystals(1000);
+            }
         }
     }
 

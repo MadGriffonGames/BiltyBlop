@@ -61,7 +61,7 @@ public class DailyReward : MonoBehaviour
     int rewardDay;
     bool is24hoursPast;
     bool isTimerTick;
-    bool isRewardedVideoWatched;
+    bool _isRewardedVideoWatched;
     DateTime lastOpenDate;
     TimeSpan span;
     TimeSpan hours24;
@@ -166,7 +166,7 @@ public class DailyReward : MonoBehaviour
             isRewardCollected = false;
         }
 
-        isRewardedVideoWatched = false;
+        _isRewardedVideoWatched = false;
     }
 
     public void TMP()
@@ -201,14 +201,14 @@ public class DailyReward : MonoBehaviour
             }
         }
 
-        if (AdsManager.Instance.isRewardVideoWatched && isRewardedVideoWatched)
+        if (AdsManager.Instance.isRewardVideoWatched && _isRewardedVideoWatched)
         {
+            doubleButton.GetComponent<Button>().interactable = false;
+
             if (musicWasPlaying)
             {
                 musicWasPlaying = false;
                 SoundManager.PlayRandomMusic("kid_music", true);
-                //PlayerPrefs.SetInt("MusicIsOn", 1);
-                //SoundManager.MuteMusic(false);
             }
             AdsManager.Instance.isRewardVideoWatched = false;
 
@@ -351,7 +351,7 @@ public class DailyReward : MonoBehaviour
         AppMetrica.Instance.ReportEvent("#REWARDx2_BUTTON pressed");
         DevToDev.Analytics.CustomEvent("#REWARDx2_BUTTON pressed");
 
-        isRewardedVideoWatched = true;
+        _isRewardedVideoWatched = true;
         if (PlayerPrefs.GetInt("MusicIsOn") == 1)
         {
             musicWasPlaying = true;
@@ -366,6 +366,5 @@ public class DailyReward : MonoBehaviour
 
         AdsManager.Instance.ShowRewardedVideo();
 #endif
-        doubleButton.GetComponent<Button>().interactable = false;
     }
 }

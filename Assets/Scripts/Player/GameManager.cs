@@ -54,11 +54,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        //for (int i = 1; i < 31; i++)
-        //{
-        //    PlayerPrefs.SetInt("Level" + i.ToString(), 1);
-        //}
-
 #if UNITY_EDITOR
         Application.targetFrameRate = 1000;
 #elif UNITY_ANDROID

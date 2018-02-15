@@ -21,6 +21,8 @@ public class UnlockPerkWindow : MonoBehaviour {
     GameObject closeErrorWindowButton;
 	[SerializeField]
 	Image perkImage;
+	[SerializeField]
+	PerksSwipeMenu perkSwipeMenu;
 
     [SerializeField]
     Transform onebuttonTransform;
@@ -51,7 +53,8 @@ public class UnlockPerkWindow : MonoBehaviour {
 
         // perkNumber - number of chosen perk in perkPrefabs[]
 
-		if (perkLvl < 3) {
+		if (perkLvl < 3) 
+		{
 			
 			int perkCoinCost = perk.upgradeCoinCost [perkLvl];
 			int perkCrystalCost = perk.upgradeCrystalCost [perkLvl];
@@ -178,6 +181,6 @@ public class UnlockPerkWindow : MonoBehaviour {
 		if (perkLvl < 3)
 			SetWindowWithPerkNumber (chosenPerkOrderNumber);
 		else
-			SetWindowWithPerkStats (chosenPerkOrderNumber);
+			perkSwipeMenu.CloseUpgradePerkWindow ();
 	}
 }

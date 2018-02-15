@@ -364,7 +364,7 @@ public class DailyReward : MonoBehaviour
         AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
 
-        AdsManager.Instance.ShowRewardedVideo();
+		AdsManager.Instance.ShowRewardedVideo();
 #endif
     }
 }

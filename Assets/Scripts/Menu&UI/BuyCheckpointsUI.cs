@@ -93,7 +93,7 @@ public class BuyCheckpointsUI : MonoBehaviour
         AdsManager.Instance.ShowRewardedVideo();//then check if ad was showed in update()
 
 #elif UNITY_IOS
-        AdsManager.Instance.ShowRewardedVideo();//then check if ad was showed in update()
+//        AdsManager.Instance.ShowRewardedVideo();//then check if ad was showed in update()
 
 #endif
 

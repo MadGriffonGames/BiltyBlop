@@ -57,7 +57,7 @@ public class AdsManager : MonoBehaviour
 
 #endif
 
-        Advertisement.Initialize(unityGameId);
+//       Advertisement.Initialize(unityGameId);
         MobileAds.Initialize(adMobAppId);
 
         RequestInterstitial();
@@ -120,7 +120,7 @@ public class AdsManager : MonoBehaviour
         }
     }
 
-    public void ShowRewardedVideo()
+   public void ShowRewardedVideo()
     {
         Debug.Log(Advertisement.IsReady());
         if (CanNotShowRewardedVideo())
@@ -138,7 +138,8 @@ public class AdsManager : MonoBehaviour
                     Debug.Log("Unity");
                     if (Advertisement.IsReady())
                     {
-                        UnityAdsShowRewardedVideo();
+                        //UnityAdsShowRewardedVideo();
+						AdMobShowRewardedVideo();
                     }
                     else
                     {
@@ -161,7 +162,8 @@ public class AdsManager : MonoBehaviour
                         Debug.Log("Unity");
                         if (Advertisement.IsReady())
                         {
-                            UnityAdsShowRewardedVideo();
+                           //UnityAdsShowRewardedVideo();
+							AdMobShowRewardedVideo();
                         }
                     }
                 }
@@ -209,10 +211,10 @@ public class AdsManager : MonoBehaviour
 
     void UnityAdsShowRewardedVideo()
     {
-        ShowOptions options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
-
-        Advertisement.Show("rewardedVideo", options);
+//        ShowOptions options = new ShowOptions();
+//        options.resultCallback = HandleShowResult;
+//
+//        Advertisement.Show("rewardedVideo", options);
     }
 
     void AdMobShowRewardedVideo()

@@ -90,6 +90,7 @@ public class PerksSwipeMenu : SwipeMenu {
                     PerkPrefab perk = perkPrefabs[j].GetComponent<PerkPrefab>();
 					perk.SetPlayerPrefsParams ();
 					int perkLvl = PlayerPrefs.GetInt (perkPrefabs[j].name);
+					Debug.Log (perkLvl);
 
                     perkCardObj.transform.SetParent(panel);
                     perkCardObj.transform.localPosition = new Vector3(i*DISTANCE, 0, 0);
@@ -117,11 +118,13 @@ public class PerksSwipeMenu : SwipeMenu {
 						perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUpgradePerkWindow(perk.orderNumber));
 						perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>().text = "upgrade";
                     }
-					if (perkLvl == 0) {
-						perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text = string.Format (perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text, perk.upgradeScales [1]);
+						
+
+					if (perkLvl == 3) {
+						perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text = string.Format (perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text, perk.upgradeScales [2]);
 					} else 
 					{
-						perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text = string.Format (perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text, perk.upgradeScales[perkLvl-1]);
+						perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text = string.Format (perkCardObj.gameObject.GetComponentsInChildren<Text> () [1].text, perk.upgradeScales[perkLvl]);
 					}
 
 					LocalizationManager.Instance.UpdateLocaliztion (perkCardObj.gameObject.GetComponentsInChildren<Button>()[1].GetComponentInChildren<Text>()); // buy button
@@ -173,11 +176,11 @@ public class PerksSwipeMenu : SwipeMenu {
 			}
 			buttons[perkOrderNumber].gameObject.GetComponentsInChildren<Text> () [1].text =  perkPrefabs[i].GetComponent<PerkPrefab>().description;
 			LocalizationManager.Instance.UpdateLocaliztion (buttons[perkOrderNumber].gameObject.GetComponentsInChildren<Text> () [1]);// PERK description
-			if (perkLvl == 0) {
-				buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text = string.Format (buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text, perk.upgradeScales [1]);
+			if (perkLvl == 3) {
+				buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text = string.Format (buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text, perk.upgradeScales [2]);
 			} else 
 			{
-				buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text = string.Format (buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text, perk.upgradeScales[perkLvl-1]);
+				buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text = string.Format (buttons [perkOrderNumber].GetComponentsInChildren<Text> () [1].text, perk.upgradeScales[perkLvl]);
 			}
 
 			LocalizationManager.Instance.UpdateLocaliztion (buttons[perkOrderNumber].GetComponentsInChildren<Button>()[1].gameObject.GetComponentInChildren<Text>()); // buy button

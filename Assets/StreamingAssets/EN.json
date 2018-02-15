@@ -349,6 +349,16 @@
 	"fontSize": 0
 	},
 	
+	"promo code": {
+	"text": "PROMO CODE", 
+	"fontSize": 0
+	},
+	
+	"enter code": {
+	"text": "ENTER CODE", 
+	"fontSize": 0
+	},
+	
 	//Level 1
 	
 	"destroy these boxes": {

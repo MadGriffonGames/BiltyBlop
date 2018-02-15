@@ -315,6 +315,16 @@
 	"text": "ВОССТАНОВИТЬ\nПОКУПКИ", 
 	"fontSize": 40
 	},
+	
+	"promo code": {
+	"text": "ПРОМО КОД", 
+	"fontSize": 0
+	},
+	
+	"enter code": {
+	"text": "ВВЕДИ КОД", 
+	"fontSize": 0
+	},
 
 	//Level 1
 	

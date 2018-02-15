@@ -77,6 +77,11 @@ using System.IO;
 
             case skin10:
                 break;
+            default:
+                {
+                    Debug.Log("lel");
+                    break;
+                }
         }
     }
 

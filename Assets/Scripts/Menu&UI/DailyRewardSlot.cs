@@ -36,6 +36,7 @@ public class DailyRewardSlot : MonoBehaviour
     [SerializeField]
     Sprite skinBack;
 
+    [SerializeField]
     Image slotBackground;
     [SerializeField]
     Image rewardImage;
@@ -48,7 +49,7 @@ public class DailyRewardSlot : MonoBehaviour
     [SerializeField]
     Text generalRewardValue;
 
-    private void Awake()
+    private void OnEnable()
     {
         slotBackground = GetComponent<Image>();
     }

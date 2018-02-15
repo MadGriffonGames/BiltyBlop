@@ -17,7 +17,7 @@ public class ActLocker : MonoBehaviour
     GameObject starsPanel;
     [SerializeField]
     GameObject statPanel;
-    const int TOTAL_LEVEL_COUNT = 20;
+    const int TOTAL_LEVEL_COUNT = 30;
 
     bool collectStars = false;
     bool completeLevel = false;
@@ -35,6 +35,10 @@ public class ActLocker : MonoBehaviour
         {
             starsCount = 35;
             PlayerPrefs.SetInt("GeneralStarsCount", starsCount);
+            for (int i = 1; i < 31; i++)
+            {
+                PlayerPrefs.SetInt("Level" + i.ToString(), 1);
+            }
         }
 
         unlockNumber.text = unlockStarsCount.ToString();
@@ -61,5 +65,5 @@ public class ActLocker : MonoBehaviour
             transform.parent.GetComponent<Button>().enabled = false;
             statPanel.SetActive(false);
         }
-	}
+    }
 }

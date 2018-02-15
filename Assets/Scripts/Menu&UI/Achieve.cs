@@ -142,4 +142,9 @@ public class Achieve : MonoBehaviour
         else
             Destroy(this);
     }
+
+    public void Getter()
+    {
+
+    }
 }

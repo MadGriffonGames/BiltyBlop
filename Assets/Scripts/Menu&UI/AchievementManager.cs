@@ -64,7 +64,6 @@ public class AchievementManager : MonoBehaviour
     string[] differentItems2;
 
     //--------achievements---------------
-
     public Achieve mobKiller;
     public Achieve treasureHunter;
     public Achieve selfDestructor;
@@ -89,7 +88,7 @@ public class AchievementManager : MonoBehaviour
         get
         {
             if (instance == null)
-                instance = GameObject.FindObjectOfType<AchievementManager>();
+                instance = FindObjectOfType<AchievementManager>();
             return instance;
         }
     }
@@ -150,7 +149,7 @@ public class AchievementManager : MonoBehaviour
         potionerRewardType = new string[] { "Coins", "Crystals", HEAL};
 
 		mobKiller = new Achieve("mob killa", mobKillerRewardType, mobKillerTargetValue, mobKillerReward);
-		treasureHunter = new Achieve("treasure hunter", treasureHunterRewardType, treasureHunterValue, treasureHunterReward);
+        treasureHunter = new Achieve("treasure hunter", treasureHunterRewardType, treasureHunterValue, treasureHunterReward);
 		swimmer = new LevelAchieve("diver", HEAL, 5, 3);
 		torchCollector3 = new Achieve("torch collector", tripleCoins, torchCollectorTargetValue, torchCollectorReward);
 		secretRoomer = new Achieve("secret room rush", secretRoomRewardType, secretRoomerTargetValue, secretRoomerReward);
@@ -186,9 +185,9 @@ public class AchievementManager : MonoBehaviour
                 }
                 else
                 {
-                    Destroy(achieve);
+                    //Destroy(achieve);
                 }
-                
+
             }
             else
             {
@@ -216,13 +215,14 @@ public class AchievementManager : MonoBehaviour
                 achievementUI.GetComponent<AchievementUI>().AchievementAppear(levelAchieve.achieveName);
                 StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
             }
-            Destroy(levelAchieve);
+            //Destroy(levelAchieve);
         }
 
         if (PlayerPrefs.GetInt(levelAchieve.achieveName) > levelAchieve.targetValue)
         {
-            Destroy(levelAchieve);
+            //Destroy(levelAchieve);
         }
+
     }
 
 

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     bool isBirded = false;
 
-    public static bool developmentBuild = false;
+    public static bool developmentBuild = true;
 
     public static int CollectedCoins
     {
@@ -62,8 +62,6 @@ public class GameManager : MonoBehaviour
 			Application.targetFrameRate = 60;
 #endif
 
-        Instantiate(achievementManager);
-
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
             crystalTxt = GameObject.FindGameObjectWithTag("CrystalTxt").GetComponent<Text>();
@@ -84,6 +82,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Instantiate(achievementManager);
+
         if (!PlayerPrefs.HasKey("NoAds"))
         {
             PlayerPrefs.SetInt("NoAds", 0);
@@ -124,10 +124,13 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level1")
             SoundManager.PlayMusic("kid_music_1", true);
         lvlCollectedCoins = 0;
+        
     }
 
     void Update()
     {
+        Debug.Log(AchievementManager.Instance.tutorialAchieve.achieveName);
+
         if (isLevel && UI.Instance.isActiveAndEnabled)
         {
             coinTxt.text = (" " + collectedCoins);

@@ -63,8 +63,6 @@ public class LocalizationManager : MonoBehaviour
             jsonString = www.text;
 #endif
             translation = JsonConvert.DeserializeObject<Dictionary<string, LocalizedString>>(jsonString);
-			Debug.Log (translation);
-
         }
     }
 

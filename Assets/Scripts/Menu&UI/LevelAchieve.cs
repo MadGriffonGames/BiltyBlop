@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine;
 
 
-public class LevelAchieve : MonoBehaviour
+public class LevelAchieve
 {
     public int targetValue;
     public string achieveName;
@@ -30,7 +30,7 @@ public class LevelAchieve : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt(_name, _targetValue);
-            Destroy(this);
+            //Destroy(this);
         }
     }
 }

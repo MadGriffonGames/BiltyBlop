@@ -264,18 +264,12 @@ public class AdsChest : MonoBehaviour
             if (PlayerPrefs.GetInt("MusicIsOn") == 1)
             {
                 musicWasPlaying = true;
-                //PlayerPrefs.SetInt("MusicIsOn", 0);
-                //SoundManager.MuteMusic(true);
                 SoundManager.Instance.currentMusic.Stop();
             }
 #if UNITY_ANDROID || UNITY_IOS
             if (Advertisement.IsReady())
             {
-                isOpened = true;
-                EnableControls(false);
-                Player.Instance.mobileInput = 0;
-                Player.Instance.ChangeState(new PlayerIdleState());
-                currentTime = Time.timeScale; //--------------------------разлочим чуть позже
+                
             }
 
             
@@ -283,7 +277,12 @@ public class AdsChest : MonoBehaviour
 #if UNITY_EDITOR
                 AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS
+            isOpened = true;
+            EnableControls(false);
+            Player.Instance.mobileInput = 0;
+            Player.Instance.ChangeState(new PlayerIdleState());
             AdsManager.Instance.ShowRewardedVideo();
+
 #endif
         }
     }

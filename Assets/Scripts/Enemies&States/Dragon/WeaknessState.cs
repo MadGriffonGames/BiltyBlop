@@ -30,7 +30,6 @@ public class WeaknessState : IDragonState
             {
                 enemy.stun.SetActive(false);
                 enemy.armature.animation.FadeIn("WEAKNESS_END", -1, 1);
-                enemy.takeDamageCollider.enabled = false;
                 enemy.ChangeState(new RiseState());
             }
         }

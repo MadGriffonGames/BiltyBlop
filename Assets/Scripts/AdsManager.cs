@@ -122,7 +122,6 @@ public class AdsManager : MonoBehaviour
 
    public void ShowRewardedVideo()
     {
-        Debug.Log(Advertisement.IsReady());
         if (CanNotShowRewardedVideo())
         {
             InstantiateWarning();
@@ -132,7 +131,6 @@ public class AdsManager : MonoBehaviour
             if (PlayerPrefs.GetInt("NoAds") == 0)
             {
                 int tmp = Random.Range(1, 3);
-                Debug.Log(tmp);
                 if (tmp == 1)
                 {
                     if (Advertisement.IsReady())

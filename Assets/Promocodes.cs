@@ -20,63 +20,95 @@ using System.IO;
     public const string skin8 = "UMEWSXZJVU";
     public const string skin9 = "YSLMHUNYFG";
     public const string skin10 = "QZTABYBQOE";
+    public string promocodeGift;
+    
 
     private string[] promocodes;
+
+
+    private static Promocodes instance;
+    public static Promocodes Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = GameObject.FindObjectOfType<Promocodes>();
+            return instance;
+        }
+    }
 
     public Promocodes(int count)
     {
         promocodes = new string[10];
     }
 
-    public bool IsCorrectCode(string data)
-    {
-        bool result = false;
-        for (int i = 0; i < promocodes.Length; i++)
-        {
-            if (promocodes[i] == data)
-            {
-                ActivateCode(data);
-            }
+    //public bool IsCorrectCode(string data)
+    //{
+    //    bool result = false;
+    //    for (int i = 0; i < promocodes.Length; i++)
+    //    {
+    //        if (promocodes[i] == data)
+    //        {
+    //            ActivateCode(data);
+    //        }
 
-            result = true;
-            return result;
-        }
-        return result;
-    }
+    //        result = true;
+    //        return result;
+    //    }
+    //    return result;
+    //}
 
-    void ActivateCode(string data)
+    public bool IsActivateCode(string data)
     {
         switch (data)
         {
             case skin1:
-                break;
+                promocodeGift = "skin1";
+                return true;
 
             case skin2:
-                break;
+                promocodeGift = "skin2";
+                return true;
 
             case skin3:
-                break;
+                promocodeGift = "skin3";
+                return true;
 
             case skin4:
-                break;
+                promocodeGift = "skin4";
+                return true;
 
             case skin5:
-                break;
+                promocodeGift = "skin5";
+                return true;
 
             case skin6:
-                break;
+                promocodeGift = "skin6";
+                return true;
 
             case skin7:
-                break;
+                promocodeGift = "skin1";
+                return true;
 
             case skin8:
-                break;
+                promocodeGift = "skin1";
+                return true;
 
             case skin9:
-                break;
+                promocodeGift = "skin1";
+                return true;
 
             case skin10:
-                break;
+                promocodeGift = "skin1";
+                return true;
+            case "W":
+                promocodeGift = "skin1";
+                return true;
+            default:
+                {
+                    Debug.Log("lel");
+                    return false;
+                }
         }
     }
 

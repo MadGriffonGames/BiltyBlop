@@ -57,7 +57,7 @@ public class AdsManager : MonoBehaviour
 
 #endif
 
-//       Advertisement.Initialize(unityGameId);
+        Advertisement.Initialize(unityGameId);
         MobileAds.Initialize(adMobAppId);
 
         RequestInterstitial();
@@ -135,17 +135,14 @@ public class AdsManager : MonoBehaviour
                 Debug.Log(tmp);
                 if (tmp == 1)
                 {
-                    Debug.Log("Unity");
                     if (Advertisement.IsReady())
                     {
-                        //UnityAdsShowRewardedVideo();
-						AdMobShowRewardedVideo();
+                        UnityAdsShowRewardedVideo();
                     }
                     else
                     {
                         if (adMobRewardedVideo.IsLoaded())
                         {
-                            Debug.Log("AdMob");
                             AdMobShowRewardedVideo();
                         }
                     }
@@ -154,16 +151,13 @@ public class AdsManager : MonoBehaviour
                 {
                     if (adMobRewardedVideo.IsLoaded())
                     {
-                        Debug.Log("AdMob");
                         AdMobShowRewardedVideo();
                     }
                     else
                     {
-                        Debug.Log("Unity");
                         if (Advertisement.IsReady())
                         {
-                           //UnityAdsShowRewardedVideo();
-							AdMobShowRewardedVideo();
+                           UnityAdsShowRewardedVideo();
                         }
                     }
                 }
@@ -211,10 +205,10 @@ public class AdsManager : MonoBehaviour
 
     void UnityAdsShowRewardedVideo()
     {
-//        ShowOptions options = new ShowOptions();
-//        options.resultCallback = HandleShowResult;
-//
-//        Advertisement.Show("rewardedVideo", options);
+        ShowOptions options = new ShowOptions();
+        options.resultCallback = HandleShowResult;
+
+        Advertisement.Show("rewardedVideo", options);
     }
 
     void AdMobShowRewardedVideo()

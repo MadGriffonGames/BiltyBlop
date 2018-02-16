@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     bool isBirded = false;
 
-    public static bool developmentBuild = true;
+    public static bool developmentBuild = false;
 
     public static int CollectedCoins
     {
@@ -129,8 +129,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(AchievementManager.Instance.tutorialAchieve.achieveName);
-
         if (isLevel && UI.Instance.isActiveAndEnabled)
         {
             coinTxt.text = (" " + collectedCoins);

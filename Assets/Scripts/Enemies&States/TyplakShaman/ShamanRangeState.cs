@@ -55,6 +55,7 @@ public class ShamanRangeState : IShamanState
         if (enemy.armature.animation.lastAnimationName == "shaman_atk_pre" && enemy.armature.animation.isCompleted)
         {
             enemy.armature.animation.FadeIn("shaman_atk", -1, 1);
+            enemy.attackCollider.enabled = true;
             SoundManager.PlaySound("shaman_fire");
             enemy.ThrowFireball();
         }
@@ -65,6 +66,7 @@ public class ShamanRangeState : IShamanState
             canExit = true;
             enemy.isAttacking = true;
             enemy.isTimerTick = true;
+            enemy.attackCollider.enabled = false;
         }
     }
 

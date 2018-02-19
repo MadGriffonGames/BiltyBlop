@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class MageBoss : Boss
 {
-    private IMageBossState currentState;
+    [HideInInspector]
+    public IMageBossState currentState;
+    [HideInInspector]
     public IMageBossState lastState;
+    [HideInInspector]
+    public IMageBossState lastAttackState;
     Rigidbody2D MyRigidbody;
     [SerializeField]
     public FireballSpawner fireballSpawner;
@@ -140,20 +144,40 @@ public class MageBoss : Boss
         SoundManager.PlaySound("shaman_fire");
     }
 
-    public IMageBossState GetRandomState()
+    public IMageBossState GetRandomAttackState()
     {
         int rnd = UnityEngine.Random.Range(0, 3);
         switch (rnd)
         {
             case 0:
-                return new MageAirAttackState();
+                return GenerateState(new MageAirAttackState());
             case 1:
-                return new MageGroundAttackState();
+                return GenerateState(new MageGroundAttackState());
             case 2:
-                return new MageFireballAttackState();
+                return GenerateState(new MageFireballAttackState());
             default:
-                return new MageIdleState();
+                return GenerateState(new MageIdleState());
         }
+    }
+
+    IMageBossState GenerateState(IMageBossState _state)
+    {
+        if (lastAttackState != null)
+        {
+            if (lastAttackState.GetType() == _state.GetType())
+            {
+                return GetRandomAttackState();
+            }
+            else
+            {
+                return _state;
+            }
+        }
+        else
+        {
+            return new MageAirAttackState();
+        }
+        
     }
 
     public void LookAtTarget()

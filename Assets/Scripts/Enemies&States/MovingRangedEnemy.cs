@@ -11,7 +11,7 @@ public class MovingRangedEnemy : Enemy
     public float movementSpeed = 3.0f;
 
     [SerializeField]
-    private EdgeCollider2D attackCollider;
+    public EdgeCollider2D attackCollider;
 
     [SerializeField]
     public float shootingRange;

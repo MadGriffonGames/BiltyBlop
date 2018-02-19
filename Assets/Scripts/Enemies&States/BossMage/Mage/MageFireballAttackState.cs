@@ -14,6 +14,7 @@ public class MageFireballAttackState : IMageBossState
         this.enemy = enemy;
         isAttacked = false;
         isPreattacked = false;
+        enemy.lastAttackState = enemy.currentState;
     }
 
     public void Execute()

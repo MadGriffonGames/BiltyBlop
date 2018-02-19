@@ -98,6 +98,7 @@ public class AchievementManager : MonoBehaviour
         idiotReward = new int[] { -5, -10, -15 };
         idiotTargerValue = new int[] { 1, 5, 10 };
         itemsNames = new string[] { HEAL, DAMAGE_BONUS, SPEED_BONUS, TIME_BONUS, IMMORTAL_BONUS, AMMO };
+        tutorialAchieve = new LevelAchieve("tutorial achievement", "Crystals", 1, 5);
     }
 
     void Start()
@@ -160,7 +161,8 @@ public class AchievementManager : MonoBehaviour
 		graver = new Achieve("graver", graverRewardType, graverTargetValue, graverReward);
 		selfDestructor = new Achieve("self-destructor", graverRewardType, idiotTargerValue, idiotReward);
 		potioner = new Achieve("potioner", potionerRewardType, potionerTargetValue, potionerReward);
-		tutorialAchieve = new LevelAchieve("tutorial achievement", "Crystals", 1, 5);
+		
+        Debug.Log(tutorialAchieve);
 		tenDaysReward = new LevelAchieve("ten days", "Crystals", 1, 5);
     }
 

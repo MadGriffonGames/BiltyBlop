@@ -57,7 +57,7 @@ public class AdsManager : MonoBehaviour
 
 #endif
 
-//        Advertisement.Initialize(unityGameId);
+//         Advertisement.Initialize(unityGameId);
         MobileAds.Initialize(adMobAppId);
 
         RequestInterstitial();

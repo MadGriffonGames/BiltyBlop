@@ -93,7 +93,7 @@ public class MainMenu : MonoBehaviour
         GeneralDailyCount();
         SetGiftsIndication();
         SetAchievementsIndication();
-
+        Debug.LogError(SystemInfo.graphicsShaderLevel);
         SoundManager.PlayMusic("main menu", true);
     }
 

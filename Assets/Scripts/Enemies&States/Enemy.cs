@@ -192,8 +192,8 @@ public class Enemy : MonoBehaviour
     {
         float tmp = armature.animation.timeScale;
 
-        armature.animation.timeScale = 0.5f;
-        yield return new WaitForSeconds(0.1f);
+        armature.animation.timeScale = 0.7f;
+        yield return new WaitForSeconds(0.08f);
         armature.animation.timeScale = tmp;
         yield return null;
     }

@@ -84,6 +84,7 @@ public class AdsChest : MonoBehaviour
             }
             Player.Instance.mobileInput = 0;
             Player.Instance.ChangeState(new PlayerIdleState());
+            EnableControls(true);
         }
         else
         {
@@ -266,14 +267,7 @@ public class AdsChest : MonoBehaviour
                 musicWasPlaying = true;
                 SoundManager.Instance.currentMusic.Stop();
             }
-#if UNITY_ANDROID || UNITY_IOS
-//            if (Advertisement.IsReady())
-//            {
-//                
-//            }
 
-            
-#endif
 #if UNITY_EDITOR
                 AdsManager.Instance.isRewardVideoWatched = true;
 #elif UNITY_ANDROID || UNITY_IOS

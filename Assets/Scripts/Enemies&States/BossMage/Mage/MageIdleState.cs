@@ -36,7 +36,7 @@ public class MageIdleState : IMageBossState
                 if (timer >= TIMER_AFTER_ATTACK)
                 {
                     timer = 0;
-                    enemy.ChangeState(enemy.GetRandomState());
+                    enemy.ChangeState(enemy.GetRandomAttackState());
                 }
             }
             else

@@ -103,15 +103,22 @@ public class CameraEffect : MonoBehaviour
 
         if (changeColors)
         {
-            myProfile.colorGrading.enabled = true;
-            myProfile.chromaticAberration.enabled = true;
+            if (SystemInfo.graphicsShaderLevel >= 35)
+            {
+                myProfile.colorGrading.enabled = true;
+                myProfile.chromaticAberration.enabled = true;
+            }
+
         }
     }
 
     public void ResetColors()
     {
-        myProfile.colorGrading.enabled = false;
-        myProfile.chromaticAberration.enabled = false;
+        if (SystemInfo.graphicsShaderLevel >= 35)
+        {
+            myProfile.colorGrading.enabled = false;
+            myProfile.chromaticAberration.enabled = false;
+        }
     }
 
     public void SwitchOnRewindEffect(bool switchOn)

@@ -84,7 +84,7 @@ public class MainMenu : MonoBehaviour
     public void Start()
     {
         SetMap();
-
+        
         ChangeDatesOfGifts();
 
         greenCircleAchieve.SetActive(false);
@@ -93,7 +93,7 @@ public class MainMenu : MonoBehaviour
         GeneralDailyCount();
         SetGiftsIndication();
         SetAchievementsIndication();
-
+        Debug.Log(SystemInfo.graphicsShaderLevel);
         SoundManager.PlayMusic("main menu", true);
     }
 

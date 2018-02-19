@@ -8,11 +8,11 @@ public class AchievmentTutorial : SceneTutorial
     Map map;
 
     bool tmp = false;
-    
-    void Start ()
+
+    private void Start()
     {
-        
-	}
+        Debug.Log(AchievementManager.Instance.tutorialAchieve);
+    }
 
     private void Update()
     {

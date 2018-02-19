@@ -12,6 +12,7 @@ public class MageGroundAttackState : IMageBossState
     {
         this.enemy = enemy;
         isAttacked = false;
+        enemy.lastAttackState = enemy.currentState;
     }
 
     public void Execute()

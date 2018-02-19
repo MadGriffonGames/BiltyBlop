@@ -25,7 +25,7 @@ public class FlyingPigPatrolState : IFlyingPigState
 
             target = Player.Instance.target.transform.position - new Vector3(0, 1, 0);
 
-            if (distanceToKidX > 3 || distanceToKidY > 3.5f)
+            if (distanceToKidX > 4 || distanceToKidY > 4.5f)
             {
                 enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, enemy.movementSpeed * Time.deltaTime);
             }
@@ -37,7 +37,7 @@ public class FlyingPigPatrolState : IFlyingPigState
                 enemy.ChangeDirection();
             }
 
-            if (distanceToKidX < 5f && enemy.canAttack)
+            if (distanceToKidX < 4f && enemy.canAttack)
             {
                 enemy.ChangeState(new FlyingPigAttackState());
             }

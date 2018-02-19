@@ -135,12 +135,14 @@ public class AdsManager : MonoBehaviour
                 {
                     if (Advertisement.IsReady())
                     {
+                        Debug.Log("UnityAds");
                         UnityAdsShowRewardedVideo();
                     }
                     else
                     {
                         if (adMobRewardedVideo.IsLoaded())
                         {
+                            Debug.Log("AdMob");
                             AdMobShowRewardedVideo();
                         }
                     }
@@ -149,13 +151,15 @@ public class AdsManager : MonoBehaviour
                 {
                     if (adMobRewardedVideo.IsLoaded())
                     {
+                        Debug.Log("AdMob");
                         AdMobShowRewardedVideo();
                     }
                     else
                     {
                         if (Advertisement.IsReady())
                         {
-                           UnityAdsShowRewardedVideo();
+                            Debug.Log("UnityAds");
+                            UnityAdsShowRewardedVideo();
                         }
                     }
                 }

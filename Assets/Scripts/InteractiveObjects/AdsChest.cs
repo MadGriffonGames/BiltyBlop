@@ -260,7 +260,7 @@ public class AdsChest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Sword"))
+		if (other.CompareTag("Sword") && AdsManager.Instance.adMobRewardedVideo.IsLoaded())
         {
             if (PlayerPrefs.GetInt("MusicIsOn") == 1)
             {

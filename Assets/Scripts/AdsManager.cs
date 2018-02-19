@@ -31,7 +31,7 @@ public class AdsManager : MonoBehaviour
     public bool isRewardedVideoShown = false;
 
     InterstitialAd interstitial;
-    private RewardBasedVideoAd adMobRewardedVideo;
+	public RewardBasedVideoAd adMobRewardedVideo;
 
     string appKey;
     string unityGameId;

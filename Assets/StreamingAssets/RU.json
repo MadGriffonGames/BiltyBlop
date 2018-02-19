@@ -325,6 +325,11 @@
 	"text": "ВВЕДИ КОД", 
 	"fontSize": 0
 	},
+	
+	"enter promo code": {
+	"text": "ВВЕСТИ ПРОМО КОД", 
+	"fontSize": 0
+	},
 
 	//Level 1
 	

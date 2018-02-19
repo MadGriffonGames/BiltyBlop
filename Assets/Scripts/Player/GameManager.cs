@@ -129,8 +129,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(AchievementManager.Instance.tutorialAchieve.achieveName);
-
         if (isLevel && UI.Instance.isActiveAndEnabled)
         {
             coinTxt.text = (" " + collectedCoins);

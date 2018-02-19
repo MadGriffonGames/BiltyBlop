@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class сrystalTrigger : MonoBehaviour
+public class CrystalTrigger : MonoBehaviour
 {
     Animator[] myAnimator;
 

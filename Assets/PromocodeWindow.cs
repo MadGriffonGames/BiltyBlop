@@ -87,7 +87,6 @@ public class PromocodeWindow : MonoBehaviour {
 
     public void GiantButton()
     {
-        Debug.Log("kek");
         giftFade.SetActive(false);
         giftWindow.SetActive(false);
         giantButton.SetActive(false);

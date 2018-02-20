@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class SnowballTest : MonoBehaviour
 {
-
     public Vector3 startPosition;
-
-   // [SerializeField]
-   // public GameObject particle;
 
     private Vector2 direction;
     float xPower;
@@ -31,12 +27,8 @@ public class SnowballTest : MonoBehaviour
         }
     }
 
-
-
-
     private void Start()
     {
-        //Throw(transform.position, new Vector2(60, 15));
         xPower = 0;
         yPower = 0;
         increment = 0.5f;
@@ -49,7 +41,6 @@ public class SnowballTest : MonoBehaviour
     {
         if (!xPressed)
         {
-            Debug.Log("x incremented");
             xPower += increment;
             if (xPower >= 40)
                 increment = -0.5f;
@@ -59,7 +50,6 @@ public class SnowballTest : MonoBehaviour
 
         if (xPressed && !yPressed)
         {
-            Debug.Log("y incremented");
             yPower += increment;
             if (yPower >= 25)
                 increment = -0.5f;
@@ -70,19 +60,16 @@ public class SnowballTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             xPressed = true;
-            Debug.Log(xPower);
         }
 
         if (Input.GetKeyDown(KeyCode.G) && xPressed)
         {
             yPressed = true;
-            Debug.Log(yPower);
         }
 
         if (xPressed && yPressed && !threw)
         {
             Throw(this.transform.position, new Vector2(xPower, yPower));
-            Debug.Log("threw");
             threw = true;
         }
 
@@ -96,7 +83,6 @@ public class SnowballTest : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("GroundYeti"))
         {
-            //Instantiate(particle, this.gameObject.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
             SoundManager.PlaySound("stone_crash");
         }
@@ -107,7 +93,6 @@ public class SnowballTest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             SoundManager.PlaySound("stone_crash");
-           // Instantiate(particle, this.gameObject.transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
         }
     }

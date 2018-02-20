@@ -98,7 +98,6 @@ public class ArenaController : MonoBehaviour {
 
 	private void GenerateNewWave()
 	{
-		Debug.Log ("NEW WAVE");
 		waveNumber++;
 		waveTime = Random.Range (10f, 15f);
 		SpawnRandomEnemy (Random.Range(4,6));
@@ -107,45 +106,8 @@ public class ArenaController : MonoBehaviour {
 	private void SpawnItem()
 	{
 		int num = Random.Range (0, 5);
-//		int itemOrderNum = 0;
-//		switch (num) 
-//		{
-//		case (num<10):
-//			{
-//				itemOrderNum = 0;
-//				break;
-//			}
-//		case (num<20):
-//			{
-//				itemOrderNum = 1;
-//				break;
-//			}
-//		case (num<30):
-//			{
-//				itemOrderNum = 2;
-//				break;
-//			}
-//		case (num<45):
-//			{
-//				itemOrderNum = 3;
-//				break;
-//			}
-//		case (num<60):
-//			{
-//				itemOrderNum = 4;
-//				break;
-//			}
-//		case (num<=100):
-//			{
-//				itemOrderNum = 5;
-//				break;
-//			}
-//		default:
-//			break;
-//		}
 		GameObject newItem = Instantiate (items [num]) as GameObject;
 		newItem.transform.position = spawnItemsTransforms [Random.Range (0, spawnItemsTransforms.Length)].position;
 		activeBonuses.Add (newItem);
-		Debug.Log (activeBonuses.Count);
 	}
 }

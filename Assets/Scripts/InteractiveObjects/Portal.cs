@@ -35,7 +35,6 @@ public class Portal : MonoBehaviour
     private void Update()
     {
         SetPortalOpacity();
-        //Debug.Log(image.GetAlpha());
     }
 
 

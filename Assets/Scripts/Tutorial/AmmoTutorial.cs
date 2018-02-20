@@ -26,7 +26,6 @@ public class AmmoTutorial : InAppTutorial
     {
         if (isCollected && (PlayerPrefs.GetInt ("Level2") == 0 || GameManager.developmentBuild))
         {
-            Debug.Log(1);
             base.Update ();
 
 			if (InventoryUI.isBonusBarOpen && !isActivated)

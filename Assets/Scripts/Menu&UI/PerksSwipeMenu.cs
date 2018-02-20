@@ -90,7 +90,6 @@ public class PerksSwipeMenu : SwipeMenu {
                     PerkPrefab perk = perkPrefabs[j].GetComponent<PerkPrefab>();
 					perk.SetPlayerPrefsParams ();
 					int perkLvl = PlayerPrefs.GetInt (perkPrefabs[j].name);
-					Debug.Log (perkLvl);
 
                     perkCardObj.transform.SetParent(panel);
                     perkCardObj.transform.localPosition = new Vector3(i*DISTANCE, 0, 0);

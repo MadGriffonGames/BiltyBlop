@@ -246,6 +246,5 @@ public class Enemy : MonoBehaviour
                 enemyParts.Add(tmp[i]);
             }
         }
-        Debug.Log(enemyParts.Count);
     }
 }

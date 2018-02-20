@@ -106,7 +106,6 @@ using System.IO;
                 return true;
             default:
                 {
-                    Debug.Log("lel");
                     return false;
                 }
         }
@@ -127,11 +126,9 @@ using System.IO;
 
     public void CreateCodes(int CODES_COUNT)
     {
-        //string path = ;
         for (int i = 0; i < CODES_COUNT; i++)
         {
             promocodes[i] = RandomString(CODE_LENGTH);
-            Debug.Log(promocodes[i]);
             using (StreamWriter sw = File.AppendText(@"C:\Users\Code\Desktop\Codes.txt"))
                 sw.WriteLine(promocodes[i]);
         }

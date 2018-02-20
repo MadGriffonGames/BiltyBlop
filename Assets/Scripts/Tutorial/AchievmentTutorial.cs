@@ -9,11 +9,6 @@ public class AchievmentTutorial : SceneTutorial
 
     bool tmp = false;
 
-    private void Start()
-    {
-        Debug.Log(AchievementManager.Instance.tutorialAchieve);
-    }
-
     private void Update()
     {
         if (!tmp)

@@ -47,7 +47,7 @@ public class FacebookManager : MonoBehaviour
         shareURL = "https://play.google.com/store/apps/details?id=com.hardslime.kidarian";
 
 #elif UNITY_IOS
-        shareURL = "www.kek.com";
+        shareURL = "https://www.hardslime.com/";
 #endif
     }
 
@@ -125,6 +125,7 @@ public class FacebookManager : MonoBehaviour
         if (PlayerPrefs.GetInt(TWITTER_SHARE) == 1)
         {
             freeGiftTwit.SetActive(false);
+            StartCoroutine(TimeToBrowse());
             StartCoroutine(GiveReward());
         }
     }
@@ -151,6 +152,11 @@ public class FacebookManager : MonoBehaviour
         shareBar.SetActive(false);
         fade.SetActive(false);
         giantButton.SetActive(false);
+    }
+
+    IEnumerator TimeToBrowse()
+    {
+        yield return new WaitForSeconds(0.23f);
     }
 
 }

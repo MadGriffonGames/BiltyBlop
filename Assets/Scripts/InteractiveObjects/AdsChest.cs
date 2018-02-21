@@ -85,6 +85,7 @@ public class AdsChest : MonoBehaviour
             Player.Instance.mobileInput = 0;
             Player.Instance.ChangeState(new PlayerIdleState());
             EnableControls(true);
+            isOpened = false;
         }
         else
         {

@@ -24,7 +24,7 @@ public class ActLocker : MonoBehaviour
 
     int starsCount = 0;
 
-	void Start ()
+    private void OnEnable()
     {
         for (int i = 0; i <= TOTAL_LEVEL_COUNT; i++)
         {
@@ -55,10 +55,12 @@ public class ActLocker : MonoBehaviour
             levelPanel.SetActive(false);
         }
 
-        if (collectStars && completeLevel)
+        if ((collectStars && completeLevel) || PlayerPrefs.GetInt(Promocodes.BETA_TESTERS_CODE) == 1)
         {
             statPanel.SetActive(true);
+            transform.parent.GetComponent<Button>().enabled = true;
             this.gameObject.SetActive(false);
+
         }
         else
         {

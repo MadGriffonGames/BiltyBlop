@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PromocodeWindow : MonoBehaviour {
-
+public class PromocodeWindow : MonoBehaviour
+{
     public InputField inputField;
     [SerializeField]
     GameObject fade;
@@ -24,19 +24,15 @@ public class PromocodeWindow : MonoBehaviour {
     GameObject giftFade;
     [SerializeField]
     GameObject giantButton;
+    [SerializeField]
+    public Text giftDescription;
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         inputField.onValueChanged.AddListener(delegate { ToUpperCase(); });
         inputField.onValueChanged.AddListener(delegate { ButtonActivate(); });
         inputField.onValueChanged.AddListener(delegate { ButtonDeactivate(); });
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 
     public void ToUpperCase()
     {
@@ -57,7 +53,6 @@ public class PromocodeWindow : MonoBehaviour {
             currentImg.GetComponent<Image>().color += new Color(0, 0, 0, 1);
             giftFade.SetActive(true);
             giftWindow.SetActive(true);
-            giftWindow.GetComponentInChildren<Text>().text = Promocodes.Instance.promocodeGift;
             giantButton.SetActive(true);
         }
         else

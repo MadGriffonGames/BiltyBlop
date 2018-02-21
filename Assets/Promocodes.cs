@@ -5,13 +5,16 @@ using System.Text;
 using UnityEngine;
 using System.IO;
 
-    public class Promocodes : MonoBehaviour
+public class Promocodes : MonoBehaviour
 {
+    [SerializeField]
+    PromocodeWindow promoceodesUi;
+
     public const int CODE_LENGTH = 10;
     public const int CODES_COUNT = 10;
 
-    public const string skin1 = "YJHXOXVRXV";
-    public const string skin2 = "UVCTQSMHLI";
+    public const string BETA_TESTERS_CODE = "YJHXOXVRXV";
+    public const string YOUTUBERS_CODE = "UVCTQSMHLI";
     public const string skin3 = "MCKGKVAZUG";
     public const string skin4 = "QIRWZSOOES";
     public const string skin5 = "TOYMOPBEOF";
@@ -21,7 +24,7 @@ using System.IO;
     public const string skin9 = "YSLMHUNYFG";
     public const string skin10 = "QZTABYBQOE";
     public string promocodeGift;
-    
+
 
     private string[] promocodes;
 
@@ -42,31 +45,28 @@ using System.IO;
         promocodes = new string[10];
     }
 
-    //public bool IsCorrectCode(string data)
-    //{
-    //    bool result = false;
-    //    for (int i = 0; i < promocodes.Length; i++)
-    //    {
-    //        if (promocodes[i] == data)
-    //        {
-    //            ActivateCode(data);
-    //        }
-
-    //        result = true;
-    //        return result;
-    //    }
-    //    return result;
-    //}
-
     public bool IsActivateCode(string data)
     {
         switch (data)
         {
-            case skin1:
-                promocodeGift = "skin1";
-                return true;
+            case BETA_TESTERS_CODE:
+                PlayerPrefs.SetInt(BETA_TESTERS_CODE, 0);
+                if (PlayerPrefs.GetInt(BETA_TESTERS_CODE) == 0)
+                {
+                    PlayerPrefs.SetInt(BETA_TESTERS_CODE, 1);
 
-            case skin2:
+                    for (int i = 1; i <= 21; i++)
+                    {
+                        PlayerPrefs.SetInt("Level" + i.ToString(), 1);
+                    }
+                    GameManager.AddCoins(1000);
+                    promoceodesUi.giftDescription.text = "thank you for your participation in the beta test! You unlocked episodes 1 and 2 and get 1000 gold";
+                    return true;
+                }
+                else
+                    return false;
+
+            case YOUTUBERS_CODE:
                 promocodeGift = "skin2";
                 return true;
 
@@ -105,9 +105,7 @@ using System.IO;
                 promocodeGift = "skin1";
                 return true;
             default:
-                {
-                    return false;
-                }
+                return false;
         }
     }
 

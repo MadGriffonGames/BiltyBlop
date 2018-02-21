@@ -12,8 +12,6 @@ public class CameraEffect : MonoBehaviour
     GameObject blood;
     GameObject backTyplak;
     Image backTyplackImage;
-    GameObject cloudsTyplak;
-    Image cloudsTyplakImage;
     Color origColor;
     GameObject typlakViniette;
     Image typlakVinietteImage;
@@ -34,11 +32,9 @@ public class CameraEffect : MonoBehaviour
         position = GetComponent<Transform>();
         blood = UI.Instance.transform.Find("Blood").gameObject;
         backTyplak = UI.Instance.transform.Find("BackTyplak").gameObject;
-        cloudsTyplak = UI.Instance.transform.Find("CloudsTyplak").gameObject;
         typlakViniette = UI.Instance.transform.Find("TyplakViniette").gameObject;
         typlakVinietteImage = typlakViniette.GetComponent<Image>();
         backTyplackImage = backTyplak.GetComponent<Image>();
-        cloudsTyplakImage = cloudsTyplak.GetComponent<Image>();
         myProfile = GetComponent<PostProcessingBehaviour>().profile;
         myProfile.colorGrading.enabled = false;
         myProfile.chromaticAberration.enabled = false;
@@ -171,7 +167,6 @@ public class CameraEffect : MonoBehaviour
     public void EnableTyplakEffect()
     {
         backTyplak.SetActive(true);
-        //cloudsTyplak.SetActive(true);
         typlakViniette.SetActive(true);
         isTyplakEffect = true;
     }
@@ -179,7 +174,6 @@ public class CameraEffect : MonoBehaviour
     void StartMoving()
     {
         backTyplackImage.color += new Color(0, 0, 0, colorShift);
-        //cloudsTyplakImage.color += new Color(0, 0, 0, colorShift * 1.5f);
         if (backTyplackImage.color.a >= 1)
         {
             colorShift = -0.005f;
@@ -210,15 +204,12 @@ public class CameraEffect : MonoBehaviour
 
         typlakVinietteImage.color += new Color(0, 0, 0, vinietteColorShift);
         typlakViniette.GetComponent<RectTransform>().localScale += new Vector3(sizeShift, sizeShift);
-
-        //cloudsTyplak.GetComponent<RectTransform>().localScale += new Vector3(sizeShift , -sizeShift);
-        //cloudsTyplak.GetComponent<RectTransform>().position += new Vector3(sizeShift * 3, 0);
     }
 
     public void DisableTyplakEffect()
     {
         backTyplak.SetActive(false);
-        cloudsTyplak.SetActive(false);
+        typlakViniette.SetActive(false);
         isTyplakEffect = false;
     }
 }

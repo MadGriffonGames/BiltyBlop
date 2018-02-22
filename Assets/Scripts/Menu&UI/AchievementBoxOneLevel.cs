@@ -263,12 +263,8 @@ public class AchievementBoxOneLevel : MonoBehaviour
         if (lootType == AMMO)
             loot.gameObject.GetComponent<Image>().sprite = ClipsCount;
 
-
-        Debug.Log(PlayerPrefs.GetInt(HEAL + "Count"));
-        Debug.Log(PlayerPrefs.GetString(achievementName + "rewardType"));
         Inventory.Instance.AddItem(PlayerPrefs.GetString(achievementName + "rewardType"), PlayerPrefs.GetInt(achievementName + "reward"));
         loot.gameObject.SetActive(true);
-        Debug.Log(PlayerPrefs.GetInt(HEAL + "Count"));
         yield return new WaitForSeconds(1.2f);
         fadeButton.SetActive(true);
     }

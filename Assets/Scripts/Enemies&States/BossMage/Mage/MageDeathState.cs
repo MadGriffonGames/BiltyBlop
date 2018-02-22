@@ -23,12 +23,12 @@ public class MageDeathState : IMageBossState
             enemy.mageCollider.enabled = false;
             enemy.damageCollider.enabled = false;
             enemy.armature.armature.animation.FadeIn("death", -1, 1);
-        }
-        if (enemy.armature.animation.lastAnimationName == "death" && enemy.armature.animation.isCompleted)
-        {
             Player.Instance.stars = 3;
             GameManager.CollectedCoins += 500;
             GameManager.lvlCollectedCoins += 500;
+        }
+        if (enemy.armature.animation.lastAnimationName == "death" && enemy.armature.animation.isCompleted)
+        {
             enemy.runeStone.SetActive(true);
         }
     }

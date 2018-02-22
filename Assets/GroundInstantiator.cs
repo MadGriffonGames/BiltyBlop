@@ -59,7 +59,6 @@ public class GroundInstantiator : MonoBehaviour {
                 {
                     mushroom.SetActive(false);
                 }
-                Debug.Log(mushroomFlag);
                 tmp = true;
                 this.gameObject.transform.position += new Vector3(40f, 0);
                 currentGroundPosition += new Vector3(40f, 0);

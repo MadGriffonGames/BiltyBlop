@@ -14,7 +14,6 @@ public class TimeController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log(internalTime);
         if (isForward && !Player.Instance.IsDead)
         {
             internalTime++;

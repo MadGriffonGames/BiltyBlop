@@ -24,7 +24,6 @@ public class SecretRoomTrigger : MonoBehaviour
             DevToDev.Analytics.CustomEvent("#SECRET_FOUND in " + GameManager.currentLvl);
 
             AchievementManager.Instance.CheckAchieve(AchievementManager.Instance.secretRoomer);
-            //Debug.Log(PlayerPrefs.GetInt(AchievementManager.Instance.secretRoomer.achieveName));
             secretRoom.SetActive(false);
             secretRoomHalo.SetActive(false);
             Player.Instance.secretIndication.SetActive(false);

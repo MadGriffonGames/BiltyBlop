@@ -16,8 +16,8 @@ public class BirdFly : MonoBehaviour {
     public UnityEngine.Transform[] pathPoints;
     public Vector3[] pathCordinates;
 
-    // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         myAnimator = GetComponent<Animator>();
         myAnimator.enabled = false;
         pathCordinates = new Vector3[pathPoints.Length];
@@ -26,18 +26,12 @@ public class BirdFly : MonoBehaviour {
         foreach (var point in pathPoints)
         {
             pathCordinates[i] = pathPoints[i].localPosition;
-            /*if (transform.localScale.x <= 0)
-            {
-                float delta = transform.localPosition.x - pathCordinates[i].x;
-                pathCordinates[i].x = transform.localPosition.x + delta;
-                Debug.Log(pathCordinates[i].x);
-            }*/
             i++;
         }
     }
 	
-	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
         if (isTriggered)
         {
             nextPos = pathCordinates[nextPosNum];

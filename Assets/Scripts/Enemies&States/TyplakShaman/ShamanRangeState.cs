@@ -83,7 +83,6 @@ public class ShamanRangeState : IShamanState
     {
         if (other.gameObject.CompareTag("Edge"))
         {
-            Debug.Log(1);
             enemy.Target = null;
             enemy.ChangeDirection();
         }

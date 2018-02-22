@@ -286,14 +286,6 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator GetSound(string soundName)
 	{
-        //ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
-
-        //while(!request.isDone)
-        //{
-        //	yield return null;
-        //}
-
-        //AudioClip clip = (AudioClip)request.asset;
         AudioClip clip = soundBank[soundName];
 
 		if(clip == null)
@@ -313,23 +305,11 @@ public class SoundManager : MonoBehaviour
 		au.volume = soundVolume;
 		au.clip = clip;
 		au.Play();
-        //Debug.Log(au.volume + " " + soundVolume);
 		Destroy(obj, clip.length);
 	}
 
     IEnumerator GetSoundPitched(string soundName, float pitch)
     {
-        //ResourceRequest request = LoadAsync(soundFolder + "/" + soundName);
-
-
-
-        //while (!request.isDone)
-        //{
-        //    yield return null;
-        //}
-
-        //AudioClip clip = (AudioClip)request.asset;
-
         AudioClip clip = soundBank[soundName];
 
         if (clip == null)
@@ -384,7 +364,6 @@ public class SoundManager : MonoBehaviour
         stepsAudio.pitch = currentPitch;
         stepsAudio.mute = muteSound;
         stepsAudio.volume = (last == null) ? musicVolume : 0;
-        //Debug.Log(clip.name);
         stepsAudio.clip = clip;
         stepsAudio.Pause();
         steps = stepsAudio;

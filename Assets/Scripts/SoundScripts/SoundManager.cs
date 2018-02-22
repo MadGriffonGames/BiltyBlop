@@ -407,5 +407,15 @@ public class SoundManager : MonoBehaviour
         stepsAudio.Stop();
     }
 
+    public void PauseCurrentTrack()
+    {
+        currentMusic.Pause();
+    }
+
+    public void UnPauseCurrentTrack()
+    {
+        currentMusic.UnPause();
+    }
+
 
 }

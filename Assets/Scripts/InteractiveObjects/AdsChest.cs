@@ -241,12 +241,6 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
     {
         if (other.CompareTag("Sword") && !isRewardCollected)
         {
-            if (PlayerPrefs.GetInt("MusicIsOn") == 1)
-            {
-                musicWasPlaying = true;
-                SoundManager.Instance.currentMusic.Stop();
-            }
-
             isOpened = true;
             EnableControls(false);
             Player.Instance.mobileInput = 0;
@@ -286,24 +280,12 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         Player.Instance.ChangeState(new PlayerIdleState());
         EnableControls(true);
 
-        if (musicWasPlaying)
-        {
-            SoundManager.MuteMusic(false);
-            //SoundManager.PlayRandomMusic("kid_music", true); хуй
-        }
-
         AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
         DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
     }
 
     public void OnRewardedVideoFailed()
     {
-        if (musicWasPlaying)
-        {
-            SoundManager.PlayRandomMusic("kid_music", true);
-
-            SoundManager.MuteMusic(false);
-        }
         Player.Instance.mobileInput = 0;
         Player.Instance.ChangeState(new PlayerIdleState());
         EnableControls(true);

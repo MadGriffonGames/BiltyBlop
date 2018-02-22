@@ -295,8 +295,6 @@ public class AdsManager : MonoBehaviour
             currentPlacement.OnRewardedVideoWatched();
             SoundManager.Instance.currentMusic.UnPause();
         }
-
-        Debug.Log(currentPlacement.GetType());
     }
 
     void OnVideoFailed()

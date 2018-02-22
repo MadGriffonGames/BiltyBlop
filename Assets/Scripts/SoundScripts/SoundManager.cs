@@ -36,6 +36,8 @@ public class SoundManager : MonoBehaviour
     private static float currentPitch = 1;
     Dictionary<string, AudioClip> soundBank;
 
+    float playbackTime;
+
 
     void Awake()
 	{
@@ -417,5 +419,14 @@ public class SoundManager : MonoBehaviour
         currentMusic.UnPause();
     }
 
+    public void PauseMusic()
+    {
+        playbackTime = currentMusic.time;
+        currentMusic.Pause();
+    }
 
+    public void UnpauseMusic()
+    {
+        currentMusic.PlayDelayed(playbackTime);
+    }
 }

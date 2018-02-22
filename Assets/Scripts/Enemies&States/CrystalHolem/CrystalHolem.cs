@@ -10,7 +10,7 @@ public class CrystalHolem : MovingMeleeEnemy
     [SerializeField]
     GameObject crystalParticle;
     [SerializeField]
-    public CrystalTrigger crystals;
+	public CrystalTrigger crystals;
 
 
     bool damaged = false;

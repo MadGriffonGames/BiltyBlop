@@ -33,6 +33,9 @@ public class AdsManager : MonoBehaviour
     InterstitialAd interstitial;
     private RewardBasedVideoAd adMobRewardedVideo;
 
+    IAdsPlacement currentPlacement;
+    bool isRewardGiven;
+
     string appKey;
     string unityGameId;
     string adMobAppId;
@@ -83,6 +86,10 @@ public class AdsManager : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         // Called when the user should be rewarded for watching a video.
         adMobRewardedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
+        // Called when the ad is closed.
+        adMobRewardedVideo.OnAdClosed += HandleRewardBasedVideoClosed;
+        // Called when an ad request failed to load.
+        adMobRewardedVideo.OnAdFailedToLoad += HandleRewardBasedVideoFailedToLoad;
         // Load the rewarded video ad with the request.
         this.adMobRewardedVideo.LoadAd(request, adUnitId);
     }
@@ -120,8 +127,16 @@ public class AdsManager : MonoBehaviour
         }
     }
 
-   public void ShowRewardedVideo()
+   public void ShowRewardedVideo(IAdsPlacement _currentPlacemnt)
     {
+
+        currentPlacement = _currentPlacemnt;
+        isRewardGiven = false;
+
+#if UNITY_EDITOR
+        OnVideoWatched();
+#endif
+
         if (CanNotShowRewardedVideo())
         {
             InstantiateWarning();
@@ -176,15 +191,18 @@ public class AdsManager : MonoBehaviour
         if (result == ShowResult.Finished)
         {
             Debug.Log("Video completed - Offer a reward to the player");
-            isRewardVideoWatched = true;
+            //isRewardVideoWatched = true;
+            OnVideoWatched();
         }
         else if (result == ShowResult.Skipped)
         {
             Debug.LogWarning("Video was skipped - Do NOT reward the player");
+            OnVideoFailed();
         }
         else if (result == ShowResult.Failed)
         {
             Debug.LogError("Video failed to show");
+            OnVideoFailed();
         }
     }
 
@@ -196,11 +214,28 @@ public class AdsManager : MonoBehaviour
 
     public void HandleRewardBasedVideoRewarded(object sender, Reward args)
     {
-        isRewardVideoWatched = true;
+        //isRewardVideoWatched = true;
+        OnVideoWatched();
 
         string type = args.Type;
         double amount = args.Amount;
         MonoBehaviour.print("HandleRewardBasedVideoRewarded event received for " + amount.ToString() + " " + type);
+    }
+
+    public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+        OnVideoFailed();
+
+        MonoBehaviour.print(
+            "HandleRewardBasedVideoFailedToLoad event received with message: "
+                             + args.Message);
+    }
+
+    public void HandleRewardBasedVideoClosed(object sender, System.EventArgs args)
+    {
+        OnVideoFailed();
+        
+        MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
     }
 
     //other
@@ -252,5 +287,19 @@ public class AdsManager : MonoBehaviour
         warning.GetComponent<RectTransform>().localPosition = new Vector2();
     }
 
+    void OnVideoWatched()
+    {
+        if (!isRewardGiven)
+        {
+            isRewardGiven = true;
+            currentPlacement.OnRewardedVideoWatched();
+        }
 
+        Debug.Log(currentPlacement.GetType());
+    }
+
+    void OnVideoFailed()
+    {
+        currentPlacement.OnRewardedVideoFailed();
+    }
 }

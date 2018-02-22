@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class DailyLoot : MonoBehaviour
+public class DailyLoot : MonoBehaviour, IAdsPlacement
 {
     [SerializeField]
     GameObject greenCircle;
@@ -136,36 +136,6 @@ public class DailyLoot : MonoBehaviour
 
 	void Update ()
     {
-        if (AdsManager.Instance.isRewardVideoWatched && coinVideo)
-        {
-            AdsManager.Instance.isRewardVideoWatched = false;
-            PlayerPrefs.SetInt(dailyCoins, 0);
-            UpdateIndicator();
-
-            GiveCoinReward(50);
-            coinVideo = false;
-        }
-
-        if (AdsManager.Instance.isRewardVideoWatched && clipsCountVideo)
-        {
-            AdsManager.Instance.isRewardVideoWatched = false;
-            PlayerPrefs.SetInt(dailyClipsCount, 0);
-            UpdateIndicator();
-
-            GiveClipsCountReward(1);
-            clipsCountVideo = false;
-        }
-
-        if (AdsManager.Instance.isRewardVideoWatched && potionVideo)
-        {
-            AdsManager.Instance.isRewardVideoWatched = false;
-            PlayerPrefs.SetInt(dailyPotions, 0);
-            UpdateIndicator();
-
-            GivePotionReward(1);
-            clipsCountVideo = false;
-        }
-
         if (isTimerTickCoin)
         {
             spanCoin = hours12 + (coinLastOpenDate - DateTime.Now);
@@ -185,7 +155,6 @@ public class DailyLoot : MonoBehaviour
                 ActivateClipsCountLoot();
             }
         }
-        
 
         if (isTimerTickPotion)
         {
@@ -302,32 +271,19 @@ public class DailyLoot : MonoBehaviour
     public void RewardedCoinVideoButton()
     {
         coinVideo = true;
-#if UNITY_EDITOR
-        AdsManager.Instance.isRewardVideoWatched = true;
-        
-#elif UNITY_ANDROID || UNITY_IOS
-        AdsManager.Instance.ShowRewardedVideo();
-#endif
+        AdsManager.Instance.ShowRewardedVideo(this);
     }
 
     public void RewardedClipsCountVideoButton()
     {
         clipsCountVideo = true;
-#if UNITY_EDITOR
-        AdsManager.Instance.isRewardVideoWatched = true;
-#elif UNITY_ANDROID || UNITY_IOS
-        AdsManager.Instance.ShowRewardedVideo();
-#endif
+        AdsManager.Instance.ShowRewardedVideo(this);
     }
 
     public void RewardedPotionVideoButton()
     {
         potionVideo = true;
-#if UNITY_EDITOR
-        AdsManager.Instance.isRewardVideoWatched = true;
-#elif UNITY_ANDROID || UNITY_IOS
-        AdsManager.Instance.ShowRewardedVideo();
-#endif
+        AdsManager.Instance.ShowRewardedVideo(this);
     }
 
 
@@ -450,5 +406,38 @@ public class DailyLoot : MonoBehaviour
                 freeText[i].gameObject.SetActive(true);
             }
         }
+    }
+
+    public void OnRewardedVideoWatched()
+    {
+        if (coinVideo)
+        {
+            PlayerPrefs.SetInt(dailyCoins, 0);
+            UpdateIndicator();
+
+            GiveCoinReward(50);
+            coinVideo = false;
+        }
+        else if (clipsCountVideo)
+        {
+            PlayerPrefs.SetInt(dailyClipsCount, 0);
+            UpdateIndicator();
+
+            GiveClipsCountReward(1);
+            clipsCountVideo = false;
+        }
+        else if (potionVideo)
+        {
+            PlayerPrefs.SetInt(dailyPotions, 0);
+            UpdateIndicator();
+
+            GivePotionReward(1);
+            clipsCountVideo = false;
+        }
+    }
+
+    public void OnRewardedVideoFailed()
+    {
+
     }
 }

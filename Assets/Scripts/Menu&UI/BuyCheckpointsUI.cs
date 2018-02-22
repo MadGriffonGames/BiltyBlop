@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class BuyCheckpointsUI : MonoBehaviour
+public class BuyCheckpointsUI : MonoBehaviour, IAdsPlacement
 {
     const int FREE_CHECKPOINTS_GIFT = 1;
     const int CRYSTAL_PRICE = 4;
@@ -67,35 +67,11 @@ public class BuyCheckpointsUI : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (AdsManager.Instance.isRewardVideoWatched)
-        {
-            AdsManager.Instance.isRewardVideoWatched = false;
-
-            this.gameObject.SetActive(false);
-
-            Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
-            DeathUI.Instance.UpdateFreeCheckpointsCounter();
-
-            notPremiumAttemps--;
-        }
-    }
-
     public void VideoButton()
     {
         MetricaManager.Instance.rewardedCheckpoints++;
 
-#if UNITY_EDITOR
-        AdsManager.Instance.isRewardVideoWatched = true;
-
-#elif UNITY_ANDROID
-        AdsManager.Instance.ShowRewardedVideo();//then check if ad was showed in update()
-
-#elif UNITY_IOS
-//        AdsManager.Instance.ShowRewardedVideo();//then check if ad was showed in update()
-
-#endif
+        AdsManager.Instance.ShowRewardedVideo(this);
 
         AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Rewarded Video in " + MetricaManager.Instance.currentLevel);
         DevToDev.Analytics.CustomEvent("#CHECKPOINTS_USE Checkpoints bought for Rewarded Video in " + MetricaManager.Instance.currentLevel);
@@ -175,5 +151,20 @@ public class BuyCheckpointsUI : MonoBehaviour
     public void Skip()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void OnRewardedVideoWatched()
+    {
+        this.gameObject.SetActive(false);
+
+        Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
+        DeathUI.Instance.UpdateFreeCheckpointsCounter();
+
+        notPremiumAttemps--;
+    }
+
+    public void OnRewardedVideoFailed()
+    {
+
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class DailyReward : MonoBehaviour
+public class DailyReward : MonoBehaviour, IAdsPlacement
 {
     [SerializeField]
     bool tmp;
@@ -200,22 +200,6 @@ public class DailyReward : MonoBehaviour
                 ActivateChest();
             }
         }
-
-        if (AdsManager.Instance.isRewardVideoWatched && _isRewardedVideoWatched)
-        {
-            doubleButton.GetComponent<Button>().interactable = false;
-
-            if (musicWasPlaying)
-            {
-                musicWasPlaying = false;
-                SoundManager.PlayRandomMusic("kid_music", true);
-            }
-            AdsManager.Instance.isRewardVideoWatched = false;
-
-            rewardText.text = (int.Parse(rewardText.text)*2).ToString();
-
-            myReward.GiveReward();
-        }
     }
 
     void SetRewardWindow()
@@ -355,16 +339,29 @@ public class DailyReward : MonoBehaviour
         if (PlayerPrefs.GetInt("MusicIsOn") == 1)
         {
             musicWasPlaying = true;
-            //PlayerPrefs.SetInt("MusicIsOn", 0);
-            //SoundManager.MuteMusic(true);
             SoundManager.Instance.currentMusic.Stop();
         }
 
-#if UNITY_EDITOR
-        AdsManager.Instance.isRewardVideoWatched = true;
-#elif UNITY_ANDROID || UNITY_IOS
+        AdsManager.Instance.ShowRewardedVideo(this);
+    }
 
-		AdsManager.Instance.ShowRewardedVideo();
-#endif
+    public void OnRewardedVideoWatched()
+    {
+        doubleButton.GetComponent<Button>().interactable = false;
+
+        if (musicWasPlaying)
+        {
+            musicWasPlaying = false;
+            //SoundManager.PlayRandomMusic("kid_music", true); хуй
+        }
+
+        rewardText.text = (int.Parse(rewardText.text) * 2).ToString();
+
+        myReward.GiveReward();
+    }
+
+    public void OnRewardedVideoFailed()
+    {
+
     }
 }

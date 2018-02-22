@@ -132,7 +132,7 @@ public class AdsManager : MonoBehaviour
 
         currentPlacement = _currentPlacemnt;
         isRewardGiven = false;
-
+        SoundManager.Instance.currentMusic.Pause();
 #if UNITY_EDITOR
         OnVideoWatched();
 #endif
@@ -293,6 +293,7 @@ public class AdsManager : MonoBehaviour
         {
             isRewardGiven = true;
             currentPlacement.OnRewardedVideoWatched();
+            SoundManager.Instance.currentMusic.UnPause();
         }
 
         Debug.Log(currentPlacement.GetType());
@@ -301,5 +302,6 @@ public class AdsManager : MonoBehaviour
     void OnVideoFailed()
     {
         currentPlacement.OnRewardedVideoFailed();
+        SoundManager.Instance.currentMusic.UnPause();
     }
 }

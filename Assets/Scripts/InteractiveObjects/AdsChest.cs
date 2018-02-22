@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
 
-public class AdsChest : MonoBehaviour
+public class AdsChest : MonoBehaviour, IAdsPlacement
 {
     public const int COINS_RANGE = 50;
     public const int CRYSTALS_RANGE = 75;
@@ -63,29 +63,7 @@ public class AdsChest : MonoBehaviour
     {
         if (isOpened && !isRewardCollected)
         {
-            if (AdsManager.Instance.isRewardVideoWatched)
-            {
-                AdsManager.Instance.isRewardVideoWatched = false;
-                GetComponent<BoxCollider2D>().enabled = false;
-                isRewardCollected = true;
-
-                Randomize();
-                GetComponent<SpriteRenderer>().sprite = openChest;
-                loot.gameObject.SetActive(true);
-
-                AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
-                DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
-            }
-            if (musicWasPlaying)
-            {
-                SoundManager.PlayRandomMusic("kid_music", true);
-
-                SoundManager.MuteMusic(false);
-            }
-            Player.Instance.mobileInput = 0;
-            Player.Instance.ChangeState(new PlayerIdleState());
-            EnableControls(true);
-            isOpened = false;
+            
         }
         else
         {
@@ -261,7 +239,7 @@ public class AdsChest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Sword"))
+        if (other.CompareTag("Sword") && !isRewardCollected)
         {
             if (PlayerPrefs.GetInt("MusicIsOn") == 1)
             {
@@ -269,16 +247,11 @@ public class AdsChest : MonoBehaviour
                 SoundManager.Instance.currentMusic.Stop();
             }
 
-#if UNITY_EDITOR
-                AdsManager.Instance.isRewardVideoWatched = true;
-#elif UNITY_ANDROID || UNITY_IOS
             isOpened = true;
             EnableControls(false);
             Player.Instance.mobileInput = 0;
             Player.Instance.ChangeState(new PlayerIdleState());
-            AdsManager.Instance.ShowRewardedVideo();
-
-#endif
+            AdsManager.Instance.ShowRewardedVideo(this);
         }
     }
 
@@ -298,5 +271,42 @@ public class AdsChest : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Time.timeScale = 0;
+    }
+
+    public void OnRewardedVideoWatched()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+        isRewardCollected = true;
+
+        Randomize();
+        GetComponent<SpriteRenderer>().sprite = openChest;
+        loot.gameObject.SetActive(true);
+
+        Player.Instance.mobileInput = 0;
+        Player.Instance.ChangeState(new PlayerIdleState());
+        EnableControls(true);
+
+        if (musicWasPlaying)
+        {
+            SoundManager.MuteMusic(false);
+            //SoundManager.PlayRandomMusic("kid_music", true); хуй
+        }
+
+        AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+        DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+    }
+
+    public void OnRewardedVideoFailed()
+    {
+        if (musicWasPlaying)
+        {
+            SoundManager.PlayRandomMusic("kid_music", true);
+
+            SoundManager.MuteMusic(false);
+        }
+        Player.Instance.mobileInput = 0;
+        Player.Instance.ChangeState(new PlayerIdleState());
+        EnableControls(true);
+        isOpened = false;
     }
 }

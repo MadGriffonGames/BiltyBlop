@@ -857,7 +857,7 @@ public class Player : Character
         HandleMovement(horizontal);
         Flip(horizontal);
 
-#elif UNITY_ANDROID || UINTY_IOS
+#elif UNITY_ANDROID || UNITY_IOS
             if (invertedControls)
 	        {
                 HandleMovement(-mobileInput);

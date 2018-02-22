@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class ChestUI : RewardedChest
+public class ChestUI : RewardedChest, IAdsPlacement
 {
     [SerializeField]
     Image lightCircle;
@@ -56,21 +56,6 @@ public class ChestUI : RewardedChest
             rotationVector.z -= 0.0005f;
             lightCircle.rectTransform.rotation = rotationVector;
         }
-
-        if (AdsManager.Instance.isRewardVideoWatched)
-        {
-            AdsManager.Instance.isRewardVideoWatched = false;
-            PlayerPrefs.SetInt("IsMapChestOpen", 1);
-            chest.GetComponent<Animator>().enabled = false;
-            chest.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-            GiveLoot();
-
-            isRewardCollected = true;
-
-            AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
-            DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
-        }
     }
 
     public void OpenChestButton()
@@ -82,9 +67,7 @@ public class ChestUI : RewardedChest
 			DevToDev.Analytics.Tutorial(3);
 		}
 
-		AdsManager.Instance.ShowRewardedVideo();
-
-        
+		AdsManager.Instance.ShowRewardedVideo(this);
     }
 
     public void GiveLoot()
@@ -125,5 +108,24 @@ public class ChestUI : RewardedChest
             isSpined = true;
             activateButton.SetActive(true);
         }
+    }
+
+    public void OnRewardedVideoWatched()
+    {
+        PlayerPrefs.SetInt("IsMapChestOpen", 1);
+        chest.GetComponent<Animator>().enabled = false;
+        chest.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        GiveLoot();
+
+        isRewardCollected = true;
+
+        AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
+        DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
+    }
+
+    public void OnRewardedVideoFailed()
+    {
+
     }
 }

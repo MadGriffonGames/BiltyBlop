@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelEndUI : MonoBehaviour
+public class LevelEndUI : MonoBehaviour, IAdsPlacement
 {
     int coinsCollected;
     [SerializeField]
@@ -56,16 +56,6 @@ public class LevelEndUI : MonoBehaviour
             AdsManager.Instance.isInterstitialClosed = false;
             SceneManager.LoadScene("Loading");
         }
-
-        if (isButtonPressed && AdsManager.Instance.isRewardVideoWatched)
-        {
-            isButtonPressed = false;
-            AdsManager.Instance.isRewardVideoWatched = false;
-
-            GameManager.AddCoins(int.Parse(coinsText.text));
-            coinsText.text = (int.Parse(coinsText.text) * 2).ToString();
-            videoButton.GetComponent<Button>().interactable = false;
-        }
     }
 
     public void Menu()
@@ -94,11 +84,7 @@ public class LevelEndUI : MonoBehaviour
         {
             isButtonPressed = true;
 
-#if UNITY_EDITOR
-            AdsManager.Instance.isRewardVideoWatched = true;
-#elif UNITY_ANDROID || UNITY_IOS
-            AdsManager.Instance.ShowRewardedVideo();
-#endif
+            AdsManager.Instance.ShowRewardedVideo(this);
         }
     }
 
@@ -129,5 +115,19 @@ public class LevelEndUI : MonoBehaviour
             starsFull[i].SetActive(true);
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    public void OnRewardedVideoWatched()
+    {
+        isButtonPressed = false;
+
+        GameManager.AddCoins(int.Parse(coinsText.text));
+        coinsText.text = (int.Parse(coinsText.text) * 2).ToString();
+        videoButton.GetComponent<Button>().interactable = false;
+    }
+
+    public void OnRewardedVideoFailed()
+    {
+
     }
 }

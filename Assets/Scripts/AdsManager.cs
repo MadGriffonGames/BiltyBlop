@@ -74,7 +74,7 @@ public class AdsManager : MonoBehaviour
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-7702587672519508/5527360718";
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-7702587672519508/4520985510";
+		string adUnitId = "ca-app-pub-7702587672519508/4520985510";
 #else
             string adUnitId = "unexpected_platform";
 #endif
@@ -122,6 +122,7 @@ public class AdsManager : MonoBehaviour
 
    public void ShowRewardedVideo()
     {
+		Debug.Log (adMobRewardedVideo.IsLoaded ());
         if (CanNotShowRewardedVideo())
         {
             InstantiateWarning();

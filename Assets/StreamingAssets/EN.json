@@ -179,6 +179,16 @@
 	"fontSize": 0
 	},
 	
+	"download video failed please, check your network connection": {
+	"text": "DOWNLOAD VIDEO FAILED. PLEASE, CHECK YOUR NETWORK CONNECTION.", 
+	"fontSize": 0
+	},
+	
+	"warning": {
+	"text": "WARNING", 
+	"fontSize": 0
+	},
+	
 	"starter pack": {
 	"text": "STARTER PACK", 
 	"fontSize": 50

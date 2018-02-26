@@ -136,6 +136,16 @@
 	"fontSize": 0
 	},
 	
+	"download video failed please, check your network connection": {
+	"text": "НЕ УДАЛОСЬ ЗАГРУЗИТЬ ВИДЕО. ПРОВЕРЬТЕ ПОДКЛЮЧЕНИЕ К ИНТЕРНЕТУ.", 
+	"fontSize": 0
+	},
+	
+	"warning": {
+	"text": "ОШИБКА", 
+	"fontSize": 0
+	},
+	
 	"thank you for your participation in the beta test! You unlocked episodes 1 and 2 and get 1000 gold": {
 	"text": "СПАСИБО ЗА УЧАСТИЕ В БЕТА ТЕСТЕ! РАЗБЛОКИРОВАНЫ ЭПИЗОДЫ 1 И 2, ДОБАВЛЕНО 1000 ЗОЛОТА", 
 	"fontSize": 0

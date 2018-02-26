@@ -51,7 +51,7 @@ public class RuneStone : InteractiveObject
             {
                 DevToDev.Analytics.Tutorial(-2);
             }
-
+            Player.Instance.immortal = true;
             MyAnimator.SetTrigger("shine");
 			StartCoroutine (WaitForGround ());
             Zoom.makeZoom(1, 3, 5);

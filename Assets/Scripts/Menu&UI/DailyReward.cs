@@ -332,8 +332,8 @@ public class DailyReward : MonoBehaviour, IAdsPlacement
 
     public void RewardedVideoButton()
     {
-        AppMetrica.Instance.ReportEvent("#REWARDx2_BUTTON pressed");
-        DevToDev.Analytics.CustomEvent("#REWARDx2_BUTTON pressed");
+        AppMetrica.Instance.ReportEvent("#DAILY_REWARDx2_BUTTON pressed");
+        DevToDev.Analytics.CustomEvent("#DAILY_REWARDx2_BUTTON pressed");
 
         _isRewardedVideoWatched = true;
         if (PlayerPrefs.GetInt("MusicIsOn") == 1)

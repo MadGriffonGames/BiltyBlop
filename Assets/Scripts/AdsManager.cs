@@ -285,6 +285,8 @@ public class AdsManager : MonoBehaviour
 #endif
         }
         warning.GetComponent<RectTransform>().localPosition = new Vector2();
+
+        OnVideoFailed();
     }
 
     void OnVideoWatched()

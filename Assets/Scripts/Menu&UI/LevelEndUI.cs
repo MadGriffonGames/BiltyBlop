@@ -43,7 +43,6 @@ public class LevelEndUI : MonoBehaviour, IAdsPlacement
         }
         SoundManager.PlayMusic("victory sound", false);
         fade.SetActive(true);
-
         coinsCollected = GameManager.lvlCollectedCoins;
         coinsText.text = "" + coinsCollected;
         StartCoroutine(ShowStars(Player.Instance.stars));

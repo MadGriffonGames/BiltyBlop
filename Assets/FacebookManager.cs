@@ -53,8 +53,6 @@ public class FacebookManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetInt(FACEBOOK_SHARE, 0);
-        PlayerPrefs.SetInt(TWITTER_SHARE, 0);
         if (PlayerPrefs.GetInt(FACEBOOK_SHARE) > 0)
         {
             freeGiftFB.SetActive(false);

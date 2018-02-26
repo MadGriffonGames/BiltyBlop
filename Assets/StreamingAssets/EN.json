@@ -946,6 +946,10 @@
 	"text": "SANTARIAN",
 	"fontSize": 0
 	},
+	"evilarian":{
+	"text": "EVILARIAN",
+	"fontSize": 0
+	},
 
 
 	"arakh":{
@@ -986,6 +990,10 @@
 	},
 	"pipe wrench":{
 	"text": "PIPE WRENCH",
+	"fontSize": 0
+	},
+	"evil sword":{
+	"text": "EVIL SWORD",
 	"fontSize": 0
 	},
 
@@ -1101,6 +1109,6 @@
 	"I'll tell you about shop and all staff in this game! First of all - SKINS!":{
 	"text": "I'll tell you about shop and all staff in this game! First of all - SKINS!",
 	"fontSize":0
-	},
+	}
 
 }

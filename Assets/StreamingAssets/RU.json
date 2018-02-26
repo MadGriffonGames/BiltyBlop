@@ -860,6 +860,10 @@
 	"text": "SANTARIAN",
 	"fontSize": 0
 	},
+	"evilarian":{
+		"text": "EVILARIAN",
+		"fontSize": 0
+		},
 
 
 	"arakh":{
@@ -891,17 +895,21 @@
 	"fontSize": 0
 	},
 	"kings hand":{
-	"text": "РУКА КОРОЛЯ",
-	"fontSize": 20
+	"text": "ДЕСНИЦА",
+	"fontSize": 0
 	},
 	"obsidian":{
 	"text": "ОБСИДИАН",
-	"fontSize": 0
+	"fontSize": 20
 	},
 	"pipe wrench":{
 	"text": "ГАЗОВЫЙ КЛЮЧ",
 	"fontSize": 20
 	},
+	"evil sword":{
+		"text": "ПРОКЛЯТЫЙ МЕЧ",
+		"fontSize": 20
+		},
 
 
 

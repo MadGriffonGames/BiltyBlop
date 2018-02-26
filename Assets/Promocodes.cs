@@ -14,7 +14,7 @@ public class Promocodes : MonoBehaviour
     public const int CODES_COUNT = 10;
 
     public const string BETA_TESTERS_CODE = "YJHXOXVRXV";
-    public const string YOUTUBERS_CODE = "UVCTQSMHLI";
+    public const string YOUTUBERS_CODE = "GIVEMESKIN";
     public const string skin3 = "MCKGKVAZUG";
     public const string skin4 = "QIRWZSOOES";
     public const string skin5 = "TOYMOPBEOF";
@@ -50,7 +50,6 @@ public class Promocodes : MonoBehaviour
         switch (data)
         {
             case BETA_TESTERS_CODE:
-                PlayerPrefs.SetInt(BETA_TESTERS_CODE, 0);
                 if (PlayerPrefs.GetInt(BETA_TESTERS_CODE) == 0)
                 {
                     PlayerPrefs.SetInt(BETA_TESTERS_CODE, 1);
@@ -67,8 +66,22 @@ public class Promocodes : MonoBehaviour
                     return false;
 
             case YOUTUBERS_CODE:
-                promocodeGift = "skin2";
-                return true;
+                if (PlayerPrefs.GetInt(YOUTUBERS_CODE) == 0)
+                {
+                    PlayerPrefs.SetInt(YOUTUBERS_CODE, 1);
+
+                    PlayerPrefs.SetString("Evilarian", "Unlocked");
+                    PlayerPrefs.SetString("EvilarianIsAvaliableInShop", "Avaliable");
+
+                    PlayerPrefs.SetString("EvilSword", "Unlocked");
+                    PlayerPrefs.SetString("EvilSwordIsAvaliableInShop", "Avaliable");
+
+
+                    promoceodesUi.giftDescription.text = "congratulations! you unlocked skin and sword! check shop menu for details";
+                    return true;
+                }
+                else
+                    return false;
 
             case skin3:
                 promocodeGift = "skin3";

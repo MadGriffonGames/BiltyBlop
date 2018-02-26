@@ -146,6 +146,11 @@
 	"fontSize": 0
 	},
 	
+	"congratulations! you unlocked skin and sword! check shop menu for details": {
+	"text": "ПОЗДРАВЛЯЕМ! ТЫ РАЗБЛОКИРОВАЛ СКИН И МЕЧ! ЗАЙДИ В МАГАЗИН, ЧТОБЫ ИСПОЛЬЗОВАТЬ ИХ", 
+	"fontSize": 0
+	},
+	
 	"thank you for your participation in the beta test! You unlocked episodes 1 and 2 and get 1000 gold": {
 	"text": "СПАСИБО ЗА УЧАСТИЕ В БЕТА ТЕСТЕ! РАЗБЛОКИРОВАНЫ ЭПИЗОДЫ 1 И 2, ДОБАВЛЕНО 1000 ЗОЛОТА", 
 	"fontSize": 0

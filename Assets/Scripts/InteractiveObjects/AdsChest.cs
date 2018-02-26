@@ -245,6 +245,10 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
             EnableControls(false);
             Player.Instance.mobileInput = 0;
             Player.Instance.ChangeState(new PlayerIdleState());
+
+            AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+            DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+
             AdsManager.Instance.ShowRewardedVideo(this);
         }
     }
@@ -272,6 +276,9 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         GetComponent<BoxCollider2D>().enabled = false;
         isRewardCollected = true;
 
+        AppMetrica.Instance.ReportEvent("#ADS_CHEST_VIDEO watched in " + GameManager.currentLvl);
+        DevToDev.Analytics.CustomEvent("#ADS_CHEST_VIDEO watched in " + GameManager.currentLvl);
+
         Randomize();
         GetComponent<SpriteRenderer>().sprite = openChest;
         loot.gameObject.SetActive(true);
@@ -280,8 +287,7 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         Player.Instance.ChangeState(new PlayerIdleState());
         EnableControls(true);
 
-        AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
-        DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+        
     }
 
     public void OnRewardedVideoFailed()

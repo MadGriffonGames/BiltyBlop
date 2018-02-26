@@ -157,6 +157,9 @@ public class BuyCheckpointsUI : MonoBehaviour, IAdsPlacement
     {
         this.gameObject.SetActive(false);
 
+        AppMetrica.Instance.ReportEvent("#CHECKPOINT_VIDEO watched");
+        DevToDev.Analytics.CustomEvent("#CHECKPOINT_VIDEO watched");
+
         Player.Instance.freeCheckpoints = FREE_CHECKPOINTS_GIFT;
         DeathUI.Instance.UpdateFreeCheckpointsCounter();
 

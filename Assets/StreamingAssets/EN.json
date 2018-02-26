@@ -194,6 +194,11 @@
 	"fontSize": 0
 	},
 	
+	"+ skin": {
+	"text": "+ SKIN", 
+	"fontSize": 0
+	},
+	
 	"starter pack": {
 	"text": "STARTER PACK", 
 	"fontSize": 50

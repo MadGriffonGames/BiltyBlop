@@ -67,7 +67,10 @@ public class ChestUI : RewardedChest, IAdsPlacement
 			DevToDev.Analytics.Tutorial(3);
 		}
 
-		AdsManager.Instance.ShowRewardedVideo(this);
+        AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
+        DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
+
+        AdsManager.Instance.ShowRewardedVideo(this);
     }
 
     public void GiveLoot()
@@ -120,8 +123,8 @@ public class ChestUI : RewardedChest, IAdsPlacement
 
         isRewardCollected = true;
 
-        AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
-        DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
+        AppMetrica.Instance.ReportEvent("#MAP_CHEST_VIDEO watched");
+        DevToDev.Analytics.CustomEvent("#MAP_CHEST_VIDEO watched");
     }
 
     public void OnRewardedVideoFailed()

@@ -271,18 +271,30 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
     public void RewardedCoinVideoButton()
     {
         coinVideo = true;
+
+        AppMetrica.Instance.ReportEvent("#GIFT_COINS_BUTTON pressed");
+        DevToDev.Analytics.CustomEvent("#GIFT_COINS_BUTTON pressed");
+
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 
     public void RewardedClipsCountVideoButton()
     {
         clipsCountVideo = true;
+
+        AppMetrica.Instance.ReportEvent("#GIFT_AMMO_BUTTON pressed");
+        DevToDev.Analytics.CustomEvent("#GIFT_AMMO_BUTTON pressed");
+
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 
     public void RewardedPotionVideoButton()
     {
         potionVideo = true;
+
+        AppMetrica.Instance.ReportEvent("#GIFT_POTION_BUTTON pressed");
+        DevToDev.Analytics.CustomEvent("#GIFT_POTION_BUTTON pressed");
+
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 
@@ -415,6 +427,9 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
             PlayerPrefs.SetInt(dailyCoins, 0);
             UpdateIndicator();
 
+            AppMetrica.Instance.ReportEvent("#GIFT_COINS_VIDEO watched");
+            DevToDev.Analytics.CustomEvent("#GIFT_COINS_VIDEO watched");
+
             GiveCoinReward(50);
             coinVideo = false;
         }
@@ -423,6 +438,9 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
             PlayerPrefs.SetInt(dailyClipsCount, 0);
             UpdateIndicator();
 
+            AppMetrica.Instance.ReportEvent("#GIFT_AMMO_VIDEO watched");
+            DevToDev.Analytics.CustomEvent("#GIFT_AMMO_VIDEO watched");
+
             GiveClipsCountReward(1);
             clipsCountVideo = false;
         }
@@ -430,6 +448,9 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
         {
             PlayerPrefs.SetInt(dailyPotions, 0);
             UpdateIndicator();
+
+            AppMetrica.Instance.ReportEvent("#GIFT_POTION_VIDEO watched");
+            DevToDev.Analytics.CustomEvent("#GIFT_POTION_VIDEO watched");
 
             GivePotionReward(1);
             clipsCountVideo = false;

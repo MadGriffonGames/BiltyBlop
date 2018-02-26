@@ -110,6 +110,9 @@ public class FacebookManager : MonoBehaviour
             {
                 freeGiftFB.SetActive(false);
                 StartCoroutine(GiveReward());
+
+                AppMetrica.Instance.ReportEvent("#FACEBOOK_SHARE_COMPLETE");
+                DevToDev.Analytics.CustomEvent("#FACEBOOK_SHARE_COMPLETE");
             }
         }
     }
@@ -127,6 +130,9 @@ public class FacebookManager : MonoBehaviour
             freeGiftTwit.SetActive(false);
             StartCoroutine(TimeToBrowse());
             StartCoroutine(GiveReward());
+
+            AppMetrica.Instance.ReportEvent("#TWITTER_SHARE_BUTTON pressed");
+            DevToDev.Analytics.CustomEvent("#TWITTER_SHARE_BUTTON pressed");
         }
     }
 
@@ -134,6 +140,9 @@ public class FacebookManager : MonoBehaviour
     {
         fade.SetActive(true);
         shareBar.SetActive(true);
+
+        AppMetrica.Instance.ReportEvent("#FACEBOOK_SHARE_BUTTON pressed");
+        DevToDev.Analytics.CustomEvent("#FACEBOOK_SHARE_BUTTON pressed");
     }
 
     IEnumerator GiveReward()

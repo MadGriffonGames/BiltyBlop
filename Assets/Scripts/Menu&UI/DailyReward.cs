@@ -141,7 +141,8 @@ public class DailyReward : MonoBehaviour, IAdsPlacement
         lastOpenDate = DateTime.Parse(PlayerPrefs.GetString("LastOpenDate"));
 
         rewardDay = PlayerPrefs.GetInt("RewardDay");
-        if (rewardDay == 9)
+
+        if (rewardDay == 10)
         {
             doubleButton.GetComponent<Button>().interactable = false;            
         }
@@ -349,11 +350,8 @@ public class DailyReward : MonoBehaviour, IAdsPlacement
     {
         doubleButton.GetComponent<Button>().interactable = false;
 
-        if (musicWasPlaying)
-        {
-            musicWasPlaying = false;
-            //SoundManager.PlayRandomMusic("kid_music", true); хуй
-        }
+        AppMetrica.Instance.ReportEvent("#DAILY_REWARDx2_VIDEO watched");
+        DevToDev.Analytics.CustomEvent("#DAILY_REWARDx2_VIDEO watched");
 
         rewardText.text = (int.Parse(rewardText.text) * 2).ToString();
 

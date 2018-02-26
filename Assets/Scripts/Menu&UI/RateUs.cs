@@ -71,18 +71,27 @@ public class RateUs : MonoBehaviour
 
         PlayerPrefs.SetInt("Rated", 1);
         EnableRateWindow(false);
+
+        AppMetrica.Instance.ReportEvent("#RATE_US_RATED");
+        DevToDev.Analytics.CustomEvent("#RATE_US_RATED");
     }
 
     public void RemindLaterButton()
     {
         PlayerPrefs.SetInt(APP_ENTER_COUNTER, 0);
         EnableRateWindow(false);
+
+        AppMetrica.Instance.ReportEvent("#RATE_US_REMIND_LATER");
+        DevToDev.Analytics.CustomEvent("#RATE_US_REMIND_LATER");
     }
 
     public void DontShowAgainButton()
     {
         PlayerPrefs.SetInt("Rated", 1);
         EnableRateWindow(false);
+
+        AppMetrica.Instance.ReportEvent("#RATE_US_DONT_REMIND");
+        DevToDev.Analytics.CustomEvent("#RATE_US_DONT_REMIND");
     }
 
     public static void IncrementAppEnterCounter()//Used in Awake() in PurchaseManager

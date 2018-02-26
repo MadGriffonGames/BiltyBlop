@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using GoogleMobileAds.Api;
-using UnityEngine.Advertisements;
+//using UnityEngine.Advertisements;
 using UnityEngine;
 
 public class AdsManager : MonoBehaviour
@@ -60,7 +60,7 @@ public class AdsManager : MonoBehaviour
 
 #endif
 
-        Advertisement.Initialize(unityGameId);
+//        Advertisement.Initialize(unityGameId);
         MobileAds.Initialize(adMobAppId);
 
         RequestInterstitial();
@@ -148,35 +148,33 @@ public class AdsManager : MonoBehaviour
                 int tmp = Random.Range(1, 3);
                 if (tmp == 1)
                 {
-                    if (Advertisement.IsReady())
-                    {
-                        Debug.Log("UnityAds");
-                        UnityAdsShowRewardedVideo();
-                    }
-                    else
-                    {
-                        if (adMobRewardedVideo.IsLoaded())
+//                    if (Advertisement.IsReady())
+//                    {
+//                        Debug.Log("UnityAds");
+//                        UnityAdsShowRewardedVideo();
+//                    }
+//                    else
+//                    {
+	                        if (adMobRewardedVideo.IsLoaded())
                         {
-                            Debug.Log("AdMob");
                             AdMobShowRewardedVideo();
                         }
-                    }
+//                    }
                 }
                 else
                 {
                     if (adMobRewardedVideo.IsLoaded())
                     {
-                        Debug.Log("AdMob");
                         AdMobShowRewardedVideo();
                     }
-                    else
-                    {
-                        if (Advertisement.IsReady())
-                        {
-                            Debug.Log("UnityAds");
-                            UnityAdsShowRewardedVideo();
-                        }
-                    }
+//                    else
+//                    {
+//                        if (Advertisement.IsReady())
+//                        {
+//                            Debug.Log("UnityAds");
+//                            UnityAdsShowRewardedVideo();
+//                        }
+//                    }
                 }
             }
             else
@@ -186,25 +184,25 @@ public class AdsManager : MonoBehaviour
         }
     }
 
-    void HandleShowResult(ShowResult result)
-    {
-        if (result == ShowResult.Finished)
-        {
-            Debug.Log("Video completed - Offer a reward to the player");
-            //isRewardVideoWatched = true;
-            OnVideoWatched();
-        }
-        else if (result == ShowResult.Skipped)
-        {
-            Debug.LogWarning("Video was skipped - Do NOT reward the player");
-            OnVideoFailed();
-        }
-        else if (result == ShowResult.Failed)
-        {
-            Debug.LogError("Video failed to show");
-            OnVideoFailed();
-        }
-    }
+//    void HandleShowResult(ShowResult result)
+//    {
+//        if (result == ShowResult.Finished)
+//        {
+//            Debug.Log("Video completed - Offer a reward to the player");
+//            //isRewardVideoWatched = true;
+//            OnVideoWatched();
+//        }
+//        else if (result == ShowResult.Skipped)
+//        {
+//            Debug.LogWarning("Video was skipped - Do NOT reward the player");
+//            OnVideoFailed();
+//        }
+//        else if (result == ShowResult.Failed)
+//        {
+//            Debug.LogError("Video failed to show");
+//            OnVideoFailed();
+//        }
+//    }
 
     public void HandleOnAdClosed(object sender, System.EventArgs args)
     {
@@ -242,10 +240,10 @@ public class AdsManager : MonoBehaviour
 
     void UnityAdsShowRewardedVideo()
     {
-        ShowOptions options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
-
-        Advertisement.Show("rewardedVideo", options);
+//        ShowOptions options = new ShowOptions();
+//        options.resultCallback = HandleShowResult;
+//
+//        Advertisement.Show("rewardedVideo", options);
     }
 
     void AdMobShowRewardedVideo()

@@ -54,29 +54,37 @@ public class SwordsSwipeMenu : SwipeMenu {
 					swordCardObj.transform.localScale = new Vector3(1, 1, 1);
 					swordCardObj.gameObject.GetComponentsInChildren<Text>()[0].text = sword.shopName;
 					swordCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = sword.swordSprite;
-
-					if (PlayerPrefs.GetString(sword.name) == "Unlocked")
+					if (sword.isAvaliableInShop) 
 					{
-						if (PlayerPrefs.GetString ("Sword") == sword.name)
-						{
-							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
-						} 
-						else  
-						{
-							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
+						swordCardObj.gameObject.GetComponentsInChildren<Image> () [5].gameObject.SetActive (false); //  TURN OFF "LOCK" on card
+						if (PlayerPrefs.GetString (sword.name) == "Unlocked") {
+							if (PlayerPrefs.GetString ("Sword") == sword.name) {
+								swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
+							} else {
+								swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
+							}
+							swordCardObj.gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
+							swordCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySword (sword.orderNumber));
+							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySword (sword.orderNumber));
+							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
+							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (true);
+						} else {
+							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (sword.coinCost);
+							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
+							swordCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ShowUnlockSwordWindow (SkinManager.Instance.NumberOfSwordPrefabBySwordOrder (sword.orderNumber))); // wdfsdf
+							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ShowUnlockSwordWindow (SkinManager.Instance.NumberOfSwordPrefabBySwordOrder (sword.orderNumber)));
 						}
-						swordCardObj.gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
-						swordCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySword (sword.orderNumber));
-						swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySword (sword.orderNumber));
-						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
-						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (true);
 					}
 					else
 					{
-						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (sword.coinCost);
+						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
 						swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
-						swordCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSwordPrefabBySwordOrder(sword.orderNumber))); // wdfsdf
-						swordCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockSwordWindow(SkinManager.Instance.NumberOfSwordPrefabBySwordOrder(sword.orderNumber)));
+						swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "locked";
+						swordCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
+						swordCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
+						swordCardObj.gameObject.GetComponentsInChildren<Image> () [0].color = new Color32 (206,206,206,255);
+						swordCardObj.gameObject.GetComponentsInChildren<Image> () [1].color = new Color32 (180,180,180,255);
+						swordCardObj.gameObject.GetComponentsInChildren<Image> () [3].color = new Color32 (180,180,180,255);
 					}
 					swordCardObj.GetComponentInChildren<SkinStatsPanel>().SetAttackIndicators(sword.attackStat);
 					LocalizationManager.Instance.UpdateLocaliztion (swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ());

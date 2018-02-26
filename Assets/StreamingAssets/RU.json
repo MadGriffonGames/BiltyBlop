@@ -136,6 +136,16 @@
 	"fontSize": 0
 	},
 	
+	"download video failed please, check your network connection": {
+	"text": "НЕ УДАЛОСЬ ЗАГРУЗИТЬ ВИДЕО. ПРОВЕРЬТЕ ПОДКЛЮЧЕНИЕ К ИНТЕРНЕТУ.", 
+	"fontSize": 0
+	},
+	
+	"warning": {
+	"text": "ОШИБКА", 
+	"fontSize": 0
+	},
+	
 	"thank you for your participation in the beta test! You unlocked episodes 1 and 2 and get 1000 gold": {
 	"text": "СПАСИБО ЗА УЧАСТИЕ В БЕТА ТЕСТЕ! РАЗБЛОКИРОВАНЫ ЭПИЗОДЫ 1 И 2, ДОБАВЛЕНО 1000 ЗОЛОТА", 
 	"fontSize": 0
@@ -850,6 +860,10 @@
 	"text": "SANTARIAN",
 	"fontSize": 0
 	},
+	"evilarian":{
+		"text": "EVILARIAN",
+		"fontSize": 0
+		},
 
 
 	"arakh":{
@@ -881,17 +895,21 @@
 	"fontSize": 0
 	},
 	"kings hand":{
-	"text": "РУКА КОРОЛЯ",
-	"fontSize": 20
+	"text": "ДЕСНИЦА",
+	"fontSize": 0
 	},
 	"obsidian":{
 	"text": "ОБСИДИАН",
-	"fontSize": 0
+	"fontSize": 20
 	},
 	"pipe wrench":{
 	"text": "ГАЗОВЫЙ КЛЮЧ",
 	"fontSize": 20
 	},
+	"evil sword":{
+		"text": "ПРОКЛЯТЫЙ МЕЧ",
+		"fontSize": 20
+		},
 
 
 

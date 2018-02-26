@@ -58,8 +58,8 @@ public class SkinSwipeMenu : SwipeMenu {
                     skinCardObj.gameObject.GetComponentsInChildren<Image>()[1].sprite = skin.skinSprite;
 					if (skin.isAvaliableInShop) 
 					{
-						skinCardObj.gameObject.GetComponentsInChildren<Image> () [5].gameObject.SetActive (false);
-
+						skinCardObj.gameObject.GetComponentsInChildren<Image> () [5].gameObject.SetActive (false); //  TURN OFF "LOCK" on card
+ 
 						if (PlayerPrefs.GetString (skin.name) == "Unlocked") {
 							if (PlayerPrefs.GetString ("Skin") == skin.name) {
 								skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";

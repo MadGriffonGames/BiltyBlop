@@ -179,6 +179,16 @@
 	"fontSize": 0
 	},
 	
+	"download video failed please, check your network connection": {
+	"text": "DOWNLOAD VIDEO FAILED. PLEASE, CHECK YOUR NETWORK CONNECTION.", 
+	"fontSize": 0
+	},
+	
+	"warning": {
+	"text": "WARNING", 
+	"fontSize": 0
+	},
+	
 	"starter pack": {
 	"text": "STARTER PACK", 
 	"fontSize": 50
@@ -936,6 +946,10 @@
 	"text": "SANTARIAN",
 	"fontSize": 0
 	},
+	"evilarian":{
+	"text": "EVILARIAN",
+	"fontSize": 0
+	},
 
 
 	"arakh":{
@@ -976,6 +990,10 @@
 	},
 	"pipe wrench":{
 	"text": "PIPE WRENCH",
+	"fontSize": 0
+	},
+	"evil sword":{
+	"text": "EVIL SWORD",
 	"fontSize": 0
 	},
 
@@ -1091,6 +1109,6 @@
 	"I'll tell you about shop and all staff in this game! First of all - SKINS!":{
 	"text": "I'll tell you about shop and all staff in this game! First of all - SKINS!",
 	"fontSize":0
-	},
+	}
 
 }

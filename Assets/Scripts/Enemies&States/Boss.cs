@@ -45,6 +45,8 @@ public class Boss : MonoBehaviour
     [SerializeField]
     public float speed;
 
+    public List<MeshRenderer> bossParts;
+
     public virtual void Start()
     {
         MyAniamtor = GetComponent<Animator>();
@@ -61,6 +63,7 @@ public class Boss : MonoBehaviour
         if (damageSources.Contains(other.tag))
         {
             CheckDamageSource(other.tag);
+            IndicateDamage();
             StartCoroutine(TakeDamage());
         }
     }
@@ -72,11 +75,43 @@ public class Boss : MonoBehaviour
         if (damageSourceName == "Sword")
         {
             health -= Player.Instance.meleeDamage;
-            
         }
         else
         {
             health -= Player.Instance.throwDamage;
+        }
+    }
+
+    protected void IndicateDamage()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            for (int i = 0; i < bossParts.Count; i++)
+            {
+                StartCoroutine(TurnToRed(bossParts[i]));
+            }
+        }
+    }
+
+    IEnumerator TurnToRed(MeshRenderer part)
+    {
+        part.material.SetColor("_Color", new Color(1, 0.3f, 0.3f, 1));
+        yield return new WaitForSeconds(0.1f);
+        part.material.SetColor("_Color", new Color(1, 1, 1, 1));
+    }
+
+    [ContextMenu("SetMeshRenderer")]
+    void SetMeshRenderer()
+    {
+        MeshRenderer[] tmp;
+        tmp = GetComponentsInChildren<MeshRenderer>();
+
+        for (int i = 0; i < tmp.Length; i++)
+        {
+            if (tmp[i].gameObject.transform.parent.name == "Slots")
+            {
+                bossParts.Add(tmp[i]);
+            }
         }
     }
 }

@@ -741,18 +741,18 @@
 	"fontSize":0
 	},
 	
-	"extinguish 10 torches":{
-	"text": "EXTINGUISH 10 TORCHES",
+	"extinguish 10 torches per level":{
+	"text": "EXTINGUISH 10 TORCHES PER LEVEL",
 	"fontSize":0
 	},
 	
-	"extinguish 25 torches":{
-	"text": "EXTINGUISH 25 TORCHES",
+	"extinguish 25 torches per level":{
+	"text": "EXTINGUISH 25 TORCHES PER LEVEL",
 	"fontSize":0
 	},
 	
-	"extinguish 50 torches":{
-	"text": "EXTINGUISH 50 TORCHES",
+	"extinguish 50 torches per level":{
+	"text": "EXTINGUISH 50 TORCHES PER LEVEL",
 	"fontSize":0
 	},
 	

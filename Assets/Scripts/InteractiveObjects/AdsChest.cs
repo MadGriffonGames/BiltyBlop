@@ -292,9 +292,11 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
 
     public void OnRewardedVideoFailed()
     {
+		Debug.LogError ("Ads Ches On rewarded video failed 1");
         Player.Instance.mobileInput = 0;
         Player.Instance.ChangeState(new PlayerIdleState());
         EnableControls(true);
         isOpened = false;
+		Debug.LogError ("Ads Ches On rewarded video failed 2");
     }
 }

@@ -275,6 +275,7 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
         AppMetrica.Instance.ReportEvent("#GIFT_COINS_BUTTON pressed");
         DevToDev.Analytics.CustomEvent("#GIFT_COINS_BUTTON pressed");
 
+        //AdsManager.Instance.reservedPlacement = this;
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 
@@ -285,6 +286,7 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
         AppMetrica.Instance.ReportEvent("#GIFT_AMMO_BUTTON pressed");
         DevToDev.Analytics.CustomEvent("#GIFT_AMMO_BUTTON pressed");
 
+        //AdsManager.Instance.reservedPlacement = this;
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 
@@ -295,6 +297,7 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
         AppMetrica.Instance.ReportEvent("#GIFT_POTION_BUTTON pressed");
         DevToDev.Analytics.CustomEvent("#GIFT_POTION_BUTTON pressed");
 
+        //AdsManager.Instance.reservedPlacement = this;
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 
@@ -453,12 +456,14 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
             DevToDev.Analytics.CustomEvent("#GIFT_POTION_VIDEO watched");
 
             GivePotionReward(1);
-            clipsCountVideo = false;
+            potionVideo = false;
         }
     }
 
     public void OnRewardedVideoFailed()
     {
-
+        coinVideo = false;
+        clipsCountVideo = false;
+        potionVideo = false;
     }
 }

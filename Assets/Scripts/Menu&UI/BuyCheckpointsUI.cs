@@ -71,6 +71,7 @@ public class BuyCheckpointsUI : MonoBehaviour, IAdsPlacement
     {
         MetricaManager.Instance.rewardedCheckpoints++;
 
+        //AdsManager.Instance.reservedPlacement = this;
         AdsManager.Instance.ShowRewardedVideo(this);
 
         AppMetrica.Instance.ReportEvent("#CHECKPOINTS_USE Checkpoints bought for Rewarded Video in " + MetricaManager.Instance.currentLevel);

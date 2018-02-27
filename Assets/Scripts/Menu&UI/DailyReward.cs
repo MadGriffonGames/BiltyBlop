@@ -343,6 +343,7 @@ public class DailyReward : MonoBehaviour, IAdsPlacement
             SoundManager.Instance.currentMusic.Stop();
         }
 
+        //AdsManager.Instance.reservedPlacement = this;
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 

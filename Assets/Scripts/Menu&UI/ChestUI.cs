@@ -70,6 +70,7 @@ public class ChestUI : RewardedChest, IAdsPlacement
         AppMetrica.Instance.ReportEvent("#MAP_CHEST activate");
         DevToDev.Analytics.CustomEvent("#MAP_CHEST activate");
 
+        //AdsManager.Instance.reservedPlacement = this;
         AdsManager.Instance.ShowRewardedVideo(this);
     }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-//using GoogleMobileAds.Api;
+using GoogleMobileAds.Api;
 using UnityEngine.Advertisements;
 using UnityEngine;
 
@@ -30,8 +30,8 @@ public class AdsManager : MonoBehaviour
     public bool isRewardedVideoFailed = false;
     public bool isRewardedVideoShown = false;
 
-//    InterstitialAd interstitial;
-//    private RewardBasedVideoAd adMobRewardedVideo;
+    InterstitialAd interstitial;
+    private RewardBasedVideoAd adMobRewardedVideo;
 
     IAdsPlacement currentPlacement;
     bool isRewardGiven;
@@ -61,70 +61,70 @@ public class AdsManager : MonoBehaviour
 #endif
 
         Advertisement.Initialize(unityGameId);
-//        MobileAds.Initialize(adMobAppId);
+        MobileAds.Initialize(adMobAppId);
 
-//        RequestInterstitial();
-//        RequestRewardedVideo();
+        RequestInterstitial();
+        RequestRewardedVideo();
 
         isInterstitialClosed = false;
         isRewardVideoWatched = false;
     }
 
-//    void RequestRewardedVideo()
-//    {
-////        adMobRewardedVideo = RewardBasedVideoAd.Instance;
-//
-//#if UNITY_ANDROID
-//        string adUnitId = "ca-app-pub-7702587672519508/5527360718";
-//#elif UNITY_IPHONE
-//            string adUnitId = "ca-app-pub-7702587672519508/4520985510";
-//#else
-//            string adUnitId = "unexpected_platform";
-//#endif
-//
-//        // Create an empty ad request.
-//        AdRequest request = new AdRequest.Builder().Build();
-//        // Called when the user should be rewarded for watching a video.
-//        adMobRewardedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
-//        // Called when the ad is closed.
-//        adMobRewardedVideo.OnAdClosed += HandleRewardBasedVideoClosed;
-//        // Called when an ad request failed to load.
-//        adMobRewardedVideo.OnAdFailedToLoad += HandleRewardBasedVideoFailedToLoad;
-//        // Load the rewarded video ad with the request.
-//        this.adMobRewardedVideo.LoadAd(request, adUnitId);
-//    }
+    void RequestRewardedVideo()
+    {
+        adMobRewardedVideo = RewardBasedVideoAd.Instance;
 
-//    private void RequestInterstitial()
-//    {
-//#if UNITY_ANDROID
-//        string adUnitId = "ca-app-pub-7702587672519508/4784645751";
-//#elif UNITY_IPHONE
-//        string adUnitId = "ca-app-pub-7702587672519508/2187779299";
-//#else
-//        string adUnitId = "unexpected_platform";
-//#endif
-//
-//        // Initialize an InterstitialAd.
-//        interstitial = new InterstitialAd(adUnitId);
-//        // Called when the ad is closed.
-//        interstitial.OnAdClosed += HandleOnAdClosed;
-//        // Create an empty ad request.
-//        AdRequest request = new AdRequest.Builder().Build();
-//        // Load the interstitial with the request.
-//        interstitial.LoadAd(request);
-//    }
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-7702587672519508/5527360718";
+#elif UNITY_IPHONE
+            string adUnitId = "ca-app-pub-7702587672519508/4520985510";
+#else
+            string adUnitId = "unexpected_platform";
+#endif
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Called when the user should be rewarded for watching a video.
+        adMobRewardedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
+        // Called when the ad is closed.
+        adMobRewardedVideo.OnAdClosed += HandleRewardBasedVideoClosed;
+        // Called when an ad request failed to load.
+        adMobRewardedVideo.OnAdFailedToLoad += HandleRewardBasedVideoFailedToLoad;
+        // Load the rewarded video ad with the request.
+        this.adMobRewardedVideo.LoadAd(request, adUnitId);
+    }
+
+    private void RequestInterstitial()
+    {
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-7702587672519508/4784645751";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-7702587672519508/2187779299";
+#else
+        string adUnitId = "unexpected_platform";
+#endif
+
+        // Initialize an InterstitialAd.
+        interstitial = new InterstitialAd(adUnitId);
+        // Called when the ad is closed.
+        interstitial.OnAdClosed += HandleOnAdClosed;
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the interstitial with the request.
+        interstitial.LoadAd(request);
+    }
 
     public void ShowAdsAtLevelEnd()
     {
-//        if (interstitial.IsLoaded())
-//        {
-//            interstitial.Show();
-//            RequestInterstitial();
-//        }
-//        else
-//        {
+        if (interstitial.IsLoaded())
+        {
+            interstitial.Show();
+            RequestInterstitial();
+        }
+        else
+        {
             isInterstitialClosed = true;
-//        }
+        }
     }
 
    public void ShowRewardedVideo(IAdsPlacement _currentPlacemnt)
@@ -154,30 +154,30 @@ public class AdsManager : MonoBehaviour
                         Debug.Log("UnityAds");
                         UnityAdsShowRewardedVideo();
                     }
-//                    else
-//                    {
-//                        if (adMobRewardedVideo.IsLoaded())
-//                        {
-//                            Debug.Log("AdMob");
-//                            AdMobShowRewardedVideo();
-//                        }
-//                    }
+                    else
+                    {
+                        if (adMobRewardedVideo.IsLoaded())
+                        {
+                            Debug.Log("AdMob");
+                            AdMobShowRewardedVideo();
+                        }
+                    }
                 }
                 else
                 {
-//                    if (adMobRewardedVideo.IsLoaded())
-//                    {
-//                        Debug.Log("AdMob");
-//                        AdMobShowRewardedVideo();
-//                    }
-//                    else
-//                    {
+                    if (adMobRewardedVideo.IsLoaded())
+                    {
+                        Debug.Log("AdMob");
+                        AdMobShowRewardedVideo();
+                    }
+                    else
+                    {
                         if (Advertisement.IsReady())
                         {
                             Debug.Log("UnityAds");
                             UnityAdsShowRewardedVideo();
                         }
-//                    }
+                    }
                 }
             }
             else
@@ -192,7 +192,6 @@ public class AdsManager : MonoBehaviour
         if (result == ShowResult.Finished)
         {
             Debug.Log("Video completed - Offer a reward to the player");
-            //isRewardVideoWatched = true;
             OnVideoWatched();
         }
         else if (result == ShowResult.Skipped)
@@ -207,38 +206,37 @@ public class AdsManager : MonoBehaviour
         }
     }
 
-//    public void HandleOnAdClosed(object sender, System.EventArgs args)
-//    {
-//        MonoBehaviour.print("HandleAdClosed event received");
-//        isInterstitialClosed = true;
-//    }
-//
-//    public void HandleRewardBasedVideoRewarded(object sender, Reward args)
-//    {
-//		Debug.LogError("Handle RewardBasedVideo Rewarded" + currentPlacement);
-//        //isRewardVideoWatched = true;
-//        OnVideoWatched();
-//
-//        string type = args.Type;
-//        double amount = args.Amount;
-//		Debug.LogError("Handle RewardBasedVideo Rewarded");
-//    }
-//
-//    public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
-//    {
-//		Debug.LogError ("Handle RewardBasedVideo FailedToLoad  " + currentPlacement);
-//        OnVideoFailed();
-//
-//		Debug.LogError("Handle RewardBasedVideo FailedToLoad");
-//    }
-//
-//    public void HandleRewardBasedVideoClosed(object sender, System.EventArgs args)
-//    {
-//		Debug.LogError("Handle RewardBasedVideo Closed  " + currentPlacement);
-//        OnVideoFailed();
-//        
-//		Debug.LogError("Handle RewardBasedVideo Closed");
-//    }
+    public void HandleOnAdClosed(object sender, System.EventArgs args)
+    {
+        MonoBehaviour.print("HandleAdClosed event received");
+        isInterstitialClosed = true;
+    }
+
+    public void HandleRewardBasedVideoRewarded(object sender, Reward args)
+    {
+		Debug.LogError("Handle RewardBasedVideo Rewarded" + currentPlacement);
+        OnVideoWatched();
+
+        string type = args.Type;
+        double amount = args.Amount;
+		Debug.LogError("Handle RewardBasedVideo Rewarded");
+    }
+
+    public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+		Debug.LogError ("Handle RewardBasedVideo FailedToLoad  " + currentPlacement);
+        OnVideoFailed();
+
+		Debug.LogError("Handle RewardBasedVideo FailedToLoad");
+    }
+
+    public void HandleRewardBasedVideoClosed(object sender, System.EventArgs args)
+    {
+		Debug.LogError("Handle RewardBasedVideo Closed  " + currentPlacement);
+        OnVideoFailed();
+        
+		Debug.LogError("Handle RewardBasedVideo Closed");
+    }
 
     //other
 
@@ -250,11 +248,11 @@ public class AdsManager : MonoBehaviour
         Advertisement.Show("rewardedVideo", options);
     }
 
-//    void AdMobShowRewardedVideo()
-//    {
-//        adMobRewardedVideo.Show();
-//        RequestRewardedVideo();
-//    }
+    void AdMobShowRewardedVideo()
+    {
+        adMobRewardedVideo.Show();
+        RequestRewardedVideo();
+    }
 
     bool CanNotShowRewardedVideo()
     {

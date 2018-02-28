@@ -67,12 +67,12 @@ public class BonusManager : MonoBehaviour
     public IEnumerator DamageBonus(float duration)
     {
         damageBonusNum++;
-        Player.Instance.meleeDamage *= 2;
+        Player.Instance.meleeDamage += 1;
         yield return new WaitForSeconds(duration * Player.Instance.potionTimeScale);
         damageBonusNum--;
         if (damageBonusNum == 0)
         {
-            Player.Instance.meleeDamage /= 2;
+            Player.Instance.meleeDamage -= 1;
             bonusFX.SetTrigger("reset");
             bonusFXObject.SetActive(false);
         }

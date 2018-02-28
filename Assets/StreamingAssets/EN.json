@@ -498,7 +498,7 @@
 	//Level 4
 	
 	"you have double damage potion! open your backpack to use it": {
-	"text": "YOU HAVE DOUBLE DAMAGE POTION! OPEN YOUR BACKPACK TO USE IT", 
+	"text": "YOU HAVE EXTENDED DAMAGE POTION! OPEN YOUR BACKPACK TO USE IT", 
 	"fontSize": 19
 	},
 	

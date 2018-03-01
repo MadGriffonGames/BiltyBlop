@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     bool isBirded = false;
 
-    public static bool developmentBuild = false;
+    public static bool developmentBuild = true;
 
     public static int CollectedCoins
     {

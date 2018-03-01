@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using UnityEngine.Advertisements;
 
 public class AdsChest : MonoBehaviour, IAdsPlacement
@@ -43,6 +44,13 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
 
     float memTimeScale;
 
+    EventSystem eventSystem;
+
+    private void Awake()
+    {
+        eventSystem = FindObjectOfType<EventSystem>();
+    }
+
     public void Start()
     {
         isOpened = false;
@@ -57,15 +65,6 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         }
 
         SetItems();
-    }
-
-    private void Update()
-    {
-        if (!UI.Instance.controlsUI.activeInHierarchy && isOpened)
-        {
-            EnableControls(true);
-        }
-
     }
 
     public void Randomize()
@@ -236,14 +235,13 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         if (other.CompareTag("Sword") && !isRewardCollected)
         {
             isOpened = true;
-            EnableControls(false);
-            Player.Instance.mobileInput = 0;
             Player.Instance.ChangeState(new PlayerIdleState());
 
             AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
             DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
 
-            //AdsManager.Instance.reservedPlacement = this;
+            eventSystem.enabled = false;
+            StartCoroutine(EnableEventSystem());
             AdsManager.Instance.ShowRewardedVideo(this);
         }
     }
@@ -260,10 +258,14 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         }
     }
 
-    IEnumerator StopTime()
+    IEnumerator EnableEventSystem()
     {
         yield return new WaitForSeconds(1);
-        Time.timeScale = 0;
+        if (!eventSystem.enabled)
+        {
+            eventSystem.enabled = true;
+        }
+        
     }
 
     public void OnRewardedVideoWatched()
@@ -278,18 +280,12 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         GetComponent<SpriteRenderer>().sprite = openChest;
         loot.gameObject.SetActive(true);
 
-        Player.Instance.mobileInput = 0;
         Player.Instance.ChangeState(new PlayerIdleState());
-        EnableControls(true);
-
-        
     }
 
     public void OnRewardedVideoFailed()
     {
-        Player.Instance.mobileInput = 0;
         Player.Instance.ChangeState(new PlayerIdleState());
-        EnableControls(true);
         isOpened = false;
     }
 }

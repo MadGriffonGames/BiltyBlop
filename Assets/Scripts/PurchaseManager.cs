@@ -61,9 +61,12 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 				NonConsumableProducts[i] = "com.hardslime.kidarian." + NonConsumableProducts[i];
 			}
 			#endif
+
             instance = GetComponent<PurchaseManager>();
-            InitializePurchasing();
             DontDestroyOnLoad(this);
+
+            InitializePurchasing();
+
             RateUs.IncrementAppEnterCounter();
             if (GameManager.developmentBuild)
             {

@@ -136,6 +136,7 @@ public class UnlockPerkWindow : MonoBehaviour {
         else
         {
 			ShowErrorWindow("not enough crystals");
+            PurchaseManager.Instance.BuyConsumable(1);
         }
     }
     public void UpgradePerkByCoins(int perkNumber)

@@ -112,7 +112,8 @@ public class UnlockThrowWindow : MonoBehaviour {
 			}
 			else
 			{
-				ShowErrorWindow("not enough crystals");
+                PurchaseManager.Instance.BuyConsumable(1);
+                ShowErrorWindow("not enough crystals");
 			}
 		}
 		else

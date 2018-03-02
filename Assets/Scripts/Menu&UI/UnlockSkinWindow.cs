@@ -115,7 +115,8 @@ public class UnlockSkinWindow : MonoBehaviour {
             else
             {
                 ShowErrorWindow("not enough crystals");
-				skinTransform.SetActive (false);
+                PurchaseManager.Instance.BuyConsumable(1);
+                skinTransform.SetActive (false);
             }
         }
         else
@@ -140,7 +141,9 @@ public class UnlockSkinWindow : MonoBehaviour {
             else
             {
 				ShowErrorWindow("not enough coins");
-				skinTransform.SetActive (false);
+                PurchaseManager.Instance.BuyConsumable(1);
+                Debug.Log("Lel");
+                skinTransform.SetActive (false);
             }
         }
         else

@@ -120,7 +120,8 @@ public class UnlockSwordWindow : MonoBehaviour {
 			else
 			{
 				ShowErrorWindow("not enough crystals");
-				swordTransform.SetActive (false);
+                PurchaseManager.Instance.BuyConsumable(1);
+                swordTransform.SetActive (false);
 			}
 		}
 		else

@@ -99,7 +99,8 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-
+                PurchaseManager.Instance.BuyConsumable(1);
+                Debug.Log("lel");
             }
         }
         if (moneyType == "Free")

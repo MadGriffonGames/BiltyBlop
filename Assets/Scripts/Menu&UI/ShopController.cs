@@ -39,6 +39,8 @@ public class ShopController : MonoBehaviour {
     private int activeShopNumber;
     private int shopsCount;
 
+
+
     private void Update()
     {
         UpdateMoneyValues();

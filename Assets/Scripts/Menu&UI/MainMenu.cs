@@ -204,22 +204,30 @@ public class MainMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("StarterPackBought") == 0)
         {
             starterPackWindow.SetActive(true);
+
+            AppMetrica.Instance.ReportEvent("#STARTER_PACK shown");
+            DevToDev.Analytics.CustomEvent("#STARTER_PACK shown");
         }
         else
         {
             if (PlayerPrefs.GetInt("NoAds") == 0)
             {
                 pack1_noadsWindow.SetActive(true);
+
+                AppMetrica.Instance.ReportEvent("#PACK1_NO_ADS shown");
+                DevToDev.Analytics.CustomEvent("#PACK1_NO_ADS shown");
             }
             else
             {
                 pack1Window.SetActive(true);
+
+                AppMetrica.Instance.ReportEvent("#PACK1 shown");
+                DevToDev.Analytics.CustomEvent("#PACK1 shown");
             }
         }
         
 
-        AppMetrica.Instance.ReportEvent("#STARTER_PACK shown");
-        DevToDev.Analytics.CustomEvent("#STARTER_PACK shown");
+        
     }
 
     void ChangeDatesOfGifts()

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AchievementBox : MonoBehaviour {
-
-
+public class AchievementBox : MonoBehaviour
+{
     [SerializeField]
     public string achievementName;
     public const string availableLoots = "avaliableLoots";
@@ -324,6 +323,8 @@ public class AchievementBox : MonoBehaviour {
             inProgress.SetActive(true);
         bronze.gameObject.SetActive(true);
 
+        AppMetrica.Instance.ReportEvent("#ACHIEVE_GET_REWARD " + achievementName + "1");
+        DevToDev.Analytics.CustomEvent("#ACHIEVE_GET_REWARD " + achievementName + "1");
     }
 
     public void GetSecondReward()
@@ -380,6 +381,9 @@ public class AchievementBox : MonoBehaviour {
         }
         bronze.SetActive(false);
         silver.SetActive(true);
+
+        AppMetrica.Instance.ReportEvent("#ACHIEVE_GET_REWARD " + achievementName + "2");
+        DevToDev.Analytics.CustomEvent("#ACHIEVE_GET_REWARD " + achievementName + "2");
     }
 
     public void GetThirdReward()
@@ -426,6 +430,9 @@ public class AchievementBox : MonoBehaviour {
         bronze.SetActive(false);
         silver.SetActive(false);
         gold.SetActive(true);
+
+        AppMetrica.Instance.ReportEvent("#ACHIEVE_GET_REWARD " + achievementName + "2");
+        DevToDev.Analytics.CustomEvent("#ACHIEVE_GET_REWARD " + achievementName + "2");
     }
 
     public void UpdateValue(int level)

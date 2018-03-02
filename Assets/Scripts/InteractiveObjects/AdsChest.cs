@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using UnityEngine.Advertisements;
 
 public class AdsChest : MonoBehaviour, IAdsPlacement
@@ -43,6 +44,13 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
 
     float memTimeScale;
 
+    EventSystem eventSystem;
+
+    private void Awake()
+    {
+        eventSystem = FindObjectOfType<EventSystem>();
+    }
+
     public void Start()
     {
         isOpened = false;
@@ -57,21 +65,6 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         }
 
         SetItems();
-    }
-
-    private void Update()
-    {
-        if (isOpened && !isRewardCollected)
-        {
-            
-        }
-        else
-        {
-            if (!UI.Instance.controlsUI.activeInHierarchy)
-            {
-                EnableControls(true);
-            }
-        }
     }
 
     public void Randomize()
@@ -242,9 +235,13 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         if (other.CompareTag("Sword") && !isRewardCollected)
         {
             isOpened = true;
-            EnableControls(false);
-            Player.Instance.mobileInput = 0;
             Player.Instance.ChangeState(new PlayerIdleState());
+
+            AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+            DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
+
+            eventSystem.enabled = false;
+            StartCoroutine(EnableEventSystem());
             AdsManager.Instance.ShowRewardedVideo(this);
         }
     }
@@ -261,10 +258,14 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         }
     }
 
-    IEnumerator StopTime()
+    IEnumerator EnableEventSystem()
     {
         yield return new WaitForSeconds(1);
-        Time.timeScale = 0;
+        if (!eventSystem.enabled)
+        {
+            eventSystem.enabled = true;
+        }
+        
     }
 
     public void OnRewardedVideoWatched()
@@ -272,23 +273,19 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
         GetComponent<BoxCollider2D>().enabled = false;
         isRewardCollected = true;
 
+        AppMetrica.Instance.ReportEvent("#ADS_CHEST_VIDEO watched in " + GameManager.currentLvl);
+        DevToDev.Analytics.CustomEvent("#ADS_CHEST_VIDEO watched in " + GameManager.currentLvl);
+
         Randomize();
         GetComponent<SpriteRenderer>().sprite = openChest;
         loot.gameObject.SetActive(true);
 
-        Player.Instance.mobileInput = 0;
         Player.Instance.ChangeState(new PlayerIdleState());
-        EnableControls(true);
-
-        AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
-        DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
     }
 
     public void OnRewardedVideoFailed()
     {
-        Player.Instance.mobileInput = 0;
         Player.Instance.ChangeState(new PlayerIdleState());
-        EnableControls(true);
         isOpened = false;
     }
 }

@@ -82,7 +82,10 @@ public class LevelEndUI : MonoBehaviour, IAdsPlacement
         else
         {
             isButtonPressed = true;
+            AppMetrica.Instance.ReportEvent("#VICTORY_UI_REWARDx2_BUTTON pressed");
+            DevToDev.Analytics.CustomEvent("#VICTORY_UI_REWARDx2_BUTTON pressed");
 
+            //AdsManager.Instance.reservedPlacement = this;
             AdsManager.Instance.ShowRewardedVideo(this);
         }
     }
@@ -119,6 +122,9 @@ public class LevelEndUI : MonoBehaviour, IAdsPlacement
     public void OnRewardedVideoWatched()
     {
         isButtonPressed = false;
+
+        AppMetrica.Instance.ReportEvent("#VICTORY_UI_REWARDx2_VIDEO watched");
+        DevToDev.Analytics.CustomEvent("#VICTORY_UI_REWARDx2_VIDEO watched");
 
         GameManager.AddCoins(int.Parse(coinsText.text));
         coinsText.text = (int.Parse(coinsText.text) * 2).ToString();

@@ -181,13 +181,11 @@ public class AchievementManager : MonoBehaviour
                         PlayerPrefs.SetInt(achieveName + "weight", achieve.weight);
                         achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieveName);
                         StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+
+                        AppMetrica.Instance.ReportEvent("#ACHIEVE_COMPLETE " + achieve.achieveName + achieve.weight.ToString());
+                        DevToDev.Analytics.CustomEvent("#ACHIEVE_COMPLETE " + achieve.achieveName + achieve.weight.ToString());
                     }
                 }
-                else
-                {
-                    //Destroy(achieve);
-                }
-
             }
             else
             {
@@ -198,6 +196,9 @@ public class AchievementManager : MonoBehaviour
 
                     achievementUI.GetComponent<AchievementUI>().AchievementAppear(achieveName);
                     StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
+
+                    AppMetrica.Instance.ReportEvent("#ACHIEVE_COMPLETE " + achieve.achieveName + "3");
+                    DevToDev.Analytics.CustomEvent("#ACHIEVE_COMPLETE " + achieve.achieveName + "3");
                 }
             }
         }
@@ -215,14 +216,10 @@ public class AchievementManager : MonoBehaviour
                 achievementUI.GetComponent<AchievementUI>().AchievementAppear(levelAchieve.achieveName);
                 StartCoroutine(achievementUI.GetComponent<AchievementUI>().AchievementDisappear());
             }
-            //Destroy(levelAchieve);
-        }
 
-        if (PlayerPrefs.GetInt(levelAchieve.achieveName) > levelAchieve.targetValue)
-        {
-            //Destroy(levelAchieve);
+            AppMetrica.Instance.ReportEvent("#ACHIEVE_COMPLETE " + levelAchieve.achieveName);
+            DevToDev.Analytics.CustomEvent("#ACHIEVE_COMPLETE " + levelAchieve.achieveName);
         }
-
     }
 
 

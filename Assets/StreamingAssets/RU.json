@@ -136,6 +136,11 @@
 	"fontSize": 0
 	},
 	
+	"+ skin": {
+	"text": "+ СКИН", 
+	"fontSize": 0
+	},
+	
 	"download video failed please, check your network connection": {
 	"text": "НЕ УДАЛОСЬ ЗАГРУЗИТЬ ВИДЕО. ПРОВЕРЬТЕ ПОДКЛЮЧЕНИЕ К ИНТЕРНЕТУ.", 
 	"fontSize": 0

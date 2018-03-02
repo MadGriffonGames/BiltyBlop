@@ -78,6 +78,10 @@ public class Inventory : MonoBehaviour
                 
                 AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
             }
+            else
+            {
+
+            }
         }
         if (moneyType == "Crystals")
         {
@@ -92,6 +96,10 @@ public class Inventory : MonoBehaviour
 
                 AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought for " + moneyType);
                 AppMetrica.Instance.ReportEvent("#BONUS_BOUGHT " + itemName + " bought before " + MetricaManager.Instance.lastUnlockedLevel);
+            }
+            else
+            {
+
             }
         }
         if (moneyType == "Free")

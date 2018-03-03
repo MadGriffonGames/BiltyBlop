@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public const float ASPECT_16x9 = 16 / 9;
-    public const float ASPECT_16x10 = 16 / 10;
-    public const float ASPECT_4x3 = 4 / 3;
+    public const float ASPECT_16x9 = (float)16 / (float)9;
+    public const float ASPECT_16x10 = (float)16 / (float)10;
+    public const float ASPECT_4x3 = (float)4 / (float)3;
 
     public static int collectedCoins;
     public static int torches;
@@ -65,9 +65,6 @@ public class GameManager : MonoBehaviour
 #endif
 
         screenAspect = (float)Screen.width / (float)Screen.height;
-        Debug.Log(Screen.width);
-        Debug.Log(Screen.height);
-        Debug.Log(screenAspect);
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {

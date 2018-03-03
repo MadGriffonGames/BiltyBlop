@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
     public GameObject lvlSelectCanvas;
     [SerializeField]
     GameObject mainMenu;
+    [SerializeField]
+    GameObject mapButtons;
 
     public int groupCount;
     private int groupIndex;
@@ -100,6 +102,7 @@ public class LevelManager : MonoBehaviour
         {
             maps[mapNum].gameObject.SetActive(false);
             actsSpacer.SetActive(true);
+            mapButtons.SetActive(false);
         }
         else
         {

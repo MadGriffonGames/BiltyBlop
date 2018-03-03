@@ -39,6 +39,11 @@
 	"fontSize": 0
 	},
 	
+	"free": {
+	"text": "FREE",
+	"fontSize": 0
+	},
+	
 	"free death ui": {
 	"text": "FREE",
 	"fontSize": 0

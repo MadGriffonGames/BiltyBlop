@@ -79,7 +79,6 @@ public class AdsManager : MonoBehaviour
         RequestRewardedVideo();
 
         isInterstitialClosed = false;
-        isRewardVideoWatched = false;
     }
 
     private void Update()
@@ -209,15 +208,20 @@ public class AdsManager : MonoBehaviour
                     }
                     else
                     {
+						#if UNITY_ANDROID
                         if (adMobRewardedVideo.IsLoaded())
                         {
                             Debug.Log("AdMob");
                             AdMobShowRewardedVideo();
                         }
+						#else
+							UnityAdsShowRewardedVideo();
+						#endif
                     }
                 }
                 else
                 {
+					#if UNITY_ANDROID
                     if (adMobRewardedVideo.IsLoaded())
                     {
                         Debug.Log("AdMob");
@@ -231,6 +235,13 @@ public class AdsManager : MonoBehaviour
                             UnityAdsShowRewardedVideo();
                         }
                     }
+					#else
+					if (Advertisement.IsReady())
+					{
+						Debug.Log("UnityAds");
+						UnityAdsShowRewardedVideo();
+					}
+					#endif
                 }
             }
             else

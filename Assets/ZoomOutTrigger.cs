@@ -41,6 +41,8 @@ public class ZoomOutTrigger : MonoBehaviour
     GameObject downPanel;
     RectTransform upPanelTrans;
     RectTransform downPanelTrans;
+    Animator downPanelAnim;
+    Animator upPanelAnim;
 
 
     GameObject[] uiElements;
@@ -53,6 +55,12 @@ public class ZoomOutTrigger : MonoBehaviour
     {
         upPanelTrans = upPanel.GetComponent<RectTransform>();
         downPanelTrans = downPanel.GetComponent<RectTransform>();
+    }
+
+    private void Start()
+    {
+        downPanelAnim = downPanel.GetComponent<Animator>();
+        upPanelAnim = upPanel.GetComponent<Animator>();
     }
 
     private void Update()
@@ -73,6 +81,11 @@ public class ZoomOutTrigger : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
+            if (GameManager.screenAspect == GameManager.ASPECT_4x3)
+            {
+                upPanelAnim.Play("BlackPanelUPiPad");
+                downPanelAnim.GetComponent<Animator>().Play("BlackPanelDowniPad");
+            }
             DisableUIElements();
             isBlackPanels = true;
             Player.Instance.ChangeCameraTarget(bossCameraTransform.gameObject, new Vector3(0, 0, 0));

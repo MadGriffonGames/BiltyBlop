@@ -665,18 +665,18 @@
 	"fontSize":0
 	},
 	
-	"extinguish 10 torches":{
-	"text": "ПОТУШИ 10 ФАКЕЛОВ",
+	"extinguish 10 torches per level":{
+	"text": "ПОТУШИ 10 ФАКЕЛОВ НА УРОВНЕ",
 	"fontSize":0
 	},
 	
-	"extinguish 25 torches":{
-	"text": "ПОТУШИ 25 ФАКЕЛОВ",
+	"extinguish 25 torches per level":{
+	"text": "ПОТУШИ 25 ФАКЕЛОВ НА УРОВНЕ",
 	"fontSize":0
 	},
 	
-	"extinguish 50 torches":{
-	"text": "ПОТУШИ 50 ФАКЕЛОВ",
+	"extinguish 50 torches per level":{
+	"text": "ПОТУШИ 50 ФАКЕЛОВ НА УРОВНЕ",
 	"fontSize":0
 	},
 	
@@ -964,11 +964,11 @@
 	"fontSize": 20
 	},
 	"strange knife":{
-	"text": "ТАИНСТВЕННЫЙ КЛИНОК",
+	"text": "ТАИНСТВЕННЫЙ КИНЖАЛ",
 	"fontSize": 17
 	},
 	"dagger":{
-	"text": "КИНЖАЛ",
+	"text": "КОПЬЕ",
 	"fontSize": 0
 	},
 
@@ -1002,7 +1002,7 @@
 	"fontSize": 0
 	},
 	"potions works {0} times longer":{
-	"text": "Зелья действуют {0} раз дольше",
+	"text": "Зелья действуют в {0}\nраз дольше",
 	"fontSize": 0
 	},
 

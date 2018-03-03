@@ -61,17 +61,11 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
 
     private void Update()
     {
-        if (isOpened && !isRewardCollected)
+        if (!UI.Instance.controlsUI.activeInHierarchy && isOpened)
         {
-            
+            EnableControls(true);
         }
-        else
-        {
-            if (!UI.Instance.controlsUI.activeInHierarchy)
-            {
-                EnableControls(true);
-            }
-        }
+
     }
 
     public void Randomize()
@@ -249,6 +243,7 @@ public class AdsChest : MonoBehaviour, IAdsPlacement
             AppMetrica.Instance.ReportEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
             DevToDev.Analytics.CustomEvent("#ADS_CHEST opened in " + GameManager.currentLvl);
 
+            //AdsManager.Instance.reservedPlacement = this;
             AdsManager.Instance.ShowRewardedVideo(this);
         }
     }

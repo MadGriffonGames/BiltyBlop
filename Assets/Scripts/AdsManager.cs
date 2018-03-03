@@ -33,16 +33,28 @@ public class AdsManager : MonoBehaviour
     InterstitialAd interstitial;
     private RewardBasedVideoAd adMobRewardedVideo;
 
-    IAdsPlacement currentPlacement;
+    public IAdsPlacement currentPlacement;
     bool isRewardGiven;
 
     string appKey;
     string unityGameId;
     string adMobAppId;
 
+    bool isVideoWatched;
+    bool isVideoFailed;
+    bool isTimerTick;
+    bool isDelayComplete;
+    float timer;
+    const float DELAY_TIME = 1f;
+
     private void Awake()
     {
         AppMetrica.Instance.ActivateWithAPIKey("cefd065c-fd53-443d-9f27-9ddf930a936f");
+
+        isVideoWatched = false;
+        isVideoFailed = false;
+        isTimerTick = false;
+        isDelayComplete = false;
     }
 
     void Start ()
@@ -67,7 +79,44 @@ public class AdsManager : MonoBehaviour
         RequestRewardedVideo();
 
         isInterstitialClosed = false;
-        isRewardVideoWatched = false;
+    }
+
+    private void Update()
+    {
+        if (isTimerTick)
+        {
+            timer += Time.deltaTime;
+        }
+
+        if (timer >= DELAY_TIME)
+        {
+            timer = 0;
+            isTimerTick = false;
+            isDelayComplete = true;
+        }
+
+        if (isVideoWatched && isDelayComplete)
+        {
+            isVideoWatched = false;
+            isDelayComplete = false;
+            currentPlacement.OnRewardedVideoWatched();
+
+            if (SoundManager.Instance.currentMusic != null)
+            {
+                SoundManager.Instance.currentMusic.UnPause();
+            }
+        }
+        else if (isVideoFailed && isDelayComplete)
+        {
+            isVideoFailed = false;
+            isDelayComplete = false;
+            currentPlacement.OnRewardedVideoFailed();
+
+            if (SoundManager.Instance.currentMusic != null)
+            {
+                SoundManager.Instance.currentMusic.UnPause();
+            }
+        }
     }
 
     void RequestRewardedVideo()
@@ -129,11 +178,14 @@ public class AdsManager : MonoBehaviour
 
    public void ShowRewardedVideo(IAdsPlacement _currentPlacemnt)
     {
-
         currentPlacement = _currentPlacemnt;
-		Debug.LogError (currentPlacement);
+        Debug.LogError("Changed current placement on" + _currentPlacemnt);
+
         isRewardGiven = false;
-        SoundManager.Instance.currentMusic.Pause();
+        if (SoundManager.Instance.currentMusic != null)
+        {
+            SoundManager.Instance.currentMusic.Pause();
+        }
 #if UNITY_EDITOR
         OnVideoWatched();
 #endif
@@ -156,15 +208,20 @@ public class AdsManager : MonoBehaviour
                     }
                     else
                     {
+						#if UNITY_ANDROID
                         if (adMobRewardedVideo.IsLoaded())
                         {
                             Debug.Log("AdMob");
                             AdMobShowRewardedVideo();
                         }
+						#else
+							UnityAdsShowRewardedVideo();
+						#endif
                     }
                 }
                 else
                 {
+					#if UNITY_ANDROID
                     if (adMobRewardedVideo.IsLoaded())
                     {
                         Debug.Log("AdMob");
@@ -178,11 +235,18 @@ public class AdsManager : MonoBehaviour
                             UnityAdsShowRewardedVideo();
                         }
                     }
+					#else
+					if (Advertisement.IsReady())
+					{
+						Debug.Log("UnityAds");
+						UnityAdsShowRewardedVideo();
+					}
+					#endif
                 }
             }
             else
             {
-                isRewardVideoWatched = true;
+                OnVideoWatched();
             }
         }
     }
@@ -208,34 +272,32 @@ public class AdsManager : MonoBehaviour
 
     public void HandleOnAdClosed(object sender, System.EventArgs args)
     {
-        MonoBehaviour.print("HandleAdClosed event received");
+        Debug.LogError("Video closrd to show");
+
         isInterstitialClosed = true;
     }
 
     public void HandleRewardBasedVideoRewarded(object sender, Reward args)
     {
-		Debug.LogError("Handle RewardBasedVideo Rewarded" + currentPlacement);
         OnVideoWatched();
 
         string type = args.Type;
         double amount = args.Amount;
-		Debug.LogError("Handle RewardBasedVideo Rewarded");
+        Debug.LogError("Video completed - Offer a reward to the player");
     }
 
     public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-		Debug.LogError ("Handle RewardBasedVideo FailedToLoad  " + currentPlacement);
         OnVideoFailed();
 
-		Debug.LogError("Handle RewardBasedVideo FailedToLoad");
+        Debug.LogError("Video failed to show");
     }
 
     public void HandleRewardBasedVideoClosed(object sender, System.EventArgs args)
     {
-		Debug.LogError("Handle RewardBasedVideo Closed  " + currentPlacement);
         OnVideoFailed();
-        
-		Debug.LogError("Handle RewardBasedVideo Closed");
+
+        Debug.LogError("Video skiped");
     }
 
     //other
@@ -286,26 +348,18 @@ public class AdsManager : MonoBehaviour
         }
         warning.GetComponent<RectTransform>().localPosition = new Vector2();
 
-        OnVideoFailed();
+        OnVideoFailed(); 
     }
 
     void OnVideoWatched()
     {
-        if (!isRewardGiven)
-        {
-            isRewardGiven = true;
-            currentPlacement.OnRewardedVideoWatched();
-            SoundManager.Instance.currentMusic.UnPause();
-        }
+        isVideoWatched = true;
+        isTimerTick = true;
     }
 
     void OnVideoFailed()
     {
-		Debug.LogError("ON VIDEO FAILED(1) ");
-		Debug.LogError("CUURENT PLACEMENT = " + currentPlacement == null);
-
-        currentPlacement.OnRewardedVideoFailed();
-        SoundManager.Instance.currentMusic.UnPause();
-		Debug.LogError("ON VIDEO FAILED(2) ");
+        isVideoFailed = true;
+        isTimerTick = true;
     }
 }

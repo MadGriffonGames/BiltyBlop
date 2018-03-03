@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
+
 public class PlayVideo : MonoBehaviour
 
 {
+	[SerializeField]
+	GameObject[] disactivatingObjects;
+	[SerializeField]
+	GameObject[] activatingObjects;
 	GameObject[] sceneUI;
 	GameObject skipButton;
 
@@ -18,8 +23,35 @@ public class PlayVideo : MonoBehaviour
         skipButton = UI.Instance.skipVideoButton;
     }
 
+	private void DisactivateObjets(GameObject[] objects)
+	{
+		foreach (GameObject item in objects) {
+			item.SetActive (false);
+		}
+	}
+
+	private void ActivateObjets(GameObject[] objects)
+	{
+		foreach (GameObject item in objects) {
+			item.SetActive (true);
+		}
+	}
+
+	private void TurnOff()
+	{
+		DisactivateObjets (disactivatingObjects);
+		ActivateObjets (activatingObjects);
+	}
+	private void TurnOn()
+	{
+		DisactivateObjets (activatingObjects);
+		ActivateObjets (disactivatingObjects);
+	}
+
     public void ExecuteVideo ()
 	{
+		TurnOff ();
+
 		videoPlayer = this.gameObject.GetComponent<VideoPlayer>();
 		videoPlayer.isLooping = false;
 		videoPlayer.loopPointReached += EndReached;
@@ -43,7 +75,7 @@ public class PlayVideo : MonoBehaviour
 
     private void Start()
     {
-#if !UNITY_EDITOR
+#if UNITY_EDITOR
         if (SceneManager.GetActiveScene ().name == "Level1")
 			ExecuteVideo ();
 #endif
@@ -57,6 +89,7 @@ public class PlayVideo : MonoBehaviour
 
     public void SkipVideo()
 	{
+		TurnOn ();
 		videoPlayer.Stop ();
 		skipButton.SetActive (false);
 

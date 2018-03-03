@@ -85,6 +85,7 @@ public class LevelEndUI : MonoBehaviour, IAdsPlacement
             AppMetrica.Instance.ReportEvent("#VICTORY_UI_REWARDx2_BUTTON pressed");
             DevToDev.Analytics.CustomEvent("#VICTORY_UI_REWARDx2_BUTTON pressed");
 
+            //AdsManager.Instance.reservedPlacement = this;
             AdsManager.Instance.ShowRewardedVideo(this);
         }
     }

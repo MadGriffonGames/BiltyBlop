@@ -20,7 +20,6 @@ public class RiseState : IDragonState
         string animName = enemy.armature.animation.lastAnimationName;
         if (enemy.armature.animation.lastAnimationName == "WEAKNESS_END" && enemy.armature.animation.isCompleted)
         {
-            enemy.takeDamageCollider.enabled = false;
             enemy.armature.animation.FadeIn("RISE", -1, 1);
             enemy.Move(5, 5);
         }

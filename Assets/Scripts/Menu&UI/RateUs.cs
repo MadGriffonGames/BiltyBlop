@@ -10,14 +10,14 @@ public class RateUs : MonoBehaviour
     [SerializeField]
     GameObject fade;
 
-    const int FIRST_APPEAR_DELAY = 5;
+    const int FIRST_APPEAR_DELAY = 3;
     const int REMIND_LATER_DELAY = 3;
 
     const string IOS_URL = "item-apps://itunes.apple.com/app/idcom.hardslime.kidarian";
     const string ANDROID_URL = "market://details?id=com.hardslime.kidarian";
 
     const string IS_RATE_US_WINDOW_APPEARED = "IsRateUsWindowAppears";
-    const string APP_ENTER_COUNTER = "AppEnterCounter";
+    const string RATE_US_ENTER_COUNTER = "AppEnterCounter";
 
     private void Start()
     {
@@ -44,14 +44,14 @@ public class RateUs : MonoBehaviour
             {
                 if (PlayerPrefs.GetInt(IS_RATE_US_WINDOW_APPEARED) > 0)
                 {
-                    if (PlayerPrefs.GetInt(APP_ENTER_COUNTER) >= REMIND_LATER_DELAY)
+                    if (PlayerPrefs.GetInt(RATE_US_ENTER_COUNTER) >= REMIND_LATER_DELAY)
                     {
                         EnableRateWindow(true);
                     }
                 }
                 else
                 {
-                    if (PlayerPrefs.GetInt(APP_ENTER_COUNTER) >= FIRST_APPEAR_DELAY)
+                    if (PlayerPrefs.GetInt(RATE_US_ENTER_COUNTER) >= FIRST_APPEAR_DELAY)
                     {
                         PlayerPrefs.SetInt(IS_RATE_US_WINDOW_APPEARED, 1);
                         EnableRateWindow(true);
@@ -78,7 +78,7 @@ public class RateUs : MonoBehaviour
 
     public void RemindLaterButton()
     {
-        PlayerPrefs.SetInt(APP_ENTER_COUNTER, 0);
+        PlayerPrefs.SetInt(RATE_US_ENTER_COUNTER, 0);
         EnableRateWindow(false);
 
         AppMetrica.Instance.ReportEvent("#RATE_US_REMIND_LATER");
@@ -96,7 +96,7 @@ public class RateUs : MonoBehaviour
 
     public static void IncrementAppEnterCounter()//Used in Awake() in PurchaseManager
     {
-        PlayerPrefs.SetInt(APP_ENTER_COUNTER, PlayerPrefs.GetInt(APP_ENTER_COUNTER) + 1);
+        
     }
 
     void EnableRateWindow(bool enable)

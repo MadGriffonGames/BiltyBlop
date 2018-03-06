@@ -7,23 +7,55 @@ public class SpecialOffer : MonoBehaviour
     [SerializeField]
     GameObject starterPackWindow;
     [SerializeField]
+    GameObject pack1Window;
+    [SerializeField]
+    GameObject pack1WithNoAdsWindow;
+    [SerializeField]
     GameObject fade;
+    [SerializeField]
+    int[] targetLevels;
+
+    const string WINDOW_SHOWN_AFTER = "WindowAfterLevel";
 
     private void Awake()
     {
-        string targetLevelName = "Level4";
-        string nextLevel = "Level" + (4 + 1).ToString();
-        string targetLevelPlusTwo = "Level" + (4 + 2).ToString();
+        CheckTargetLevel();
+    }
 
-        if (PlayerPrefs.GetInt("IsSpecialOfferShown") == 0)
+    void CheckTargetLevel()
+    {
+        string lastLevel = PlayerPrefs.GetString("LastCompletedLevel");
+        int lastLevelNum = int.Parse(lastLevel.Remove(0, 5));
+
+        for (int i = 0; i < targetLevels.Length; i++)
         {
-            if (PlayerPrefs.GetString("LastCompletedLevel") == targetLevelName && PlayerPrefs.GetInt(nextLevel) == 1 && PlayerPrefs.GetInt(targetLevelPlusTwo) == 0)
+            if (targetLevels[i] == lastLevelNum)
             {
-                starterPackWindow.SetActive(true);
-                fade.SetActive(true);
-                PlayerPrefs.SetInt("IsSpecialOfferShown", 1);
+                EnablePackWindow(lastLevel);
             }
         }
-        
+    }
+
+    void EnablePackWindow(string lastLevel)
+    {
+        if (PlayerPrefs.GetInt(WINDOW_SHOWN_AFTER + lastLevel) == 0)
+        {
+            fade.SetActive(true);
+            if (PlayerPrefs.GetInt("StarterPackBought") == 0)
+            {
+                starterPackWindow.SetActive(true);
+                PlayerPrefs.SetInt(WINDOW_SHOWN_AFTER + lastLevel, 1);
+            }
+            else if (PlayerPrefs.GetInt("Pack1_NoAdsBought") == 0)
+            {
+                pack1WithNoAdsWindow.SetActive(true);
+                PlayerPrefs.SetInt(WINDOW_SHOWN_AFTER + lastLevel, 1);
+            }
+            else if (PlayerPrefs.GetInt("Pack1Bought") == 0)
+            {
+                pack1Window.SetActive(true);
+                PlayerPrefs.SetInt(WINDOW_SHOWN_AFTER + lastLevel, 1);
+            }
+        }
     }
 }

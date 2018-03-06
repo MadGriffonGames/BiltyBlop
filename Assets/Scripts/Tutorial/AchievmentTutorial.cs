@@ -9,22 +9,19 @@ public class AchievmentTutorial : SceneTutorial
 
     bool tmp = false;
 
-    private void Update()
+    private void Start()
     {
-        if (!tmp)
+        if (PlayerPrefs.GetInt(ACHIEVEMENT_TUTORIAL_COMPLETE) == 0 && PlayerPrefs.GetInt(SHOP_TUTORIAL_COMPLETE) == 1)
         {
-            tmp = true;
-            if (isItTimeForTutorial() && PlayerPrefs.GetInt("TutorialMode") > 0 && PlayerPrefs.GetInt(ACHIEVEMENT_TUTORIAL_COMPLETE) == 0)
+            PlayerPrefs.SetInt("TutorialMode", 1);
+        }
+
+        if (isItTimeForTutorial() && PlayerPrefs.GetInt("TutorialMode") > 0 && PlayerPrefs.GetInt(ACHIEVEMENT_TUTORIAL_COMPLETE) == 0 && PlayerPrefs.GetInt(SHOP_TUTORIAL_COMPLETE) == 1)
+        {
+            if (map)
             {
-                if (PlayerPrefs.GetInt("TutorialAchieve") == 0)
-                {
-                    AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.tutorialAchieve);
-                }
-                if (map)
-                {
-                    map.SetAchievementsIndication();
-                }
+                map.SetAchievementsIndication();
             }
-        }   
+        }
     }
 }

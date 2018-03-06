@@ -11,54 +11,59 @@ public class NetworkTime : MonoBehaviour
     public static DateTime GetNetworkTime()
     {
         DateTime networkDateTime = new DateTime();
-        try
-        {
-            const string ntpServer = "pool.ntp.org";
-            // NTP message size - 16 bytes of the digest (RFC 2030)
-            var ntpData = new byte[48];
 
-            //Setting the Leap Indicator, Version Number and Mode values
-            ntpData[0] = 0x1B; //LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
+        // DO NOT TOUCH THIS CODE, IT'S USEFULL
+        //try
+        //{
+        //    const string ntpServer = "pool.ntp.org";
+        //    // NTP message size - 16 bytes of the digest (RFC 2030)
+        //    var ntpData = new byte[48];
 
-            var addresses = Dns.GetHostEntry(ntpServer).AddressList;
+        //    //Setting the Leap Indicator, Version Number and Mode values
+        //    ntpData[0] = 0x1B; //LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
 
-            //The UDP port number assigned to NTP is 123
-            var ipEndPoint = new IPEndPoint(addresses[0], 123);
-            //NTP uses UDP
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
-                socket.Connect(ipEndPoint);
+        //    var addresses = Dns.GetHostEntry(ntpServer).AddressList;
 
-                //Stops code hang if NTP is blocked
-                socket.ReceiveTimeout = 3000;
+        //    //The UDP port number assigned to NTP is 123
+        //    var ipEndPoint = new IPEndPoint(addresses[0], 123);
+        //    //NTP uses UDP
+        //    using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+        //    {
+        //        socket.Connect(ipEndPoint);
 
-                socket.Send(ntpData);
-                socket.Receive(ntpData);
-            }
+        //        //Stops code hang if NTP is blocked
+        //        socket.ReceiveTimeout = 3000;
 
-            //Offset to get to the "Transmit Timestamp" field (time at which the reply 
-            //departed the server for the client, in 64-bit timestamp format."
-            const byte serverReplyTime = 40;
+        //        socket.Send(ntpData);
+        //        socket.Receive(ntpData);
+        //    }
 
-            //Get the seconds part
-            ulong intPart = BitConverter.ToUInt32(ntpData, serverReplyTime);
+        //    //Offset to get to the "Transmit Timestamp" field (time at which the reply 
+        //    //departed the server for the client, in 64-bit timestamp format."
+        //    const byte serverReplyTime = 40;
 
-            //Get the seconds fraction
-            ulong fractPart = BitConverter.ToUInt32(ntpData, serverReplyTime + 4);
+        //    //Get the seconds part
+        //    ulong intPart = BitConverter.ToUInt32(ntpData, serverReplyTime);
 
-            //Convert From big-endian to little-endian
-            intPart = SwapEndianness(intPart);
-            fractPart = SwapEndianness(fractPart);
+        //    //Get the seconds fraction
+        //    ulong fractPart = BitConverter.ToUInt32(ntpData, serverReplyTime + 4);
 
-            var milliseconds = (intPart * 1000) + ((fractPart * 1000) / 0x100000000L);
+        //    //Convert From big-endian to little-endian
+        //    intPart = SwapEndianness(intPart);
+        //    fractPart = SwapEndianness(fractPart);
 
-            //**UTC** time
-            networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
-        }
-        catch (SocketException)
-        {
-            networkDateTime = DateTime.Now;
-        }
+        //    var milliseconds = (intPart * 1000) + ((fractPart * 1000) / 0x100000000L);
+
+        //    //**UTC** time
+        //    networkDateTime = (new DateTime(1900, 1, 1, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds((long)milliseconds);
+        //}
+        //catch (SocketException)
+        //{
+        //    networkDateTime = DateTime.Now;
+        //}
+        // DO NOT TOUCH THIS CODE, IT'S USEFULL
+
+        networkDateTime = DateTime.Now;
 
         return networkDateTime.ToLocalTime();
     }

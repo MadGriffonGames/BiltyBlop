@@ -142,7 +142,6 @@ public class UnlockSkinWindow : MonoBehaviour {
             {
 				ShowErrorWindow("not enough coins");
                 PurchaseManager.Instance.BuyConsumable(1);
-                Debug.Log("Lel");
                 skinTransform.SetActive (false);
             }
         }

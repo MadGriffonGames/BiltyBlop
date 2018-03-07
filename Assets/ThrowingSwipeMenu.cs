@@ -74,7 +74,10 @@ public class ThrowingSwipeMenu : SwipeMenu {
 					}
 					else
 					{
-						throwCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (throwScript.coinCost);
+						if (throwScript.coinCost == 0)
+							throwCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCrystalCost (throwScript.crystalCost);
+						else
+							throwCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (throwScript.coinCost);
 						throwCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
 						throwCardObj.gameObject.GetComponentsInChildren<Button>()[0].onClick.AddListener(() => ShowUnlockThrowWindow(SkinManager.Instance.NumberOfThrowPrefabByOrder(throwScript.orderNumber))); // wdfsdf
 						throwCardObj.gameObject.GetComponentsInChildren<Button>()[1].onClick.AddListener(() => ShowUnlockThrowWindow(SkinManager.Instance.NumberOfThrowPrefabByOrder(throwScript.orderNumber)));

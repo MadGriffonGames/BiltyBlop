@@ -526,8 +526,8 @@
 	},
 	
 	//Level 8
-	"dark magic overcomes me":{
-	"text": "ТЕМНАЯ МАГИЯ ОДОЛЕВАЕТ МЕНЯ",
+	"dark magic overcomes me... i won't help you anymore":{
+	"text": "ЗЛО ОДОЛЕВАЕТ МЕНЯ... Я БОЛЬШЕ НЕ СМОГУ ПОМОГАТЬ ТЕБЕ...",
 	"fontSize": 0
 	},
 	

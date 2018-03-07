@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static int torches;
     public static float screenAspect;
     bool isBirded = false;
-    public static bool developmentBuild = true;
+    public static bool developmentBuild = false;
 
     public static int CollectedCoins
     {

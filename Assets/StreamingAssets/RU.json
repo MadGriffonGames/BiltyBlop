@@ -86,6 +86,26 @@
 	"fontSize": 170
 	},
 	
+	"level_pre_level_shop": {
+	"text": "УРОВЕНЬ",
+	"fontSize": 0
+	},
+	
+	"heal_pre_level_shop": {
+	"text": "ЗДОРОВЬЕ",
+	"fontSize": 0
+	},
+	
+	"ammo_pre_level_shop": {
+	"text": "КОЛЧАН",
+	"fontSize": 0
+	},
+	
+	"immortal_pre_level_shop": {
+	"text": "БЕССМЕРТИЕ",
+	"fontSize": 0
+	},
+	
 	"play": {
 	"text": "ИГРАТЬ",
 	"fontSize": 85

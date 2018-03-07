@@ -84,6 +84,26 @@
 	"fontSize": 0
 	},
 	
+	"level_pre_level_shop": {
+	"text": "LEVEL",
+	"fontSize": 0
+	},
+	
+	"heal_pre_level_shop": {
+	"text": "HEAL",
+	"fontSize": 0
+	},
+	
+	"ammo_pre_level_shop": {
+	"text": "AMMO",
+	"fontSize": 0
+	},
+	
+	"immortal_pre_level_shop": {
+	"text": "IMMORTAL",
+	"fontSize": 0
+	},
+	
 	"restore\npurchases": {
 	"text": "RESTORE\nPURCHASES",
 	"fontSize": 0

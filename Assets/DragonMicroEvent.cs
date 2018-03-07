@@ -18,6 +18,8 @@ public class DragonMicroEvent : MonoBehaviour {
     GameObject stopCollider;
     [SerializeField]
     GameObject eventText;
+    [SerializeField]
+    GameObject tutorialUI;
     Slot[] dragonSlots;
     int dragonIndex;
     bool isOldDragon = false;
@@ -76,7 +78,7 @@ public class DragonMicroEvent : MonoBehaviour {
         {
             StartCoroutine(TextDelay());
             StartCoroutine(WeaknessDelay());
-            
+            StartCoroutine(TextOff());
         }
     }
 
@@ -99,7 +101,7 @@ public class DragonMicroEvent : MonoBehaviour {
 
     IEnumerator WeaknessDelay()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
         lightningBolt.SetActive(true);
         SoundManager.PlaySound("lightning_sound1");
         StartCoroutine(ThrowSecondLight());
@@ -111,7 +113,7 @@ public class DragonMicroEvent : MonoBehaviour {
 
     IEnumerator TextDelay()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.9f);
         eventText.SetActive(true);
     }
 
@@ -152,16 +154,23 @@ public class DragonMicroEvent : MonoBehaviour {
 
     IEnumerator ThrowSecondLight()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         lighningBolt1.SetActive(true);
         SoundManager.PlaySound("lightning_sound1");
     }
 
     IEnumerator ThrowTrhirdLight()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.6f);
         lightningBolt2.SetActive(true);
         SoundManager.PlaySound("lightning_sound1");
+    }
+
+    IEnumerator TextOff()
+    {
+        yield return new WaitForSeconds(4.5f);
+        tutorialUI.gameObject.SetActive(false);
+        eventText.gameObject.SetActive(false);
     }
 
 }

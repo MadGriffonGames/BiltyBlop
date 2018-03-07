@@ -84,6 +84,26 @@
 	"fontSize": 0
 	},
 	
+	"level_pre_level_shop": {
+	"text": "LEVEL",
+	"fontSize": 0
+	},
+	
+	"heal_pre_level_shop": {
+	"text": "HEAL",
+	"fontSize": 0
+	},
+	
+	"ammo_pre_level_shop": {
+	"text": "AMMO",
+	"fontSize": 0
+	},
+	
+	"immortal_pre_level_shop": {
+	"text": "IMMORTAL",
+	"fontSize": 0
+	},
+	
 	"restore\npurchases": {
 	"text": "RESTORE\nPURCHASES",
 	"fontSize": 0
@@ -412,7 +432,7 @@
 	},
 	
 	"greetings young warrior! i will teach you on your journey": {
-	"text": "GREETINGS YOUNG WARRIOR! I WILL TEACH YOU IN YOUR JOURNEY", 
+	"text": "GREETINGS YOUNG WARRIOR! I AM THE GUARDIAN OF THESE LANDS AND I WILL TEACH YOU ON YOUR JOURNEY", 
 	"fontSize": 19
 	},
 	
@@ -526,6 +546,12 @@
 	"hit this lever to open the door": {
 	"text": "HIT THIS LEVER TO OPEN THE DOOR", 
 	"fontSize": 30
+	},
+	
+	//Level 8
+	"dark magic overcomes me":{
+	"text": "DARK MAGIC OVERCOMES ME",
+	"fontSize": 0
 	},
 	
 	//Map

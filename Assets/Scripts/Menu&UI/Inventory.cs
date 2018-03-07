@@ -22,6 +22,8 @@ public class Inventory : MonoBehaviour
     const int SPEED_DURATION = 5;
     const int TIME_DURATION = 5;
 
+    public const string FIRST_BUY = "firstBuy";
+
 
     /* Inventory Items Names */
     public const string HEAL = "HealthPot";
@@ -80,7 +82,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-
+                PurchaseManager.Instance.BuyConsumable(1);
             }
         }
         if (moneyType == "Crystals")
@@ -100,12 +102,16 @@ public class Inventory : MonoBehaviour
             else
             {
                 PurchaseManager.Instance.BuyConsumable(1);
-                Debug.Log("lel");
             }
         }
         if (moneyType == "Free")
         {
             AddItem(itemName, itemCount);
+            if (PlayerPrefs.GetInt(FIRST_BUY) == 0 || !PlayerPrefs.HasKey(FIRST_BUY))
+            {
+                PlayerPrefs.SetInt(FIRST_BUY, 1);
+                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
+            }
         }
     }
 

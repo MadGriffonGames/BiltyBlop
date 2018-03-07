@@ -25,6 +25,8 @@ public class SceneTutorial : MonoBehaviour
     string description;
     [SerializeField]
     int fontSize;
+    [SerializeField]
+    int tutorialType;
 
     string targetLevelName;
 
@@ -40,33 +42,23 @@ public class SceneTutorial : MonoBehaviour
         {
             if (isItTimeForTutorial())
             {
-                if (PlayerPrefs.GetInt("TutorialMode") > 0)
+                if (frontPlan)
                 {
-                    PlayerPrefs.SetInt("TutorialMode", 0);
+                    MoveToFrontPlan(targetObject);
                 }
-                else
+                DisableButtons();
+                highlighter.SetActive(true);
+                textBar.SetActive(true);
+                tutorialDescriptionText.text = description;
+                if (fade)
                 {
-                    if (isItTimeForTutorial())
-                    {
-                        if (frontPlan)
-                        {
-                            MoveToFrontPlan(targetObject);
-                        }
-                        DisableButtons();
-                        highlighter.SetActive(true);
-                        textBar.SetActive(true);
-                        tutorialDescriptionText.text = description;
-                        if (fade)
-                        {
-                            fade.SetActive(true);
-                        }
-                        if (fontSize != 0)
-                        {
-                            tutorialDescriptionText.fontSize = fontSize;
-                        }
-                        PlayerPrefs.SetInt("TutorialMode", 1);
-                    }
+                    fade.SetActive(true);
                 }
+                if (fontSize != 0)
+                {
+                    tutorialDescriptionText.fontSize = fontSize;
+                }
+                PlayerPrefs.SetInt("TutorialMode", 1);
             }
         }       
         else if(isItTimeForTutorial())
@@ -101,7 +93,7 @@ public class SceneTutorial : MonoBehaviour
 
     public bool isTutorialAvailable()
     {
-        switch (targetLevelNum)
+        switch (tutorialType)
         {
             case 1:
                 return PlayerPrefs.GetInt(CHEST_TUTORIAL_COMPLETE) == 0;
@@ -110,8 +102,8 @@ public class SceneTutorial : MonoBehaviour
                 return PlayerPrefs.GetInt(SHOP_TUTORIAL_COMPLETE) == 0;
 
             case 3:
-                
-                return PlayerPrefs.GetInt(ACHIEVEMENT_TUTORIAL_COMPLETE) == 0;
+                return PlayerPrefs.GetInt(ACHIEVEMENT_TUTORIAL_COMPLETE) == 0 && PlayerPrefs.GetInt(SHOP_TUTORIAL_COMPLETE) == 1;
+
             default:
                 return false;
         }

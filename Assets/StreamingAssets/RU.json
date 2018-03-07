@@ -86,6 +86,26 @@
 	"fontSize": 170
 	},
 	
+	"level_pre_level_shop": {
+	"text": "УРОВЕНЬ",
+	"fontSize": 0
+	},
+	
+	"heal_pre_level_shop": {
+	"text": "ЗДОРОВЬЕ",
+	"fontSize": 0
+	},
+	
+	"ammo_pre_level_shop": {
+	"text": "КОЛЧАН",
+	"fontSize": 0
+	},
+	
+	"immortal_pre_level_shop": {
+	"text": "БЕССМЕРТИЕ",
+	"fontSize": 0
+	},
+	
 	"play": {
 	"text": "ИГРАТЬ",
 	"fontSize": 85
@@ -384,7 +404,7 @@
 	},
 	
 	"greetings young warrior! i will teach you on your journey": {
-	"text": "ПРИВЕТСТВУЮ, ЮНЫЙ ВОИН! Я БУДУ ОБУЧАТЬ ТЕБЯ", 
+	"text": "ПРИВЕТСТВУЮ, ЮНЫЙ ВОИН! Я - ХРАНИТЕЛЬ ЭТИХ ЗЕМЕЛЬ И Я БУДУ ОБУЧАТЬ ТЕБЯ", 
 	"fontSize": 22
 	},
 	
@@ -503,6 +523,12 @@
 	"hit this lever to open the door": {
 	"text": "УДАРЬ ПО РЫЧАГУ ЧТОБЫ ОТКРЫТЬ ДВЕРЬ", 
 	"fontSize": 24
+	},
+	
+	//Level 8
+	"dark magic overcomes me":{
+	"text": "ТЕМНАЯ МАГИЯ ОДОЛЕВАЕТ МЕНЯ",
+	"fontSize": 0
 	},
 	
 	//Map

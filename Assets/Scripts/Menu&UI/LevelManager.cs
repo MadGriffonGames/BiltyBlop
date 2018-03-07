@@ -30,6 +30,8 @@ public class LevelManager : MonoBehaviour
     GameObject mainMenu;
     [SerializeField]
     GameObject mapButtons;
+    [SerializeField]
+    GameObject preLevelShop;
 
     public int groupCount;
     private int groupIndex;
@@ -65,7 +67,14 @@ public class LevelManager : MonoBehaviour
     public void LoadLevel(string levelName)
     {
         GameManager.nextLevelName = "Level" + levelName;
-        SceneManager.LoadScene("Loading");
+        if (levelName != "1" && levelName != "2")
+        {
+            ActivatePreLevelShop(levelName);
+        }
+        else
+        {
+            SceneManager.LoadScene("Loading");
+        }
     }
 
     void SaveAll()
@@ -110,5 +119,15 @@ public class LevelManager : MonoBehaviour
             mainMenuCanvas.SetActive(true);
             mainMenu.SetActive(true);
         }
+    }
+
+    void ActivatePreLevelShop(string levelName)
+    {
+        PreLevelShop plsComponent = preLevelShop.GetComponent<PreLevelShop>();
+        plsComponent.title.text = "level_pre_level_shop";
+        LocalizationManager.Instance.UpdateLocaliztion(plsComponent.title);
+        plsComponent.title.text += (" " + levelName);
+        plsComponent.fade.SetActive(true);
+        preLevelShop.SetActive(true);
     }
 }

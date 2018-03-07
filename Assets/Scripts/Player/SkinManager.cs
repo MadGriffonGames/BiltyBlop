@@ -32,7 +32,6 @@ public class SkinManager : MonoBehaviour
     private const string SKIN_PREFABS_FOLDER = "Skins/";
 	private const string SWORDS_PREFAB_FOLDER = "Swords/";
 	private const string THROW_PREFAB_FOLDER = "Throw/";
-    public const string firstBuy = "firstBuy";
 
     private void Awake()
     {
@@ -67,11 +66,7 @@ public class SkinManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - skinPrefabs[skinNumber].GetComponent<SkinPrefab>().crystalCost);
             skinPrefabs[skinNumber].GetComponent<SkinPrefab>().UnlockSkin();
-            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
-            {
-                PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                
-            }
+
             AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             DevToDev.Analytics.CustomEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             return true;
@@ -87,11 +82,7 @@ public class SkinManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - skinPrefabs[skinNumber].GetComponent<SkinPrefab>().coinCost);
             skinPrefabs[skinNumber].GetComponent<SkinPrefab>().UnlockSkin();
-            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
-            {
-                PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);             
-            }
+
             AppMetrica.Instance.ReportEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             DevToDev.Analytics.CustomEvent("#SKIN_BOUGHT " + skinPrefabs[skinNumber].name);
             return true;
@@ -106,11 +97,7 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - swordPrefabs[swordNumber].GetComponent<SwordPrefab>().crystalCost);
 			swordPrefabs[swordNumber].GetComponent<SwordPrefab>().UnlockSword();
-            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
-            {
-                PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);              
-            }
+
             AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             DevToDev.Analytics.CustomEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             return true;
@@ -126,11 +113,7 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - swordPrefabs[swordNumber].GetComponent<SwordPrefab>().coinCost);
 			swordPrefabs[swordNumber].GetComponent<SwordPrefab>().UnlockSword();
-            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
-            {
-                PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                
-            }
+            
             AppMetrica.Instance.ReportEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             DevToDev.Analytics.CustomEvent("#SWORD_BOUGHT " + swordPrefabs[swordNumber].name);
             return true;
@@ -145,11 +128,7 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Crystals", PlayerPrefs.GetInt("Crystals") - throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().crystalCost);
 			throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().UnlockThrow();
-            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
-            {
-                PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);                            
-            }
+
             AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             DevToDev.Analytics.CustomEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             return true;
@@ -165,11 +144,7 @@ public class SkinManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().coinCost);
 			throwPrefabs[throwNumber].GetComponent<ThrowPrefab>().UnlockThrow();
-            if (PlayerPrefs.GetInt(firstBuy) == 0 || !PlayerPrefs.HasKey(firstBuy))
-            {
-                PlayerPrefs.SetInt(firstBuy, 1);
-                AchievementManager.Instance.CheckLevelAchieve(AchievementManager.Instance.firstBuy);
-            }
+
             AppMetrica.Instance.ReportEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             DevToDev.Analytics.CustomEvent("#THROWING_BOUGHT " + throwPrefabs[throwNumber].name);
             return true;

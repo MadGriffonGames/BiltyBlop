@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 #elif UNITY_ANDROID
         Application.targetFrameRate = 60;
 #elif UNITY_IOS
-			Application.targetFrameRate = 60;
+		Application.targetFrameRate = 60;
 #endif
 
         screenAspect = (float)Screen.width / (float)Screen.height;

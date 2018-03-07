@@ -74,7 +74,10 @@ public class PackWindow : MonoBehaviour
     private void DisablePackWindow()
     {
         fade.SetActive(false);
-        packSign.SetActive(false);
+        if (packSign)
+        {
+            packSign.SetActive(false);
+        }
         this.gameObject.SetActive(false);
     } 
 

@@ -305,10 +305,8 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
     void CoinStart()
     {
         isTimerTickCoin = false;
-        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
         coinLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("CoinLastOpenDate"));
-
-        is24hoursPastCoin = NetworkTime.Check24hours(coinLastOpenDate);
+        //is24hoursPastCoin = NetworkTime.Check24hours(coinLastOpenDate);
         if (!is24hoursPastCoin)
         {
             coinButton.GetComponent<Button>().interactable = false;
@@ -323,7 +321,6 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
     void ClipsCountStart()
     {
         isTimerTickClipsCount = false;
-        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
 
         clipsCountLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("ClipsCountLastOpenDate"));
 
@@ -342,11 +339,10 @@ public class DailyLoot : MonoBehaviour, IAdsPlacement
     void PotionStart()
     {
         isTimerTickPotion = false;
-        hours24 = (DateTime.Now.AddDays(1) - DateTime.Now);
 
         potionLastOpenDate = DateTime.Parse(PlayerPrefs.GetString("PotionLastOpenDate"));
 
-        is24hoursPastPotion = NetworkTime.Check24hours(potionLastOpenDate);
+        //is24hoursPastPotion = NetworkTime.Check24hours(potionLastOpenDate);
         if (!is24hoursPastPotion)
         {
             potionButton.GetComponent<Button>().interactable = false;

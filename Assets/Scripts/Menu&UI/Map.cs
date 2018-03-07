@@ -12,7 +12,7 @@ public class Map : MonoBehaviour
     GameObject availableAchievementsCounter;
     [SerializeField]
     GameObject greenCircleAchieve;
-    public const string availableAchievements = "avaliableLoots";
+    public const string AVAILIABLE_ACHIEVEMENTS = "avaliableLoots";
 
     private void Start()
     {
@@ -62,12 +62,13 @@ public class Map : MonoBehaviour
 
     public void SetAchievementsIndication()
     {
-        if (PlayerPrefs.GetInt(availableAchievements) != 0)
+        if (PlayerPrefs.GetInt(AVAILIABLE_ACHIEVEMENTS) != 0)
         {
+            Debug.Log("AHAHHAHAHAHAHAHAHHAHAHAHHAHAHA");
             greenCircleAchieve.SetActive(true);
-            availableAchievementsCounter.GetComponent<Text>().text = PlayerPrefs.GetInt(availableAchievements).ToString();
+            availableAchievementsCounter.GetComponent<Text>().text = PlayerPrefs.GetInt(AVAILIABLE_ACHIEVEMENTS).ToString();
         }
-        else if (PlayerPrefs.GetInt(availableAchievements) == 0 || !PlayerPrefs.HasKey(availableAchievements))
+        else if (PlayerPrefs.GetInt(AVAILIABLE_ACHIEVEMENTS) == 0 || !PlayerPrefs.HasKey(AVAILIABLE_ACHIEVEMENTS))
         {
             availableAchievementsCounter.GetComponent<Text>().text = "";
             greenCircleAchieve.SetActive(false);

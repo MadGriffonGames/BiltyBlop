@@ -18,6 +18,10 @@ public class SkinStatsPanel : MonoBehaviour
 	[SerializeField]
 	GameObject statHalo;
 
+	private string crystalsImagePath = "Sprites/UI/Loot/Crystals/CrystalMiddlePack";
+	private Sprite crystalsSprite;
+
+
     public void SetDefendIndicators(int stat)
     {      
 		hpStatText.text = stat.ToString();
@@ -27,6 +31,12 @@ public class SkinStatsPanel : MonoBehaviour
     {
 		coinCostText.text = stat.ToString();
     }
+
+	public void SetCrystalCost(int stat)
+	{
+		coinCostText.text = stat.ToString();
+		ChangeCoinPictureToCrystals ();
+	}
 	public void SetAttackIndicators(int stat)
 	{
 		attackStatText.text = stat.ToString();
@@ -46,5 +56,11 @@ public class SkinStatsPanel : MonoBehaviour
 		ActivateCheck (false);
 		TurnOffCoinCost ();
 		this.gameObject.transform.localPosition = new Vector3 (0,this.gameObject.transform.localPosition.y,this.gameObject.transform.localPosition.z);
+	}
+	public void ChangeCoinPictureToCrystals()
+	{
+		crystalsSprite = Resources.Load<Sprite>(crystalsImagePath);
+		coin.GetComponent<Image> ().sprite = crystalsSprite;
+		coin.transform.localScale = new Vector3 (1.5f, 1.5f, 1f);
 	}
 }

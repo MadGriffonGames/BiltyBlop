@@ -24,4 +24,13 @@ public class TutorialUI : MonoBehaviour
     public Image textBar;
 
 
+	void Awake()
+	{
+		if (GameManager.screenAspect == GameManager.ASPECT_4x3)
+		{
+			Vector3 tmp = GetComponent<RectTransform> ().localPosition;
+			tmp.y = 170;
+			GetComponent<RectTransform> ().localPosition = tmp;
+		}
+	}
 }

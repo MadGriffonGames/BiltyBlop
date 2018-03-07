@@ -20,7 +20,7 @@ public class GemsSwipeMenu : SwipeMenu
 
 	public override void Start()
 	{
-		listeners = new int[] {3,4,2,1,0};    // соответствие карточек и их порядка в PurchaseManager
+		listeners = new int[] {1,4,3,2,0};    // соответствие карточек и их порядка в PurchaseManager
 		buttons = new GameObject[panel.transform.childCount];
 		distance = new float[buttons.Length];
 		for (int i = 0; i < buttons.Length; i++) 

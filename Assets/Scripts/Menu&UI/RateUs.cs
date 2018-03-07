@@ -13,7 +13,7 @@ public class RateUs : MonoBehaviour
     const int FIRST_APPEAR_DELAY = 3;
     const int REMIND_LATER_DELAY = 3;
 
-    const string IOS_URL = "item-apps://itunes.apple.com/app/idcom.hardslime.kidarian";
+	const string IOS_URL = "https://itunes.apple.com/us/app/apple-store/id1285247601?mt=8";
     const string ANDROID_URL = "market://details?id=com.hardslime.kidarian";
 
     const string IS_RATE_US_WINDOW_APPEARED = "IsRateUsWindowAppears";

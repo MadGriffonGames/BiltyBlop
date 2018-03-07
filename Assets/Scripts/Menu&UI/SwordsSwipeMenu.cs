@@ -57,10 +57,13 @@ public class SwordsSwipeMenu : SwipeMenu {
 					if (sword.isAvaliableInShop) 
 					{
 						swordCardObj.gameObject.GetComponentsInChildren<Image> () [5].gameObject.SetActive (false); //  TURN OFF "LOCK" on card
-						if (PlayerPrefs.GetString (sword.name) == "Unlocked") {
-							if (PlayerPrefs.GetString ("Sword") == sword.name) {
+						if (PlayerPrefs.GetString (sword.name) == "Unlocked") 
+						{
+							if (PlayerPrefs.GetString ("Sword") == sword.name) 
+							{
 								swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
-							} else {
+							} else 
+							{
 								swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 							}
 							swordCardObj.gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
@@ -68,8 +71,13 @@ public class SwordsSwipeMenu : SwipeMenu {
 							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySword (sword.orderNumber));
 							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
 							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (true);
-						} else {
-							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (sword.coinCost);
+						} 
+						else 
+						{
+							if (sword.coinCost == 0)
+								swordCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCrystalCost (sword.crystalCost);
+							else 
+								swordCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (sword.coinCost);
 							swordCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
 							swordCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ShowUnlockSwordWindow (SkinManager.Instance.NumberOfSwordPrefabBySwordOrder (sword.orderNumber))); // wdfsdf
 							swordCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ShowUnlockSwordWindow (SkinManager.Instance.NumberOfSwordPrefabBySwordOrder (sword.orderNumber)));

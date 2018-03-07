@@ -60,10 +60,13 @@ public class SkinSwipeMenu : SwipeMenu {
 					{
 						skinCardObj.gameObject.GetComponentsInChildren<Image> () [5].gameObject.SetActive (false); //  TURN OFF "LOCK" on card
  
-						if (PlayerPrefs.GetString (skin.name) == "Unlocked") {
-							if (PlayerPrefs.GetString ("Skin") == skin.name) {
+						if (PlayerPrefs.GetString (skin.name) == "Unlocked") 
+						{
+							if (PlayerPrefs.GetString ("Skin") == skin.name) 
+							{
 								skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
-							} else {
+							} else 
+							{
 								skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 							}
 							skinCardObj.GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
@@ -73,7 +76,10 @@ public class SkinSwipeMenu : SwipeMenu {
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySkin (skin.orderNumber));
 						} else {
 							skinCardObj.GetComponentInChildren<SkinStatsPanel> ().ActivateCheck (false);
-							skinCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (skin.coinCost);
+							if (skin.coinCost == 0) 
+								skinCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCrystalCost (skin.crystalCost);
+							else
+								skinCardObj.GetComponentInChildren<SkinStatsPanel> ().SetCoinCost (skin.coinCost);
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ShowUnlockSkinWindow (SkinManager.Instance.NumberOfSkinPrefabBySkinOrder (skin.orderNumber)));
 							skinCardObj.gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ShowUnlockSkinWindow (SkinManager.Instance.NumberOfSkinPrefabBySkinOrder (skin.orderNumber)));
 						}
@@ -114,10 +120,13 @@ public class SkinSwipeMenu : SwipeMenu {
 					buttons[i].gameObject.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
 					buttons[i].gameObject.GetComponentsInChildren<Button>()[1].onClick.RemoveAllListeners();
 					if (skin.isAvaliableInShop) {
-						if (PlayerPrefs.GetString (skin.name) == "Unlocked") {
-							if (PlayerPrefs.GetString ("Skin") == skin.name) {
+						if (PlayerPrefs.GetString (skin.name) == "Unlocked") 
+						{
+							if (PlayerPrefs.GetString ("Skin") == skin.name) 
+							{
 								buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equiped";
-							} else {
+							} else 
+							{
 								buttons [i].gameObject.GetComponentsInChildren<Button> () [1].GetComponentInChildren<Text> ().text = "equip";
 							}
 							buttons [i].GetComponentInChildren<SkinStatsPanel> ().TurnOffCoinCost ();
@@ -125,7 +134,9 @@ public class SkinSwipeMenu : SwipeMenu {
 							buttons [i].gameObject.GetComponentsInChildren<Image> () [3].sprite = equipButton;
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ApplySkin (skin.orderNumber));
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ApplySkin (skin.orderNumber));
-						} else {
+						} 
+						else 
+						{
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [0].onClick.AddListener (() => ShowUnlockSkinWindow (SkinManager.Instance.NumberOfSkinPrefabBySkinOrder (skin.orderNumber)));
 							buttons [i].gameObject.GetComponentsInChildren<Button> () [1].onClick.AddListener (() => ShowUnlockSkinWindow (SkinManager.Instance.NumberOfSkinPrefabBySkinOrder (skin.orderNumber)));
 						}

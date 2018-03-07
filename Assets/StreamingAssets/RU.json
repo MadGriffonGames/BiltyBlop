@@ -525,6 +525,12 @@
 	"fontSize": 24
 	},
 	
+	//Level 8
+	"dark magic overcomes me":{
+	"text": "ТЕМНАЯ МАГИЯ ОДОЛЕВАЕТ МЕНЯ",
+	"fontSize": 0
+	},
+	
 	//Map
 	
 	"it's time for shopping! tap on this button to go to the shop": {

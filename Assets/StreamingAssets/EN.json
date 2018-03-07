@@ -548,6 +548,12 @@
 	"fontSize": 30
 	},
 	
+	//Level 8
+	"dark magic overcomes me":{
+	"text": "DARK MAGIC OVERCOMES ME",
+	"fontSize": 0
+	},
+	
 	//Map
 	
 	"it's time for shopping! tap on this button to go to the shop": {

@@ -16,6 +16,8 @@ public class DragonMicroEvent : MonoBehaviour {
     GameObject changableTargetObject;
     [SerializeField]
     GameObject stopCollider;
+    [SerializeField]
+    GameObject eventText;
     Slot[] dragonSlots;
     int dragonIndex;
     bool isOldDragon = false;
@@ -72,13 +74,9 @@ public class DragonMicroEvent : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            lightningBolt.SetActive(true);
-            SoundManager.PlaySound("lightning_sound1");
-            StartCoroutine(ThrowSecondLight());
-            StartCoroutine(ThrowTrhirdLight());
-            StartCoroutine(ChangeDisplayIndexes());
-            StartCoroutine(StopDisable());
-            gameObject.GetComponent<Collider2D>().enabled = false;
+            StartCoroutine(TextDelay());
+            StartCoroutine(WeaknessDelay());
+            
         }
     }
 
@@ -97,6 +95,24 @@ public class DragonMicroEvent : MonoBehaviour {
         yield return new WaitForSeconds(0.2f);
         ChangeIndexes();
         isOldDragon = true;
+    }
+
+    IEnumerator WeaknessDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        lightningBolt.SetActive(true);
+        SoundManager.PlaySound("lightning_sound1");
+        StartCoroutine(ThrowSecondLight());
+        StartCoroutine(ThrowTrhirdLight());
+        StartCoroutine(ChangeDisplayIndexes());
+        StartCoroutine(StopDisable());
+        gameObject.GetComponent<Collider2D>().enabled = false;
+    }
+
+    IEnumerator TextDelay()
+    {
+        yield return new WaitForSeconds(1);
+        eventText.SetActive(true);
     }
 
     void AddSlot(Slot slot, ref int i)

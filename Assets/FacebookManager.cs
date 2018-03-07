@@ -47,7 +47,7 @@ public class FacebookManager : MonoBehaviour
         shareURL = "https://play.google.com/store/apps/details?id=com.hardslime.kidarian";
 
 #elif UNITY_IOS
-        shareURL = "https://www.hardslime.com/";
+        shareURL = "https://itunes.apple.com/us/app/apple-store/id1285247601?mt=8";
 #endif
     }
 

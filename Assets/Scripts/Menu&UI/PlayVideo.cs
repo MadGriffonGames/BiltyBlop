@@ -75,7 +75,7 @@ public class PlayVideo : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR
+#if !UNITY_EDITOR 
         if (SceneManager.GetActiveScene ().name == "Level1")
 			ExecuteVideo ();
 #endif

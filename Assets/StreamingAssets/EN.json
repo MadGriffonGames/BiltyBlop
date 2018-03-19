@@ -249,6 +249,11 @@
 	"fontSize": 60
 	},
 	
+	"exclusive": {
+	"text": "EXCLUSIVE", 
+	"fontSize": 0
+	},
+	
 	"get": {
 	"text": "GET", 
 	"fontSize": 0

@@ -341,6 +341,11 @@
 	"fontSize": 65
 	},
 	
+	"exclusive": {
+	"text": "ЭКСКЛЮЗИВ", 
+	"fontSize": 0
+	},
+	
 	"hero's choise title": {
 	"text": "ВЫБОР ГЕРОЯ", 
 	"fontSize": 65

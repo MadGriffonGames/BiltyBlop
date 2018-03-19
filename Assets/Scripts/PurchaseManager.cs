@@ -27,6 +27,10 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
 	[SerializeField]
 	GameObject ninjaSkin;
+    [SerializeField]
+    GameObject lightarianSkin;
+    [SerializeField]
+    GameObject mace;
 
     /// <summary>
     /// Событие, которое запускается при удачной покупке многоразового товара.
@@ -135,6 +139,17 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
                 PlayerPrefs.SetFloat("Greedy3", 1.5f);
                 PlayerPrefs.SetInt("FreeRevives", 20);
                 DevToDev.Analytics.InAppPurchase(productId, "Pack", 1, 349, "rub");
+                break;
+
+            case "skin_pack":
+                PlayerPrefs.SetInt("SkinPackBought", 1);
+
+                PlayerPrefs.SetString("Lightarian", "Unlocked");
+                lightarianSkin.GetComponent<SkinPrefab>().UnlockSkin();
+                PlayerPrefs.SetString("EvilSword", "Unlocked");
+                PlayerPrefs.SetString("EvilSwordIsAvaliableInShop", "Avaliable");
+
+                DevToDev.Analytics.InAppPurchase(productId, "SkinPack", 1, 349, "rub");
                 break;
 
             default:

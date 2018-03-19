@@ -32,7 +32,8 @@ public class ThrowingSwipeMenu : SwipeMenu {
 		panel.anchoredPosition = new Vector2(buttons[1].transform.position.x, panel.anchoredPosition.y);
 	}
 
-	public override void Update () {
+	public override void Update ()
+    {
 		base.Update ();	
 	}
 

@@ -964,6 +964,14 @@
 		"text": "ПРОКЛЯТЫЙ МЕЧ",
 		"fontSize": 20
 		},
+		"mace":{
+			"text": "БУЛАВА",
+			"fontSize": 0
+			},
+		"springaxe":{
+		"text": "ТОПОР ВЕСНЫ",
+		"fontSize": 0
+		},
 
 
 

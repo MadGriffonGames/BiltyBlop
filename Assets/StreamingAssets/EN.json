@@ -1044,7 +1044,14 @@
 	"text": "EVIL SWORD",
 	"fontSize": 0
 	},
-
+	"mace":{
+		"text": "MACE",
+		"fontSize": 0
+		},
+	"springaxe":{
+	"text": "SPRING AXE",
+	"fontSize": 0
+	},
 
 
 	"classicthr":{

@@ -986,7 +986,14 @@
 	"text": "EVILARIAN",
 	"fontSize": 0
 	},
-
+	"lightarian":{
+		"text": "LIGHTARIAN",
+		"fontSize": 0
+		},
+	"girlarian":{
+		"text": "GIRLARIAN",
+		"fontSize": 0
+		},
 
 	"arakh":{
 	"text": "ARAKH",

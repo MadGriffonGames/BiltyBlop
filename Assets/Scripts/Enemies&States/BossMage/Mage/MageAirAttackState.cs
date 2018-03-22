@@ -24,7 +24,7 @@ public class MageAirAttackState : IMageBossState
         }
         if (enemy.armature.animation.lastAnimationName == "Casting_spell_bang" && enemy.armature.animation.isCompleted)
         {
-            enemy.SpawnFireballs(false);
+            enemy.SpawnFireballs();
             enemy.ChangeState(new MageIdleState());
         }
     }

@@ -40,7 +40,6 @@ public class MageBoss : Boss
 
     void Awake()
     {
-        armature = GetComponent<UnityArmatureComponent>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<BoxCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), Player.Instance.GetComponent<CapsuleCollider2D>(), true);
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), platformColliderToIgnore, true);
@@ -53,7 +52,7 @@ public class MageBoss : Boss
     {
         base.Start();
         currentPoint = 0;
-        MyRigidbody = GetComponent<Rigidbody2D>();
+        
         ChangeState(new MageIdleState());
     }
 
@@ -133,9 +132,9 @@ public class MageBoss : Boss
         MyRigidbody.velocity = Vector2.zero;
     }
 
-    public void SpawnFireballs(bool reverse)
+    public void SpawnFireballs()
     {
-        StartCoroutine(fireballSpawner.SpawnFireballs(reverse));
+        StartCoroutine(fireballSpawner.SpawnFireballs());
     }
 
     public void ThrowFireballs()

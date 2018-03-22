@@ -15,25 +15,13 @@ public class FireballSpawner : MonoBehaviour
     [SerializeField]
     float timeToLife;
 
-    public IEnumerator SpawnFireballs(bool reverse)
+    public IEnumerator SpawnFireballs()
     {
-        if (!reverse)
+        for (int i = 0; i < instantiaitePoints.Length; i++)
         {
-            for (int i = 0; i < instantiaitePoints.Length; i++)
-            {
-                ThrowFireball(i);
-                SoundManager.PlaySound("vulcan_sound");
-                yield return new WaitForSeconds(throwDealy);
-            }
-        }
-        else
-        {
-            for (int i = instantiaitePoints.Length - 1; i >= 0; i--)
-            {
-                ThrowFireball(i);
-                SoundManager.PlaySound("vulcan_sound");
-                yield return new WaitForSeconds(throwDealy);
-            }
+            ThrowFireball(i);
+            SoundManager.PlaySound("vulcan_sound");
+            yield return new WaitForSeconds(throwDealy);
         }
     }
 

@@ -22,7 +22,7 @@ public class MageDeathState : IMageBossState
             isDead = true;
             enemy.mageCollider.enabled = false;
             enemy.damageCollider.enabled = false;
-            enemy.armature.armature.animation.FadeIn("death", -1, 1);
+            enemy.armature.animation.FadeIn("death", -1, 1);
             Player.Instance.stars = 3;
             GameManager.CollectedCoins += 500;
             GameManager.lvlCollectedCoins += 500;

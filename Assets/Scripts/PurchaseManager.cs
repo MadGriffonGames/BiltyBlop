@@ -146,8 +146,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
                 PlayerPrefs.SetString("Lightarian", "Unlocked");
                 lightarianSkin.GetComponent<SkinPrefab>().UnlockSkin();
-                PlayerPrefs.SetString("EvilSword", "Unlocked");
-                PlayerPrefs.SetString("EvilSwordIsAvaliableInShop", "Avaliable");
+                PlayerPrefs.SetString("Mace", "Unlocked");
+                PlayerPrefs.SetString("MaceIsAvaliableInShop", "Avaliable");
 
                 DevToDev.Analytics.InAppPurchase(productId, "SkinPack", 1, 349, "rub");
                 break;
